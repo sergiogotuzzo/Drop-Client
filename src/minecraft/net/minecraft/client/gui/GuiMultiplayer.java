@@ -10,6 +10,8 @@ import net.minecraft.client.multiplayer.ServerList;
 import net.minecraft.client.network.LanServerDetector;
 import net.minecraft.client.network.OldServerPinger;
 import net.minecraft.client.resources.I18n;
+import rubik.Client;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
@@ -49,6 +51,8 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
+    	Client.getInstance().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
+    	
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
 
