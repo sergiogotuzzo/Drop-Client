@@ -168,6 +168,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import rubik.Client;
+import rubik.event.impl.TickEvent;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
@@ -2246,6 +2247,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.mcProfiler.endStartSection("pendingConnection");
             this.myNetworkManager.processReceivedPackets();
         }
+        
+        new TickEvent().call();
 
         this.mcProfiler.endSection();
         this.systemTime = getSystemTime();

@@ -1,5 +1,8 @@
 package rubik;
 
+import rubik.event.EventTarget;
+import rubik.event.impl.TickEvent;
+
 public class Client {
 	private static final Client client = new Client();
 	
@@ -19,5 +22,10 @@ public class Client {
 	
 	public void shutdown() {
 		discordRichPresence.shutdown();
+	}
+	
+	@EventTarget
+	public void onTick(TickEvent event) {
+		
 	}
 }
