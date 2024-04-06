@@ -9,6 +9,9 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
+	private int color = 0xFFFFFFFF;
+	private boolean shadow = true;
+	
 	@Override
 	public int getWidth() {
 		return 48;
@@ -48,7 +51,11 @@ public class ArmorStatus extends ModDraggable {
 		if (is.getItem().isDamageable()) {
 			double damage = ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 			
-			font.drawString(String.format("%.0f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, -1);
+			if (shadow) {
+				font.drawStringWithShadow(String.format("%.0f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
+			} else {
+				font.drawString(String.format("%.0f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
+			}
 		}
 		
 		RenderHelper.enableGUIStandardItemLighting();
