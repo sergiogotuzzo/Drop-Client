@@ -85,6 +85,8 @@ import net.optifine.shaders.Shaders;
 import net.optifine.shaders.ShadersRender;
 import net.optifine.util.TextureUtils;
 import net.optifine.util.TimedEvent;
+import rubik.event.impl.RenderEvent;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
@@ -1424,6 +1426,8 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 }
             }
         }
+        
+        new RenderEvent().call();
 
         this.frameFinish();
         this.waitForServerThread();

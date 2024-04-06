@@ -1,7 +1,13 @@
 package rubik;
 
+import net.minecraft.client.Minecraft;
+import rubik.event.EventManager;
 import rubik.event.EventTarget;
+import rubik.event.impl.RenderEvent;
 import rubik.event.impl.TickEvent;
+import rubik.gui.GuiModPositioning;
+import rubik.gui.hud.HUDManager;
+import rubik.mods.ModInstances;
 
 public class Client {
 	private static final Client client = new Client();
@@ -16,8 +22,19 @@ public class Client {
 		return discordRichPresence;
 	}
 	
+	private HUDManager hudManager;
+	private Minecraft mc = Minecraft.getMinecraft();
+	
 	public void init() {
 		discordRichPresence.start();
+		
+		EventManager.register(this);
+	}
+	
+	public void start() {
+		hudManager = HUDManager.getInstance();
+		
+		ModInstances.register(hudManager);
 	}
 	
 	public void shutdown() {
@@ -26,6 +43,8 @@ public class Client {
 	
 	@EventTarget
 	public void onTick(TickEvent event) {
-		
+		if (mc.gameSettings.keyBindModPositioning.isPressed()) {
+			mc.displayGuiScreen(new GuiModPositioning(hudManager));
+		}
 	}
 }
