@@ -9,12 +9,26 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
+	public static enum ArmorStatusMode {
+		Percentual,
+		Damage
+	}
+	
 	private int color = 0xFFFFFFFF;
 	private boolean shadow = true;
+	private ArmorStatusMode mode = ArmorStatusMode.Damage;
 	
 	@Override
 	public int getWidth() {
-		return 48;
+		int width = 0;
+		
+		if (mode == ArmorStatusMode.Percentual) {
+			width = 48;
+		} else if (mode == ArmorStatusMode.Damage) {
+			width = 64;
+		}
+		
+		return width;
 	}
 
 	@Override
@@ -49,12 +63,10 @@ public class ArmorStatus extends ModDraggable {
 		int yAdd = (-16 * i) + 48;
 		
 		if (is.getItem().isDamageable()) {
-			double damage = ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
-			
 			if (shadow) {
-				font.drawStringWithShadow(String.format("%.0f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
+				font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
 			} else {
-				font.drawString(String.format("%.0f%%", damage), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
+				font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
 			}
 		}
 		
@@ -63,5 +75,17 @@ public class ArmorStatus extends ModDraggable {
 		mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX(), pos.getAbsoluteY() + yAdd);
 		
 		GL11.glPopMatrix();
+	}
+	
+	private String getDamageText(ItemStack is) {
+		if (mode == ArmorStatusMode.Percentual) {
+			double damage = ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
+			
+			return String.format("%.0f%%", damage);
+		} else if (mode == ArmorStatusMode.Damage) {
+			return (is.getMaxDamage() - is.getItemDamage()) + "/" + is.getMaxDamage();
+		}
+		
+		return null;
 	}
 }
