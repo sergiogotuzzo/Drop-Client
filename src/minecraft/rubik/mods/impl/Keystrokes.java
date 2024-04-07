@@ -96,8 +96,8 @@ public class Keystrokes extends ModDraggable {
 		}
 	}
 	
-	private int pressedColor = new Color(255, 255, 255, 102).getRGB();
-	private int releasedColor = new Color(0, 0, 0, 102).getRGB();
+	private int pressedColor = Color.BLACK.getRGB();
+	private int releasedColor = Color.WHITE.getRGB();
 	private boolean shadow = true;
 	private KeystrokesMode mode = KeystrokesMode.WASD_JUMP_MOUSE;
 
@@ -121,7 +121,7 @@ public class Keystrokes extends ModDraggable {
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? pressedColor : releasedColor
+	                key.isDown() ? new Color(255, 255, 255, 102).getRGB() : new Color(0, 0, 0, 102).getRGB()
 	                );
 	        
 	        if (shadow) {
@@ -129,14 +129,14 @@ public class Keystrokes extends ModDraggable {
 		                key.getName(),
 		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-		                key.isDown() ? Color.BLACK.getRGB() : Color.WHITE.getRGB()
+		                key.isDown() ? pressedColor : releasedColor
 		                );
 	        } else {
 	        	font.drawString(
 		                key.getName(),
 		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-		                key.isDown() ? Color.BLACK.getRGB() : Color.WHITE.getRGB()
+		                key.isDown() ? pressedColor : releasedColor
 		                );
 	        }
 	    }
