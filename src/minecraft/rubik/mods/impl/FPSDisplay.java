@@ -46,4 +46,20 @@ public class FPSDisplay extends ModDraggable {
 	public String getFPSText() {
 		return background ? mc.getDebugFPS() + " FPS" : "[" + mc.getDebugFPS() + " FPS]";
 	}
+	
+	public void setBackgroundEnabled(boolean enabled) {
+		background = enabled;
+	}
+	
+	public boolean isBackgroundEnabled() {
+		return background;
+	}
+	
+	public void setShadowEnabled(boolean enabled) {
+		shadow = enabled;
+	}
+	
+	public boolean isShadowEnabled() {
+		return shadow;
+	}
 }

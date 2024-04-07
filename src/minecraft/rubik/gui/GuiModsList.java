@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.gui.mods.GuiCPSDisplay;
+import rubik.gui.mods.GuiFPSDisplay;
 
 public class GuiModsList extends GuiScreen {
 	private final GuiScreen previousScreen;
@@ -50,6 +51,7 @@ public class GuiModsList extends GuiScreen {
             	this.mc.displayGuiScreen(new GuiCPSDisplay(this));
             	break;
             case 3:
+            	this.mc.displayGuiScreen(new GuiFPSDisplay(this));
             	break;
             case 4:
             	break;
