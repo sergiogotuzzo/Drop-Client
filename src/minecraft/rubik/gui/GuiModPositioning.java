@@ -23,8 +23,8 @@ public class GuiModPositioning extends GuiScreen {
 	private int prevX;
 	private int prevY;
 	
-	public GuiModPositioning(HUDManager api) {
-		Collection<IRenderer> registeredRenderers = api.getRegisteredRenderers();
+	public GuiModPositioning(HUDManager manager) {
+		Collection<IRenderer> registeredRenderers = manager.getRegisteredRenderers();
 		
 		for (IRenderer renderer : registeredRenderers) {
 			if (!renderer.isEnabled()) {
