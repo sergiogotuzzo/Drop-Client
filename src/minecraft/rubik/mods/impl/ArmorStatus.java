@@ -10,22 +10,25 @@ import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
 	public static enum ArmorStatusMode {
-		Percentual,
-		Damage
+		PERCENTAGE,
+		DAMAGE,
+		DAMAGE_MAX_DAMAGE
 	}
 	
 	private int color = 0xFFFFFFFF;
 	private boolean shadow = true;
-	private ArmorStatusMode mode = ArmorStatusMode.Damage;
+	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
 	
 	@Override
 	public int getWidth() {
 		int width = 0;
 		
-		if (mode == ArmorStatusMode.Percentual) {
+		if (mode == ArmorStatusMode.PERCENTAGE) {
 			width = 48;
-		} else if (mode == ArmorStatusMode.Damage) {
-			width = 64;
+		} else if (mode == ArmorStatusMode.DAMAGE) {
+			width = 40;
+		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
+			return 64;
 		}
 		
 		return width;
@@ -78,11 +81,13 @@ public class ArmorStatus extends ModDraggable {
 	}
 	
 	private String getDamageText(ItemStack is) {
-		if (mode == ArmorStatusMode.Percentual) {
+		if (mode == ArmorStatusMode.PERCENTAGE) {
 			double damage = ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 			
 			return String.format("%.0f%%", damage);
-		} else if (mode == ArmorStatusMode.Damage) {
+		} else if (mode == ArmorStatusMode.DAMAGE) {
+			return "" + (is.getMaxDamage() - is.getItemDamage());
+		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
 			return (is.getMaxDamage() - is.getItemDamage()) + "/" + is.getMaxDamage();
 		}
 		
