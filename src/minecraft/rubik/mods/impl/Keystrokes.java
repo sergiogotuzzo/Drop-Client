@@ -13,8 +13,8 @@ public class Keystrokes extends ModDraggable {
 	public static enum KeystrokesMode {
 		WASD(Key.W, Key.A, Key.S, Key.D),
 		WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
-		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, Key.SPACE),
-		WASD_JUMP_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, Key.SPACE);
+		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 1, 41, 58, 12)),
+		WASD_JUMP_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 1, 61, 58, 12));
 	
 		private final Key[] keys;
 		private int width = 0;
@@ -49,7 +49,6 @@ public class Keystrokes extends ModDraggable {
 		private static final Key D = new Key("D", Minecraft.getMinecraft().gameSettings.keyBindRight, 41, 21, 18, 18);
 		private static final Key LMB = new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 1, 41, 28, 18);
 		private static final Key RMB = new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 31, 41, 28, 18);
-		private static final Key SPACE = new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 1, 61, 58, 12);
 		
 		private final String name;
 		private final KeyBinding keyBind;
