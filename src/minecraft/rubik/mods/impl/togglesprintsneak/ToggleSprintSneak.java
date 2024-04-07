@@ -77,6 +77,22 @@ public class ToggleSprintSneak extends ModDraggable {
 		}
 	}
 	
+	public void setBackgroundEnabled(boolean enabled) {
+		background = enabled;
+	}
+	
+	public boolean isBackgroundEnabled() {
+		return background;
+	}
+	
+	public void setShadowEnabled(boolean enabled) {
+		shadow = enabled;
+	}
+	
+	public boolean isShadowEnabled() {
+		return shadow;
+	}
+	
 	public void setToggleSprintEnabled(boolean enabled) {
 		toggleSprint = enabled;
 	}

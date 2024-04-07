@@ -10,6 +10,7 @@ import rubik.gui.mods.GuiCPSDisplay;
 import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
 import rubik.gui.mods.GuiKeystrokes;
+import rubik.gui.mods.GuiToggleSprintSneak;
 
 public class GuiModsList extends GuiScreen {
 	private final GuiScreen previousScreen;
@@ -74,6 +75,7 @@ public class GuiModsList extends GuiScreen {
             	this.mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
             	break;
             case 11:
+            	this.mc.displayGuiScreen(new GuiToggleSprintSneak(this));
             	break;
         }
     }
