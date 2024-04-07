@@ -141,4 +141,20 @@ public class Keystrokes extends ModDraggable {
 	        }
 	    }
 	}
+	
+	public void setShadowEnabled(boolean enabled) {
+		shadow = enabled;
+	}
+	
+	public boolean isShadowEnabled() {
+		return shadow;
+	}
+	
+	public void setMode(KeystrokesMode mode) {
+		this.mode = mode;
+	}
+	
+	public KeystrokesMode getMode() {
+		return mode;
+	}
 }
