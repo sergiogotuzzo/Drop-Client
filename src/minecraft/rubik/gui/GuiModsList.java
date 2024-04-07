@@ -5,6 +5,7 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.gui.mods.GuiCPSDisplay;
 
 public class GuiModsList extends GuiScreen {
 	private final GuiScreen previousScreen;
@@ -46,6 +47,7 @@ public class GuiModsList extends GuiScreen {
             case 1:
                 break;
             case 2:
+            	this.mc.displayGuiScreen(new GuiCPSDisplay(this));
             	break;
             case 3:
             	break;
@@ -72,7 +74,7 @@ public class GuiModsList extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Mod Settings", new Object[0]), this.width / 2, 40, 16777215);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("Mods List", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

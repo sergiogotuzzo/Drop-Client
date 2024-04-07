@@ -90,4 +90,28 @@ public class CPSDisplay extends ModDraggable {
 		
 		return background ? cps + " CPS" : "[" + cps + " CPS]";
 	}
+	
+	public void setBackgroundEnabled(boolean enabled) {
+		background = enabled;
+	}
+	
+	public boolean isBackgroundEnabled() {
+		return background;
+	}
+	
+	public void setShadowEnabled(boolean enabled) {
+		shadow = enabled;
+	}
+	
+	public boolean isShadowEnabled() {
+		return shadow;
+	}
+	
+	public void setRightEnabled(boolean enabled) {
+		right = enabled;
+	}
+	
+	public boolean isRightEnabled() {
+		return right;
+	}
 }
