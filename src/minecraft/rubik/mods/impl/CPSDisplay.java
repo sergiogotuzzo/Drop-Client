@@ -26,7 +26,7 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(right ? "9 | 9 CPS" : "9 CPS");
+		return font.getStringWidth("9 | 9 CPS");
 	}
 
 	@Override
