@@ -6,6 +6,7 @@ import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Keystrokes;
+import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -13,6 +14,7 @@ public class ModInstances {
 	private static Keystrokes keystrokesMod;
 	private static ArmorStatus armorStatusMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
+	private static ToggleSprintSneak toggleSprintSneakMod;
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -20,6 +22,7 @@ public class ModInstances {
 		manager.register(keystrokesMod = new Keystrokes());
 		manager.register(armorStatusMod = new ArmorStatus());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
+		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -40,5 +43,9 @@ public class ModInstances {
 	
 	public static CoordinatesDisplay getCoordinatesDisplayMod() {
 		return coordinatesDisplayMod;
+	}
+	
+	public static ToggleSprintSneak getToggleSprintSneakMod() {
+		return toggleSprintSneakMod;
 	}
 }

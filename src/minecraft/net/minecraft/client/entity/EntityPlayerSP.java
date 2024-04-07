@@ -51,6 +51,7 @@ import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
+import rubik.mods.impl.togglesprintsneak.RubikClientMovementInput;
 
 public class EntityPlayerSP extends AbstractClientPlayer
 {
@@ -100,7 +101,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     private int positionUpdateTicks;
     private boolean hasValidHealth;
     private String clientBrand;
-    public MovementInput movementInput;
+    public RubikClientMovementInput movementInput;
     protected Minecraft mc;
 
     /**
