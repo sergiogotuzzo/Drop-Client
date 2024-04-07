@@ -16,7 +16,7 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return 80;
+		return 60;
 	}
 
 	@Override
@@ -106,5 +106,21 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	private String getFacingTowardsZ() {
 		return mc.thePlayer.getLookVec().zCoord > 0 ? "+" : "-";
+	}
+	
+	public void setShadowEnabled(boolean enabled) {
+		shadow = enabled;
+	}
+	
+	public boolean isShadowEnabled() {
+		return shadow;
+	}
+	
+	public void setBiomeEnabled(boolean enabled) {
+		biome = enabled;
+	}
+	
+	public boolean isBiomeEnabled() {
+		return biome;
 	}
 }

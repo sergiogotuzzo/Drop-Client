@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.gui.mods.GuiArmorStatus;
 import rubik.gui.mods.GuiCPSDisplay;
+import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
 import rubik.gui.mods.GuiKeystrokes;
 
@@ -70,6 +71,7 @@ public class GuiModsList extends GuiScreen {
             case 9:
             	break;
             case 10:
+            	this.mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
             	break;
             case 11:
             	break;
