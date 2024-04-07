@@ -93,4 +93,20 @@ public class ArmorStatus extends ModDraggable {
 		
 		return null;
 	}
+	
+	public void setShadowEnabled(boolean enabled) {
+		shadow = enabled;
+	}
+	
+	public boolean isShadowEnabled() {
+		return shadow;
+	}
+	
+	public void setMode(ArmorStatusMode mode) {
+		this.mode = mode;
+	}
+	
+	public ArmorStatusMode getMode() {
+		return mode;
+	}
 }
