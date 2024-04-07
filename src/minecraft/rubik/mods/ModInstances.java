@@ -3,6 +3,7 @@ package rubik.mods;
 import rubik.gui.hud.HUDManager;
 import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.CPSDisplay;
+import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Keystrokes;
 
@@ -11,12 +12,14 @@ public class ModInstances {
 	private static CPSDisplay cpsDisplayMod;
 	private static Keystrokes keystrokesMod;
 	private static ArmorStatus armorStatusMod;
+	private static CoordinatesDisplay coordinatesDisplayMod;
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
 		manager.register(cpsDisplayMod = new CPSDisplay());
 		manager.register(keystrokesMod = new Keystrokes());
 		manager.register(armorStatusMod = new ArmorStatus());
+		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -33,5 +36,9 @@ public class ModInstances {
 	
 	public static ArmorStatus getArmorStatusMod() {
 		return armorStatusMod;
+	}
+	
+	public static CoordinatesDisplay getCoordinatesDisplayMod() {
+		return coordinatesDisplayMod;
 	}
 }
