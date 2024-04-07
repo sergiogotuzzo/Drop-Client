@@ -168,6 +168,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import rubik.Client;
+import rubik.event.impl.KeyEvent;
 import rubik.event.impl.TickEvent;
 import rubik.mods.impl.togglesprintsneak.RubikClientMovementInput;
 
@@ -1894,6 +1895,14 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 if (Keyboard.getEventKeyState())
                 {
                     KeyBinding.onTick(k);
+                }
+                
+                KeyEvent e = new KeyEvent(k);
+                
+                e.call();
+                
+                if (e.isCancelled()) {
+                	return;
                 }
 
                 if (this.debugCrashKeyPressTime > 0L)

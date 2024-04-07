@@ -289,6 +289,7 @@ public class GameSettings
     
     /** Rubik Client keybindings */
     public KeyBinding keyBindModPositioning = new KeyBinding("Mod Positioning", Keyboard.KEY_RSHIFT, "Rubik Client");
+    public KeyBinding keyBindFreelook = new KeyBinding("Freelook", Keyboard.KEY_F, "Rubik Client");
 
     public GameSettings(Minecraft mcIn, File p_i46326_2_)
     {
@@ -348,6 +349,7 @@ public class GameSettings
     
     public void addClientKeybindings() {
     	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindModPositioning);
+    	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindFreelook);
     }
 
     /**

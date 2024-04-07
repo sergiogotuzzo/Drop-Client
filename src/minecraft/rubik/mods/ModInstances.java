@@ -5,6 +5,7 @@ import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
+import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Keystrokes;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
@@ -15,6 +16,7 @@ public class ModInstances {
 	private static ArmorStatus armorStatusMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
+	private static Freelook freelookMod;
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -23,6 +25,8 @@ public class ModInstances {
 		manager.register(armorStatusMod = new ArmorStatus());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
+		
+		freelookMod = new Freelook();
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -47,5 +51,9 @@ public class ModInstances {
 	
 	public static ToggleSprintSneak getToggleSprintSneakMod() {
 		return toggleSprintSneakMod;
+	}
+	
+	public static Freelook getFreelookMod() {
+		return freelookMod;
 	}
 }
