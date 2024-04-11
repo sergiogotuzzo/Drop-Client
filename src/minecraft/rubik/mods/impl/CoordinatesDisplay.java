@@ -86,7 +86,23 @@ public class CoordinatesDisplay extends ModDraggable {
 	}
 	
 	private String getFacingTowardsX() {
-		return mc.thePlayer.getLookVec().xCoord > 0 ? "+" : "-";
+		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
+        String facing = "";
+        
+        switch (enumFacing)
+        {
+            case WEST:
+            	facing = "-";
+                break;
+            case EAST:
+            	facing = "+";
+                break;
+            default:
+            	facing = "";
+            	break;
+        }
+        
+        return facing;
 	}
 
 	private String getFacing() {
@@ -116,7 +132,23 @@ public class CoordinatesDisplay extends ModDraggable {
 	}
 	
 	private String getFacingTowardsZ() {
-		return mc.thePlayer.getLookVec().zCoord > 0 ? "+" : "-";
+		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
+        String facing = "";
+        
+        switch (enumFacing)
+        {
+            case NORTH:
+            	facing = "-";
+                break;
+            case SOUTH:
+            	facing = "+";
+                break;
+            default:
+            	facing = "";
+            	break;
+        }
+        
+        return facing;
 	}
 	
 	public void setShadowEnabled(boolean enabled) {
