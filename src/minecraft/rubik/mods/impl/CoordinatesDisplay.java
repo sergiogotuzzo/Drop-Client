@@ -91,7 +91,7 @@ public class CoordinatesDisplay extends ModDraggable {
 
 	private String getFacing() {
 		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
-        String facing = "Invalid";
+        String facing = "/";
         
         switch (enumFacing)
         {
@@ -107,6 +107,9 @@ public class CoordinatesDisplay extends ModDraggable {
             case EAST:
             	facing = "E";
                 break;
+            default:
+            	facing = "/";
+            	break;
         }
         
         return facing;
