@@ -79,7 +79,7 @@ public class GuiConnecting extends GuiScreen
                     }
 
                     GuiConnecting.logger.error((String)"Couldn\'t connect to server", (Throwable)unknownhostexception);
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Unknown host"})));
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Unknown host"}), ip, port));
                 }
                 catch (Exception exception)
                 {
@@ -97,7 +97,7 @@ public class GuiConnecting extends GuiScreen
                         s = s.replaceAll(s1, "");
                     }
 
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {s})));
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {s}), ip, port));
                 }
             }
         }).start();
