@@ -4,8 +4,9 @@ import java.awt.Color;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
@@ -79,9 +80,9 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	private String getBiomeText() {
 		BlockPos playerPos = new BlockPos(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().getEntityBoundingBox().minY, mc.getRenderViewEntity().posZ);
-		BiomeGenBase biomeGen = mc.theWorld.getBiomeGenForCoords(playerPos);
+		Chunk chunk = this.mc.theWorld.getChunkFromBlockCoords(playerPos);
 		
-		return "Biome: " + biomeGen.biomeName;
+		return "Biome: " + chunk.getBiome(playerPos, mc.theWorld.getWorldChunkManager()).biomeName;
 	}
 	
 	private String getFacingTowardsX() {
@@ -89,19 +90,26 @@ public class CoordinatesDisplay extends ModDraggable {
 	}
 
 	private String getFacing() {
-		float yaw = mc.thePlayer.rotationYaw;
+		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
+        String facing = "Invalid";
         
-        yaw = MathHelper.wrapAngleTo180_float(yaw);
-        
-        if (yaw >= -135 && yaw < -45) {
-            return "E";
-        } else if (yaw >= -45 && yaw < 45) {
-            return "S";
-        } else if (yaw >= 45 && yaw < 135) {
-            return "W";
-        } else {
-            return "N";
+        switch (enumFacing)
+        {
+            case NORTH:
+            	facing = "N";
+                break;
+            case SOUTH:
+            	facing = "S";
+                break;
+            case WEST:
+            	facing = "W";
+                break;
+            case EAST:
+            	facing = "E";
+                break;
         }
+        
+        return facing;
 	}
 	
 	private String getFacingTowardsZ() {
