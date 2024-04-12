@@ -18,7 +18,7 @@ public class ModInstances {
 	private static ArmorStatus armorStatusMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
-	private static Freelook freelookMod;
+	private static Freelook freelookMod = new Freelook();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -28,8 +28,6 @@ public class ModInstances {
 		manager.register(armorStatusMod = new ArmorStatus());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
-		
-		freelookMod = new Freelook();
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
