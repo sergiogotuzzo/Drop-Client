@@ -11,6 +11,7 @@ import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
 import rubik.gui.mods.GuiFreelook;
 import rubik.gui.mods.GuiKeystrokes;
+import rubik.gui.mods.GuiPingDisplay;
 import rubik.gui.mods.GuiToggleSprintSneak;
 
 public class GuiModsList extends GuiScreen {
@@ -34,7 +35,7 @@ public class GuiModsList extends GuiScreen {
         this.buttonList.add(new GuiButton(4, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Armor Status", new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 - 100 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Unknown", new Object[0])));
         this.buttonList.add(new GuiButton(6, this.width / 2 + 2 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Unknown", new Object[0])));
-        this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Unknown", new Object[0])));
+        this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Ping Display", new Object[0])));
         this.buttonList.add(new GuiButton(8, this.width / 2 - 100 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Unknown", new Object[0])));
         this.buttonList.add(new GuiButton(9, this.width / 2 + 2 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Freelook", new Object[0])));
         this.buttonList.add(new GuiButton(10, this.width / 2 - 100 - 26, this.height / 4 + 96 + i, 124, 20, I18n.format("Coordinates Display", new Object[0])));
@@ -67,6 +68,7 @@ public class GuiModsList extends GuiScreen {
             case 6:
             	break;
             case 7:
+            	this.mc.displayGuiScreen(new GuiPingDisplay(this));
             	break;
             case 8:
             	break;
