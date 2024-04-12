@@ -30,12 +30,12 @@ public class GuiModsList extends GuiScreen {
         int centralize = 50;
         
         this.buttonList.add(new GuiButton(1, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 24 + i, 98, 20, I18n.format("Keystrokes", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100 + centralize, this.height / 4 + 24 + i, 98, 20, I18n.format("CPS Display", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + 2 + centralize, this.height / 4 + 24 + i, 98, 20, I18n.format("FPS Display", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Armor Status", new Object[0])));
-        this.buttonList.add(new GuiButton(5, this.width / 2 - 100 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Unknown", new Object[0])));
-        this.buttonList.add(new GuiButton(6, this.width / 2 + 2 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Unknown", new Object[0])));
-        this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Ping Display", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 100 + centralize, this.height / 4 + 24 + i, 98, 20, I18n.format("Armor Status", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + 2 + centralize, this.height / 4 + 24 + i, 98, 20, I18n.format("Unknown", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("CPS Display", new Object[0])));
+        this.buttonList.add(new GuiButton(5, this.width / 2 - 100 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("FPS Display", new Object[0])));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + 2 + centralize, this.height / 4 + 48 + i, 98, 20, I18n.format("Ping Display", new Object[0])));
+        this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Unknown", new Object[0])));
         this.buttonList.add(new GuiButton(8, this.width / 2 - 100 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Unknown", new Object[0])));
         this.buttonList.add(new GuiButton(9, this.width / 2 + 2 + centralize, this.height / 4 + 72 + i, 98, 20, I18n.format("Freelook", new Object[0])));
         this.buttonList.add(new GuiButton(10, this.width / 2 - 100 - 26, this.height / 4 + 96 + i, 124, 20, I18n.format("Coordinates Display", new Object[0])));
@@ -55,20 +55,20 @@ public class GuiModsList extends GuiScreen {
             	this.mc.displayGuiScreen(new GuiKeystrokes(this));
                 break;
             case 2:
-            	this.mc.displayGuiScreen(new GuiCPSDisplay(this));
-            	break;
-            case 3:
-            	this.mc.displayGuiScreen(new GuiFPSDisplay(this));
-            	break;
-            case 4:
             	this.mc.displayGuiScreen(new GuiArmorStatus(this));
             	break;
+            case 3:
+            	break;
+            case 4:
+            	this.mc.displayGuiScreen(new GuiCPSDisplay(this));
+            	break;
             case 5:
+            	this.mc.displayGuiScreen(new GuiFPSDisplay(this));
             	break;
             case 6:
+            	this.mc.displayGuiScreen(new GuiPingDisplay(this));
             	break;
             case 7:
-            	this.mc.displayGuiScreen(new GuiPingDisplay(this));
             	break;
             case 8:
             	break;
