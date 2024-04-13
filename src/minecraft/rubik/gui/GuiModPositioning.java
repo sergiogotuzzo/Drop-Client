@@ -54,6 +54,7 @@ public class GuiModPositioning extends GuiScreen {
 	    this.zLevel = 200;
 
 	    drawHollowRect(0, 0, this.width - 1, this.height - 1, 0xFF00FFFF);
+	    
 	    for (IRenderer renderer : renderers.keySet()) {
 	        ScreenPosition pos = renderers.get(renderer);
 	        
