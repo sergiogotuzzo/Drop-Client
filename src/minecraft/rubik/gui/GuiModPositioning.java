@@ -61,8 +61,8 @@ public class GuiModPositioning extends GuiScreen {
 	        renderer.renderDummy(pos);
 	        
 	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0xFFFFFFFF);
-
-	        if (selectedRenderer.isPresent() && selectedRenderer.get() == renderer && isMouseOver(renderer, mouseX, mouseY)) {
+	        
+	        if (isMouseOver(renderer, mouseX, mouseY)) {
 	            drawFillRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), new Color(255, 255, 255, 40).getRGB());
 	        }
 	    }
