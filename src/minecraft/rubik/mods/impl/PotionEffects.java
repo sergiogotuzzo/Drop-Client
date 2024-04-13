@@ -61,8 +61,13 @@ public class PotionEffects extends ModDraggable {
             new Gui().drawTexturedModalRect(pos.getAbsoluteX(), pos.getAbsoluteY() + yOffset + 4, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
         
-        font.drawString(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 22, pos.getAbsoluteY() + yOffset + 4, color);
-        font.drawString(potion.getDurationString(effect), pos.getAbsoluteX() + 22, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+        if (shadow) {
+        	font.drawStringWithShadow(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 22, pos.getAbsoluteY() + yOffset + 4, color);
+            font.drawStringWithShadow(potion.getDurationString(effect), pos.getAbsoluteX() + 22, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+        } else {
+        	font.drawString(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 22, pos.getAbsoluteY() + yOffset + 4, color);
+            font.drawString(potion.getDurationString(effect), pos.getAbsoluteX() + 22, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+        }
 
         GL11.glPopMatrix();
     }
