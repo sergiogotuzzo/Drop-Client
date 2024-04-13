@@ -19,6 +19,7 @@ public class ArmorStatus extends ModDraggable {
 	
 	private int color = 0xFFFFFFFF;
 	private boolean shadow = true;
+	private boolean dynamicColors = true;
 	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
 	
 	@Override
@@ -67,20 +68,24 @@ public class ArmorStatus extends ModDraggable {
 		
 		int yAdd = (-16 * i) + 48;
 		
-		double damagePercentage = getDamagePercentage(is);
-		
-		if (damagePercentage > 80) {
-			color = Color.WHITE.getRGB();
-		} else if (damagePercentage > 60) {
-			color = new Color(85, 255, 85).getRGB();
-		} else if (damagePercentage > 40) {
-			color = new Color(255, 255, 85).getRGB();
-		} else if (damagePercentage > 25) {
-			color = new Color(255, 170, 0).getRGB();
-		} else if (damagePercentage > 10) {
-			color = new Color(255, 85, 85).getRGB();
-		} else if (damagePercentage < 10) {
-			color = new Color(170, 0, 0).getRGB();
+		if (dynamicColors) {
+			double damagePercentage = getDamagePercentage(is);
+			
+			if (damagePercentage > 80) {
+				color = Color.WHITE.getRGB();
+			} else if (damagePercentage > 60) {
+				color = new Color(85, 255, 85).getRGB();
+			} else if (damagePercentage > 40) {
+				color = new Color(255, 255, 85).getRGB();
+			} else if (damagePercentage > 25) {
+				color = new Color(255, 170, 0).getRGB();
+			} else if (damagePercentage > 10) {
+				color = new Color(255, 85, 85).getRGB();
+			} else if (damagePercentage < 10) {
+				color = new Color(170, 0, 0).getRGB();
+			}
+		} else {
+			color = 0xFFFFFFFF;
 		}
 		
 		if (is.getItem().isDamageable()) {
@@ -120,6 +125,14 @@ public class ArmorStatus extends ModDraggable {
 	
 	public boolean isShadowEnabled() {
 		return shadow;
+	}
+	
+	public void setDynamicColorsEnabled(boolean enabled) {
+		dynamicColors = enabled;
+	}
+	
+	public boolean isDynamicColorsEnabled() {
+		return dynamicColors;
 	}
 	
 	public void setMode(ArmorStatusMode mode) {
