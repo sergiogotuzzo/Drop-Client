@@ -1,5 +1,7 @@
 package rubik.mods.impl;
 
+import java.awt.Color;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.RenderHelper;
@@ -65,6 +67,22 @@ public class ArmorStatus extends ModDraggable {
 		
 		int yAdd = (-16 * i) + 48;
 		
+		double damagePercentage = getDamagePercentage(is);
+		
+		if (damagePercentage > 80) {
+			color = Color.WHITE.getRGB();
+		} else if (damagePercentage > 60) {
+			color = new Color(85, 255, 85).getRGB();
+		} else if (damagePercentage > 40) {
+			color = new Color(255, 255, 85).getRGB();
+		} else if (damagePercentage > 25) {
+			color = new Color(255, 170, 0).getRGB();
+		} else if (damagePercentage > 10) {
+			color = new Color(255, 85, 85).getRGB();
+		} else if (damagePercentage < 10) {
+			color = new Color(170, 0, 0).getRGB();
+		}
+		
 		if (is.getItem().isDamageable()) {
 			if (shadow) {
 				font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
@@ -82,9 +100,7 @@ public class ArmorStatus extends ModDraggable {
 	
 	private String getDamageText(ItemStack is) {
 		if (mode == ArmorStatusMode.PERCENTAGE) {
-			double damage = ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
-			
-			return String.format("%.0f%%", damage);
+			return String.format("%.0f%%", getDamagePercentage(is));
 		} else if (mode == ArmorStatusMode.DAMAGE) {
 			return "" + (is.getMaxDamage() - is.getItemDamage());
 		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
@@ -92,6 +108,10 @@ public class ArmorStatus extends ModDraggable {
 		}
 		
 		return null;
+	}
+	
+	private double getDamagePercentage(ItemStack is) {
+		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 	}
 	
 	public void setShadowEnabled(boolean enabled) {
