@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.chunk.Chunk;
 import rubik.gui.hud.ScreenPosition;
@@ -86,69 +85,43 @@ public class CoordinatesDisplay extends ModDraggable {
 	}
 	
 	private String getFacingTowardsX() {
-		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
-        String facing = "";
-        
-        switch (enumFacing)
+        switch (mc.getRenderViewEntity().getHorizontalFacing())
         {
             case WEST:
-            	facing = "-";
-                break;
+            	return "-";
             case EAST:
-            	facing = "+";
-                break;
+            	return "+";
             default:
-            	facing = "";
-            	break;
+            	return "";
         }
-        
-        return facing;
 	}
 
 	private String getFacing() {
-		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
-        String facing = "/";
-        
-        switch (enumFacing)
+        switch (mc.getRenderViewEntity().getHorizontalFacing())
         {
             case NORTH:
-            	facing = "N";
-                break;
+            	return "N";
             case SOUTH:
-            	facing = "S";
-                break;
+            	return "S";
             case WEST:
-            	facing = "W";
-                break;
+            	return "W";
             case EAST:
-            	facing = "E";
-                break;
+            	return "E";
             default:
-            	facing = "/";
-            	break;
+            	return "/";
         }
-        
-        return facing;
 	}
 	
 	private String getFacingTowardsZ() {
-		EnumFacing enumFacing = mc.getRenderViewEntity().getHorizontalFacing();
-        String facing = "";
-        
-        switch (enumFacing)
+        switch (mc.getRenderViewEntity().getHorizontalFacing())
         {
             case NORTH:
-            	facing = "-";
-                break;
+            	return "-";
             case SOUTH:
-            	facing = "+";
-                break;
+            	return "+";
             default:
-            	facing = "";
-            	break;
+            	return "";
         }
-        
-        return facing;
 	}
 	
 	public void setShadowEnabled(boolean enabled) {
