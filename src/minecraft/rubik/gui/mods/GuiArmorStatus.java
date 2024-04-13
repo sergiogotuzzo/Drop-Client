@@ -10,11 +10,11 @@ import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 
 public class GuiArmorStatus extends GuiScreen {
-	private final GuiScreen previousScreen;
+	private final GuiScreen previousGuiScreen;
 	private ArmorStatus mod = ModInstances.getArmorStatusMod();
 	
-	public GuiArmorStatus(GuiScreen previousScreen) {
-		this.previousScreen = previousScreen;
+	public GuiArmorStatus(GuiScreen previousGuiScreen) {
+		this.previousGuiScreen = previousGuiScreen;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class GuiArmorStatus extends GuiScreen {
         switch (button.id)
         {
             case 0:
-            	this.mc.displayGuiScreen(this.previousScreen);
+            	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
             	mod.setEnabled(!mod.isEnabled());

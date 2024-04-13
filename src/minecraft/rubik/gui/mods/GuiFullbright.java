@@ -9,11 +9,11 @@ import rubik.mods.ModInstances;
 import rubik.mods.impl.Fullbright;
 
 public class GuiFullbright extends GuiScreen {
-	private final GuiScreen previousScreen;
+	private final GuiScreen previousGuiScreen;
 	private Fullbright mod = ModInstances.getFullbrightMod();
 	
-	public GuiFullbright(GuiScreen previousScreen) {
-		this.previousScreen = previousScreen;
+	public GuiFullbright(GuiScreen previousGuiScreen) {
+		this.previousGuiScreen = previousGuiScreen;
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class GuiFullbright extends GuiScreen {
         switch (button.id)
         {
             case 0:
-            	this.mc.displayGuiScreen(this.previousScreen);
+            	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
 	            {

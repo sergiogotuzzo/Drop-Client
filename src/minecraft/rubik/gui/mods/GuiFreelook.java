@@ -9,11 +9,11 @@ import rubik.mods.ModInstances;
 import rubik.mods.impl.Freelook;
 
 public class GuiFreelook extends GuiScreen {
-	private final GuiScreen previousScreen;
+	private final GuiScreen previousGuiScreen;
 	private Freelook mod = ModInstances.getFreelookMod();
 	
-	public GuiFreelook(GuiScreen previousScreen) {
-		this.previousScreen = previousScreen;
+	public GuiFreelook(GuiScreen previousGuiScreen) {
+		this.previousGuiScreen = previousGuiScreen;
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class GuiFreelook extends GuiScreen {
         switch (button.id)
         {
             case 0:
-            	this.mc.displayGuiScreen(this.previousScreen);
+            	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
             	mod.setEnabled(!mod.isEnabled());

@@ -10,11 +10,11 @@ import rubik.mods.impl.Keystrokes;
 import rubik.mods.impl.Keystrokes.KeystrokesMode;
 
 public class GuiKeystrokes extends GuiScreen {
-	private final GuiScreen previousScreen;
+	private final GuiScreen previousGuiScreen;
 	private Keystrokes mod = ModInstances.getKeystrokesMod();
 	
-	public GuiKeystrokes(GuiScreen previousScreen) {
-		this.previousScreen = previousScreen;
+	public GuiKeystrokes(GuiScreen previousGuiScreen) {
+		this.previousGuiScreen = previousGuiScreen;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class GuiKeystrokes extends GuiScreen {
         switch (button.id)
         {
             case 0:
-            	this.mc.displayGuiScreen(this.previousScreen);
+            	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
             	mod.setEnabled(!mod.isEnabled());
