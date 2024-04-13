@@ -8,6 +8,7 @@ import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Keystrokes;
 import rubik.mods.impl.PingDisplay;
+import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
 public class ModInstances {
@@ -16,6 +17,7 @@ public class ModInstances {
 	private static PingDisplay pingDisplayMod;
 	private static Keystrokes keystrokesMod;
 	private static ArmorStatus armorStatusMod;
+	private static PotionEffects potionEffectsMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
 	private static Freelook freelookMod = new Freelook();
@@ -26,6 +28,7 @@ public class ModInstances {
 		manager.register(pingDisplayMod = new PingDisplay());
 		manager.register(keystrokesMod = new Keystrokes());
 		manager.register(armorStatusMod = new ArmorStatus());
+		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
 	}
@@ -48,6 +51,10 @@ public class ModInstances {
 	
 	public static ArmorStatus getArmorStatusMod() {
 		return armorStatusMod;
+	}
+	
+	public static PotionEffects getPotionEffectsMod() {
+		return potionEffectsMod;
 	}
 	
 	public static CoordinatesDisplay getCoordinatesDisplayMod() {
