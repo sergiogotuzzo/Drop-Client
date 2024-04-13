@@ -156,4 +156,18 @@ public class Keystrokes extends ModDraggable {
 	public KeystrokesMode getMode() {
 		return mode;
 	}
+	
+	public int getModeIndex() {
+		if (getMode() == KeystrokesMode.WASD) {
+        	return 1;
+        } else if (getMode() == KeystrokesMode.WASD_MOUSE) {
+        	return 2;
+        } else if (getMode() == KeystrokesMode.WASD_JUMP) {
+        	return 3;
+        } else if (getMode() == KeystrokesMode.WASD_JUMP_MOUSE) {
+        	return 4;
+        }
+		
+		return 0;
+	}
 }
