@@ -20,10 +20,10 @@ public abstract class Mod {
 		setEnabled(enabled);
 	}
 
-	public void setEnabled(boolean isEnabled) {
-		this.enabled = isEnabled;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 		
-		if (isEnabled) {
+		if (enabled) {
 			EventManager.register(this);
 		} else {
 			EventManager.unregister(this);
