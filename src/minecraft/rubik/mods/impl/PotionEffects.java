@@ -24,7 +24,9 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public int getHeight() {
-        return 2 * EFFECT_HEIGHT;
+    	int activePotionEffectsSize = mc.thePlayer.getActivePotionEffects().size();
+    	
+        return activePotionEffectsSize == 0 ? 2 * EFFECT_HEIGHT : activePotionEffectsSize * EFFECT_HEIGHT;
     }
 
     @Override
@@ -42,8 +44,12 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-        renderPotionEffect(pos, 0, new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3));
-        renderPotionEffect(pos, EFFECT_HEIGHT, new PotionEffect(Potion.damageBoost.getId(), 20, 3));
+        if (mc.thePlayer.getActivePotionEffects().size() == 0) {
+        	renderPotionEffect(pos, 0, new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3));
+            renderPotionEffect(pos, EFFECT_HEIGHT, new PotionEffect(Potion.damageBoost.getId(), 20, 3));
+        } else {
+        	render(pos);
+        }
     }
 
     private void renderPotionEffect(ScreenPosition pos, int yOffset, PotionEffect pe) {
