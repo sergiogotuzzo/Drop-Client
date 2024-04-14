@@ -279,28 +279,32 @@ public class ItemRenderer
      */
     private void transformFirstPersonItem(float equipProgress, float swingProgress)
     {
-    	if (ModInstances.getOldAnimationsMod().isEnabled()) {
-    		GlStateManager.translate(0.56F, -0.48F, -0.71999997F);
-            GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
-            GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-            float f = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
-            float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-            GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
-            GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.scale(0.3F, 0.3F, 0.3F);
-    	} else {
-    		GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
-            GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
-            GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-            float f = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
-            float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-            GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
-            GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.scale(0.4F, 0.4F, 0.4F);
-    	}
-    }
+		boolean isOldAnimationsModEnabled = ModInstances.getOldAnimationsMod().isEnabled();
+		
+		if (isOldAnimationsModEnabled && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
+		}
+
+		if (isOldAnimationsModEnabled && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
+			GlStateManager.translate(0.08f, -0.027f, -0.33f);
+			GlStateManager.scale(0.93f, 1.0f, 1.0f);
+		}
+
+		if (isOldAnimationsModEnabled && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.isSwingInProgress && this.mc.thePlayer.getCurrentEquippedItem() != null && !this.mc.thePlayer.isEating() && !this.mc.thePlayer.isBlocking()) {
+			GlStateManager.scale(0.85f, 0.85f, 0.85f);
+			GlStateManager.translate(-0.078f, 0.003f, 0.05f);
+		}
+
+		GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
+		GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
+		GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+		float f = MathHelper.sin(swingProgress * swingProgress * (float) Math.PI);
+		float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float) Math.PI);
+		GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.scale(0.4F, 0.4F, 0.4F);
+	}
 
     private void func_178098_a(float p_178098_1_, AbstractClientPlayer clientPlayer)
     {
