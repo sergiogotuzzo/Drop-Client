@@ -1,5 +1,8 @@
 package rubik.mods.impl;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -12,6 +15,7 @@ import rubik.mods.ModDraggable;
 
 public class PotionEffects extends ModDraggable {
 	private float zLevel;
+	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
     private int color = 0xFFFFFFFF;
     private boolean shadow = true;
@@ -19,7 +23,11 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public int getWidth() {
-        return 83;
+    	Collection<PotionEffect> activePotionEffects = mc.thePlayer.getActivePotionEffects();
+    	
+        return activePotionEffects.size() == 0 ?
+        		26 + font.getStringWidth(getLongestEffectName(dummyPotionEffects)) :
+        		26 + font.getStringWidth(getLongestEffectName(activePotionEffects));
     }
 
     @Override
@@ -45,11 +53,39 @@ public class PotionEffects extends ModDraggable {
     @Override
     public void renderDummy(ScreenPosition pos) {
         if (mc.thePlayer.getActivePotionEffects().size() == 0) {
-        	renderPotionEffect(pos, 0, new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3));
-            renderPotionEffect(pos, EFFECT_HEIGHT, new PotionEffect(Potion.damageBoost.getId(), 20, 3));
+        	int yOffset = 0;
+
+            for (int i = 0; i < dummyPotionEffects.size(); i++) {
+                PotionEffect potionEffect = (PotionEffect) dummyPotionEffects.toArray()[i];
+
+                renderPotionEffect(pos, yOffset, potionEffect);
+                
+                yOffset += EFFECT_HEIGHT;
+            }
         } else {
         	render(pos);
         }
+    }
+    
+    private String getLongestEffectName(Collection<PotionEffect> effects) {
+        if (effects == null || effects.isEmpty()) {
+            return null;
+        }
+        
+        PotionEffect longestEffect = null;
+        
+        int maxLength = 0;
+        
+        for (PotionEffect effect : effects) {
+            String effectName = getPotionName(effect);
+            
+            if (effectName.length() > maxLength) {
+                maxLength = effectName.length();
+                longestEffect = effect;
+            }
+        }
+        
+        return getPotionName(longestEffect);
     }
 
     private void renderPotionEffect(ScreenPosition pos, int yOffset, PotionEffect pe) {
