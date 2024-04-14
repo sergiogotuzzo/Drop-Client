@@ -73,7 +73,7 @@ public class GuiDisconnected extends GuiScreen
         }
         else if (button.id == 1)
         {
-        	this.mc.displayGuiScreen(new GuiConnecting(new GuiMultiplayer(new GuiMainMenu()), mc, ip, port));
+        	this.mc.displayGuiScreen(new GuiConnecting(this.parentScreen, mc, ip, port));
         }
     }
 
