@@ -30,6 +30,8 @@ import net.minecraft.world.storage.MapData;
 import net.optifine.DynamicLights;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
+import rubik.mods.ModInstances;
+
 import org.lwjgl.opengl.GL11;
 
 public class ItemRenderer
@@ -277,15 +279,27 @@ public class ItemRenderer
      */
     private void transformFirstPersonItem(float equipProgress, float swingProgress)
     {
-        GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
-        GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
-        GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-        float f = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
-        float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-        GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
-        GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.scale(0.4F, 0.4F, 0.4F);
+    	if (ModInstances.getOldAnimationsMod().isEnabled()) {
+    		GlStateManager.translate(0.56F, -0.48F, -0.71999997F);
+            GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
+            GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+            float f = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
+            float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
+            GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
+            GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
+            GlStateManager.scale(0.3F, 0.3F, 0.3F);
+    	} else {
+    		GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
+            GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
+            GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+            float f = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
+            float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
+            GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
+            GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
+            GlStateManager.scale(0.4F, 0.4F, 0.4F);
+    	}
     }
 
     private void func_178098_a(float p_178098_1_, AbstractClientPlayer clientPlayer)
@@ -366,8 +380,16 @@ public class ItemRenderer
                             break;
 
                         case BLOCK:
-                            this.transformFirstPersonItem(f, 0.0F);
-                            this.func_178103_d();
+                        	{
+                        		if (ModInstances.getOldAnimationsMod().isEnabled()) {
+                        			this.transformFirstPersonItem(0.2F, f1);
+                                    this.func_178103_d();
+                                    GlStateManager.translate(-0.5F, 0.2F, 0.0F);
+                        		} else {
+                        			this.transformFirstPersonItem(f, 0.0F);
+                                    this.func_178103_d();
+                        		}
+                        	}
                             break;
 
                         case BOW:

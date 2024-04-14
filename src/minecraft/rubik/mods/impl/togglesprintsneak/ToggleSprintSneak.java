@@ -33,7 +33,7 @@ public class ToggleSprintSneak extends ModDraggable {
 	public void render(ScreenPosition pos) {
 		textToRender = background ? mc.thePlayer.movementInput.getDisplayText().replace("[", "").replace("]", "") : mc.thePlayer.movementInput.getDisplayText();
 		
-		if (background && !textToRender.isBlank()) {
+		if (background && !textToRender.isEmpty()) {
 			int paddingX = 6;
 	        int paddingY = 4;
 	        

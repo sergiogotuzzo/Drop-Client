@@ -8,6 +8,7 @@ import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Fullbright;
 import rubik.mods.impl.Keystrokes;
+import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
@@ -23,6 +24,7 @@ public class ModInstances {
 	private static ToggleSprintSneak toggleSprintSneakMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
+	private static OldAnimations oldAnimationsMod = new OldAnimations();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -73,5 +75,9 @@ public class ModInstances {
 	
 	public static Fullbright getFullbrightMod() {
 		return fullbrightMod;
+	}
+	
+	public static OldAnimations getOldAnimationsMod() {
+		return oldAnimationsMod;
 	}
 }
