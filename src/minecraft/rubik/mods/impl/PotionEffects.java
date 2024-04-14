@@ -1,9 +1,5 @@
 package rubik.mods.impl;
 
-import java.util.Collection;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
@@ -49,8 +45,6 @@ public class PotionEffects extends ModDraggable {
         if (effect == null) {
             return;
         }
-
-        GL11.glPushMatrix();
         
         Potion potion = Potion.potionTypes[effect.getPotionID()];
 
@@ -70,8 +64,6 @@ public class PotionEffects extends ModDraggable {
         	font.drawString(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
             font.drawString(potion.getDurationString(effect), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
         }
-
-        GL11.glPopMatrix();
     }
 
     public void setShadowEnabled(boolean enabled) {
