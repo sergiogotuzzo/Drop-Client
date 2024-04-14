@@ -24,9 +24,7 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public int getHeight() {
-        int potionEffectsSize = mc.thePlayer.getActivePotionEffects().size();
-        
-        return potionEffectsSize > 0 ? potionEffectsSize * EFFECT_HEIGHT : 2 * EFFECT_HEIGHT;
+        return 2 * EFFECT_HEIGHT;
     }
 
     @Override
