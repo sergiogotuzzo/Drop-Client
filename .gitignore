@@ -2,6 +2,7 @@ bin/
 conf/
 docs/
 eclipse/
+export/
 jars/
 logs/
 reobf/
