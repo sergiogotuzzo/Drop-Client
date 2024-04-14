@@ -63,15 +63,15 @@ public class PotionEffects extends ModDraggable {
         }
         
         if (shadow) {
-        	font.drawStringWithShadow(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+        	font.drawStringWithShadow(getPotionName(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
             font.drawStringWithShadow(Potion.getDurationString(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
         } else {
-        	font.drawString(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+        	font.drawString(getPotionName(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
             font.drawString(Potion.getDurationString(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
         }
     }
     
-    public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)
+    private void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)
     {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
@@ -86,6 +86,25 @@ public class PotionEffects extends ModDraggable {
         worldrenderer.func_181662_b((double)(x + 0), (double)(y + 0), (double)this.zLevel).func_181673_a((double)((float)(textureX + 0) * f), (double)((float)(textureY + 0) * f1)).func_181675_d();
         
         tessellator.draw();
+    }
+    
+    private String getPotionName(PotionEffect pe) {
+    	String potionName = I18n.format(pe.getEffectName(), new Object[0]);
+    	
+    	if (pe.getAmplifier() == 1)
+        {
+    		potionName = potionName + " " + I18n.format("enchantment.level.2", new Object[0]);
+        }
+        else if (pe.getAmplifier() == 2)
+        {
+        	potionName = potionName + " " + I18n.format("enchantment.level.3", new Object[0]);
+        }
+        else if (pe.getAmplifier() == 3)
+        {
+        	potionName = potionName + " " + I18n.format("enchantment.level.4", new Object[0]);
+        }
+    	
+    	return potionName;
     }
 
     public void setShadowEnabled(boolean enabled) {
