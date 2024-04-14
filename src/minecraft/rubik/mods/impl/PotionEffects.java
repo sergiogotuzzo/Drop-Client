@@ -19,7 +19,7 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public int getWidth() {
-        return 70;
+        return 83;
     }
 
     @Override
@@ -42,8 +42,8 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-        renderPotionEffect(pos, 0, new PotionEffect(1, 60));
-        renderPotionEffect(pos, EFFECT_HEIGHT, new PotionEffect(2, 60));
+        renderPotionEffect(pos, 0, new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3));
+        renderPotionEffect(pos, EFFECT_HEIGHT, new PotionEffect(Potion.damageBoost.getId(), 20, 3));
     }
 
     private void renderPotionEffect(ScreenPosition pos, int yOffset, PotionEffect pe) {
