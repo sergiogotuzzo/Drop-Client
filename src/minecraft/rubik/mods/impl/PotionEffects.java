@@ -8,6 +8,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
@@ -57,7 +58,10 @@ public class PotionEffects extends ModDraggable {
 
         if (potion.hasStatusIcon())
         {
-          int iconIndex = potion.getStatusIconIndex();
+        	mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
+        	
+        	int iconIndex = potion.getStatusIconIndex();
+          
             new Gui().drawTexturedModalRect(pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yOffset + 4, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
         
