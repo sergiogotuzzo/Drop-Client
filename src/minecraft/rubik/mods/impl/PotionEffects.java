@@ -41,12 +41,12 @@ public class PotionEffects extends ModDraggable {
         renderPotionEffect(pos, EFFECT_HEIGHT, new PotionEffect(2, 60));
     }
 
-    private void renderPotionEffect(ScreenPosition pos, int yOffset, PotionEffect effect) {
-        if (effect == null) {
+    private void renderPotionEffect(ScreenPosition pos, int yOffset, PotionEffect pe) {
+        if (pe == null) {
             return;
         }
         
-        Potion potion = Potion.potionTypes[effect.getPotionID()];
+        Potion potion = Potion.potionTypes[pe.getPotionID()];
 
         if (potion.hasStatusIcon())
         {
@@ -59,10 +59,10 @@ public class PotionEffects extends ModDraggable {
         
         if (shadow) {
         	font.drawStringWithShadow(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
-            font.drawStringWithShadow(potion.getDurationString(effect), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+            font.drawStringWithShadow(Potion.getDurationString(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
         } else {
         	font.drawString(I18n.format(potion.getName(), new Object[0]), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
-            font.drawString(potion.getDurationString(effect), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+            font.drawString(Potion.getDurationString(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
         }
     }
 
