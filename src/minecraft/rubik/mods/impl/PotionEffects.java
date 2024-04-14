@@ -92,27 +92,35 @@ public class PotionEffects extends ModDraggable {
         if (pe == null) {
             return;
         }
-        
+
         Potion potion = Potion.potionTypes[pe.getPotionID()];
 
-        if (potion.hasStatusIcon())
-        {
-        	mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
-        	
-        	int iconIndex = potion.getStatusIconIndex();
-          
+        if (potion.hasStatusIcon()) {
+            mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
+            
+            int iconIndex = potion.getStatusIconIndex();
+              
             drawTexturedModalRect(pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yOffset + 4, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
-        
+
+        String potionName = getPotionName(pe);
+        String durationString = Potion.getDurationString(pe);
+
         if (shadow) {
-        	font.drawStringWithShadow(getPotionName(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
-            font.drawStringWithShadow(Potion.getDurationString(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+            font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+
+            if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+                font.drawStringWithShadow(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+            }
         } else {
-        	font.drawString(getPotionName(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
-            font.drawString(Potion.getDurationString(pe), pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+            font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+
+            if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+                font.drawString(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+            }
         }
     }
-    
+
     private void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)
     {
         float f = 0.00390625F;
