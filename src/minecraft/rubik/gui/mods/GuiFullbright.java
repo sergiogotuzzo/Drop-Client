@@ -36,19 +36,8 @@ public class GuiFullbright extends GuiScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-	            {
-	            	if (mod.isEnabled()) {
-	            		mod.setEnabled(false);
-	            		
-	            		mc.gameSettings.gammaSetting = 1.0F;
-	            	} else {
-	            		mod.setEnabled(true);
-	            		
-	            		mc.gameSettings.gammaSetting = 10.0F;
-	            	}
-	            	
-	            	this.initGui();
-	            }
+	            mod.setEnabled(!mod.isEnabled());
+	            this.initGui();
                 break;
         }
     }

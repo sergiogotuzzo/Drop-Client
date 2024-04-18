@@ -8,6 +8,7 @@ import rubik.event.impl.TickEvent;
 import rubik.gui.GuiModPositioning;
 import rubik.gui.hud.HUDManager;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.Fullbright;
 
 public class Client {
 	private static final Client client = new Client();
@@ -45,6 +46,12 @@ public class Client {
 	public void onTick(TickEvent event) {
 		if (mc.gameSettings.keyBindModPositioning.isPressed()) {
 			mc.displayGuiScreen(new GuiModPositioning(hudManager));
+		}
+		
+		if (mc.gameSettings.keyBindFullbright.isPressed()) {
+			Fullbright mod = ModInstances.getFullbrightMod();
+			
+			mod.setEnabled(!mod.isEnabled());
 		}
 	}
 }
