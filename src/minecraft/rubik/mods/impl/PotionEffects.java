@@ -19,6 +19,8 @@ public class PotionEffects extends ModDraggable {
 	
     private int color = 0xFFFFFFFF;
     private boolean shadow = true;
+    private boolean showTime = true;
+    
     private final int EFFECT_HEIGHT = 24;
 
     @Override
@@ -107,16 +109,24 @@ public class PotionEffects extends ModDraggable {
         String durationString = Potion.getDurationString(pe);
 
         if (shadow) {
-            font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+        	if (showTime) {
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
 
-            if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                font.drawStringWithShadow(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
-            }
+                if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+                }
+        	} else {
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color);
+        	}
         } else {
-            font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+            if (showTime) {
+            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
 
-            if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                font.drawString(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+                if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+                    font.drawString(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+                }
+            } else {
+            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color);
             }
         }
     }
@@ -163,5 +173,13 @@ public class PotionEffects extends ModDraggable {
 
     public boolean isShadowEnabled() {
         return shadow;
+    }
+    
+    public void setShowTimeEnabled(boolean enabled) {
+    	showTime = enabled;
+    }
+
+    public boolean isShowTimeEnabled() {
+        return showTime;
     }
 }
