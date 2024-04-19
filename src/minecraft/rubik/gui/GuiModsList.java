@@ -37,7 +37,7 @@ public class GuiModsList extends GuiScreen {
         this.buttonList.add(new GuiButton(4, this.width / 2 - 200 - 2 + j, this.height / 4 + 48 + i, 98, 20, I18n.format("CPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 - 100 + j, this.height / 4 + 48 + i, 98, 20, I18n.format("FPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(6, this.width / 2 + 2 + j, this.height / 4 + 48 + i, 98, 20, I18n.format("Ping Display", new Object[0])));
-        this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Unknown", new Object[0])));
+        this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Coming Soon...", new Object[0])));
         this.buttonList.add(new GuiButton(8, this.width / 2 - 100 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Fullbright", new Object[0])));
         this.buttonList.add(new GuiButton(9, this.width / 2 + 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Freelook", new Object[0])));
         this.buttonList.add(new GuiButton(10, this.width / 2 - 100 - 26, this.height / 4 + 96 + i, 124, 20, I18n.format("Coordinates Display", new Object[0])));
