@@ -21,17 +21,17 @@ public class ArmorStatus extends ModDraggable {
 	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean dynamicColors = true;
-	private DamageMode mode = DamageMode.DAMAGE;
+	private DamageMode damageMode = DamageMode.DAMAGE;
 	
 	@Override
 	public int getWidth() {
 		int width = 0;
 		
-		if (mode == DamageMode.PERCENTAGE) {
+		if (damageMode == DamageMode.PERCENTAGE) {
 			width = 48;
-		} else if (mode == DamageMode.DAMAGE) {
+		} else if (damageMode == DamageMode.DAMAGE) {
 			width = 40;
-		} else if (mode == DamageMode.DAMAGE_MAX_DAMAGE) {
+		} else if (damageMode == DamageMode.DAMAGE_MAX_DAMAGE) {
 			return 64;
 		}
 		
@@ -104,11 +104,11 @@ public class ArmorStatus extends ModDraggable {
 	}
 	
 	private String getDamageText(ItemStack is) {
-		if (mode == DamageMode.PERCENTAGE) {
+		if (damageMode == DamageMode.PERCENTAGE) {
 			return String.format("%.0f%%", getDamagePercentage(is));
-		} else if (mode == DamageMode.DAMAGE) {
+		} else if (damageMode == DamageMode.DAMAGE) {
 			return "" + (is.getMaxDamage() - is.getItemDamage());
-		} else if (mode == DamageMode.DAMAGE_MAX_DAMAGE) {
+		} else if (damageMode == DamageMode.DAMAGE_MAX_DAMAGE) {
 			return (is.getMaxDamage() - is.getItemDamage()) + "/" + is.getMaxDamage();
 		}
 		
@@ -143,20 +143,20 @@ public class ArmorStatus extends ModDraggable {
 		return dynamicColors;
 	}
 	
-	public void setMode(DamageMode mode) {
-		this.mode = mode;
+	public void setDamageMode(DamageMode mode) {
+		this.damageMode = mode;
 	}
 	
-	public DamageMode getMode() {
-		return mode;
+	public DamageMode getDamageMode() {
+		return damageMode;
 	}
 	
-	public int getModeIndex() {
-		if (getMode() == DamageMode.PERCENTAGE) {
+	public int getDamageModeIndex() {
+		if (damageMode == DamageMode.PERCENTAGE) {
         	return 1;
-        } else if (getMode() == DamageMode.DAMAGE) {
+        } else if (damageMode == DamageMode.DAMAGE) {
         	return 2;
-        } else if (getMode() == DamageMode.DAMAGE_MAX_DAMAGE) {
+        } else if (damageMode == DamageMode.DAMAGE_MAX_DAMAGE) {
         	return 3;
         }
 		
