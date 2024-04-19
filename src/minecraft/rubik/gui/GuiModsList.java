@@ -5,7 +5,6 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import rubik.gui.mods.GuiArmorStatus;
 import rubik.gui.mods.GuiCPSDisplay;
 import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
@@ -15,6 +14,7 @@ import rubik.gui.mods.GuiKeystrokes;
 import rubik.gui.mods.GuiPingDisplay;
 import rubik.gui.mods.GuiPotionEffects;
 import rubik.gui.mods.GuiToggleSprintSneak;
+import rubik.gui.mods.armorstatus.GuiArmorStatus;
 
 public class GuiModsList extends GuiScreen {
 	private final GuiScreen previousScreen;

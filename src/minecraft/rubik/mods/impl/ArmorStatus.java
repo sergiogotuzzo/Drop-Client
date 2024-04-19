@@ -17,7 +17,7 @@ public class ArmorStatus extends ModDraggable {
 		DAMAGE_MAX_DAMAGE
 	}
 	
-	private int color = 0xFFFFFFFF;
+	private Color color = new Color(255, 255, 255, 255);
 	private boolean shadow = true;
 	private boolean dynamicColors = true;
 	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
@@ -67,32 +67,31 @@ public class ArmorStatus extends ModDraggable {
 		GL11.glPushMatrix();
 		
 		int yAdd = (-16 * i) + 48;
+		Color dynamicColor = Color.WHITE;
 		
 		if (dynamicColors) {
 			double damagePercentage = getDamagePercentage(is);
 			
 			if (damagePercentage > 80) {
-				color = Color.WHITE.getRGB();
+				dynamicColor = Color.WHITE;
 			} else if (damagePercentage > 60) {
-				color = new Color(85, 255, 85).getRGB();
+				dynamicColor = new Color(85, 255, 85);
 			} else if (damagePercentage > 40) {
-				color = new Color(255, 255, 85).getRGB();
+				dynamicColor = new Color(255, 255, 85);
 			} else if (damagePercentage > 25) {
-				color = new Color(255, 170, 0).getRGB();
+				dynamicColor = new Color(255, 170, 0);
 			} else if (damagePercentage > 10) {
-				color = new Color(255, 85, 85).getRGB();
+				dynamicColor = new Color(255, 85, 85);
 			} else if (damagePercentage < 10) {
-				color = new Color(170, 0, 0).getRGB();
+				dynamicColor = new Color(170, 0, 0);
 			}
-		} else {
-			color = 0xFFFFFFFF;
 		}
 		
 		if (is.getItem().isDamageable()) {
 			if (shadow) {
-				font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
+				font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 			} else {
-				font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, color);
+				font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 			}
 		}
 		
@@ -117,6 +116,26 @@ public class ArmorStatus extends ModDraggable {
 	
 	private double getDamagePercentage(ItemStack is) {
 		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
+	}
+	
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
+	public void setColorRed(int red) {
+		setColor(new Color(red, color.getGreen(), color.getBlue()));
+	}
+	
+	public void setColorGreen(int green) {
+		setColor(new Color(color.getRed(), green, color.getBlue()));
+	}
+	
+	public void setColorBlue(int blue) {
+		setColor(new Color(color.getRed(), color.getGreen(), blue));
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 	
 	public void setShadowEnabled(boolean enabled) {
