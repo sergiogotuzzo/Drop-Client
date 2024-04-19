@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
@@ -17,7 +18,7 @@ public class ArmorStatus extends ModDraggable {
 		DAMAGE_MAX_DAMAGE
 	}
 	
-	private Color color = new Color(255, 255, 255, 255);
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean dynamicColors = true;
 	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
@@ -118,24 +119,12 @@ public class ArmorStatus extends ModDraggable {
 		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 	}
 	
-	public void setColor(Color color) {
-		this.color = color;
-	}
-	
-	public void setColorRed(int red) {
-		setColor(new Color(red, color.getGreen(), color.getBlue()));
-	}
-	
-	public void setColorGreen(int green) {
-		setColor(new Color(color.getRed(), green, color.getBlue()));
-	}
-	
-	public void setColorBlue(int blue) {
-		setColor(new Color(color.getRed(), color.getGreen(), blue));
+	public ColorManager getColorManager() {
+		return color;
 	}
 	
 	public Color getColor() {
-		return color;
+		return color.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {

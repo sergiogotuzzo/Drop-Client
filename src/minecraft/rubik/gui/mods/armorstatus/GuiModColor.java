@@ -46,22 +46,22 @@ public class GuiModColor extends GuiScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setColorRed((int) (sliderRed.func_175217_d() * 255.0F));
+            	mod.getColorManager().setRed((int) (sliderRed.func_175217_d() * 255.0F));
             	break;
             case 2:
-            	mod.setColorGreen((int) (sliderGreen.func_175217_d() * 255.0F));
+            	mod.getColorManager().setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
             	break;
             case 3:
-            	mod.setColorBlue((int) (sliderBlue.func_175217_d() * 255.0F));
+            	mod.getColorManager().setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
             	break;
         }
     }
     
     @Override
     public void mouseClickMove(final int mouseX, final int mouseY, final int clickedMouseButton, final long timeSinceLastClick) {
-    	mod.setColorRed((int) (sliderRed.func_175217_d() * 255.0F));
-    	mod.setColorGreen((int) (sliderGreen.func_175217_d() * 255.0F));
-    	mod.setColorBlue((int) (sliderBlue.func_175217_d() * 255.0F));
+    	mod.getColorManager().setRed((int) (sliderRed.func_175217_d() * 255.0F));
+    	mod.getColorManager().setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
+    	mod.getColorManager().setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
     }
 
     @Override
