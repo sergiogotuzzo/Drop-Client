@@ -12,7 +12,7 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
-	public static enum ArmorStatusMode {
+	public static enum DamageMode {
 		PERCENTAGE,
 		DAMAGE,
 		DAMAGE_MAX_DAMAGE
@@ -21,17 +21,17 @@ public class ArmorStatus extends ModDraggable {
 	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean dynamicColors = true;
-	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
+	private DamageMode mode = DamageMode.DAMAGE;
 	
 	@Override
 	public int getWidth() {
 		int width = 0;
 		
-		if (mode == ArmorStatusMode.PERCENTAGE) {
+		if (mode == DamageMode.PERCENTAGE) {
 			width = 48;
-		} else if (mode == ArmorStatusMode.DAMAGE) {
+		} else if (mode == DamageMode.DAMAGE) {
 			width = 40;
-		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
+		} else if (mode == DamageMode.DAMAGE_MAX_DAMAGE) {
 			return 64;
 		}
 		
@@ -104,11 +104,11 @@ public class ArmorStatus extends ModDraggable {
 	}
 	
 	private String getDamageText(ItemStack is) {
-		if (mode == ArmorStatusMode.PERCENTAGE) {
+		if (mode == DamageMode.PERCENTAGE) {
 			return String.format("%.0f%%", getDamagePercentage(is));
-		} else if (mode == ArmorStatusMode.DAMAGE) {
+		} else if (mode == DamageMode.DAMAGE) {
 			return "" + (is.getMaxDamage() - is.getItemDamage());
-		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
+		} else if (mode == DamageMode.DAMAGE_MAX_DAMAGE) {
 			return (is.getMaxDamage() - is.getItemDamage()) + "/" + is.getMaxDamage();
 		}
 		
@@ -143,20 +143,20 @@ public class ArmorStatus extends ModDraggable {
 		return dynamicColors;
 	}
 	
-	public void setMode(ArmorStatusMode mode) {
+	public void setMode(DamageMode mode) {
 		this.mode = mode;
 	}
 	
-	public ArmorStatusMode getMode() {
+	public DamageMode getMode() {
 		return mode;
 	}
 	
 	public int getModeIndex() {
-		if (getMode() == ArmorStatusMode.PERCENTAGE) {
+		if (getMode() == DamageMode.PERCENTAGE) {
         	return 1;
-        } else if (getMode() == ArmorStatusMode.DAMAGE) {
+        } else if (getMode() == DamageMode.DAMAGE) {
         	return 2;
-        } else if (getMode() == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
+        } else if (getMode() == DamageMode.DAMAGE_MAX_DAMAGE) {
         	return 3;
         }
 		

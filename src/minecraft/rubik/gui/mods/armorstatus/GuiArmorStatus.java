@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.ArmorStatus;
-import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
+import rubik.mods.impl.ArmorStatus.DamageMode;
 
 public class GuiArmorStatus extends GuiScreen {
 	private final GuiScreen previousGuiScreen;
@@ -50,12 +50,12 @@ public class GuiArmorStatus extends GuiScreen {
                 break;
             case 2:
 	            {
-	            	if (mod.getMode() == ArmorStatusMode.PERCENTAGE) {
-	            		mod.setMode(ArmorStatusMode.DAMAGE);
-	            	} else if (mod.getMode() == ArmorStatusMode.DAMAGE) {
-	            		mod.setMode(ArmorStatusMode.DAMAGE_MAX_DAMAGE);
-	            	} else if (mod.getMode() == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
-	            		mod.setMode(ArmorStatusMode.PERCENTAGE);
+	            	if (mod.getMode() == DamageMode.PERCENTAGE) {
+	            		mod.setMode(DamageMode.DAMAGE);
+	            	} else if (mod.getMode() == DamageMode.DAMAGE) {
+	            		mod.setMode(DamageMode.DAMAGE_MAX_DAMAGE);
+	            	} else if (mod.getMode() == DamageMode.DAMAGE_MAX_DAMAGE) {
+	            		mod.setMode(DamageMode.PERCENTAGE);
 	            	}
 	            	
 	            	this.initGui();
