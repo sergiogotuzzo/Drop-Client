@@ -1,4 +1,4 @@
-package rubik.gui.mods;
+package rubik.gui.mods.pingdisplay;
 
 import java.io.IOException;
 
@@ -6,14 +6,13 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.Keystrokes;
-import rubik.mods.impl.Keystrokes.KeystrokesMode;
+import rubik.mods.impl.PingDisplay;
 
-public class GuiKeystrokes extends GuiScreen {
+public class GuiPingDisplay extends GuiScreen {
 	private final GuiScreen previousGuiScreen;
-	private Keystrokes mod = ModInstances.getKeystrokesMod();
+	private PingDisplay mod = ModInstances.getPingDisplayMod();
 	
-	public GuiKeystrokes(GuiScreen previousGuiScreen) {
+	public GuiPingDisplay(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 	
@@ -25,8 +24,9 @@ public class GuiKeystrokes extends GuiScreen {
         int i = -16;
  
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? "§aEnabled" : "§cDisabled", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format("Mode: " + mod.getModeIndex(), new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100 + 50, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format("Color", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isBackgroundEnabled() ? "§a" : "§c") + "Show Background", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -43,21 +43,13 @@ public class GuiKeystrokes extends GuiScreen {
             	this.initGui();
                 break;
             case 2:
-	            {
-	            	if (mod.getMode() == KeystrokesMode.WASD) {
-	            		mod.setMode(KeystrokesMode.WASD_MOUSE);
-	            	} else if (mod.getMode() == KeystrokesMode.WASD_MOUSE) {
-	            		mod.setMode(KeystrokesMode.WASD_JUMP);
-	            	} else if (mod.getMode() == KeystrokesMode.WASD_JUMP) {
-	            		mod.setMode(KeystrokesMode.WASD_JUMP_MOUSE);
-	            	} else if (mod.getMode() == KeystrokesMode.WASD_JUMP_MOUSE) {
-	            		mod.setMode(KeystrokesMode.WASD);
-	            	}
-	            	
-	            	this.initGui();
-	            }
-            	break;
+            	this.mc.displayGuiScreen(new GuiColor(this));
+                break;
             case 3:
+            	mod.setBackgroundEnabled(!mod.isBackgroundEnabled());
+            	this.initGui();
+            	break;
+            case 4:
             	mod.setShadowEnabled(!mod.isShadowEnabled());
             	this.initGui();
             	break;
@@ -68,7 +60,7 @@ public class GuiKeystrokes extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Keystrokes Settings", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("Ping Display Settings", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

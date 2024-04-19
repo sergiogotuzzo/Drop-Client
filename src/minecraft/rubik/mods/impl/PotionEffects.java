@@ -1,5 +1,6 @@
 package rubik.mods.impl;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -10,6 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
@@ -17,7 +19,7 @@ public class PotionEffects extends ModDraggable {
 	private float zLevel;
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
-    private int color = 0xFFFFFFFF;
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
     private boolean shadow = true;
     private boolean showTime = true;
     
@@ -110,23 +112,23 @@ public class PotionEffects extends ModDraggable {
 
         if (shadow) {
         	if (showTime) {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color.getRGB());
 
                 if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color.getRGB());
                 }
         	} else {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color);
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
         	}
         } else {
             if (showTime) {
-            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color);
+            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color.getRGB());
 
                 if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawString(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color);
+                    font.drawString(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color.getRGB());
                 }
             } else {
-            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color);
+            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
             }
         }
     }
@@ -166,6 +168,14 @@ public class PotionEffects extends ModDraggable {
     	
     	return potionName;
     }
+    
+    public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
+	}
 
     public void setShadowEnabled(boolean enabled) {
         shadow = enabled;

@@ -70,7 +70,7 @@ public class GuiArmorStatus extends GuiScreen {
             	this.initGui();
             	break;
             case 5:
-            	this.mc.displayGuiScreen(new GuiModColor(this));
+            	this.mc.displayGuiScreen(new GuiColor(this));
             	break;
         }
     }

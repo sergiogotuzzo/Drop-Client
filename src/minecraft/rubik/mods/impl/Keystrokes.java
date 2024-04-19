@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
@@ -95,8 +96,8 @@ public class Keystrokes extends ModDraggable {
 		}
 	}
 	
-	private int pressedColor = Color.BLACK.getRGB();
-	private int releasedColor = Color.WHITE.getRGB();
+	private ColorManager pressedColor = new ColorManager(Color.BLACK);
+	private ColorManager releasedColor = new ColorManager(Color.WHITE);
 	private boolean shadow = true;
 	private KeystrokesMode mode = KeystrokesMode.WASD_JUMP_MOUSE;
 
@@ -128,17 +129,33 @@ public class Keystrokes extends ModDraggable {
 		                key.getName(),
 		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-		                key.isDown() ? pressedColor : releasedColor
+		                key.isDown() ? pressedColor.getRGB() : releasedColor.getRGB()
 		                );
 	        } else {
 	        	font.drawString(
 		                key.getName(),
 		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-		                key.isDown() ? pressedColor : releasedColor
+		                key.isDown() ? pressedColor.getRGB() : releasedColor.getRGB()
 		                );
 	        }
 	    }
+	}
+	
+	public ColorManager getPressedColorManager() {
+		return pressedColor;
+	}
+	
+	public Color getPressedColor() {
+		return pressedColor.getColor();
+	}
+	
+	public ColorManager getReleasedColorManager() {
+		return releasedColor;
+	}
+	
+	public Color getReleasedColor() {
+		return releasedColor.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {

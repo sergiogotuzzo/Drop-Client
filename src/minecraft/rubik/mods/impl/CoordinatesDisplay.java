@@ -6,11 +6,12 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.chunk.Chunk;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CoordinatesDisplay extends ModDraggable {
-	private int color = 0xFFFFFFFF;
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean biome = true;
 	
@@ -39,28 +40,28 @@ public class CoordinatesDisplay extends ModDraggable {
 				);
 		
 		if (shadow) {
-			font.drawStringWithShadow(getCoordinatesXText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color);
-			font.drawStringWithShadow(getCoordinatesYText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 12, color);
-			font.drawStringWithShadow(getCoordinatesZText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 23, color);
+			font.drawStringWithShadow(getCoordinatesXText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+			font.drawStringWithShadow(getCoordinatesYText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 12, color.getRGB());
+			font.drawStringWithShadow(getCoordinatesZText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 23, color.getRGB());
 			
-			font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 1, color);
-			font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 12, color);
-			font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 23, color);
+			font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 1, color.getRGB());
+			font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 12, color.getRGB());
+			font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 23, color.getRGB());
 			
 			if (biome) {
-				font.drawStringWithShadow(getBiomeText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 34, color);
+				font.drawStringWithShadow(getBiomeText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 34, color.getRGB());
 			}
 		} else {
-			font.drawString(getCoordinatesXText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color);
-			font.drawString(getCoordinatesYText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 12, color);
-			font.drawString(getCoordinatesZText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 23, color);
+			font.drawString(getCoordinatesXText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+			font.drawString(getCoordinatesYText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 12, color.getRGB());
+			font.drawString(getCoordinatesZText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 23, color.getRGB());
 			
-			font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 1, color);
-			font.drawString(getFacing(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 12, color);
-			font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 23, color);
+			font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 1, color.getRGB());
+			font.drawString(getFacing(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 12, color.getRGB());
+			font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 23, color.getRGB());
 			
 			if (biome) {
-				font.drawString(getBiomeText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 34, color);
+				font.drawString(getBiomeText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 34, color.getRGB());
 			}
 		}
 	}
@@ -122,6 +123,14 @@ public class CoordinatesDisplay extends ModDraggable {
             default:
             	return "";
         }
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {

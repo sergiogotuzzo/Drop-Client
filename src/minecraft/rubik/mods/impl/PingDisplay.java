@@ -4,12 +4,13 @@ import java.awt.Color;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.server.MinecraftServer;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class PingDisplay extends ModDraggable {
 	private boolean background = false;
-	private int color = 0xFFFFFFFF;
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	
 	@Override
@@ -38,9 +39,9 @@ public class PingDisplay extends ModDraggable {
 		}
 		
 		if (shadow) {
-			font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
-			font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		}
 	}
 	
@@ -56,6 +57,14 @@ public class PingDisplay extends ModDraggable {
 	
 	public boolean isBackgroundEnabled() {
 		return background;
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {

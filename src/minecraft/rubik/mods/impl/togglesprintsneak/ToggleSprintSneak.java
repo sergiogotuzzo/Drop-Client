@@ -3,6 +3,7 @@ package rubik.mods.impl.togglesprintsneak;
 import java.awt.Color;
 
 import net.minecraft.client.gui.Gui;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
@@ -10,7 +11,7 @@ public class ToggleSprintSneak extends ModDraggable {
 	public int keyHoldTicks = 7;
 	
 	private boolean background = false;
-	private int color = 0xFFFFFFFF;
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean toggleSprint = true;
 	private boolean toggleSneak = false;
@@ -47,9 +48,9 @@ public class ToggleSprintSneak extends ModDraggable {
 		}
 		
 		if (shadow) {
-			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
-			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		}
 	}
 	
@@ -71,9 +72,9 @@ public class ToggleSprintSneak extends ModDraggable {
 		}
 		
 		if (shadow) {
-			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
-			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		}
 	}
 	
@@ -83,6 +84,14 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public boolean isBackgroundEnabled() {
 		return background;
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {

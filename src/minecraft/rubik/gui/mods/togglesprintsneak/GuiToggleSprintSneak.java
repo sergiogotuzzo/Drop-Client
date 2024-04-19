@@ -1,10 +1,11 @@
-package rubik.gui.mods;
+package rubik.gui.mods.togglesprintsneak;
 
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.gui.mods.pingdisplay.GuiColor;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
@@ -23,13 +24,14 @@ public class GuiToggleSprintSneak extends GuiScreen {
         
         int i = -16;
  
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100 + 50, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? "§aEnabled" : "§cDisabled", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isBackgroundEnabled() ? "§a" : "§c") + "Show Background", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSprintEnabled() ? "§a" : "§c") + "Toggle Sprint", new Object[0])));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSneakEnabled() ? "§a" : "§c") + "Toggle Sneak", new Object[0])));
-        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isFlyBoostEnabled() ? "§a" : "§c") + "Fly Boost", new Object[0])));
-        this.buttonList.add(new GuiButton(7, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, I18n.format("Boost Factor: " + mod.getFlyBoostFactor() + "x", new Object[0])));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? "§aEnabled" : "§cDisabled", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format("Color", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isBackgroundEnabled() ? "§a" : "§c") + "Show Background", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSprintEnabled() ? "§a" : "§c") + "Toggle Sprint", new Object[0])));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSneakEnabled() ? "§a" : "§c") + "Toggle Sneak", new Object[0])));
+        this.buttonList.add(new GuiButton(7, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isFlyBoostEnabled() ? "§a" : "§c") + "Fly Boost", new Object[0])));
+        this.buttonList.add(new GuiButton(8, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, I18n.format("Boost Factor: " + mod.getFlyBoostFactor() + "x", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -46,26 +48,29 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.initGui();
                 break;
             case 2:
+            	this.mc.displayGuiScreen(new GuiColor(this));
+                break;
+            case 3:
             	mod.setBackgroundEnabled(!mod.isBackgroundEnabled());
             	this.initGui();
             	break;
-            case 3:
+            case 4:
             	mod.setShadowEnabled(!mod.isShadowEnabled());
             	this.initGui();
             	break;
-            case 4:
+            case 5:
             	mod.setToggleSprintEnabled(!mod.isToggleSprintEnabled());
             	this.initGui();
             	break;
-            case 5:
+            case 6:
             	mod.setToggleSneakEnabled(!mod.isToggleSneakEnabled());
             	this.initGui();
             	break;
-            case 6:
+            case 7:
             	mod.setFlyBoostEnabled(!mod.isFlyBoostEnabled());
             	this.initGui();
             	break;
-            case 7:
+            case 8:
             	mod.setFlyBoostFactor((mod.getFlyBoostFactor() < 8 && mod.getFlyBoostFactor() >= 1) ? mod.getFlyBoostFactor() + 1 : 1);
             	this.initGui();
             	break;

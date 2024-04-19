@@ -1,4 +1,4 @@
-package rubik.gui.mods.armorstatus;
+package rubik.gui.mods.cpsdisplay;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -8,18 +8,18 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.gui.GuiSlider;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.ArmorStatus;
+import rubik.mods.impl.CPSDisplay;
 
-public class GuiModColor extends GuiScreen {
+public class GuiColor extends GuiScreen {
 	private final GuiScreen previousGuiScreen;
-	private ArmorStatus mod = ModInstances.getArmorStatusMod();
+	private CPSDisplay mod = ModInstances.getCPSDisplayMod();
 	
 	private GuiSlider sliderRed;
     private GuiSlider sliderGreen;
     private GuiSlider sliderBlue;
     private GuiSlider sliderAlpha;
 	
-	public GuiModColor(GuiScreen previousGuiScreen) {
+	public GuiColor(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 	
@@ -68,7 +68,7 @@ public class GuiModColor extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Armor Status Mod Color", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("CPS Display Mod Color", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

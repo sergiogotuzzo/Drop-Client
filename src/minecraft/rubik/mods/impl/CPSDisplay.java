@@ -7,12 +7,13 @@ import java.util.List;
 import org.lwjgl.input.Mouse;
 
 import net.minecraft.client.gui.Gui;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CPSDisplay extends ModDraggable {
 	private boolean background = false;
-	private int color = 0xFFFFFFFF;
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean right = true;
 	
@@ -71,9 +72,9 @@ public class CPSDisplay extends ModDraggable {
 		}
 		
 		if (shadow) {
-			font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
-			font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		}
 	}
 	
@@ -97,6 +98,14 @@ public class CPSDisplay extends ModDraggable {
 	
 	public boolean isBackgroundEnabled() {
 		return background;
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {

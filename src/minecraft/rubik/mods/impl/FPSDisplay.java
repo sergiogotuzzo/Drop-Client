@@ -3,12 +3,13 @@ package rubik.mods.impl;
 import java.awt.Color;
 
 import net.minecraft.client.gui.Gui;
+import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class FPSDisplay extends ModDraggable {
 	private boolean background = false;
-	private int color = 0xFFFFFFFF;
+	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	
 	@Override
@@ -37,9 +38,9 @@ public class FPSDisplay extends ModDraggable {
 		}
 		
 		if (shadow) {
-			font.drawStringWithShadow(getFPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getFPSText())) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawStringWithShadow(getFPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getFPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
-			font.drawString(getFPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getFPSText())) / 2, pos.getAbsoluteY() + 1, color);
+			font.drawString(getFPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getFPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		}
 	}
 	
@@ -53,6 +54,14 @@ public class FPSDisplay extends ModDraggable {
 	
 	public boolean isBackgroundEnabled() {
 		return background;
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
 	}
 	
 	public void setShadowEnabled(boolean enabled) {
