@@ -87,7 +87,7 @@ public class CPSDisplay extends ModDraggable {
     }
 	
 	public String getCPSText() {
-		String cps = right ? getCPS(leftClicks) + " ⎟ " + getCPS(rightClicks) : "" + getCPS(leftClicks);
+		String cps = right ? getCPS(leftClicks) + " §7⎟ §r" + getCPS(rightClicks) : "" + getCPS(leftClicks);
 		
 		return background ? cps + " CPS" : "[" + cps + " CPS]";
 	}
