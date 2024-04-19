@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.ArmorStatus;
+import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 import rubik.mods.impl.ArmorStatus.DamageMode;
 
 public class GuiArmorStatus extends GuiScreen {
@@ -26,10 +27,11 @@ public class GuiArmorStatus extends GuiScreen {
         int i = -16;
  
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? "§aEnabled" : "§cDisabled", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format("Mode: " + mod.getDamageModeIndex(), new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isDynamicColorsEnabled() ? "§a" : "§c") + "Dynamic Colors", new Object[0])));
-        this.buttonList.add(buttonColor = new GuiButton(5, this.width / 2 - 100 + 50, this.height / 4 + 72 + i, 98, 20, I18n.format("Color", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format("Side: " + mod.getMode().toString().replace("LEFT", "Left").replace("RIGHT", "Right"), new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("Damage Mode: " + mod.getDamageModeIndex(), new Object[0])));
+        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isDynamicColorsEnabled() ? "§a" : "§c") + "Dynamic Colors", new Object[0])));
+        this.buttonList.add(buttonColor = new GuiButton(6, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format("Color", new Object[0])));
         
         buttonColor.enabled = !mod.isDynamicColorsEnabled();
         
@@ -49,6 +51,21 @@ public class GuiArmorStatus extends GuiScreen {
             	this.initGui();
                 break;
             case 2:
+            	mod.setShadowEnabled(!mod.isShadowEnabled());
+            	this.initGui();
+            	break;
+            case 3:
+            {
+            	if (mod.getMode() == ArmorStatusMode.LEFT) {
+            		mod.setMode(ArmorStatusMode.RIGHT);
+            	} else if (mod.getMode() == ArmorStatusMode.RIGHT) {
+            		mod.setMode(ArmorStatusMode.LEFT);
+            	}
+            	
+            	this.initGui();
+            }
+            	break;
+            case 4:
 	            {
 	            	if (mod.getDamageMode() == DamageMode.PERCENTAGE) {
 	            		mod.setDamageMode(DamageMode.DAMAGE);
@@ -61,15 +78,11 @@ public class GuiArmorStatus extends GuiScreen {
 	            	this.initGui();
 	            }
             	break;
-            case 3:
-            	mod.setShadowEnabled(!mod.isShadowEnabled());
-            	this.initGui();
-            	break;
-            case 4:
+            case 5:
             	mod.setDynamicColorsEnabled(!mod.isDynamicColorsEnabled());
             	this.initGui();
             	break;
-            case 5:
+            case 6:
             	this.mc.displayGuiScreen(new GuiColor(this));
             	break;
         }

@@ -28,10 +28,16 @@ public class ArmorStatus extends ModDraggable {
 		}
 	}
 	
+	public static enum ArmorStatusMode {
+		LEFT,
+		RIGHT
+	}
+	
 	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean dynamicColors = true;
 	private DamageMode damageMode = DamageMode.DAMAGE;
+	private ArmorStatusMode mode = ArmorStatusMode.LEFT;
 	
 	@Override
 	public int getWidth() {
@@ -90,15 +96,27 @@ public class ArmorStatus extends ModDraggable {
 		
 		if (is.getItem().isDamageable()) {
 			if (shadow) {
-				font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				if (mode == ArmorStatusMode.LEFT) {
+					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				} else if (mode == ArmorStatusMode.RIGHT) {
+					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				}
 			} else {
-				font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				if (mode == ArmorStatusMode.LEFT) {
+					font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				} else if (mode == ArmorStatusMode.RIGHT) {
+					font.drawString(getDamageText(is), pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				}
 			}
 		}
 		
 		RenderHelper.enableGUIStandardItemLighting();
 		
-		mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX(), pos.getAbsoluteY() + yAdd);
+		if (mode == ArmorStatusMode.LEFT) {
+			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX(), pos.getAbsoluteY() + yAdd);
+		} else if (mode == ArmorStatusMode.RIGHT) {
+			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 4, pos.getAbsoluteY() + yAdd);
+		}
 		
 		GL11.glPopMatrix();
 	}
@@ -161,5 +179,13 @@ public class ArmorStatus extends ModDraggable {
         }
 		
 		return 0;
+	}
+	
+	public void setMode(ArmorStatusMode mode) {
+		this.mode = mode;
+	}
+	
+	public ArmorStatusMode getMode() {
+		return mode;
 	}
 }
