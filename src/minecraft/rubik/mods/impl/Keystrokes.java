@@ -15,7 +15,7 @@ public class Keystrokes extends ModDraggable {
 		WASD(Key.W, Key.A, Key.S, Key.D),
 		WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
 		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 1, 41, 58, 12)),
-		WASD_JUMP_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 1, 61, 58, 12));
+		WASD_MOUSE_JUMP(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 1, 61, 58, 12));
 	
 		private final Key[] keys;
 		private int width = 0;
@@ -99,7 +99,7 @@ public class Keystrokes extends ModDraggable {
 	private ColorManager pressedColor = new ColorManager(Color.BLACK);
 	private ColorManager releasedColor = new ColorManager(Color.WHITE);
 	private boolean shadow = true;
-	private KeystrokesMode mode = KeystrokesMode.WASD_JUMP_MOUSE;
+	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 
 	@Override
 	public int getWidth() {
@@ -172,19 +172,5 @@ public class Keystrokes extends ModDraggable {
 	
 	public KeystrokesMode getMode() {
 		return mode;
-	}
-	
-	public int getModeIndex() {
-		if (getMode() == KeystrokesMode.WASD) {
-        	return 1;
-        } else if (getMode() == KeystrokesMode.WASD_MOUSE) {
-        	return 2;
-        } else if (getMode() == KeystrokesMode.WASD_JUMP) {
-        	return 3;
-        } else if (getMode() == KeystrokesMode.WASD_JUMP_MOUSE) {
-        	return 4;
-        }
-		
-		return 0;
 	}
 }
