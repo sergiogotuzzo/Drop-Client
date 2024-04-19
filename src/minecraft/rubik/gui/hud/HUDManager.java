@@ -7,17 +7,11 @@ import com.google.common.collect.Sets;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import rubik.event.EventManager;
 import rubik.event.EventTarget;
 import rubik.event.impl.RenderEvent;
 
 public class HUDManager {
-	private HUDManager() {
-		
-	};
-	
 	private static HUDManager hudManager = null;
 	
 	public static HUDManager getInstance() {
