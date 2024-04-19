@@ -13,9 +13,19 @@ import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
 	public static enum DamageMode {
-		PERCENTAGE,
-		DAMAGE,
-		DAMAGE_MAX_DAMAGE
+		PERCENTAGE(48),
+		DAMAGE(40),
+		DAMAGE_MAX_DAMAGE(64);
+		
+		private int width = 0;
+		
+		private DamageMode(int width) {
+			this.width = width;
+		}
+		
+		public int getWidth() {
+			return width;
+		}
 	}
 	
 	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
@@ -25,17 +35,7 @@ public class ArmorStatus extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		int width = 0;
-		
-		if (damageMode == DamageMode.PERCENTAGE) {
-			width = 48;
-		} else if (damageMode == DamageMode.DAMAGE) {
-			width = 40;
-		} else if (damageMode == DamageMode.DAMAGE_MAX_DAMAGE) {
-			return 64;
-		}
-		
-		return width;
+		return damageMode.getWidth();
 	}
 
 	@Override
