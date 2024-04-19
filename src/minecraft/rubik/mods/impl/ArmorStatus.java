@@ -38,6 +38,9 @@ public class ArmorStatus extends ModDraggable {
 	private boolean dynamicColors = true;
 	private DamageMode damageMode = DamageMode.DAMAGE;
 	private ArmorStatusMode mode = ArmorStatusMode.LEFT;
+	private boolean showCurrentItem = false;
+	
+	private final int ITEM_HEIGHT = 16;
 	
 	@Override
 	public int getWidth() {
@@ -46,7 +49,7 @@ public class ArmorStatus extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return 64;
+		return showCurrentItem ? ITEM_HEIGHT * 5 : ITEM_HEIGHT * 4;
 	}
 
 	@Override
@@ -54,16 +57,33 @@ public class ArmorStatus extends ModDraggable {
 		for (int i = 0; i < mc.thePlayer.inventory.armorInventory.length; i++) {
 			ItemStack itemStack = mc.thePlayer.inventory.armorInventory[i];
 			
-			renderItemStack(pos, i, itemStack);
+			if (showCurrentItem) {
+				if (mc.thePlayer.inventory.getCurrentItem() == null) {
+					renderItemStack(pos, i, itemStack);
+				} else {
+					renderItemStack(pos, 0, mc.thePlayer.inventory.getCurrentItem());
+					renderItemStack(pos, i + 1, itemStack);
+				}
+			} else {
+				renderItemStack(pos, i, itemStack);
+			}
 		}
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		renderItemStack(pos, 3, new ItemStack(Items.diamond_helmet));
-		renderItemStack(pos, 2, new ItemStack(Items.diamond_chestplate));
-		renderItemStack(pos, 1, new ItemStack(Items.diamond_leggings));
-		renderItemStack(pos, 0, new ItemStack(Items.diamond_boots));
+		if (showCurrentItem) {
+			renderItemStack(pos, 4, new ItemStack(Items.diamond_helmet));
+			renderItemStack(pos, 3, new ItemStack(Items.diamond_chestplate));
+			renderItemStack(pos, 2, new ItemStack(Items.diamond_leggings));
+			renderItemStack(pos, 1, new ItemStack(Items.diamond_boots));
+			renderItemStack(pos, 0, new ItemStack(Items.compass, 1));
+		} else {
+			renderItemStack(pos, 3, new ItemStack(Items.diamond_helmet));
+			renderItemStack(pos, 2, new ItemStack(Items.diamond_chestplate));
+			renderItemStack(pos, 1, new ItemStack(Items.diamond_leggings));
+			renderItemStack(pos, 0, new ItemStack(Items.diamond_boots));
+		}
 	}
 
 	private void renderItemStack(ScreenPosition pos, int i, ItemStack is) {
@@ -73,7 +93,7 @@ public class ArmorStatus extends ModDraggable {
 		
 		GL11.glPushMatrix();
 		
-		int yAdd = (-16 * i) + 48;
+		int yAdd = (-16 * i) + getHeight() - ITEM_HEIGHT;
 		Color dynamicColor = Color.WHITE;
 		
 		if (dynamicColors) {
@@ -106,6 +126,20 @@ public class ArmorStatus extends ModDraggable {
 					font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				} else if (mode == ArmorStatusMode.RIGHT) {
 					font.drawString(getDamageText(is), pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				}
+			}
+		} else if (is.isStackable()) {
+			if (shadow) {
+				if (mode == ArmorStatusMode.LEFT) {
+					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+				} else if (mode == ArmorStatusMode.RIGHT) {
+					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+				}
+			} else {
+				if (mode == ArmorStatusMode.LEFT) {
+					font.drawString("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+				} else if (mode == ArmorStatusMode.RIGHT) {
+					font.drawString("" + is.stackSize, pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				}
 			}
 		}
@@ -187,5 +221,13 @@ public class ArmorStatus extends ModDraggable {
 	
 	public ArmorStatusMode getMode() {
 		return mode;
+	}
+	
+	public void setShowCurrentItemEnabled(boolean enabled) {
+		showCurrentItem = enabled;
+	}
+	
+	public boolean isShowCurrentItemEnabled() {
+		return showCurrentItem;
 	}
 }
