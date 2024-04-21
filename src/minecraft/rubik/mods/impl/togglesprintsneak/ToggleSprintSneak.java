@@ -57,9 +57,9 @@ public class ToggleSprintSneak extends ModDraggable {
 		textToRender = "[Sprinting (Vanilla)]";
 		
 		if (shadow) {
-			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
-			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			font.drawString(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 		}
 	}
 	
