@@ -115,7 +115,7 @@ public class RubikClientMovementInput extends MovementInput {
 			player.setSprinting(true);
 		}
 		
-		if (ModInstances.getToggleSprintSneakMod().isFlyBoostEnabled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && sprint) {
+		if (ModInstances.getToggleSprintSneakMod().isFlyBoostEnabled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && gameSettings.keyBindSprint.isKeyDown()) {
 			if (originalFlySpeed < 0.0F || this.player.capabilities.getFlySpeed() != boostedFlySpeed) {
 				originalFlySpeed = this.player.capabilities.getFlySpeed();
 			}
