@@ -10,7 +10,6 @@ import rubik.mods.ModDraggable;
 public class ToggleSprintSneak extends ModDraggable {
 	public int keyHoldTicks = 7;
 	
-	private boolean background = false;
 	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean toggleSprint = true;
@@ -22,7 +21,7 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(background ? textToRender.replace("[", "").replace("]", "") : textToRender);
+		return font.getStringWidth(textToRender);
 	}
 
 	@Override
@@ -32,20 +31,7 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		textToRender = background ? mc.thePlayer.movementInput.getDisplayText().replace("[", "").replace("]", "") : mc.thePlayer.movementInput.getDisplayText();
-		
-		if (background && !textToRender.isEmpty()) {
-			int paddingX = 6;
-	        int paddingY = 4;
-	        
-			Gui.drawRect(
-					pos.getAbsoluteX() - paddingX,
-					pos.getAbsoluteY() - paddingY,
-					pos.getAbsoluteX() + getWidth() + paddingX,
-					pos.getAbsoluteY() + getHeight() + paddingY,
-					new Color(0, 0, 0, 102).getRGB()
-					);
-		}
+		textToRender = mc.thePlayer.movementInput.getDisplayText();
 		
 		if (shadow) {
 			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
@@ -56,34 +42,13 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		textToRender = background ? "Sprinting (Vanilla)" : "[Sprinting (Vanilla)]";
-		
-		if (background) {
-			int paddingX = 6;
-	        int paddingY = 4;
-	        
-			Gui.drawRect(
-					pos.getAbsoluteX() - paddingX,
-					pos.getAbsoluteY() - paddingY,
-					pos.getAbsoluteX() + getWidth() + paddingX,
-					pos.getAbsoluteY() + getHeight() + paddingY,
-					new Color(0, 0, 0, 102).getRGB()
-					);
-		}
+		textToRender ="[Sprinting (Vanilla)]";
 		
 		if (shadow) {
 			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
 			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 		}
-	}
-	
-	public void setBackgroundEnabled(boolean enabled) {
-		background = enabled;
-	}
-	
-	public boolean isBackgroundEnabled() {
-		return background;
 	}
 	
 	public ColorManager getColorManager() {
