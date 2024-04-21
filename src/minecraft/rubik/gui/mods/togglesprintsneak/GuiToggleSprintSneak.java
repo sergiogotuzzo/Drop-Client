@@ -5,12 +5,15 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.gui.GuiSlider;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
 public class GuiToggleSprintSneak extends GuiScreen {
 	private final GuiScreen previousGuiScreen;
 	private ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
+	
+	private GuiSlider sliderFlyBoost;
 	
 	public GuiToggleSprintSneak(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
@@ -25,7 +28,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
  
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? "§aEnabled" : "§cDisabled", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isFlyBoostEnabled() ? "§a" : "§c") + "Fly Boost", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, I18n.format("Fly Boost Factor: " + mod.getFlyBoostFactor() + "x", new Object[0])));
+        this.buttonList.add(sliderFlyBoost = new GuiSlider(3, this.width / 2 - 100, this.height / 4 + 48 + i, 200, 20, "Fly Boost Factor", 1, 8, mod.getFlyBoostFactor()));
         this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSprintEnabled() ? "§a" : "§c") + "Toggle Sprint", new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSneakEnabled() ? "§a" : "§c") + "Toggle Sneak", new Object[0])));
         this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
@@ -50,8 +53,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.initGui();
             	break;
             case 3:
-            	mod.setFlyBoostFactor((mod.getFlyBoostFactor() < 8 && mod.getFlyBoostFactor() >= 1) ? mod.getFlyBoostFactor() + 1 : 1);
-            	this.initGui();
+            	mod.setFlyBoostFactor(sliderFlyBoost.func_175217_d() * 8.0F);
             	break;
             case 4:
             	mod.setToggleSprintEnabled(!mod.isToggleSprintEnabled());
@@ -69,6 +71,11 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.mc.displayGuiScreen(new GuiColor(this));
                 break;
         }
+    }
+    
+    @Override
+    public void mouseClickMove(final int mouseX, final int mouseY, final int clickedMouseButton, final long timeSinceLastClick) {
+    	mod.setFlyBoostFactor(sliderFlyBoost.func_175217_d() * 8.0F);
     }
 
     @Override
