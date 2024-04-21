@@ -107,6 +107,9 @@ import net.optifine.shaders.ShadersRender;
 import net.optifine.shaders.ShadowUtils;
 import net.optifine.util.ChunkUtils;
 import net.optifine.util.RenderChunkUtils;
+import rubik.mods.ModInstances;
+import rubik.mods.impl.BlockOverlay;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
@@ -2591,6 +2594,13 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
             GlStateManager.color(0.0F, 0.0F, 0.0F, 0.4F);
             GL11.glLineWidth(2.0F);
             GlStateManager.disableTexture2D();
+            
+            BlockOverlay blockOverlayMod = ModInstances.getBlockOverlayMod();
+            
+            if (blockOverlayMod.isEnabled()) {
+            	GlStateManager.color(blockOverlayMod.getColor().getRed(), blockOverlayMod.getColor().getGreen(), blockOverlayMod.getColor().getBlue(), 0.4F);
+            	GL11.glLineWidth(blockOverlayMod.getOutline());
+            }
 
             if (Config.isShaders())
             {
