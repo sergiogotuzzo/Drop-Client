@@ -9,6 +9,7 @@ import rubik.mods.Mod;
 
 public class Freelook extends Mod {
 	private boolean returnOnRelease = true;
+	
 	private boolean perspectiveToggled = false;
 	
 	private float cameraYaw = 0F;
@@ -77,5 +78,13 @@ public class Freelook extends Mod {
 		}
 		
 		return false;
+	}
+	
+	public void setReturnOnRelease(boolean enabled) {
+		this.returnOnRelease = enabled;
+	}
+	
+	public boolean isReturnOnReleaseEnabled() {
+		return returnOnRelease;
 	}
 }
