@@ -97,7 +97,7 @@ public class GuiIngameMenu extends GuiScreen
                 this.mc.displayGuiScreen(new GuiShareToLan(this));
                 break;
             case 8:
-            	this.mc.displayGuiScreen(new GuiMultiplayer(this, false));
+            	this.mc.displayGuiScreen(new GuiMultiplayer(this));
             	break;
             case 9:
             	this.mc.displayGuiScreen(new GuiModsList(this));
