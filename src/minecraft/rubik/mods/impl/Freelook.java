@@ -58,7 +58,8 @@ public class Freelook extends Mod {
 			
 			mc.mouseHelper.mouseXYChange();
 			
-			float f1 = mc.gameSettings.mouseSensitivity * 0.6F + 0.2F;
+			float sensitivityScale = 0.1F;
+			float f1 = mc.gameSettings.mouseSensitivity * sensitivityScale;
 			float f2 = f1 * 3 * 8.0F;
 			float f3 = mc.mouseHelper.deltaX * f2;
 			float f4 = mc.mouseHelper.deltaY * f2;
