@@ -15,33 +15,61 @@ public class PingDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(background ? "00 ms" : "[00 ms]");
+		return background ? 58 : font.getStringWidth("[27 ms]");
 	}
 
 	@Override
 	public int getHeight() {
-		return font.FONT_HEIGHT;
+		return background ? 16 : font.FONT_HEIGHT;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
 		if (background) {
-			int paddingX = 10;
-	        int paddingY = 4;
-	        
 			Gui.drawRect(
-					pos.getAbsoluteX() - paddingX,
-					pos.getAbsoluteY() - paddingY,
-					pos.getAbsoluteX() + getWidth() + paddingX + 2,
-					pos.getAbsoluteY() + getHeight() + paddingY,
+					pos.getAbsoluteX(),
+					pos.getAbsoluteY(),
+					pos.getAbsoluteX() + getWidth(),
+					pos.getAbsoluteY() + getHeight(),
 					new Color(0, 0, 0, 102).getRGB()
 					);
-		}
-		
-		if (shadow) {
-			font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			
+			if (shadow) {
+				font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			} else {
+				font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			}
 		} else {
-			font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			if (shadow) {
+				font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			} else {
+				font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			}
+		}
+	}
+	
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		if (background) {
+			Gui.drawRect(
+					pos.getAbsoluteX(),
+					pos.getAbsoluteY(),
+					pos.getAbsoluteX() + getWidth(),
+					pos.getAbsoluteY() + getHeight(),
+					new Color(0, 0, 0, 102).getRGB()
+					);
+			
+			if (shadow) {
+				font.drawStringWithShadow("27 ms", pos.getAbsoluteX() + (getWidth() - font.getStringWidth("27 ms")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			} else {
+				font.drawString("27 ms", pos.getAbsoluteX() + (getWidth() - font.getStringWidth("27 ms")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			}
+		} else {
+			if (shadow) {
+				font.drawStringWithShadow("[27 ms]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+			} else {
+				font.drawString("[27 ms]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+			}
 		}
 	}
 	
