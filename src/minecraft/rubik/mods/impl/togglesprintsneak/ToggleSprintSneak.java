@@ -37,7 +37,7 @@ public class ToggleSprintSneak extends ModDraggable {
 	    
 	    double maxRelativeX = 1;
 	    
-	    if (pos.getRelativeX() < (maxRelativeX / 3)) {
+	    if (pos.getRelativeX() < (maxRelativeX / (3 * 3))) {
 	        xPosition = pos.getAbsoluteX();
 	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
 	        xPosition = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2;
