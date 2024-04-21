@@ -2,7 +2,6 @@ package rubik.mods;
 
 import rubik.gui.hud.HUDManager;
 import rubik.mods.impl.ArmorStatus;
-import rubik.mods.impl.BlockOverlay;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
@@ -26,7 +25,6 @@ public class ModInstances {
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
-	private static BlockOverlay blockOverlayMod = new BlockOverlay();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -81,9 +79,5 @@ public class ModInstances {
 	
 	public static OldAnimations getOldAnimationsMod() {
 		return oldAnimationsMod;
-	}
-	
-	public static BlockOverlay getBlockOverlayMod() {
-		return blockOverlayMod;
 	}
 }
