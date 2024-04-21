@@ -9,6 +9,8 @@ import rubik.mods.Mod;
 
 public class Freelook extends Mod {
 	private boolean returnOnRelease = true;
+	private boolean invertYaw = false;
+	private boolean invertPitch = false;
 	
 	private boolean perspectiveToggled = false;
 	
@@ -65,8 +67,8 @@ public class Freelook extends Mod {
 			float f3 = mc.mouseHelper.deltaX * f2;
 			float f4 = mc.mouseHelper.deltaY * f2;
 			
-			cameraYaw += f3 * 0.15F;
-			cameraPitch -= f4 * 0.15F;
+			cameraYaw = invertYaw ? cameraYaw - (f3 * 0.15F) : cameraYaw + (f3 * 0.15F);
+			cameraPitch = invertPitch ? cameraPitch + (f4 * 0.15F) : cameraPitch - (f4 * 0.15F);
 			
 			if (cameraPitch > 90) {
 				cameraPitch = 90;
@@ -86,5 +88,21 @@ public class Freelook extends Mod {
 	
 	public boolean isReturnOnReleaseEnabled() {
 		return returnOnRelease;
+	}
+	
+	public void setInvertYaw(boolean enabled) {
+		this.invertYaw = enabled;
+	}
+	
+	public boolean isInvertYawEnabled() {
+		return invertYaw;
+	}
+	
+	public void setInvertPitch(boolean enabled) {
+		this.invertPitch = enabled;
+	}
+	
+	public boolean isInvertPitchEnabled() {
+		return invertPitch;
 	}
 }
