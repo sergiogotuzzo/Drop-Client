@@ -24,9 +24,9 @@ public class GuiPingDisplay extends GuiScreen {
         int i = -16;
  
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? "§aEnabled" : "§cDisabled", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format("Color", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isBackgroundEnabled() ? "§a" : "§c") + "Show Background", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isBackgroundEnabled() ? "§a" : "§c") + "Show Background", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? "§a" : "§c") + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("Color", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -43,15 +43,15 @@ public class GuiPingDisplay extends GuiScreen {
             	this.initGui();
                 break;
             case 2:
-            	this.mc.displayGuiScreen(new GuiColor(this));
-                break;
-            case 3:
             	mod.setBackgroundEnabled(!mod.isBackgroundEnabled());
             	this.initGui();
             	break;
-            case 4:
+            case 3:
             	mod.setShadowEnabled(!mod.isShadowEnabled());
             	this.initGui();
+            	break;
+            case 4:
+            	this.mc.displayGuiScreen(new GuiColor(this));
             	break;
         }
     }
