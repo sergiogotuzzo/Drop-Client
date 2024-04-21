@@ -27,7 +27,7 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return background ? 58 : font.getStringWidth(getCPSText());
+		return background ? 58 : font.getStringWidth(right ? "[9 ⎟ 9 CPS]" : "[9 CPS]");
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class CPSDisplay extends ModDraggable {
             }
         }
         
-		if (background) {
+        if (background) {
 			Gui.drawRect(
 					pos.getAbsoluteX(),
 					pos.getAbsoluteY(),
@@ -74,9 +74,34 @@ public class CPSDisplay extends ModDraggable {
 			}
 		} else {
 			if (shadow) {
-				font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (font.getStringWidth("99 | 99 CPS") - getWidth()) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 			} else {
-				font.drawString(getCPSText(), pos.getAbsoluteX() + (font.getStringWidth("99 | 99 CPS") - getWidth()) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
+			}
+		}
+	}
+	
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		if (background) {
+			Gui.drawRect(
+					pos.getAbsoluteX(),
+					pos.getAbsoluteY(),
+					pos.getAbsoluteX() + getWidth(),
+					pos.getAbsoluteY() + getHeight(),
+					new Color(0, 0, 0, 102).getRGB()
+					);
+			
+			if (shadow) {
+				font.drawStringWithShadow(right ? "9 ⎟ 9 CPS" : "9 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "9 ⎟ 9 CPS" : "9 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			} else {
+				font.drawString(right ? "9 ⎟ 9 CPS" : "9 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "9 ⎟ 9 CPS" : "9 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			}
+		} else {
+			if (shadow) {
+				font.drawStringWithShadow(right ? "[9 ⎟ 9 CPS]" : "[9 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+			} else {
+				font.drawString(right ? "[9 ⎟ 9 CPS]" : "[9 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			}
 		}
 	}
