@@ -21,7 +21,7 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(textToRender);
+		return font.getStringWidth("[Sprinting (Vanilla)]");
 	}
 
 	@Override
@@ -31,18 +31,30 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		textToRender = mc.thePlayer.movementInput.getDisplayText();
-		
-		if (shadow) {
-			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
-		} else {
-			font.drawString(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
-		}
+	    textToRender = mc.thePlayer.movementInput.getDisplayText();
+	    
+	    int xPosition;
+	    
+	    double maxRelativeX = 1;
+	    
+	    if (pos.getRelativeX() < (maxRelativeX / 3)) {
+	        xPosition = pos.getAbsoluteX();
+	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
+	        xPosition = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2;
+	    } else {
+	        xPosition = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender);
+	    }
+
+	    if (shadow) {
+	        font.drawStringWithShadow(textToRender, xPosition, pos.getAbsoluteY() + 1, color.getRGB());
+	    } else {
+	        font.drawString(textToRender, xPosition, pos.getAbsoluteY() + 1, color.getRGB());
+	    }
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		textToRender ="[Sprinting (Vanilla)]";
+		textToRender = "[Sprinting (Vanilla)]";
 		
 		if (shadow) {
 			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + 1, color.getRGB());
