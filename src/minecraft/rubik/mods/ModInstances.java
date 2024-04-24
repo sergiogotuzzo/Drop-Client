@@ -1,7 +1,9 @@
 package rubik.mods;
 
 import rubik.gui.hud.HUDManager;
+import rubik.gui.hud.ScreenPosition;
 import rubik.mods.impl.ArmorStatus;
+import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
@@ -35,6 +37,17 @@ public class ModInstances {
 		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
+		
+		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(219, 3));
+		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(151, 3));
+		pingDisplayMod.setBackgroundEnabled(true);
+		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, 75));
+		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(0, 0));
+		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(387, 176));
+		armorStatusMod.setMode(ArmorStatusMode.RIGHT);
+		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, 97));
+		coordinatesDisplayMod.setEnabled(false);
+		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(325, 3));
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
