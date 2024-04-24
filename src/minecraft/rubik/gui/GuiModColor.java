@@ -68,7 +68,7 @@ public class GuiModColor extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Toggle Sprint / Sneak Mod Color", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, I18n.format("Customize Mod Color", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }
