@@ -119,13 +119,13 @@ public class ArmorStatus extends ModDraggable {
 				if (mode == ArmorStatusMode.LEFT) {
 					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				} else if (mode == ArmorStatusMode.RIGHT) {
-					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				}
 			} else {
 				if (mode == ArmorStatusMode.LEFT) {
 					font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				} else if (mode == ArmorStatusMode.RIGHT) {
-					font.drawString(getDamageText(is), pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+					font.drawString(getDamageText(is), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				}
 			}
 		} else if (is.isStackable()) {
@@ -133,13 +133,13 @@ public class ArmorStatus extends ModDraggable {
 				if (mode == ArmorStatusMode.LEFT) {
 					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				} else if (mode == ArmorStatusMode.RIGHT) {
-					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + getWidth() - font.getStringWidth("" + is.stackSize) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				}
 			} else {
 				if (mode == ArmorStatusMode.LEFT) {
 					font.drawString("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				} else if (mode == ArmorStatusMode.RIGHT) {
-					font.drawString("" + is.stackSize, pos.getAbsoluteX() + 4, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+					font.drawString("" + is.stackSize, pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				}
 			}
 		}
@@ -147,7 +147,7 @@ public class ArmorStatus extends ModDraggable {
 		RenderHelper.enableGUIStandardItemLighting();
 		
 		if (mode == ArmorStatusMode.LEFT) {
-			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX(), pos.getAbsoluteY() + yAdd);
+			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yAdd);
 		} else if (mode == ArmorStatusMode.RIGHT) {
 			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 4, pos.getAbsoluteY() + yAdd);
 		}
