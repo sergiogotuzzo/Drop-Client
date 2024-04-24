@@ -1,10 +1,11 @@
-package rubik.gui.mods.togglesprintsneak;
+package rubik.gui.mods;
 
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.gui.GuiModColor;
 import rubik.gui.GuiSlider;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
@@ -68,7 +69,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.initGui();
             	break;
             case 7:
-            	this.mc.displayGuiScreen(new GuiColor(this));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColorManager()));
                 break;
         }
     }

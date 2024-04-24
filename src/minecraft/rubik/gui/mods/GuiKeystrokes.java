@@ -1,10 +1,11 @@
-package rubik.gui.mods.keystrokes;
+package rubik.gui.mods;
 
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.gui.GuiModColor;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Keystrokes;
 import rubik.mods.impl.Keystrokes.KeystrokesMode;
@@ -49,10 +50,10 @@ public class GuiKeystrokes extends GuiScreen {
             	this.initGui();
             	break;
             case 3:
-            	this.mc.displayGuiScreen(new GuiPressedColor(this));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getPressedColorManager()));
             	break;
             case 4:
-            	this.mc.displayGuiScreen(new GuiReleasedColor(this));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getReleasedColorManager()));
             	break;
             case 5:
             {

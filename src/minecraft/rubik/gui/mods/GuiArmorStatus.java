@@ -1,10 +1,11 @@
-package rubik.gui.mods.armorstatus;
+package rubik.gui.mods;
 
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.gui.GuiModColor;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
@@ -84,7 +85,7 @@ public class GuiArmorStatus extends GuiScreen {
             	this.initGui();
             	break;
             case 6:
-            	this.mc.displayGuiScreen(new GuiColor(this));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColorManager()));
             	break;
             case 7:
             	mod.setShadowEnabled(!mod.isShadowEnabled());
