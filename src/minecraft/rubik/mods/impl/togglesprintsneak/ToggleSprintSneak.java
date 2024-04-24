@@ -17,6 +17,9 @@ public class ToggleSprintSneak extends ModDraggable {
 	private boolean flyBoost = true;
 	private float flyBoostFactor = 4;
 	
+	private boolean sprinting = false;
+	private boolean sneaking = false;
+	
 	private String textToRender = "";
 
 	@Override
@@ -109,5 +112,21 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public float getFlyBoostFactor() {
 		return flyBoostFactor;
+	}
+	
+	public void setSprinting(boolean sprinting) {
+		this.sprinting = sprinting;
+	}
+	
+	public boolean isSprinting() {
+		return sprinting;
+	}
+	
+	public void setSneaking(boolean sneaking) {
+		this.sneaking = sneaking;
+	}
+	
+	public boolean isSneaking() {
+		return sneaking;
 	}
 }

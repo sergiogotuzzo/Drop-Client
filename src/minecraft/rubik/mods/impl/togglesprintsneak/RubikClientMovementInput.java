@@ -21,9 +21,13 @@ public class RubikClientMovementInput extends MovementInput {
 	
 	private static final DecimalFormat df = new DecimalFormat("#.0");
 	
+	private ToggleSprintSneak toggleSprintSneakMod = ModInstances.getToggleSprintSneakMod();
+	
 	public RubikClientMovementInput(GameSettings gameSettings) {
 		this.gameSettings = gameSettings;
 		this.mc = Minecraft.getMinecraft();
+		this.sprint = toggleSprintSneakMod.isSprinting();
+		this.sneak = toggleSprintSneakMod.isSneaking();
 	}
 	
 	@Override
@@ -52,13 +56,13 @@ public class RubikClientMovementInput extends MovementInput {
 		
 		// SNEAK
 		
-		if (ModInstances.getToggleSprintSneakMod().isEnabled() && ModInstances.getToggleSprintSneakMod().isToggleSneakEnabled()) {
+		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.isToggleSneakEnabled()) {
 			if (gameSettings.keyBindSneak.isKeyDown()) {
 				if (sneakWasPressed == 0) {
 					if (sneak) {
 						sneakWasPressed = -1;
 					} else if (player.isRiding() || player.capabilities.isFlying) {
-						sneakWasPressed = ModInstances.getToggleSprintSneakMod().keyHoldTicks + 1;
+						sneakWasPressed = toggleSprintSneakMod.keyHoldTicks + 1;
 					} else {
 						sneakWasPressed = 1;
 					}
@@ -68,7 +72,7 @@ public class RubikClientMovementInput extends MovementInput {
 					sneakWasPressed++;
 				}
 			} else {
-				if ((ModInstances.getToggleSprintSneakMod().keyHoldTicks > 0) && (sneakWasPressed > ModInstances.getToggleSprintSneakMod().keyHoldTicks)) {
+				if ((toggleSprintSneakMod.keyHoldTicks > 0) && (sneakWasPressed > toggleSprintSneakMod.keyHoldTicks)) {
 					sneak = false;
 				}
 				
@@ -83,15 +87,17 @@ public class RubikClientMovementInput extends MovementInput {
 			moveForward *= 0.3F;
 		}
 		
+		toggleSprintSneakMod.setSneaking(sneak);
+		
 		// SPRINT
 		
-		if (ModInstances.getToggleSprintSneakMod().isEnabled() && ModInstances.getToggleSprintSneakMod().isToggleSprintEnabled()) {
+		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.isToggleSprintEnabled()) {
 			if (gameSettings.keyBindSprint.isKeyDown()) {
 				if (sprintWasPressed == 0) {
 					if (sprint) {
 						sprintWasPressed = -1;
 					} else if (player.capabilities.isFlying) {
-						sprintWasPressed = ModInstances.getToggleSprintSneakMod().keyHoldTicks + 1;
+						sprintWasPressed = toggleSprintSneakMod.keyHoldTicks + 1;
 					} else {
 						sprintWasPressed = 1;
 					}
@@ -101,7 +107,7 @@ public class RubikClientMovementInput extends MovementInput {
 					sprintWasPressed++;
 				}
 			} else {
-				if ((ModInstances.getToggleSprintSneakMod().keyHoldTicks > 0) && (sprintWasPressed > ModInstances.getToggleSprintSneakMod().keyHoldTicks)) {
+				if ((toggleSprintSneakMod.keyHoldTicks > 0) && (sprintWasPressed > toggleSprintSneakMod.keyHoldTicks)) {
 					sprint = false;
 				}
 				
@@ -115,21 +121,23 @@ public class RubikClientMovementInput extends MovementInput {
 			player.setSprinting(true);
 		}
 		
-		if (ModInstances.getToggleSprintSneakMod().isFlyBoostEnabled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && gameSettings.keyBindSprint.isKeyDown()) {
+		toggleSprintSneakMod.setSprinting(sprint);
+		
+		if (toggleSprintSneakMod.isFlyBoostEnabled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && gameSettings.keyBindSprint.isKeyDown()) {
 			if (originalFlySpeed < 0.0F || this.player.capabilities.getFlySpeed() != boostedFlySpeed) {
 				originalFlySpeed = this.player.capabilities.getFlySpeed();
 			}
 			
-			boostedFlySpeed = originalFlySpeed * ModInstances.getToggleSprintSneakMod().getFlyBoostFactor();
+			boostedFlySpeed = originalFlySpeed * toggleSprintSneakMod.getFlyBoostFactor();
 			
 			player.capabilities.setFlySpeed(boostedFlySpeed);
 			
 			if (sneak) {
-				player.motionY -= 0.15D * (double) (ModInstances.getToggleSprintSneakMod().getFlyBoostFactor() - 1.0F);
+				player.motionY -= 0.15D * (double) (toggleSprintSneakMod.getFlyBoostFactor() - 1.0F);
 			}
 			
 			if (jump) {
-				player.motionY += 0.15D * (double) (ModInstances.getToggleSprintSneakMod().getFlyBoostFactor() - 1.0F);
+				player.motionY += 0.15D * (double) (toggleSprintSneakMod.getFlyBoostFactor() - 1.0F);
 			}
 		} else {
 			if (player.capabilities.getFlySpeed() == boostedFlySpeed) {
