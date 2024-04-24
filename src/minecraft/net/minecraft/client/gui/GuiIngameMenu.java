@@ -72,7 +72,7 @@ public class GuiIngameMenu extends GuiScreen
                 }
                 else
                 {
-                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiMainMenu()));
+                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiMainMenu(), true));
                 }
 
             case 2:
@@ -97,7 +97,7 @@ public class GuiIngameMenu extends GuiScreen
                 this.mc.displayGuiScreen(new GuiShareToLan(this));
                 break;
             case 8:
-            	this.mc.displayGuiScreen(new GuiMultiplayer(this));
+            	this.mc.displayGuiScreen(new GuiMultiplayer(this, false));
             	break;
             case 9:
             	this.mc.displayGuiScreen(new GuiModsList(this));

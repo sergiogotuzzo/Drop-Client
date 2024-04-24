@@ -39,10 +39,13 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback
     private LanServerDetector.LanServerList lanServerList;
     private LanServerDetector.ThreadLanServerFind lanServerDetector;
     private boolean initialized;
+    
+    private boolean updateDiscordRichPresence;
 
-    public GuiMultiplayer(GuiScreen parentScreen)
+    public GuiMultiplayer(GuiScreen parentScreen, boolean updateDiscordRichPresence)
     {
         this.parentScreen = parentScreen;
+        this.updateDiscordRichPresence = updateDiscordRichPresence;
     }
 
     /**
@@ -51,7 +54,9 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
-    	Client.getInstance().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
+    	if (updateDiscordRichPresence) {
+    		Client.getInstance().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
+    	}
     	
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
@@ -197,7 +202,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback
 
     private void refreshServerList()
     {
-        this.mc.displayGuiScreen(new GuiMultiplayer(this.parentScreen));
+        this.mc.displayGuiScreen(new GuiMultiplayer(this.parentScreen, this.updateDiscordRichPresence));
     }
 
     public void confirmClicked(boolean result, int id)
