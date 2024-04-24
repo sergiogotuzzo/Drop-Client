@@ -27,7 +27,7 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return background ? 58 : font.getStringWidth(right ? "[9 ⎟ 9 CPS]" : "[9 CPS]");
+		return background ? 58 : font.getStringWidth(right ? "[0 ⎟ 0 CPS]" : "[0 CPS]");
 	}
 
 	@Override
@@ -93,15 +93,15 @@ public class CPSDisplay extends ModDraggable {
 					);
 			
 			if (shadow) {
-				font.drawStringWithShadow(right ? "9 ⎟ 9 CPS" : "9 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "9 ⎟ 9 CPS" : "9 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+				font.drawStringWithShadow(right ? "0 ⎟ 0 CPS" : "0 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "0 ⎟ 0 CPS" : "0 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			} else {
-				font.drawString(right ? "9 ⎟ 9 CPS" : "9 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "9 ⎟ 9 CPS" : "9 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+				font.drawString(right ? "0 ⎟ 0 CPS" : "0 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "0 ⎟ 0 CPS" : "0 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			}
 		} else {
 			if (shadow) {
-				font.drawStringWithShadow(right ? "[9 ⎟ 9 CPS]" : "[9 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawStringWithShadow(right ? "[0 ⎟ 0 CPS]" : "[0 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			} else {
-				font.drawString(right ? "[9 ⎟ 9 CPS]" : "[9 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawString(right ? "[0 ⎟ 0 CPS]" : "[0 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			}
 		}
 	}
