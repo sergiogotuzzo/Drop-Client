@@ -73,7 +73,7 @@ public class PingDisplay extends ModDraggable {
 		}
 	}
 	
-	public String getPingText() {
+	private String getPingText() {
 		int ping = MinecraftServer.getServer().isSinglePlayer() ? 0 : mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
 		
 		return background ? ping + " ms" : "[" + ping + " ms]";

@@ -72,7 +72,7 @@ public class FPSDisplay extends ModDraggable {
 		}
 	}
 	
-	public String getFPSText() {
+	private String getFPSText() {
 		return background ? mc.getDebugFPS() + " FPS" : "[" + mc.getDebugFPS() + " FPS]";
 	}
 	
