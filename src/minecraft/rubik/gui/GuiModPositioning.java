@@ -61,10 +61,6 @@ public class GuiModPositioning extends GuiScreen {
 	        renderer.renderDummy(pos);
 	        
 	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0xFFFFFFFF);
-	        
-	        if (isMouseOver(renderer, mouseX, mouseY)) {
-	            drawFillRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), new Color(255, 255, 255, 40).getRGB());
-	        }
 	    }
 
 	    this.zLevel = zBackup;
@@ -75,10 +71,6 @@ public class GuiModPositioning extends GuiScreen {
 		this.drawHorizontalLine(x, x + width, y + height, color);
 		this.drawVerticalLine(x, y + height, y, color);
 		this.drawVerticalLine(x + width, y + height, y, color);
-	}
-	
-	private void drawFillRect(int x, int y, int width, int height, int color) {
-		Gui.drawRect(x, y, x + width, y + height, color);
 	}
 	
 	@Override
