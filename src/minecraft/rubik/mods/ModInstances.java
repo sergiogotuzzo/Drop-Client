@@ -38,6 +38,10 @@ public class ModInstances {
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
 		
+		resetModSettings();
+	}
+	
+	public static void resetModSettings() {
 		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(219, 3));
 		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(151, 3));
 		pingDisplayMod.setBackgroundEnabled(true);
