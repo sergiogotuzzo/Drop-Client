@@ -42,7 +42,6 @@ public class GuiModsList extends GuiScreen {
         this.buttonList.add(new GuiButton(9, this.width / 2 + 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Freelook", new Object[0])));
         this.buttonList.add(new GuiButton(10, this.width / 2 - 100 - (124 - 98), this.height / 4 + 96 + i, 124, 20, I18n.format("Coordinates Display", new Object[0])));
         this.buttonList.add(new GuiButton(11, this.width / 2 + 2, this.height / 4 + 96 + i, 124, 20, I18n.format("Toggle Sprint / Sneak", new Object[0])));
-        this.buttonList.add(new GuiButton(12, this.width / 2 - 100, this.height / 6 + 142, I18n.format("Reset Mod Settings", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -84,9 +83,6 @@ public class GuiModsList extends GuiScreen {
             	break;
             case 11:
             	this.mc.displayGuiScreen(new GuiToggleSprintSneak(this));
-            	break;
-            case 12:
-            	ModInstances.resetModSettings();
             	break;
         }
     }
