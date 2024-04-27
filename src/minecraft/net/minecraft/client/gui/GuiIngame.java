@@ -43,6 +43,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
+import rubik.mods.ModInstances;
 
 public class GuiIngame extends Gui
 {
@@ -544,6 +545,10 @@ public class GuiIngame extends Gui
 
     private void renderScoreboard(ScoreObjective p_180475_1_, ScaledResolution p_180475_2_)
     {
+    	if (!ModInstances.getScoreboardMod().isEnabled()) {
+    		return;
+    	}
+    	
         Scoreboard scoreboard = p_180475_1_.getScoreboard();
         Collection<Score> collection = scoreboard.getSortedScores(p_180475_1_);
         List<Score> list = Lists.newArrayList(Iterables.filter(collection, new Predicate<Score>()
@@ -587,8 +592,20 @@ public class GuiIngame extends Gui
             int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
             int l = p_180475_2_.getScaledWidth() - k1 + 2;
             drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1342177280);
-            this.getFontRenderer().drawString(s1, l1, k, 553648127);
-            this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
+            if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
+            	this.getFontRenderer().drawStringWithShadow(s1, l1, k, 553648127);
+            	
+            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
+                	this.getFontRenderer().drawStringWithShadow(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
+                }
+            } else {
+            	this.getFontRenderer().drawString(s1, l1, k, 553648127);
+            	
+            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
+                	this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
+                }
+            }
+            
 
             if (j == collection.size())
             {

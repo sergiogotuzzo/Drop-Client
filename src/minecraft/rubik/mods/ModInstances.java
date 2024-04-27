@@ -14,6 +14,7 @@ import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
+import rubik.mods.impl.Scoreboard;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -27,6 +28,7 @@ public class ModInstances {
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
+	private static Scoreboard scoreboardMod = new Scoreboard();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -52,6 +54,7 @@ public class ModInstances {
 		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, 97));
 		coordinatesDisplayMod.setEnabled(false);
 		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(325, 3));
+		scoreboardMod.setHideNumbers(true);
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -96,5 +99,9 @@ public class ModInstances {
 	
 	public static OldAnimations getOldAnimationsMod() {
 		return oldAnimationsMod;
+	}
+	
+	public static Scoreboard getScoreboardMod() {
+		return scoreboardMod;
 	}
 }
