@@ -94,15 +94,15 @@ public class CPSDisplay extends ModDraggable {
 					);
 			
 			if (shadow) {
-				font.drawStringWithShadow(right ? "0 ⎟ 0 CPS" : "0 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "0 ⎟ 0 CPS" : "0 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+				font.drawStringWithShadow(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			} else {
-				font.drawString(right ? "0 ⎟ 0 CPS" : "0 CPS", pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? "0 ⎟ 0 CPS" : "0 CPS")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+				font.drawString(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			}
 		} else {
 			if (shadow) {
-				font.drawStringWithShadow(right ? "[0 ⎟ 0 CPS]" : "[0 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawStringWithShadow(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			} else {
-				font.drawString(right ? "[0 ⎟ 0 CPS]" : "[0 CPS]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawString(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			}
 		}
 	}
@@ -116,9 +116,15 @@ public class CPSDisplay extends ModDraggable {
     }
 	
 	private String getCPSText() {
-		String cps = right ? getCPS(leftClicks) + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + getCPS(rightClicks) : "" + getCPS(leftClicks);
+		String cpsString = right ? getCPS(leftClicks) + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + getCPS(rightClicks) : "" + getCPS(leftClicks);
 		
-		return background ? cps + " CPS" : "[" + cps + " CPS]";
+		return background ? cpsString + " CPS" : "[" + cpsString + " CPS]";
+	}
+	
+	private String getCPSText(int cps) {
+		String cpsString = right ? cps + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + cps : "" + cps;
+		
+		return background ? cpsString + " CPS" : "[" + cpsString + " CPS]";
 	}
 	
 	public void setBackgroundEnabled(boolean enabled) {
