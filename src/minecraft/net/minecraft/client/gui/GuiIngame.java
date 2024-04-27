@@ -591,7 +591,11 @@ public class GuiIngame extends Gui
             String s2 = EnumChatFormatting.RED + "" + score1.getScorePoints();
             int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
             int l = p_180475_2_.getScaledWidth() - k1 + 2;
-            drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1342177280);
+            
+            if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
+            	drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1342177280);
+            }
+            
             if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
             	this.getFontRenderer().drawStringWithShadow(s1, l1, k, 553648127);
             	
@@ -605,14 +609,21 @@ public class GuiIngame extends Gui
                 	this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
                 }
             }
-            
 
             if (j == collection.size())
             {
                 String s3 = p_180475_1_.getDisplayName();
-                drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
-                drawRect(l1 - 2, k - 1, l, k, 1342177280);
-                this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
+                
+                if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
+                	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
+                    drawRect(l1 - 2, k - 1, l, k, 1342177280);
+                }
+                
+                if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
+                	this.getFontRenderer().drawStringWithShadow(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
+                } else {
+                	this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
+                }
             }
         }
     }
