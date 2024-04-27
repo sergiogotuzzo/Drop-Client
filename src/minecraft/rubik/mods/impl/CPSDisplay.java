@@ -7,6 +7,7 @@ import java.util.List;
 import org.lwjgl.input.Mouse;
 
 import net.minecraft.client.gui.Gui;
+import net.minecraft.util.EnumChatFormatting;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
@@ -115,7 +116,7 @@ public class CPSDisplay extends ModDraggable {
     }
 	
 	private String getCPSText() {
-		String cps = right ? getCPS(leftClicks) + " §7⎟ §r" + getCPS(rightClicks) : "" + getCPS(leftClicks);
+		String cps = right ? getCPS(leftClicks) + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + getCPS(rightClicks) : "" + getCPS(leftClicks);
 		
 		return background ? cps + " CPS" : "[" + cps + " CPS]";
 	}
