@@ -78,6 +78,7 @@ public class GuiModColor extends GuiScreen {
         
         drawRect(rectLeft, rectTop, rectLeft + rectWidth, rectTop + rectHeight, color.getRGB());
         drawHollowRect(rectLeft, rectTop, rectWidth, rectHeight, Color.BLACK.getRGB());
+        this.fontRendererObj.drawStringWithShadow("Current Color", (rectLeft + (rectWidth - this.fontRendererObj.getStringWidth("Current Color")) / 2) + 1, (rectTop + (rectHeight - this.fontRendererObj.FONT_HEIGHT) / 2) + 1, Color.WHITE.getRGB());
     }
     
     private void drawHollowRect(int x, int y, int width, int height, int color) {
