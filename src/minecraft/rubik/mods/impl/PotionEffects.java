@@ -23,22 +23,22 @@ public class PotionEffects extends ModDraggable {
     private boolean textShadow = true;
 	private ColorManager color = new ColorManager(Color.WHITE);
     
-    private final int EFFECT_HEIGHT = 24;
+    private final int EFFECT_HEIGHT = 20;
 
     @Override
     public int getWidth() {
     	Collection<PotionEffect> activePotionEffects = mc.thePlayer.getActivePotionEffects();
     	
         return activePotionEffects.size() == 0 ?
-        		26 + font.getStringWidth(getLongestEffectName(dummyPotionEffects)) :
-        		26 + font.getStringWidth(getLongestEffectName(activePotionEffects));
+        		22 + font.getStringWidth(getLongestEffectName(dummyPotionEffects)) :
+        		22 + font.getStringWidth(getLongestEffectName(activePotionEffects));
     }
 
     @Override
     public int getHeight() {
-    	int activePotionEffectsSize = mc.thePlayer.getActivePotionEffects().size();
+    	int activePotionEffectsSize = mc.thePlayer.getActivePotionEffects().size() == 0 ? dummyPotionEffects.size() : mc.thePlayer.getActivePotionEffects().size();
     	
-        return activePotionEffectsSize == 0 ? 2 * EFFECT_HEIGHT : activePotionEffectsSize * EFFECT_HEIGHT;
+        return activePotionEffectsSize * EFFECT_HEIGHT;
     }
 
     @Override
@@ -98,13 +98,15 @@ public class PotionEffects extends ModDraggable {
         }
 
         Potion potion = Potion.potionTypes[pe.getPotionID()];
+        int i = 2;
+        int j = 22;
 
         if (potion.hasStatusIcon()) {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
             
             int iconIndex = potion.getStatusIconIndex();
               
-            drawTexturedModalRect(pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yOffset + 4, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+            drawTexturedModalRect(pos.getAbsoluteX(), pos.getAbsoluteY() + yOffset + i, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
 
         String potionName = getPotionName(pe);
@@ -112,23 +114,23 @@ public class PotionEffects extends ModDraggable {
 
         if (textShadow) {
         	if (showTime) {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color.getRGB());
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + i, color.getRGB());
 
                 if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color.getRGB());
+                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + i, color.getRGB());
                 }
         	} else {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
         	}
         } else {
             if (showTime) {
-            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color.getRGB());
+            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + i, color.getRGB());
 
                 if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawString(durationString, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + 4, color.getRGB());
+                    font.drawString(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + i, color.getRGB());
                 }
             } else {
-            	font.drawString(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
+            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
             }
         }
     }
