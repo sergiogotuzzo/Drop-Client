@@ -29,11 +29,11 @@ public class GuiModColor extends GuiScreen {
         this.buttonList.clear();
         
         int i = -16;
-        int j = 50;
+        int j = 75;
         
-		this.buttonList.add(sliderRed = new GuiSlider(1, this.width / 2 - 100 + j, this.height / 4 + 24 + i, 100, 20, "Red", 0, 255, color.getRed()));
-        this.buttonList.add(sliderGreen = new GuiSlider(2, this.width / 2 - 100 + j, this.height / 4 + 48 + i, 100, 20, "Green", 0, 255, color.getGreen()));
-        this.buttonList.add(sliderBlue = new GuiSlider(3, this.width / 2 - 100 + j, this.height / 4 + 72 + i, 100, 20, "Blue", 0, 255, color.getBlue()));
+		this.buttonList.add(sliderRed = new GuiSlider(1, this.width / 2 - j, this.height / 4 + 24 + i, 150, 20, "Red", 0, 255, color.getRed()));
+        this.buttonList.add(sliderGreen = new GuiSlider(2, this.width / 2 - j, this.height / 4 + 48 + i, 150, 20, "Green", 0, 255, color.getGreen()));
+        this.buttonList.add(sliderBlue = new GuiSlider(3, this.width / 2 - j, this.height / 4 + 72 + i, 150, 20, "Blue", 0, 255, color.getBlue()));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -73,8 +73,8 @@ public class GuiModColor extends GuiScreen {
         
         int rectLeft = this.width / 2 - 100;
         int rectTop = this.height / 4 + 96;
-        int rectWidth = 200;
-        int rectHeight = 20;
+        int rectWidth = 200 - 1;
+        int rectHeight = 20 - 1;
         
         drawRect(rectLeft, rectTop, rectLeft + rectWidth, rectTop + rectHeight, color.getRGB());
         drawHollowRect(rectLeft - 1, rectTop - 1, rectWidth + 1, rectHeight + 1, Color.BLACK.getRGB());
