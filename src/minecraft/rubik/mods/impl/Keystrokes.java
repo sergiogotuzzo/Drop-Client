@@ -51,7 +51,8 @@ public class Keystrokes extends ModDraggable {
 		private static final Key LMB = new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 1, 41, 28, 18);
 		private static final Key RMB = new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 31, 41, 28, 18);
 		
-		private final String name;
+		private String name;
+		
 		private final KeyBinding keyBind;
 		private final int x;
 		private final int y;
@@ -69,6 +70,10 @@ public class Keystrokes extends ModDraggable {
 		
 		public boolean isDown() {
 			return keyBind.isKeyDown();
+		}
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 		
 		public String getName() {
@@ -103,6 +108,7 @@ public class Keystrokes extends ModDraggable {
 	private ColorManager releasedColor = new ColorManager(Color.WHITE);
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
+	private boolean arrows = false;
 
 	@Override
 	public int getWidth() {
@@ -118,6 +124,40 @@ public class Keystrokes extends ModDraggable {
 	public void render(ScreenPosition pos) {
 	    for (Key key : mode.getKeys()) {
 	        int textWidth = font.getStringWidth(key.getName());
+	        
+	        if (arrows) {
+	        	if (key.getName() == "W") {
+	        		key.setName("▲");
+	        	}
+	        	
+	        	if (key.getName() == "A") {
+	        		key.setName("◄");
+	        	}
+	        	
+	        	if (key.getName() == "S") {
+	        		key.setName("▼");
+	        	}
+	        	
+	        	if (key.getName() == "D") {
+	        		key.setName("►");
+	        	}
+	        } else {
+	        	if (key.getName() == "▲") {
+	        		key.setName("W");
+	        	}
+	        	
+	        	if (key.getName() == "◄") {
+	        		key.setName("A");
+	        	}
+	        	
+	        	if (key.getName() == "▼") {
+	        		key.setName("S");
+	        	}
+	        	
+	        	if (key.getName() == "►") {
+	        		key.setName("D");
+	        	}
+	        }
 	        
 	        Gui.drawRect(
 	                pos.getAbsoluteX() + key.getX(),
@@ -199,5 +239,13 @@ public class Keystrokes extends ModDraggable {
 	
 	public boolean isShowSpacebarEnabled() {
 		return showSpacebar;
+	}
+	
+	public void setArrows(boolean enabled) {
+		arrows = enabled;
+	}
+	
+	public boolean isArrowsEnabled() {
+		return arrows;
 	}
 }
