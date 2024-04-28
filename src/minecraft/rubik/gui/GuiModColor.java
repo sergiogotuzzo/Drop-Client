@@ -71,13 +71,13 @@ public class GuiModColor extends GuiScreen {
         this.drawCenteredString(this.fontRendererObj, I18n.format("Customize Mod Color", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
         
-        int rectLeft = this.width / 2 - 100;
-        int rectTop = this.height / 4 + 96;
-        int rectWidth = 200 - 1;
+        int rectLeft = this.width / 2 - 75;
+        int rectTop = this.height / 4 + 80;
+        int rectWidth = 150 - 1;
         int rectHeight = 20 - 1;
         
         drawRect(rectLeft, rectTop, rectLeft + rectWidth, rectTop + rectHeight, color.getRGB());
-        drawHollowRect(rectLeft - 1, rectTop - 1, rectWidth + 1, rectHeight + 1, Color.BLACK.getRGB());
+        drawHollowRect(rectLeft, rectTop, rectWidth, rectHeight, Color.BLACK.getRGB());
     }
     
     private void drawHollowRect(int x, int y, int width, int height, int color) {
