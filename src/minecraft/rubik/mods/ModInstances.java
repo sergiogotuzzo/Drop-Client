@@ -5,6 +5,7 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 import rubik.mods.impl.CPSDisplay;
+import rubik.mods.impl.Chat;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
@@ -29,6 +30,7 @@ public class ModInstances {
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
 	private static Scoreboard scoreboardMod = new Scoreboard();
+	private static Chat chatMod = new Chat();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -103,5 +105,9 @@ public class ModInstances {
 	
 	public static Scoreboard getScoreboardMod() {
 		return scoreboardMod;
+	}
+	
+	public static Chat getChatMod() {
+		return chatMod;
 	}
 }

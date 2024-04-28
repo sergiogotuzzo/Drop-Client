@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.gui.mods.GuiArmorStatus;
 import rubik.gui.mods.GuiCPSDisplay;
+import rubik.gui.mods.GuiChat;
 import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
 import rubik.gui.mods.GuiFreelook;
@@ -39,7 +40,7 @@ public class GuiModsList extends GuiScreen {
         this.buttonList.add(new GuiButton(5, this.width / 2 - 100 + j, this.height / 4 + 48 + i, 98, 20, I18n.format("FPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(6, this.width / 2 + 2 + j, this.height / 4 + 48 + i, 98, 20, I18n.format("Ping Display", new Object[0])));
         this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Coordinates", new Object[0])));
-        this.buttonList.add(new GuiButton(8, this.width / 2 - 100 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Coming Soon...", new Object[0])));
+        this.buttonList.add(new GuiButton(8, this.width / 2 - 100 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Chat", new Object[0])));
         this.buttonList.add(new GuiButton(9, this.width / 2 + 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Scoreboard", new Object[0])));
         this.buttonList.add(new GuiButton(10, this.width / 2 - 200 - 2 + j, this.height / 4 + 96 + i, 96, 20, I18n.format("Coming Soon...", new Object[0])));
         this.buttonList.add(new GuiButton(11, this.width / 2 - 100 + j, this.height / 4 + 96 + i, 96, 20, I18n.format("Toggle Movements", new Object[0])));
@@ -77,6 +78,7 @@ public class GuiModsList extends GuiScreen {
             	this.mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
             	break;
             case 8:
+            	this.mc.displayGuiScreen(new GuiChat(this));
             	break;
             case 9:
             	this.mc.displayGuiScreen(new GuiScoreboard(this));

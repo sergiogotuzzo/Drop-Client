@@ -1,6 +1,8 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+
+import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -9,6 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
+import rubik.mods.ModInstances;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -79,7 +83,17 @@ public class GuiNewChat extends Gui
                             {
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
+                                
+                                int backgroundColor;
+                                
+                                if (ModInstances.getChatMod().isTransparentBackgroundEnabled()) {
+                                	backgroundColor = new Color(0, 0, 0 ,0).getRGB();
+                                } else {
+                                	backgroundColor = l1 / 2 << 24;
+                                }
+                                
+                                drawRect(i2, j2 - 9, i2 + l + 4, j2, backgroundColor);
+                                
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
