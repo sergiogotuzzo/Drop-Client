@@ -28,12 +28,12 @@ public class ArmorStatus extends ModDraggable {
 		}
 	}
 	
-	private ColorManager color = new ColorManager(Color.WHITE);
-	private boolean shadow = true;
-	private boolean dynamicColors = true;
-	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
-	private boolean right = false;
 	private boolean showCurrentItem = false;
+	private boolean right = false;
+	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
+	private boolean dynamicColors = true;
+	private ColorManager color = new ColorManager(Color.WHITE);
+	private boolean textShadow = true;
 	
 	private final int ITEM_HEIGHT = 16;
 	
@@ -110,7 +110,7 @@ public class ArmorStatus extends ModDraggable {
 		}
 		
 		if (is.getItem().isDamageable()) {
-			if (shadow) {
+			if (textShadow) {
 				if (right) {
 					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				} else {
@@ -124,7 +124,7 @@ public class ArmorStatus extends ModDraggable {
 				}
 			}
 		} else if (is.isStackable()) {
-			if (shadow) {
+			if (textShadow) {
 				if (right) {
 					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + getWidth() - font.getStringWidth("" + is.stackSize) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				} else {
@@ -166,36 +166,12 @@ public class ArmorStatus extends ModDraggable {
 		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 	}
 	
-	public ColorManager getColorManager() {
-		return color;
+	public void setShowCurrentItem(boolean enabled) {
+		showCurrentItem = enabled;
 	}
 	
-	public Color getColor() {
-		return color.getColor();
-	}
-	
-	public void setShadowEnabled(boolean enabled) {
-		shadow = enabled;
-	}
-	
-	public boolean isShadowEnabled() {
-		return shadow;
-	}
-	
-	public void setDynamicColorsEnabled(boolean enabled) {
-		dynamicColors = enabled;
-	}
-	
-	public boolean isDynamicColorsEnabled() {
-		return dynamicColors;
-	}
-	
-	public void setMode(ArmorStatusMode mode) {
-		this.mode = mode;
-	}
-	
-	public ArmorStatusMode getMode() {
-		return mode;
+	public boolean isShowCurrentItemEnabled() {
+		return showCurrentItem;
 	}
 	
 	public void setRight(boolean enabled) {
@@ -206,11 +182,35 @@ public class ArmorStatus extends ModDraggable {
 		return right;
 	}
 	
-	public void setShowCurrentItemEnabled(boolean enabled) {
-		showCurrentItem = enabled;
+	public void setMode(ArmorStatusMode mode) {
+		this.mode = mode;
 	}
 	
-	public boolean isShowCurrentItemEnabled() {
-		return showCurrentItem;
+	public ArmorStatusMode getMode() {
+		return mode;
+	}
+	
+	public void setDynamicColors(boolean enabled) {
+		dynamicColors = enabled;
+	}
+	
+	public boolean isDynamicColorsEnabled() {
+		return dynamicColors;
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
 	}
 }

@@ -13,10 +13,10 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CPSDisplay extends ModDraggable {
-	private boolean background = false;
+	private boolean showBackground = false;
+	private boolean textShadow = true;
 	private ColorManager color = new ColorManager(Color.WHITE);
-	private boolean shadow = true;
-	private boolean right = true;
+	private boolean showRightCPS = true;
 	
 	private List<Long> leftClicks = new ArrayList<>();
     private boolean wasLeftPressed;
@@ -28,12 +28,12 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return background ? 58 : font.getStringWidth(right ? "[0 ⎟ 0 CPS]" : "[0 CPS]");
+		return showBackground ? 58 : font.getStringWidth(showRightCPS ? "[0 ⎟ 0 CPS]" : "[0 CPS]");
 	}
 
 	@Override
 	public int getHeight() {
-		return background ? 16 : font.FONT_HEIGHT;
+		return showBackground ? 16 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class CPSDisplay extends ModDraggable {
             }
         }
         
-        if (background) {
+        if (showBackground) {
 			Gui.drawRect(
 					pos.getAbsoluteX(),
 					pos.getAbsoluteY(),
@@ -68,13 +68,13 @@ public class CPSDisplay extends ModDraggable {
 					new Color(0, 0, 0, 102).getRGB()
 					);
 			
-			if (shadow) {
+			if (textShadow) {
 				font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			} else {
 				font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			}
 		} else {
-			if (shadow) {
+			if (textShadow) {
 				font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
 			} else {
 				font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
@@ -84,7 +84,7 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (background) {
+		if (showBackground) {
 			Gui.drawRect(
 					pos.getAbsoluteX(),
 					pos.getAbsoluteY(),
@@ -93,16 +93,16 @@ public class CPSDisplay extends ModDraggable {
 					new Color(0, 0, 0, 102).getRGB()
 					);
 			
-			if (shadow) {
-				font.drawStringWithShadow(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+			if (textShadow) {
+				font.drawStringWithShadow(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(showRightCPS ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			} else {
-				font.drawString(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(right ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+				font.drawString(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(showRightCPS ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 			}
 		} else {
-			if (shadow) {
-				font.drawStringWithShadow(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+			if (textShadow) {
+				font.drawStringWithShadow(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			} else {
-				font.drawString(right ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
+				font.drawString(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			}
 		}
 	}
@@ -116,23 +116,31 @@ public class CPSDisplay extends ModDraggable {
     }
 	
 	private String getCPSText() {
-		String cpsString = right ? getCPS(leftClicks) + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + getCPS(rightClicks) : "" + getCPS(leftClicks);
+		String cpsString = showRightCPS ? getCPS(leftClicks) + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + getCPS(rightClicks) : "" + getCPS(leftClicks);
 		
-		return background ? cpsString + " CPS" : "[" + cpsString + " CPS]";
+		return showBackground ? cpsString + " CPS" : "[" + cpsString + " CPS]";
 	}
 	
 	private String getCPSText(int cps) {
-		String cpsString = right ? cps + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + cps : "" + cps;
+		String cpsString = showRightCPS ? cps + " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET + cps : "" + cps;
 		
-		return background ? cpsString + " CPS" : "[" + cpsString + " CPS]";
+		return showBackground ? cpsString + " CPS" : "[" + cpsString + " CPS]";
 	}
 	
-	public void setBackgroundEnabled(boolean enabled) {
-		background = enabled;
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
 	}
 	
-	public boolean isBackgroundEnabled() {
-		return background;
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
 	}
 	
 	public ColorManager getColorManager() {
@@ -143,19 +151,11 @@ public class CPSDisplay extends ModDraggable {
 		return color.getColor();
 	}
 	
-	public void setShadowEnabled(boolean enabled) {
-		shadow = enabled;
+	public void setShowRightCPS(boolean enabled) {
+		showRightCPS = enabled;
 	}
 	
-	public boolean isShadowEnabled() {
-		return shadow;
-	}
-	
-	public void setRightEnabled(boolean enabled) {
-		right = enabled;
-	}
-	
-	public boolean isRightEnabled() {
-		return right;
+	public boolean isShowRightCPSEnabled() {
+		return showRightCPS;
 	}
 }

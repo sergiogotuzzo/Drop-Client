@@ -96,10 +96,11 @@ public class Keystrokes extends ModDraggable {
 		}
 	}
 	
+	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
+
+	private boolean textShadow = true;
 	private ColorManager pressedColor = new ColorManager(Color.BLACK);
 	private ColorManager releasedColor = new ColorManager(Color.WHITE);
-	private boolean textShadow = true;
-	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
 
@@ -144,6 +145,26 @@ public class Keystrokes extends ModDraggable {
 	    }
 	}
 	
+	private void updateMode() {
+		if (showMouse && showSpacebar) {
+			mode = KeystrokesMode.WASD_MOUSE_JUMP;
+		} else if (showMouse && !showSpacebar) {
+			mode = KeystrokesMode.WASD_MOUSE;
+		} else if (!showMouse && showSpacebar) {
+			mode = KeystrokesMode.WASD_JUMP;
+		} else if (!showMouse && !showSpacebar) {
+			mode = KeystrokesMode.WASD;
+		}
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
+	}
+	
 	public ColorManager getPressedColorManager() {
 		return pressedColor;
 	}
@@ -158,14 +179,6 @@ public class Keystrokes extends ModDraggable {
 	
 	public Color getReleasedColor() {
 		return releasedColor.getColor();
-	}
-	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
-	}
-	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
 	}
 	
 	public void setShowMouse(boolean enabled) {
@@ -186,17 +199,5 @@ public class Keystrokes extends ModDraggable {
 	
 	public boolean isShowSpacebarEnabled() {
 		return showSpacebar;
-	}
-	
-	public void updateMode() {
-		if (showMouse && showSpacebar) {
-			mode = KeystrokesMode.WASD_MOUSE_JUMP;
-		} else if (showMouse && !showSpacebar) {
-			mode = KeystrokesMode.WASD_MOUSE;
-		} else if (!showMouse && showSpacebar) {
-			mode = KeystrokesMode.WASD_JUMP;
-		} else if (!showMouse && !showSpacebar) {
-			mode = KeystrokesMode.WASD;
-		}
 	}
 }

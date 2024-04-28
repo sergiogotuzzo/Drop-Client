@@ -11,9 +11,9 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CoordinatesDisplay extends ModDraggable {
+	private boolean showBiome = true;
+	private boolean textShadow = true;
 	private ColorManager color = new ColorManager(Color.WHITE);
-	private boolean shadow = true;
-	private boolean biome = true;
 	
 	@Override
 	public int getWidth() {
@@ -22,14 +22,14 @@ public class CoordinatesDisplay extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return biome ? 42 : 32;
+		return showBiome ? 42 : 32;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
 		int paddingX = 6;
         int paddingY = 4;
-        int width = biome ? font.getStringWidth(getBiomeText()) : getWidth();
+        int width = showBiome ? font.getStringWidth(getBiomeText()) : getWidth();
         
 		Gui.drawRect(
 				pos.getAbsoluteX() - paddingX,
@@ -39,7 +39,7 @@ public class CoordinatesDisplay extends ModDraggable {
 				new Color(0, 0, 0, 102).getRGB()
 				);
 		
-		if (shadow) {
+		if (textShadow) {
 			font.drawStringWithShadow(getCoordinatesXText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 			font.drawStringWithShadow(getCoordinatesYText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 12, color.getRGB());
 			font.drawStringWithShadow(getCoordinatesZText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 23, color.getRGB());
@@ -48,7 +48,7 @@ public class CoordinatesDisplay extends ModDraggable {
 			font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 12, color.getRGB());
 			font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 23, color.getRGB());
 			
-			if (biome) {
+			if (showBiome) {
 				font.drawStringWithShadow(getBiomeText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 34, color.getRGB());
 			}
 		} else {
@@ -60,7 +60,7 @@ public class CoordinatesDisplay extends ModDraggable {
 			font.drawString(getFacing(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 12, color.getRGB());
 			font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + width - 5, pos.getAbsoluteY() + 23, color.getRGB());
 			
-			if (biome) {
+			if (showBiome) {
 				font.drawString(getBiomeText(), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 34, color.getRGB());
 			}
 		}
@@ -125,27 +125,27 @@ public class CoordinatesDisplay extends ModDraggable {
         }
 	}
 	
+	public void setShowBiome(boolean enabled) {
+		showBiome = enabled;
+	}
+	
+	public boolean isShowBiomeEnabled() {
+		return showBiome;
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
+	}
+	
 	public ColorManager getColorManager() {
 		return color;
 	}
 	
 	public Color getColor() {
 		return color.getColor();
-	}
-	
-	public void setShadowEnabled(boolean enabled) {
-		shadow = enabled;
-	}
-	
-	public boolean isShadowEnabled() {
-		return shadow;
-	}
-	
-	public void setBiomeEnabled(boolean enabled) {
-		biome = enabled;
-	}
-	
-	public boolean isBiomeEnabled() {
-		return biome;
 	}
 }

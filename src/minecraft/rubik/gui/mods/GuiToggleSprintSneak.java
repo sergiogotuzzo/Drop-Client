@@ -33,7 +33,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
         this.buttonList.add(sliderFlyBoost = new GuiSlider(3, this.width / 2 - 100, this.height / 4 + 48 + i, 200, 20, "Fly Boost Factor", 1, 8, mod.getFlyBoostFactor()));
         this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSprintEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Toggle Sprint", new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isToggleSneakEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Toggle Sneak", new Object[0])));
-        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isTextShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
         this.buttonList.add(new GuiButton(7, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, I18n.format("Color", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
@@ -51,22 +51,22 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setFlyBoostEnabled(!mod.isFlyBoostEnabled());
+            	mod.setFlyBoost(!mod.isFlyBoostEnabled());
             	this.initGui();
             	break;
             case 3:
             	mod.setFlyBoostFactor(sliderFlyBoost.func_175217_d() * 8.0F);
             	break;
             case 4:
-            	mod.setToggleSprintEnabled(!mod.isToggleSprintEnabled());
+            	mod.setToggleSprint(!mod.isToggleSprintEnabled());
             	this.initGui();
             	break;
             case 5:
-            	mod.setToggleSneakEnabled(!mod.isToggleSneakEnabled());
+            	mod.setToggleSneak(!mod.isToggleSneakEnabled());
             	this.initGui();
             	break;
             case 6:
-            	mod.setShadowEnabled(!mod.isShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
             case 7:

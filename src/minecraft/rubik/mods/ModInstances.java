@@ -46,7 +46,7 @@ public class ModInstances {
 	public static void resetModSettings() {
 		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(219, 3));
 		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(151, 3));
-		pingDisplayMod.setBackgroundEnabled(true);
+		pingDisplayMod.setShowBackground(true);
 		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, 75));
 		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(0, 0));
 		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(387, 176));

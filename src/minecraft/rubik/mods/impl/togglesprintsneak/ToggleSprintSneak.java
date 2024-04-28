@@ -9,16 +9,15 @@ import rubik.mods.ModDraggable;
 
 public class ToggleSprintSneak extends ModDraggable {
 	public int keyHoldTicks = 7;
-	
-	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
-	private boolean shadow = true;
-	private boolean toggleSprint = true;
-	private boolean toggleSneak = false;
-	private boolean flyBoost = true;
-	private float flyBoostFactor = 4;
-	
 	private boolean sprinting = false;
 	private boolean sneaking = false;
+	
+	private boolean flyBoost = true;
+	private float flyBoostFactor = 4;
+	private boolean toggleSprint = true;
+	private boolean toggleSneak = false;
+	private boolean textShadow = true;
+	private ColorManager color = new ColorManager(Color.WHITE);
 	
 	private String textToRender = "";
 
@@ -48,7 +47,7 @@ public class ToggleSprintSneak extends ModDraggable {
 	        xPosition = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender);
 	    }
 
-	    if (shadow) {
+	    if (textShadow) {
 	        font.drawStringWithShadow(textToRender, xPosition, pos.getAbsoluteY() + 1, color.getRGB());
 	    } else {
 	        font.drawString(textToRender, xPosition, pos.getAbsoluteY() + 1, color.getRGB());
@@ -59,59 +58,11 @@ public class ToggleSprintSneak extends ModDraggable {
 	public void renderDummy(ScreenPosition pos) {
 		textToRender = "[Sprinting (Vanilla)]";
 		
-		if (shadow) {
+		if (textShadow) {
 			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 		} else {
 			font.drawString(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 		}
-	}
-	
-	public ColorManager getColorManager() {
-		return color;
-	}
-	
-	public Color getColor() {
-		return color.getColor();
-	}
-	
-	public void setShadowEnabled(boolean enabled) {
-		shadow = enabled;
-	}
-	
-	public boolean isShadowEnabled() {
-		return shadow;
-	}
-	
-	public void setToggleSprintEnabled(boolean enabled) {
-		toggleSprint = enabled;
-	}
-	
-	public boolean isToggleSprintEnabled() {
-		return toggleSprint;
-	}
-	
-	public void setToggleSneakEnabled(boolean enabled) {
-		toggleSneak = enabled;
-	}
-	
-	public boolean isToggleSneakEnabled() {
-		return toggleSneak;
-	}
-	
-	public void setFlyBoostEnabled(boolean enabled) {
-		flyBoost = enabled;
-	}
-	
-	public boolean isFlyBoostEnabled() {
-		return flyBoost;
-	}
-	
-	public void setFlyBoostFactor(float factor) {
-		flyBoostFactor = factor;
-	}
-	
-	public float getFlyBoostFactor() {
-		return flyBoostFactor;
 	}
 	
 	public void setSprinting(boolean sprinting) {
@@ -128,5 +79,53 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public boolean isSneaking() {
 		return sneaking;
+	}
+	
+	public void setFlyBoost(boolean enabled) {
+		flyBoost = enabled;
+	}
+	
+	public boolean isFlyBoostEnabled() {
+		return flyBoost;
+	}
+	
+	public void setFlyBoostFactor(float factor) {
+		flyBoostFactor = factor;
+	}
+	
+	public float getFlyBoostFactor() {
+		return flyBoostFactor;
+	}
+	
+	public void setToggleSprint(boolean enabled) {
+		toggleSprint = enabled;
+	}
+	
+	public boolean isToggleSprintEnabled() {
+		return toggleSprint;
+	}
+	
+	public void setToggleSneak(boolean enabled) {
+		toggleSneak = enabled;
+	}
+	
+	public boolean isToggleSneakEnabled() {
+		return toggleSneak;
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
+	}
+	
+	public ColorManager getColorManager() {
+		return color;
+	}
+	
+	public Color getColor() {
+		return color.getColor();
 	}
 }

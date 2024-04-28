@@ -19,9 +19,9 @@ public class PotionEffects extends ModDraggable {
 	private float zLevel;
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
-	private ColorManager color = new ColorManager(Color.WHITE);
-    private boolean shadow = true;
     private boolean showTime = true;
+    private boolean textShadow = true;
+	private ColorManager color = new ColorManager(Color.WHITE);
     
     private final int EFFECT_HEIGHT = 24;
 
@@ -110,7 +110,7 @@ public class PotionEffects extends ModDraggable {
         String potionName = getPotionName(pe);
         String durationString = Potion.getDurationString(pe);
 
-        if (shadow) {
+        if (textShadow) {
         	if (showTime) {
         		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + 24, pos.getAbsoluteY() + yOffset + 4, color.getRGB());
 
@@ -169,6 +169,22 @@ public class PotionEffects extends ModDraggable {
     	return potionName;
     }
     
+    public void setShowTime(boolean enabled) {
+    	showTime = enabled;
+    }
+
+    public boolean isShowTimeEnabled() {
+        return showTime;
+    }
+
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
+	}
+    
     public ColorManager getColorManager() {
 		return color;
 	}
@@ -176,20 +192,4 @@ public class PotionEffects extends ModDraggable {
 	public Color getColor() {
 		return color.getColor();
 	}
-
-    public void setShadowEnabled(boolean enabled) {
-        shadow = enabled;
-    }
-
-    public boolean isShadowEnabled() {
-        return shadow;
-    }
-    
-    public void setShowTimeEnabled(boolean enabled) {
-    	showTime = enabled;
-    }
-
-    public boolean isShowTimeEnabled() {
-        return showTime;
-    }
 }

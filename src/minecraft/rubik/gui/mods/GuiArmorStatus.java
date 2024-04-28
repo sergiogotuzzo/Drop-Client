@@ -33,7 +33,7 @@ public class GuiArmorStatus extends GuiScreen {
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format(mod.getMode().toString().replace("DAMAGE_MAX_DAMAGE", "Damage/Max Damage").replace("DAMAGE", "Damage").replace("PERCENTAGE", "Percentage"), new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isDynamicColorsEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Dynamic Colors", new Object[0])));
         this.buttonList.add(buttonColor = new GuiButton(6, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format("Color", new Object[0])));
-        this.buttonList.add(new GuiButton(7, this.width / 2 - 100 + 50, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
+        this.buttonList.add(new GuiButton(7, this.width / 2 - 100 + 50, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isTextShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
         
         buttonColor.enabled = !mod.isDynamicColorsEnabled();
         
@@ -53,7 +53,7 @@ public class GuiArmorStatus extends GuiScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setShowCurrentItemEnabled(!mod.isShowCurrentItemEnabled());
+            	mod.setShowCurrentItem(!mod.isShowCurrentItemEnabled());
             	this.initGui();
             	break;
             case 3:
@@ -74,14 +74,14 @@ public class GuiArmorStatus extends GuiScreen {
 	            }
             	break;
             case 5:
-            	mod.setDynamicColorsEnabled(!mod.isDynamicColorsEnabled());
+            	mod.setDynamicColors(!mod.isDynamicColorsEnabled());
             	this.initGui();
             	break;
             case 6:
             	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColorManager()));
             	break;
             case 7:
-            	mod.setShadowEnabled(!mod.isShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
         }
