@@ -43,9 +43,9 @@ public class GuiModsList extends GuiScreen {
         this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Coordinates", new Object[0])));
         this.buttonList.add(new GuiButton(8, this.width / 2 - 100 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Chat", new Object[0])));
         this.buttonList.add(new GuiButton(9, this.width / 2 + 2 + j, this.height / 4 + 72 + i, 98, 20, I18n.format("Scoreboard", new Object[0])));
-        this.buttonList.add(new GuiButton(10, this.width / 2 - 200 - 2 + j, this.height / 4 + 96 + i, 96, 20, I18n.format("Old Animations", new Object[0])));
-        this.buttonList.add(new GuiButton(11, this.width / 2 - 100 + j, this.height / 4 + 96 + i, 96, 20, I18n.format("Toggle Movements", new Object[0])));
-        this.buttonList.add(new GuiButton(12, this.width / 2 + 2 + j, this.height / 4 + 96 + i, 96, 20, I18n.format("Freelook", new Object[0])));
+        this.buttonList.add(new GuiButton(10, this.width / 2 - 200 - 2 + j, this.height / 4 + 96 + i, 98, 20, I18n.format("Old Animations", new Object[0])));
+        this.buttonList.add(new GuiButton(11, this.width / 2 - 100 + j, this.height / 4 + 96 + i, 98, 20, I18n.format("Toggle Movements", new Object[0])));
+        this.buttonList.add(new GuiButton(12, this.width / 2 + 2 + j, this.height / 4 + 96 + i, 98, 20, I18n.format("Freelook", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
