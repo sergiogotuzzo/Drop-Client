@@ -203,18 +203,6 @@ public class ArmorStatus extends ModDraggable {
 		return damageMode;
 	}
 	
-	public int getDamageModeIndex() {
-		if (damageMode == DamageMode.PERCENTAGE) {
-        	return 1;
-        } else if (damageMode == DamageMode.DAMAGE) {
-        	return 2;
-        } else if (damageMode == DamageMode.DAMAGE_MAX_DAMAGE) {
-        	return 3;
-        }
-		
-		return 0;
-	}
-	
 	public void setMode(ArmorStatusMode mode) {
 		this.mode = mode;
 	}

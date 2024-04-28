@@ -30,7 +30,7 @@ public class GuiKeystrokes extends GuiScreen {
         this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
         this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format("Pressed Color", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("Released Color", new Object[0])));
-        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, I18n.format("Mode: " + mod.getMode().toString().replace("WASD_MOUSE_JUMP", "WASD ⎟ Mouse ⎟ Jump").replace("WASD_MOUSE", "WASD ⎟ Mouse").replace("WASD_JUMP", "WASD ⎟ Jump"), new Object[0])));        
+        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, I18n.format(mod.getMode().toString().replace("WASD_MOUSE_JUMP", "WASD ⎟ Mouse ⎟ Jump").replace("WASD_MOUSE", "WASD ⎟ Mouse").replace("WASD_JUMP", "WASD ⎟ Jump"), new Object[0])));        
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 

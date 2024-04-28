@@ -30,8 +30,8 @@ public class GuiArmorStatus extends GuiScreen {
  
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isShowCurrentItemEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Current Item", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format("Side: " + mod.getMode().toString().replace("LEFT", "Left").replace("RIGHT", "Right"), new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("Damage Mode: " + mod.getDamageModeIndex(), new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format(mod.getMode().toString().replace("LEFT", "Left").replace("RIGHT", "Right"), new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format(mod.getDamageMode().toString().replace("DAMAGE_MAX_DAMAGE", "Damage/Max Damage").replace("DAMAGE", "Damage").replace("PERCENTAGE", "Percentage"), new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isDynamicColorsEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Dynamic Colors", new Object[0])));
         this.buttonList.add(buttonColor = new GuiButton(6, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format("Color", new Object[0])));
         this.buttonList.add(new GuiButton(7, this.width / 2 - 100 + 50, this.height / 4 + 96 + i, 98, 20, I18n.format((mod.isShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
