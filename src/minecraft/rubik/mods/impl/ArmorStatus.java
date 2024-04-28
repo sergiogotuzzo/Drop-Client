@@ -12,14 +12,14 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
-	public static enum DamageMode {
+	public static enum ArmorStatusMode {
 		PERCENTAGE(48),
 		DAMAGE(40),
 		DAMAGE_MAX_DAMAGE(64);
 		
 		private int width = 0;
 		
-		private DamageMode(int width) {
+		private ArmorStatusMode(int width) {
 			this.width = width;
 		}
 		
@@ -28,23 +28,18 @@ public class ArmorStatus extends ModDraggable {
 		}
 	}
 	
-	public static enum ArmorStatusMode {
-		LEFT,
-		RIGHT
-	}
-	
 	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
 	private boolean shadow = true;
 	private boolean dynamicColors = true;
-	private DamageMode damageMode = DamageMode.DAMAGE;
-	private ArmorStatusMode mode = ArmorStatusMode.LEFT;
+	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
+	private boolean right = false;
 	private boolean showCurrentItem = false;
 	
 	private final int ITEM_HEIGHT = 16;
 	
 	@Override
 	public int getWidth() {
-		return damageMode.getWidth();
+		return mode.getWidth();
 	}
 
 	@Override
@@ -116,51 +111,51 @@ public class ArmorStatus extends ModDraggable {
 		
 		if (is.getItem().isDamageable()) {
 			if (shadow) {
-				if (mode == ArmorStatusMode.LEFT) {
-					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
-				} else if (mode == ArmorStatusMode.RIGHT) {
+				if (right) {
 					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				} else {
+					font.drawStringWithShadow(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				}
 			} else {
-				if (mode == ArmorStatusMode.LEFT) {
-					font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
-				} else if (mode == ArmorStatusMode.RIGHT) {
+				if (right) {
 					font.drawString(getDamageText(is), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
+				} else {
+					font.drawString(getDamageText(is), pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : color.getRGB());
 				}
 			}
 		} else if (is.isStackable()) {
 			if (shadow) {
-				if (mode == ArmorStatusMode.LEFT) {
-					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
-				} else if (mode == ArmorStatusMode.RIGHT) {
+				if (right) {
 					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + getWidth() - font.getStringWidth("" + is.stackSize) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+				} else {
+					font.drawStringWithShadow("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				}
 			} else {
-				if (mode == ArmorStatusMode.LEFT) {
+				if (right) {
+					font.drawString("" + is.stackSize, pos.getAbsoluteX() + getWidth() - font.getStringWidth("" + is.stackSize) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
+				} else {
 					font.drawString("" + is.stackSize, pos.getAbsoluteX() + 20, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
-				} else if (mode == ArmorStatusMode.RIGHT) {
-					font.drawString("" + is.stackSize, pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? Color.WHITE.getRGB() : color.getRGB());
 				}
 			}
 		}
 		
 		RenderHelper.enableGUIStandardItemLighting();
 		
-		if (mode == ArmorStatusMode.LEFT) {
-			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yAdd);
-		} else if (mode == ArmorStatusMode.RIGHT) {
+		if (right) {
 			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 4, pos.getAbsoluteY() + yAdd);
+		} else {
+			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yAdd);
 		}
 		
 		GL11.glPopMatrix();
 	}
 	
 	private String getDamageText(ItemStack is) {
-		if (damageMode == DamageMode.PERCENTAGE) {
+		if (mode == ArmorStatusMode.PERCENTAGE) {
 			return String.format("%.0f%%", getDamagePercentage(is));
-		} else if (damageMode == DamageMode.DAMAGE) {
+		} else if (mode == ArmorStatusMode.DAMAGE) {
 			return "" + (is.getMaxDamage() - is.getItemDamage());
-		} else if (damageMode == DamageMode.DAMAGE_MAX_DAMAGE) {
+		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
 			return (is.getMaxDamage() - is.getItemDamage()) + "/" + is.getMaxDamage();
 		}
 		
@@ -195,20 +190,20 @@ public class ArmorStatus extends ModDraggable {
 		return dynamicColors;
 	}
 	
-	public void setDamageMode(DamageMode mode) {
-		this.damageMode = mode;
-	}
-	
-	public DamageMode getDamageMode() {
-		return damageMode;
-	}
-	
 	public void setMode(ArmorStatusMode mode) {
 		this.mode = mode;
 	}
 	
 	public ArmorStatusMode getMode() {
 		return mode;
+	}
+	
+	public void setRight(boolean enabled) {
+		right = enabled;
+	}
+	
+	public boolean isRightEnabled() {
+		return right;
 	}
 	
 	public void setShowCurrentItemEnabled(boolean enabled) {

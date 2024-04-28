@@ -50,7 +50,7 @@ public class ModInstances {
 		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, 75));
 		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(0, 0));
 		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(387, 176));
-		armorStatusMod.setMode(ArmorStatusMode.RIGHT);
+		armorStatusMod.setRight(true);
 		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, 97));
 		coordinatesDisplayMod.setEnabled(false);
 		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(325, 3));
