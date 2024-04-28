@@ -92,7 +92,7 @@ public class RubikClientMovementInput extends MovementInput {
 		// SPRINT
 		
 		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.isToggleSprintEnabled()) {
-			if (gameSettings.keyBindSprint.isKeyDown()) {
+			if (gameSettings.keyBindSprint.isKeyDown() && !player.capabilities.isFlying) {
 				if (sprintWasPressed == 0) {
 					if (sprint) {
 						sprintWasPressed = -1;
