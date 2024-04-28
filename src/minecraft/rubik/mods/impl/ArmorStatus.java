@@ -198,12 +198,8 @@ public class ArmorStatus extends ModDraggable {
 		return dynamicColors;
 	}
 	
-	public ColorManager getColorManager() {
+	public ColorManager getColor() {
 		return color;
-	}
-	
-	public Color getColor() {
-		return color.getColor();
 	}
 	
 	public void setTextShadow(boolean enabled) {

@@ -78,7 +78,7 @@ public class GuiArmorStatus extends GuiScreen {
             	this.initGui();
             	break;
             case 6:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColorManager()));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColor()));
             	break;
             case 7:
             	mod.setTextShadow(!mod.isTextShadowEnabled());

@@ -187,11 +187,7 @@ public class PotionEffects extends ModDraggable {
 		return textShadow;
 	}
     
-    public ColorManager getColorManager() {
+    public ColorManager getColor() {
 		return color;
-	}
-	
-	public Color getColor() {
-		return color.getColor();
 	}
 }

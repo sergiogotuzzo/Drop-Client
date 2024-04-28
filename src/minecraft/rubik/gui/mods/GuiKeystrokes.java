@@ -53,10 +53,10 @@ public class GuiKeystrokes extends GuiScreen {
             	this.initGui();
             	break;
             case 3:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getPressedColorManager()));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getPressedColor()));
             	break;
             case 4:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getReleasedColorManager()));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getReleasedColor()));
             	break;
             case 5:
             	mod.setShowMouse(!mod.isShowMouseEnabled());

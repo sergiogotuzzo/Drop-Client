@@ -53,7 +53,7 @@ public class GuiCoordinatesDisplay extends GuiScreen {
             	this.initGui();
             	break;
             case 4:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColorManager()));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColor()));
             	break;
         }
     }

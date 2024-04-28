@@ -70,7 +70,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.initGui();
             	break;
             case 7:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColorManager()));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColor()));
                 break;
         }
     }

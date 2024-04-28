@@ -205,20 +205,12 @@ public class Keystrokes extends ModDraggable {
 		return textShadow;
 	}
 	
-	public ColorManager getPressedColorManager() {
+	public ColorManager getPressedColor() {
 		return pressedColor;
 	}
 	
-	public Color getPressedColor() {
-		return pressedColor.getColor();
-	}
-	
-	public ColorManager getReleasedColorManager() {
+	public ColorManager getReleasedColor() {
 		return releasedColor;
-	}
-	
-	public Color getReleasedColor() {
-		return releasedColor.getColor();
 	}
 	
 	public void setShowMouse(boolean enabled) {
