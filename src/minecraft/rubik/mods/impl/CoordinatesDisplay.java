@@ -11,7 +11,7 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CoordinatesDisplay extends ModDraggable {
-	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
+	private ColorManager color = new ColorManager(Color.WHITE);
 	private boolean shadow = true;
 	private boolean biome = true;
 	

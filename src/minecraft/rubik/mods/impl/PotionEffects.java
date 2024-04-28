@@ -19,7 +19,7 @@ public class PotionEffects extends ModDraggable {
 	private float zLevel;
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
-	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
+	private ColorManager color = new ColorManager(Color.WHITE);
     private boolean shadow = true;
     private boolean showTime = true;
     

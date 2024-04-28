@@ -9,7 +9,7 @@ import rubik.mods.ModDraggable;
 
 public class FPSDisplay extends ModDraggable {
 	private boolean background = false;
-	private ColorManager color = new ColorManager(new Color(255, 255, 255, 255));
+	private ColorManager color = new ColorManager(Color.WHITE);
 	private boolean shadow = true;
 	
 	@Override
