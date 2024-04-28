@@ -98,8 +98,10 @@ public class Keystrokes extends ModDraggable {
 	
 	private ColorManager pressedColor = new ColorManager(Color.BLACK);
 	private ColorManager releasedColor = new ColorManager(Color.WHITE);
-	private boolean shadow = true;
+	private boolean textShadow = true;
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
+	private boolean showMouse = true;
+	private boolean showSpacebar = true;
 
 	@Override
 	public int getWidth() {
@@ -124,7 +126,7 @@ public class Keystrokes extends ModDraggable {
 	                key.isDown() ? new Color(255, 255, 255, 102).getRGB() : new Color(0, 0, 0, 102).getRGB()
 	                );
 	        
-	        if (shadow) {
+	        if (textShadow) {
 	        	font.drawStringWithShadow(
 		                key.getName(),
 		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
@@ -158,19 +160,43 @@ public class Keystrokes extends ModDraggable {
 		return releasedColor.getColor();
 	}
 	
-	public void setShadowEnabled(boolean enabled) {
-		shadow = enabled;
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
 	}
 	
-	public boolean isShadowEnabled() {
-		return shadow;
+	public boolean isTextShadowEnabled() {
+		return textShadow;
 	}
 	
-	public void setMode(KeystrokesMode mode) {
-		this.mode = mode;
+	public void setShowMouse(boolean enabled) {
+		showMouse = enabled;
+		
+		updateMode();
 	}
 	
-	public KeystrokesMode getMode() {
-		return mode;
+	public boolean isShowMouseEnabled() {
+		return showMouse;
+	}
+	
+	public void setShowSpacebar(boolean enabled) {
+		showSpacebar = enabled;
+		
+		updateMode();
+	}
+	
+	public boolean isShowSpacebarEnabled() {
+		return showSpacebar;
+	}
+	
+	public void updateMode() {
+		if (showMouse && showSpacebar) {
+			mode = KeystrokesMode.WASD_MOUSE_JUMP;
+		} else if (showMouse && !showSpacebar) {
+			mode = KeystrokesMode.WASD_MOUSE;
+		} else if (!showMouse && showSpacebar) {
+			mode = KeystrokesMode.WASD_JUMP;
+		} else if (!showMouse && !showSpacebar) {
+			mode = KeystrokesMode.WASD;
+		}
 	}
 }
