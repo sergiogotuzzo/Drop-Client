@@ -53,14 +53,21 @@ public class GuiModPositioning extends GuiScreen {
 	    
 	    this.zLevel = 200;
 
-	    drawHollowRect(0, 0, this.width - 1, this.height - 1, 0xFF00FFFF);
+	    drawHollowRect(0, 0, this.width - 1, this.height - 1, Color.MAGENTA.getRGB());
 	    
 	    for (IRenderer renderer : renderers.keySet()) {
 	        ScreenPosition pos = renderers.get(renderer);
 	        
 	        renderer.renderDummy(pos);
 	        
-	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0xFFFFFFFF);
+	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), Color.GRAY.getRGB());
+	        drawFillRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), new Color(255, 255, 255, 40).getRGB());
+	    }
+	    
+	    if (selectedRenderer.isPresent()) {
+	    	ScreenPosition pos = renderers.get(selectedRenderer.get());
+	        
+	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth(), selectedRenderer.get().getHeight(), Color.MAGENTA.getRGB());
 	    }
 
 	    this.zLevel = zBackup;
@@ -71,6 +78,10 @@ public class GuiModPositioning extends GuiScreen {
 		this.drawHorizontalLine(x, x + width, y + height, color);
 		this.drawVerticalLine(x, y + height, y, color);
 		this.drawVerticalLine(x + width, y + height, y, color);
+	}
+	
+	private void drawFillRect(int x, int y, int width, int height, int color) {
+		Gui.drawRect(x, y, x + width, y + height, color);
 	}
 	
 	@Override
