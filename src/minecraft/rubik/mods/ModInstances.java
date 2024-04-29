@@ -1,5 +1,7 @@
 package rubik.mods;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.impl.ArmorStatus;
@@ -46,16 +48,18 @@ public class ModInstances {
 	}
 	
 	public static void resetModSettings() {
-		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(219, 3));
-		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(151, 3));
+		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
+		
+		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 + 1, 1));
+		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 - cpsDisplayMod.getWidth() - 1, 1));
 		pingDisplayMod.setShowBackground(true);
-		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, 75));
+		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, res.getScaledHeight() / 2 - keystrokesMod.getHeight() + (pingDisplayMod.getHeight() - 2) * 2));
 		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(0, 0));
-		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(387, 176));
+		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - armorStatusMod.getWidth(), res.getScaledHeight() - armorStatusMod.getHeight()));
 		armorStatusMod.setRight(true);
-		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, 97));
+		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, res.getScaledHeight() / 2));
 		coordinatesDisplayMod.setEnabled(false);
-		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(325, 3));
+		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth(), 0));
 		scoreboardMod.setHideNumbers(true);
 	}
 	
