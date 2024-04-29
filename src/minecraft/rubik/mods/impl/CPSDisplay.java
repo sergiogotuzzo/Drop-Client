@@ -28,12 +28,12 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return showBackground ? 58 : font.getStringWidth(showRightCPS ? "[0 ⎟ 0 CPS]" : "[0 CPS]");
+		return 58;
 	}
 
 	@Override
 	public int getHeight() {
-		return showBackground ? 16 : font.FONT_HEIGHT;
+		return 16;
 	}
 
 	@Override
@@ -67,43 +67,12 @@ public class CPSDisplay extends ModDraggable {
 					pos.getAbsoluteY() + getHeight(),
 					new Color(0, 0, 0, 102).getRGB()
 					);
+        }
 			
-			if (textShadow) {
-				font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			} else {
-				font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			}
+		if (textShadow) {
+			font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 		} else {
-			if (textShadow) {
-				font.drawStringWithShadow(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
-			} else {
-				font.drawString(getCPSText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
-			}
-		}
-	}
-	
-	@Override
-	public void renderDummy(ScreenPosition pos) {
-		if (showBackground) {
-			Gui.drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					new Color(0, 0, 0, 102).getRGB()
-					);
-			
-			if (textShadow) {
-				font.drawStringWithShadow(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(showRightCPS ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			} else {
-				font.drawString(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(showRightCPS ? getCPSText(0) : getCPSText(0))) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			}
-		} else {
-			if (textShadow) {
-				font.drawStringWithShadow(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-			} else {
-				font.drawString(showRightCPS ? getCPSText(0) : getCPSText(0), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-			}
+			font.drawString(getCPSText(), pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(getCPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 		}
 	}
 	

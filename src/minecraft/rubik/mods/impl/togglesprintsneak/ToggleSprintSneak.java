@@ -23,12 +23,12 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth("[Sprinting (Vanilla)]");
+		return font.getStringWidth("[Sprinting (Vanilla)]") + 4;
 	}
 
 	@Override
 	public int getHeight() {
-		return font.FONT_HEIGHT;
+		return font.FONT_HEIGHT + 3;
 	}
 
 	@Override
@@ -40,29 +40,29 @@ public class ToggleSprintSneak extends ModDraggable {
 	    double maxRelativeX = 1;
 	    
 	    if (pos.getRelativeX() < (maxRelativeX / (3 * 3))) {
-	        xPosition = pos.getAbsoluteX();
+	        xPosition = pos.getAbsoluteX() + 3;
 	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
-	        xPosition = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2;
+	        xPosition = pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2;
 	    } else {
-	        xPosition = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender);
+	        xPosition = pos.getAbsoluteX() - 1 + getWidth() - font.getStringWidth(textToRender);
 	    }
 
 	    if (textShadow) {
-	        font.drawStringWithShadow(textToRender, xPosition, pos.getAbsoluteY() + 1, color.getRGB());
+	        font.drawStringWithShadow(textToRender, xPosition, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 	    } else {
-	        font.drawString(textToRender, xPosition, pos.getAbsoluteY() + 1, color.getRGB());
+	        font.drawString(textToRender, xPosition, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 	    }
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		textToRender = "[Sprinting (Vanilla)]";
-		
-		if (textShadow) {
-			font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-		} else {
-			font.drawString(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-		}
+
+	    if (textShadow) {
+	        font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	    } else {
+	        font.drawString(textToRender, pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	    }
 	}
 	
 	public void setSprinting(boolean sprinting) {

@@ -15,12 +15,12 @@ public class PingDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return showBackground ? 58 : font.getStringWidth("[27 ms]");
+		return 58;
 	}
 
 	@Override
 	public int getHeight() {
-		return showBackground ? 16 : font.FONT_HEIGHT;
+		return 16;
 	}
 
 	@Override
@@ -33,43 +33,12 @@ public class PingDisplay extends ModDraggable {
 					pos.getAbsoluteY() + getHeight(),
 					new Color(0, 0, 0, 102).getRGB()
 					);
-			
-			if (textShadow) {
-				font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			} else {
-				font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			}
-		} else {
-			if (textShadow) {
-				font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
-			} else {
-				font.drawString(getPingText(), pos.getAbsoluteX() + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + 1, color.getRGB());
-			}
 		}
-	}
-	
-	@Override
-	public void renderDummy(ScreenPosition pos) {
-		if (showBackground) {
-			Gui.drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					new Color(0, 0, 0, 102).getRGB()
-					);
 			
-			if (textShadow) {
-				font.drawStringWithShadow("27 ms", pos.getAbsoluteX() + (getWidth() - font.getStringWidth("27 ms")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			} else {
-				font.drawString("27 ms", pos.getAbsoluteX() + (getWidth() - font.getStringWidth("27 ms")) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-			}
+		if (textShadow) {
+			font.drawStringWithShadow(getPingText(), pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 		} else {
-			if (textShadow) {
-				font.drawStringWithShadow("[27 ms]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-			} else {
-				font.drawString("[27 ms]", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-			}
+			font.drawString(getPingText(), pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(getPingText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 		}
 	}
 	
