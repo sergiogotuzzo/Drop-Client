@@ -60,7 +60,6 @@ public class ModInstances {
 		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 + 2, 2));
 		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 - cpsDisplayMod.getWidth() - 2, 2));
 		
-		
 		// RIGHT SIDE
 		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth() - 2 - 1, 2));
 		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - armorStatusMod.getWidth() - 2 - 1, res.getScaledHeight() - armorStatusMod.getHeight() - 2 - 1));
