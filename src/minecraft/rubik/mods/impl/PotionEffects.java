@@ -120,7 +120,7 @@ public class PotionEffects extends ModDraggable {
                     font.drawStringWithShadow(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + i, color.getRGB());
                 }
         	} else {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT - i, color.getRGB());
         	}
         } else {
             if (showTime) {
@@ -130,7 +130,7 @@ public class PotionEffects extends ModDraggable {
                     font.drawString(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + i, color.getRGB());
                 }
             } else {
-            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT, color.getRGB());
+            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT - i, color.getRGB());
             }
         }
     }
