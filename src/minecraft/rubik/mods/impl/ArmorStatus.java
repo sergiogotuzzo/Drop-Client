@@ -142,7 +142,13 @@ public class ArmorStatus extends ModDraggable {
 		RenderHelper.enableGUIStandardItemLighting();
 		
 		if (right) {
-			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 4, pos.getAbsoluteY() + yAdd);
+			if (mode == ArmorStatusMode.DAMAGE) {
+				mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 4, pos.getAbsoluteY() + yAdd);
+			} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
+				mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 28, pos.getAbsoluteY() + yAdd);
+			} else if (mode == ArmorStatusMode.PERCENTAGE) {
+				mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 20 + 12, pos.getAbsoluteY() + yAdd);
+			}
 		} else {
 			mc.getRenderItem().renderItemAndEffectIntoGUI(is, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + yAdd);
 		}
