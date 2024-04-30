@@ -2,6 +2,7 @@ package rubik.mods;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import rubik.gui.GuiModPositioning;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.impl.ArmorStatus;
@@ -50,19 +51,22 @@ public class ModInstances {
 	public static void resetModSettings() {
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
 		
+		int marginX = GuiModPositioning.getMarginX();
+		int marginY = GuiModPositioning.getMarginY();
+		
 		// LEFT SIDE
-		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(2, 2));
-		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(2, keystrokesMod.load().getAbsoluteX() + keystrokesMod.getHeight() + 2));
+		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(marginX, marginY));
+		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(marginX, keystrokesMod.load().getAbsoluteX() + keystrokesMod.getHeight() + marginY));
 		pingDisplayMod.setShowBackground(true);
-		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(2, res.getScaledHeight() / 2));
+		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(marginX, res.getScaledHeight() / 2));
 		
 		// CENTER
-		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 + 2, 2));
-		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 - cpsDisplayMod.getWidth() - 2, 2));
+		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 + marginX, marginY));
+		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 - cpsDisplayMod.getWidth() - marginX, marginY));
 		
 		// RIGHT SIDE
-		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth() - 2 - 1, 2));
-		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - armorStatusMod.getWidth() - 2 - 1, res.getScaledHeight() - armorStatusMod.getHeight() - 2 - 1));
+		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth() - marginX - 1, marginY));
+		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - armorStatusMod.getWidth() - marginX - 1, res.getScaledHeight() - armorStatusMod.getHeight() - marginY - 1));
 		armorStatusMod.setRight(true);
 		
 		// OTHER
