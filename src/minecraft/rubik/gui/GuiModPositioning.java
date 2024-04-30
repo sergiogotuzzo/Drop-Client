@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import rubik.gui.hud.HUDManager;
@@ -81,7 +80,7 @@ public class GuiModPositioning extends GuiScreen {
 	}
 	
 	private void drawFillRect(int x, int y, int width, int height, int color) {
-		Gui.drawRect(x, y, x + width, y + height, color);
+		drawRect(x, y, x + width, y + height, color);
 	}
 	
 	@Override
