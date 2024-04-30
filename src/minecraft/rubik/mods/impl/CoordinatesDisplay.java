@@ -38,7 +38,6 @@ public class CoordinatesDisplay extends ModDraggable {
 		int i = 3;
 		int j = 5;
 		int k = showBiome ? getWidth() - font.getStringWidth(getBiomeText()) : 12;
-		System.out.println(k);
 		
 		if (textShadow) {
 			font.drawStringWithShadow(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
