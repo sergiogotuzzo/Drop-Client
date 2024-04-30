@@ -16,14 +16,16 @@ public class CoordinatesDisplay extends ModDraggable {
 	private ColorManager color = new ColorManager(Color.WHITE);
 	private boolean showBiome = true;
 	
+	private final int padding = 12;
+	
 	@Override
 	public int getWidth() {
-		return showBiome ? font.getStringWidth(getBiomeText()) + 12 : 70;
+		return showBiome ? font.getStringWidth(getBiomeText()) + padding : 70;
 	}
 
 	@Override
 	public int getHeight() {
-		return showBiome ? 50 : 40;
+		return (showBiome ? 38 : 28) + padding;
 	}
 
 	@Override
@@ -38,18 +40,17 @@ public class CoordinatesDisplay extends ModDraggable {
 					);
 		}
 		
-		int i = 3;
-		int j = 5;
-		int k = showBiome ? getWidth() - font.getStringWidth(getBiomeText()) : 12;
+		final int i = showBiome ? padding / 4 : padding / 3;
+		final int j = padding / 2;
 		
 		if (textShadow) {
 			font.drawStringWithShadow(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
 			font.drawStringWithShadow(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
 			font.drawStringWithShadow(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
 			
-			font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - k, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-			font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + getWidth() - k, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-			font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - k, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
+			font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
+			font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
+			font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
 			
 			if (showBiome) {
 				font.drawStringWithShadow(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, color.getRGB());
@@ -59,9 +60,9 @@ public class CoordinatesDisplay extends ModDraggable {
 			font.drawString(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
 			font.drawString(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
 			
-			font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - k, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-			font.drawString(getFacing(), pos.getAbsoluteX() + getWidth() - k, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-			font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - k, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
+			font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
+			font.drawString(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
+			font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
 			
 			if (showBiome) {
 				font.drawString(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, color.getRGB());
