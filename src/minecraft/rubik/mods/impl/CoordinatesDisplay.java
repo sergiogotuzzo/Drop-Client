@@ -11,9 +11,10 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CoordinatesDisplay extends ModDraggable {
-	private boolean showBiome = true;
+	private boolean showBackground = true;
 	private boolean textShadow = true;
 	private ColorManager color = new ColorManager(Color.WHITE);
+	private boolean showBiome = true;
 	
 	@Override
 	public int getWidth() {
@@ -27,13 +28,15 @@ public class CoordinatesDisplay extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		Gui.drawRect(
-				pos.getAbsoluteX(),
-				pos.getAbsoluteY(),
-				pos.getAbsoluteX() + getWidth(),
-				pos.getAbsoluteY() + getHeight(),
-				new Color(0, 0, 0, 102).getRGB()
-				);
+		if (showBackground) {
+			Gui.drawRect(
+					pos.getAbsoluteX(),
+					pos.getAbsoluteY(),
+					pos.getAbsoluteX() + getWidth(),
+					pos.getAbsoluteY() + getHeight(),
+					new Color(0, 0, 0, 102).getRGB()
+					);
+		}
 		
 		int i = 3;
 		int j = 5;
@@ -129,12 +132,12 @@ public class CoordinatesDisplay extends ModDraggable {
         }
 	}
 	
-	public void setShowBiome(boolean enabled) {
-		showBiome = enabled;
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
 	}
 	
-	public boolean isShowBiomeEnabled() {
-		return showBiome;
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
 	}
 	
 	public void setTextShadow(boolean enabled) {
@@ -147,5 +150,13 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	public ColorManager getColor() {
 		return color;
+	}
+	
+	public void setShowBiome(boolean enabled) {
+		showBiome = enabled;
+	}
+	
+	public boolean isShowBiomeEnabled() {
+		return showBiome;
 	}
 }
