@@ -15,6 +15,7 @@ public class CoordinatesDisplay extends ModDraggable {
 	private boolean textShadow = true;
 	private ColorManager color = new ColorManager(Color.WHITE);
 	private boolean showBiome = true;
+	private boolean showTowards = true;
 	
 	private final int padding = 12;
 	
@@ -48,9 +49,11 @@ public class CoordinatesDisplay extends ModDraggable {
 			font.drawStringWithShadow(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
 			font.drawStringWithShadow(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
 			
-			font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-			font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-			font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
+			if (showTowards) {
+				font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
+				font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
+				font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
+			}
 			
 			if (showBiome) {
 				font.drawStringWithShadow(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, color.getRGB());
@@ -60,9 +63,11 @@ public class CoordinatesDisplay extends ModDraggable {
 			font.drawString(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
 			font.drawString(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
 			
-			font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-			font.drawString(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-			font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
+			if (showTowards) {
+				font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
+				font.drawString(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
+				font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
+			}
 			
 			if (showBiome) {
 				font.drawString(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, color.getRGB());
@@ -159,5 +164,13 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	public boolean isShowBiomeEnabled() {
 		return showBiome;
+	}
+	
+	public void setShowTowards(boolean enabled) {
+		showTowards = enabled;
+	}
+	
+	public boolean isShowTowardsEnabled() {
+		return showTowards;
 	}
 }

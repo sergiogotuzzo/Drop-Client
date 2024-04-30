@@ -29,7 +29,8 @@ public class GuiCoordinatesDisplay extends GuiScreen {
         this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isShowBackgroundEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Background", new Object[0])));
         this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isTextShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("Color", new Object[0])));
-        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, I18n.format((mod.isShowBiomeEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Biome", new Object[0])));
+        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isShowBiomeEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Biome", new Object[0])));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isShowTowardsEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Towards", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -58,6 +59,10 @@ public class GuiCoordinatesDisplay extends GuiScreen {
             	break;
             case 5:
             	mod.setShowBiome(!mod.isShowBiomeEnabled());
+            	this.initGui();
+            	break;
+            case 6:
+            	mod.setShowTowards(!mod.isShowTowardsEnabled());
             	this.initGui();
             	break;
         }
