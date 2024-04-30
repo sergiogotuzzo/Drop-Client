@@ -374,42 +374,23 @@ public class ItemRenderer
                     switch (enumaction)
                     {
                         case NONE:
-                        	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
-                                this.transformFirstPersonItem(f, f1);
-                        	} else {
-                                this.transformFirstPersonItem(f, 0.0F);
-                        	}
+                        	this.transformFirstPersonItem(f, oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled() ? f1 : 0.0F);
                             break;
 
                         case EAT:
                         case DRINK:
-                            if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
-                            	this.func_178104_a(abstractclientplayer, partialTicks);
-                                this.transformFirstPersonItem(f, f1);
-                        	} else {
-                        		this.func_178104_a(abstractclientplayer, partialTicks);
-                                this.transformFirstPersonItem(f, 0.0F);
-                        	}
+                        	this.func_178104_a(abstractclientplayer, partialTicks);
+                        	this.transformFirstPersonItem(f, oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled() ? f1 : 0.0F);
                             break;
 
                         case BLOCK:
-                        	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
-                        		this.transformFirstPersonItem(f, f1);
-                                this.func_178103_d();
-                        	} else {
-                        		this.transformFirstPersonItem(f, 0.0F);
-                                this.func_178103_d();
-                        	}
+                        	this.transformFirstPersonItem(f, oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled() ? f1 : 0.0F);
+                        	this.func_178103_d();
                             break;
 
                         case BOW:
-                        	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
-                                this.transformFirstPersonItem(f, f1);
-                                this.func_178098_a(partialTicks, abstractclientplayer);
-                        	} else {
-                                this.transformFirstPersonItem(f, 0.0F);
-                                this.func_178098_a(partialTicks, abstractclientplayer);
-                        	}
+                        	this.transformFirstPersonItem(f, oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled() ? f1 : 0.0F);
+                        	this.func_178098_a(partialTicks, abstractclientplayer);
                     }
                 }
                 else
