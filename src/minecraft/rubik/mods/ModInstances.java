@@ -50,16 +50,24 @@ public class ModInstances {
 	public static void resetModSettings() {
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
 		
+		// LEFT SIDE
+		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(0, 0));
+		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, keystrokesMod.load().getAbsoluteX() + keystrokesMod.getHeight() + 2));
+		pingDisplayMod.setShowBackground(true);
+		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, res.getScaledHeight() / 2));
+		
+		// CENTER
 		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 + 1, 1));
 		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 - cpsDisplayMod.getWidth() - 1, 1));
-		pingDisplayMod.setShowBackground(true);
-		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(1, res.getScaledHeight() / 2 - keystrokesMod.getHeight() + (pingDisplayMod.getHeight() - 2) * 2));
-		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(0, 0));
+		
+		
+		// RIGHT SIDE
+		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth(), 0));
 		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - armorStatusMod.getWidth(), res.getScaledHeight() - armorStatusMod.getHeight()));
 		armorStatusMod.setRight(true);
-		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(0, res.getScaledHeight() / 2));
+		
+		// OTHER
 		coordinatesDisplayMod.setEnabled(false);
-		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth(), 0));
 		scoreboardMod.setHideNumbers(true);
 	}
 	
