@@ -24,6 +24,9 @@ public class GuiModPositioning extends GuiScreen {
 	private int prevX;
 	private int prevY;
 	
+	private final int marginX = 2;
+	private final int marginY = 2;
+	
 	public GuiModPositioning(HUDManager manager) {
 		Collection<IRenderer> registeredRenderers = manager.getRegisteredRenderers();
 		
@@ -52,7 +55,7 @@ public class GuiModPositioning extends GuiScreen {
 	    
 	    this.zLevel = 200;
 
-	    drawHollowRect(0, 0, this.width - 1, this.height - 1, Color.MAGENTA.getRGB());
+	    drawHollowRect(marginX, marginY, this.width - 1 - marginX * 2, this.height - 1 - marginY * 2, Color.MAGENTA.getRGB());
 	    
 	    for (IRenderer renderer : renderers.keySet()) {
 	        ScreenPosition pos = renderers.get(renderer);
@@ -131,8 +134,8 @@ public class GuiModPositioning extends GuiScreen {
 		int screenWidth = res.getScaledWidth();
 		int screenHeight = res.getScaledHeight();
 		
-		int absoluteX = Math.max(0, Math.min(pos.getAbsoluteX(), Math.max(screenWidth - renderer.getWidth(), 0)));
-		int absoluteY = Math.max(0, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight(), 0)));
+		int absoluteX = Math.max(marginX, Math.min(pos.getAbsoluteX(), Math.max(screenWidth - renderer.getWidth() - marginX - 1, 0)));
+		int absoluteY = Math.max(marginY, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight() - marginY - 1, 0)));
 		
 		pos.setAbsolute(absoluteX, absoluteY);
 	}
