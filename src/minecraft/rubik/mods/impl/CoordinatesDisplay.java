@@ -18,10 +18,11 @@ public class CoordinatesDisplay extends ModDraggable {
 	private boolean showTowards = true;
 	
 	private final int padding = 12;
+	private final int gap = 10;
 	
 	@Override
 	public int getWidth() {
-		return showBiome ? font.getStringWidth(getBiomeText()) + padding : 70;
+		return showBiome ? (font.getStringWidth(getBiomeText()) > getLongestCoordinateText() + (showTowards ? gap : 0) ? font.getStringWidth(getBiomeText()) : getLongestCoordinateText() + (showTowards ? gap : 0)) + padding : getLongestCoordinateText() + (showTowards ? gap : 0) + padding;
 	}
 
 	@Override
@@ -77,6 +78,24 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	private int getLineY(int line) {
 		return line * 11 - 10; 
+	}
+	
+	private int getLongestCoordinate() {
+		int max = Math.abs((int) mc.getRenderViewEntity().posX);
+		
+		if (Math.abs((int) mc.getRenderViewEntity().getEntityBoundingBox().minY) > max) {
+			max = Math.abs((int) mc.getRenderViewEntity().getEntityBoundingBox().minY);
+		}
+		
+		if (Math.abs((int) mc.getRenderViewEntity().posZ) > max) {
+			max = Math.abs((int) mc.getRenderViewEntity().posZ);
+		}
+		
+		return max;
+	}
+	
+	private int getLongestCoordinateText() {
+		return font.getStringWidth("C: -" + getLongestCoordinate());
 	}
 	
 	private String getCoordinatesXText() {
