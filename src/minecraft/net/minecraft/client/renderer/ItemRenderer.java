@@ -31,6 +31,7 @@ import net.optifine.DynamicLights;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.OldAnimations;
 
 import org.lwjgl.opengl.GL11;
 
@@ -53,6 +54,8 @@ public class ItemRenderer
 
     /** The index of the currently held item (0-8, or -1 if not yet updated) */
     private int equippedItemSlot = -1;
+    
+    private final OldAnimations oldAnimationsMod = ModInstances.getOldAnimationsMod();
 
     public ItemRenderer(Minecraft mcIn)
     {
@@ -277,20 +280,17 @@ public class ItemRenderer
      * @param equipProgress The progress of the animation to equip (raise from out of frame) while switching held items.
      * @param swingProgress The progress of the arm swing animation.
      */
-    private void transformFirstPersonItem(float equipProgress, float swingProgress)
-    {
-		boolean isOldAnimationsModEnabled = ModInstances.getOldAnimationsMod().isEnabled();
-		
-		if (isOldAnimationsModEnabled && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+    private void transformFirstPersonItem(float equipProgress, float swingProgress) {
+		if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isOldBowEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
 			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
 		}
 
-		if (isOldAnimationsModEnabled && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
+		if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isOldFishingRodEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
 			GlStateManager.translate(0.08f, -0.027f, -0.33f);
 			GlStateManager.scale(0.93f, 1.0f, 1.0f);
 		}
 
-		if (isOldAnimationsModEnabled && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.isSwingInProgress && this.mc.thePlayer.getCurrentEquippedItem() != null && !this.mc.thePlayer.isEating() && !this.mc.thePlayer.isBlocking()) {
+		if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.isSwingInProgress && this.mc.thePlayer.getCurrentEquippedItem() != null && !this.mc.thePlayer.isEating() && !this.mc.thePlayer.isBlocking()) {
 			GlStateManager.scale(0.85f, 0.85f, 0.85f);
 			GlStateManager.translate(-0.078f, 0.003f, 0.05f);
 		}
@@ -374,31 +374,42 @@ public class ItemRenderer
                     switch (enumaction)
                     {
                         case NONE:
-                            this.transformFirstPersonItem(f, 0.0F);
+                        	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
+                                this.transformFirstPersonItem(f, f1);
+                        	} else {
+                                this.transformFirstPersonItem(f, 0.0F);
+                        	}
                             break;
 
                         case EAT:
                         case DRINK:
-                            this.func_178104_a(abstractclientplayer, partialTicks);
-                            this.transformFirstPersonItem(f, 0.0F);
+                            if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
+                            	this.func_178104_a(abstractclientplayer, partialTicks);
+                                this.transformFirstPersonItem(f, f1);
+                        	} else {
+                        		this.func_178104_a(abstractclientplayer, partialTicks);
+                                this.transformFirstPersonItem(f, 0.0F);
+                        	}
                             break;
 
                         case BLOCK:
-                        	{
-                        		if (ModInstances.getOldAnimationsMod().isEnabled()) {
-                        			this.transformFirstPersonItem(0.2F, f1);
-                                    this.func_178103_d();
-                                    GlStateManager.translate(-0.5F, 0.2F, 0.0F);
-                        		} else {
-                        			this.transformFirstPersonItem(f, 0.0F);
-                                    this.func_178103_d();
-                        		}
+                        	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
+                        		this.transformFirstPersonItem(f, f1);
+                                this.func_178103_d();
+                        	} else {
+                        		this.transformFirstPersonItem(f, 0.0F);
+                                this.func_178103_d();
                         	}
                             break;
 
                         case BOW:
-                            this.transformFirstPersonItem(f, 0.0F);
-                            this.func_178098_a(partialTicks, abstractclientplayer);
+                        	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled()) {
+                                this.transformFirstPersonItem(f, f1);
+                                this.func_178098_a(partialTicks, abstractclientplayer);
+                        	} else {
+                                this.transformFirstPersonItem(f, 0.0F);
+                                this.func_178098_a(partialTicks, abstractclientplayer);
+                        	}
                     }
                 }
                 else

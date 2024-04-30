@@ -23,9 +23,11 @@ public class GuiOldAnimations extends GuiScreen {
         this.buttonList.clear();
         
         int i = -16;
-        int j = 75;
  
-        this.buttonList.add(new GuiButton(1, this.width / 2 - j, this.height / 4 + 24 + i, 150, 20, I18n.format(mod.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled", new Object[0])));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isOldFishingRodEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Old Fishing Rod", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isOldBowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Old Bow", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isBlockHitEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Block Hit", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -39,6 +41,18 @@ public class GuiOldAnimations extends GuiScreen {
             	break;
             case 1:
             	mod.setEnabled(!mod.isEnabled());
+            	this.initGui();
+                break;
+            case 2:
+            	mod.setOldFishingRod(!mod.isOldFishingRodEnabled());
+            	this.initGui();
+                break;
+            case 3:
+            	mod.setOldBow(!mod.isOldBowEnabled());
+            	this.initGui();
+                break;
+            case 4:
+            	mod.setBlockHit(!mod.isBlockHitEnabled());
             	this.initGui();
                 break;
         }

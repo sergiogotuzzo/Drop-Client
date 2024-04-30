@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -44,6 +45,7 @@ import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.OldAnimations;
 
 public class GuiIngame extends Gui
 {
@@ -93,6 +95,8 @@ public class GuiIngame extends Gui
 
     /** Used with updateCounter to make the heart bar flash */
     private long healthUpdateCounter = 0L;
+    
+    private final OldAnimations oldAnimationsMod = ModInstances.getOldAnimationsMod();
 
     public GuiIngame(Minecraft mcIn)
     {
@@ -353,6 +357,10 @@ public class GuiIngame extends Gui
 
     protected void renderTooltip(ScaledResolution sr, float partialTicks)
     {
+    	if (oldAnimationsMod.isEnabled() && oldAnimationsMod.isBlockHitEnabled() && this.mc.thePlayer.getHeldItem() != null) {
+			this.attemptSwing();
+		}
+    	
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer)
         {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -381,6 +389,25 @@ public class GuiIngame extends Gui
             GlStateManager.disableBlend();
         }
     }
+    
+    private void attemptSwing() {
+		if (this.mc.thePlayer.getItemInUseCount() > 0) {
+			final boolean mouseDown = this.mc.gameSettings.keyBindAttack.isKeyDown() && this.mc.gameSettings.keyBindUseItem.isKeyDown();
+			
+			if (mouseDown && this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+				this.swingItem(this.mc.thePlayer);
+			}
+		}
+	}
+
+	private void swingItem(EntityPlayerSP entityplayersp) {
+		final int swingAnimationEnd = entityplayersp.isPotionActive(Potion.digSpeed) ? (6 - (1 + entityplayersp.getActivePotionEffect(Potion.digSpeed).getAmplifier()) * 1) : (entityplayersp.isPotionActive(Potion.digSlowdown) ? (6 + (1 + entityplayersp.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2) : 6);
+		
+		if (!entityplayersp.isSwingInProgress || entityplayersp.swingProgressInt >= swingAnimationEnd / 2 || entityplayersp.swingProgressInt < 0) {
+			entityplayersp.swingProgressInt = -1;
+			entityplayersp.isSwingInProgress = true;
+		}
+	}
 
     public void renderHorseJumpBar(ScaledResolution p_175186_1_, int p_175186_2_)
     {
@@ -629,7 +656,7 @@ public class GuiIngame extends Gui
     }
 
     private void renderPlayerStats(ScaledResolution p_180477_1_)
-    {
+    {	
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer)
         {
             EntityPlayer entityplayer = (EntityPlayer)this.mc.getRenderViewEntity();
