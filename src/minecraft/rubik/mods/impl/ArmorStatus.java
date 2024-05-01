@@ -28,7 +28,7 @@ public class ArmorStatus extends ModDraggable {
 		}
 	}
 	
-	private boolean showCurrentItem = false;
+	private boolean showEquippedItem = false;
 	private boolean right = false;
 	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
 	private boolean dynamicColors = true;
@@ -44,7 +44,7 @@ public class ArmorStatus extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return showCurrentItem ? ITEM_HEIGHT * 5 : ITEM_HEIGHT * 4;
+		return showEquippedItem ? ITEM_HEIGHT * 5 : ITEM_HEIGHT * 4;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class ArmorStatus extends ModDraggable {
 		for (int i = 0; i < mc.thePlayer.inventory.armorInventory.length; i++) {
 			ItemStack itemStack = mc.thePlayer.inventory.armorInventory[i];
 			
-			if (showCurrentItem) {
+			if (showEquippedItem) {
 				if (mc.thePlayer.inventory.getCurrentItem() == null) {
 					renderItemStack(pos, i, itemStack);
 				} else {
@@ -67,7 +67,7 @@ public class ArmorStatus extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (showCurrentItem) {
+		if (showEquippedItem) {
 			renderItemStack(pos, 4, new ItemStack(Items.diamond_helmet));
 			renderItemStack(pos, 3, new ItemStack(Items.diamond_chestplate));
 			renderItemStack(pos, 2, new ItemStack(Items.diamond_leggings));
@@ -172,12 +172,12 @@ public class ArmorStatus extends ModDraggable {
 		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 	}
 	
-	public void setShowCurrentItem(boolean enabled) {
-		showCurrentItem = enabled;
+	public void setShowEquippedItem(boolean enabled) {
+		showEquippedItem = enabled;
 	}
 	
-	public boolean isShowCurrentItemEnabled() {
-		return showCurrentItem;
+	public boolean isShowEquippedItemEnabled() {
+		return showEquippedItem;
 	}
 	
 	public void setRight(boolean enabled) {
