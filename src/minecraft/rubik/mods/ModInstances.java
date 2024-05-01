@@ -2,7 +2,6 @@ package rubik.mods;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import rubik.FileManager;
 import rubik.gui.GuiModPositioning;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.ScreenPosition;
@@ -45,6 +44,8 @@ public class ModInstances {
 		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
+		
+		resetModSettings();
 	}
 	
 	public static void resetModSettings() {
