@@ -625,7 +625,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Rubik Client (1.8.9)");
+        Display.setTitle("Rubik Client (1.8.9-" + Client.version + ")");
 
         try
         {

@@ -11,6 +11,8 @@ import rubik.mods.ModInstances;
 import rubik.mods.impl.Fullbright;
 
 public class Client {
+	public static final String version = "eb89813/alpha";
+	
 	private static final Client client = new Client();
 	
 	public static final Client getInstance() {
