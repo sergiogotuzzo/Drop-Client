@@ -27,6 +27,7 @@ public class GuiChat extends GuiScreen {
  
         this.buttonList.add(new GuiButton(1, this.width / 2 - j, this.height / 4 + 24 + i, 150, 20, I18n.format(mod.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 - j, this.height / 4 + 48 + i, 150, 20, I18n.format((mod.isTransparentBackgroundEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Transparent Background", new Object[0])));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - j, this.height / 4 + 72 + i, 150, 20, I18n.format((mod.isTextShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
@@ -44,6 +45,10 @@ public class GuiChat extends GuiScreen {
                 break;
             case 2:
             	mod.setTransparentBackground(!mod.isTransparentBackgroundEnabled());
+            	this.initGui();
+            	break;
+            case 3:
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
         }

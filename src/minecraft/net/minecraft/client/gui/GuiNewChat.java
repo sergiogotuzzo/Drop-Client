@@ -99,7 +99,13 @@ public class GuiNewChat extends Gui
                                 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
-                                this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
+                                
+                                if (chatMod.isEnabled() && !chatMod.isTextShadowEnabled()) {
+                                	this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24), false);
+                                } else {
+                                	this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
+                                }
+                                
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
                             }
