@@ -42,7 +42,7 @@ public class CoordinatesDisplay extends ModDraggable {
 					);
 		}
 		
-		final int i = showBiome ? padding / 4 : padding / 3;
+		final int i = 4;
 		final int j = padding / 2;
 		
 		if (textShadow) {
