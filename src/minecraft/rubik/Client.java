@@ -15,16 +15,7 @@ public class Client {
 	
 	private static final Client client = new Client();
 	
-	public static final Client getInstance() {
-		return client;
-	}
-	
 	private DiscordRP discordRichPresence = new DiscordRP();
-	
-	public DiscordRP getDiscordRichPresence() {
-		return discordRichPresence;
-	}
-	
 	private HUDManager hudManager;
 	private Minecraft mc = Minecraft.getMinecraft();
 	
@@ -55,5 +46,13 @@ public class Client {
 			
 			mod.setEnabled(!mod.isEnabled());
 		}
+	}
+	
+	public static final Client getInstance() {
+		return client;
+	}
+	
+	public DiscordRP getDiscordRichPresence() {
+		return discordRichPresence;
 	}
 }
