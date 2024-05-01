@@ -35,22 +35,21 @@ public class ToggleSprintSneak extends ModDraggable {
 	public void render(ScreenPosition pos) {
 	    textToRender = mc.thePlayer.movementInput.getDisplayText();
 	    
-	    int xPosition;
-	    
+	    int positionX;
 	    double maxRelativeX = 1;
 	    
 	    if (pos.getRelativeX() < (maxRelativeX / (3 * 3))) {
-	        xPosition = pos.getAbsoluteX() + 3;
+	    	positionX = pos.getAbsoluteX() + 3;
 	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
-	        xPosition = pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2;
+	    	positionX = pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2;
 	    } else {
-	        xPosition = pos.getAbsoluteX() - 1 + getWidth() - font.getStringWidth(textToRender);
+	    	positionX = pos.getAbsoluteX() - 1 + getWidth() - font.getStringWidth(textToRender);
 	    }
 
 	    if (textShadow) {
-	        font.drawStringWithShadow(textToRender, xPosition, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	        font.drawStringWithShadow(textToRender, positionX, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 	    } else {
-	        font.drawString(textToRender, xPosition, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	        font.drawString(textToRender, positionX, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
 	    }
 	}
 	
