@@ -23,12 +23,12 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth("[Sprinting (Vanilla)]") + 4;
+		return font.getStringWidth("[Sprinting (Vanilla)]");
 	}
 
 	@Override
 	public int getHeight() {
-		return font.FONT_HEIGHT + 3;
+		return font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -39,17 +39,17 @@ public class ToggleSprintSneak extends ModDraggable {
 	    double maxRelativeX = 1;
 	    
 	    if (pos.getRelativeX() < (maxRelativeX / (3 * 3))) {
-	    	positionX = pos.getAbsoluteX() + 3;
+	    	positionX = pos.getAbsoluteX();
 	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
-	    	positionX = pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2;
+	    	positionX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2;
 	    } else {
-	    	positionX = pos.getAbsoluteX() - 1 + getWidth() - font.getStringWidth(textToRender);
+	    	positionX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender);
 	    }
 
 	    if (textShadow) {
-	        font.drawStringWithShadow(textToRender, positionX, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	        font.drawStringWithShadow(textToRender, positionX + 1, pos.getAbsoluteY() + 1, color.getRGB());
 	    } else {
-	        font.drawString(textToRender, positionX, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	        font.drawString(textToRender, positionX + 1, pos.getAbsoluteY() + 1, color.getRGB());
 	    }
 	}
 	
@@ -58,9 +58,9 @@ public class ToggleSprintSneak extends ModDraggable {
 		textToRender = "[Sprinting (Vanilla)]";
 
 	    if (textShadow) {
-	        font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	        font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 	    } else {
-	        font.drawString(textToRender, pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
+	        font.drawString(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
 	    }
 	}
 	
