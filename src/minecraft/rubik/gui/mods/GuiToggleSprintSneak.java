@@ -55,7 +55,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
             	this.initGui();
             	break;
             case 3:
-            	mod.setFlyBoostFactor(sliderFlyBoost.func_175217_d() * 8.0F);
+            	mod.setFlyBoostFactor((float) Math.round(sliderFlyBoost.func_175217_d() * 8.0F));
             	break;
             case 4:
             	mod.setToggleSprint(!mod.isToggleSprintEnabled());
@@ -77,7 +77,7 @@ public class GuiToggleSprintSneak extends GuiScreen {
     
     @Override
     public void mouseClickMove(final int mouseX, final int mouseY, final int clickedMouseButton, final long timeSinceLastClick) {
-    	mod.setFlyBoostFactor(sliderFlyBoost.func_175217_d() * 8.0F);
+    	mod.setFlyBoostFactor((float) Math.round(sliderFlyBoost.func_175217_d() * 8.0F));
     }
 
     @Override
