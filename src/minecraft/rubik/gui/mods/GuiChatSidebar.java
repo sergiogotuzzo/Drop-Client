@@ -8,12 +8,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Chat;
-import rubik.mods.impl.Scoreboard;
+import rubik.mods.impl.Sidebar;
 
 public class GuiChatSidebar extends GuiScreen {
 	private final GuiScreen previousGuiScreen;
 	private Chat chatMod = ModInstances.getChatMod();
-	private Scoreboard sidebarMod = ModInstances.getScoreboardMod();
+	private Sidebar sidebarMod = ModInstances.getSidebarMod();
 	
 	public GuiChatSidebar(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;

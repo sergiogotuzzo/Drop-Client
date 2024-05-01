@@ -18,7 +18,7 @@ import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
-import rubik.mods.impl.Scoreboard;
+import rubik.mods.impl.Sidebar;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -32,7 +32,7 @@ public class ModInstances {
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
-	private static Scoreboard scoreboardMod = new Scoreboard();
+	private static Sidebar sidebarMod = new Sidebar();
 	private static Chat chatMod = new Chat();
 	
 	public static void register(HUDManager manager) {
@@ -71,7 +71,7 @@ public class ModInstances {
 		
 		// OTHER
 		coordinatesDisplayMod.setEnabled(false);
-		scoreboardMod.setHideNumbers(true);
+		sidebarMod.setHideNumbers(true);
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -118,8 +118,8 @@ public class ModInstances {
 		return oldAnimationsMod;
 	}
 	
-	public static Scoreboard getScoreboardMod() {
-		return scoreboardMod;
+	public static Sidebar getSidebarMod() {
+		return sidebarMod;
 	}
 	
 	public static Chat getChatMod() {

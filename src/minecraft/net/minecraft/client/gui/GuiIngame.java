@@ -46,6 +46,7 @@ import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.OldAnimations;
+import rubik.mods.impl.Sidebar;
 
 public class GuiIngame extends Gui
 {
@@ -97,6 +98,7 @@ public class GuiIngame extends Gui
     private long healthUpdateCounter = 0L;
     
     private final OldAnimations oldAnimationsMod = ModInstances.getOldAnimationsMod();
+    private final Sidebar sidebarMod = ModInstances.getSidebarMod();
 
     public GuiIngame(Minecraft mcIn)
     {
@@ -572,7 +574,7 @@ public class GuiIngame extends Gui
 
     private void renderScoreboard(ScoreObjective p_180475_1_, ScaledResolution p_180475_2_)
     {
-    	if (!ModInstances.getScoreboardMod().isEnabled()) {
+    	if (!sidebarMod.isEnabled()) {
     		return;
     	}
     	
@@ -619,20 +621,20 @@ public class GuiIngame extends Gui
             int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
             int l = p_180475_2_.getScaledWidth() - k1 + 2;
             
-            if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
+            if (sidebarMod.isShowBackgroundEnabled()) {
             	drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1342177280);
             }
             
-            if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
+            if (sidebarMod.isTextShadowEnabled()) {
             	this.getFontRenderer().drawStringWithShadow(s1, l1, k, 553648127);
             	
-            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
+            	if (!sidebarMod.isHideNumbersEnabled()) {
                 	this.getFontRenderer().drawStringWithShadow(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
                 }
             } else {
             	this.getFontRenderer().drawString(s1, l1, k, 553648127);
             	
-            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
+            	if (!sidebarMod.isHideNumbersEnabled()) {
                 	this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
                 }
             }
@@ -641,12 +643,12 @@ public class GuiIngame extends Gui
             {
                 String s3 = p_180475_1_.getDisplayName();
                 
-                if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
+                if (sidebarMod.isShowBackgroundEnabled()) {
                 	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
                     drawRect(l1 - 2, k - 1, l, k, 1342177280);
                 }
                 
-                if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
+                if (sidebarMod.isTextShadowEnabled()) {
                 	this.getFontRenderer().drawStringWithShadow(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
                 } else {
                 	this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);

@@ -2,7 +2,7 @@ package rubik.mods.impl;
 
 import rubik.mods.Mod;
 
-public class Scoreboard extends Mod {
+public class Sidebar extends Mod {
 	private boolean hideNumbers = false;
 	private boolean textShadow = false;
 	private boolean showBackground = true;
