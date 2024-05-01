@@ -12,6 +12,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.Chat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,8 @@ public class GuiNewChat extends Gui
     private final List<ChatLine> field_146253_i = Lists.<ChatLine>newArrayList();
     private int scrollPos;
     private boolean isScrolled;
+    
+    private final Chat chatMod = ModInstances.getChatMod();
 
     public GuiNewChat(Minecraft mcIn)
     {
@@ -86,7 +89,7 @@ public class GuiNewChat extends Gui
                                 
                                 int backgroundColor;
                                 
-                                if (ModInstances.getChatMod().isTransparentBackgroundEnabled()) {
+                                if (chatMod.isEnabled() && chatMod.isTransparentBackgroundEnabled()) {
                                 	backgroundColor = new Color(0, 0, 0 ,0).getRGB();
                                 } else {
                                 	backgroundColor = l1 / 2 << 24;
