@@ -27,6 +27,8 @@ public class Client {
 	private Minecraft mc = Minecraft.getMinecraft();
 	
 	public void init() {
+		FileManager.init();
+		
 		discordRichPresence.start();
 		
 		EventManager.register(this);
