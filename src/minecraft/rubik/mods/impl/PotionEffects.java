@@ -43,28 +43,28 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
-        int yOffset = 0;
+        int offsetY = 0;
 
         for (int i = 0; i < mc.thePlayer.getActivePotionEffects().size(); i++) {
             PotionEffect potionEffect = (PotionEffect) mc.thePlayer.getActivePotionEffects().toArray()[i];
 
-            renderPotionEffect(pos, yOffset, potionEffect);
+            renderPotionEffect(pos, offsetY, potionEffect);
             
-            yOffset += EFFECT_HEIGHT;
+            offsetY += EFFECT_HEIGHT;
         }
     }
 
     @Override
     public void renderDummy(ScreenPosition pos) {
         if (mc.thePlayer.getActivePotionEffects().size() == 0) {
-        	int yOffset = 0;
+        	int offsetY = 0;
 
             for (int i = 0; i < dummyPotionEffects.size(); i++) {
                 PotionEffect potionEffect = (PotionEffect) dummyPotionEffects.toArray()[i];
 
-                renderPotionEffect(pos, yOffset, potionEffect);
+                renderPotionEffect(pos, offsetY, potionEffect);
                 
-                yOffset += EFFECT_HEIGHT;
+                offsetY += EFFECT_HEIGHT;
             }
         } else {
         	render(pos);
@@ -92,7 +92,7 @@ public class PotionEffects extends ModDraggable {
         return getPotionName(longestEffect);
     }
 
-    private void renderPotionEffect(ScreenPosition pos, int yOffset, PotionEffect pe) {
+    private void renderPotionEffect(ScreenPosition pos, int offsetY, PotionEffect pe) {
         if (pe == null) {
             return;
         }
@@ -106,7 +106,7 @@ public class PotionEffects extends ModDraggable {
             
             int iconIndex = potion.getStatusIconIndex();
               
-            drawTexturedModalRect(pos.getAbsoluteX(), pos.getAbsoluteY() + yOffset + i, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+            drawTexturedModalRect(pos.getAbsoluteX(), pos.getAbsoluteY() + offsetY + i, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
 
         String potionName = getPotionName(pe);
@@ -114,23 +114,23 @@ public class PotionEffects extends ModDraggable {
 
         if (textShadow) {
         	if (showTime) {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + i, color.getRGB());
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + offsetY + i, color.getRGB());
 
                 if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + i, color.getRGB());
+                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, color.getRGB());
                 }
         	} else {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT - i, color.getRGB());
+        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, color.getRGB());
         	}
         } else {
             if (showTime) {
-            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + i, color.getRGB());
+            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + offsetY + i, color.getRGB());
 
                 if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawString(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT + i, color.getRGB());
+                    font.drawString(durationString, pos.getAbsoluteX() + j, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, color.getRGB());
                 }
             } else {
-            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + yOffset + font.FONT_HEIGHT - i, color.getRGB());
+            	font.drawString(potionName, pos.getAbsoluteX() + j, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, color.getRGB());
             }
         }
     }
