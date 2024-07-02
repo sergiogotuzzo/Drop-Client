@@ -10,13 +10,12 @@ import java.util.function.Predicate;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.IRenderer;
 import rubik.gui.hud.ScreenPosition;
 
-public class GuiModPositioning extends GuiScreen {
+public class GuiModPositioning extends GuiRubikClientScreen {
 	private final HashMap<IRenderer, ScreenPosition> renderers = new HashMap<IRenderer, ScreenPosition>();
 	
 	private Optional<IRenderer> selectedRenderer = Optional.empty();
@@ -24,8 +23,8 @@ public class GuiModPositioning extends GuiScreen {
 	private int prevX;
 	private int prevY;
 	
-	private static final int marginX = 2;
-	private static final int marginY = 2;
+	public static final int marginX = 2;
+	public static final int marginY = 2;
 	
 	public GuiModPositioning(HUDManager manager) {
 		Collection<IRenderer> registeredRenderers = manager.getRegisteredRenderers();
@@ -49,41 +48,37 @@ public class GuiModPositioning extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-	    super.drawDefaultBackground();
+	    this.drawDefaultBackground();
 
 	    final float zBackup = this.zLevel;
 	    
-	    this.zLevel = 200;
-
-	    drawHollowRect(marginX, marginY, this.width - marginX * 2 - 1, this.height - marginY * 2 - 1, Color.MAGENTA.getRGB());
+	    this.zLevel = 200.0F;
 	    
 	    for (IRenderer renderer : renderers.keySet()) {
 	        ScreenPosition pos = renderers.get(renderer);
 	        
 	        renderer.renderDummy(pos);
-	        
-	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), Color.GRAY.getRGB());
-	        drawFillRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), new Color(255, 255, 255, 40).getRGB());
 	    }
 	    
 	    if (selectedRenderer.isPresent()) {
+	    	drawHollowRect(marginX, marginY, this.width - marginX * 2 - 1, this.height - marginY * 2 - 1, Color.CYAN.getRGB());
+	    	
 	    	ScreenPosition pos = renderers.get(selectedRenderer.get());
+	    	
+	    	int gap = 3;
 	        
-	        drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth(), selectedRenderer.get().getHeight(), Color.MAGENTA.getRGB());
+	    	if ((pos.getAbsoluteX() + selectedRenderer.get().getWidth()) >= this.width / 2 - gap && pos.getAbsoluteX() <= this.width / 2 + gap) {
+	    		drawVerticalLine(this.width / 2, 0 + marginY, this.height - marginY, Color.CYAN.getRGB());
+	    	}
+	        
+	    	if ((pos.getAbsoluteY() + selectedRenderer.get().getHeight()) >= this.height / 2 - gap && pos.getAbsoluteY() <= this.height / 2 + gap) {
+	    		drawHorizontalLine(0 + marginX, this.width - marginX - 1, this.height / 2, Color.CYAN.getRGB());
+	    	}
+	        
+	    	drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth(), selectedRenderer.get().getHeight(), Color.MAGENTA.getRGB());
 	    }
 
 	    this.zLevel = zBackup;
-	}
-
-	private void drawHollowRect(int x, int y, int width, int height, int color) {
-		this.drawHorizontalLine(x, x + width, y, color);
-		this.drawHorizontalLine(x, x + width, y + height, color);
-		this.drawVerticalLine(x, y + height, y, color);
-		this.drawVerticalLine(x + width, y + height, y, color);
-	}
-	
-	private void drawFillRect(int x, int y, int width, int height, int color) {
-		drawRect(x, y, x + width, y + height, color);
 	}
 	
 	@Override
@@ -98,6 +93,14 @@ public class GuiModPositioning extends GuiScreen {
 	}
 	
 	@Override
+	protected void mouseClicked(int x, int y, int mouseButton) throws IOException {
+		this.prevX = x;
+		this.prevY = y;
+		
+		loadMouseOver(x, y);
+	}
+	
+	@Override
 	protected void mouseClickMove(int x, int y, int button, long time) {
 		if (selectedRenderer.isPresent()) {
 			moveSelectedRenderBy(x - prevX, y - prevY);
@@ -105,15 +108,6 @@ public class GuiModPositioning extends GuiScreen {
 		
 		this.prevX = x;
 		this.prevY = y;
-	}
-
-	private void moveSelectedRenderBy(int offsetX, int offsetY) {
-		IRenderer renderer = selectedRenderer.get();
-		ScreenPosition pos = renderers.get(renderer);
-		
-		pos.setAbsolute(pos.getAbsoluteX() + offsetX, pos.getAbsoluteY() + offsetY);
-		
-		adjustBounds(renderer, pos);
 	}
 
 	@Override
@@ -139,17 +133,14 @@ public class GuiModPositioning extends GuiScreen {
 		
 		pos.setAbsolute(absoluteX, absoluteY);
 	}
-	
-	@Override
-	protected void mouseClicked(int x, int y, int mouseButton) throws IOException {
-		this.prevX = x;
-		this.prevY = y;
-		
-		loadMouseOver(x, y);
-	}
 
-	private void loadMouseOver(int x, int y) {
-		selectedRenderer = renderers.keySet().stream().filter(renderer -> isMouseOver(renderer, x, y)).findFirst();
+	private void moveSelectedRenderBy(int offsetX, int offsetY) {
+		IRenderer renderer = selectedRenderer.get();
+		ScreenPosition pos = renderers.get(renderer);
+		
+		pos.setAbsolute(pos.getAbsoluteX() + offsetX, pos.getAbsoluteY() + offsetY);
+		
+		adjustBounds(renderer, pos);
 	}
 	
 	private boolean isMouseOver(IRenderer renderer, int mouseX, int mouseY) {
@@ -160,12 +151,8 @@ public class GuiModPositioning extends GuiScreen {
 	    
 	    return (mouseX >= absoluteX && mouseX <= absoluteX + renderer.getWidth()) && (mouseY >= absoluteY && mouseY <= absoluteY + renderer.getHeight());
 	}
-	
-	public static int getMarginX() {
-		return marginX;
-	}
-	
-	public static int getMarginY() {
-		return marginY;
+
+	private void loadMouseOver(int x, int y) {
+		selectedRenderer = renderers.keySet().stream().filter(renderer -> isMouseOver(renderer, x, y)).findFirst();
 	}
 }

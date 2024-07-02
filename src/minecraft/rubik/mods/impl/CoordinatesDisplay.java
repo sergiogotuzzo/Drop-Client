@@ -2,9 +2,7 @@ package rubik.mods.impl;
 
 import java.awt.Color;
 
-import net.minecraft.client.gui.Gui;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.chunk.Chunk;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
@@ -13,12 +11,24 @@ import rubik.mods.ModDraggable;
 public class CoordinatesDisplay extends ModDraggable {
 	private boolean showBackground = true;
 	private boolean textShadow = true;
-	private ColorManager color = new ColorManager(Color.WHITE);
+	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean showBiome = true;
 	private boolean showTowards = true;
+	private ColorManager backgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
+	private boolean textChroma = false;
 	
 	private final int padding = 12;
 	private final int gap = 10;
+	
+	public CoordinatesDisplay() {
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
+		setShowBiome((boolean) getFromFile("showBiome", showBiome));
+		setShowTowards((boolean) getFromFile("showTowards", showTowards));
+		setBackgroundColor((int) ((long) getFromFile("backgroundColor", backgroundColor.getRGB())));
+		setTextChroma((boolean) getFromFile("textChroma", textChroma));
+	}
 	
 	@Override
 	public int getWidth() {
@@ -33,46 +43,30 @@ public class CoordinatesDisplay extends ModDraggable {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			Gui.drawRect(
+			drawRect(
 					pos.getAbsoluteX(),
 					pos.getAbsoluteY(),
 					pos.getAbsoluteX() + getWidth(),
 					pos.getAbsoluteY() + getHeight(),
-					new Color(0, 0, 0, 102).getRGB()
+					backgroundColor.getRGB()
 					);
 		}
 		
 		final int i = 4;
 		final int j = padding / 2;
 		
-		if (textShadow) {
-			font.drawStringWithShadow(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-			font.drawStringWithShadow(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-			font.drawStringWithShadow(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
-			
-			if (showTowards) {
-				font.drawStringWithShadow(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-				font.drawStringWithShadow(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-				font.drawStringWithShadow(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
-			}
-			
-			if (showBiome) {
-				font.drawStringWithShadow(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, color.getRGB());
-			}
-		} else {
-			font.drawString(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-			font.drawString(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-			font.drawString(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
-			
-			if (showTowards) {
-				font.drawString(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(1) + i, color.getRGB());
-				font.drawString(getFacing(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(2) + i, color.getRGB());
-				font.drawString(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - padding, pos.getAbsoluteY() + getLineY(3) + i, color.getRGB());
-			}
-			
-			if (showBiome) {
-				font.drawString(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, color.getRGB());
-			}
+		drawText(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(1) + i, textColor.getRGB(), textShadow, textChroma);
+		drawText(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, textColor.getRGB(), textShadow, textChroma);
+		drawText(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, textColor.getRGB(), textShadow, textChroma);
+		
+		if (showTowards) {
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - padding / 2, pos.getAbsoluteY() + getLineY(1) + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - padding / 2, pos.getAbsoluteY() + getLineY(2) + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - padding / 2, pos.getAbsoluteY() + getLineY(3) + i, textColor.getRGB(), textShadow, textChroma);
+		}
+		
+		if (showBiome) {
+			drawText(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, textColor.getRGB(), textShadow, textChroma);
 		}
 	}
 	
@@ -117,48 +111,89 @@ public class CoordinatesDisplay extends ModDraggable {
 		return "Biome: " + chunk.getBiome(playerPos, mc.theWorld.getWorldChunkManager()).biomeName;
 	}
 	
+	private int getDirectionFacing() {
+        int yaw = (int) mc.getRenderViewEntity().rotationYaw;
+        
+        yaw += 360;
+        yaw += 22;
+        yaw %= 360;
+        
+        return yaw / 45;
+    }
+	
 	private String getFacingTowardsX() {
-        switch (mc.getRenderViewEntity().getHorizontalFacing())
-        {
-            case WEST:
-            	return "-";
-            case EAST:
-            	return "+";
-            default:
-            	return "";
+        switch (getDirectionFacing()) {
+	        case 0:
+	            return "";
+	        case 1:
+	            return "-";
+	        case 2:
+	            return "-";
+	        case 3:
+	        	return "-";
+	        case 4:
+	        	return "";
+	        case 5:
+	        	return "+";
+	        case 6:
+	        	return "+";
+	        case 7:
+	        	return "+";
+	        default:
+	        	return "";
         }
 	}
 
 	private String getFacing() {
-        switch (mc.getRenderViewEntity().getHorizontalFacing())
-        {
-            case NORTH:
+        switch (getDirectionFacing()) {
+            case 0:
+                return "S";
+            case 1:
+                return "SW";
+            case 2:
+                return "W";
+            case 3:
+            	return "NW";
+            case 4:
             	return "N";
-            case SOUTH:
-            	return "S";
-            case WEST:
-            	return "W";
-            case EAST:
+            case 5:
+            	return "NE";
+            case 6:
             	return "E";
+            case 7:
+            	return "SE";
             default:
             	return "/";
         }
 	}
 	
 	private String getFacingTowardsZ() {
-        switch (mc.getRenderViewEntity().getHorizontalFacing())
-        {
-            case NORTH:
-            	return "-";
-            case SOUTH:
-            	return "+";
-            default:
-            	return "";
-        }
+		switch (getDirectionFacing()) {
+	        case 0:
+	            return "+";
+	        case 1:
+	            return "+";
+	        case 2:
+	            return "";
+	        case 3:
+	        	return "-";
+	        case 4:
+	        	return "-";
+	        case 5:
+	        	return "-";
+	        case 6:
+	        	return "";
+	        case 7:
+	        	return "+";
+	        default:
+	        	return "";
+	    }
 	}
 	
 	public void setShowBackground(boolean enabled) {
 		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
 	}
 	
 	public boolean isShowBackgroundEnabled() {
@@ -167,18 +202,28 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	public void setTextShadow(boolean enabled) {
 		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
 	}
 	
 	public boolean isTextShadowEnabled() {
 		return textShadow;
 	}
 	
-	public ColorManager getColor() {
-		return color;
+	public void setTextColor(int rgb) {
+		this.textColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("textColor", rgb);
+	}
+	
+	public ColorManager getTextColor() {
+		return textColor;
 	}
 	
 	public void setShowBiome(boolean enabled) {
 		showBiome = enabled;
+		
+		setToFile("showBiome", enabled);
 	}
 	
 	public boolean isShowBiomeEnabled() {
@@ -187,9 +232,31 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	public void setShowTowards(boolean enabled) {
 		showTowards = enabled;
+		
+		setToFile("showTowards", enabled);
 	}
 	
 	public boolean isShowTowardsEnabled() {
 		return showTowards;
+	}
+	
+	public void setBackgroundColor(int rgb) {
+		this.backgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
+		
+		setToFile("backgroundColor", rgb);
+	}
+	
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
+	}
+	
+	public void setTextChroma(boolean enabled) {
+		this.textChroma = enabled;
+		
+		setToFile("textChroma", enabled);
+	}
+	
+	public boolean isTextChromaEnabled() {
+		return textChroma;
 	}
 }

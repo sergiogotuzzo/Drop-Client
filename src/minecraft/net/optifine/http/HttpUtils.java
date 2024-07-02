@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
+import java.util.Set;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Config;
 
@@ -88,9 +90,8 @@ public class HttpUtils
 
             if (headers != null)
             {
-                for (Object e: headers.keySet())
+                for (String s: (Set<String>)(Set<?>)headers.keySet())
                 {
-                    String s = (String) e;
                     String s1 = "" + headers.get(s);
                     httpurlconnection.setRequestProperty(s, s1);
                 }

@@ -5,40 +5,34 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.EnumChatFormatting;
+import rubik.Client;
 import rubik.gui.GuiModColor;
+import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.CoordinatesDisplay;
 
-public class GuiCoordinatesDisplay extends GuiScreen {
+public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private CoordinatesDisplay mod = ModInstances.getCoordinatesDisplayMod();
+	private final CoordinatesDisplay mod = ModInstances.getCoordinatesDisplayMod();
+	
+	private GuiButton backgroundColorButton;
 	
 	public GuiCoordinatesDisplay(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
-	
-	@Override
-    public void initGui()
-    {
-        this.buttonList.clear();
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
         
-        int i = -16;
- 
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isShowBackgroundEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Background", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isTextShadowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Text Shadow", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("Color", new Object[0])));
-        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isShowBiomeEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Biome", new Object[0])));
-        this.buttonList.add(new GuiButton(6, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format((mod.isShowTowardsEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Show Towards", new Object[0])));
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+        this.drawCenteredString(this.fontRendererObj, "Coordinates Display Settings", this.width / 2, 30, 0xFFFFFFFF);
+
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        switch (button.id)
-        {
+    protected void actionPerformed(GuiButton button) throws IOException {
+        switch (button.id) {
             case 0:
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
@@ -55,7 +49,7 @@ public class GuiCoordinatesDisplay extends GuiScreen {
             	this.initGui();
             	break;
             case 4:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getColor()));
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), this.mod));
             	break;
             case 5:
             	mod.setShowBiome(!mod.isShowBiomeEnabled());
@@ -65,14 +59,33 @@ public class GuiCoordinatesDisplay extends GuiScreen {
             	mod.setShowTowards(!mod.isShowTowardsEnabled());
             	this.initGui();
             	break;
+            case 7:
+            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getBackgroundColor(), this.mod));
+            	break;
+            case 8:
+            	mod.setTextChroma(!mod.isTextChromaEnabled());
+            	this.initGui();
+            	break;
         }
     }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
-        this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Coordinates Display Settings", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
-        super.drawScreen(mouseX, mouseY, partialTicks);
+	
+	@Override
+    public void initGui() {
+        this.buttonList.clear();
+        
+        int i = -12;
+        int j = -155;
+        
+        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, mod.isEnabled() ? "Enabled" : "Disabled"));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Text Color"));
+        this.buttonList.add(new GuiButton(5, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Show Biome: " + (mod.isShowBiomeEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Show Towards: " + (mod.isShowTowardsEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(backgroundColorButton = new GuiButton(7, this.width / 2 + j, this.height / 6 + i + 96, 150, 20, "Background Color"));
+        this.buttonList.add(new GuiButton(8, this.width / 2 + j + 160, this.height / 6 + i + 96, 150, 20, "Text Chroma: " + (mod.isTextChromaEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+        
+        backgroundColorButton.enabled = mod.isShowBackgroundEnabled();
     }
 }

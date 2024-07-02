@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 import net.minecraft.src.Config;
 import net.minecraft.util.ResourceLocation;
 
@@ -35,6 +36,7 @@ public class FontUtils
 
                 Config.log("Loading " + s2);
                 properties.load(inputstream);
+                inputstream.close();
             }
             catch (FileNotFoundException var7)
             {
@@ -51,9 +53,8 @@ public class FontUtils
 
     public static void readCustomCharWidths(Properties props, float[] charWidth)
     {
-        for (Object e : props.keySet())
+        for (String s: (Iterable<String>)(Iterable<?>)props.keySet())
         {
-            String s = (String) e;
             String s1 = "width.";
 
             if (s.startsWith(s1))

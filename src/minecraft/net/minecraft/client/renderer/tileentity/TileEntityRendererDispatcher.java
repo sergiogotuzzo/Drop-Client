@@ -1,7 +1,9 @@
 package net.minecraft.client.renderer.tileentity;
 
-import com.google.common.collect.Maps;
 import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -86,7 +88,7 @@ public class TileEntityRendererDispatcher
             this.mapSpecialRenderers.put(teClass, tileentityspecialrenderer);
         }
 
-        return (TileEntitySpecialRenderer<T>) tileentityspecialrenderer;
+        return (TileEntitySpecialRenderer<T>)tileentityspecialrenderer;
     }
 
     public <T extends TileEntity> TileEntitySpecialRenderer<T> getSpecialRenderer(TileEntity tileEntityIn)
@@ -211,7 +213,7 @@ public class TileEntityRendererDispatcher
 
     public void preDrawBatch()
     {
-        this.batchBuffer.getWorldRenderer().func_181668_a(7, DefaultVertexFormats.BLOCK);
+        this.batchBuffer.getWorldRenderer().begin(7, DefaultVertexFormats.BLOCK);
         this.drawingBatch = true;
     }
 
@@ -234,7 +236,7 @@ public class TileEntityRendererDispatcher
 
         if (p_drawBatch_1_ > 0)
         {
-            this.batchBuffer.getWorldRenderer().func_181674_a((float)staticPlayerX, (float)staticPlayerY, (float)staticPlayerZ);
+            this.batchBuffer.getWorldRenderer().sortVertexData((float)staticPlayerX, (float)staticPlayerY, (float)staticPlayerZ);
         }
 
         this.batchBuffer.draw();

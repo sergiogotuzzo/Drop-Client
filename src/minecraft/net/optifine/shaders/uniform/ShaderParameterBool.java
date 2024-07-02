@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.optifine.expr.ExpressionType;
 import net.optifine.expr.IExpressionBool;
 
 public enum ShaderParameterBool implements IExpressionBool
@@ -12,7 +11,6 @@ public enum ShaderParameterBool implements IExpressionBool
     IS_ALIVE("is_alive"),
     IS_BURNING("is_burning"),
     IS_CHILD("is_child"),
-    IS_GLOWING("is_glowing"),
     IS_HURT("is_hurt"),
     IS_IN_LAVA("is_in_lava"),
     IS_IN_WATER("is_in_water"),
@@ -37,11 +35,6 @@ public enum ShaderParameterBool implements IExpressionBool
     public String getName()
     {
         return this.name;
-    }
-
-    public ExpressionType getExpressionType()
-    {
-        return ExpressionType.BOOL;
     }
 
     public boolean eval()

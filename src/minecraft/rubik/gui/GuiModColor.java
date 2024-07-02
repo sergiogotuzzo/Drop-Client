@@ -6,26 +6,83 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import rubik.Client;
 import rubik.ColorManager;
 import rubik.gui.GuiSlider;
+import rubik.mods.Mod;
 
-public class GuiModColor extends GuiScreen {
+public class GuiModColor extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private ColorManager color;
+	private final ColorManager color;
+	private final Mod mod;
+    private final String key;
 	
 	private GuiSlider sliderRed;
     private GuiSlider sliderGreen;
     private GuiSlider sliderBlue;
-    private GuiSlider sliderAlpha;
 	
-	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color) {
-		this.previousGuiScreen = previousGuiScreen;
-		this.color = color;
+	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod) {
+		this(previousGuiScreen, color, mod, "textColor");
 	}
 	
+	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String key) {
+		this.previousGuiScreen = previousGuiScreen;
+		this.color = color;
+		this.mod = mod;
+		this.key = key;
+	}
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        
+        this.drawCenteredString(this.fontRendererObj, "Customize Mod Color", this.width / 2, 40, 0xFFFFFFFF);
+        
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        
+        int rectLeft = this.width / 2 - 75;
+        int rectTop = this.height / 4 + 80;
+        int rectWidth = 150 - 1;
+        int rectHeight = 20 - 1;
+        
+        drawRect(rectLeft, rectTop, rectLeft + rectWidth, rectTop + rectHeight, color.getRGB());
+        drawHollowRect(rectLeft, rectTop, rectWidth, rectHeight, Color.BLACK.getRGB());
+        
+        this.fontRendererObj.drawStringWithShadow("Current Color", (rectLeft + (rectWidth - this.fontRendererObj.getStringWidth("Current Color")) / 2) + 1, (rectTop + (rectHeight - this.fontRendererObj.FONT_HEIGHT) / 2) + 1, Color.WHITE.getRGB());
+    }
+    
+    @Override
+    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+    	color.setRed((int) (sliderRed.func_175217_d() * 255.0F));
+    	color.setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
+    	color.setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
+    	
+    	mod.setToFile(key, color.getRGB());
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException {
+        switch (button.id) {
+            case 0:
+            	this.mc.displayGuiScreen(this.previousGuiScreen);
+            	break;
+            case 1:
+            	color.setRed((int) (sliderRed.func_175217_d() * 255.0F));
+            	mod.setToFile(key, color.getRGB());
+            	break;
+            case 2:
+            	color.setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
+            	mod.setToFile(key, color.getRGB());
+            	break;
+            case 3:
+            	color.setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
+            	mod.setToFile(key, color.getRGB());
+            	break;
+        }
+    }
+	
 	@Override
-    public void initGui()
-    {
+    public void initGui() {
         this.buttonList.clear();
         
         int i = -16;
@@ -36,55 +93,4 @@ public class GuiModColor extends GuiScreen {
         this.buttonList.add(sliderBlue = new GuiSlider(3, this.width / 2 - j, this.height / 4 + 72 + i, 150, 20, "Blue", 0, 255, color.getBlue()));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
-
-    @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        switch (button.id)
-        {
-            case 0:
-            	this.mc.displayGuiScreen(this.previousGuiScreen);
-            	break;
-            case 1:
-            	color.setRed((int) (sliderRed.func_175217_d() * 255.0F));
-            	break;
-            case 2:
-            	color.setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
-            	break;
-            case 3:
-            	color.setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
-            	break;
-        }
-    }
-    
-    @Override
-    public void mouseClickMove(final int mouseX, final int mouseY, final int clickedMouseButton, final long timeSinceLastClick) {
-    	color.setRed((int) (sliderRed.func_175217_d() * 255.0F));
-    	color.setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
-    	color.setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
-        this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Customize Mod Color", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        
-        int rectLeft = this.width / 2 - 75;
-        int rectTop = this.height / 4 + 80;
-        int rectWidth = 150 - 1;
-        int rectHeight = 20 - 1;
-        
-        drawRect(rectLeft, rectTop, rectLeft + rectWidth, rectTop + rectHeight, color.getRGB());
-        drawHollowRect(rectLeft, rectTop, rectWidth, rectHeight, Color.BLACK.getRGB());
-        this.fontRendererObj.drawStringWithShadow("Current Color", (rectLeft + (rectWidth - this.fontRendererObj.getStringWidth("Current Color")) / 2) + 1, (rectTop + (rectHeight - this.fontRendererObj.FONT_HEIGHT) / 2) + 1, Color.WHITE.getRGB());
-    }
-    
-    private void drawHollowRect(int x, int y, int width, int height, int color) {
-		this.drawHorizontalLine(x, x + width, y, color);
-		this.drawHorizontalLine(x, x + width, y + height, color);
-		this.drawVerticalLine(x, y + height, y, color);
-		this.drawVerticalLine(x + width, y + height, y, color);
-	}
 }

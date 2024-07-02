@@ -6,10 +6,11 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import rubik.event.EventManager;
-import rubik.event.EventTarget;
-import rubik.event.impl.RenderEvent;
+import net.minecraft.client.gui.GuiScreen;
+import rubik.events.EventManager;
+import rubik.events.EventTarget;
+import rubik.events.impl.RenderEvent;
+import rubik.gui.GuiModPositioning;
 
 public class HUDManager {
 	private static HUDManager hudManager = null;
@@ -47,7 +48,7 @@ public class HUDManager {
 	
 	@EventTarget
 	public void onRender(RenderEvent e) {
-		if (mc.currentScreen == null || mc.currentScreen instanceof GuiChat) {
+		if (mc.currentScreen == null || mc.currentScreen instanceof GuiScreen && !(mc.currentScreen instanceof GuiModPositioning)) {
 			for (IRenderer renderer : registeredRenderers) {
 				callRenderer(renderer);
 			}

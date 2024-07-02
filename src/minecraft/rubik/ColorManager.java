@@ -8,39 +8,62 @@ public class ColorManager {
 	private int blue;
 	private int alpha;
 	
-	public ColorManager(Color color) {
+	private ColorManager(Color color) {
 		this.red = color.getRed();
 		this.green = color.getGreen();
 		this.blue = color.getBlue();
 		this.alpha = color.getAlpha();
 	}
 	
-	public void setRed(int red) {
+	private ColorManager(int rgb) {
+		this.red = (rgb >> 16) & 0xFF;
+		this.green = (rgb >> 8) & 0xFF;
+		this.blue = (rgb >> 0) & 0xFF;
+		this.alpha = (rgb >> 24) & 0xFF;
+	}
+	
+	public static ColorManager fromColor(Color color) {
+		return new ColorManager(color);
+	}
+	
+	public static ColorManager fromRGB(int rgb) {
+		return new ColorManager(rgb);
+	}
+	
+	public ColorManager setRed(int red) {
 		this.red = red;
-	}
-	
-	public void setGreen(int green) {
-		this.green = green;
-	}
-	
-	public void setBlue(int blue) {
-		this.blue = blue;
-	}
-	
-	public void setAlpha(int alpha) {
-		this.alpha = alpha;
+		
+		return this;
 	}
 	
 	public int getRed() {
 		return red;
 	}
 	
+	public ColorManager setGreen(int green) {
+		this.green = green;
+		
+		return this;
+	}
+	
 	public int getGreen() {
 		return green;
 	}
 	
+	public ColorManager setBlue(int blue) {
+		this.blue = blue;
+		
+		return this;
+	}
+	
 	public int getBlue() {
 		return blue;
+	}
+	
+	public ColorManager setAlpha(int alpha) {
+		this.alpha = alpha;
+		
+		return this;
 	}
 	
 	public int getAlpha() {

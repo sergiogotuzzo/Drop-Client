@@ -1,22 +1,25 @@
 package rubik.mods;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import rubik.gui.GuiModPositioning;
+import rubik.FileManager;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
+import rubik.mods.impl.BlockOverlay;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.Chat;
+import rubik.mods.impl.Clock;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Fullbright;
 import rubik.mods.impl.Keystrokes;
+import rubik.mods.impl.MemoryUsage;
 import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
+import rubik.mods.impl.PotsCounter;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import rubik.mods.impl.Sidebar;
 
@@ -29,11 +32,15 @@ public class ModInstances {
 	private static PotionEffects potionEffectsMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
+	private static Clock clockMod;
+	private static MemoryUsage memoryUsageMod;
+	private static PotsCounter potsCounterMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
 	private static Sidebar sidebarMod = new Sidebar();
 	private static Chat chatMod = new Chat();
+	private static BlockOverlay blockOverlayMod = new BlockOverlay();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -44,34 +51,9 @@ public class ModInstances {
 		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
-		
-		resetModSettings();
-	}
-	
-	public static void resetModSettings() {
-		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-		
-		int marginX = GuiModPositioning.getMarginX();
-		int marginY = GuiModPositioning.getMarginY();
-		
-		// LEFT SIDE
-		keystrokesMod.save(ScreenPosition.fromAbsolutePosition(marginX, marginY));
-		pingDisplayMod.save(ScreenPosition.fromAbsolutePosition(marginX, keystrokesMod.load().getAbsoluteX() + keystrokesMod.getHeight() + marginY));
-		pingDisplayMod.setShowBackground(true);
-		potionEffectsMod.save(ScreenPosition.fromAbsolutePosition(marginX, res.getScaledHeight() / 2));
-		
-		// CENTER
-		fpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 + marginX, marginY));
-		cpsDisplayMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() / 2 - cpsDisplayMod.getWidth() - marginX, marginY));
-		
-		// RIGHT SIDE
-		toggleSprintSneakMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - toggleSprintSneakMod.getWidth() - marginX - 1, marginY));
-		armorStatusMod.save(ScreenPosition.fromAbsolutePosition(res.getScaledWidth() - armorStatusMod.getWidth() - marginX - 1, res.getScaledHeight() - armorStatusMod.getHeight() - marginY - 1));
-		armorStatusMod.setRight(true);
-		
-		// OTHER
-		coordinatesDisplayMod.setEnabled(false);
-		sidebarMod.setHideNumbers(true);
+		manager.register(clockMod = new Clock());
+		manager.register(memoryUsageMod = new MemoryUsage());
+		manager.register(potsCounterMod = new PotsCounter());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -106,6 +88,18 @@ public class ModInstances {
 		return toggleSprintSneakMod;
 	}
 	
+	public static Clock getClockMod() {
+		return clockMod;
+	}
+	
+	public static MemoryUsage getMemoryUsageMod() {
+		return memoryUsageMod;
+	}
+	
+	public static PotsCounter getPotsCounterMod() {
+		return potsCounterMod;
+	}
+	
 	public static Freelook getFreelookMod() {
 		return freelookMod;
 	}
@@ -124,5 +118,9 @@ public class ModInstances {
 	
 	public static Chat getChatMod() {
 		return chatMod;
+	}
+	
+	public static BlockOverlay getBlockOverlayMod() {
+		return blockOverlayMod;
 	}
 }

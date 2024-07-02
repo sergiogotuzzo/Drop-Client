@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.BlockPane;
@@ -2254,6 +2255,7 @@ public class ConnectedTextures
                 {
                     Properties properties = new PropertiesOrdered();
                     properties.load(inputstream);
+                    inputstream.close();
                     ConnectedProperties connectedproperties = new ConnectedProperties(properties, s);
 
                     if (connectedproperties.isValid(s))
@@ -2350,12 +2352,12 @@ public class ConnectedTextures
         return !set1.isEmpty();
     }
 
-    private static ConnectedProperties[][] propertyListToArray(final List list) {
-        final ConnectedProperties[][] propArr = new ConnectedProperties[list.size()][];
+    private static ConnectedProperties[][] propertyListToArray(List list) {
+        ConnectedProperties[][] propArr = new ConnectedProperties[list.size()][];
         for (int i = 0; i < list.size(); ++i) {
-            final List subList = (List) list.get(i);
+            List subList = (List) list.get(i);
             if (subList != null) {
-                final ConnectedProperties[] subArr = (ConnectedProperties[]) subList.toArray(new ConnectedProperties[subList.size()]);
+                ConnectedProperties[] subArr = (ConnectedProperties[]) subList.toArray(new ConnectedProperties[subList.size()]);
                 propArr[i] = subArr;
             }
         }
@@ -2418,15 +2420,15 @@ public class ConnectedTextures
             list.add(null);
         }
 
-        List l = (List)list.get(id);
+        List subList = (List)list.get(id);
 
-        if (l == null)
+        if (subList == null)
         {
-            l = new ArrayList();
-            list.set(id, l);
+        	subList = new ArrayList();
+        	list.set(id, subList);
         }
 
-        l.add(cp);
+        subList.add(cp);
     }
 
     private static String[] getDefaultCtmPaths()

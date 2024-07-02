@@ -1,8 +1,10 @@
 package net.optifine.gui;
 
-import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -14,7 +16,7 @@ public class GuiMessage extends GuiScreen
     private GuiScreen parentScreen;
     private String messageLine1;
     private String messageLine2;
-    private final List listLines2 = Lists.newArrayList();
+    private final List<String> listLines2 = Lists.newArrayList();
     protected String confirmButtonText;
     private int ticksUntilEnable;
 
@@ -54,9 +56,8 @@ public class GuiMessage extends GuiScreen
         this.drawCenteredString(this.fontRendererObj, this.messageLine1, this.width / 2, 70, 16777215);
         int i = 90;
 
-        for (Object e : this.listLines2)
+        for (String s : this.listLines2)
         {
-            String s = (String) e;
             this.drawCenteredString(this.fontRendererObj, s, this.width / 2, i, 16777215);
             i += this.fontRendererObj.FONT_HEIGHT;
         }

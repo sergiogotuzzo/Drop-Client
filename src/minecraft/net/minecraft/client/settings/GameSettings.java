@@ -82,7 +82,7 @@ public class GameSettings
     private static final String[] STREAM_CHAT_MODES = new String[] {"options.stream.chat.enabled.streaming", "options.stream.chat.enabled.always", "options.stream.chat.enabled.never"};
     private static final String[] STREAM_CHAT_FILTER_MODES = new String[] {"options.stream.chat.userFilter.all", "options.stream.chat.userFilter.subs", "options.stream.chat.userFilter.mods"};
     private static final String[] STREAM_MIC_MODES = new String[] {"options.stream.mic_toggle.mute", "options.stream.mic_toggle.talk"};
-    private static final String[] field_181149_aW = new String[] {"options.off", "options.graphics.fast", "options.graphics.fancy"};
+    private static final String[] CLOUDS_TYPES = new String[] {"options.off", "options.graphics.fast", "options.graphics.fancy"};
     public float mouseSensitivity = 0.5F;
     public boolean invertMouse;
     public int renderDistanceChunks = -1;
@@ -98,7 +98,7 @@ public class GameSettings
     /** Smooth Lighting */
     public int ambientOcclusion = 2;
     public List<String> resourcePacks = Lists.<String>newArrayList();
-    public List<String> field_183018_l = Lists.<String>newArrayList();
+    public List<String> incompatibleResourcePacks = Lists.<String>newArrayList();
     public EntityPlayer.EnumChatVisibility chatVisibility = EntityPlayer.EnumChatVisibility.FULL;
     public boolean chatColours = true;
     public boolean chatLinks = true;
@@ -142,9 +142,9 @@ public class GameSettings
     public int streamChatEnabled = 0;
     public int streamChatUserFilter = 0;
     public int streamMicToggleBehavior = 0;
-    public boolean field_181150_U = true;
-    public boolean field_181151_V = true;
-    public boolean field_183509_X = true;
+    public boolean useNativeTransport = true;
+    public boolean entityShadows = true;
+    public boolean realmsNotifications = true;
     public KeyBinding keyBindForward = new KeyBinding("key.forward", 17, "key.categories.movement");
     public KeyBinding keyBindLeft = new KeyBinding("key.left", 30, "key.categories.movement");
     public KeyBinding keyBindBack = new KeyBinding("key.back", 31, "key.categories.movement");
@@ -180,7 +180,7 @@ public class GameSettings
     /** true if debug info should be displayed instead of version */
     public boolean showDebugInfo;
     public boolean showDebugProfilerChart;
-    public boolean field_181657_aC;
+    public boolean showLagometer;
 
     /** The lastServer string. */
     public String lastServer;
@@ -291,8 +291,8 @@ public class GameSettings
     public KeyBinding keyBindModPositioning = new KeyBinding("Mod Positioning", Keyboard.KEY_RSHIFT, "Rubik Client");
     public KeyBinding keyBindFreelook = new KeyBinding("Freelook", Keyboard.KEY_F, "Rubik Client");
     public KeyBinding keyBindFullbright = new KeyBinding("Fullbright", Keyboard.KEY_L, "Rubik Client");
-
-    public GameSettings(Minecraft mcIn, File p_i46326_2_)
+    
+    public GameSettings(Minecraft mcIn, File optionsFileIn)
     {
         this.keyBindings = (KeyBinding[])((KeyBinding[])ArrayUtils.addAll(new KeyBinding[] {this.keyBindAttack, this.keyBindUseItem, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindSprint, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList, this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective, this.keyBindSmoothCamera, this.keyBindStreamStartStop, this.keyBindStreamPauseUnpause, this.keyBindStreamCommercials, this.keyBindStreamToggleMic, this.keyBindFullscreen, this.keyBindSpectatorOutlines}, this.keyBindsHotbar));
         this.difficulty = EnumDifficulty.NORMAL;
@@ -301,7 +301,7 @@ public class GameSettings
         this.language = "en_US";
         this.forceUnicodeFont = false;
         this.mc = mcIn;
-        this.optionsFile = new File(p_i46326_2_, "options.txt");
+        this.optionsFile = new File(optionsFileIn, "options.txt");
 
         if (mcIn.isJava64bit() && Runtime.getRuntime().maxMemory() >= 1000000000L)
         {
@@ -324,7 +324,7 @@ public class GameSettings
         }
 
         this.renderDistanceChunks = mcIn.isJava64bit() ? 12 : 8;
-        this.optionsFileOF = new File(p_i46326_2_, "optionsof.txt");
+        this.optionsFileOF = new File(optionsFileIn, "optionsof.txt");
         this.limitFramerate = (int)GameSettings.Options.FRAMERATE_LIMIT.getValueMax();
         this.ofKeyBindZoom = new KeyBinding("of.key.zoom", 46, "key.categories.misc");
         this.keyBindings = (KeyBinding[])((KeyBinding[])ArrayUtils.add(this.keyBindings, this.ofKeyBindZoom));
@@ -356,54 +356,64 @@ public class GameSettings
 
     /**
      * Represents a key or mouse button as a string. Args: key
+     *  
+     * @param key The key to display
      */
-    public static String getKeyDisplayString(int p_74298_0_)
+    public static String getKeyDisplayString(int key)
     {
-        return p_74298_0_ < 0 ? I18n.format("key.mouseButton", new Object[] {Integer.valueOf(p_74298_0_ + 101)}): (p_74298_0_ < 256 ? Keyboard.getKeyName(p_74298_0_) : String.format("%c", new Object[] {Character.valueOf((char)(p_74298_0_ - 256))}).toUpperCase());
+        return key < 0 ? I18n.format("key.mouseButton", new Object[] {Integer.valueOf(key + 101)}): (key < 256 ? Keyboard.getKeyName(key) : String.format("%c", new Object[] {Character.valueOf((char)(key - 256))}).toUpperCase());
     }
 
     /**
      * Returns whether the specified key binding is currently being pressed.
+     *  
+     * @param key The key tested
      */
-    public static boolean isKeyDown(KeyBinding p_100015_0_)
+    public static boolean isKeyDown(KeyBinding key)
     {
-        return p_100015_0_.getKeyCode() == 0 ? false : (p_100015_0_.getKeyCode() < 0 ? Mouse.isButtonDown(p_100015_0_.getKeyCode() + 100) : Keyboard.isKeyDown(p_100015_0_.getKeyCode()));
+        return key.getKeyCode() == 0 ? false : (key.getKeyCode() < 0 ? Mouse.isButtonDown(key.getKeyCode() + 100) : Keyboard.isKeyDown(key.getKeyCode()));
     }
 
     /**
      * Sets a key binding and then saves all settings.
+     *  
+     * @param key The key that the option will be set
+     * @param keyCode The option (keycode) to set.
      */
-    public void setOptionKeyBinding(KeyBinding p_151440_1_, int p_151440_2_)
+    public void setOptionKeyBinding(KeyBinding key, int keyCode)
     {
-        p_151440_1_.setKeyCode(p_151440_2_);
+        key.setKeyCode(keyCode);
         this.saveOptions();
     }
 
     /**
      * If the specified option is controlled by a slider (float value), this will set the float value.
+     *  
+     * @param settingsOption The option to set to a value
+     * @param value The value that the option will take
      */
-    public void setOptionFloatValue(GameSettings.Options p_74304_1_, float p_74304_2_)
+    public void setOptionFloatValue(GameSettings.Options settingsOption, float value)
     {
-        this.setOptionFloatValueOF(p_74304_1_, p_74304_2_);
+        this.setOptionFloatValueOF(settingsOption, value);
 
-        if (p_74304_1_ == GameSettings.Options.SENSITIVITY)
+        if (settingsOption == GameSettings.Options.SENSITIVITY)
         {
-            this.mouseSensitivity = p_74304_2_;
+            this.mouseSensitivity = value;
         }
 
-        if (p_74304_1_ == GameSettings.Options.FOV)
+        if (settingsOption == GameSettings.Options.FOV)
         {
-            this.fovSetting = p_74304_2_;
+            this.fovSetting = value;
         }
 
-        if (p_74304_1_ == GameSettings.Options.GAMMA)
+        if (settingsOption == GameSettings.Options.GAMMA)
         {
-            this.gammaSetting = p_74304_2_;
+            this.gammaSetting = value;
         }
 
-        if (p_74304_1_ == GameSettings.Options.FRAMERATE_LIMIT)
+        if (settingsOption == GameSettings.Options.FRAMERATE_LIMIT)
         {
-            this.limitFramerate = (int)p_74304_2_;
+            this.limitFramerate = (int)value;
             this.enableVsync = false;
 
             if (this.limitFramerate <= 0)
@@ -415,42 +425,42 @@ public class GameSettings
             this.updateVSync();
         }
 
-        if (p_74304_1_ == GameSettings.Options.CHAT_OPACITY)
+        if (settingsOption == GameSettings.Options.CHAT_OPACITY)
         {
-            this.chatOpacity = p_74304_2_;
+            this.chatOpacity = value;
             this.mc.ingameGUI.getChatGUI().refreshChat();
         }
 
-        if (p_74304_1_ == GameSettings.Options.CHAT_HEIGHT_FOCUSED)
+        if (settingsOption == GameSettings.Options.CHAT_HEIGHT_FOCUSED)
         {
-            this.chatHeightFocused = p_74304_2_;
+            this.chatHeightFocused = value;
             this.mc.ingameGUI.getChatGUI().refreshChat();
         }
 
-        if (p_74304_1_ == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED)
+        if (settingsOption == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED)
         {
-            this.chatHeightUnfocused = p_74304_2_;
+            this.chatHeightUnfocused = value;
             this.mc.ingameGUI.getChatGUI().refreshChat();
         }
 
-        if (p_74304_1_ == GameSettings.Options.CHAT_WIDTH)
+        if (settingsOption == GameSettings.Options.CHAT_WIDTH)
         {
-            this.chatWidth = p_74304_2_;
+            this.chatWidth = value;
             this.mc.ingameGUI.getChatGUI().refreshChat();
         }
 
-        if (p_74304_1_ == GameSettings.Options.CHAT_SCALE)
+        if (settingsOption == GameSettings.Options.CHAT_SCALE)
         {
-            this.chatScale = p_74304_2_;
+            this.chatScale = value;
             this.mc.ingameGUI.getChatGUI().refreshChat();
         }
 
-        if (p_74304_1_ == GameSettings.Options.MIPMAP_LEVELS)
+        if (settingsOption == GameSettings.Options.MIPMAP_LEVELS)
         {
             int i = this.mipmapLevels;
-            this.mipmapLevels = (int)p_74304_2_;
+            this.mipmapLevels = (int)value;
 
-            if ((float)i != p_74304_2_)
+            if ((float)i != value)
             {
                 this.mc.getTextureMapBlocks().setMipmapLevels(this.mipmapLevels);
                 this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -459,61 +469,64 @@ public class GameSettings
             }
         }
 
-        if (p_74304_1_ == GameSettings.Options.BLOCK_ALTERNATIVES)
+        if (settingsOption == GameSettings.Options.BLOCK_ALTERNATIVES)
         {
             this.allowBlockAlternatives = !this.allowBlockAlternatives;
             this.mc.renderGlobal.loadRenderers();
         }
 
-        if (p_74304_1_ == GameSettings.Options.RENDER_DISTANCE)
+        if (settingsOption == GameSettings.Options.RENDER_DISTANCE)
         {
-            this.renderDistanceChunks = (int)p_74304_2_;
+            this.renderDistanceChunks = (int)value;
             this.mc.renderGlobal.setDisplayListEntitiesDirty();
         }
 
-        if (p_74304_1_ == GameSettings.Options.STREAM_BYTES_PER_PIXEL)
+        if (settingsOption == GameSettings.Options.STREAM_BYTES_PER_PIXEL)
         {
-            this.streamBytesPerPixel = p_74304_2_;
+            this.streamBytesPerPixel = value;
         }
 
-        if (p_74304_1_ == GameSettings.Options.STREAM_VOLUME_MIC)
+        if (settingsOption == GameSettings.Options.STREAM_VOLUME_MIC)
         {
-            this.streamMicVolume = p_74304_2_;
+            this.streamMicVolume = value;
             this.mc.getTwitchStream().updateStreamVolume();
         }
 
-        if (p_74304_1_ == GameSettings.Options.STREAM_VOLUME_SYSTEM)
+        if (settingsOption == GameSettings.Options.STREAM_VOLUME_SYSTEM)
         {
-            this.streamGameVolume = p_74304_2_;
+            this.streamGameVolume = value;
             this.mc.getTwitchStream().updateStreamVolume();
         }
 
-        if (p_74304_1_ == GameSettings.Options.STREAM_KBPS)
+        if (settingsOption == GameSettings.Options.STREAM_KBPS)
         {
-            this.streamKbps = p_74304_2_;
+            this.streamKbps = value;
         }
 
-        if (p_74304_1_ == GameSettings.Options.STREAM_FPS)
+        if (settingsOption == GameSettings.Options.STREAM_FPS)
         {
-            this.streamFps = p_74304_2_;
+            this.streamFps = value;
         }
     }
 
     /**
      * For non-float options. Toggles the option on/off, or cycles through the list i.e. render distances.
+     *  
+     * @param settingsOption The option to set to a value
+     * @param value The value that the option will take
      */
-    public void setOptionValue(GameSettings.Options p_74306_1_, int p_74306_2_)
+    public void setOptionValue(GameSettings.Options settingsOption, int value)
     {
-        this.setOptionValueOF(p_74306_1_, p_74306_2_);
+        this.setOptionValueOF(settingsOption, value);
 
-        if (p_74306_1_ == GameSettings.Options.INVERT_MOUSE)
+        if (settingsOption == GameSettings.Options.INVERT_MOUSE)
         {
             this.invertMouse = !this.invertMouse;
         }
 
-        if (p_74306_1_ == GameSettings.Options.GUI_SCALE)
+        if (settingsOption == GameSettings.Options.GUI_SCALE)
         {
-            this.guiScale += p_74306_2_;
+            this.guiScale += value;
 
             if (GuiScreen.isShiftKeyDown())
             {
@@ -532,7 +545,7 @@ public class GameSettings
 
             if (this.mc.isUnicode() && this.guiScale % 2 != 0)
             {
-                this.guiScale += p_74306_2_;
+                this.guiScale += value;
             }
 
             if (this.guiScale < 0 || this.guiScale >= k)
@@ -541,33 +554,33 @@ public class GameSettings
             }
         }
 
-        if (p_74306_1_ == GameSettings.Options.PARTICLES)
+        if (settingsOption == GameSettings.Options.PARTICLES)
         {
-            this.particleSetting = (this.particleSetting + p_74306_2_) % 3;
+            this.particleSetting = (this.particleSetting + value) % 3;
         }
 
-        if (p_74306_1_ == GameSettings.Options.VIEW_BOBBING)
+        if (settingsOption == GameSettings.Options.VIEW_BOBBING)
         {
             this.viewBobbing = !this.viewBobbing;
         }
 
-        if (p_74306_1_ == GameSettings.Options.RENDER_CLOUDS)
+        if (settingsOption == GameSettings.Options.RENDER_CLOUDS)
         {
-            this.clouds = (this.clouds + p_74306_2_) % 3;
+            this.clouds = (this.clouds + value) % 3;
         }
 
-        if (p_74306_1_ == GameSettings.Options.FORCE_UNICODE_FONT)
+        if (settingsOption == GameSettings.Options.FORCE_UNICODE_FONT)
         {
             this.forceUnicodeFont = !this.forceUnicodeFont;
             this.mc.fontRendererObj.setUnicodeFlag(this.mc.getLanguageManager().isCurrentLocaleUnicode() || this.forceUnicodeFont);
         }
 
-        if (p_74306_1_ == GameSettings.Options.FBO_ENABLE)
+        if (settingsOption == GameSettings.Options.FBO_ENABLE)
         {
             this.fboEnable = !this.fboEnable;
         }
 
-        if (p_74306_1_ == GameSettings.Options.ANAGLYPH)
+        if (settingsOption == GameSettings.Options.ANAGLYPH)
         {
             if (!this.anaglyph && Config.isShaders())
             {
@@ -579,75 +592,75 @@ public class GameSettings
             this.mc.refreshResources();
         }
 
-        if (p_74306_1_ == GameSettings.Options.GRAPHICS)
+        if (settingsOption == GameSettings.Options.GRAPHICS)
         {
             this.fancyGraphics = !this.fancyGraphics;
             this.updateRenderClouds();
             this.mc.renderGlobal.loadRenderers();
         }
 
-        if (p_74306_1_ == GameSettings.Options.AMBIENT_OCCLUSION)
+        if (settingsOption == GameSettings.Options.AMBIENT_OCCLUSION)
         {
-            this.ambientOcclusion = (this.ambientOcclusion + p_74306_2_) % 3;
+            this.ambientOcclusion = (this.ambientOcclusion + value) % 3;
             this.mc.renderGlobal.loadRenderers();
         }
 
-        if (p_74306_1_ == GameSettings.Options.CHAT_VISIBILITY)
+        if (settingsOption == GameSettings.Options.CHAT_VISIBILITY)
         {
-            this.chatVisibility = EntityPlayer.EnumChatVisibility.getEnumChatVisibility((this.chatVisibility.getChatVisibility() + p_74306_2_) % 3);
+            this.chatVisibility = EntityPlayer.EnumChatVisibility.getEnumChatVisibility((this.chatVisibility.getChatVisibility() + value) % 3);
         }
 
-        if (p_74306_1_ == GameSettings.Options.STREAM_COMPRESSION)
+        if (settingsOption == GameSettings.Options.STREAM_COMPRESSION)
         {
-            this.streamCompression = (this.streamCompression + p_74306_2_) % 3;
+            this.streamCompression = (this.streamCompression + value) % 3;
         }
 
-        if (p_74306_1_ == GameSettings.Options.STREAM_SEND_METADATA)
+        if (settingsOption == GameSettings.Options.STREAM_SEND_METADATA)
         {
             this.streamSendMetadata = !this.streamSendMetadata;
         }
 
-        if (p_74306_1_ == GameSettings.Options.STREAM_CHAT_ENABLED)
+        if (settingsOption == GameSettings.Options.STREAM_CHAT_ENABLED)
         {
-            this.streamChatEnabled = (this.streamChatEnabled + p_74306_2_) % 3;
+            this.streamChatEnabled = (this.streamChatEnabled + value) % 3;
         }
 
-        if (p_74306_1_ == GameSettings.Options.STREAM_CHAT_USER_FILTER)
+        if (settingsOption == GameSettings.Options.STREAM_CHAT_USER_FILTER)
         {
-            this.streamChatUserFilter = (this.streamChatUserFilter + p_74306_2_) % 3;
+            this.streamChatUserFilter = (this.streamChatUserFilter + value) % 3;
         }
 
-        if (p_74306_1_ == GameSettings.Options.STREAM_MIC_TOGGLE_BEHAVIOR)
+        if (settingsOption == GameSettings.Options.STREAM_MIC_TOGGLE_BEHAVIOR)
         {
-            this.streamMicToggleBehavior = (this.streamMicToggleBehavior + p_74306_2_) % 2;
+            this.streamMicToggleBehavior = (this.streamMicToggleBehavior + value) % 2;
         }
 
-        if (p_74306_1_ == GameSettings.Options.CHAT_COLOR)
+        if (settingsOption == GameSettings.Options.CHAT_COLOR)
         {
             this.chatColours = !this.chatColours;
         }
 
-        if (p_74306_1_ == GameSettings.Options.CHAT_LINKS)
+        if (settingsOption == GameSettings.Options.CHAT_LINKS)
         {
             this.chatLinks = !this.chatLinks;
         }
 
-        if (p_74306_1_ == GameSettings.Options.CHAT_LINKS_PROMPT)
+        if (settingsOption == GameSettings.Options.CHAT_LINKS_PROMPT)
         {
             this.chatLinksPrompt = !this.chatLinksPrompt;
         }
 
-        if (p_74306_1_ == GameSettings.Options.SNOOPER_ENABLED)
+        if (settingsOption == GameSettings.Options.SNOOPER_ENABLED)
         {
             this.snooperEnabled = !this.snooperEnabled;
         }
 
-        if (p_74306_1_ == GameSettings.Options.TOUCHSCREEN)
+        if (settingsOption == GameSettings.Options.TOUCHSCREEN)
         {
             this.touchscreen = !this.touchscreen;
         }
 
-        if (p_74306_1_ == GameSettings.Options.USE_FULLSCREEN)
+        if (settingsOption == GameSettings.Options.USE_FULLSCREEN)
         {
             this.fullScreen = !this.fullScreen;
 
@@ -657,51 +670,51 @@ public class GameSettings
             }
         }
 
-        if (p_74306_1_ == GameSettings.Options.ENABLE_VSYNC)
+        if (settingsOption == GameSettings.Options.ENABLE_VSYNC)
         {
             this.enableVsync = !this.enableVsync;
             Display.setVSyncEnabled(this.enableVsync);
         }
 
-        if (p_74306_1_ == GameSettings.Options.USE_VBO)
+        if (settingsOption == GameSettings.Options.USE_VBO)
         {
             this.useVbo = !this.useVbo;
             this.mc.renderGlobal.loadRenderers();
         }
 
-        if (p_74306_1_ == GameSettings.Options.BLOCK_ALTERNATIVES)
+        if (settingsOption == GameSettings.Options.BLOCK_ALTERNATIVES)
         {
             this.allowBlockAlternatives = !this.allowBlockAlternatives;
             this.mc.renderGlobal.loadRenderers();
         }
 
-        if (p_74306_1_ == GameSettings.Options.REDUCED_DEBUG_INFO)
+        if (settingsOption == GameSettings.Options.REDUCED_DEBUG_INFO)
         {
             this.reducedDebugInfo = !this.reducedDebugInfo;
         }
 
-        if (p_74306_1_ == GameSettings.Options.ENTITY_SHADOWS)
+        if (settingsOption == GameSettings.Options.ENTITY_SHADOWS)
         {
-            this.field_181151_V = !this.field_181151_V;
+            this.entityShadows = !this.entityShadows;
         }
 
-        if (p_74306_1_ == GameSettings.Options.REALMS_NOTIFICATIONS)
+        if (settingsOption == GameSettings.Options.REALMS_NOTIFICATIONS)
         {
-            this.field_183509_X = !this.field_183509_X;
+            this.realmsNotifications = !this.realmsNotifications;
         }
 
         this.saveOptions();
     }
 
-    public float getOptionFloatValue(GameSettings.Options p_74296_1_)
+    public float getOptionFloatValue(GameSettings.Options settingOption)
     {
-        float f = this.getOptionFloatValueOF(p_74296_1_);
-        return f != Float.MAX_VALUE ? f : (p_74296_1_ == GameSettings.Options.FOV ? this.fovSetting : (p_74296_1_ == GameSettings.Options.GAMMA ? this.gammaSetting : (p_74296_1_ == GameSettings.Options.SATURATION ? this.saturation : (p_74296_1_ == GameSettings.Options.SENSITIVITY ? this.mouseSensitivity : (p_74296_1_ == GameSettings.Options.CHAT_OPACITY ? this.chatOpacity : (p_74296_1_ == GameSettings.Options.CHAT_HEIGHT_FOCUSED ? this.chatHeightFocused : (p_74296_1_ == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED ? this.chatHeightUnfocused : (p_74296_1_ == GameSettings.Options.CHAT_SCALE ? this.chatScale : (p_74296_1_ == GameSettings.Options.CHAT_WIDTH ? this.chatWidth : (p_74296_1_ == GameSettings.Options.FRAMERATE_LIMIT ? (float)this.limitFramerate : (p_74296_1_ == GameSettings.Options.MIPMAP_LEVELS ? (float)this.mipmapLevels : (p_74296_1_ == GameSettings.Options.RENDER_DISTANCE ? (float)this.renderDistanceChunks : (p_74296_1_ == GameSettings.Options.STREAM_BYTES_PER_PIXEL ? this.streamBytesPerPixel : (p_74296_1_ == GameSettings.Options.STREAM_VOLUME_MIC ? this.streamMicVolume : (p_74296_1_ == GameSettings.Options.STREAM_VOLUME_SYSTEM ? this.streamGameVolume : (p_74296_1_ == GameSettings.Options.STREAM_KBPS ? this.streamKbps : (p_74296_1_ == GameSettings.Options.STREAM_FPS ? this.streamFps : 0.0F)))))))))))))))));
+        float f = this.getOptionFloatValueOF(settingOption);
+        return f != Float.MAX_VALUE ? f : (settingOption == GameSettings.Options.FOV ? this.fovSetting : (settingOption == GameSettings.Options.GAMMA ? this.gammaSetting : (settingOption == GameSettings.Options.SATURATION ? this.saturation : (settingOption == GameSettings.Options.SENSITIVITY ? this.mouseSensitivity : (settingOption == GameSettings.Options.CHAT_OPACITY ? this.chatOpacity : (settingOption == GameSettings.Options.CHAT_HEIGHT_FOCUSED ? this.chatHeightFocused : (settingOption == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED ? this.chatHeightUnfocused : (settingOption == GameSettings.Options.CHAT_SCALE ? this.chatScale : (settingOption == GameSettings.Options.CHAT_WIDTH ? this.chatWidth : (settingOption == GameSettings.Options.FRAMERATE_LIMIT ? (float)this.limitFramerate : (settingOption == GameSettings.Options.MIPMAP_LEVELS ? (float)this.mipmapLevels : (settingOption == GameSettings.Options.RENDER_DISTANCE ? (float)this.renderDistanceChunks : (settingOption == GameSettings.Options.STREAM_BYTES_PER_PIXEL ? this.streamBytesPerPixel : (settingOption == GameSettings.Options.STREAM_VOLUME_MIC ? this.streamMicVolume : (settingOption == GameSettings.Options.STREAM_VOLUME_SYSTEM ? this.streamGameVolume : (settingOption == GameSettings.Options.STREAM_KBPS ? this.streamKbps : (settingOption == GameSettings.Options.STREAM_FPS ? this.streamFps : 0.0F)))))))))))))))));
     }
 
-    public boolean getOptionOrdinalValue(GameSettings.Options p_74308_1_)
+    public boolean getOptionOrdinalValue(GameSettings.Options settingOption)
     {
-        switch (p_74308_1_)
+        switch (settingOption)
         {
             case INVERT_MOUSE:
                 return this.invertMouse;
@@ -752,10 +765,10 @@ public class GameSettings
                 return this.reducedDebugInfo;
 
             case ENTITY_SHADOWS:
-                return this.field_181151_V;
+                return this.entityShadows;
 
             case REALMS_NOTIFICATIONS:
-                return this.field_183509_X;
+                return this.realmsNotifications;
 
             default:
                 return false;
@@ -765,23 +778,28 @@ public class GameSettings
     /**
      * Returns the translation of the given index in the given String array. If the index is smaller than 0 or greater
      * than/equal to the length of the String array, it is changed to 0.
+     *  
+     * @param strArray The array of string containing the string to translate
+     * @param index The index in the array of the string to translate
      */
-    private static String getTranslation(String[] p_74299_0_, int p_74299_1_)
+    private static String getTranslation(String[] strArray, int index)
     {
-        if (p_74299_1_ < 0 || p_74299_1_ >= p_74299_0_.length)
+        if (index < 0 || index >= strArray.length)
         {
-            p_74299_1_ = 0;
+            index = 0;
         }
 
-        return I18n.format(p_74299_0_[p_74299_1_], new Object[0]);
+        return I18n.format(strArray[index], new Object[0]);
     }
 
     /**
      * Gets a key binding.
+     *  
+     * @param settingOption The KeyBinding is generated from this option
      */
-    public String getKeyBinding(GameSettings.Options p_74297_1_)
+    public String getKeyBinding(GameSettings.Options settingOption)
     {
-        String s = this.getKeyBindingOF(p_74297_1_);
+        String s = this.getKeyBindingOF(settingOption);
 
         if (s != null)
         {
@@ -789,56 +807,56 @@ public class GameSettings
         }
         else
         {
-            String s1 = I18n.format(p_74297_1_.getEnumString(), new Object[0]) + ": ";
+            String s1 = I18n.format(settingOption.getEnumString(), new Object[0]) + ": ";
 
-            if (p_74297_1_.getEnumFloat())
+            if (settingOption.getEnumFloat())
             {
-                float f1 = this.getOptionFloatValue(p_74297_1_);
-                float f = p_74297_1_.normalizeValue(f1);
-                return p_74297_1_ == GameSettings.Options.MIPMAP_LEVELS && (double)f1 >= 4.0D ? s1 + Lang.get("of.general.max") : (p_74297_1_ == GameSettings.Options.SENSITIVITY ? (f == 0.0F ? s1 + I18n.format("options.sensitivity.min", new Object[0]) : (f == 1.0F ? s1 + I18n.format("options.sensitivity.max", new Object[0]) : s1 + (int)(f * 200.0F) + "%")) : (p_74297_1_ == GameSettings.Options.FOV ? (f1 == 70.0F ? s1 + I18n.format("options.fov.min", new Object[0]) : (f1 == 110.0F ? s1 + I18n.format("options.fov.max", new Object[0]) : s1 + (int)f1)) : (p_74297_1_ == GameSettings.Options.FRAMERATE_LIMIT ? (f1 == p_74297_1_.valueMax ? s1 + I18n.format("options.framerateLimit.max", new Object[0]) : s1 + (int)f1 + " fps") : (p_74297_1_ == GameSettings.Options.RENDER_CLOUDS ? (f1 == p_74297_1_.valueMin ? s1 + I18n.format("options.cloudHeight.min", new Object[0]) : s1 + ((int)f1 + 128)) : (p_74297_1_ == GameSettings.Options.GAMMA ? (f == 0.0F ? s1 + I18n.format("options.gamma.min", new Object[0]) : (f == 1.0F ? s1 + I18n.format("options.gamma.max", new Object[0]) : s1 + "+" + (int)(f * 100.0F) + "%")) : (p_74297_1_ == GameSettings.Options.SATURATION ? s1 + (int)(f * 400.0F) + "%" : (p_74297_1_ == GameSettings.Options.CHAT_OPACITY ? s1 + (int)(f * 90.0F + 10.0F) + "%" : (p_74297_1_ == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (p_74297_1_ == GameSettings.Options.CHAT_HEIGHT_FOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (p_74297_1_ == GameSettings.Options.CHAT_WIDTH ? s1 + GuiNewChat.calculateChatboxWidth(f) + "px" : (p_74297_1_ == GameSettings.Options.RENDER_DISTANCE ? s1 + (int)f1 + " chunks" : (p_74297_1_ == GameSettings.Options.MIPMAP_LEVELS ? (f1 == 0.0F ? s1 + I18n.format("options.off", new Object[0]) : s1 + (int)f1) : (p_74297_1_ == GameSettings.Options.STREAM_FPS ? s1 + TwitchStream.formatStreamFps(f) + " fps" : (p_74297_1_ == GameSettings.Options.STREAM_KBPS ? s1 + TwitchStream.formatStreamKbps(f) + " Kbps" : (p_74297_1_ == GameSettings.Options.STREAM_BYTES_PER_PIXEL ? s1 + String.format("%.3f bpp", new Object[] {Float.valueOf(TwitchStream.formatStreamBps(f))}): (f == 0.0F ? s1 + I18n.format("options.off", new Object[0]) : s1 + (int)(f * 100.0F) + "%"))))))))))))))));
+                float f1 = this.getOptionFloatValue(settingOption);
+                float f = settingOption.normalizeValue(f1);
+                return settingOption == GameSettings.Options.MIPMAP_LEVELS && (double)f1 >= 4.0D ? s1 + Lang.get("of.general.max") : (settingOption == GameSettings.Options.SENSITIVITY ? (f == 0.0F ? s1 + I18n.format("options.sensitivity.min", new Object[0]) : (f == 1.0F ? s1 + I18n.format("options.sensitivity.max", new Object[0]) : s1 + (int)(f * 200.0F) + "%")) : (settingOption == GameSettings.Options.FOV ? (f1 == 70.0F ? s1 + I18n.format("options.fov.min", new Object[0]) : (f1 == 110.0F ? s1 + I18n.format("options.fov.max", new Object[0]) : s1 + (int)f1)) : (settingOption == GameSettings.Options.FRAMERATE_LIMIT ? (f1 == settingOption.valueMax ? s1 + I18n.format("options.framerateLimit.max", new Object[0]) : s1 + (int)f1 + " fps") : (settingOption == GameSettings.Options.RENDER_CLOUDS ? (f1 == settingOption.valueMin ? s1 + I18n.format("options.cloudHeight.min", new Object[0]) : s1 + ((int)f1 + 128)) : (settingOption == GameSettings.Options.GAMMA ? (f == 0.0F ? s1 + I18n.format("options.gamma.min", new Object[0]) : (f == 1.0F ? s1 + I18n.format("options.gamma.max", new Object[0]) : s1 + "+" + (int)(f * 100.0F) + "%")) : (settingOption == GameSettings.Options.SATURATION ? s1 + (int)(f * 400.0F) + "%" : (settingOption == GameSettings.Options.CHAT_OPACITY ? s1 + (int)(f * 90.0F + 10.0F) + "%" : (settingOption == GameSettings.Options.CHAT_HEIGHT_UNFOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (settingOption == GameSettings.Options.CHAT_HEIGHT_FOCUSED ? s1 + GuiNewChat.calculateChatboxHeight(f) + "px" : (settingOption == GameSettings.Options.CHAT_WIDTH ? s1 + GuiNewChat.calculateChatboxWidth(f) + "px" : (settingOption == GameSettings.Options.RENDER_DISTANCE ? s1 + (int)f1 + " chunks" : (settingOption == GameSettings.Options.MIPMAP_LEVELS ? (f1 == 0.0F ? s1 + I18n.format("options.off", new Object[0]) : s1 + (int)f1) : (settingOption == GameSettings.Options.STREAM_FPS ? s1 + TwitchStream.formatStreamFps(f) + " fps" : (settingOption == GameSettings.Options.STREAM_KBPS ? s1 + TwitchStream.formatStreamKbps(f) + " Kbps" : (settingOption == GameSettings.Options.STREAM_BYTES_PER_PIXEL ? s1 + String.format("%.3f bpp", new Object[] {Float.valueOf(TwitchStream.formatStreamBps(f))}): (f == 0.0F ? s1 + I18n.format("options.off", new Object[0]) : s1 + (int)(f * 100.0F) + "%"))))))))))))))));
             }
-            else if (p_74297_1_.getEnumBoolean())
+            else if (settingOption.getEnumBoolean())
             {
-                boolean flag = this.getOptionOrdinalValue(p_74297_1_);
+                boolean flag = this.getOptionOrdinalValue(settingOption);
                 return flag ? s1 + I18n.format("options.on", new Object[0]) : s1 + I18n.format("options.off", new Object[0]);
             }
-            else if (p_74297_1_ == GameSettings.Options.GUI_SCALE)
+            else if (settingOption == GameSettings.Options.GUI_SCALE)
             {
                 return this.guiScale >= GUISCALES.length ? s1 + this.guiScale + "x" : s1 + getTranslation(GUISCALES, this.guiScale);
             }
-            else if (p_74297_1_ == GameSettings.Options.CHAT_VISIBILITY)
+            else if (settingOption == GameSettings.Options.CHAT_VISIBILITY)
             {
                 return s1 + I18n.format(this.chatVisibility.getResourceKey(), new Object[0]);
             }
-            else if (p_74297_1_ == GameSettings.Options.PARTICLES)
+            else if (settingOption == GameSettings.Options.PARTICLES)
             {
                 return s1 + getTranslation(PARTICLES, this.particleSetting);
             }
-            else if (p_74297_1_ == GameSettings.Options.AMBIENT_OCCLUSION)
+            else if (settingOption == GameSettings.Options.AMBIENT_OCCLUSION)
             {
                 return s1 + getTranslation(AMBIENT_OCCLUSIONS, this.ambientOcclusion);
             }
-            else if (p_74297_1_ == GameSettings.Options.STREAM_COMPRESSION)
+            else if (settingOption == GameSettings.Options.STREAM_COMPRESSION)
             {
                 return s1 + getTranslation(STREAM_COMPRESSIONS, this.streamCompression);
             }
-            else if (p_74297_1_ == GameSettings.Options.STREAM_CHAT_ENABLED)
+            else if (settingOption == GameSettings.Options.STREAM_CHAT_ENABLED)
             {
                 return s1 + getTranslation(STREAM_CHAT_MODES, this.streamChatEnabled);
             }
-            else if (p_74297_1_ == GameSettings.Options.STREAM_CHAT_USER_FILTER)
+            else if (settingOption == GameSettings.Options.STREAM_CHAT_USER_FILTER)
             {
                 return s1 + getTranslation(STREAM_CHAT_FILTER_MODES, this.streamChatUserFilter);
             }
-            else if (p_74297_1_ == GameSettings.Options.STREAM_MIC_TOGGLE_BEHAVIOR)
+            else if (settingOption == GameSettings.Options.STREAM_MIC_TOGGLE_BEHAVIOR)
             {
                 return s1 + getTranslation(STREAM_MIC_MODES, this.streamMicToggleBehavior);
             }
-            else if (p_74297_1_ == GameSettings.Options.RENDER_CLOUDS)
+            else if (settingOption == GameSettings.Options.RENDER_CLOUDS)
             {
-                return s1 + getTranslation(field_181149_aW, this.clouds);
+                return s1 + getTranslation(CLOUDS_TYPES, this.clouds);
             }
-            else if (p_74297_1_ == GameSettings.Options.GRAPHICS)
+            else if (settingOption == GameSettings.Options.GRAPHICS)
             {
                 if (this.fancyGraphics)
                 {
@@ -1004,11 +1022,11 @@ public class GameSettings
 
                             if (astring[0].equals("incompatibleResourcePacks"))
                             {
-                                this.field_183018_l = (List)gson.fromJson((String)s.substring(s.indexOf(58) + 1), typeListString);
+                                this.incompatibleResourcePacks = (List)gson.fromJson((String)s.substring(s.indexOf(58) + 1), typeListString);
 
-                                if (this.field_183018_l == null)
+                                if (this.incompatibleResourcePacks == null)
                                 {
-                                    this.field_183018_l = Lists.<String>newArrayList();
+                                    this.incompatibleResourcePacks = Lists.<String>newArrayList();
                                 }
                             }
 
@@ -1211,17 +1229,17 @@ public class GameSettings
 
                             if (astring[0].equals("useNativeTransport"))
                             {
-                                this.field_181150_U = astring[1].equals("true");
+                                this.useNativeTransport = astring[1].equals("true");
                             }
 
                             if (astring[0].equals("entityShadows"))
                             {
-                                this.field_181151_V = astring[1].equals("true");
+                                this.entityShadows = astring[1].equals("true");
                             }
 
                             if (astring[0].equals("realmsNotifications"))
                             {
-                                this.field_183509_X = astring[1].equals("true");
+                                this.realmsNotifications = astring[1].equals("true");
                             }
 
                             for (KeyBinding keybinding : this.keyBindings)
@@ -1277,10 +1295,12 @@ public class GameSettings
 
     /**
      * Parses a string into a float.
+     *  
+     * @param str The string to parse
      */
-    private float parseFloat(String p_74305_1_)
+    private float parseFloat(String str)
     {
-        return p_74305_1_.equals("true") ? 1.0F : (p_74305_1_.equals("false") ? 0.0F : Float.parseFloat(p_74305_1_));
+        return str.equals("true") ? 1.0F : (str.equals("false") ? 0.0F : Float.parseFloat(str));
     }
 
     /**
@@ -1332,7 +1352,7 @@ public class GameSettings
             }
 
             printwriter.println("resourcePacks:" + gson.toJson((Object)this.resourcePacks));
-            printwriter.println("incompatibleResourcePacks:" + gson.toJson((Object)this.field_183018_l));
+            printwriter.println("incompatibleResourcePacks:" + gson.toJson((Object)this.incompatibleResourcePacks));
             printwriter.println("lastServer:" + this.lastServer);
             printwriter.println("lang:" + this.language);
             printwriter.println("chatVisibility:" + this.chatVisibility.getChatVisibility());
@@ -1371,9 +1391,9 @@ public class GameSettings
             printwriter.println("forceUnicodeFont:" + this.forceUnicodeFont);
             printwriter.println("allowBlockAlternatives:" + this.allowBlockAlternatives);
             printwriter.println("reducedDebugInfo:" + this.reducedDebugInfo);
-            printwriter.println("useNativeTransport:" + this.field_181150_U);
-            printwriter.println("entityShadows:" + this.field_181151_V);
-            printwriter.println("realmsNotifications:" + this.field_183509_X);
+            printwriter.println("useNativeTransport:" + this.useNativeTransport);
+            printwriter.println("entityShadows:" + this.entityShadows);
+            printwriter.println("realmsNotifications:" + this.realmsNotifications);
 
             for (KeyBinding keybinding : this.keyBindings)
             {
@@ -1401,15 +1421,15 @@ public class GameSettings
         this.sendSettingsToServer();
     }
 
-    public float getSoundLevel(SoundCategory p_151438_1_)
+    public float getSoundLevel(SoundCategory sndCategory)
     {
-        return this.mapSoundLevels.containsKey(p_151438_1_) ? ((Float)this.mapSoundLevels.get(p_151438_1_)).floatValue() : 1.0F;
+        return this.mapSoundLevels.containsKey(sndCategory) ? ((Float)this.mapSoundLevels.get(sndCategory)).floatValue() : 1.0F;
     }
 
-    public void setSoundLevel(SoundCategory p_151439_1_, float p_151439_2_)
+    public void setSoundLevel(SoundCategory sndCategory, float soundLevel)
     {
-        this.mc.getSoundHandler().setSoundLevel(p_151439_1_, p_151439_2_);
-        this.mapSoundLevels.put(p_151439_1_, Float.valueOf(p_151439_2_));
+        this.mc.getSoundHandler().setSoundLevel(sndCategory, soundLevel);
+        this.mapSoundLevels.put(sndCategory, Float.valueOf(soundLevel));
     }
 
     /**
@@ -1435,42 +1455,48 @@ public class GameSettings
         return ImmutableSet.copyOf(this.setModelParts);
     }
 
-    public void setModelPartEnabled(EnumPlayerModelParts p_178878_1_, boolean p_178878_2_)
+    public void setModelPartEnabled(EnumPlayerModelParts modelPart, boolean enable)
     {
-        if (p_178878_2_)
+        if (enable)
         {
-            this.setModelParts.add(p_178878_1_);
+            this.setModelParts.add(modelPart);
         }
         else
         {
-            this.setModelParts.remove(p_178878_1_);
+            this.setModelParts.remove(modelPart);
         }
 
         this.sendSettingsToServer();
     }
 
-    public void switchModelPartEnabled(EnumPlayerModelParts p_178877_1_)
+    public void switchModelPartEnabled(EnumPlayerModelParts modelPart)
     {
-        if (!this.getModelParts().contains(p_178877_1_))
+        if (!this.getModelParts().contains(modelPart))
         {
-            this.setModelParts.add(p_178877_1_);
+            this.setModelParts.add(modelPart);
         }
         else
         {
-            this.setModelParts.remove(p_178877_1_);
+            this.setModelParts.remove(modelPart);
         }
 
         this.sendSettingsToServer();
     }
 
-    public int func_181147_e()
+    /**
+     * Return true if the clouds should be rendered
+     */
+    public int shouldRenderClouds()
     {
         return this.renderDistanceChunks >= 4 ? this.clouds : 0;
     }
 
-    public boolean func_181148_f()
+    /**
+     * Return true if the client connect to a server using the native transport system
+     */
+    public boolean isUsingNativeTransport()
     {
-        return this.field_181150_U;
+        return this.useNativeTransport;
     }
 
     private void setOptionFloatValueOF(GameSettings.Options p_setOptionFloatValueOF_1_, float p_setOptionFloatValueOF_2_)
@@ -1998,7 +2024,7 @@ public class GameSettings
 
             if (this.ofFastRender)
             {
-                this.mc.entityRenderer.func_181022_b();
+                this.mc.entityRenderer.stopUseShader();
             }
 
             Config.updateFramebufferSize();
@@ -3454,11 +3480,11 @@ public class GameSettings
         private float valueMin;
         private float valueMax;
 
-        public static GameSettings.Options getEnumOptions(int p_74379_0_)
+        public static GameSettings.Options getEnumOptions(int ordinal)
         {
             for (GameSettings.Options gamesettings$options : values())
             {
-                if (gamesettings$options.returnEnumOrdinal() == p_74379_0_)
+                if (gamesettings$options.returnEnumOrdinal() == ordinal)
                 {
                     return gamesettings$options;
                 }
@@ -3467,19 +3493,19 @@ public class GameSettings
             return null;
         }
 
-        private Options(String p_i1015_3_, boolean p_i1015_4_, boolean p_i1015_5_)
+        private Options(String str, boolean isFloat, boolean isBoolean)
         {
-            this(p_i1015_3_, p_i1015_4_, p_i1015_5_, 0.0F, 1.0F, 0.0F);
+            this(str, isFloat, isBoolean, 0.0F, 1.0F, 0.0F);
         }
 
-        private Options(String p_i45004_3_, boolean p_i45004_4_, boolean p_i45004_5_, float p_i45004_6_, float p_i45004_7_, float p_i45004_8_)
+        private Options(String str, boolean isFloat, boolean isBoolean, float valMin, float valMax, float valStep)
         {
-            this.enumString = p_i45004_3_;
-            this.enumFloat = p_i45004_4_;
-            this.enumBoolean = p_i45004_5_;
-            this.valueMin = p_i45004_6_;
-            this.valueMax = p_i45004_7_;
-            this.valueStep = p_i45004_8_;
+            this.enumString = str;
+            this.enumFloat = isFloat;
+            this.enumBoolean = isBoolean;
+            this.valueMin = valMin;
+            this.valueMax = valMax;
+            this.valueStep = valStep;
         }
 
         public boolean getEnumFloat()
@@ -3507,35 +3533,35 @@ public class GameSettings
             return this.valueMax;
         }
 
-        public void setValueMax(float p_148263_1_)
+        public void setValueMax(float value)
         {
-            this.valueMax = p_148263_1_;
+            this.valueMax = value;
         }
 
-        public float normalizeValue(float p_148266_1_)
+        public float normalizeValue(float value)
         {
-            return MathHelper.clamp_float((this.snapToStepClamp(p_148266_1_) - this.valueMin) / (this.valueMax - this.valueMin), 0.0F, 1.0F);
+            return MathHelper.clamp_float((this.snapToStepClamp(value) - this.valueMin) / (this.valueMax - this.valueMin), 0.0F, 1.0F);
         }
 
-        public float denormalizeValue(float p_148262_1_)
+        public float denormalizeValue(float value)
         {
-            return this.snapToStepClamp(this.valueMin + (this.valueMax - this.valueMin) * MathHelper.clamp_float(p_148262_1_, 0.0F, 1.0F));
+            return this.snapToStepClamp(this.valueMin + (this.valueMax - this.valueMin) * MathHelper.clamp_float(value, 0.0F, 1.0F));
         }
 
-        public float snapToStepClamp(float p_148268_1_)
+        public float snapToStepClamp(float value)
         {
-            p_148268_1_ = this.snapToStep(p_148268_1_);
-            return MathHelper.clamp_float(p_148268_1_, this.valueMin, this.valueMax);
+            value = this.snapToStep(value);
+            return MathHelper.clamp_float(value, this.valueMin, this.valueMax);
         }
 
-        protected float snapToStep(float p_148264_1_)
+        protected float snapToStep(float value)
         {
             if (this.valueStep > 0.0F)
             {
-                p_148264_1_ = this.valueStep * (float)Math.round(p_148264_1_ / this.valueStep);
+                value = this.valueStep * (float)Math.round(value / this.valueStep);
             }
 
-            return p_148264_1_;
+            return value;
         }
     }
 }

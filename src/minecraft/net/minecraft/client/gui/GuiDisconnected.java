@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;
+import rubik.Client;
 
 public class GuiDisconnected extends GuiScreen
 {
@@ -14,28 +15,12 @@ public class GuiDisconnected extends GuiScreen
     private List<String> multilineMessage;
     private final GuiScreen parentScreen;
     private int field_175353_i;
-    private final String ip;
-    private final int port;
-    private boolean reconnectButton;
 
-    public GuiDisconnected(GuiScreen screen, String reasonLocalizationKey, IChatComponent chatComp, final String ip, final int port)
-    {
-        this.parentScreen = screen;
-        this.reason = I18n.format(reasonLocalizationKey, new Object[0]);
-        this.message = chatComp;
-        this.ip = ip;
-        this.port = port;
-        this.reconnectButton = true;
-    }
-    
     public GuiDisconnected(GuiScreen screen, String reasonLocalizationKey, IChatComponent chatComp)
     {
         this.parentScreen = screen;
         this.reason = I18n.format(reasonLocalizationKey, new Object[0]);
         this.message = chatComp;
-        this.ip = "";
-        this.port = 0;
-        this.reconnectButton = false;
     }
 
     /**
@@ -56,10 +41,7 @@ public class GuiDisconnected extends GuiScreen
         this.multilineMessage = this.fontRendererObj.listFormattedStringToWidth(this.message.getFormattedText(), this.width - 50);
         this.field_175353_i = this.multilineMessage.size() * this.fontRendererObj.FONT_HEIGHT;
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 2 + this.field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT, I18n.format("gui.toMenu", new Object[0])));
-    
-        if (reconnectButton) {
-        	this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 2 + this.field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 25, I18n.format("Reconnect", new Object[0])));
-        }
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 2 + this.field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 25, I18n.format("Reconnect", new Object[0])));
     }
 
     /**
@@ -73,7 +55,7 @@ public class GuiDisconnected extends GuiScreen
         }
         else if (button.id == 1)
         {
-        	this.mc.displayGuiScreen(new GuiConnecting(this.parentScreen, mc, ip, port));
+        	this.mc.displayGuiScreen(new GuiConnecting(this.parentScreen, mc, Client.lastServerIp, Client.lastServerPort));
         }
     }
 

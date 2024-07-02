@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -471,11 +472,10 @@ public class ConnectedProperties
         }
     }
 
-    public static IProperty getProperty(String key, Collection properties)
+    public static IProperty getProperty(String key, Collection<IProperty> properties)
     {
-        for (Object e : properties)
+        for (IProperty iproperty : properties)
         {
-            IProperty iproperty = (IProperty) e;
             if (key.equals(iproperty.getName()))
             {
                 return iproperty;

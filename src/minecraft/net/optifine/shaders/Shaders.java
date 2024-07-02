@@ -1,6 +1,5 @@
 package net.optifine.shaders;
 
-import com.google.common.base.Charsets;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +29,26 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.IOUtils;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBFragmentShader;
+import org.lwjgl.opengl.ARBGeometryShader4;
+import org.lwjgl.opengl.ARBShaderObjects;
+import org.lwjgl.opengl.ARBVertexShader;
+import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.EXTFramebufferObject;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.GLContext;
+import org.lwjgl.util.glu.GLU;
+import org.lwjgl.util.vector.Vector4f;
+
+import com.google.common.base.Charsets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -45,6 +64,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.data.TextureMetadataSection;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -101,22 +121,6 @@ import net.optifine.util.EntityUtils;
 import net.optifine.util.PropertiesOrdered;
 import net.optifine.util.StrUtils;
 import net.optifine.util.TimedEvent;
-import org.apache.commons.io.IOUtils;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ARBFragmentShader;
-import org.lwjgl.opengl.ARBGeometryShader4;
-import org.lwjgl.opengl.ARBShaderObjects;
-import org.lwjgl.opengl.ARBVertexShader;
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.EXTFramebufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.util.glu.GLU;
-import org.lwjgl.util.vector.Vector4f;
 
 public class Shaders
 {
@@ -378,7 +382,7 @@ public class Shaders
     public static final Program[] ProgramsAll = programs.getPrograms();
     public static Program activeProgram = ProgramNone;
     public static int activeProgramID = 0;
-    private static ProgramStack programStackLeash = new ProgramStack();
+    private static ProgramStack programStack = new ProgramStack();
     private static boolean hasDeferredPrograms = false;
     static IntBuffer activeDrawBuffers = null;
     private static int activeCompositeMipmapSetting = 0;
@@ -1003,7 +1007,7 @@ public class Shaders
 
         if (shaderPack != null)
         {
-            BlockAliases.update(shaderPack);
+            //BlockAliases.update(shaderPack);
             ItemAliases.update(shaderPack);
             EntityAliases.update(shaderPack);
             String s = "/shaders/shaders.properties";
@@ -1071,9 +1075,8 @@ public class Shaders
         Set set = props.keySet();
         List<ICustomTexture> list = new ArrayList();
 
-        for (Object e: set)
+        for (String s1: (Set<String>)(Set<?>)set)
         {
-            String s1 = (String) e;
             if (s1.startsWith(s))
             {
                 String s2 = StrUtils.removePrefix(s1, s);
@@ -1260,7 +1263,8 @@ public class Shaders
                 ByteBuffer bytebuffer = GLAllocation.createDirectByteBuffer(abyte.length);
                 bytebuffer.put(abyte);
                 bytebuffer.flip();
-                CustomTextureRaw customtextureraw = new CustomTextureRaw(type, internalFormat, width, height, depth, pixelFormat, pixelType, bytebuffer, textureUnit);
+                TextureMetadataSection texturemetadatasection = SimpleShaderTexture.loadTextureMetadataSection(s, new TextureMetadataSection(true, true, new ArrayList()));
+                CustomTextureRaw customtextureraw = new CustomTextureRaw(type, internalFormat, width, height, depth, pixelFormat, pixelType, bytebuffer, textureUnit, texturemetadatasection.getTextureBlur(), texturemetadatasection.getTextureClamp());
                 return customtextureraw;
             }
         }
@@ -2018,10 +2022,10 @@ public class Shaders
         SMCLog.info(stringbuilder.toString());
     }
 
-    public static void startup(Minecraft mcs)
+    public static void startup(Minecraft mcRefer)
     {
         checkShadersModInstalled();
-        mc = mcs;
+        Shaders.mc = mcRefer;
         capabilities = GLContext.getCapabilities();
         glVersionString = GL11.glGetString(GL11.GL_VERSION);
         glVendorString = GL11.glGetString(GL11.GL_VENDOR);
@@ -2418,17 +2422,17 @@ public class Shaders
         }
     }
 
-    private static int getDrawBuffer(Program p, String str, int ic)
+    private static int getDrawBuffer(Program p, String str, int ii)
     {
         int i = 0;
 
-        if (ic >= str.length())
+        if (ii >= str.length())
         {
             return i;
         }
         else
         {
-            int j = str.charAt(ic) - 48;
+            int j = str.charAt(ii) - 48;
 
             if (p == ProgramShadow)
             {
@@ -4185,10 +4189,10 @@ public class Shaders
     {
         if (currentWorld != world)
         {
-            World oldworld = currentWorld;
+            World oldWorld = currentWorld;
             currentWorld = world;
             setCameraOffset(mc.getRenderViewEntity());
-            int i = getDimensionId(oldworld);
+            int i = getDimensionId(oldWorld);
             int j = getDimensionId(world);
 
             if (j != i)
@@ -4928,39 +4932,43 @@ public class Shaders
         double d3 = -d0;
         double d4 = 16.0D;
         double d5 = -cameraPositionY;
-        worldrenderer.func_181668_a(7, DefaultVertexFormats.field_181705_e);
-        worldrenderer.func_181662_b(d2, d5, d3).func_181675_d();
-        worldrenderer.func_181662_b(d2, d4, d3).func_181675_d();
-        worldrenderer.func_181662_b(d3, d4, d2).func_181675_d();
-        worldrenderer.func_181662_b(d3, d5, d2).func_181675_d();
-        worldrenderer.func_181662_b(d3, d5, d2).func_181675_d();
-        worldrenderer.func_181662_b(d3, d4, d2).func_181675_d();
-        worldrenderer.func_181662_b(d3, d4, d1).func_181675_d();
-        worldrenderer.func_181662_b(d3, d5, d1).func_181675_d();
-        worldrenderer.func_181662_b(d3, d5, d1).func_181675_d();
-        worldrenderer.func_181662_b(d3, d4, d1).func_181675_d();
-        worldrenderer.func_181662_b(d2, d4, d0).func_181675_d();
-        worldrenderer.func_181662_b(d2, d5, d0).func_181675_d();
-        worldrenderer.func_181662_b(d2, d5, d0).func_181675_d();
-        worldrenderer.func_181662_b(d2, d4, d0).func_181675_d();
-        worldrenderer.func_181662_b(d1, d4, d0).func_181675_d();
-        worldrenderer.func_181662_b(d1, d5, d0).func_181675_d();
-        worldrenderer.func_181662_b(d1, d5, d0).func_181675_d();
-        worldrenderer.func_181662_b(d1, d4, d0).func_181675_d();
-        worldrenderer.func_181662_b(d0, d4, d1).func_181675_d();
-        worldrenderer.func_181662_b(d0, d5, d1).func_181675_d();
-        worldrenderer.func_181662_b(d0, d5, d1).func_181675_d();
-        worldrenderer.func_181662_b(d0, d4, d1).func_181675_d();
-        worldrenderer.func_181662_b(d0, d4, d2).func_181675_d();
-        worldrenderer.func_181662_b(d0, d5, d2).func_181675_d();
-        worldrenderer.func_181662_b(d0, d5, d2).func_181675_d();
-        worldrenderer.func_181662_b(d0, d4, d2).func_181675_d();
-        worldrenderer.func_181662_b(d1, d4, d3).func_181675_d();
-        worldrenderer.func_181662_b(d1, d5, d3).func_181675_d();
-        worldrenderer.func_181662_b(d1, d5, d3).func_181675_d();
-        worldrenderer.func_181662_b(d1, d4, d3).func_181675_d();
-        worldrenderer.func_181662_b(d2, d4, d3).func_181675_d();
-        worldrenderer.func_181662_b(d2, d5, d3).func_181675_d();
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(d2, d5, d3).endVertex();
+        worldrenderer.pos(d2, d4, d3).endVertex();
+        worldrenderer.pos(d3, d4, d2).endVertex();
+        worldrenderer.pos(d3, d5, d2).endVertex();
+        worldrenderer.pos(d3, d5, d2).endVertex();
+        worldrenderer.pos(d3, d4, d2).endVertex();
+        worldrenderer.pos(d3, d4, d1).endVertex();
+        worldrenderer.pos(d3, d5, d1).endVertex();
+        worldrenderer.pos(d3, d5, d1).endVertex();
+        worldrenderer.pos(d3, d4, d1).endVertex();
+        worldrenderer.pos(d2, d4, d0).endVertex();
+        worldrenderer.pos(d2, d5, d0).endVertex();
+        worldrenderer.pos(d2, d5, d0).endVertex();
+        worldrenderer.pos(d2, d4, d0).endVertex();
+        worldrenderer.pos(d1, d4, d0).endVertex();
+        worldrenderer.pos(d1, d5, d0).endVertex();
+        worldrenderer.pos(d1, d5, d0).endVertex();
+        worldrenderer.pos(d1, d4, d0).endVertex();
+        worldrenderer.pos(d0, d4, d1).endVertex();
+        worldrenderer.pos(d0, d5, d1).endVertex();
+        worldrenderer.pos(d0, d5, d1).endVertex();
+        worldrenderer.pos(d0, d4, d1).endVertex();
+        worldrenderer.pos(d0, d4, d2).endVertex();
+        worldrenderer.pos(d0, d5, d2).endVertex();
+        worldrenderer.pos(d0, d5, d2).endVertex();
+        worldrenderer.pos(d0, d4, d2).endVertex();
+        worldrenderer.pos(d1, d4, d3).endVertex();
+        worldrenderer.pos(d1, d5, d3).endVertex();
+        worldrenderer.pos(d1, d5, d3).endVertex();
+        worldrenderer.pos(d1, d4, d3).endVertex();
+        worldrenderer.pos(d2, d4, d3).endVertex();
+        worldrenderer.pos(d2, d5, d3).endVertex();
+        worldrenderer.pos(d3, d5, d3).endVertex();
+        worldrenderer.pos(d3, d5, d0).endVertex();
+        worldrenderer.pos(d0, d5, d0).endVertex();
+        worldrenderer.pos(d0, d5, d3).endVertex();
         Tessellator.getInstance().draw();
     }
 
@@ -5436,15 +5444,26 @@ public class Shaders
         }
     }
 
+    public static void pushProgram()
+    {
+        programStack.push(activeProgram);
+    }
+
+    public static void popProgram()
+    {
+        Program program = programStack.pop();
+        useProgram(program);
+    }
+
     public static void beginLeash()
     {
-        programStackLeash.push(activeProgram);
+        pushProgram();
         useProgram(ProgramBasic);
     }
 
     public static void endLeash()
     {
-        useProgram(programStackLeash.pop());
+        popProgram();
     }
 
     public static void enableFog()
@@ -5571,16 +5590,28 @@ public class Shaders
         return shaderPack == null ? null : shaderPack.getResourceAsStream(path);
     }
 
-    public static void nextAntialiasingLevel()
+    public static void nextAntialiasingLevel(boolean forward)
     {
-        configAntialiasingLevel += 2;
-        configAntialiasingLevel = configAntialiasingLevel / 2 * 2;
-
-        if (configAntialiasingLevel > 4)
+        if (forward)
         {
-            configAntialiasingLevel = 0;
+            configAntialiasingLevel += 2;
+
+            if (configAntialiasingLevel > 4)
+            {
+                configAntialiasingLevel = 0;
+            }
+        }
+        else
+        {
+            configAntialiasingLevel -= 2;
+
+            if (configAntialiasingLevel < 0)
+            {
+                configAntialiasingLevel = 4;
+            }
         }
 
+        configAntialiasingLevel = configAntialiasingLevel / 2 * 2;
         configAntialiasingLevel = Config.limit(configAntialiasingLevel, 0, 4);
     }
 
@@ -5639,9 +5670,8 @@ public class Shaders
                         Lang.loadLocaleData(inputstream, properties);
                         inputstream.close();
 
-                        for (Object o  : properties.keySet())
+                        for (String s4: (Set<String>)(Set<?>)properties.keySet())
                         {
-                        	String s4 = (String)o;
                             String s5 = properties.getProperty(s4);
                             shaderPackResources.put(s4, s5);
                         }

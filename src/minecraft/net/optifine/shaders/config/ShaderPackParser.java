@@ -22,6 +22,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import net.minecraft.src.Config;
 import net.optifine.expr.ExpressionFloatArrayCached;
 import net.optifine.expr.ExpressionFloatCached;
@@ -262,9 +263,8 @@ public class ShaderPackParser
         String s = "profile.";
         List<ShaderProfile> list = new ArrayList();
 
-        for (Object e : props.keySet())
+        for (String s1: (Set<String>)(Set<?>)props.keySet())
         {
-            String s1 = (String) e;
             if (s1.startsWith(s))
             {
                 String s2 = s1.substring(s.length());
@@ -296,9 +296,8 @@ public class ShaderPackParser
         Pattern pattern = Pattern.compile("program\\.([^.]+)\\.enabled");
         Map<String, IExpressionBool> map = new HashMap();
 
-        for (Object e : props.keySet())
+        for (String s1: (Set<String>)(Set<?>)props.keySet())
         {
-            String s1 = (String) e;
             Matcher matcher = pattern.matcher(s1);
 
             if (matcher.matches())
@@ -759,9 +758,8 @@ public class ShaderPackParser
         Map<String, IExpression> map = new HashMap();
         List<CustomUniform> list = new ArrayList();
 
-        for (Object e : props.keySet())
+        for (String s4: (Set<String>)(Set<?>)props.keySet())
         {
-            String s4 = (String) e;
             String[] astring = Config.tokenize(s4, ".");
 
             if (astring.length == 3)
@@ -850,9 +848,8 @@ public class ShaderPackParser
 
     public static void parseAlphaStates(Properties props)
     {
-        for (Object e : props.keySet())
+        for (String s: (Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String[] astring = Config.tokenize(s, ".");
 
             if (astring.length == 2)
@@ -915,9 +912,8 @@ public class ShaderPackParser
 
     public static void parseBlendStates(Properties props)
     {
-        for (Object e : props.keySet())
+        for (String s: (Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String[] astring = Config.tokenize(s, ".");
 
             if (astring.length == 2)
@@ -991,9 +987,8 @@ public class ShaderPackParser
 
     public static void parseRenderScales(Properties props)
     {
-        for (Object e : props.keySet())
+        for (String s: (Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String[] astring = Config.tokenize(s, ".");
 
             if (astring.length == 2)
@@ -1056,9 +1051,8 @@ public class ShaderPackParser
 
     public static void parseBuffersFlip(Properties props)
     {
-        for (Object e : props.keySet())
+        for (String s:(Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String[] astring = Config.tokenize(s, ".");
 
             if (astring.length == 3)

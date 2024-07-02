@@ -7,8 +7,16 @@ public class Sidebar extends Mod {
 	private boolean textShadow = false;
 	private boolean showBackground = true;
 	
+	public Sidebar() {
+		setHideNumbers((boolean) getFromFile("hideNumbers", textShadow));
+		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+	}
+	
 	public void setHideNumbers(boolean enabled) {
 		hideNumbers = enabled;
+		
+		setToFile("hideNumbers", enabled);
 	}
 	
 	public boolean isHideNumbersEnabled() {
@@ -17,6 +25,8 @@ public class Sidebar extends Mod {
 	
 	public void setTextShadow(boolean enabled) {
 		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
 	}
 	
 	public boolean isTextShadowEnabled() {
@@ -25,6 +35,8 @@ public class Sidebar extends Mod {
 	
 	public void setShowBackground(boolean enabled) {
 		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
 	}
 	
 	public boolean isShowBackgroundEnabled() {

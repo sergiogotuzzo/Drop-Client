@@ -2,6 +2,7 @@ package net.optifine;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNewLeaf;
 import net.minecraft.block.BlockOldLeaf;
@@ -128,7 +129,7 @@ public class SmartLeaves
 
                     if (ibakedmodel != null && ibakedmodel != modelmanager.getMissingModel())
                     {
-                        List list = ibakedmodel.getGeneralQuads();
+                        List<BakedQuad> list = ibakedmodel.getGeneralQuads();
 
                         if (list.size() == 0)
                         {
@@ -140,9 +141,8 @@ public class SmartLeaves
                         }
                         else
                         {
-                            for (Object e : list)
+                            for (BakedQuad bakedquad : list)
                             {
-                                BakedQuad bakedquad = (BakedQuad) e;
                                 List list1 = ibakedmodel.getFaceQuads(bakedquad.getFace());
 
                                 if (list1.size() > 0)

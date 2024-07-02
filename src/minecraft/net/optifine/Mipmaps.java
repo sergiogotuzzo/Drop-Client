@@ -173,9 +173,9 @@ public class Mipmaps
 
     private int averageColor(int i, int j)
     {
-        int k = (i & -16777216) >> 24 & 255;
-        int p = (j & -16777216) >> 24 & 255;
-        return (k + j >> 1 << 24) + ((k & 16711422) + (p & 16711422) >> 1);
+        int c = (i & -16777216) >> 24 & 255;
+        int f = (j & -16777216) >> 24 & 255;
+        return (c + j >> 1 << 24) + ((c & 16711422) + (f & 16711422) >> 1);
     }
 
     public static IntBuffer[] makeMipmapBuffers(Dimension[] mipmapDimensions, int[][] mipmapDatas)

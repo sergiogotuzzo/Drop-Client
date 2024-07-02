@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockPart;
@@ -41,7 +44,6 @@ import net.optifine.reflect.Reflector;
 import net.optifine.render.Blender;
 import net.optifine.util.StrUtils;
 import net.optifine.util.TextureUtils;
-import org.lwjgl.opengl.GL11;
 
 public class CustomItemProperties
 {
@@ -344,9 +346,9 @@ public class CustomItemProperties
             Set set = map.keySet();
             Map map1 = new LinkedHashMap();
 
-            for (Object e : set)
+            for (String s1:(Set<String>)(Set<?>) set)
             {
-                String s1 = (String) e;
+
                 String s2 = (String)map.get(s1);
                 s2 = fixTextureName(s2, basePath);
                 map1.put(s1, s2);
@@ -426,9 +428,8 @@ public class CustomItemProperties
             Set set = map.keySet();
             Map map1 = new LinkedHashMap();
 
-            for (Object e : set)
+            for (String s1:(Set<String>)(Set<?>)set)
             {
-                String s1 = (String) e;
                 String s2 = (String)map.get(s1);
                 s2 = fixModelName(s2, basePath);
                 map1.put(s1, s2);
@@ -635,9 +636,8 @@ public class CustomItemProperties
         {
             List list = new ArrayList();
 
-            for (Object e : map.keySet())
+            for (String s1: (Set<String>)(Set<?>)map.keySet())
             {
-                String s1 = (String) e;
                 String s2 = (String)map.get(s1);
                 String s3 = s1.substring(s.length());
                 NbtTagValue nbttagvalue = new NbtTagValue(s3, s2);
@@ -653,9 +653,8 @@ public class CustomItemProperties
     {
         Map map = new LinkedHashMap();
 
-        for (Object e: props.keySet())
+        for (String s:(Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String s1 = props.getProperty(s);
 
             if (s.startsWith(keyPrefix))
@@ -863,8 +862,7 @@ public class CustomItemProperties
                             this.mapBakedModelsTexture = new HashMap();
                         }
 
-                        String s3 = "item/" + s2;
-                        this.mapBakedModelsTexture.put(s3, ibakedmodel);
+                        this.mapBakedModelsTexture.put(s2, ibakedmodel);
                     }
                 }
             }
@@ -1182,8 +1180,7 @@ public class CustomItemProperties
                             this.mapBakedModelsFull = new HashMap();
                         }
 
-                        String s3 = "item/" + s2;
-                        this.mapBakedModelsFull.put(s3, ibakedmodel1);
+                        this.mapBakedModelsFull.put(s2, ibakedmodel1);
                     }
                 }
             }

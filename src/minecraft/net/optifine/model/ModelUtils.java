@@ -2,6 +2,7 @@ package net.optifine.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
@@ -14,7 +15,7 @@ public class ModelUtils
     {
         if (model != null)
         {
-            Config.dbg("Model: " + model + ", ao: " + model.isAmbientOcclusion() + ", gui3d: " + model.isGui3d() + ", builtIn: " + model.isBuiltInRenderer() + ", particle: " + model.getTexture());
+            Config.dbg("Model: " + model + ", ao: " + model.isAmbientOcclusion() + ", gui3d: " + model.isGui3d() + ", builtIn: " + model.isBuiltInRenderer() + ", particle: " + model.getParticleTexture());
             EnumFacing[] aenumfacing = EnumFacing.VALUES;
 
             for (int i = 0; i < aenumfacing.length; ++i)
@@ -29,11 +30,10 @@ public class ModelUtils
         }
     }
 
-    private static void dbgQuads(String name, List quads, String prefix)
+    private static void dbgQuads(String name, List<BakedQuad> quads, String prefix)
     {
-        for (Object e : quads)
+        for (BakedQuad bakedquad : quads)
         {
-            BakedQuad bakedquad = (BakedQuad) e;
             dbgQuad(name, bakedquad, prefix);
         }
     }
@@ -76,17 +76,16 @@ public class ModelUtils
             list1.add(list3);
         }
 
-        SimpleBakedModel simplebakedmodel = new SimpleBakedModel(list, list1, model.isAmbientOcclusion(), model.isGui3d(), model.getTexture(), model.getItemCameraTransforms());
+        SimpleBakedModel simplebakedmodel = new SimpleBakedModel(list, list1, model.isAmbientOcclusion(), model.isGui3d(), model.getParticleTexture(), model.getItemCameraTransforms());
         return simplebakedmodel;
     }
 
-    public static List duplicateQuadList(List lists)
+    public static List duplicateQuadList(List<BakedQuad> lists)
     {
         List list = new ArrayList();
 
-        for (Object e : lists)
+        for (BakedQuad bakedquad : lists)
         {
-            BakedQuad bakedquad = (BakedQuad) e;
             BakedQuad bakedquad1 = duplicateQuad(bakedquad);
             list.add(bakedquad1);
         }

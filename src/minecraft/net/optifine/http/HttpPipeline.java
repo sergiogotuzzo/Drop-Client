@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import net.minecraft.src.Config;
 
 public class HttpPipeline
@@ -212,9 +213,8 @@ public class HttpPipeline
 
     public static boolean hasActiveRequests()
     {
-        for (Object e: mapConnections.values())
+        for (HttpPipelineConnection httppipelineconnection : (Iterable<HttpPipelineConnection>)mapConnections.values())
         {
-            HttpPipelineConnection httppipelineconnection = (HttpPipelineConnection) e;
             if (httppipelineconnection.hasActiveRequests())
             {
                 return true;

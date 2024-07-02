@@ -3,6 +3,7 @@ package net.optifine.util;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.src.Config;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -73,18 +74,18 @@ public class ChunkUtils
             chunk.setHasEntities(false);
             List list2 = new ArrayList();
 
-            for (Object e : list)
+            for (Object o:list)
             {
-                Field field1 = (Field) e;
+            	Field field1 = (Field)o;
                 list2.add(field1.get(chunk));
             }
 
             chunk.setHasEntities(true);
             List list3 = new ArrayList();
 
-            for (Object e: list)
+            for (Object o: list)
             {
-                Field field2 = (Field) e;
+            	Field field2 = (Field)o;
                 list3.add(field2.get(chunk));
             }
 

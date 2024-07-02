@@ -8,6 +8,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.minecraft.src.Config;
 
 public class ExpressionParser
@@ -246,15 +247,15 @@ public class ExpressionParser
     {
         Token token = (Token)deque.peek();
 
-        if (tokens != null && token.getType() == TokenType.BRACKET_OPEN)
+        if (token != null && token.getType() == TokenType.BRACKET_OPEN)
         {
             FunctionType functiontype1 = FunctionType.parse(token.getText());
-            checkNull(functiontype1, "Unknown function: " + token);
+            checkNull(functiontype1, "Unknown function: " + token.getType());
             return functiontype1;
         }
         else
         {
-            FunctionType functiontype = FunctionType.parse(token.getText());
+            FunctionType functiontype = FunctionType.parse(tokens.getText());
 
             if (functiontype == null)
             {
@@ -284,8 +285,8 @@ public class ExpressionParser
         }
 
         Token token1 = (Token)deque.poll();
-        Deque<Token> deque2 = getGroup(deque, TokenType.BRACKET_CLOSE, true);
-        IExpression[] aiexpression = this.parseExpressions(deque2);
+        Deque<Token> dequeBracketed = getGroup(deque, TokenType.BRACKET_CLOSE, true);
+        IExpression[] aiexpression = this.parseExpressions(dequeBracketed);
         return makeFunction(type, aiexpression);
     }
 
@@ -295,8 +296,8 @@ public class ExpressionParser
 
         while (true)
         {
-            Deque<Token> deque2 = getGroup(deque, TokenType.COMMA, false);
-            IExpression iexpression = this.parseInfix(deque2);
+            Deque<Token> dequeComma = getGroup(deque, TokenType.COMMA, false);
+            IExpression iexpression = this.parseInfix(dequeComma);
 
             if (iexpression == null)
             {
@@ -372,13 +373,13 @@ public class ExpressionParser
 
     private IExpression makeBracketed(Token token, Deque<Token> deque) throws ParseException
     {
-        Deque<Token> deque2 = getGroup(deque, TokenType.BRACKET_CLOSE, true);
-        return this.parseInfix(deque2);
+        Deque<Token> dequeBracketed = getGroup(deque, TokenType.BRACKET_CLOSE, true);
+        return this.parseInfix(dequeBracketed);
     }
 
     private static Deque<Token> getGroup(Deque<Token> deque, TokenType tokenTypeEnd, boolean tokenEndRequired) throws ParseException
     {
-        Deque<Token> deque3 = new ArrayDeque();
+        Deque<Token> dequeGroup = new ArrayDeque();
         int i = 0;
         Iterator iterator = deque.iterator();
 
@@ -389,10 +390,10 @@ public class ExpressionParser
 
             if (i == 0 && token.getType() == tokenTypeEnd)
             {
-                return deque3;
+                return dequeGroup;
             }
 
-            deque3.add(token);
+            dequeGroup.add(token);
 
             if (token.getType() == TokenType.BRACKET_OPEN)
             {
@@ -411,7 +412,7 @@ public class ExpressionParser
         }
         else
         {
-            return deque3;
+            return dequeGroup;
         }
     }
 

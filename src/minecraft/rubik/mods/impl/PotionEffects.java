@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -16,23 +14,37 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class PotionEffects extends ModDraggable {
-	private float zLevel;
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
-    private boolean showTime = true;
+    private boolean showName = true;
     private boolean textShadow = true;
-	private ColorManager color = new ColorManager(Color.WHITE);
+    private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE);
+    private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE);
+    private boolean nameTextChroma = false;
+    private boolean durationTextChroma = false;
+    private boolean right = false;
+    private boolean blink = true;
     
     private final int EFFECT_HEIGHT = 20;
     private final int EFFECT_WIDTH = 22;
+    
+    public PotionEffects() {
+    	setShowName((boolean) getFromFile("showName", showName));
+		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
+		setDurationTextColor((int) ((long) getFromFile("durationTextColor", durationTextColor.getRGB())));
+		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextChroma));
+		setDurationTextChroma((boolean) getFromFile("durationTextChroma", durationTextChroma));
+		setRight((boolean) getFromFile("right", right));
+	}
 
-    @Override
+	@Override
     public int getWidth() {
     	Collection<PotionEffect> activePotionEffects = mc.thePlayer.getActivePotionEffects();
     	
-        return activePotionEffects.size() == 0 ?
+        return showName ? activePotionEffects.size() == 0 ?
         		EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(dummyPotionEffects)) :
-        		EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(activePotionEffects));
+        		EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(activePotionEffects)) : EFFECT_WIDTH + font.getStringWidth("00:00");
     }
 
     @Override
@@ -49,7 +61,7 @@ public class PotionEffects extends ModDraggable {
         for (int i = 0; i < mc.thePlayer.getActivePotionEffects().size(); i++) {
             PotionEffect potionEffect = (PotionEffect) mc.thePlayer.getActivePotionEffects().toArray()[i];
 
-            renderPotionEffect(pos, offsetY, potionEffect);
+            drawPotionEffect(pos, offsetY, potionEffect);
             
             offsetY += EFFECT_HEIGHT;
         }
@@ -63,7 +75,7 @@ public class PotionEffects extends ModDraggable {
             for (int i = 0; i < dummyPotionEffects.size(); i++) {
                 PotionEffect potionEffect = (PotionEffect) dummyPotionEffects.toArray()[i];
 
-                renderPotionEffect(pos, offsetY, potionEffect);
+                drawPotionEffect(pos, offsetY, potionEffect);
                 
                 offsetY += EFFECT_HEIGHT;
             }
@@ -93,63 +105,50 @@ public class PotionEffects extends ModDraggable {
         return getPotionName(longestEffect);
     }
 
-    private void renderPotionEffect(ScreenPosition pos, int offsetY, PotionEffect pe) {
+    private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect pe) {
         if (pe == null) {
             return;
         }
 
         Potion potion = Potion.potionTypes[pe.getPotionID()];
+        
         int i = 2;
+        int iconX = right ? showName ? pos.getAbsoluteX() + font.getStringWidth(getLongestEffectName(mc.thePlayer.getActivePotionEffects())) + i * 2 : pos.getAbsoluteX() + font.getStringWidth("00:00") + i * 2 : pos.getAbsoluteX() + i;
+        int nameTextX = right ? pos.getAbsoluteX() + i : pos.getAbsoluteX() + EFFECT_WIDTH;
+        int durationTextX = right ? pos.getAbsoluteX() + i : pos.getAbsoluteX() + EFFECT_WIDTH;
 
         if (potion.hasStatusIcon()) {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
             
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            
             int iconIndex = potion.getStatusIconIndex();
               
-            drawTexturedModalRect(pos.getAbsoluteX(), pos.getAbsoluteY() + offsetY + i, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+            drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + i, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
 
         String potionName = getPotionName(pe);
         String durationString = Potion.getDurationString(pe);
-
-        if (textShadow) {
-        	if (showTime) {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + EFFECT_WIDTH, pos.getAbsoluteY() + offsetY + i, color.getRGB());
-
-                if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawStringWithShadow(durationString, pos.getAbsoluteX() + EFFECT_WIDTH, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, color.getRGB());
+        
+        if (showName) {
+        	drawText(potionName, nameTextX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), textShadow, nameTextChroma);
+        	
+        	if (blink) {
+        		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), textShadow, durationTextChroma);
                 }
         	} else {
-        		font.drawStringWithShadow(potionName, pos.getAbsoluteX() + EFFECT_WIDTH, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, color.getRGB());
+        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), textShadow, durationTextChroma);
         	}
         } else {
-            if (showTime) {
-            	font.drawString(potionName, pos.getAbsoluteX() + EFFECT_WIDTH, pos.getAbsoluteY() + offsetY + i, color.getRGB());
-
-                if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-                    font.drawString(durationString, pos.getAbsoluteX() + EFFECT_WIDTH, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, color.getRGB());
+        	if (blink) {
+        		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), textShadow, durationTextChroma);
                 }
-            } else {
-            	font.drawString(potionName, pos.getAbsoluteX() + EFFECT_WIDTH, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, color.getRGB());
-            }
+        	} else {
+        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), textShadow, durationTextChroma);
+        	}
         }
-    }
-
-    private void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)
-    {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        
-        worldrenderer.func_181668_a(7, DefaultVertexFormats.field_181707_g);
-        worldrenderer.func_181662_b((double)(x + 0), (double)(y + height), (double)this.zLevel).func_181673_a((double)((float)(textureX + 0) * f), (double)((float)(textureY + height) * f1)).func_181675_d();
-        worldrenderer.func_181662_b((double)(x + width), (double)(y + height), (double)this.zLevel).func_181673_a((double)((float)(textureX + width) * f), (double)((float)(textureY + height) * f1)).func_181675_d();
-        worldrenderer.func_181662_b((double)(x + width), (double)(y + 0), (double)this.zLevel).func_181673_a((double)((float)(textureX + width) * f), (double)((float)(textureY + 0) * f1)).func_181675_d();
-        worldrenderer.func_181662_b((double)(x + 0), (double)(y + 0), (double)this.zLevel).func_181673_a((double)((float)(textureX + 0) * f), (double)((float)(textureY + 0) * f1)).func_181675_d();
-        
-        tessellator.draw();
     }
     
     private String getPotionName(PotionEffect pe) {
@@ -169,23 +168,83 @@ public class PotionEffects extends ModDraggable {
     	return potionName;
     }
     
-    public void setShowTime(boolean enabled) {
-    	showTime = enabled;
+    public void setShowName(boolean enabled) {
+    	showName = enabled;
+		
+    	setToFile("showName", enabled);
     }
 
-    public boolean isShowTimeEnabled() {
-        return showTime;
+    public boolean isShowNameEnabled() {
+        return showName;
     }
 
 	public void setTextShadow(boolean enabled) {
 		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
 	}
 	
 	public boolean isTextShadowEnabled() {
 		return textShadow;
 	}
+	
+	public void setNameTextColor(int rgb) {
+		this.nameTextColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("nameTextColor", rgb);
+	}
     
-    public ColorManager getColor() {
-		return color;
+    public ColorManager getNameTextColor() {
+		return nameTextColor;
+	}
+    
+    public void setDurationTextColor(int rgb) {
+		this.durationTextColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("durationTextColor", rgb);
+	}
+    
+    public ColorManager getDurationTextColor() {
+		return durationTextColor;
+	}
+	
+	public void setNameTextChroma(boolean enabled) {
+		this.nameTextChroma = enabled;
+		
+		setToFile("nameTextChroma", enabled);
+	}
+	
+	public boolean isNameTextChromaEnabled() {
+		return nameTextChroma;
+	}
+	
+	public void setDurationTextChroma(boolean enabled) {
+		this.durationTextChroma = enabled;
+		
+		setToFile("durationTextChroma", enabled);
+	}
+	
+	public boolean isDurationTextChromaEnabled() {
+		return durationTextChroma;
+	}
+	
+	public void setRight(boolean enabled) {
+		this.right = enabled;
+		
+		setToFile("right", enabled);
+	}
+	
+	public boolean isRightEnabled() {
+		return right;
+	}
+	
+	public void setBlink(boolean enabled) {
+		this.blink = enabled;
+		
+		setToFile("blink", enabled);
+	}
+	
+	public boolean isBlinkEnabled() {
+		return blink;
 	}
 }

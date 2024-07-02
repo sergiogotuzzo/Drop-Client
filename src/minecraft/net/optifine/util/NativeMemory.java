@@ -68,8 +68,8 @@ public class NativeMemory
                 method.setAccessible(true);
             }
 
-            final Method method1 = method;
-            final Object o= object;
+            final Method method_f = method;
+            final Object o_f= object;
             LongSupplier longsupplier = new LongSupplier()
             {
                 private boolean disabled = false;
@@ -83,7 +83,7 @@ public class NativeMemory
                     {
                         try
                         {
-                            return (long) method1.invoke(o);
+                            return (long) method_f.invoke(o_f);
                         }
                         catch (Throwable throwable)
                         {

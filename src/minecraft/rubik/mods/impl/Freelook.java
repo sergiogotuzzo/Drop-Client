@@ -3,8 +3,8 @@ package rubik.mods.impl;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
-import rubik.event.EventTarget;
-import rubik.event.impl.KeyEvent;
+import rubik.events.EventTarget;
+import rubik.events.impl.KeyEvent;
 import rubik.mods.Mod;
 
 public class Freelook extends Mod {
@@ -18,6 +18,12 @@ public class Freelook extends Mod {
 	private float cameraPitch = 0F;
 	
 	private int previousPerspective = 0;
+	
+	public Freelook() {
+		setReturnOnRelease((boolean) getFromFile("returnOnRelease", returnOnRelease));
+		setInvertYaw((boolean) getFromFile("invertYaw", invertYaw));
+		setInvertPitch((boolean) getFromFile("invertPitch", invertPitch));
+	}
 	
 	@EventTarget
 	public void onKey(KeyEvent e) {
@@ -84,6 +90,8 @@ public class Freelook extends Mod {
 	
 	public void setReturnOnRelease(boolean enabled) {
 		this.returnOnRelease = enabled;
+		
+		setToFile("returnOnRelease", enabled);
 	}
 	
 	public boolean isReturnOnReleaseEnabled() {
@@ -92,6 +100,8 @@ public class Freelook extends Mod {
 	
 	public void setInvertYaw(boolean enabled) {
 		this.invertYaw = enabled;
+		
+		setToFile("invertYaw", enabled);
 	}
 	
 	public boolean isInvertYawEnabled() {
@@ -100,6 +110,8 @@ public class Freelook extends Mod {
 	
 	public void setInvertPitch(boolean enabled) {
 		this.invertPitch = enabled;
+		
+		setToFile("invertPitch", enabled);
 	}
 	
 	public boolean isInvertPitchEnabled() {

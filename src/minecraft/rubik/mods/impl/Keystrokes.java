@@ -1,10 +1,14 @@
 package rubik.mods.impl;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.input.Mouse;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
@@ -14,8 +18,12 @@ public class Keystrokes extends ModDraggable {
 	public static enum KeystrokesMode {
 		WASD(Key.W, Key.A, Key.S, Key.D),
 		WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
-		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 40, 58, 12)),
-		WASD_MOUSE_JUMP(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "----", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 60, 58, 12));
+		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 40, 58, 10)),
+		WASD_MOUSE_JUMP(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 60, 58, 10)),
+		MOUSE(new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 0, 28, 18), new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 30, 0, 28, 18)),
+		JUMP(new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 0, 58, 10)),
+		MOUSE_JUMP(new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 0, 28, 18), new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 30, 0, 28, 18), new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 20, 58, 10)),
+		NONE();
 	
 		private final Key[] keys;
 		private int width = 0;
@@ -104,11 +112,42 @@ public class Keystrokes extends ModDraggable {
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 
 	private boolean textShadow = true;
-	private ColorManager pressedColor = new ColorManager(Color.BLACK);
-	private ColorManager releasedColor = new ColorManager(Color.WHITE);
+	private ColorManager pressedTextColor = ColorManager.fromColor(Color.BLACK);
+	private ColorManager releasedTextColor = ColorManager.fromColor(Color.WHITE);
+	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
 	private boolean arrows = false;
+	private ColorManager pressedBackgroundColor = ColorManager.fromColor(Color.WHITE).setAlpha(102);
+	private ColorManager releasedBackgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
+	private boolean showLeftCPS = false;
+	private boolean showRightCPS = false;
+	private boolean pressedTextChroma = false;
+	private boolean releasedTextChroma = false;
+	
+	private List<Long> leftClicks = new ArrayList<>();
+    private boolean wasLeftPressed;
+    private long lastLeftPressed;
+    
+    private List<Long> rightClicks = new ArrayList<>();
+    private boolean wasRightPressed;
+    private long lastRightPressed;
+	
+	public Keystrokes() {
+		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
+		setReleasedTextColor((int) ((long) getFromFile("releasedTextColor", releasedTextColor.getRGB())));
+		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
+		setShowMouse((boolean) getFromFile("showMouse", showMouse));
+		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
+		setArrows((boolean) getFromFile("arrows", arrows));
+		setPressedBackgroundColor((int) ((long) getFromFile("pressedBackgroundColor", pressedBackgroundColor.getRGB())));
+		setReleasedBackgroundColor((int) ((long) getFromFile("releasedBackgroundColor", releasedBackgroundColor.getRGB())));
+		setShowLeftCPS((boolean) getFromFile("showLeftCPS", showLeftCPS));
+		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
+		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
+		setReleasedTextChroma((boolean) getFromFile("releasedTextChroma", releasedTextChroma));
+	}
 
 	@Override
 	public int getWidth() {
@@ -122,99 +161,187 @@ public class Keystrokes extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
+		final boolean leftPressed = Mouse.isButtonDown(0);
+        final boolean rightPressed = Mouse.isButtonDown(1);
+
+        if (leftPressed != this.wasLeftPressed) {
+            this.lastLeftPressed = System.currentTimeMillis();
+            this.wasLeftPressed = leftPressed;
+
+            if (leftPressed) {
+                this.leftClicks.add(this.lastLeftPressed);
+            }
+        }
+
+        if (rightPressed != this.wasRightPressed) {
+            this.lastRightPressed = System.currentTimeMillis();
+            this.wasRightPressed = rightPressed;
+
+            if (rightPressed) {
+                this.rightClicks.add(this.lastRightPressed);
+            }
+        }
+        
 	    for (Key key : mode.getKeys()) {
 	        int textWidth = font.getStringWidth(key.getName());
 	        
 	        if (arrows) {
-	        	if (key.getName() == "W") {
-	        		key.setName("▲");
-	        	}
-	        	
-	        	if (key.getName() == "A") {
-	        		key.setName("◄");
-	        	}
-	        	
-	        	if (key.getName() == "S") {
-	        		key.setName("▼");
-	        	}
-	        	
-	        	if (key.getName() == "D") {
-	        		key.setName("►");
+	        	switch (key.getName()) {
+		        	case "W":
+		        		key.setName("▲");
+		        		break;
+		        	case "A":
+		        		key.setName("◄");
+		        		break;
+		        	case "S":
+		        		key.setName("▼");
+		        		break;
+		        	case "D":
+		        		key.setName("►");
+		        		break;
 	        	}
 	        } else {
-	        	if (key.getName() == "▲") {
-	        		key.setName("W");
-	        	}
-	        	
-	        	if (key.getName() == "◄") {
-	        		key.setName("A");
-	        	}
-	        	
-	        	if (key.getName() == "▼") {
-	        		key.setName("S");
-	        	}
-	        	
-	        	if (key.getName() == "►") {
-	        		key.setName("D");
+	        	switch (key.getName()) {
+		        	case "▲":
+		        		key.setName("W");
+		        		break;
+		        	case "◄":
+		        		key.setName("A");
+		        		break;
+		        	case "▼":
+		        		key.setName("S");
+		        		break;
+		        	case "►":
+		        		key.setName("D");
+		        		break;
 	        	}
 	        }
 	        
-	        Gui.drawRect(
+	        drawRect(
 	                pos.getAbsoluteX() + key.getX(),
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? new Color(255, 255, 255, 102).getRGB() : new Color(0, 0, 0, 102).getRGB()
+	                key.isDown() ? pressedBackgroundColor.getRGB() : releasedBackgroundColor.getRGB()
 	                );
 	        
-	        if (textShadow) {
-	        	font.drawStringWithShadow(
-		                key.getName(),
-		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
-		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-		                key.isDown() ? pressedColor.getRGB() : releasedColor.getRGB()
-		                );
-	        } else {
-	        	font.drawString(
-		                key.getName(),
-		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
-		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-		                key.isDown() ? pressedColor.getRGB() : releasedColor.getRGB()
-		                );
+	        int addY = 0;
+	        
+	        if (key.getName() == "LMB" && showLeftCPS) {
+	        	addY = -3;
+	        	
+	        	String text = getCPS(leftClicks) + " CPS";
+	        	
+	        	drawScaledText(
+		        		text,
+		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2 + (font.getStringWidth(text) > 28 ? 0 : 1),
+		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + 6,
+		                0.5,
+		                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
+		                textShadow,
+		                key.isDown() ? pressedTextChroma : releasedTextChroma
+		        		);
+	        } else if (key.getName() == "RMB" && showRightCPS) {
+	        	addY = -3;
+	        	
+	        	String text = getCPS(rightClicks) + " CPS";
+	        	
+	        	drawScaledText(
+		        		text,
+		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2 + (font.getStringWidth(text) > 28 ? 0 : 1),
+		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + 6,
+		                0.5,
+		                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
+		                textShadow,
+		                key.isDown() ? pressedTextChroma : releasedTextChroma
+		        		);
 	        }
+	        
+	        drawText(
+	        		key.getName(),
+	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + addY,
+	                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
+	                textShadow,
+	                key.isDown() ? pressedTextChroma : releasedTextChroma
+	        		);
 	    }
 	}
 	
+	private int getCPS(List<Long> clicks) {
+        final long time = System.currentTimeMillis();
+
+        clicks.removeIf((aLong) -> aLong + 1000 < time);
+
+        return clicks.size();
+    }
+	
 	private void updateMode() {
-		if (showMouse && showSpacebar) {
+		if (showMovementKeys && showMouse && showSpacebar) {
 			mode = KeystrokesMode.WASD_MOUSE_JUMP;
-		} else if (showMouse && !showSpacebar) {
+		} else if (showMovementKeys && showMouse && !showSpacebar) {
 			mode = KeystrokesMode.WASD_MOUSE;
-		} else if (!showMouse && showSpacebar) {
+		} else if (showMovementKeys && !showMouse && showSpacebar) {
 			mode = KeystrokesMode.WASD_JUMP;
-		} else if (!showMouse && !showSpacebar) {
+		} else if (showMovementKeys && !showMouse && !showSpacebar) {
 			mode = KeystrokesMode.WASD;
+		} else if (!showMovementKeys && showMouse && !showSpacebar) {
+			mode = KeystrokesMode.MOUSE;
+		} else if (!showMovementKeys && !showMouse && showSpacebar) {
+			mode = KeystrokesMode.JUMP;
+		} else if (!showMovementKeys && showMouse && showSpacebar) {
+			mode = KeystrokesMode.MOUSE_JUMP;
+		} else if (!showMovementKeys && !showMouse && !showSpacebar) {
+			mode = KeystrokesMode.NONE;
 		}
 	}
 	
 	public void setTextShadow(boolean enabled) {
 		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
 	}
 	
 	public boolean isTextShadowEnabled() {
 		return textShadow;
 	}
 	
-	public ColorManager getPressedColor() {
-		return pressedColor;
+	public void setPressedTextColor(int rgb) {
+		this.pressedTextColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("pressedColor", rgb);
 	}
 	
-	public ColorManager getReleasedColor() {
-		return releasedColor;
+	public ColorManager getPressedTextColor() {
+		return pressedTextColor;
+	}
+	
+	public void setReleasedTextColor(int rgb) {
+		this.releasedTextColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("releasedTextColor", rgb);
+	}
+	
+	public ColorManager getReleasedTextColor() {
+		return releasedTextColor;
+	}
+	
+	public void setShowMovementKeys(boolean enabled) {
+		showMovementKeys = enabled;
+		
+		setToFile("showMovementKeys", enabled);
+		
+		updateMode();
+	}
+	
+	public boolean isShowMovementKeysEnabled() {
+		return showMovementKeys;
 	}
 	
 	public void setShowMouse(boolean enabled) {
 		showMouse = enabled;
+		
+		setToFile("showMouse", enabled);
 		
 		updateMode();
 	}
@@ -226,6 +353,8 @@ public class Keystrokes extends ModDraggable {
 	public void setShowSpacebar(boolean enabled) {
 		showSpacebar = enabled;
 		
+		setToFile("showSpacebar", enabled);
+		
 		updateMode();
 	}
 	
@@ -235,9 +364,71 @@ public class Keystrokes extends ModDraggable {
 	
 	public void setArrows(boolean enabled) {
 		arrows = enabled;
+		
+		setToFile("arrows", enabled);
 	}
 	
 	public boolean isArrowsEnabled() {
 		return arrows;
+	}
+	
+	public void setPressedBackgroundColor(int rgb) {
+		this.pressedBackgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
+		
+		setToFile("pressedBackgroundColor", rgb);
+	}
+	
+	public ColorManager getPressedBackgroundColor() {
+		return pressedBackgroundColor;
+	}
+	
+	public void setReleasedBackgroundColor(int rgb) {
+		this.releasedBackgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
+		
+		setToFile("releasedBackgroundColor", rgb);
+	}
+	
+	public ColorManager getReleasedBackgroundColor() {
+		return releasedBackgroundColor;
+	}
+	
+	public void setShowLeftCPS(boolean enabled) {
+		showLeftCPS = enabled;
+		
+		setToFile("showLeftCPS", enabled);
+	}
+	
+	public boolean isShowLeftCPSEnabled() {
+		return showLeftCPS;
+	}
+	
+	public void setShowRightCPS(boolean enabled) {
+		showRightCPS = enabled;
+		
+		setToFile("showRightCPS", enabled);
+	}
+	
+	public boolean isShowRightCPSEnabled() {
+		return showRightCPS;
+	}
+	
+	public void setPressedTextChroma(boolean enabled) {
+		this.pressedTextChroma = enabled;
+		
+		setToFile("pressedTextChroma", enabled);
+	}
+	
+	public boolean isPressedTextChromaEnabled() {
+		return pressedTextChroma;
+	}
+	
+	public void setReleasedTextChroma(boolean enabled) {
+		this.releasedTextChroma = enabled;
+		
+		setToFile("releasedTextChroma", enabled);
+	}
+	
+	public boolean isReleasedTextChromaEnabled() {
+		return releasedTextChroma;
 	}
 }

@@ -33,10 +33,13 @@ public class GuiConnecting extends GuiScreen
     {
         this.mc = mcIn;
         this.previousGuiScreen = p_i1181_1_;
-        ServerAddress serveraddress = ServerAddress.func_78860_a(p_i1181_3_.serverIP);
+        ServerAddress serveraddress = ServerAddress.fromString(p_i1181_3_.serverIP);
         mcIn.loadWorld((WorldClient)null);
         mcIn.setServerData(p_i1181_3_);
         this.connect(serveraddress.getIP(), serveraddress.getPort());
+        
+        Client.lastServerIp = serveraddress.getIP();
+        Client.lastServerPort = serveraddress.getPort();
     }
 
     public GuiConnecting(GuiScreen p_i1182_1_, Minecraft mcIn, String hostName, int port)
@@ -45,6 +48,9 @@ public class GuiConnecting extends GuiScreen
         this.previousGuiScreen = p_i1182_1_;
         mcIn.loadWorld((WorldClient)null);
         this.connect(hostName, port);
+        
+        Client.lastServerIp = hostName;
+        Client.lastServerPort = port;
     }
 
     private void connect(final String ip, final int port)
@@ -64,12 +70,12 @@ public class GuiConnecting extends GuiScreen
                     }
 
                     inetaddress = InetAddress.getByName(ip);
-                    GuiConnecting.this.networkManager = NetworkManager.func_181124_a(inetaddress, port, GuiConnecting.this.mc.gameSettings.func_181148_f());
+                    GuiConnecting.this.networkManager = NetworkManager.createNetworkManagerAndConnect(inetaddress, port, GuiConnecting.this.mc.gameSettings.isUsingNativeTransport());
                     GuiConnecting.this.networkManager.setNetHandler(new NetHandlerLoginClient(GuiConnecting.this.networkManager, GuiConnecting.this.mc, GuiConnecting.this.previousGuiScreen));
                     GuiConnecting.this.networkManager.sendPacket(new C00Handshake(47, ip, port, EnumConnectionState.LOGIN));
                     GuiConnecting.this.networkManager.sendPacket(new C00PacketLoginStart(GuiConnecting.this.mc.getSession().getProfile()));
                     
-                    Client.getInstance().getDiscordRichPresence().update("Playing " + (ip) + (port != 25565 ? ":" + port : ""), "In Game");
+                    Client.getInstance().getDiscordRichPresence().update("Playing " + mc.getCurrentServerData().serverIP, "In Game");
                 }
                 catch (UnknownHostException unknownhostexception)
                 {
@@ -79,7 +85,7 @@ public class GuiConnecting extends GuiScreen
                     }
 
                     GuiConnecting.logger.error((String)"Couldn\'t connect to server", (Throwable)unknownhostexception);
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Unknown host"}), ip, port));
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {"Unknown host"})));
                 }
                 catch (Exception exception)
                 {
@@ -97,7 +103,7 @@ public class GuiConnecting extends GuiScreen
                         s = s.replaceAll(s1, "");
                     }
 
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {s}), ip, port));
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {s})));
                 }
             }
         }).start();

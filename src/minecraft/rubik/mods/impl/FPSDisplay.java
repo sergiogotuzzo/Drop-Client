@@ -2,7 +2,6 @@ package rubik.mods.impl;
 
 import java.awt.Color;
 
-import net.minecraft.client.gui.Gui;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
@@ -10,7 +9,17 @@ import rubik.mods.ModDraggable;
 public class FPSDisplay extends ModDraggable {
 	private boolean showBackground = false;
 	private boolean textShadow = true;
-	private ColorManager color = new ColorManager(Color.WHITE);
+	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
+	private ColorManager backgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
+	private boolean textChroma = false;
+	
+	public FPSDisplay() {
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
+		setBackgroundColor((int) ((long) getFromFile("backgroundColor", backgroundColor.getRGB())));
+		setTextChroma((boolean) getFromFile("textChroma", textChroma));
+	}
 	
 	@Override
 	public int getWidth() {
@@ -19,34 +28,34 @@ public class FPSDisplay extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return 16;
+		return 18;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			Gui.drawRect(
+			drawRect(
 					pos.getAbsoluteX(),
 					pos.getAbsoluteY(),
 					pos.getAbsoluteX() + getWidth(),
 					pos.getAbsoluteY() + getHeight(),
-					new Color(0, 0, 0, 102).getRGB()
+					backgroundColor.getRGB()
 					);
 		}
-			
-		if (textShadow) {
-			font.drawStringWithShadow(getFPSText(), pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(getFPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-		} else {
-			font.drawString(getFPSText(), pos.getAbsoluteX() + 1 + (getWidth() - font.getStringWidth(getFPSText())) / 2, pos.getAbsoluteY() + (getHeight() - (getHeight() / 2)) / 2, color.getRGB());
-		}
+		
+		drawCenteredText(getFPSText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);
 	}
 	
 	private String getFPSText() {
-		return showBackground ? mc.getDebugFPS() + " FPS" : "[" + mc.getDebugFPS() + " FPS]";
+		String fpsText = mc.getDebugFPS() + " FPS";
+		
+		return showBackground ? fpsText : "[" + fpsText + "]";
 	}
 	
 	public void setShowBackground(boolean enabled) {
 		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
 	}
 	
 	public boolean isShowBackgroundEnabled() {
@@ -55,13 +64,41 @@ public class FPSDisplay extends ModDraggable {
 	
 	public void setTextShadow(boolean enabled) {
 		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
 	}
 	
 	public boolean isTextShadowEnabled() {
 		return textShadow;
 	}
 	
-	public ColorManager getColor() {
-		return color;
+	public void setTextColor(int rgb) {
+		this.textColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("textColor", rgb);
+	}
+	
+	public ColorManager getTextColor() {
+		return textColor;
+	}
+	
+	public void setBackgroundColor(int rgb) {
+		this.backgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
+		
+		setToFile("backgroundColor", rgb);
+	}
+	
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
+	}
+	
+	public void setTextChroma(boolean enabled) {
+		this.textChroma = enabled;
+		
+		setToFile("textChroma", enabled);
+	}
+	
+	public boolean isTextChromaEnabled() {
+		return textChroma;
 	}
 }

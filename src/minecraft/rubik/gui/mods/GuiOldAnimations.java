@@ -5,37 +5,31 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.EnumChatFormatting;
+import rubik.Client;
+import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.OldAnimations;
 
-public class GuiOldAnimations extends GuiScreen {
+public class GuiOldAnimations extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private OldAnimations mod = ModInstances.getOldAnimationsMod();
+	private final OldAnimations mod = ModInstances.getOldAnimationsMod();
 	
 	public GuiOldAnimations(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
-	
-	@Override
-    public void initGui()
-    {
-        this.buttonList.clear();
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
         
-        int i = -16;
- 
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 24 + i, 98, 20, I18n.format(mod.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + 2, this.height / 4 + 24 + i, 98, 20, I18n.format((mod.isOldFishingRodEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Old Fishing Rod", new Object[0])));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isOldBowEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Old Bow", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format((mod.isBlockHitEnabled() ? EnumChatFormatting.GREEN : EnumChatFormatting.RED) + "Block Hit", new Object[0])));
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+        this.drawCenteredString(this.fontRendererObj, "Old Animations Settings", this.width / 2, 30, 0xFFFFFFFF);
+
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        switch (button.id)
-        {
+    protected void actionPerformed(GuiButton button) throws IOException {
+        switch (button.id) {
             case 0:
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
@@ -55,14 +49,25 @@ public class GuiOldAnimations extends GuiScreen {
             	mod.setBlockHit(!mod.isBlockHitEnabled());
             	this.initGui();
                 break;
+            case 6:
+            	mod.setOldSneaking(!mod.isOldSneakingEnabled());
+            	this.initGui();
+            	break;
         }
     }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
-        this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, I18n.format("Old Animations Settings", new Object[0]), this.width / 2, 40, 0xFFFFFFFF);
-        super.drawScreen(mouseX, mouseY, partialTicks);
+	
+	@Override
+    public void initGui() {
+        this.buttonList.clear();
+        
+        int i = -12;
+        int j = -155;
+        
+        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, mod.isEnabled() ? "Enabled" : "Disabled"));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Old Fishing Rod: " + (mod.isOldFishingRodEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Old Bow: " + (mod.isOldBowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Block Hit: " + (mod.isBlockHitEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Old Sneaking: " + (mod.isOldSneakingEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

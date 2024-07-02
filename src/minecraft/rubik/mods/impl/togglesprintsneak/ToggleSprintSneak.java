@@ -2,7 +2,6 @@ package rubik.mods.impl.togglesprintsneak;
 
 import java.awt.Color;
 
-import net.minecraft.client.gui.Gui;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
@@ -13,17 +12,28 @@ public class ToggleSprintSneak extends ModDraggable {
 	private boolean sneaking = false;
 	
 	private boolean flyBoost = true;
-	private float flyBoostFactor = 4;
+	private float flyBoostFactor = 4.0F;
 	private boolean toggleSprint = true;
 	private boolean toggleSneak = false;
 	private boolean textShadow = true;
-	private ColorManager color = new ColorManager(Color.WHITE);
+	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
+	private boolean textChroma = false;
 	
 	private String textToRender = "";
+	
+	public ToggleSprintSneak() {
+		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
+		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
+		setToggleSprint((boolean) getFromFile("toggleSprint", toggleSprint));
+		setToggleSneak((boolean) getFromFile("toggleSneak", toggleSneak));
+		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
+		setTextChroma((boolean) getFromFile("textChroma", textChroma));
+	}
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth("[Sprinting (Vanilla)]");
+		return font.getStringWidth("[Walking]");
 	}
 
 	@Override
@@ -45,23 +55,15 @@ public class ToggleSprintSneak extends ModDraggable {
 	    } else {
 	    	positionX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender);
 	    }
-
-	    if (textShadow) {
-	        font.drawStringWithShadow(textToRender, positionX + 1, pos.getAbsoluteY() + 1, color.getRGB());
-	    } else {
-	        font.drawString(textToRender, positionX + 1, pos.getAbsoluteY() + 1, color.getRGB());
-	    }
+	    
+	    drawText(textToRender, positionX + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		textToRender = "[Sprinting (Vanilla)]";
+		textToRender = "[Walking]";
 
-	    if (textShadow) {
-	        font.drawStringWithShadow(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-	    } else {
-	        font.drawString(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color.getRGB());
-	    }
+		drawText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
 	}
 	
 	public void setSprinting(boolean sprinting) {
@@ -82,6 +84,8 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public void setFlyBoost(boolean enabled) {
 		flyBoost = enabled;
+		
+		setToFile("flyBoost", enabled);
 	}
 	
 	public boolean isFlyBoostEnabled() {
@@ -90,6 +94,8 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public void setFlyBoostFactor(float factor) {
 		flyBoostFactor = factor;
+		
+		setToFile("flyBoostFactor", factor);
 	}
 	
 	public float getFlyBoostFactor() {
@@ -98,6 +104,8 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public void setToggleSprint(boolean enabled) {
 		toggleSprint = enabled;
+		
+		setToFile("toggleSprint", enabled);
 	}
 	
 	public boolean isToggleSprintEnabled() {
@@ -106,6 +114,8 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public void setToggleSneak(boolean enabled) {
 		toggleSneak = enabled;
+		
+		setToFile("toggleSneak", enabled);
 	}
 	
 	public boolean isToggleSneakEnabled() {
@@ -114,13 +124,31 @@ public class ToggleSprintSneak extends ModDraggable {
 	
 	public void setTextShadow(boolean enabled) {
 		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
 	}
 	
 	public boolean isTextShadowEnabled() {
 		return textShadow;
 	}
 	
-	public ColorManager getColor() {
-		return color;
+	public void setTextColor(int rgb) {
+		this.textColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("textColor", rgb);
+	}
+	
+	public ColorManager getTextColor() {
+		return textColor;
+	}
+	
+	public void setTextChroma(boolean enabled) {
+		this.textChroma = enabled;
+		
+		setToFile("textChroma", enabled);
+	}
+	
+	public boolean isTextChromaEnabled() {
+		return textChroma;
 	}
 }

@@ -50,4 +50,12 @@ public class DiscordRP {
 		
 		DiscordRPC.discordUpdatePresence(richPresenceBuilder.build());
 	}
+	
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
+	public boolean isRunning() {
+		return running;
+	}
 }

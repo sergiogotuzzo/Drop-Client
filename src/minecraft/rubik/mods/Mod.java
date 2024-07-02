@@ -3,7 +3,9 @@ package rubik.mods;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import rubik.Client;
-import rubik.event.EventManager;
+import rubik.FileManager;
+import rubik.events.EventManager;
+import rubik.gui.hud.ScreenPosition;
 
 public abstract class Mod {
 	private boolean enabled = true;
@@ -17,7 +19,7 @@ public abstract class Mod {
 		font = mc.fontRendererObj;
 		client = Client.getInstance();
 		
-		setEnabled(enabled);
+		setEnabled((boolean) getFromFile("enabled", enabled));
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -28,9 +30,31 @@ public abstract class Mod {
 		} else {
 			EventManager.unregister(this);
 		}
+		
+		setToFile("enabled", enabled);
 	}
 	
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public void setToFile(String key, Object value) {
+		FileManager.set(getName() + "." + key, value);
+	}
+	
+	public Object getFromFile(String key, Object defaultValue) {
+		if (!hasInFile(key)) {
+			setToFile(key, defaultValue);
+		}
+		
+		return FileManager.get(getName() + "." + key);
+	}
+	
+	public boolean hasInFile(String key) {
+		return FileManager.has(getName() + "." + key);
+	}
+	
+	public String getName() {
+		return this.getClass().getSimpleName();
 	}
 }

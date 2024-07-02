@@ -76,8 +76,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
     private long lastMouseEvent;
 
     /**
-     * Incremented when the game is in touchscreen mode and the screen is tapped, decremented if the screen isn't
-     * tapped. Does not appear to be used.
+     * Tracks the number of fingers currently on the screen. Prevents subsequent fingers registering as clicks.
      */
     private int touchValue;
     private URI clickedLinkURI;
@@ -265,12 +264,16 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
     /**
      * Draws the hover event specified by the given chat component
+     *  
+     * @param component The IChatComponent to render
+     * @param x The x position where to render
+     * @param y The y position where to render
      */
-    protected void handleComponentHover(IChatComponent p_175272_1_, int p_175272_2_, int p_175272_3_)
+    protected void handleComponentHover(IChatComponent component, int x, int y)
     {
-        if (p_175272_1_ != null && p_175272_1_.getChatStyle().getChatHoverEvent() != null)
+        if (component != null && component.getChatStyle().getChatHoverEvent() != null)
         {
-            HoverEvent hoverevent = p_175272_1_.getChatStyle().getChatHoverEvent();
+            HoverEvent hoverevent = component.getChatStyle().getChatHoverEvent();
 
             if (hoverevent.getAction() == HoverEvent.Action.SHOW_ITEM)
             {
@@ -292,11 +295,11 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
                 if (itemstack != null)
                 {
-                    this.renderToolTip(itemstack, p_175272_2_, p_175272_3_);
+                    this.renderToolTip(itemstack, x, y);
                 }
                 else
                 {
-                    this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid Item!", p_175272_2_, p_175272_3_);
+                    this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid Item!", x, y);
                 }
             }
             else if (hoverevent.getAction() == HoverEvent.Action.SHOW_ENTITY)
@@ -320,22 +323,22 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
                             }
 
                             list1.add(nbttagcompound.getString("id"));
-                            this.drawHoveringText(list1, p_175272_2_, p_175272_3_);
+                            this.drawHoveringText(list1, x, y);
                         }
                         else
                         {
-                            this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid Entity!", p_175272_2_, p_175272_3_);
+                            this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid Entity!", x, y);
                         }
                     }
                     catch (NBTException var10)
                     {
-                        this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid Entity!", p_175272_2_, p_175272_3_);
+                        this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid Entity!", x, y);
                     }
                 }
             }
             else if (hoverevent.getAction() == HoverEvent.Action.SHOW_TEXT)
             {
-                this.drawHoveringText(NEWLINE_SPLITTER.splitToList(hoverevent.getValue().getFormattedText()), p_175272_2_, p_175272_3_);
+                this.drawHoveringText(NEWLINE_SPLITTER.splitToList(hoverevent.getValue().getFormattedText()), x, y);
             }
             else if (hoverevent.getAction() == HoverEvent.Action.SHOW_ACHIEVEMENT)
             {
@@ -354,11 +357,11 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
                         list.addAll(this.fontRendererObj.listFormattedStringToWidth(s1, 150));
                     }
 
-                    this.drawHoveringText(list, p_175272_2_, p_175272_3_);
+                    this.drawHoveringText(list, x, y);
                 }
                 else
                 {
-                    this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid statistic/achievement!", p_175272_2_, p_175272_3_);
+                    this.drawCreativeTabHoveringText(EnumChatFormatting.RED + "Invalid statistic/achievement!", x, y);
                 }
             }
 
@@ -368,9 +371,6 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
     /**
      * Sets the text of the chat
-     *  
-     * @param newChatText The new chat text to be set
-     * @param shouldOverwrite Determines if the text currently in the chat should be overwritten or appended
      */
     protected void setText(String newChatText, boolean shouldOverwrite)
     {
@@ -378,22 +378,24 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
     /**
      * Executes the click event specified by the given chat component
+     *  
+     * @param component The ChatComponent to check for click
      */
-    protected boolean handleComponentClick(IChatComponent p_175276_1_)
+    protected boolean handleComponentClick(IChatComponent component)
     {
-        if (p_175276_1_ == null)
+        if (component == null)
         {
             return false;
         }
         else
         {
-            ClickEvent clickevent = p_175276_1_.getChatStyle().getChatClickEvent();
+            ClickEvent clickevent = component.getChatStyle().getChatClickEvent();
 
             if (isShiftKeyDown())
             {
-                if (p_175276_1_.getChatStyle().getInsertion() != null)
+                if (component.getChatStyle().getInsertion() != null)
                 {
-                    this.setText(p_175276_1_.getChatStyle().getInsertion(), false);
+                    this.setText(component.getChatStyle().getInsertion(), false);
                 }
             }
             else if (clickevent != null)
@@ -473,6 +475,9 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         }
     }
 
+    /**
+     * Used to add chat messages to the client's GuiChat.
+     */
     public void sendChatMessage(String msg)
     {
         this.sendChatMessage(msg, true);
@@ -551,10 +556,16 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         this.initGui();
     }
 
-    public void func_183500_a(int p_183500_1_, int p_183500_2_)
+    /**
+     * Set the gui to the specified width and height
+     *  
+     * @param w The width of the screen
+     * @param h The height of the screen
+     */
+    public void setGuiSize(int w, int h)
     {
-        this.width = p_183500_1_;
-        this.height = p_183500_2_;
+        this.width = w;
+        this.height = h;
     }
 
     /**
@@ -683,11 +694,11 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         this.mc.getTextureManager().bindTexture(optionsBackground);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         float f = 32.0F;
-        worldrenderer.func_181668_a(7, DefaultVertexFormats.field_181709_i);
-        worldrenderer.func_181662_b(0.0D, (double)this.height, 0.0D).func_181673_a(0.0D, (double)((float)this.height / 32.0F + (float)tint)).func_181669_b(64, 64, 64, 255).func_181675_d();
-        worldrenderer.func_181662_b((double)this.width, (double)this.height, 0.0D).func_181673_a((double)((float)this.width / 32.0F), (double)((float)this.height / 32.0F + (float)tint)).func_181669_b(64, 64, 64, 255).func_181675_d();
-        worldrenderer.func_181662_b((double)this.width, 0.0D, 0.0D).func_181673_a((double)((float)this.width / 32.0F), (double)tint).func_181669_b(64, 64, 64, 255).func_181675_d();
-        worldrenderer.func_181662_b(0.0D, 0.0D, 0.0D).func_181673_a(0.0D, (double)tint).func_181669_b(64, 64, 64, 255).func_181675_d();
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+        worldrenderer.pos(0.0D, (double)this.height, 0.0D).tex(0.0D, (double)((float)this.height / 32.0F + (float)tint)).color(64, 64, 64, 255).endVertex();
+        worldrenderer.pos((double)this.width, (double)this.height, 0.0D).tex((double)((float)this.width / 32.0F), (double)((float)this.height / 32.0F + (float)tint)).color(64, 64, 64, 255).endVertex();
+        worldrenderer.pos((double)this.width, 0.0D, 0.0D).tex((double)((float)this.width / 32.0F), (double)tint).color(64, 64, 64, 255).endVertex();
+        worldrenderer.pos(0.0D, 0.0D, 0.0D).tex(0.0D, (double)tint).color(64, 64, 64, 255).endVertex();
         tessellator.draw();
     }
 
@@ -713,13 +724,13 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         }
     }
 
-    private void openWebLink(URI p_175282_1_)
+    private void openWebLink(URI url)
     {
         try
         {
             Class<?> oclass = Class.forName("java.awt.Desktop");
             Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object)null, new Object[0]);
-            oclass.getMethod("browse", new Class[] {URI.class}).invoke(object, new Object[] {p_175282_1_});
+            oclass.getMethod("browse", new Class[] {URI.class}).invoke(object, new Object[] {url});
         }
         catch (Throwable throwable)
         {
@@ -751,31 +762,34 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         return Keyboard.isKeyDown(56) || Keyboard.isKeyDown(184);
     }
 
-    public static boolean isKeyComboCtrlX(int p_175277_0_)
+    public static boolean isKeyComboCtrlX(int keyID)
     {
-        return p_175277_0_ == 45 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
+        return keyID == 45 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
     }
 
-    public static boolean isKeyComboCtrlV(int p_175279_0_)
+    public static boolean isKeyComboCtrlV(int keyID)
     {
-        return p_175279_0_ == 47 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
+        return keyID == 47 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
     }
 
-    public static boolean isKeyComboCtrlC(int p_175280_0_)
+    public static boolean isKeyComboCtrlC(int keyID)
     {
-        return p_175280_0_ == 46 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
+        return keyID == 46 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
     }
 
-    public static boolean isKeyComboCtrlA(int p_175278_0_)
+    public static boolean isKeyComboCtrlA(int keyID)
     {
-        return p_175278_0_ == 30 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
+        return keyID == 30 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown();
     }
 
     /**
      * Called when the GUI is resized in order to update the world and the resolution
+     *  
+     * @param w The width of the screen
+     * @param h The height of the screen
      */
-    public void onResize(Minecraft mcIn, int p_175273_2_, int p_175273_3_)
+    public void onResize(Minecraft mcIn, int w, int h)
     {
-        this.setWorldAndResolution(mcIn, p_175273_2_, p_175273_3_);
+        this.setWorldAndResolution(mcIn, w, h);
     }
 }

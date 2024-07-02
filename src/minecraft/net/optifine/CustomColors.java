@@ -12,7 +12,12 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
+
 import javax.imageio.ImageIO;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.BlockStem;
@@ -48,8 +53,6 @@ import net.optifine.util.PropertiesOrdered;
 import net.optifine.util.ResUtils;
 import net.optifine.util.StrUtils;
 import net.optifine.util.TextureUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
 public class CustomColors
 {
@@ -457,9 +460,9 @@ public class CustomColors
         String s = "palette.block.";
         Map map = new HashMap();
 
-        for (Object e : props.keySet())
+        for (String s1: (Set<String>)(Set<?>) props.keySet())
         {
-            String s1 = (String) e;
+
             String s2 = props.getProperty(s1);
 
             if (s1.startsWith(s))
@@ -541,6 +544,7 @@ public class CustomColors
                 {
                     Properties properties = new PropertiesOrdered();
                     properties.load(inputstream);
+                    inputstream.close();
                     CustomColormap customcolormap = new CustomColormap(properties, s, width, height, paletteFormatDefault);
 
                     if (customcolormap.isValid(s) && customcolormap.isValidMatchBlocks(s))
@@ -605,35 +609,35 @@ public class CustomColors
         }
     }
 
-    private static void addToList(CustomColormap cm, List lists, int id)
+    private static void addToList(CustomColormap cm, List list, int id)
     {
-        while (id >= lists.size())
+        while (id >= list.size())
         {
-            lists.add(null);
+            list.add(null);
         }
 
-        List list = (List)lists.get(id);
+        List subList = (List)list.get(id);
 
-        if (list == null)
+        if (subList == null)
         {
-            list = new ArrayList();
-            list.set(id, list);
+        	subList = new ArrayList();
+            list.set(id, subList);
         }
 
-        list.add(cm);
+        subList.add(cm);
     }
 
-    private static CustomColormap[][] blockListToArray(List lists)
+    private static CustomColormap[][] blockListToArray(List list)
     {
-        CustomColormap[][] acustomcolormap = new CustomColormap[lists.size()][];
+        CustomColormap[][] acustomcolormap = new CustomColormap[list.size()][];
 
-        for (int i = 0; i < lists.size(); ++i)
+        for (int i = 0; i < list.size(); ++i)
         {
-            List list = (List)lists.get(i);
+            List subList = (List)list.get(i);
 
-            if (list != null)
+            if (subList != null)
             {
-                CustomColormap[] acustomcolormap1 = (CustomColormap[])((CustomColormap[])list.toArray(new CustomColormap[list.size()]));
+                CustomColormap[] acustomcolormap1 = ((CustomColormap[])subList.toArray(new CustomColormap[subList.size()]));
                 acustomcolormap[i] = acustomcolormap1;
             }
         }
@@ -1359,9 +1363,8 @@ public class CustomColors
         Set set = props.keySet();
         int i = 0;
 
-        for (Object e : set)
+        for (String s : (Set<String>)(Set<?>)set)
         {
-            String s = (String) e;
             String s1 = props.getProperty(s);
 
             if (s.startsWith(prefix))
@@ -1460,9 +1463,8 @@ public class CustomColors
         float[][] afloat1 = new float[aenumdyecolor.length][];
         int k = 0;
 
-        for (Object e : props.keySet())
+        for (String s: (Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String s1 = props.getProperty(s);
 
             if (s.startsWith(prefix))
@@ -1534,9 +1536,8 @@ public class CustomColors
         Arrays.fill((int[])aint, (int) - 1);
         int i = 0;
 
-        for (Object e: props.keySet())
+        for (String s: (Set<String>)(Set<?>)props.keySet())
         {
-            String s = (String) e;
             String s1 = props.getProperty(s);
 
             if (s.startsWith(prefix))
@@ -1591,9 +1592,8 @@ public class CustomColors
         Arrays.fill((int[])aint, (int) - 1);
         int i = 0;
 
-        for (Object o : props.keySet())
+        for (String s: (Set<String>)(Set<?>)props.keySet())
         {
-        	String s = (String)o;
             String s1 = props.getProperty(s);
 
             if (s.startsWith(prefix))
@@ -1631,9 +1631,8 @@ public class CustomColors
         Arrays.fill((int[])aint, (int) - 1);
         int i = 0;
 
-        for (Object e : props.keySet())
+        for (String s: (Set<String>)(Set<?>) props.keySet())
         {
-            String s = (String) e;
             String s1 = props.getProperty(s);
 
             if (s.startsWith(prefix))

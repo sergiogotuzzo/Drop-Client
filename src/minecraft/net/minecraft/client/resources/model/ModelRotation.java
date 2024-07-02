@@ -10,7 +10,7 @@ import net.minecraftforge.client.model.IModelState;
 import net.minecraftforge.client.model.ITransformation;
 import net.minecraftforge.client.model.TRSRTransformation;
 import net.optifine.reflect.Reflector;
-import net.minecraft.util.Matrix4f;
+import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 public enum ModelRotation implements IModelState, ITransformation
@@ -117,9 +117,9 @@ public enum ModelRotation implements IModelState, ITransformation
         return (Optional)Reflector.call(Reflector.ForgeHooksClient_applyTransform, new Object[] {this.getMatrix(), p_apply_1_});
     }
 
-    public Matrix4f getMatrix()
+    public javax.vecmath.Matrix4f getMatrix()
     {
-        return Reflector.ForgeHooksClient_getMatrix.exists() ? (Matrix4f)Reflector.call(Reflector.ForgeHooksClient_getMatrix, new Object[] {this}): null;
+        return Reflector.ForgeHooksClient_getMatrix.exists() ? (javax.vecmath.Matrix4f)Reflector.call(Reflector.ForgeHooksClient_getMatrix, new Object[] {this}): new javax.vecmath.Matrix4f(this.getMatrix4d());
     }
 
     public EnumFacing rotate(EnumFacing p_rotate_1_)

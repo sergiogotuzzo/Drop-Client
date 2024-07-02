@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.properties.IProperty;
@@ -426,11 +427,10 @@ public class ConnectedParser
         return comparable;
     }
 
-    public static Comparable getPropertyValue(String value, Collection propertyValues)
+    public static Comparable getPropertyValue(String value, Collection<Comparable> propertyValues)
     {
-        for (Object e : propertyValues)
+        for (Comparable comparable : propertyValues)
         {
-            Comparable comparable = (Comparable) e;
             if (getValueName(comparable).equals(value))
             {
                 return comparable;
@@ -978,7 +978,7 @@ public class ConnectedParser
         {
             str = str.toLowerCase().trim();
             String[] astring = Config.tokenize(str, " ");
-            T[] at = (T[]) Array.newInstance(objs.getClass().getComponentType(), astring.length);
+            T[] at = (T[])Array.newInstance(objs.getClass().getComponentType(), astring.length);
 
             for (int i = 0; i < astring.length; ++i)
             {
