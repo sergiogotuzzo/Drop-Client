@@ -42,7 +42,7 @@ public class FileManager {
         
         writeJsonToFile(jsonObject);
         
-        logger.info("[FileManager]: " + key + ": " + value);
+        logger.info("[RubikClient] (FileManager) " + key + ": " + value);
     }
 
     public static Object get(String key) {
