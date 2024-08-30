@@ -45,18 +45,7 @@ public class ToggleSprintSneak extends ModDraggable {
 	public void render(ScreenPosition pos) {
 	    textToRender = mc.thePlayer.movementInput.getDisplayText();
 	    
-	    int positionX;
-	    double maxRelativeX = 1;
-	    
-	    if (pos.getRelativeX() < (maxRelativeX / (3 * 3))) {
-	    	positionX = pos.getAbsoluteX();
-	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
-	    	positionX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2;
-	    } else {
-	    	positionX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender);
-	    }
-	    
-	    drawText(textToRender, positionX + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+	    drawText(textToRender, getPositionedAbsoluteX(textToRender) + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
 	}
 	
 	@Override
