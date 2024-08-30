@@ -3,11 +3,14 @@ package rubik.mods.impl;
 import rubik.mods.Mod;
 
 public class Fullbright extends Mod {
+	private float fullbrightGamma = 10.0F;
+	private float defaultGamma = 1.0F;
+	
 	public Fullbright() {
 		if (isEnabled()) {
-			mc.gameSettings.gammaSetting = 10.0F;
+			mc.gameSettings.gammaSetting = fullbrightGamma;
 		} else {
-			mc.gameSettings.gammaSetting = 1.0F;
+			mc.gameSettings.gammaSetting = defaultGamma;
 		}
 	}
 	
@@ -16,9 +19,9 @@ public class Fullbright extends Mod {
 		super.setEnabled(enabled);
 		
 		if (enabled) {
-			mc.gameSettings.gammaSetting = 10.0F;
+			mc.gameSettings.gammaSetting = fullbrightGamma;
 		} else {
-			mc.gameSettings.gammaSetting = 1.0F;
+			mc.gameSettings.gammaSetting = defaultGamma;
 		}
 	}
 }
