@@ -41,8 +41,6 @@ import net.optifine.CustomPanoramaProperties;
 import net.optifine.reflect.Reflector;
 import rubik.Client;
 import rubik.gui.GuiModsList;
-import rubik.gui.sessionchanger.GuiButtonAlts;
-import rubik.gui.sessionchanger.GuiSessionChanger;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 {
@@ -241,7 +239,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
         this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, j + 72 + 12));
-        this.buttonList.add(new GuiButtonAlts(16, this.width / 2 + 124 / 2 + 42, j + 72 + 12));
 
         synchronized (this.threadLock)
         {
@@ -365,10 +362,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
         if (button.id == 15) {
         	this.mc.displayGuiScreen(new GuiModsList(this));
-        }
-        
-        if (button.id == 16) {
-        	this.mc.displayGuiScreen(new GuiSessionChanger(this));
         }
     }
 
