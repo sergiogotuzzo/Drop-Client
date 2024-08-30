@@ -12,7 +12,7 @@ import rubik.mods.ModInstances;
 import rubik.mods.impl.Fullbright;
 
 public class Client {
-	public static final String version = "1.8.9-2df00e1/alpha";
+	public static final String version = "1.8.9-2df00e1/main";
 	
 	private static final Client instance = new Client();
 	
