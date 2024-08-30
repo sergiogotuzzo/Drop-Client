@@ -120,8 +120,6 @@ public class Keystrokes extends ModDraggable {
 	private boolean arrows = false;
 	private ColorManager pressedBackgroundColor = ColorManager.fromColor(Color.WHITE).setAlpha(102);
 	private ColorManager releasedBackgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
-	private boolean showLeftCPS = false;
-	private boolean showRightCPS = false;
 	private boolean pressedTextChroma = false;
 	private boolean releasedTextChroma = false;
 	
@@ -143,8 +141,6 @@ public class Keystrokes extends ModDraggable {
 		setArrows((boolean) getFromFile("arrows", arrows));
 		setPressedBackgroundColor((int) ((long) getFromFile("pressedBackgroundColor", pressedBackgroundColor.getRGB())));
 		setReleasedBackgroundColor((int) ((long) getFromFile("releasedBackgroundColor", releasedBackgroundColor.getRGB())));
-		setShowLeftCPS((boolean) getFromFile("showLeftCPS", showLeftCPS));
-		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
 		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
 		setReleasedTextChroma((boolean) getFromFile("releasedTextChroma", releasedTextChroma));
 	}
@@ -225,42 +221,10 @@ public class Keystrokes extends ModDraggable {
 	                key.isDown() ? pressedBackgroundColor.getRGB() : releasedBackgroundColor.getRGB()
 	                );
 	        
-	        int addY = 0;
-	        
-	        if (key.getName() == "LMB" && showLeftCPS) {
-	        	addY = -3;
-	        	
-	        	String text = getCPS(leftClicks) + " CPS";
-	        	
-	        	drawScaledText(
-		        		text,
-		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2 + (font.getStringWidth(text) > 28 ? 0 : 1),
-		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + 6,
-		                0.5,
-		                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
-		                textShadow,
-		                key.isDown() ? pressedTextChroma : releasedTextChroma
-		        		);
-	        } else if (key.getName() == "RMB" && showRightCPS) {
-	        	addY = -3;
-	        	
-	        	String text = getCPS(rightClicks) + " CPS";
-	        	
-	        	drawScaledText(
-		        		text,
-		                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2 + (font.getStringWidth(text) > 28 ? 0 : 1),
-		                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + 6,
-		                0.5,
-		                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
-		                textShadow,
-		                key.isDown() ? pressedTextChroma : releasedTextChroma
-		        		);
-	        }
-	        
 	        drawText(
 	        		key.getName(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
-	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + addY,
+	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
 	                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
 	                textShadow,
 	                key.isDown() ? pressedTextChroma : releasedTextChroma
@@ -390,26 +354,6 @@ public class Keystrokes extends ModDraggable {
 	
 	public ColorManager getReleasedBackgroundColor() {
 		return releasedBackgroundColor;
-	}
-	
-	public void setShowLeftCPS(boolean enabled) {
-		showLeftCPS = enabled;
-		
-		setToFile("showLeftCPS", enabled);
-	}
-	
-	public boolean isShowLeftCPSEnabled() {
-		return showLeftCPS;
-	}
-	
-	public void setShowRightCPS(boolean enabled) {
-		showRightCPS = enabled;
-		
-		setToFile("showRightCPS", enabled);
-	}
-	
-	public boolean isShowRightCPSEnabled() {
-		return showRightCPS;
 	}
 	
 	public void setPressedTextChroma(boolean enabled) {

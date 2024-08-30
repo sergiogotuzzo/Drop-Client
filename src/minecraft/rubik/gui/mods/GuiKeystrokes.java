@@ -73,14 +73,6 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
             case 10:
             	this.mc.displayGuiScreen(new GuiModColor(this, mod.getReleasedBackgroundColor(), this.mod, "releasedBackgroundColor"));
             	break;
-            case 11:
-            	mod.setShowLeftCPS(!mod.isShowLeftCPSEnabled());
-            	this.initGui();
-            	break;
-            case 12:
-            	mod.setShowRightCPS(!mod.isShowRightCPSEnabled());
-            	this.initGui();
-            	break;
             case 13:
             	mod.setPressedTextChroma(!mod.isPressedTextChromaEnabled());
             	this.initGui();
@@ -110,8 +102,6 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
         this.buttonList.add(arrowsButton = new GuiButton(8, this.width / 2 + j + 160, this.height / 6 + i + 96 + k * 3, 150, 20, "Arrows: " + (mod.isArrowsEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(9, this.width / 2 + j, this.height / 6 + i + 120 + k * 4, 150, 20, "Pressed Background Color"));
         this.buttonList.add(new GuiButton(10, this.width / 2 + j + 160, this.height / 6 + i + 120 + k * 4, 150, 20, "Released Background Color"));
-        this.buttonList.add(new GuiButton(11, this.width / 2 + j, this.height / 6 + i + 144 + k * 5, 150, 20, "Show Left CPS: " + (mod.isShowLeftCPSEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(12, this.width / 2 + j + 160, this.height / 6 + i + 144 + k * 5, 150, 20, "Show Right CPS: " + (mod.isShowRightCPSEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(13, this.width / 2 + j, this.height / 6 + i + 168 + k * 6, 150, 20, "Pressed Text Chroma: " + (mod.isPressedTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(14, this.width / 2 + j + 160, this.height / 6 + i + 168 + k * 6, 150, 20, "Released Text Chroma: " + (mod.isReleasedTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
