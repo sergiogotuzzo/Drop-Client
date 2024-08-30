@@ -1,5 +1,7 @@
 package rubik;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,6 +14,8 @@ import java.io.IOException;
 public class FileManager {
 	private static final File rootDir = new File("rubik");
     private static final File modsFile = new File(rootDir, "mods.json");
+    
+    private static final Logger logger = LogManager.getLogger();
     
     public static void init() {
 		if (!rootDir.exists()) {
@@ -37,6 +41,8 @@ public class FileManager {
         jsonObject.put(key, value);
         
         writeJsonToFile(jsonObject);
+        
+        logger.info("[FileManager]: " + key + ": " + value);
     }
 
     public static Object get(String key) {
