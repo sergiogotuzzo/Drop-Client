@@ -9,13 +9,11 @@ import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 import rubik.mods.impl.BlockOverlay;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.Chat;
-import rubik.mods.impl.Clock;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Fullbright;
 import rubik.mods.impl.Keystrokes;
-import rubik.mods.impl.MemoryUsage;
 import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
@@ -32,8 +30,6 @@ public class ModInstances {
 	private static PotionEffects potionEffectsMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
-	private static Clock clockMod;
-	private static MemoryUsage memoryUsageMod;
 	private static PotsCounter potsCounterMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
@@ -51,8 +47,6 @@ public class ModInstances {
 		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
-		manager.register(clockMod = new Clock());
-		manager.register(memoryUsageMod = new MemoryUsage());
 		manager.register(potsCounterMod = new PotsCounter());
 	}
 	
@@ -86,14 +80,6 @@ public class ModInstances {
 	
 	public static ToggleSprintSneak getToggleSprintSneakMod() {
 		return toggleSprintSneakMod;
-	}
-	
-	public static Clock getClockMod() {
-		return clockMod;
-	}
-	
-	public static MemoryUsage getMemoryUsageMod() {
-		return memoryUsageMod;
 	}
 	
 	public static PotsCounter getPotsCounterMod() {

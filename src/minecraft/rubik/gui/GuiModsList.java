@@ -10,13 +10,11 @@ import rubik.gui.mods.GuiArmorStatus;
 import rubik.gui.mods.GuiBlockOverlay;
 import rubik.gui.mods.GuiCPSDisplay;
 import rubik.gui.mods.GuiChat;
-import rubik.gui.mods.GuiClock;
 import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
 import rubik.gui.mods.GuiFreelook;
 import rubik.gui.mods.GuiFullbright;
 import rubik.gui.mods.GuiKeystrokes;
-import rubik.gui.mods.GuiMemoryUsage;
 import rubik.gui.mods.GuiOldAnimations;
 import rubik.gui.mods.GuiPingDisplay;
 import rubik.gui.mods.GuiPotionEffects;
@@ -88,12 +86,6 @@ public class GuiModsList extends GuiRubikClientScreen {
             case 13:
             	this.mc.displayGuiScreen(new GuiBlockOverlay(this));
             	break;
-            case 14:
-            	this.mc.displayGuiScreen(new GuiClock(this));
-            	break;
-            case 15:
-            	this.mc.displayGuiScreen(new GuiMemoryUsage(this));
-            	break;
             case 16:
             	this.mc.displayGuiScreen(new GuiFullbright(this));
             	break;
@@ -114,8 +106,6 @@ public class GuiModsList extends GuiRubikClientScreen {
         this.buttonList.add(new GuiButton(3, this.width / 2 - 200 - 2 + j, this.height / 6 + 24 + i, 98, 20, I18n.format("FPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 - 200 - 2 + j, this.height / 6 + 48 + i, 98, 20, I18n.format("CPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 - 200 - 2 + j, this.height / 6 + 72 + i, 98, 20, I18n.format("Ping Display", new Object[0])));
-        this.buttonList.add(new GuiButton(14, this.width / 2 - 200 - 2 + j, this.height / 6 + 96 + i, 98, 20, I18n.format("Clock", new Object[0])));
-        this.buttonList.add(new GuiButton(15, this.width / 2 - 200 - 2 + j, this.height / 6 + 120 + i, 98, 20, I18n.format("Memory Usage", new Object[0])));
         this.buttonList.add(new GuiButton(7, this.width / 2 - 200 - 2 + j, this.height / 6 + 144 + i, 98, 20, I18n.format("Coordinates", new Object[0])));
 
         // SECOND COLUMN
