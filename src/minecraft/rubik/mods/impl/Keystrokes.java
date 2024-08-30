@@ -118,8 +118,6 @@ public class Keystrokes extends ModDraggable {
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
 	private boolean arrows = false;
-	private ColorManager pressedBackgroundColor = ColorManager.fromColor(Color.WHITE).setAlpha(102);
-	private ColorManager releasedBackgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
 	private boolean pressedTextChroma = false;
 	private boolean releasedTextChroma = false;
 	
@@ -139,8 +137,6 @@ public class Keystrokes extends ModDraggable {
 		setShowMouse((boolean) getFromFile("showMouse", showMouse));
 		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
 		setArrows((boolean) getFromFile("arrows", arrows));
-		setPressedBackgroundColor((int) ((long) getFromFile("pressedBackgroundColor", pressedBackgroundColor.getRGB())));
-		setReleasedBackgroundColor((int) ((long) getFromFile("releasedBackgroundColor", releasedBackgroundColor.getRGB())));
 		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
 		setReleasedTextChroma((boolean) getFromFile("releasedTextChroma", releasedTextChroma));
 	}
@@ -218,7 +214,7 @@ public class Keystrokes extends ModDraggable {
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? pressedBackgroundColor.getRGB() : releasedBackgroundColor.getRGB()
+	                key.isDown() ? ColorManager.fromColor(Color.WHITE).setAlpha(102).getRGB() : ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 	                );
 	        
 	        drawText(
@@ -334,26 +330,6 @@ public class Keystrokes extends ModDraggable {
 	
 	public boolean isArrowsEnabled() {
 		return arrows;
-	}
-	
-	public void setPressedBackgroundColor(int rgb) {
-		this.pressedBackgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
-		
-		setToFile("pressedBackgroundColor", rgb);
-	}
-	
-	public ColorManager getPressedBackgroundColor() {
-		return pressedBackgroundColor;
-	}
-	
-	public void setReleasedBackgroundColor(int rgb) {
-		this.releasedBackgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
-		
-		setToFile("releasedBackgroundColor", rgb);
-	}
-	
-	public ColorManager getReleasedBackgroundColor() {
-		return releasedBackgroundColor;
 	}
 	
 	public void setPressedTextChroma(boolean enabled) {

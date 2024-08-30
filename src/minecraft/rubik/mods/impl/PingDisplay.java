@@ -10,7 +10,6 @@ public class PingDisplay extends ModDraggable {
 	private boolean showBackground = false;
 	private boolean textShadow = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
-	private ColorManager backgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
 	private boolean textChroma = false;
 	private boolean dynamicColors = true;
 	
@@ -18,7 +17,6 @@ public class PingDisplay extends ModDraggable {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
-		setBackgroundColor((int) ((long) getFromFile("backgroundColor", backgroundColor.getRGB())));
 		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 	}
@@ -41,7 +39,7 @@ public class PingDisplay extends ModDraggable {
 					pos.getAbsoluteY(),
 					pos.getAbsoluteX() + getWidth(),
 					pos.getAbsoluteY() + getHeight(),
-					backgroundColor.getRGB()
+					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 					);
 		}
 		
@@ -104,16 +102,6 @@ public class PingDisplay extends ModDraggable {
 	
 	public ColorManager getTextColor() {
 		return textColor;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		this.backgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
 	}
 	
 	public void setTextChroma(boolean enabled) {

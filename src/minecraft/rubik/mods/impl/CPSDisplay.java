@@ -34,7 +34,6 @@ public class CPSDisplay extends ModDraggable {
 	private boolean textShadow = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private CPSMode mode = CPSMode.LEFT_RIGHT;
-	private ColorManager backgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
 	private boolean textChroma = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();
@@ -50,7 +49,6 @@ public class CPSDisplay extends ModDraggable {
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setMode((int) ((long) getFromFile("mode", mode.getIndex())));
-		setBackgroundColor((int) ((long) getFromFile("backgroundColor", backgroundColor.getRGB())));
 		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 	}
 	
@@ -93,7 +91,7 @@ public class CPSDisplay extends ModDraggable {
 					pos.getAbsoluteY(),
 					pos.getAbsoluteX() + getWidth(),
 					pos.getAbsoluteY() + getHeight(),
-					backgroundColor.getRGB()
+					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 					);
         }
         
@@ -181,16 +179,6 @@ public class CPSDisplay extends ModDraggable {
 	
 	public CPSMode getMode() {
 		return mode;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		this.backgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
 	}
 	
 	public void setTextChroma(boolean enabled) {

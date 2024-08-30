@@ -53,9 +53,6 @@ public class GuiPingDisplay extends GuiRubikClientScreen {
             case 4:
             	this.mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), this.mod));
             	break;
-            case 5:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getBackgroundColor(), this.mod));
-            	break;
             case 6:
             	mod.setTextChroma(!mod.isTextChromaEnabled());
             	this.initGui();
@@ -78,7 +75,6 @@ public class GuiPingDisplay extends GuiRubikClientScreen {
         this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
         this.buttonList.add(buttonTextColor = new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Text Color"));
-        this.buttonList.add(backgroundColorButton = new GuiButton(5, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Background Color"));
         this.buttonList.add(buttonTextChroma = new GuiButton(6, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Text Chroma: " + (mod.isTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(7, this.width / 2 + j, this.height / 6 + i + 96, 150, 20, "Dynamic Colors: " + (mod.isDynamicColorsEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));

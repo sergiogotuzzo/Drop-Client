@@ -14,7 +14,6 @@ public class CoordinatesDisplay extends ModDraggable {
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean showBiome = true;
 	private boolean showTowards = true;
-	private ColorManager backgroundColor = ColorManager.fromColor(Color.BLACK).setAlpha(102);
 	private boolean textChroma = false;
 	
 	private final int padding = 12;
@@ -26,7 +25,6 @@ public class CoordinatesDisplay extends ModDraggable {
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setShowBiome((boolean) getFromFile("showBiome", showBiome));
 		setShowTowards((boolean) getFromFile("showTowards", showTowards));
-		setBackgroundColor((int) ((long) getFromFile("backgroundColor", backgroundColor.getRGB())));
 		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 	}
 	
@@ -48,7 +46,7 @@ public class CoordinatesDisplay extends ModDraggable {
 					pos.getAbsoluteY(),
 					pos.getAbsoluteX() + getWidth(),
 					pos.getAbsoluteY() + getHeight(),
-					backgroundColor.getRGB()
+					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 					);
 		}
 		
@@ -238,16 +236,6 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	public boolean isShowTowardsEnabled() {
 		return showTowards;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		this.backgroundColor = ColorManager.fromRGB(rgb).setAlpha(102);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
 	}
 	
 	public void setTextChroma(boolean enabled) {

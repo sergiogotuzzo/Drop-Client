@@ -67,12 +67,6 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
             	mod.setArrows(!mod.isArrowsEnabled());
             	this.initGui();
             	break;
-            case 9:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getPressedBackgroundColor(), this.mod, "pressedBackgroundColor"));
-            	break;
-            case 10:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getReleasedBackgroundColor(), this.mod, "releasedBackgroundColor"));
-            	break;
             case 13:
             	mod.setPressedTextChroma(!mod.isPressedTextChromaEnabled());
             	this.initGui();
@@ -100,8 +94,6 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
         this.buttonList.add(new GuiButton(6, this.width / 2 + j + 160, this.height / 6 + i + 72 + k * 2, 150, 20, "Show Spacebar: " + (mod.isShowSpacebarEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(7, this.width / 2 + j, this.height / 6 + i + 96 + k * 3, 150, 20, "Show Movement Keys: " + (mod.isShowMovementKeysEnabled() ? "ON" : "OFF")));
         this.buttonList.add(arrowsButton = new GuiButton(8, this.width / 2 + j + 160, this.height / 6 + i + 96 + k * 3, 150, 20, "Arrows: " + (mod.isArrowsEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(9, this.width / 2 + j, this.height / 6 + i + 120 + k * 4, 150, 20, "Pressed Background Color"));
-        this.buttonList.add(new GuiButton(10, this.width / 2 + j + 160, this.height / 6 + i + 120 + k * 4, 150, 20, "Released Background Color"));
         this.buttonList.add(new GuiButton(13, this.width / 2 + j, this.height / 6 + i + 168 + k * 6, 150, 20, "Pressed Text Chroma: " + (mod.isPressedTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(14, this.width / 2 + j + 160, this.height / 6 + i + 168 + k * 6, 150, 20, "Released Text Chroma: " + (mod.isReleasedTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
