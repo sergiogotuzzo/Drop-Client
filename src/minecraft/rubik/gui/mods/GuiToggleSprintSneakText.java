@@ -9,16 +9,15 @@ import rubik.Client;
 import rubik.gui.GuiModColor;
 import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.PingDisplay;
+import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
-public class GuiPingDisplay extends GuiRubikClientScreen {
+public class GuiToggleSprintSneakText extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final PingDisplay mod = ModInstances.getPingDisplayMod();
-
-	private GuiButton buttonTextColor;
-	private GuiButton buttonTextChroma;
+	private final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
 	
-	public GuiPingDisplay(GuiScreen previousGuiScreen) {
+	private GuiButton buttonTextColor;
+	
+	public GuiToggleSprintSneakText(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -26,9 +25,8 @@ public class GuiPingDisplay extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Ping Display", this.width / 2, 15, 0xFFFFFFFF);
-        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
-
+        this.drawCenteredString(this.fontRendererObj, "Toggle Sprint / Sneak", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Text Settings", this.width / 2, 30, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -39,15 +37,15 @@ public class GuiPingDisplay extends GuiRubikClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setEnabled(!mod.isEnabled());
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
                 break;
             case 2:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
-            	this.initGui();
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod));
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiPingDisplayText(this));
+            	mod.setTextChroma(!mod.isTextChromaEnabled());
+            	this.initGui();
             	break;
         }
     }
@@ -59,9 +57,11 @@ public class GuiPingDisplay extends GuiRubikClientScreen {
         int i = -12;
         int j = -155;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Text"));
+        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, "Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(buttonTextColor = new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Color"));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Chroma: " + (mod.isTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+        
+        buttonTextColor.enabled = !mod.isTextChromaEnabled();
     }
 }

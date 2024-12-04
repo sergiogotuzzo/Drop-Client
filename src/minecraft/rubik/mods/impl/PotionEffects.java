@@ -17,7 +17,8 @@ public class PotionEffects extends ModDraggable {
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
     private boolean showName = true;
-    private boolean textShadow = true;
+    private boolean nameTextShadow = true;
+    private boolean durationTextShadow = true;
     private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE);
     private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE);
     private boolean nameTextChroma = false;
@@ -30,7 +31,8 @@ public class PotionEffects extends ModDraggable {
     
     public PotionEffects() {
     	setShowName((boolean) getFromFile("showName", showName));
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+    	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
+    	setDurationTextShadow((boolean) getFromFile("durationTextShadow", durationTextShadow));
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
 		setDurationTextColor((int) ((long) getFromFile("durationTextColor", durationTextColor.getRGB())));
 		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextChroma));
@@ -131,22 +133,22 @@ public class PotionEffects extends ModDraggable {
         String durationString = Potion.getDurationString(pe);
         
         if (showName) {
-        	drawText(potionName, nameTextX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), textShadow, nameTextChroma);
+        	drawText(potionName, nameTextX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
         	
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), textShadow, durationTextChroma);
+            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), textShadow, durationTextChroma);
+        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
         	}
         } else {
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), textShadow, durationTextChroma);
+            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), textShadow, durationTextChroma);
+        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
         	}
         }
     }
@@ -178,14 +180,24 @@ public class PotionEffects extends ModDraggable {
         return showName;
     }
 
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
+	public void setNameTextShadow(boolean enabled) {
+		nameTextShadow = enabled;
 		
-		setToFile("textShadow", enabled);
+		setToFile("nameTextShadow", enabled);
 	}
 	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
+	public boolean isNameTextShadowEnabled() {
+		return nameTextShadow;
+	}
+	
+	public void setDurationTextShadow(boolean enabled) {
+		durationTextShadow = enabled;
+		
+		setToFile("durationTextShadow", enabled);
+	}
+	
+	public boolean isDurationTextShadowEnabled() {
+		return durationTextShadow;
 	}
 	
 	public void setNameTextColor(int rgb) {

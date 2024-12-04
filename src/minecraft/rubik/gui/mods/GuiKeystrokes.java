@@ -26,7 +26,8 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Keystrokes Settings", this.width / 2, 30, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Keystrokes", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -42,38 +43,26 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
-            	this.initGui();
-            	break;
-            case 3:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getPressedTextColor(), this.mod, "pressedColor"));
-            	break;
-            case 4:
-            	this.mc.displayGuiScreen(new GuiModColor(this, mod.getReleasedTextColor(), this.mod, "releasedColor"));
-            	break;
-            case 5:
             	mod.setShowMouse(!mod.isShowMouseEnabled());
             	this.initGui();
             	break;
-            case 6:
-            	mod.setShowSpacebar(!mod.isShowSpacebarEnabled());
-            	this.initGui();
-            	break;
-            case 7:
-            	mod.setShowMovementKeys(!mod.isShowMovementKeysEnabled());
-            	this.initGui();
-            	break;
-            case 8:
+            case 3:
             	mod.setArrows(!mod.isArrowsEnabled());
             	this.initGui();
             	break;
-            case 13:
-            	mod.setPressedTextChroma(!mod.isPressedTextChromaEnabled());
+            case 4:
+            	mod.setShowSpacebar(!mod.isShowSpacebarEnabled());
             	this.initGui();
             	break;
-            case 14:
-            	mod.setReleasedTextChroma(!mod.isReleasedTextChromaEnabled());
+            case 5:
+            	this.mc.displayGuiScreen(new GuiKeystrokesReleasedText(this));
+            	break;
+            case 6:
+            	mod.setShowMovementKeys(!mod.isShowMovementKeysEnabled());
             	this.initGui();
+            	break;
+            case 7:
+            	this.mc.displayGuiScreen(new GuiKeystrokesPressedText(this));
             	break;
         }
     }
@@ -84,18 +73,14 @@ public class GuiKeystrokes extends GuiRubikClientScreen {
         
         int i = -12;
         int j = -155;
-        int k = -3;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, mod.isEnabled() ? "Enabled" : "Disabled"));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48 + k, 150, 20, "Pressed Text Color"));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 48 + k, 150, 20, "Released Text Color"));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j, this.height / 6 + i + 72 + k * 2, 150, 20, "Show Mouse: " + (mod.isShowMouseEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(6, this.width / 2 + j + 160, this.height / 6 + i + 72 + k * 2, 150, 20, "Show Spacebar: " + (mod.isShowSpacebarEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(7, this.width / 2 + j, this.height / 6 + i + 96 + k * 3, 150, 20, "Show Movement Keys: " + (mod.isShowMovementKeysEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(arrowsButton = new GuiButton(8, this.width / 2 + j + 160, this.height / 6 + i + 96 + k * 3, 150, 20, "Arrows: " + (mod.isArrowsEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(13, this.width / 2 + j, this.height / 6 + i + 168 + k * 6, 150, 20, "Pressed Text Chroma: " + (mod.isPressedTextChromaEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(14, this.width / 2 + j + 160, this.height / 6 + i + 168 + k * 6, 150, 20, "Released Text Chroma: " + (mod.isReleasedTextChromaEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Show Mouse: " + (mod.isShowMouseEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(arrowsButton = new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Arrows: " + (mod.isArrowsEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Show Spacebar: " + (mod.isShowSpacebarEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Released Text"));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + j, this.height / 6 + i + 96, 150, 20, "Show Movement Keys: " + (mod.isShowMovementKeysEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(7, this.width / 2 + j + 160, this.height / 6 + i + 96, 150, 20, "Pressed Text"));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
         
         arrowsButton.enabled = mod.isShowMovementKeysEnabled();

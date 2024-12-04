@@ -11,11 +11,13 @@ import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.PotionEffects;
 
-public class GuiPotionEffects extends GuiRubikClientScreen {
+public class GuiPotionEffectsNameText extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final PotionEffects mod = ModInstances.getPotionEffectsMod();
 	
-	public GuiPotionEffects(GuiScreen previousGuiScreen) {
+	private GuiButton buttonTextColor;
+	
+	public GuiPotionEffectsNameText(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -24,8 +26,7 @@ public class GuiPotionEffects extends GuiRubikClientScreen {
         this.drawDefaultBackground();
         
         this.drawCenteredString(this.fontRendererObj, "Potion Effects", this.width / 2, 15, 0xFFFFFFFF);
-        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
-
+        this.drawCenteredString(this.fontRendererObj, "Name Text Settings", this.width / 2, 30, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -36,22 +37,19 @@ public class GuiPotionEffects extends GuiRubikClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setEnabled(!mod.isEnabled());
+            	mod.setShowName(!mod.isShowNameEnabled());
+            	this.initGui();
+            	break;
+            case 2:
+            	mod.setNameTextShadow(!mod.isNameTextShadowEnabled());
             	this.initGui();
                 break;
-            case 2:
-            	mod.setRight(!mod.isRightEnabled());
-            	this.initGui();
-            	break;
             case 3:
-            	mod.setBlink(!mod.isBlinkEnabled());
-            	this.initGui();
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getNameTextColor(), mod, "nameTextColor"));
             	break;
             case 4:
-            	this.mc.displayGuiScreen(new GuiPotionEffectsNameText(this));
-            	break;
-            case 5:
-            	this.mc.displayGuiScreen(new GuiPotionEffectsDurationText(this));
+            	mod.setNameTextChroma(!mod.isNameTextChromaEnabled());
+            	this.initGui();
             	break;
         }
     }
@@ -63,11 +61,12 @@ public class GuiPotionEffects extends GuiRubikClientScreen {
         int i = -12;
         int j = -155;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Side: " + (mod.isRightEnabled() ? "RIGHT" : "LEFT")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Blink: " + (mod.isBlinkEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Name Text"));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Duration Text"));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Show: " + (mod.isShowNameEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Shadow: " + (mod.isNameTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(buttonTextColor = new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Color"));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Chroma: " + (mod.isNameTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+        
+        buttonTextColor.enabled = !mod.isNameTextChromaEnabled();
     }
 }

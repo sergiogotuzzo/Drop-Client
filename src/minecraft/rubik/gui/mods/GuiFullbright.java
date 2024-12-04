@@ -22,7 +22,8 @@ public class GuiFullbright extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Fullbright Settings", this.width / 2, 30, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Fullbright", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -47,7 +48,7 @@ public class GuiFullbright extends GuiRubikClientScreen {
         int i = -12;
         int j = -155;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, mod.isEnabled() ? "Enabled" : "Disabled"));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

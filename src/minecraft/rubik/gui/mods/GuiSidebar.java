@@ -22,7 +22,8 @@ public class GuiSidebar extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Sidebar Settings", this.width / 2, 30, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Sidebar", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -38,15 +39,15 @@ public class GuiSidebar extends GuiRubikClientScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setHideNumbers(!mod.isHideNumbersEnabled());
-            	this.initGui();
-            	break;
-            case 3:
             	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
-            case 4:
+            case 3:
             	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	this.initGui();
+            	break;
+            case 4:
+            	mod.setHideNumbers(!mod.isHideNumbersEnabled());
             	this.initGui();
             	break;
         }
@@ -59,10 +60,10 @@ public class GuiSidebar extends GuiRubikClientScreen {
         int i = -12;
         int j = -155;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, mod.isEnabled() ? "Enabled" : "Disabled"));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Hide Numbers: " + (mod.isHideNumbersEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Hide Numbers: " + (mod.isHideNumbersEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

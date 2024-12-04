@@ -111,7 +111,8 @@ public class Keystrokes extends ModDraggable {
 	
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 
-	private boolean textShadow = true;
+	private boolean pressedTextShadow = true;
+	private boolean releasedTextShadow = true;
 	private ColorManager pressedTextColor = ColorManager.fromColor(Color.BLACK);
 	private ColorManager releasedTextColor = ColorManager.fromColor(Color.WHITE);
 	private boolean showMovementKeys = true;
@@ -130,7 +131,8 @@ public class Keystrokes extends ModDraggable {
     private long lastRightPressed;
 	
 	public Keystrokes() {
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
+		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
+		setReleasedTextShadow((boolean) getFromFile("releasedTextShadow", releasedTextShadow));
 		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
 		setReleasedTextColor((int) ((long) getFromFile("releasedTextColor", releasedTextColor.getRGB())));
 		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
@@ -222,7 +224,7 @@ public class Keystrokes extends ModDraggable {
 	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
 	                key.isDown() ? pressedTextColor.getRGB() : releasedTextColor.getRGB(),
-	                textShadow,
+	                key.isDown() ? pressedTextShadow : releasedTextShadow,
 	                key.isDown() ? pressedTextChroma : releasedTextChroma
 	        		);
 	    }
@@ -256,20 +258,30 @@ public class Keystrokes extends ModDraggable {
 		}
 	}
 	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
+	public void setPressedTextShadow(boolean enabled) {
+		pressedTextShadow = enabled;
 		
-		setToFile("textShadow", enabled);
+		setToFile("pressedTextShadow", enabled);
 	}
 	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
+	public boolean isPressedTextShadowEnabled() {
+		return pressedTextShadow;
+	}
+	
+	public void setReleasedTextShadow(boolean enabled) {
+		releasedTextShadow = enabled;
+		
+		setToFile("releasedTextShadow", enabled);
+	}
+	
+	public boolean isReleasedTextShadowEnabled() {
+		return releasedTextShadow;
 	}
 	
 	public void setPressedTextColor(int rgb) {
 		this.pressedTextColor = ColorManager.fromRGB(rgb);
 		
-		setToFile("pressedColor", rgb);
+		setToFile("pressedTextColor", rgb);
 	}
 	
 	public ColorManager getPressedTextColor() {

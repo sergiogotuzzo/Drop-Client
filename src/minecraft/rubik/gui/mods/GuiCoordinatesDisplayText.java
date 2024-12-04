@@ -11,11 +11,13 @@ import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.CoordinatesDisplay;
 
-public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
+public class GuiCoordinatesDisplayText extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final CoordinatesDisplay mod = ModInstances.getCoordinatesDisplayMod();
-		
-	public GuiCoordinatesDisplay(GuiScreen previousGuiScreen) {
+	
+	private GuiButton buttonTextColor;
+	
+	public GuiCoordinatesDisplayText(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -24,8 +26,7 @@ public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
         this.drawDefaultBackground();
         
         this.drawCenteredString(this.fontRendererObj, "Coordinates Display", this.width / 2, 15, 0xFFFFFFFF);
-        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
-
+        this.drawCenteredString(this.fontRendererObj, "Text Settings", this.width / 2, 30, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -36,23 +37,15 @@ public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setEnabled(!mod.isEnabled());
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
                 break;
             case 2:
-            	mod.setShowBiome(!mod.isShowBiomeEnabled());
-            	this.initGui();
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod));
             	break;
             case 3:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	mod.setTextChroma(!mod.isTextChromaEnabled());
             	this.initGui();
-            	break;
-            case 4:
-            	mod.setShowTowards(!mod.isShowTowardsEnabled());
-            	this.initGui();
-            	break;
-            case 5:
-            	mc.displayGuiScreen(new GuiCoordinatesDisplayText(this));
             	break;
         }
     }
@@ -64,11 +57,11 @@ public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
         int i = -12;
         int j = -155;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Show Biome: " + (mod.isShowBiomeEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Show Towards: " + (mod.isShowTowardsEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Text"));
+        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, "Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(buttonTextColor = new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Color"));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Chroma: " + (mod.isTextChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+        
+        buttonTextColor.enabled = !mod.isTextChromaEnabled();
     }
 }
