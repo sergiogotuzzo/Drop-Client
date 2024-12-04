@@ -115,9 +115,8 @@ public class PotionEffects extends ModDraggable {
         Potion potion = Potion.potionTypes[pe.getPotionID()];
         
         int i = 2;
-        int iconX = right ? showName ? pos.getAbsoluteX() + font.getStringWidth(getLongestEffectName(mc.thePlayer.getActivePotionEffects())) + i * 2 : pos.getAbsoluteX() + font.getStringWidth("00:00") + i * 2 : pos.getAbsoluteX() + i;
-        int nameTextX = right ? pos.getAbsoluteX() + i : pos.getAbsoluteX() + EFFECT_WIDTH;
-        int durationTextX = right ? pos.getAbsoluteX() + i : pos.getAbsoluteX() + EFFECT_WIDTH;
+        int iconX = right ? showName ? pos.getAbsoluteX() + font.getStringWidth(getLongestEffectName(mc.thePlayer.getActivePotionEffects().size() == 0 ? dummyPotionEffects : mc.thePlayer.getActivePotionEffects())) + i * 2 : pos.getAbsoluteX() + font.getStringWidth("00:00") + i * 2 : pos.getAbsoluteX() + i;
+        int textX = right ? pos.getAbsoluteX() + i * 2 : pos.getAbsoluteX() + EFFECT_WIDTH;
 
         if (potion.hasStatusIcon()) {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
@@ -133,22 +132,22 @@ public class PotionEffects extends ModDraggable {
         String durationString = Potion.getDurationString(pe);
         
         if (showName) {
-        	drawText(potionName, nameTextX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
+        	drawText(potionName, textX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
         	
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+            		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+        		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
         	}
         } else {
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+            		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, durationTextX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+        		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
         	}
         }
     }
