@@ -22,7 +22,7 @@ public class GuiScoreboard extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Sidebar", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Scoreboard", this.width / 2, 15, 0xFFFFFFFF);
         this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
