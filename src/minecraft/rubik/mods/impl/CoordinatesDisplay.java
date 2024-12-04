@@ -9,7 +9,6 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class CoordinatesDisplay extends ModDraggable {
-	private boolean showBackground = true;
 	private boolean textShadow = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean showBiome = true;
@@ -20,7 +19,6 @@ public class CoordinatesDisplay extends ModDraggable {
 	private final int gap = 10;
 	
 	public CoordinatesDisplay() {
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setShowBiome((boolean) getFromFile("showBiome", showBiome));
@@ -40,15 +38,13 @@ public class CoordinatesDisplay extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (showBackground) {
-			drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
-					);
-		}
+		drawRect(
+				pos.getAbsoluteX(),
+				pos.getAbsoluteY(),
+				pos.getAbsoluteX() + getWidth(),
+				pos.getAbsoluteY() + getHeight(),
+				ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
+				);
 		
 		final int i = 4;
 		final int j = padding / 2;
@@ -186,16 +182,6 @@ public class CoordinatesDisplay extends ModDraggable {
 	        default:
 	        	return "";
 	    }
-	}
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
 	}
 	
 	public void setTextShadow(boolean enabled) {
