@@ -41,19 +41,13 @@ public class PotionEffects extends ModDraggable {
 	}
 
 	@Override
-    public int getWidth() {
-    	Collection<PotionEffect> activePotionEffects = mc.thePlayer.getActivePotionEffects();
-    	
-        return showName ? activePotionEffects.size() == 0 ?
-        		EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(dummyPotionEffects)) :
-        		EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(activePotionEffects)) : EFFECT_WIDTH + font.getStringWidth("00:00");
+    public int getWidth() {    	
+        return showName ? EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(getPlayerPotionEffects())) : EFFECT_WIDTH + font.getStringWidth("00:00");
     }
 
     @Override
-    public int getHeight() {
-    	int activePotionEffectsSize = mc.thePlayer.getActivePotionEffects().size() == 0 ? dummyPotionEffects.size() : mc.thePlayer.getActivePotionEffects().size();
-    	
-        return activePotionEffectsSize * EFFECT_HEIGHT;
+    public int getHeight() {    	
+        return getPlayerPotionEffects().size() * EFFECT_HEIGHT;
     }
 
     @Override
@@ -86,6 +80,10 @@ public class PotionEffects extends ModDraggable {
         }
     }
     
+    private Collection<PotionEffect> getPlayerPotionEffects() {
+    	return mc.thePlayer.getActivePotionEffects().size() == 0 ? dummyPotionEffects : mc.thePlayer.getActivePotionEffects();
+    }
+    
     private String getLongestEffectName(Collection<PotionEffect> effects) {
         if (effects == null || effects.isEmpty()) {
             return null;
@@ -115,7 +113,7 @@ public class PotionEffects extends ModDraggable {
         Potion potion = Potion.potionTypes[pe.getPotionID()];
         
         int i = 2;
-        int iconX = right ? showName ? pos.getAbsoluteX() + font.getStringWidth(getLongestEffectName(mc.thePlayer.getActivePotionEffects().size() == 0 ? dummyPotionEffects : mc.thePlayer.getActivePotionEffects())) + i * 2 : pos.getAbsoluteX() + font.getStringWidth("00:00") + i * 2 : pos.getAbsoluteX() + i;
+        int iconX = right ? showName ? pos.getAbsoluteX() + font.getStringWidth(getLongestEffectName(getPlayerPotionEffects())) + i * 2 : pos.getAbsoluteX() + font.getStringWidth("00:00") + i * 2 : pos.getAbsoluteX() + i;
         int textX = right ? pos.getAbsoluteX() + i * 2 : pos.getAbsoluteX() + EFFECT_WIDTH;
 
         if (potion.hasStatusIcon()) {
