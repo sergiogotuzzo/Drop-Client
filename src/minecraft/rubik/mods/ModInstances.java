@@ -17,7 +17,6 @@ import rubik.mods.impl.Keystrokes;
 import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
-import rubik.mods.impl.PotsCounter;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import rubik.mods.impl.Sidebar;
 
@@ -30,7 +29,6 @@ public class ModInstances {
 	private static PotionEffects potionEffectsMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
-	private static PotsCounter potsCounterMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
@@ -47,7 +45,6 @@ public class ModInstances {
 		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
-		manager.register(potsCounterMod = new PotsCounter());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -80,10 +77,6 @@ public class ModInstances {
 	
 	public static ToggleSprintSneak getToggleSprintSneakMod() {
 		return toggleSprintSneakMod;
-	}
-	
-	public static PotsCounter getPotsCounterMod() {
-		return potsCounterMod;
 	}
 	
 	public static Freelook getFreelookMod() {
