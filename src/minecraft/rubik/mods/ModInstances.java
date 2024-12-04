@@ -18,7 +18,7 @@ import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
-import rubik.mods.impl.Sidebar;
+import rubik.mods.impl.Scoreboard;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -32,7 +32,7 @@ public class ModInstances {
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
-	private static Sidebar sidebarMod = new Sidebar();
+	private static Scoreboard scoreboardMod = new Scoreboard();
 	private static Chat chatMod = new Chat();
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
 	
@@ -91,8 +91,8 @@ public class ModInstances {
 		return oldAnimationsMod;
 	}
 	
-	public static Sidebar getSidebarMod() {
-		return sidebarMod;
+	public static Scoreboard getScoreboardMod() {
+		return scoreboardMod;
 	}
 	
 	public static Chat getChatMod() {

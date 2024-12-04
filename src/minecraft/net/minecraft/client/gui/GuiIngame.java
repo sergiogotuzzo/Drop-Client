@@ -630,20 +630,20 @@ public class GuiIngame extends Gui
             int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
             int l = scaledRes.getScaledWidth() - k1 + 2;
             
-            if (ModInstances.getSidebarMod().isShowBackgroundEnabled()) {
+            if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
             	drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1610612736);
             }
             
-            if (ModInstances.getSidebarMod().isTextShadowEnabled()) {
+            if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
             	this.getFontRenderer().drawStringWithShadow(s1, l1, k, 553648127);
             	
-            	if (!ModInstances.getSidebarMod().isHideNumbersEnabled()) {
+            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
                 	this.getFontRenderer().drawStringWithShadow(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
                 }
             } else {
             	this.getFontRenderer().drawString(s1, l1, k, 553648127);
             	
-            	if (!ModInstances.getSidebarMod().isHideNumbersEnabled()) {
+            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
                 	this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
                 }
             }
@@ -652,12 +652,12 @@ public class GuiIngame extends Gui
             {
             	String s3 = objective.getDisplayName();
                 
-                if (ModInstances.getSidebarMod().isShowBackgroundEnabled()) {
+                if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
                 	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
                     drawRect(l1 - 2, k - 1, l, k, 1610612736);
                 }
                 
-                if (ModInstances.getSidebarMod().isTextShadowEnabled()) {
+                if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
                 	this.getFontRenderer().drawStringWithShadow(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
                 } else {
                 	this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);

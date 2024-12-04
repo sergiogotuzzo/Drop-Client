@@ -18,7 +18,7 @@ import rubik.gui.mods.GuiKeystrokes;
 import rubik.gui.mods.GuiOldAnimations;
 import rubik.gui.mods.GuiPingDisplay;
 import rubik.gui.mods.GuiPotionEffects;
-import rubik.gui.mods.GuiSidebar;
+import rubik.gui.mods.GuiScoreboard;
 import rubik.gui.mods.GuiToggleSprintSneak;
 import rubik.mods.ModInstances;
 
@@ -80,7 +80,7 @@ public class GuiModsList extends GuiRubikClientScreen {
             	this.mc.displayGuiScreen(new GuiPotionEffects(this));
             	break;
             case 12:
-            	this.mc.displayGuiScreen(new GuiSidebar(this));
+            	this.mc.displayGuiScreen(new GuiScoreboard(this));
             	break;
             case 13:
             	this.mc.displayGuiScreen(new GuiCoordinatesDisplay(this));

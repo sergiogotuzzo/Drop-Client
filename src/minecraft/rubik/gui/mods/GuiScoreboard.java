@@ -8,13 +8,13 @@ import net.minecraft.client.resources.I18n;
 import rubik.Client;
 import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.Sidebar;
+import rubik.mods.impl.Scoreboard;
 
-public class GuiSidebar extends GuiRubikClientScreen {
+public class GuiScoreboard extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final Sidebar mod = ModInstances.getSidebarMod();
+	private final Scoreboard mod = ModInstances.getScoreboardMod();
 	
-	public GuiSidebar(GuiScreen previousGuiScreen) {
+	public GuiScoreboard(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 

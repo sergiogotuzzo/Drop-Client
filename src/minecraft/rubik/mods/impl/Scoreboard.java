@@ -2,12 +2,12 @@ package rubik.mods.impl;
 
 import rubik.mods.Mod;
 
-public class Sidebar extends Mod {
+public class Scoreboard extends Mod {
 	private boolean hideNumbers = false;
 	private boolean textShadow = false;
 	private boolean showBackground = true;
 	
-	public Sidebar() {
+	public Scoreboard() {
 		setHideNumbers((boolean) getFromFile("hideNumbers", textShadow));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
