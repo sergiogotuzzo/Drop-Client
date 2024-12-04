@@ -111,10 +111,10 @@ public class PotionEffects extends ModDraggable {
         }
 
         Potion potion = Potion.potionTypes[pe.getPotionID()];
+                
+        int i = EFFECT_HEIGHT / font.FONT_HEIGHT;
         
-        int i = 2;
-        int iconX = right ? showName ? pos.getAbsoluteX() + font.getStringWidth(getLongestEffectName(getPlayerPotionEffects())) + i * 2 : pos.getAbsoluteX() + font.getStringWidth("00:00") + i * 2 : pos.getAbsoluteX() + i;
-        int textX = right ? pos.getAbsoluteX() + i * 2 : pos.getAbsoluteX() + EFFECT_WIDTH;
+        int iconX = right ? pos.getAbsoluteX() + getWidth() - 18 : pos.getAbsoluteX() + 2;
 
         if (potion.hasStatusIcon()) {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
@@ -128,6 +128,8 @@ public class PotionEffects extends ModDraggable {
 
         String potionName = getPotionName(pe);
         String durationString = Potion.getDurationString(pe);
+        
+        int textX = right ? pos.getAbsoluteX() + 2 : pos.getAbsoluteX() + getWidth() - font.getStringWidth(showName ? getLongestEffectName(getPlayerPotionEffects()) : durationString);
         
         if (showName) {
         	drawText(potionName, textX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
