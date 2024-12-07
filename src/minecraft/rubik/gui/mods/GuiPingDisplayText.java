@@ -16,6 +16,7 @@ public class GuiPingDisplayText extends GuiRubikClientScreen {
 	private final PingDisplay mod = ModInstances.getPingDisplayMod();
 	
 	private GuiButton buttonTextColor;
+	private GuiButton buttonTextChroma;
 	
 	public GuiPingDisplayText(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
@@ -47,6 +48,10 @@ public class GuiPingDisplayText extends GuiRubikClientScreen {
             	mod.setTextChroma(!mod.isTextChromaEnabled());
             	this.initGui();
             	break;
+            case 4:
+	            mod.setDynamicColors(!mod.isDynamicColorsEnabled());
+	            this.initGui();
+            	break;
         }
     }
 	
@@ -59,9 +64,16 @@ public class GuiPingDisplayText extends GuiRubikClientScreen {
         
         this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, "Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
         this.buttonList.add(buttonTextColor = new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Color"));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Chroma: " + (mod.isTextChromaEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(buttonTextChroma = new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Chroma: " + (mod.isTextChromaEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Dynamic Colors: " + (mod.isDynamicColorsEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
         
-        buttonTextColor.enabled = !mod.isTextChromaEnabled();
+        buttonTextChroma.enabled = !mod.isDynamicColorsEnabled();
+        
+        if (mod.isDynamicColorsEnabled() || mod.isTextChromaEnabled()) {
+        	buttonTextColor.enabled = false;
+        } else {
+        	buttonTextColor.enabled = true;
+        }
     }
 }
