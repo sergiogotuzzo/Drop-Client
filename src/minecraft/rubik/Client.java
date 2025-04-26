@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import rubik.events.EventManager;
 import rubik.events.EventTarget;
+import rubik.events.impl.ClickEvent;
 import rubik.events.impl.RenderEvent;
 import rubik.events.impl.TickEvent;
 import rubik.gui.GuiModPositioning;
@@ -39,6 +40,13 @@ public class Client {
 	
 	public void shutdown() {
 		discordRichPresence.shutdown();
+	}
+	
+
+	
+	@EventTarget
+	public void onClick(ClickEvent event) {
+		mc.displayGuiScreen(event.getSettingsGui());
 	}
 	
 	@EventTarget

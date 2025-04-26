@@ -88,6 +88,9 @@ public class GuiModsList extends GuiRubikClientScreen {
             case 14:
             	this.mc.displayGuiScreen(new GuiToggleSprintSneak(this));
             	break;
+            case 90:
+            	this.mc.displayGuiScreen(new GuiModsListNew());
+            	break;
         }
     }
 	
@@ -121,6 +124,7 @@ public class GuiModsList extends GuiRubikClientScreen {
         this.buttonList.add(new GuiButton(10, fc, fourthRaw, 98, 20, I18n.format("Ping Display", new Object[0])));
         this.buttonList.add(new GuiButton(11, sc, fourthRaw, 98, 20, I18n.format("Potion Effects", new Object[0])));
         this.buttonList.add(new GuiButton(12, tc, fourthRaw, 98, 20, I18n.format("Scoreboard", new Object[0])));
+        this.buttonList.add(new GuiButton(90, this.width / 2 - 100, sixthRaw + 20, I18n.format("NEW GUI", new Object[0])));
 
         this.buttonList.add(new GuiButton(13, this.width / 2 - 100, fifthRaw, I18n.format("Coordinates Display", new Object[0])));
         this.buttonList.add(new GuiButton(14, this.width / 2 - 100, sixthRaw, I18n.format("Toggle Sprint / Sneak", new Object[0])));
