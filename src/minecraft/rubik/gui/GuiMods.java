@@ -20,12 +20,12 @@ import rubik.gui.mods.GuiScoreboardSettings;
 import rubik.gui.mods.GuiToggleSprintSneak;
 import rubik.mods.ModInstances;
 
-public class GuiModsList extends GuiRubikClientScreen {
+public class GuiMods extends GuiRubikClientScreen {
 	private final GuiScreen previousScreen;
 	
 	private GuiButton buttonReset;
 	
-	public GuiModsList(GuiScreen previousScreen) {
+	public GuiMods(GuiScreen previousScreen) {
 		this.previousScreen = previousScreen;
 	}
 
@@ -33,7 +33,7 @@ public class GuiModsList extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Mods List", this.width / 2, 20, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "Mods", this.width / 2, 20, 0xFFFFFFFF);
         
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

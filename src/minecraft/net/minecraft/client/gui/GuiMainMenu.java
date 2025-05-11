@@ -40,7 +40,8 @@ import net.optifine.CustomPanorama;
 import net.optifine.CustomPanoramaProperties;
 import net.optifine.reflect.Reflector;
 import rubik.Client;
-import rubik.gui.GuiModsList;
+import rubik.gui.GuiMods;
+import rubik.gui.mods.GuiButtonQuit;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 {
@@ -226,6 +227,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
         int i = 24;
         int j = this.height / 4 + 48;
+        int h = 4;
 
         if (this.mc.isDemo())
         {
@@ -237,8 +239,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
 
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
-        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, j + 72 + 12));
+        this.buttonList.add(new GuiButton(15, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("Mods...", new Object[0])));
+        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 120 - h, j + 72 + 12));
+        this.buttonList.add(new GuiButtonQuit(4, this.width / 2 + 2 + 98 + h, j + 72 + 12));
 
         synchronized (this.threadLock)
         {
@@ -282,8 +285,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
         else
         {
-            this.buttonList.add(this.realmsButton = new GuiButton(14, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("menu.online", new Object[0]).replace("Minecraft", "").trim()));
-            this.buttonList.add(this.modButton = new GuiButton(15, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("Mods", new Object[0])));
+            this.buttonList.add(this.realmsButton = new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.online", new Object[0])));
         }
     }
 
@@ -361,7 +363,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
 
         if (button.id == 15) {
-        	this.mc.displayGuiScreen(new GuiModsList(this));
+        	this.mc.displayGuiScreen(new GuiMods(this));
         }
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import rubik.Client;
-import rubik.gui.GuiModsList;
+import rubik.gui.GuiMods;
 
 public class GuiIngameMenu extends GuiScreen
 {
@@ -38,13 +38,13 @@ public class GuiIngameMenu extends GuiScreen
         this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 24 + i, I18n.format("menu.returnToGame", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, I18n.format("menu.options", new Object[0])));
         GuiButton guibutton;
-        this.buttonList.add(guibutton = new GuiButton(7, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, I18n.format("menu.shareToLan", new Object[0])));
+        this.buttonList.add(guibutton = new GuiButton(7, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format("menu.shareToLan", new Object[0])));
         this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 4 + 48 + i, 98, 20, I18n.format("gui.achievements", new Object[0])));
         this.buttonList.add(new GuiButton(6, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("gui.stats", new Object[0])));
         guibutton.enabled = this.mc.isSingleplayer() && !this.mc.getIntegratedServer().getPublic();
         
         this.buttonList.add(new GuiButton(8, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format("menu.multiplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(9, this.width / 2 + 2, this.height / 4 + 72 + i, 98, 20, I18n.format("Mods", new Object[0])));
+        this.buttonList.add(new GuiButton(9, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, I18n.format("Mods...", new Object[0])));
     }
 
     /**
@@ -104,7 +104,7 @@ public class GuiIngameMenu extends GuiScreen
             	this.mc.displayGuiScreen(new GuiMultiplayer(this, false));
             	break;
             case 9:
-            	this.mc.displayGuiScreen(new GuiModsList(this));
+            	this.mc.displayGuiScreen(new GuiMods(this));
             	break;
         }
     }
