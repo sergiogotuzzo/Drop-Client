@@ -1,4 +1,4 @@
-package rubik.gui.mods;
+package rubik.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
