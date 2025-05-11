@@ -3,13 +3,17 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
+import rubik.gui.GuiRubikClientScreen;
+import rubik.mods.ModInstances;
+import rubik.mods.impl.Chat;
 
-public class ScreenChatOptions extends GuiScreen
+public class ScreenChatOptions extends GuiRubikClientScreen
 {
     private static final GameSettings.Options[] field_146399_a = new GameSettings.Options[] {GameSettings.Options.CHAT_VISIBILITY, GameSettings.Options.CHAT_COLOR, GameSettings.Options.CHAT_LINKS, GameSettings.Options.CHAT_OPACITY, GameSettings.Options.CHAT_LINKS_PROMPT, GameSettings.Options.CHAT_SCALE, GameSettings.Options.CHAT_HEIGHT_FOCUSED, GameSettings.Options.CHAT_HEIGHT_UNFOCUSED, GameSettings.Options.CHAT_WIDTH, GameSettings.Options.REDUCED_DEBUG_INFO};
     private final GuiScreen parentScreen;
     private final GameSettings game_settings;
     private String field_146401_i;
+    private final Chat mod = ModInstances.getChatMod();
 
     public ScreenChatOptions(GuiScreen parentScreenIn, GameSettings gameSettingsIn)
     {
@@ -39,8 +43,11 @@ public class ScreenChatOptions extends GuiScreen
 
             ++i;
         }
+        
+        this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background: " + (mod.isTransparentBackgroundEnabled() ? "Transparent" : "Default")));
 
-        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 120, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 150, I18n.format("gui.done", new Object[0])));
     }
 
     /**
@@ -54,6 +61,16 @@ public class ScreenChatOptions extends GuiScreen
             {
                 this.game_settings.setOptionValue(((GuiOptionButton)button).returnEnumOptions(), 1);
                 button.displayString = this.game_settings.getKeyBinding(GameSettings.Options.getEnumOptions(button.id));
+            }
+            
+            if (button.id == 43) {
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	button.displayString = "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF");
+            }
+            
+            if (button.id == 44) {
+            	mod.setTransparentBackground(!mod.isTransparentBackgroundEnabled());
+            	button.displayString = "Background: " + (mod.isTransparentBackgroundEnabled() ? "Transparent" : "Default");
             }
 
             if (button.id == 200)

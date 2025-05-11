@@ -8,13 +8,13 @@ import net.minecraft.client.resources.I18n;
 import rubik.Client;
 import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.Chat;
+import rubik.mods.impl.Scoreboard;
 
-public class GuiChat extends GuiRubikClientScreen {
+public class GuiScoreboardSettings extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final Chat mod = ModInstances.getChatMod();
+	private final Scoreboard mod = ModInstances.getScoreboardMod();
 	
-	public GuiChat(GuiScreen previousGuiScreen) {
+	public GuiScoreboardSettings(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -22,9 +22,8 @@ public class GuiChat extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Chat", this.width / 2, 15, 0xFFFFFFFF);
-        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
-        
+        this.drawCenteredString(this.fontRendererObj, "Scoreboard Settings...", this.width / 2, 20, 0xFFFFFFFF);
+
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -39,11 +38,15 @@ public class GuiChat extends GuiRubikClientScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setHideNumbers(!mod.isHideNumbersEnabled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setTransparentBackground(!mod.isTransparentBackgroundEnabled());
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	this.initGui();
+            	break;
+            case 4:
+            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
             	this.initGui();
             	break;
         }
@@ -53,12 +56,13 @@ public class GuiChat extends GuiRubikClientScreen {
     public void initGui() {
         this.buttonList.clear();
         
-        int i = -12;
+        int i = 0;
         int j = -155;
         
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Transparent Background: " + (mod.isTransparentBackgroundEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i, 150, 20, "Scoreboard: " + (mod.isEnabled() ? "Shown" : "Hidden")));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i, 150, 20, "Hide Numbers: " + (mod.isHideNumbersEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Background: " + (mod.isShowBackgroundEnabled() ? "Transparent" : "Default")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

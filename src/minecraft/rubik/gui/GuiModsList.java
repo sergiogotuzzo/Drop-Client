@@ -9,16 +9,14 @@ import rubik.Client;
 import rubik.gui.mods.GuiArmorStatus;
 import rubik.gui.mods.GuiBlockOverlay;
 import rubik.gui.mods.GuiCPSDisplay;
-import rubik.gui.mods.GuiChat;
 import rubik.gui.mods.GuiCoordinatesDisplay;
 import rubik.gui.mods.GuiFPSDisplay;
 import rubik.gui.mods.GuiFreelook;
-import rubik.gui.mods.GuiFullbright;
 import rubik.gui.mods.GuiKeystrokes;
 import rubik.gui.mods.GuiOldAnimations;
 import rubik.gui.mods.GuiPingDisplay;
 import rubik.gui.mods.GuiPotionEffects;
-import rubik.gui.mods.GuiScoreboard;
+import rubik.gui.mods.GuiScoreboardSettings;
 import rubik.gui.mods.GuiToggleSprintSneak;
 import rubik.mods.ModInstances;
 
@@ -52,9 +50,6 @@ public class GuiModsList extends GuiRubikClientScreen {
             case 2:
             	this.mc.displayGuiScreen(new GuiBlockOverlay(this));
             	break;
-            case 3:
-            	this.mc.displayGuiScreen(new GuiChat(this));
-            	break;
             case 4:
             	this.mc.displayGuiScreen(new GuiCPSDisplay(this));
             	break;
@@ -63,9 +58,6 @@ public class GuiModsList extends GuiRubikClientScreen {
             	break;
             case 6:
             	this.mc.displayGuiScreen(new GuiFreelook(this));
-            	break;
-            case 7:
-            	this.mc.displayGuiScreen(new GuiFullbright(this));
             	break;
             case 8:
             	this.mc.displayGuiScreen(new GuiKeystrokes(this));
@@ -78,9 +70,6 @@ public class GuiModsList extends GuiRubikClientScreen {
             	break;
             case 11:
             	this.mc.displayGuiScreen(new GuiPotionEffects(this));
-            	break;
-            case 12:
-            	this.mc.displayGuiScreen(new GuiScoreboard(this));
             	break;
             case 13:
             	this.mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
@@ -107,22 +96,18 @@ public class GuiModsList extends GuiRubikClientScreen {
         int thirdRaw = this.height / 6 + 72 + i;
         int fourthRaw = this.height / 6 + 96 + i;
         int fifthRaw = this.height / 6 + 120 + i;
-        int sixthRaw = this.height / 6 + 144 + i;
         
         this.buttonList.add(new GuiButton(1, fc, firstRaw, 98, 20, I18n.format("Armor Status", new Object[0])));
         this.buttonList.add(new GuiButton(2, sc, firstRaw, 98, 20, I18n.format("Block Overlay", new Object[0])));
-        this.buttonList.add(new GuiButton(3, tc, firstRaw, 98, 20, I18n.format("Chat", new Object[0])));
         this.buttonList.add(new GuiButton(13, fc, secondRaw, I18n.format("Coordinates Display", new Object[0])));
         this.buttonList.add(new GuiButton(4, tc, secondRaw, 98, 20, I18n.format("CPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(5, fc, thirdRaw, 98, 20, I18n.format("FPS Display", new Object[0])));
         this.buttonList.add(new GuiButton(6, sc, thirdRaw, 98, 20, I18n.format("Freelook", new Object[0])));
-        this.buttonList.add(new GuiButton(7, tc, thirdRaw, 98, 20, I18n.format("Fullbright", new Object[0])));
-        this.buttonList.add(new GuiButton(8, fc, fourthRaw, 98, 20, I18n.format("Keystrokes", new Object[0])));
-        this.buttonList.add(new GuiButton(9, sc, fourthRaw, 98, 20, I18n.format("Old Animations", new Object[0])));
-        this.buttonList.add(new GuiButton(10, tc, fourthRaw, 98, 20, I18n.format("Ping Display", new Object[0])));
-        this.buttonList.add(new GuiButton(11, fc, fifthRaw, 98, 20, I18n.format("Potion Effects", new Object[0])));
-        this.buttonList.add(new GuiButton(12, sc, fifthRaw, 98, 20, I18n.format("Scoreboard", new Object[0])));
-        this.buttonList.add(new GuiButton(14, fc, sixthRaw, I18n.format("Toggle Sprint / Sneak", new Object[0])));
+        this.buttonList.add(new GuiButton(8, tc, thirdRaw, 98, 20, I18n.format("Keystrokes", new Object[0])));
+        this.buttonList.add(new GuiButton(9, fc, fourthRaw, 98, 20, I18n.format("Old Animations", new Object[0])));
+        this.buttonList.add(new GuiButton(10, sc, fourthRaw, 98, 20, I18n.format("Ping Display", new Object[0])));
+        this.buttonList.add(new GuiButton(11, tc, fourthRaw, 98, 20, I18n.format("Potion Effects", new Object[0])));
+        this.buttonList.add(new GuiButton(14, fc, fifthRaw, I18n.format("Toggle Sprint / Sneak", new Object[0])));
 
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
