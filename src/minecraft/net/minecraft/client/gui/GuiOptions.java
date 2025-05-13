@@ -15,7 +15,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
 import rubik.gui.GuiRubikClientScreen;
-import rubik.gui.mods.impl.GuiScoreboardSettings;
+import rubik.gui.GuiScoreboardSettings;
 
 public class GuiOptions extends GuiRubikClientScreen implements GuiYesNoCallback
 {

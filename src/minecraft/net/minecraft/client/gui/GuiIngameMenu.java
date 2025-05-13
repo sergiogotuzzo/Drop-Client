@@ -11,7 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import rubik.Client;
-import rubik.gui.mods.GuiMods;
+import rubik.gui.GuiMods;
 
 public class GuiIngameMenu extends GuiScreen
 {
