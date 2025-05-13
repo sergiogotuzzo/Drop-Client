@@ -26,9 +26,6 @@ public class PotionEffects extends ModDraggable {
     private boolean right = false;
     private boolean blink = true;
     
-    private final int EFFECT_HEIGHT = 20;
-    private final int EFFECT_WIDTH = 22;
-    
     public PotionEffects() {
     	setShowName((boolean) getFromFile("showName", showName));
     	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
@@ -42,12 +39,12 @@ public class PotionEffects extends ModDraggable {
 
 	@Override
     public int getWidth() {    	
-        return showName ? EFFECT_WIDTH + font.getStringWidth(getLongestEffectName(getPlayerPotionEffects())) : EFFECT_WIDTH + font.getStringWidth("00:00");
+        return 20 + 2 + (showName ? font.getStringWidth(getLongestEffectName(getPlayerPotionEffects())) : font.getStringWidth("00:00"));
     }
 
     @Override
     public int getHeight() {    	
-        return getPlayerPotionEffects().size() * EFFECT_HEIGHT;
+        return getPlayerPotionEffects().size() * 20;
     }
 
     @Override
@@ -59,7 +56,7 @@ public class PotionEffects extends ModDraggable {
 
             drawPotionEffect(pos, offsetY, potionEffect);
             
-            offsetY += EFFECT_HEIGHT;
+            offsetY += 20;
         }
     }
 
@@ -73,7 +70,7 @@ public class PotionEffects extends ModDraggable {
 
                 drawPotionEffect(pos, offsetY, potionEffect);
                 
-                offsetY += EFFECT_HEIGHT;
+                offsetY += 20;
             }
         } else {
         	render(pos);
@@ -112,7 +109,7 @@ public class PotionEffects extends ModDraggable {
 
         Potion potion = Potion.potionTypes[pe.getPotionID()];
                 
-        int i = EFFECT_HEIGHT / font.FONT_HEIGHT;
+        int i = 2;
         
         int iconX = right ? pos.getAbsoluteX() + getWidth() - 18 : pos.getAbsoluteX() + 2;
 
