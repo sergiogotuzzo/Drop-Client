@@ -11,6 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
+import rubik.ColorManager;
+import rubik.mods.Mod;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Chat;
 
@@ -87,13 +89,7 @@ public class GuiNewChat extends Gui
                                 int j2 = -i1 * 9;
                                 int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
                                 
-                                int backgroundColor;
-                                
-                                if (chatMod.isTransparentBackgroundEnabled()) {
-                                	backgroundColor = new Color(0, 0, 0, 0).getRGB();
-                                } else {
-                                	backgroundColor = l1 / 2 << 24;
-                                }
+                                int backgroundColor = new Color(0, 0, 0, chatMod.getBackgroundOpacity()).getRGB();
                                 
                                 drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, backgroundColor);
                                 

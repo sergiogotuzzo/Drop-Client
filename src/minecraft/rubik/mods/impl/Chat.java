@@ -1,5 +1,8 @@
 package rubik.mods.impl;
 
+import java.awt.Color;
+
+import rubik.ColorManager;
 import rubik.FileManager;
 import rubik.mods.Mod;
 
@@ -7,10 +10,12 @@ public class Chat extends Mod {
 	private boolean textShadow = true;
 	private boolean transparentBackground = false;
 	private boolean chatHeightFix = true;
+	private int backgroundOpacity = 127;
 	
 	public Chat() {
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setTransparentBackground((boolean) getFromFile("transparentBackground", transparentBackground));
+		setChatHeightFix((boolean) getFromFile("chatHeightFix", chatHeightFix));
+		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));
 	}
 	
 	public void setTextShadow(boolean enabled) {
@@ -23,16 +28,6 @@ public class Chat extends Mod {
 		return textShadow;
 	}
 	
-	public void setTransparentBackground(boolean enabled) {
-		transparentBackground = enabled;
-		
-		setToFile("transparentBackground", enabled);
-	}
-	
-	public boolean isTransparentBackgroundEnabled() {
-		return transparentBackground;
-	}
-	
 	public void setChatHeightFix(boolean enabled) {
 		chatHeightFix = enabled;
 		
@@ -41,5 +36,15 @@ public class Chat extends Mod {
 	
 	public boolean isChatHeightFixEnabled() {
 		return chatHeightFix;
+	}
+	
+	public void setBackgroundOpacity(int opacity) {
+		backgroundOpacity = opacity;
+		
+		setToFile("backgroundOpacity", opacity);
+	}
+	
+	public int getBackgroundOpacity() {
+		return backgroundOpacity;
 	}
 }

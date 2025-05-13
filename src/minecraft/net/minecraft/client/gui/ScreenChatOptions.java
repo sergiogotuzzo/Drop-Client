@@ -4,6 +4,7 @@ import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import rubik.gui.GuiRubikClientScreen;
+import rubik.gui.GuiSlider;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Chat;
 
@@ -14,6 +15,7 @@ public class ScreenChatOptions extends GuiRubikClientScreen
     private final GameSettings game_settings;
     private String field_146401_i;
     private final Chat mod = ModInstances.getChatMod();
+    private GuiSlider sliderBackgroundOpacity;
 
     public ScreenChatOptions(GuiScreen parentScreenIn, GameSettings gameSettingsIn)
     {
@@ -45,10 +47,15 @@ public class ScreenChatOptions extends GuiRubikClientScreen
         }
         
         this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background: " + (mod.isTransparentBackgroundEnabled() ? "Transparent" : "Default")));
+        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background Opacity", 0, 127, mod.getBackgroundOpacity()));
         this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144, 150, 20, "Chat Height Fix: " + (mod.isChatHeightFixEnabled() ? "ON" : "OFF")));
 
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+    }
+    
+    @Override
+    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
     }
 
     /**
@@ -70,8 +77,7 @@ public class ScreenChatOptions extends GuiRubikClientScreen
             }
             
             if (button.id == 44) {
-            	mod.setTransparentBackground(!mod.isTransparentBackgroundEnabled());
-            	button.displayString = "Background: " + (mod.isTransparentBackgroundEnabled() ? "Transparent" : "Default");
+            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
             }
             
             if (button.id == 45) {
