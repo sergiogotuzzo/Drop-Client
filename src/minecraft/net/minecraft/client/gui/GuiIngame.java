@@ -3,6 +3,8 @@ package net.minecraft.client.gui;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import java.awt.Color;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -44,6 +46,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
+import rubik.ColorManager;
 import rubik.events.impl.RenderEvent;
 import rubik.mods.ModInstances;
 
@@ -630,9 +633,7 @@ public class GuiIngame extends Gui
             int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
             int l = scaledRes.getScaledWidth() - k1 + 2;
             
-            if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
-            	drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1610612736);
-            }
+            drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, ColorManager.fromColor(Color.BLACK).setAlpha(ModInstances.getScoreboardMod().getBackgroundOpacity()).getRGB());
             
             if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
             	this.getFontRenderer().drawStringWithShadow(s1, l1, k, 553648127);
@@ -652,10 +653,8 @@ public class GuiIngame extends Gui
             {
             	String s3 = objective.getDisplayName();
                 
-                if (ModInstances.getScoreboardMod().isShowBackgroundEnabled()) {
-                	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
-                    drawRect(l1 - 2, k - 1, l, k, 1610612736);
-                }
+            	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, ColorManager.fromColor(Color.BLACK).setAlpha(ModInstances.getScoreboardMod().getBackgroundOpacity()).getRGB());
+                drawRect(l1 - 2, k - 1, l, k, ColorManager.fromColor(Color.BLACK).setAlpha(ModInstances.getScoreboardMod().getBackgroundOpacity()).getRGB());
                 
                 if (ModInstances.getScoreboardMod().isTextShadowEnabled()) {
                 	this.getFontRenderer().drawStringWithShadow(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);

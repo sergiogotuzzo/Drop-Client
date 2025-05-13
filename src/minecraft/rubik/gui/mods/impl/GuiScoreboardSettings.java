@@ -7,12 +7,15 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
 import rubik.gui.GuiRubikClientScreen;
+import rubik.gui.GuiSlider;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Scoreboard;
 
 public class GuiScoreboardSettings extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final Scoreboard mod = ModInstances.getScoreboardMod();
+	
+	private GuiSlider sliderBackgroundOpacity;
 	
 	public GuiScoreboardSettings(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
@@ -25,6 +28,11 @@ public class GuiScoreboardSettings extends GuiRubikClientScreen {
         this.drawCenteredString(this.fontRendererObj, "Scoreboard Settings...", this.width / 2, 20, 0xFFFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
+    }
+    
+    @Override
+    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
     }
 
     @Override
@@ -46,8 +54,7 @@ public class GuiScoreboardSettings extends GuiRubikClientScreen {
             	this.initGui();
             	break;
             case 4:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
-            	this.initGui();
+            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
             	break;
         }
     }
@@ -62,7 +69,7 @@ public class GuiScoreboardSettings extends GuiRubikClientScreen {
         this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i, 150, 20, "Scoreboard: " + (mod.isEnabled() ? "Shown" : "Hidden")));
         this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i, 150, 20, "Hide Numbers: " + (mod.isHideNumbersEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Background: " + (mod.isShowBackgroundEnabled() ? "Transparent" : "Default")));
+        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(4, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Background Opacity", 0, 127, mod.getBackgroundOpacity()));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

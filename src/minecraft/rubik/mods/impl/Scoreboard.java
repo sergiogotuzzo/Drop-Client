@@ -5,12 +5,12 @@ import rubik.mods.Mod;
 public class Scoreboard extends Mod {
 	private boolean hideNumbers = false;
 	private boolean textShadow = false;
-	private boolean showBackground = true;
+	private int backgroundOpacity = 127;
 	
 	public Scoreboard() {
 		setHideNumbers((boolean) getFromFile("hideNumbers", textShadow));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));
 	}
 	
 	public void setHideNumbers(boolean enabled) {
@@ -33,13 +33,13 @@ public class Scoreboard extends Mod {
 		return textShadow;
 	}
 	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
+	public void setBackgroundOpacity(int opacity) {
+		backgroundOpacity = opacity;
 		
-		setToFile("showBackground", enabled);
+		setToFile("backgroundOpacity", opacity);
 	}
 	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
+	public int getBackgroundOpacity() {
+		return backgroundOpacity;
 	}
 }
