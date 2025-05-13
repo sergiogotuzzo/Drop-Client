@@ -40,7 +40,6 @@ import net.optifine.CustomPanorama;
 import net.optifine.CustomPanoramaProperties;
 import net.optifine.reflect.Reflector;
 import rubik.Client;
-import rubik.gui.GuiButtonQuit;
 import rubik.gui.GuiMods;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
@@ -241,7 +240,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(15, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("Mods...", new Object[0])));
         this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 120 - h, j + 72 + 12));
-        this.buttonList.add(new GuiButtonQuit(4, this.width / 2 + 2 + 98 + h, j + 72 + 12));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + 2 + 98 + h, j + 72 + 12, 20, 20, "X"));
 
         synchronized (this.threadLock)
         {
