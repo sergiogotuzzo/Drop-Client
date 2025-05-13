@@ -10,7 +10,6 @@ import net.minecraft.util.EnumChatFormatting;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
-import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 
 public class CPSDisplay extends ModDraggable {
 	public enum CPSMode {

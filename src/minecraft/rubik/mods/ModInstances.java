@@ -5,7 +5,6 @@ import rubik.FileManager;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.ScreenPosition;
 import rubik.mods.impl.ArmorStatus;
-import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 import rubik.mods.impl.BlockOverlay;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.Chat;

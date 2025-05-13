@@ -10,7 +10,6 @@ import rubik.gui.GuiModColor;
 import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.ArmorStatus;
-import rubik.mods.impl.ArmorStatus.ArmorStatusMode;
 
 public class GuiArmorStatusText extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;

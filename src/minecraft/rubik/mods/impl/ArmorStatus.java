@@ -12,36 +12,22 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class ArmorStatus extends ModDraggable {
-	public static enum ArmorStatusMode {
-		PERCENTAGE(1),
-		DAMAGE(2),
-		DAMAGE_MAX_DAMAGE(3);
-		
-		private int index = 0;
-		
-		private ArmorStatusMode(int index) {
-			this.index = index;
-		}
-		
-		public int getIndex() {
-			return index;
-		}
-	}
-	
-	private boolean showEquippedItem = false;
+	private boolean equippedItem = false;
 	private boolean right = false;
-	private ArmorStatusMode mode = ArmorStatusMode.DAMAGE;
+	private boolean showPercentage = false;
+	private boolean showDamage = true;
+	private boolean showMaxDamage = false;
 	private boolean dynamicColors = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean textShadow = true;
 	private boolean textChroma = true;
 	
-	private final int ITEM_HEIGHT = 16;
-	
 	public ArmorStatus() {
-		setShowEquippedItem((boolean) getFromFile("showEquippedItem", showEquippedItem));
+		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
 		setRight((boolean) getFromFile("right", right));
-		setMode((int) ((long) getFromFile("mode", mode.getIndex())));
+		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
+		setShowDamage((boolean) getFromFile("showDamage", showDamage));
+		setShowMaxDamage((boolean) getFromFile("showMaxDamage", showMaxDamage));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
@@ -50,31 +36,39 @@ public class ArmorStatus extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		switch (mode) {
-			case PERCENTAGE:
-				return 44;
-			case DAMAGE:
-				return showEquippedItem ? 44 : 38;
-			case DAMAGE_MAX_DAMAGE:
-				return showEquippedItem ? 74 : 62;
-			default:
-				return 0;
+		int width = 0;
+		
+		if (showPercentage) {
+			width = 2 + font.getStringWidth("100%");
+		} else if (showDamage && !showMaxDamage) {
+			width = 2 + (equippedItem ? font.getStringWidth("1561") : font.getStringWidth("528"));
+		} else if (showDamage && showMaxDamage) {
+			width = 2 + (equippedItem ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
 		}
+		
+		return 16 + width;
 	}
 
 	@Override
 	public int getHeight() {
-		return showEquippedItem ? ITEM_HEIGHT * 5 : ITEM_HEIGHT * 4;
+		return equippedItem ? 16 * 5 : 16 * 4;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
+		if (pos.getAbsoluteX() > (mc.displayWidth / 3)) {
+			right = true;
+		} else {
+			right = false;
+		}
+		
 		int i = 0;
 		
 		for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
 			if (itemStack != null) {
-				if (showEquippedItem) {
+				if (equippedItem) {
 					if (mc.thePlayer.inventory.getCurrentItem() == null) {
+						
 						drawItemStack(pos, i, itemStack);
 					} else {
 						drawItemStack(pos, 0, mc.thePlayer.inventory.getCurrentItem());
@@ -91,7 +85,7 @@ public class ArmorStatus extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (showEquippedItem) {
+		if (equippedItem) {
 			drawItemStack(pos, 4, new ItemStack(Items.diamond_helmet));
 			drawItemStack(pos, 3, new ItemStack(Items.diamond_chestplate));
 			drawItemStack(pos, 2, new ItemStack(Items.diamond_leggings));
@@ -112,7 +106,7 @@ public class ArmorStatus extends ModDraggable {
 		
 		GL11.glPushMatrix();
 		
-		int yAdd = (-16 * i) + getHeight() - ITEM_HEIGHT;
+		int yAdd = (-16 * i) + getHeight() - 16;
 		Color dynamicColor = Color.WHITE;
 		
 		if (dynamicColors) {
@@ -152,11 +146,11 @@ public class ArmorStatus extends ModDraggable {
 	}
 	
 	private String getDamageText(ItemStack is) {
-		if (mode == ArmorStatusMode.PERCENTAGE) {
+		if (showPercentage) {
 			return String.format("%.0f%%", getDamagePercentage(is));
-		} else if (mode == ArmorStatusMode.DAMAGE) {
+		} else if (showDamage && !showMaxDamage) {
 			return String.valueOf(is.getMaxDamage() - is.getItemDamage());
-		} else if (mode == ArmorStatusMode.DAMAGE_MAX_DAMAGE) {
+		} else if (showDamage && showMaxDamage) {
 			return (is.getMaxDamage() - is.getItemDamage()) + "/" + is.getMaxDamage();
 		}
 		
@@ -167,14 +161,14 @@ public class ArmorStatus extends ModDraggable {
 		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
 	}
 	
-	public void setShowEquippedItem(boolean enabled) {
-		showEquippedItem = enabled;
+	public void setEquippedItem(boolean enabled) {
+		equippedItem = enabled;
 		
-		setToFile("showEquippedItem", enabled);
+		setToFile("equippedItem", enabled);
 	}
 	
-	public boolean isShowEquippedItemEnabled() {
-		return showEquippedItem;
+	public boolean isEquippedItemEnabled() {
+		return equippedItem;
 	}
 	
 	public void setRight(boolean enabled) {
@@ -187,24 +181,34 @@ public class ArmorStatus extends ModDraggable {
 		return right;
 	}
 	
-	public void setMode(int modeIndex) {
-		switch (modeIndex) {
-			case 1:
-				this.mode = ArmorStatusMode.PERCENTAGE;
-				break;
-			case 2:
-				this.mode = ArmorStatusMode.DAMAGE;
-				break;
-			case 3:
-				this.mode = ArmorStatusMode.DAMAGE_MAX_DAMAGE;
-				break;
-		}
+	public void setShowPercentage(boolean enabled) {
+		showPercentage = enabled;
 		
-		setToFile("mode", modeIndex);
+		setToFile("showPercentage", enabled);
 	}
 	
-	public ArmorStatusMode getMode() {
-		return mode;
+	public boolean isShowPercentageEnabled() {
+		return showPercentage;
+	}
+	
+	public void setShowDamage(boolean enabled) {
+		showDamage = enabled;
+		
+		setToFile("showDamage", enabled);
+	}
+	
+	public boolean isShowDamageEnabled() {
+		return showDamage;
+	}
+	
+	public void setShowMaxDamage(boolean enabled) {
+		showMaxDamage = enabled;
+		
+		setToFile("showMaxDamage", enabled);
+	}
+	
+	public boolean isShowMaxDamageEnabled() {
+		return showMaxDamage;
 	}
 	
 	public void setDynamicColors(boolean enabled) {
