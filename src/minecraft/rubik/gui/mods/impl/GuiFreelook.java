@@ -1,4 +1,4 @@
-package rubik.gui.mods;
+package rubik.gui.mods.impl;
 
 import java.io.IOException;
 

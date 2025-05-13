@@ -40,7 +40,7 @@ import net.optifine.CustomPanorama;
 import net.optifine.CustomPanoramaProperties;
 import net.optifine.reflect.Reflector;
 import rubik.Client;
-import rubik.gui.GuiMods;
+import rubik.gui.mods.GuiMods;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 {

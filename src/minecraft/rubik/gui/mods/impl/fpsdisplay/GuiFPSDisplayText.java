@@ -1,4 +1,4 @@
-package rubik.gui.mods;
+package rubik.gui.mods.impl.fpsdisplay;
 
 import java.io.IOException;
 
@@ -6,18 +6,18 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
-import rubik.gui.GuiModColor;
 import rubik.gui.GuiRubikClientScreen;
+import rubik.gui.mods.GuiModColor;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
+import rubik.mods.impl.FPSDisplay;
 
-public class GuiToggleSprintSneakText extends GuiRubikClientScreen {
+public class GuiFPSDisplayText extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
+	private final FPSDisplay mod = ModInstances.getFPSDisplayMod();
 	
 	private GuiButton buttonTextColor;
 	
-	public GuiToggleSprintSneakText(GuiScreen previousGuiScreen) {
+	public GuiFPSDisplayText(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -25,7 +25,7 @@ public class GuiToggleSprintSneakText extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Toggle Sprint / Sneak", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "FPS Display", this.width / 2, 15, 0xFFFFFFFF);
         this.drawCenteredString(this.fontRendererObj, "Text Settings", this.width / 2, 30, 0xFFFFFFFF);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

@@ -1,4 +1,4 @@
-package rubik.gui;
+package rubik.gui.mods;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
 import rubik.ColorManager;
+import rubik.gui.GuiRubikClientScreen;
 import rubik.gui.GuiSlider;
 import rubik.mods.Mod;
 

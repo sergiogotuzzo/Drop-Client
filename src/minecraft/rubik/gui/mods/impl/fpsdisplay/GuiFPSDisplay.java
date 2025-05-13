@@ -1,4 +1,4 @@
-package rubik.gui.mods;
+package rubik.gui.mods.impl.fpsdisplay;
 
 import java.io.IOException;
 
@@ -6,16 +6,15 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
-import rubik.gui.GuiModColor;
 import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.CoordinatesDisplay;
+import rubik.mods.impl.FPSDisplay;
 
-public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
+public class GuiFPSDisplay extends GuiRubikClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final CoordinatesDisplay mod = ModInstances.getCoordinatesDisplayMod();
-		
-	public GuiCoordinatesDisplay(GuiScreen previousGuiScreen) {
+	private final FPSDisplay mod = ModInstances.getFPSDisplayMod();
+	
+	public GuiFPSDisplay(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -23,7 +22,7 @@ public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         
-        this.drawCenteredString(this.fontRendererObj, "Coordinates Display", this.width / 2, 15, 0xFFFFFFFF);
+        this.drawCenteredString(this.fontRendererObj, "FPS Display", this.width / 2, 15, 0xFFFFFFFF);
         this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -40,15 +39,11 @@ public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setShowBiome(!mod.isShowBiomeEnabled());
+            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setShowTowards(!mod.isShowTowardsEnabled());
-            	this.initGui();
-            	break;
-            case 4:
-            	mc.displayGuiScreen(new GuiCoordinatesDisplayText(this));
+            	mc.displayGuiScreen(new GuiFPSDisplayText(this));
             	break;
         }
     }
@@ -61,9 +56,8 @@ public class GuiCoordinatesDisplay extends GuiRubikClientScreen {
         int j = -155;
         
         this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Show Biome: " + (mod.isShowBiomeEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Show Towards: " + (mod.isShowTowardsEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Text"));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Show Background: " + (mod.isShowBackgroundEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Text"));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

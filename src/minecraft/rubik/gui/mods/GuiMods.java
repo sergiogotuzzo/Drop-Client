@@ -1,4 +1,4 @@
-package rubik.gui;
+package rubik.gui.mods;
 
 import java.io.IOException;
 
@@ -6,18 +6,18 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
-import rubik.gui.mods.GuiArmorStatus;
-import rubik.gui.mods.GuiBlockOverlay;
-import rubik.gui.mods.GuiCPSDisplay;
-import rubik.gui.mods.GuiCoordinatesDisplay;
-import rubik.gui.mods.GuiFPSDisplay;
-import rubik.gui.mods.GuiFreelook;
-import rubik.gui.mods.GuiKeystrokes;
-import rubik.gui.mods.GuiOldAnimations;
-import rubik.gui.mods.GuiPingDisplay;
-import rubik.gui.mods.GuiPotionEffects;
-import rubik.gui.mods.GuiScoreboardSettings;
-import rubik.gui.mods.GuiToggleSprintSneak;
+import rubik.gui.GuiRubikClientScreen;
+import rubik.gui.mods.impl.GuiFreelook;
+import rubik.gui.mods.impl.GuiOldAnimations;
+import rubik.gui.mods.impl.armorstatus.GuiArmorStatus;
+import rubik.gui.mods.impl.blockoverlay.GuiBlockOverlay;
+import rubik.gui.mods.impl.coordinatesdisplay.GuiCoordinatesDisplay;
+import rubik.gui.mods.impl.cpsdisplay.GuiCPSDisplay;
+import rubik.gui.mods.impl.fpsdisplay.GuiFPSDisplay;
+import rubik.gui.mods.impl.keystrokes.GuiKeystrokes;
+import rubik.gui.mods.impl.pingdisplay.GuiPingDisplay;
+import rubik.gui.mods.impl.potioneffects.GuiPotionEffects;
+import rubik.gui.mods.impl.togglesprintsneak.GuiToggleSprintSneak;
 import rubik.mods.ModInstances;
 
 public class GuiMods extends GuiRubikClientScreen {

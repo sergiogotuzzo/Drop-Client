@@ -1,4 +1,4 @@
-package rubik.gui.mods;
+package rubik.gui.mods.impl.togglesprintsneak;
 
 import java.io.IOException;
 
@@ -6,7 +6,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
-import rubik.gui.GuiModColor;
 import rubik.gui.GuiRubikClientScreen;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
