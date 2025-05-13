@@ -6,6 +6,7 @@ import rubik.mods.Mod;
 public class Chat extends Mod {
 	private boolean textShadow = true;
 	private boolean transparentBackground = false;
+	private boolean chatHeightFix = true;
 	
 	public Chat() {
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
@@ -30,5 +31,15 @@ public class Chat extends Mod {
 	
 	public boolean isTransparentBackgroundEnabled() {
 		return transparentBackground;
+	}
+	
+	public void setChatHeightFix(boolean enabled) {
+		chatHeightFix = enabled;
+		
+		setToFile("chatHeightFix", enabled);
+	}
+	
+	public boolean isChatHeightFixEnabled() {
+		return chatHeightFix;
 	}
 }

@@ -12,6 +12,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.Chat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,7 @@ public class GuiNewChat extends Gui
     private final List<ChatLine> drawnChatLines = Lists.<ChatLine>newArrayList();
     private int scrollPos;
     private boolean isScrolled;
+    private final Chat chatMod = ModInstances.getChatMod();
 
     public GuiNewChat(Minecraft mcIn)
     {
@@ -83,24 +85,25 @@ public class GuiNewChat extends Gui
                             {
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
+                                int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
                                 
                                 int backgroundColor;
                                 
-                                if (ModInstances.getChatMod().isEnabled() && ModInstances.getChatMod().isTransparentBackgroundEnabled()) {
+                                if (chatMod.isTransparentBackgroundEnabled()) {
                                 	backgroundColor = new Color(0, 0, 0, 0).getRGB();
                                 } else {
                                 	backgroundColor = l1 / 2 << 24;
                                 }
                                 
-                                drawRect(i2, j2 - 9, i2 + l + 4, j2, backgroundColor);
+                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, backgroundColor);
                                 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                if (ModInstances.getChatMod().isEnabled() && !ModInstances.getChatMod().isTextShadowEnabled()) {
-                                	this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24), false);
+                                if (!chatMod.isTextShadowEnabled()) {
+                                	this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), false);
                                 } else {
-                                	this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8), 16777215 + (l1 << 24));
+                                	this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24));
                                 }
                                 
                                 GlStateManager.disableAlpha();

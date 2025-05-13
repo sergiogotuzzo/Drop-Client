@@ -46,8 +46,9 @@ public class ScreenChatOptions extends GuiRubikClientScreen
         
         this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background: " + (mod.isTransparentBackgroundEnabled() ? "Transparent" : "Default")));
+        this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144, 150, 20, "Chat Height Fix: " + (mod.isChatHeightFixEnabled() ? "ON" : "OFF")));
 
-        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 150, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 
     /**
@@ -71,6 +72,11 @@ public class ScreenChatOptions extends GuiRubikClientScreen
             if (button.id == 44) {
             	mod.setTransparentBackground(!mod.isTransparentBackgroundEnabled());
             	button.displayString = "Background: " + (mod.isTransparentBackgroundEnabled() ? "Transparent" : "Default");
+            }
+            
+            if (button.id == 45) {
+            	mod.setChatHeightFix(!mod.isChatHeightFixEnabled());
+            	button.displayString = "Chat Height Fix: " + (mod.isChatHeightFixEnabled() ? "ON" : "OFF");
             }
 
             if (button.id == 200)
