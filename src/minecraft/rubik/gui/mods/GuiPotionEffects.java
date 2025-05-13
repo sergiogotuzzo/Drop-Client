@@ -40,17 +40,13 @@ public class GuiPotionEffects extends GuiRubikClientScreen {
             	this.initGui();
                 break;
             case 2:
-            	mod.setRight(!mod.isRightEnabled());
-            	this.initGui();
-            	break;
-            case 3:
             	mod.setBlink(!mod.isBlinkEnabled());
             	this.initGui();
             	break;
-            case 4:
+            case 3:
             	this.mc.displayGuiScreen(new GuiPotionEffectsNameText(this));
             	break;
-            case 5:
+            case 4:
             	this.mc.displayGuiScreen(new GuiPotionEffectsDurationText(this));
             	break;
         }
@@ -64,10 +60,9 @@ public class GuiPotionEffects extends GuiRubikClientScreen {
         int j = -155;
         
         this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Side: " + (mod.isRightEnabled() ? "RIGHT" : "LEFT")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Blink: " + (mod.isBlinkEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Name Text"));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Duration Text"));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Blink: " + (mod.isBlinkEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Name Text"));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Duration Text"));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

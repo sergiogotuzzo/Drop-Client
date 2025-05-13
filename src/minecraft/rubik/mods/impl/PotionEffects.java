@@ -49,6 +49,12 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
+    	if (pos.getAbsoluteX() > (mc.displayWidth / 3)) {
+			right = true;
+		} else {
+			right = false;
+		}
+    	
         int offsetY = 0;
 
         for (int i = 0; i < mc.thePlayer.getActivePotionEffects().size(); i++) {
@@ -62,6 +68,12 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
+    	if (pos.getAbsoluteX() > (mc.displayWidth / 3)) {
+			right = true;
+		} else {
+			right = false;
+		}
+    	
         if (mc.thePlayer.getActivePotionEffects().size() == 0) {
         	int offsetY = 0;
 

@@ -85,6 +85,12 @@ public class ArmorStatus extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
+		if (pos.getAbsoluteX() > (mc.displayWidth / 3)) {
+			right = true;
+		} else {
+			right = false;
+		}
+		
 		if (equippedItem) {
 			drawItemStack(pos, 4, new ItemStack(Items.diamond_helmet));
 			drawItemStack(pos, 3, new ItemStack(Items.diamond_chestplate));
