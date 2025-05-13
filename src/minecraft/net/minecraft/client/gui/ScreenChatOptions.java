@@ -14,7 +14,7 @@ public class ScreenChatOptions extends GuiRubikClientScreen
     private final GuiScreen parentScreen;
     private final GameSettings game_settings;
     private String field_146401_i;
-    private final Chat mod = ModInstances.getChatMod();
+    private final Chat chatMod = ModInstances.getChatMod();
     private GuiSlider sliderBackgroundOpacity;
 
     public ScreenChatOptions(GuiScreen parentScreenIn, GameSettings gameSettingsIn)
@@ -46,16 +46,16 @@ public class ScreenChatOptions extends GuiRubikClientScreen
             ++i;
         }
         
-        this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background Opacity", 0, 127, mod.getBackgroundOpacity()));
-        this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144, 150, 20, "Chat Height Fix: " + (mod.isChatHeightFixEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120, 150, 20, "Text Shadow: " + (chatMod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background Opacity", 0, 127, chatMod.getBackgroundOpacity()));
+        this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144, 150, 20, "Chat Height Fix: " + (chatMod.isChatHeightFixEnabled() ? "ON" : "OFF")));
 
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
     
     @Override
     public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
+    	chatMod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
     }
 
     /**
@@ -72,17 +72,17 @@ public class ScreenChatOptions extends GuiRubikClientScreen
             }
             
             if (button.id == 43) {
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
-            	button.displayString = "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF");
+            	chatMod.setTextShadow(!chatMod.isTextShadowEnabled());
+            	button.displayString = "Text Shadow: " + (chatMod.isTextShadowEnabled() ? "ON" : "OFF");
             }
             
             if (button.id == 44) {
-            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
+            	chatMod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
             }
             
             if (button.id == 45) {
-            	mod.setChatHeightFix(!mod.isChatHeightFixEnabled());
-            	button.displayString = "Chat Height Fix: " + (mod.isChatHeightFixEnabled() ? "ON" : "OFF");
+            	chatMod.setChatHeightFix(!chatMod.isChatHeightFixEnabled());
+            	button.displayString = "Chat Height Fix: " + (chatMod.isChatHeightFixEnabled() ? "ON" : "OFF");
             }
 
             if (button.id == 200)
