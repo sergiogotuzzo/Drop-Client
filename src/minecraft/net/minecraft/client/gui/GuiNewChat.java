@@ -1,4 +1,4 @@
-package net.minecraft.client.gui;
+ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 
@@ -89,9 +89,9 @@ public class GuiNewChat extends Gui
                                 int j2 = -i1 * 9;
                                 int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
                                 
-                                int backgroundColor = new Color(0, 0, 0, chatMod.getBackgroundOpacity()).getRGB();
+                                int backgroundRGB = new Color(0, 0, 0, (int)((chatMod.getBackgroundOpacity() / 255.0F) * l1)).getRGB();
                                 
-                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, backgroundColor);
+                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, backgroundRGB);
                                 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
