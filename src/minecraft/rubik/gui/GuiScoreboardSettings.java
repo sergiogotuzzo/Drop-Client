@@ -65,7 +65,7 @@ public class GuiScoreboardSettings extends GuiRubikClientScreen {
         int j = -155;
         
         this.buttonList.add(new GuiButton(1, this.width / 2 + j, this.height / 6 + i, 150, 20, "Scoreboard: " + (mod.isEnabled() ? "Shown" : "Hidden")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i, 150, 20, "Hide Numbers: " + (mod.isHideNumbersEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i, 150, 20, "Numbers: " + (mod.isHideNumbersEnabled() ? "Hidden" : "Shown")));
         this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 24, 150, 20, "Text Shadow: " + (mod.isTextShadowEnabled() ? "ON" : "OFF")));
         this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(4, this.width / 2 + j + 160, this.height / 6 + i + 24, 150, 20, "Background Opacity", 0, 127, mod.getBackgroundOpacity()));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
