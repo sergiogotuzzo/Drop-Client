@@ -31,24 +31,26 @@ public class ScreenChatOptions extends GuiRubikClientScreen
     {
         int i = 0;
         this.field_146401_i = I18n.format("options.chat.title", new Object[0]);
+        
+        int k = -6;
 
         for (GameSettings.Options gamesettings$options : field_146399_a)
         {
             if (gamesettings$options.getEnumFloat())
             {
-                this.buttonList.add(new GuiOptionSlider(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), gamesettings$options));
+                this.buttonList.add(new GuiOptionSlider(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1) + k, gamesettings$options));
             }
             else
             {
-                this.buttonList.add(new GuiOptionButton(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), gamesettings$options, this.game_settings.getKeyBinding(gamesettings$options)));
+                this.buttonList.add(new GuiOptionButton(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1) + k, gamesettings$options, this.game_settings.getKeyBinding(gamesettings$options)));
             }
 
             ++i;
         }
         
-        this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120, 150, 20, "Text Shadow: " + (chatMod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(44, this.width / 2 - 155 + 160, this.height / 6 + 120, 150, 20, "Background Opacity", 0, 127, chatMod.getBackgroundOpacity()));
-        this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144, 150, 20, "Chat Height Fix: " + (chatMod.isChatHeightFixEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120 + k, 150, 20, "Text Shadow: " + (chatMod.isTextShadowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(44, this.width / 2 - 155 + 160, this.height / 6 + 120 + k, 150, 20, "Background Opacity", 0, 127, chatMod.getBackgroundOpacity()));
+        this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144 + k, 150, 20, "Chat Height Fix: " + (chatMod.isChatHeightFixEnabled() ? "ON" : "OFF")));
 
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
