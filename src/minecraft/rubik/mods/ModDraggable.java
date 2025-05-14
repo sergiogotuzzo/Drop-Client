@@ -93,15 +93,14 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	
 	public int getPositionedAbsoluteX(String text) {
 		int positionX;
-	    double maxRelativeX = 1;
-	    
-	    if (pos.getRelativeX() < (maxRelativeX / (3 * 3))) {
-	    	positionX = pos.getAbsoluteX();
-	    } else if (pos.getRelativeX() < (maxRelativeX - (maxRelativeX / 3))) {
-	    	positionX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
-	    } else {
-	    	positionX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text);
-	    }
+		
+		if (pos.getRelativeX() < 1.0 / 3.0) {
+			positionX = pos.getAbsoluteX();
+		} else if (pos.getRelativeX() > 2.0 / 3.0) {
+			positionX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text);
+		} else {
+			positionX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
+		}
 	    
 	    return positionX;
 	}
