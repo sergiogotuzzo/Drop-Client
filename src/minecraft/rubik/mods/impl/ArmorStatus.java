@@ -17,7 +17,7 @@ public class ArmorStatus extends ModDraggable {
 	private boolean showPercentage = false;
 	private boolean showDamage = true;
 	private boolean showMaxDamage = false;
-	private boolean damageOverlays = false;
+	private boolean damageOverlays = true;
 	private boolean dynamicColors = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean textShadow = true;
