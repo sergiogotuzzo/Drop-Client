@@ -64,19 +64,17 @@ public class ArmorStatus extends ModDraggable {
 		
 		int i = 0;
 		
+		if (equippedItem) {
+			if (mc.thePlayer.inventory.getCurrentItem() != null) {
+				drawItemStack(pos, 0, mc.thePlayer.inventory.getCurrentItem());
+				
+				i = 1;
+			}
+		}
+		
 		for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
 			if (itemStack != null) {
-				if (equippedItem) {
-					if (mc.thePlayer.inventory.getCurrentItem() == null) {
-						
-						drawItemStack(pos, i, itemStack);
-					} else {
-						drawItemStack(pos, 0, mc.thePlayer.inventory.getCurrentItem());
-						drawItemStack(pos, i + 1, itemStack);
-					}
-				} else {
-					drawItemStack(pos, i, itemStack);
-				}
+				drawItemStack(pos, i, itemStack);
 				
 				i++;
 			}
