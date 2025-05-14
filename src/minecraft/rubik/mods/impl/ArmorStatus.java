@@ -137,10 +137,7 @@ public class ArmorStatus extends ModDraggable {
 		int damageX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
 		
 		mc.getRenderItem().renderItemAndEffectIntoGUI(is, itemX, pos.getAbsoluteY() + yAdd);
-		
-		if (is.isStackable()) {
-			mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
-		}
+		mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
 		
 		if (is.getItem().isDamageable()) {
 			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
