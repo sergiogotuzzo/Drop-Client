@@ -17,6 +17,7 @@ public class ArmorStatus extends ModDraggable {
 	private boolean showPercentage = false;
 	private boolean showDamage = true;
 	private boolean showMaxDamage = false;
+	private boolean damageOverlays = false;
 	private boolean dynamicColors = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean textShadow = true;
@@ -137,9 +138,16 @@ public class ArmorStatus extends ModDraggable {
 		int damageX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
 		
 		mc.getRenderItem().renderItemAndEffectIntoGUI(is, itemX, pos.getAbsoluteY() + yAdd);
-		mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
+		
+		if (is.isStackable()) {
+			mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
+		}
 		
 		if (is.getItem().isDamageable()) {
+			if (damageOverlays) {
+				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
+			}
+			
 			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
 		}
 		
@@ -210,6 +218,16 @@ public class ArmorStatus extends ModDraggable {
 	
 	public boolean isShowMaxDamageEnabled() {
 		return showMaxDamage;
+	}
+	
+	public void setDamageOverlays(boolean enabled) {
+		damageOverlays = enabled;
+		
+		setToFile("damageOverlays", enabled);
+	}
+	
+	public boolean isDamageOverlaysEnabled() {
+		return damageOverlays;
 	}
 	
 	public void setDynamicColors(boolean enabled) {

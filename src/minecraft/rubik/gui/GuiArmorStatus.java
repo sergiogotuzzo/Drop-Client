@@ -53,11 +53,15 @@ public class GuiArmorStatus extends GuiRubikClientScreen {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiArmorStatusText(this));
+            	mod.setDamageOverlays(!mod.isDamageOverlaysEnabled());
+            	this.initGui();
             	break;
             case 6:
             	mod.setShowMaxDamage(!mod.isShowMaxDamageEnabled());
             	this.initGui();
+            	break;
+            case 7:
+            	mc.displayGuiScreen(new GuiArmorStatusText(this));
             	break;
         }
     }
@@ -73,8 +77,9 @@ public class GuiArmorStatus extends GuiRubikClientScreen {
         this.buttonList.add(percentageBtn = new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Show Percentage: " + (mod.isShowPercentageEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Equipped Item: " + (mod.isEquippedItemEnabled() ? "ON" : "OFF")));
         this.buttonList.add(damageBtn = new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Show Damage: " + (mod.isShowDamageEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Text"));
+        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Damage Overlays: " + (mod.isDamageOverlaysEnabled() ? "ON" : "OFF")));
         this.buttonList.add(maxDamageBtn = new GuiButton(6, this.width / 2 + j, this.height / 6 + i + 96, 150, 20, "Show Max Damage: " + (mod.isShowMaxDamageEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(7, this.width / 2 + j + 160, this.height / 6 + i + 96, 150, 20, "Text"));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
         
         damageBtn.enabled = !mod.isShowPercentageEnabled();
