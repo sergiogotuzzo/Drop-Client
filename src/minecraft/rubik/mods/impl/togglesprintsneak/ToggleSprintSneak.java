@@ -45,14 +45,14 @@ public class ToggleSprintSneak extends ModDraggable {
 	public void render(ScreenPosition pos) {
 	    textToRender = mc.thePlayer.movementInput.getDisplayText();
 	    
-	    drawText(textToRender, getPositionedAbsoluteX(textToRender) + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+	    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		textToRender = "[Walking]";
 
-		drawText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+		drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
 	}
 	
 	public void setSprinting(boolean sprinting) {
