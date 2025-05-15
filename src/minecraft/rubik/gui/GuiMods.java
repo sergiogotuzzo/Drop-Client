@@ -73,20 +73,19 @@ public class GuiMods extends GuiRubikClientScreen {
         this.buttonList.clear();
         
         int i = -16;
-        int j = 50;
         int k = 24;
         
-        this.buttonList.add(new GuiButton(8, this.width / 2 + j - 200 - 2, this.height / 6 + i + k * 1, 98, 20, I18n.format("Keystrokes", new Object[0])));
-        this.buttonList.add(new GuiButton(13, this.width / 2 + j - 100, this.height / 6 + i + k * 1, I18n.format("Coordinates Display", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j - 200 - 2, this.height / 6 + i + k * 2, 98, 20, I18n.format("CPS Display", new Object[0])));
-        this.buttonList.add(new GuiButton(10, this.width / 2 + j - 100, this.height / 6 + i + k * 2, 98, 20, I18n.format("Ping Display", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 2, this.height / 6 + i + k * 2, 98, 20, I18n.format("Block Overlay", new Object[0])));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j - 200 - 2, this.height / 6 + i + k * 3, 98, 20, I18n.format("FPS Display", new Object[0])));
-        this.buttonList.add(new GuiButton(6, this.width / 2 + j - 100, this.height / 6 + i + k * 3, 98, 20, I18n.format("Freelook", new Object[0])));
-        this.buttonList.add(new GuiButton(9, this.width / 2 + j + 2, this.height / 6 + i + k * 3, 98, 20, I18n.format("Old Animations", new Object[0])));
-        this.buttonList.add(new GuiButton(1, this.width / 2 + j - 200 - 2, this.height / 6 + i + k * 4, 98, 20, I18n.format("Armor Status", new Object[0])));
-        this.buttonList.add(new GuiButton(14, this.width / 2 + j - 100, this.height / 6 + i + k * 4, I18n.format("Toggle Sprint / Sneak", new Object[0])));
-        this.buttonList.add(new GuiButton(11, this.width / 2 + j - 200 - 2, this.height / 6 + i + k * 5, 98, 20, I18n.format("Potion Effects", new Object[0])));
+        this.buttonList.add(new GuiButton(8, this.width / 2 - 155, this.height / 6 + i + k * 1, 150, 20, I18n.format("Keystrokes", new Object[0])));
+        this.buttonList.add(new GuiButton(13, this.width / 2 - 155 + 160, this.height / 6 + i + k * 5, 150, 20, I18n.format("Coordinates Display", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width / 2 - 155, this.height / 6 + i + k * 2, 150, 20, I18n.format("CPS Display", new Object[0])));
+        this.buttonList.add(new GuiButton(10, this.width / 2 - 155, this.height / 6 + i + k * 4, 150, 20, I18n.format("Ping Display", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 155 + 160, this.height / 6 + i + k * 4, 150, 20, I18n.format("Block Overlay", new Object[0])));
+        this.buttonList.add(new GuiButton(5, this.width / 2 - 155, this.height / 6 + i + k * 3, 150, 20, I18n.format("FPS Display", new Object[0])));
+        this.buttonList.add(new GuiButton(6, this.width / 2 - 155 + 160, this.height / 6 + i + k * 2, 150, 20, I18n.format("Freelook", new Object[0])));
+        this.buttonList.add(new GuiButton(9, this.width / 2 - 155 + 160, this.height / 6 + i + k * 3, 150, 20, I18n.format("Old Animations", new Object[0])));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 155, this.height / 6 + i + k * 5, 150, 20, I18n.format("Armor Status", new Object[0])));
+        this.buttonList.add(new GuiButton(14, this.width / 2 - 155 + 160, this.height / 6 + i + k * 1, 150, 20, I18n.format("Toggle Sprint / Sneak", new Object[0])));
+        this.buttonList.add(new GuiButton(11, this.width / 2 - 155, this.height / 6 + i + k * 6, 150, 20, I18n.format("Potion Effects", new Object[0])));
 
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
