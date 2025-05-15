@@ -96,11 +96,7 @@ public class GuiNewChat extends Gui
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                if (!chatMod.isTextShadowEnabled()) {
-                                	this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), false);
-                                } else {
-                                	this.mc.fontRendererObj.drawStringWithShadow(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24));
-                                }
+                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.isTextShadowEnabled());
                                 
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -276,6 +272,9 @@ public class GuiNewChat extends Gui
             int k = mouseY / i - 27;
             j = MathHelper.floor_float((float)j / f);
             k = MathHelper.floor_float((float)k / f);
+            
+            int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
+            k += h;
 
             if (j >= 0 && k >= 0)
             {
