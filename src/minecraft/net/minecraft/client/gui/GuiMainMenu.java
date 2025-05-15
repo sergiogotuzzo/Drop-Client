@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,6 +41,9 @@ import net.optifine.CustomPanorama;
 import net.optifine.CustomPanoramaProperties;
 import net.optifine.reflect.Reflector;
 import rubik.Client;
+import rubik.gui.GuiButtonMods;
+import rubik.gui.GuiButtonOptions;
+import rubik.gui.GuiButtonQuit;
 import rubik.gui.GuiMods;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
@@ -97,6 +101,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     private GuiScreen field_183503_M;
     private GuiButton modButton;
     private GuiScreen modUpdateNotification;
+    
+    private ResourceLocation iconResourceLocation = new ResourceLocation("rubik/icon.png");
+    private int iconSide = 98;
 
     public GuiMainMenu()
     {
@@ -225,7 +232,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
 
         int i = 24;
-        int j = this.height / 4 + 48;
+        int j = (this.height - 20 * 2) / 2;
         int h = 4;
 
         if (this.mc.isDemo())
@@ -237,10 +244,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             this.addSingleplayerMultiplayerButtons(j, 24);
         }
 
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
-        this.buttonList.add(new GuiButton(15, this.width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("Mods...", new Object[0])));
-        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 120 - h, j + 72 + 12));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2 + 98 + h, j + 72 + 12, 20, 20, "X"));
+        this.addMiniButtons(this.fontRendererObj, this.height - 20, 14);
 
         synchronized (this.threadLock)
         {
@@ -274,18 +278,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
      */
     private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
     {
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
-        
-        if (Reflector.GuiModList_Constructor.exists())
-        {
-            this.buttonList.add(this.realmsButton = new GuiButton(14, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("menu.online", new Object[0]).replace("Minecraft", "").trim()));
-            this.buttonList.add(this.modButton = new GuiButton(6, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("fml.menu.mods", new Object[0])));
-        }
-        else
-        {
-            this.buttonList.add(this.realmsButton = new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.online", new Object[0])));
-        }
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100 + iconSide / 2, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 100 + iconSide / 2, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
     }
 
     /**
@@ -293,8 +287,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
      */
     private void addDemoButtons(int p_73972_1_, int p_73972_2_)
     {
-        this.buttonList.add(new GuiButton(11, this.width / 2 - 100, p_73972_1_, I18n.format("menu.playdemo", new Object[0])));
-        this.buttonList.add(this.buttonResetDemo = new GuiButton(12, this.width / 2 - 100, p_73972_1_ + p_73972_2_ * 1, I18n.format("menu.resetdemo", new Object[0])));
+        this.buttonList.add(new GuiButton(11, this.width / 2 - 100 + iconSide / 2, p_73972_1_, I18n.format("menu.playdemo", new Object[0])));
+        this.buttonList.add(this.buttonResetDemo = new GuiButton(12, this.width / 2 - 100 + iconSide / 2, p_73972_1_ + p_73972_2_ * 1, I18n.format("menu.resetdemo", new Object[0])));
         ISaveFormat isaveformat = this.mc.getSaveLoader();
         WorldInfo worldinfo = isaveformat.getWorldInfo("Demo_World");
 
@@ -302,6 +296,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         {
             this.buttonResetDemo.enabled = false;
         }
+    }
+    
+    private void addMiniButtons(FontRenderer font, int y, int spacingFromBottom) {
+        this.buttonList.add(new GuiButtonMods(15, this.width / 2 - 2 * 3 - 40, y - font.FONT_HEIGHT - spacingFromBottom));
+    	this.buttonList.add(new GuiButtonOptions(0, this.width / 2 + 2, y - font.FONT_HEIGHT - spacingFromBottom));
+        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 2 - 20, y - font.FONT_HEIGHT - spacingFromBottom));
+        this.buttonList.add(new GuiButtonQuit(4, this.width / 2 + 2 * 3 + 20, y - font.FONT_HEIGHT - spacingFromBottom));
     }
 
     /**
@@ -625,65 +626,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             this.drawGradientRect(0, 0, this.width, this.height, j1, k1);
         }
 
-        this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
-        if ((double)this.updateCounter < 1.0E-4D)
-        {
-            this.drawTexturedModalRect(j + 0, k + 0, 0, 0, 99, 44);
-            this.drawTexturedModalRect(j + 99, k + 0, 129, 0, 27, 44);
-            this.drawTexturedModalRect(j + 99 + 26, k + 0, 126, 0, 3, 44);
-            this.drawTexturedModalRect(j + 99 + 26 + 3, k + 0, 99, 0, 26, 44);
-            this.drawTexturedModalRect(j + 155, k + 0, 0, 45, 155, 44);
-        }
-        else
-        {
-            this.drawTexturedModalRect(j + 0, k + 0, 0, 0, 155, 44);
-            this.drawTexturedModalRect(j + 155, k + 0, 0, 45, 155, 44);
-        }
-
-        GlStateManager.pushMatrix();
-        GlStateManager.translate((float)(this.width / 2 + 90), 70.0F, 0.0F);
-        GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
-        float f = 1.8F - MathHelper.abs(MathHelper.sin((float)(Minecraft.getSystemTime() % 1000L) / 1000.0F * (float)Math.PI * 2.0F) * 0.1F);
-        f = f * 100.0F / (float)(this.fontRendererObj.getStringWidth(this.splashText) + 32);
-        GlStateManager.scale(f, f, f);
-        this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
-        GlStateManager.popMatrix();
-        String s = "Minecraft 1.8.9";
-
-        if (this.mc.isDemo())
-        {
-            s = s + " Demo";
-        }
-
-        if (Reflector.FMLCommonHandler_getBrandings.exists())
-        {
-            Object object = Reflector.call(Reflector.FMLCommonHandler_instance, new Object[0]);
-            List<String> list = Lists.<String>reverse((List)Reflector.call(object, Reflector.FMLCommonHandler_getBrandings, new Object[] {Boolean.valueOf(true)}));
-
-            for (int l1 = 0; l1 < list.size(); ++l1)
-            {
-                String s1 = (String)list.get(l1);
-
-                if (!Strings.isNullOrEmpty(s1))
-                {
-                    this.drawString(this.fontRendererObj, s1, 2, this.height - (10 + l1 * (this.fontRendererObj.FONT_HEIGHT + 1)), 16777215);
-                }
-            }
-
-            if (Reflector.ForgeHooksClient_renderMainMenu.exists())
-            {
-                Reflector.call(Reflector.ForgeHooksClient_renderMainMenu, new Object[] {this, this.fontRendererObj, Integer.valueOf(this.width), Integer.valueOf(this.height)});
-            }
-        }
-        else
-        {
-            this.drawString(this.fontRendererObj, s, 2, this.height - 10, -1);
-        }
-
-        String s2 = "Copyright Mojang AB. Do not distribute!";
-        this.drawString(this.fontRendererObj, s2, this.width - this.fontRendererObj.getStringWidth(s2) - 2, this.height - 10, -1);
+    	drawRect((this.width - 320) / 2, (this.height - 128) / 2, (this.width - 320) / 2 + 320, (this.height - 128) / 2 + 128, new Color(0, 0, 0, 127).getRGB());
+        
+        this.drawString(this.fontRendererObj, "Rubik Client (" + Client.version + ")", 2, this.height - 10, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0xFFFFFF);
 
         if (this.openGLWarning1 != null && this.openGLWarning1.length() > 0)
         {
@@ -703,6 +649,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         {
             this.modUpdateNotification.drawScreen(mouseX, mouseY, partialTicks);
         }
+        
+        GL11.glColor3f(1.0F, 1.0F, 1.0F);
+        this.mc.getTextureManager().bindTexture(iconResourceLocation);
+        Gui.drawModalRectWithCustomSizedTexture(this.width / 2 - 100 - iconSide / 2, (this.height - 128) / 2 + (128 - iconSide) / 2, 0.0f, 0.0f, iconSide, iconSide, (float)(iconSide), (float)(iconSide));
     }
 
     /**
