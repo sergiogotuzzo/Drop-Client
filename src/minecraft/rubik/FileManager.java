@@ -14,9 +14,7 @@ import java.io.IOException;
 public class FileManager {
 	private static final File rootDir = new File("rubik");
     private static final File modsFile = new File(rootDir, "mods.json");
-    
-    private static final Logger logger = LogManager.getLogger();
-    
+        
     public static void init() {
 		if (!rootDir.exists()) {
 			rootDir.mkdirs();
@@ -41,8 +39,6 @@ public class FileManager {
         jsonObject.put(key, value);
         
         writeJsonToFile(jsonObject);
-        
-        logger.info("[RubikClient] (FileManager) " + key + ": " + value);
     }
 
     public static Object get(String key) {
