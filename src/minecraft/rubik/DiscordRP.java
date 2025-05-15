@@ -23,7 +23,7 @@ public class DiscordRP {
 		};
 		DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler(readyEventHandler).build();
 		
-		DiscordRPC.discordInitialize("1229162105270439946", handlers, true);
+		DiscordRPC.discordInitialize("1372602305852997746", handlers, true);
 		
 		new Thread("Discord RPC Callback") {
 			@Override

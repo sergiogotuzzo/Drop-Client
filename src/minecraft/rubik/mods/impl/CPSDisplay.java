@@ -93,7 +93,7 @@ public class CPSDisplay extends ModDraggable {
 					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 					);
         }
-        
+                
         drawCenteredText(getCPSText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);
 	}
 	
