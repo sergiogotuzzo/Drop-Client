@@ -39,6 +39,10 @@ public class GuiBlockOverlayOverlay extends GuiRubikClientScreen {
             case 2:
             	mc.displayGuiScreen(new GuiModColorWithAlpha(this, mod.getOverlayColor(), this.mod, "overlayColor"));
             	break;
+            case 4:
+            	mod.setOverlayChroma(!mod.isOverlayChromaEnabled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -50,7 +54,8 @@ public class GuiBlockOverlayOverlay extends GuiRubikClientScreen {
         int j = -155;
         
         this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isOverlayEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Color"));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 24 * 2, 150, 20, "Color"));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j + 160, this.height / 6 + i + 24 * 2, 150, 20, "Chroma: " + (mod.isOverlayChromaEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }

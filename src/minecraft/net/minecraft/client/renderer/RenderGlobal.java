@@ -1,5 +1,6 @@
 package net.minecraft.client.renderer;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -118,7 +119,9 @@ import net.optifine.shaders.ShadowUtils;
 import net.optifine.shaders.gui.GuiShaderOptions;
 import net.optifine.util.ChunkUtils;
 import net.optifine.util.RenderChunkUtils;
+import rubik.ColorManager;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.BlockOverlay;
 
 public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListener
 {
@@ -2612,22 +2615,31 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
     public void drawSelectionBox(EntityPlayer player, MovingObjectPosition movingObjectPositionIn, int execute, float partialTicks)
     {
         if (execute == 0 && movingObjectPositionIn.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
-        {
+        {        	
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             GlStateManager.color(0.0F, 0.0F, 0.0F, 0.4F);
             GL11.glLineWidth(2.0F);
             GlStateManager.disableTexture2D();
             
-            if (ModInstances.getBlockOverlayMod().isEnabled() && ModInstances.getBlockOverlayMod().isOutlineEnabled()) {
-            	GlStateManager.color((float) ModInstances.getBlockOverlayMod().getOutlineColor().getRed() / 255.0F, (float) ModInstances.getBlockOverlayMod().getOutlineColor().getGreen() / 255.0F, (float) ModInstances.getBlockOverlayMod().getOutlineColor().getBlue() / 255.0F, 1.0F);
-            	GL11.glLineWidth(ModInstances.getBlockOverlayMod().getOutlineWidth());
-            } else if (ModInstances.getBlockOverlayMod().isEnabled() && !ModInstances.getBlockOverlayMod().isOutlineEnabled()) {
-                GlStateManager.color(0.0F, 0.0F, 0.0F, 0.0F);
-            } else if (!ModInstances.getBlockOverlayMod().isEnabled()) {
-            	GlStateManager.color(0.0F, 0.0F, 0.0F, 0.4F);
-            }
+            final BlockOverlay blockOverlayMod = ModInstances.getBlockOverlayMod();
+            
+            if (blockOverlayMod.isEnabled()) {
+            	if (blockOverlayMod.isOutlineEnabled()) {
+            		if (blockOverlayMod.isOutlineChromaEnabled()) {
+                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F));
 
+                        GlStateManager.color(chromaColor.getRed() / 255.0F, chromaColor.getGreen() / 255.0F, chromaColor.getBlue() / 255.0F, 0.4F);
+            		} else {
+            			GlStateManager.color((float) blockOverlayMod.getOutlineColor().getRed() / 255.0F, (float) blockOverlayMod.getOutlineColor().getGreen() / 255.0F, blockOverlayMod.getOutlineColor().getBlue() / 255.0F, 1.0F);
+            		}
+            		
+                	GL11.glLineWidth(blockOverlayMod.getOutlineWidth());
+            	} else {
+            		GlStateManager.color(0.0F, 0.0F, 0.0F, 0.0F);
+            	}
+            }
+            
             if (Config.isShaders())
             {
                 Shaders.disableTexture2D();
@@ -2654,14 +2666,24 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
 
                 drawSelectionBoundingBox(axisalignedbb.expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2));
                 
-                if (ModInstances.getBlockOverlayMod().isEnabled() && ModInstances.getBlockOverlayMod().isOverlayEnabled()) {
-                	int red = ModInstances.getBlockOverlayMod().getOverlayColor().getRed();
-                	int green = ModInstances.getBlockOverlayMod().getOverlayColor().getGreen();
-                	int blue = ModInstances.getBlockOverlayMod().getOverlayColor().getBlue();
-                	int alpha = ModInstances.getBlockOverlayMod().getOverlayColor().getAlpha();
-                	
-                    drawSelectionOverlay(block.getSelectedBoundingBox(this.theWorld, blockpos).expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2), red, green, blue, alpha);
+                if (blockOverlayMod.isEnabled() && blockOverlayMod.isOverlayEnabled()) {
+                	int red;
+                	int green;
+                	int blue;
+                	int alpha = blockOverlayMod.getOverlayColor().getAlpha();
 
+                	if (blockOverlayMod.isOverlayChromaEnabled()) {
+                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F));
+                    	red = chromaColor.getRed();
+                    	green = chromaColor.getGreen();
+                    	blue = chromaColor.getBlue();
+                	} else {
+                		red = blockOverlayMod.getOverlayColor().getRed();
+                    	green = blockOverlayMod.getOverlayColor().getGreen();
+                    	blue = blockOverlayMod.getOverlayColor().getBlue();
+                	}
+                	
+                	drawSelectionOverlay(block.getSelectedBoundingBox(this.theWorld, blockpos).expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2), red, green, blue, alpha);
                 }
             }
 
