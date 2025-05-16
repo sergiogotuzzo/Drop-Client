@@ -12,11 +12,13 @@ public class OldAnimations extends Mod {
 	private boolean oldBow = true;
 	private boolean blockHit = true;
 	private boolean oldSneaking = true;
+	private boolean armorHitAnimation = true;
 	
 	public OldAnimations() {
 		setOldFishingRod((boolean) getFromFile("showBackground", oldFishingRod));
 		setOldBow((boolean) getFromFile("textShadow", oldBow));
 		setBlockHit((boolean) getFromFile("blockHit", blockHit));
+		setArmorHitAnimation((boolean) getFromFile("armorHitAnimation", armorHitAnimation));
 	}
 	
 	public float getCustomEyeHeight(Entity entity)
@@ -99,5 +101,15 @@ public class OldAnimations extends Mod {
 	
 	public boolean isOldSneakingEnabled() {
 		return oldSneaking;
+	}
+	
+	public void setArmorHitAnimation(boolean enabled) {
+		this.armorHitAnimation = enabled;
+		
+		setToFile("armorHitAnimation", enabled);
+	}
+	
+	public boolean isArmorHitAnimationEnabled() {
+		return armorHitAnimation;
 	}
 }

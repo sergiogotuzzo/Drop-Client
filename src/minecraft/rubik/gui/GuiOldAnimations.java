@@ -53,6 +53,10 @@ public class GuiOldAnimations extends GuiRubikClientScreen {
             	mod.setOldSneaking(!mod.isOldSneakingEnabled());
             	this.initGui();
             	break;
+            case 7:
+            	mod.setArmorHitAnimation(!mod.isArmorHitAnimationEnabled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -64,10 +68,11 @@ public class GuiOldAnimations extends GuiRubikClientScreen {
         int j = -155;
         
         this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Old Fishing Rod: " + (mod.isOldFishingRodEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Old Bow: " + (mod.isOldBowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Block Hit: " + (mod.isBlockHitEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(6, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Old Sneaking: " + (mod.isOldSneakingEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 24 * 2, 150, 20, "Old Fishing Rod: " + (mod.isOldFishingRodEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 24 * 2, 150, 20, "Old Bow: " + (mod.isOldBowEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 24 * 3, 150, 20, "Block Hit: " + (mod.isBlockHitEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(6, this.width / 2 + j + 160, this.height / 6 + i + 24 * 3, 150, 20, "Old Sneaking: " + (mod.isOldSneakingEnabled() ? "ON" : "OFF")));
+        this.buttonList.add(new GuiButton(7, this.width / 2 + j, this.height / 6 + i + 24 * 4, 150, 20, "Armor Hit Animation: " + (mod.isArmorHitAnimationEnabled() ? "ON" : "OFF")));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
     }
 }
