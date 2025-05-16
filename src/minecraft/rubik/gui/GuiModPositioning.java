@@ -11,6 +11,7 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.ResourceLocation;
 import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.IRenderer;
 import rubik.gui.hud.ScreenPosition;
@@ -47,8 +48,13 @@ public class GuiModPositioning extends GuiRubikClientScreen {
 	}
 	
 	@Override
+	public void initGui() {
+		mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/menu_blur.json"));
+	}
+	
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-	    this.drawDefaultBackground();
+	    // this.drawDefaultBackground();
 
 	    final float zBackup = this.zLevel;
 	    
@@ -112,6 +118,8 @@ public class GuiModPositioning extends GuiRubikClientScreen {
 
 	@Override
 	public void onGuiClosed() {
+		mc.entityRenderer.stopUseShader();
+		
 		for (IRenderer renderer : renderers.keySet()) {
 			renderer.save(renderers.get(renderer));
 		}
