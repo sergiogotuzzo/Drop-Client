@@ -110,8 +110,8 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     public void initGui() {
 		Client.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
 				
-		this.buttonList.add(new GuiDropClientButton(1, this.width / 2 - 150 / 2, this.height / 2 + 24 * 1 + 8, 150, 20, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiDropClientButton(2, this.width / 2 - 150 / 2, this.height / 2 + 24 * 2 + 8, 150, 20, I18n.format("menu.multiplayer", new Object[0])));
+		this.buttonList.add(new GuiButton(1, this.width / 2 - 150 / 2, this.height / 2 + 24 * 1 + 8, 150, 20, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 150 / 2, this.height / 2 + 24 * 2 + 8, 150, 20, I18n.format("menu.multiplayer", new Object[0])));
         this.buttonList.add(new GuiButtonMods(5, this.width / 2 - 2 * 3 - 40, this.height - 20 - fontRendererObj.FONT_HEIGHT - 14));
     	this.buttonList.add(new GuiButtonOptions(3, this.width / 2 + 2, this.height - 20 - fontRendererObj.FONT_HEIGHT - 14));
         this.buttonList.add(new GuiButtonLanguage(4, this.width / 2 - 2 - 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 14));
