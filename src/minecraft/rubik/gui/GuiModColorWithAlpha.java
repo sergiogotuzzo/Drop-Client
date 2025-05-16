@@ -36,8 +36,6 @@ public class GuiModColorWithAlpha extends GuiDropClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, I18n.format("Customize Mod Color", new Object[0]), this.width / 2, 20, 0xFFFFFFFF);
-        this.drawString(this.fontRendererObj, "Rubik Client (" + Client.version + ")", 2, this.height - 10, 0x808080);
-        this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0x808080);
         super.drawScreen(mouseX, mouseY, partialTicks);
         
         int rectLeft = this.width / 2 - 75;
