@@ -48,6 +48,8 @@ public class HUDManager {
 	
 	@EventTarget
 	public void onRender(RenderEvent e) {
+		if (mc.gameSettings.showDebugInfo) return;
+		
 		if (mc.currentScreen == null || mc.currentScreen instanceof GuiScreen && !(mc.currentScreen instanceof GuiModPositioning)) {
 			for (IRenderer renderer : registeredRenderers) {
 				callRenderer(renderer);
