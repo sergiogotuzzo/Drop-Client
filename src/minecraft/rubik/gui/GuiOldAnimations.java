@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.OldAnimations;
 
-public class GuiOldAnimations extends GuiRubikClientScreen {
+public class GuiOldAnimations extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final OldAnimations mod = ModInstances.getOldAnimationsMod();
 	

@@ -10,7 +10,7 @@ import rubik.Client;
 import rubik.ColorManager;
 import rubik.mods.Mod;
 
-public class GuiModColor extends GuiRubikClientScreen {
+public class GuiModColor extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final ColorManager color;
 	private final Mod mod;

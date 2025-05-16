@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Keystrokes;
 
-public class GuiKeystrokesReleasedText extends GuiRubikClientScreen {
+public class GuiKeystrokesReleasedText extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final Keystrokes mod = ModInstances.getKeystrokesMod();
 	

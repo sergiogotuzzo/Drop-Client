@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.PingDisplay;
 
-public class GuiPingDisplay extends GuiRubikClientScreen {
+public class GuiPingDisplay extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final PingDisplay mod = ModInstances.getPingDisplayMod();
 

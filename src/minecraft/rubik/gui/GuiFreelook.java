@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Freelook;
 
-public class GuiFreelook extends GuiRubikClientScreen {
+public class GuiFreelook extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final Freelook mod = ModInstances.getFreelookMod();
 	

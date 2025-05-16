@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Scoreboard;
 
-public class GuiScoreboardSettings extends GuiRubikClientScreen {
+public class GuiScoreboardSettings extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final Scoreboard mod = ModInstances.getScoreboardMod();
 	

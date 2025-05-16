@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.PotionEffects;
 
-public class GuiPotionEffectsNameText extends GuiRubikClientScreen {
+public class GuiPotionEffectsNameText extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final PotionEffects mod = ModInstances.getPotionEffectsMod();
 	

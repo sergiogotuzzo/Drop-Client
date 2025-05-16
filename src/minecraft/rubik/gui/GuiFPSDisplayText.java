@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.FPSDisplay;
 
-public class GuiFPSDisplayText extends GuiRubikClientScreen {
+public class GuiFPSDisplayText extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final FPSDisplay mod = ModInstances.getFPSDisplayMod();
 	

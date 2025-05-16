@@ -10,7 +10,7 @@ import rubik.mods.ModInstances;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.CPSDisplay.CPSMode;
 
-public class GuiCPSDisplay extends GuiRubikClientScreen {
+public class GuiCPSDisplay extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final CPSDisplay mod = ModInstances.getCPSDisplayMod();
 	

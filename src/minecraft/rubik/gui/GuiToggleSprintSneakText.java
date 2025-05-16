@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
-public class GuiToggleSprintSneakText extends GuiRubikClientScreen {
+public class GuiToggleSprintSneakText extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
 	

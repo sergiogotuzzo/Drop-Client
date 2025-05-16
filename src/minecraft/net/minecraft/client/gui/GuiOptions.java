@@ -14,10 +14,10 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
-import rubik.gui.GuiRubikClientScreen;
+import rubik.gui.GuiDropClientScreen;
 import rubik.gui.GuiScoreboardSettings;
 
-public class GuiOptions extends GuiRubikClientScreen implements GuiYesNoCallback
+public class GuiOptions extends GuiDropClientScreen implements GuiYesNoCallback
 {
     private static final GameSettings.Options[] field_146440_f = new GameSettings.Options[] {GameSettings.Options.FOV};
     private final GuiScreen field_146441_g;

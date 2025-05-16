@@ -16,7 +16,7 @@ import rubik.gui.hud.HUDManager;
 import rubik.gui.hud.IRenderer;
 import rubik.gui.hud.ScreenPosition;
 
-public class GuiModPositioning extends GuiRubikClientScreen {
+public class GuiModPositioning extends GuiDropClientScreen {
 	private final HashMap<IRenderer, ScreenPosition> renderers = new HashMap<IRenderer, ScreenPosition>();
 	
 	private Optional<IRenderer> selectedRenderer = Optional.empty();

@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.BlockOverlay;
 
-public class GuiBlockOverlayOverlay extends GuiRubikClientScreen {
+public class GuiBlockOverlayOverlay extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final BlockOverlay mod = ModInstances.getBlockOverlayMod();
 	

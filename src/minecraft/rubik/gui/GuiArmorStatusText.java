@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.ArmorStatus;
 
-public class GuiArmorStatusText extends GuiRubikClientScreen {
+public class GuiArmorStatusText extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final ArmorStatus mod = ModInstances.getArmorStatusMod();
 	

@@ -8,7 +8,7 @@ import net.minecraft.client.resources.I18n;
 import rubik.Client;
 import rubik.mods.ModInstances;
 
-public class GuiMods extends GuiRubikClientScreen {
+public class GuiMods extends GuiDropClientScreen {
 	private final GuiScreen previousScreen;
 	
 	private GuiButton buttonReset;

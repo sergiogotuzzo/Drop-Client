@@ -9,7 +9,7 @@ import rubik.Client;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.CoordinatesDisplay;
 
-public class GuiCoordinatesDisplayText extends GuiRubikClientScreen {
+public class GuiCoordinatesDisplayText extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final CoordinatesDisplay mod = ModInstances.getCoordinatesDisplayMod();
 	
