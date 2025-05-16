@@ -87,6 +87,7 @@ import net.optifine.shaders.ShadersRender;
 import net.optifine.util.MemoryMonitor;
 import net.optifine.util.TextureUtils;
 import net.optifine.util.TimedEvent;
+import rubik.gui.GuiDropClientMainMenu;
 import rubik.mods.ModInstances;
 
 import org.apache.logging.log4j.LogManager;
@@ -2700,9 +2701,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
             }
         }
 
-        if (this.mc.currentScreen instanceof GuiMainMenu)
+        if (this.mc.currentScreen instanceof GuiDropClientMainMenu)
         {
-            this.updateMainMenu((GuiMainMenu)this.mc.currentScreen);
+            this.updateMainMenu((GuiDropClientMainMenu)this.mc.currentScreen);
         }
 
         if (this.updatedWorld != world)
@@ -2740,7 +2741,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
     }
 
-    private void updateMainMenu(GuiMainMenu p_updateMainMenu_1_)
+    private void updateMainMenu(GuiDropClientMainMenu p_updateMainMenu_1_)
     {
         try
         {

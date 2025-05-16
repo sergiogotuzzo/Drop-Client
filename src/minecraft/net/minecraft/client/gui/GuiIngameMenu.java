@@ -12,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import rubik.Client;
+import rubik.gui.GuiDropClientMainMenu;
 import rubik.gui.GuiMods;
 
 public class GuiIngameMenu extends GuiScreen
@@ -68,16 +69,16 @@ public class GuiIngameMenu extends GuiScreen
 
                 if (flag)
                 {
-                    this.mc.displayGuiScreen(new GuiMainMenu());
+                    this.mc.displayGuiScreen(new GuiDropClientMainMenu());
                 }
                 else if (flag1)
                 {
                     RealmsBridge realmsbridge = new RealmsBridge();
-                    realmsbridge.switchToRealms(new GuiMainMenu());
+                    realmsbridge.switchToRealms(new GuiDropClientMainMenu());
                 }
                 else
                 {
-                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiMainMenu(), true));
+                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiDropClientMainMenu(), true));
                 }
 
             case 2:

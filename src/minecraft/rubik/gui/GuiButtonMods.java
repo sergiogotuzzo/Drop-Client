@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonMods extends GuiButton {
-    private static final ResourceLocation icon = new ResourceLocation("rubik/iconBlur.png");
+    private static final ResourceLocation icon = new ResourceLocation("rubik/icon.png");
 
     public GuiButtonMods(int buttonId, int x, int y) {
         super(buttonId, x, y, 20, 20, "");

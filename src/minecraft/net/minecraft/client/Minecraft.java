@@ -190,6 +190,7 @@ import net.minecraft.world.storage.WorldInfo;
 import rubik.Client;
 import rubik.events.impl.KeyEvent;
 import rubik.events.impl.TickEvent;
+import rubik.gui.GuiDropClientMainMenu;
 import rubik.mods.impl.togglesprintsneak.RubikClientMovementInput;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
@@ -579,11 +580,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (this.serverName != null)
         {
-            this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
+            this.displayGuiScreen(new GuiConnecting(new GuiDropClientMainMenu(), this, this.serverName, this.serverPort));
         }
         else
         {
-            this.displayGuiScreen(new GuiMainMenu());
+            this.displayGuiScreen(new GuiDropClientMainMenu());
         }
 
         this.renderEngine.deleteTexture(this.mojangLogo);
@@ -1003,14 +1004,14 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (guiScreenIn == null && this.theWorld == null)
         {
-            guiScreenIn = new GuiMainMenu();
+            guiScreenIn = new GuiDropClientMainMenu();
         }
         else if (guiScreenIn == null && this.thePlayer.getHealth() <= 0.0F)
         {
             guiScreenIn = new GuiGameOver();
         }
 
-        if (guiScreenIn instanceof GuiMainMenu)
+        if (guiScreenIn instanceof GuiDropClientMainMenu)
         {
             this.gameSettings.showDebugInfo = false;
             this.ingameGUI.getChatGUI().clearChatMessages();
