@@ -143,7 +143,7 @@ public class ArmorStatus extends ModDraggable {
 			mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
 		}
 		
-		if (is.getItem().isDamageable()) {
+		if ((showDamage || showPercentage) && is.getItem().isDamageable()) {
 			if (damageOverlays) {
 				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
 			}
