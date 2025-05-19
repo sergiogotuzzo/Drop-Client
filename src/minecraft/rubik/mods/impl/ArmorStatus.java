@@ -21,7 +21,7 @@ public class ArmorStatus extends ModDraggable {
 	private boolean dynamicColors = true;
 	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private boolean textShadow = true;
-	private boolean textChroma = true;
+	private boolean textChroma = false;
 	
 	public ArmorStatus() {
 		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
