@@ -12,9 +12,6 @@ public class CoordinatesDisplay extends ModDraggableText {
 	private boolean showBiome = true;
 	private boolean showTowards = true;
 	
-	private final int padding = 12;
-	private final int gap = 10;
-	
 	public CoordinatesDisplay() {
 		setShowBiome((boolean) getFromFile("showBiome", showBiome));
 		setShowTowards((boolean) getFromFile("showTowards", showTowards));
@@ -22,12 +19,40 @@ public class CoordinatesDisplay extends ModDraggableText {
 	
 	@Override
 	public int getWidth() {
-		return showBiome ? (font.getStringWidth(getBiomeText()) > getLongestCoordinateText() + (showTowards ? gap : 0) ? font.getStringWidth(getBiomeText()) : getLongestCoordinateText() + (showTowards ? gap : 0)) + padding : getLongestCoordinateText() + (showTowards ? gap : 0) + padding;
+		int width = 0;
+
+		if (showBiome) {
+			int biomeWidth = font.getStringWidth(getBiomeText());
+			int coordsWidth = font.getStringWidth(getLongestCoordinateText());
+			
+			if (showTowards) {
+				coordsWidth += 10 + 6;
+			}
+
+			if (biomeWidth > coordsWidth) {
+				width = biomeWidth;
+			} else {
+				width = coordsWidth;
+			}
+
+			width += 12;
+		} else {
+			width = font.getStringWidth(getLongestCoordinateText());
+
+			if (showTowards) {
+				width += 10 + 6;
+			}
+
+			width += 12;
+		}
+
+		return width;
 	}
+
 
 	@Override
 	public int getHeight() {
-		return (showBiome ? 38 : 28) + padding;
+		return (showBiome ? 38 : 28) + 12;
 	}
 
 	@Override
@@ -40,44 +65,43 @@ public class CoordinatesDisplay extends ModDraggableText {
 				ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 				);
 		
-		final int i = 4;
-		final int j = padding / 2;
+		int i = 4;
+		int j = 6;
 		
-		drawText(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(1) + i, textColor.getRGB(), textShadow, textChroma);
-		drawText(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(2) + i, textColor.getRGB(), textShadow, textChroma);
-		drawText(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(3) + i, textColor.getRGB(), textShadow, textChroma);
+		drawText(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 1 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+		drawText(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 2 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+		drawText(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 3 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
 		
 		if (showTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - padding / 2, pos.getAbsoluteY() + getLineY(1) + i, textColor.getRGB(), textShadow, textChroma);
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - padding / 2, pos.getAbsoluteY() + getLineY(2) + i, textColor.getRGB(), textShadow, textChroma);
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - padding / 2, pos.getAbsoluteY() + getLineY(3) + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - j, pos.getAbsoluteY() + 1 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - j, pos.getAbsoluteY() + 2 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - j, pos.getAbsoluteY() + 3 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
 		}
 		
 		if (showBiome) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + getLineY(4) + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 4 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
 		}
 	}
 	
-	private int getLineY(int line) {
-		return line * 11 - 10; 
-	}
-	
-	private int getLongestCoordinate() {
-		int max = Math.abs((int) mc.getRenderViewEntity().posX);
+	private String getLongestCoordinateText() {
+		int x = (int) mc.getRenderViewEntity().posX;
+		int y = (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
+		int z = (int) mc.getRenderViewEntity().posZ;
 		
-		if (Math.abs((int) mc.getRenderViewEntity().getEntityBoundingBox().minY) > max) {
-			max = Math.abs((int) mc.getRenderViewEntity().getEntityBoundingBox().minY);
+		int max = x;
+		String text = String.valueOf(x);
+		
+		if (Math.abs(y) > max) {
+			max = Math.abs(y);
+			text = String.valueOf(y);
 		}
 		
-		if (Math.abs((int) mc.getRenderViewEntity().posZ) > max) {
-			max = Math.abs((int) mc.getRenderViewEntity().posZ);
+		if (Math.abs(z) > max) {
+			max = Math.abs(z);
+			text = String.valueOf(z);
 		}
 		
-		return max;
-	}
-	
-	private int getLongestCoordinateText() {
-		return font.getStringWidth("C: -" + getLongestCoordinate());
+		return "C: " + text;
 	}
 	
 	private String getCoordinatesXText() {
