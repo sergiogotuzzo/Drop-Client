@@ -59,9 +59,13 @@ public class ArmorStatus extends ModDraggable {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			setRight(false);
+			if (right == true) {
+				setRight(false);
+			}
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			setRight(true);
+			if (right == false) {
+				setRight(true);
+			}
 		}
 		
 		int i = 0;
