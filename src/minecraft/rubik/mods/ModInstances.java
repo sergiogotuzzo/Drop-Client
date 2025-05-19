@@ -1,5 +1,8 @@
 package rubik.mods;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import net.minecraft.client.Minecraft;
 import rubik.FileManager;
 import rubik.gui.hud.HUDManager;
@@ -100,5 +103,22 @@ public class ModInstances {
 	
 	public static BlockOverlay getBlockOverlayMod() {
 		return blockOverlayMod;
+	}
+	
+	public static Collection<Mod> getAllMods() {
+		return Arrays.asList(
+			    getArmorStatusMod(),
+			    getBlockOverlayMod(),
+			    getCoordinatesDisplayMod(),
+			    getCPSDisplayMod(),
+			    getFPSDisplayMod(),
+			    getFreelookMod(),
+			    getKeystrokesMod(),
+			    getOldAnimationsMod(),
+			    getPingDisplayMod(),
+			    getPotionEffectsMod(),
+			    getToggleSprintSneakMod()
+			);
+
 	}
 }

@@ -1,11 +1,13 @@
 package rubik.gui;
 
+import java.awt.Color;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import rubik.Client;
+import rubik.events.EventTarget;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Freelook;
 
@@ -19,10 +21,12 @@ public class GuiFreelook extends GuiDropClientScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
+    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
-        this.drawCenteredString(this.fontRendererObj, "Freelook", this.width / 2, 15, 0xFFFFFFFF);
-        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
+        this.drawScaledText("Freelook", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+        this.drawText("Return On Release", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
+        this.drawText("Invert Yaw", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Invert Pitch", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -34,18 +38,14 @@ public class GuiFreelook extends GuiDropClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setEnabled(!mod.isEnabled());
-            	this.initGui();
-                break;
-            case 2:
             	mod.setReturnOnRelease(!mod.isReturnOnReleaseEnabled());
             	this.initGui();
             	break;
-            case 3:
+            case 2:
             	mod.setInvertYaw(!mod.isInvertYawEnabled());
             	this.initGui();
             	break;
-            case 4:
+            case 3:
             	mod.setInvertPitch(!mod.isInvertPitchEnabled());
             	this.initGui();
             	break;
@@ -54,15 +54,13 @@ public class GuiFreelook extends GuiDropClientScreen {
 	
 	@Override
     public void initGui() {
+		super.initGui();
+		
         this.buttonList.clear();
         
-        int i = -12;
-        int j = -155;
-        
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Mode: " + (mod.isReturnOnReleaseEnabled() ? "Key Held" : "Toggle")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Invert Yaw: " + (mod.isInvertYawEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Invert Pitch: " + (mod.isInvertPitchEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+    	this.buttonList.add(new GuiButtonToggled(1, mod.isReturnOnReleaseEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isInvertYawEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(3, mod.isInvertPitchEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

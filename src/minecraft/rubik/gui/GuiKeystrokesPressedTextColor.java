@@ -11,11 +11,11 @@ import rubik.mods.Mod;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Keystrokes;
 
-public class GuiKeystrokesReleasedText extends GuiModColor {
+public class GuiKeystrokesPressedTextColor extends GuiModColor {
 	private static final Keystrokes mod = ModInstances.getKeystrokesMod();
 	
-	public GuiKeystrokesReleasedText(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getReleasedTextColor(), mod, "releasedTextColor", "Keystrokes", "Released Text Color");
+	public GuiKeystrokesPressedTextColor(GuiScreen previousGuiScreen) {
+		super(previousGuiScreen, mod.getPressedTextColor(), mod, "pressedTextColor", "Keystrokes", "Pressed Text Color");
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class GuiKeystrokesReleasedText extends GuiModColor {
     	super.actionPerformed(button);
     	
         if (button.id == 5) {
-        	mod.setReleasedTextChroma(!mod.isReleasedTextChromaEnabled());
+        	mod.setPressedTextChroma(!mod.isPressedTextChromaEnabled());
         	this.initGui();
         }
     }
@@ -39,6 +39,6 @@ public class GuiKeystrokesReleasedText extends GuiModColor {
     public void initGui() {
 		super.initGui();
 
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isReleasedTextChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(5, mod.isPressedTextChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     }
 }

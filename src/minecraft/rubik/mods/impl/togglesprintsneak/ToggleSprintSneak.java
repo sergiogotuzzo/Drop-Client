@@ -4,31 +4,25 @@ import java.awt.Color;
 
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
-import rubik.mods.ModDraggable;
+import rubik.mods.ModDraggableText;
 
-public class ToggleSprintSneak extends ModDraggable {
+public class ToggleSprintSneak extends ModDraggableText {
 	public int keyHoldTicks = 7;
 	private boolean sprinting = false;
 	private boolean sneaking = false;
-	
-	private boolean flyBoost = true;
-	private float flyBoostFactor = 4.0F;
+
 	private boolean toggleSprint = true;
 	private boolean toggleSneak = false;
-	private boolean textShadow = true;
-	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
-	private boolean textChroma = false;
+	private boolean flyBoost = true;
+	private float flyBoostFactor = 4.0F;
 	
 	private String textToRender = "";
 	
 	public ToggleSprintSneak() {
-		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
-		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
 		setToggleSprint((boolean) getFromFile("toggleSprint", toggleSprint));
 		setToggleSneak((boolean) getFromFile("toggleSneak", toggleSneak));
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
-		setTextChroma((boolean) getFromFile("textChroma", textChroma));
+		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
+		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
 	}
 
 	@Override
@@ -71,26 +65,6 @@ public class ToggleSprintSneak extends ModDraggable {
 		return sneaking;
 	}
 	
-	public void setFlyBoost(boolean enabled) {
-		flyBoost = enabled;
-		
-		setToFile("flyBoost", enabled);
-	}
-	
-	public boolean isFlyBoostEnabled() {
-		return flyBoost;
-	}
-	
-	public void setFlyBoostFactor(float factor) {
-		flyBoostFactor = factor;
-		
-		setToFile("flyBoostFactor", factor);
-	}
-	
-	public float getFlyBoostFactor() {
-		return flyBoostFactor;
-	}
-	
 	public void setToggleSprint(boolean enabled) {
 		toggleSprint = enabled;
 		
@@ -111,33 +85,23 @@ public class ToggleSprintSneak extends ModDraggable {
 		return toggleSneak;
 	}
 	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
+	public void setFlyBoost(boolean enabled) {
+		flyBoost = enabled;
 		
-		setToFile("textShadow", enabled);
+		setToFile("flyBoost", enabled);
 	}
 	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
+	public boolean isFlyBoostEnabled() {
+		return flyBoost;
 	}
 	
-	public void setTextColor(int rgb) {
-		this.textColor = ColorManager.fromRGB(rgb);
+	public void setFlyBoostFactor(float factor) {
+		flyBoostFactor = factor;
 		
-		setToFile("textColor", rgb);
+		setToFile("flyBoostFactor", factor);
 	}
 	
-	public ColorManager getTextColor() {
-		return textColor;
-	}
-	
-	public void setTextChroma(boolean enabled) {
-		this.textChroma = enabled;
-		
-		setToFile("textChroma", enabled);
-	}
-	
-	public boolean isTextChromaEnabled() {
-		return textChroma;
+	public float getFlyBoostFactor() {
+		return flyBoostFactor;
 	}
 }

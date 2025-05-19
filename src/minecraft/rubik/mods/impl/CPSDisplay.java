@@ -9,9 +9,9 @@ import org.lwjgl.input.Mouse;
 import net.minecraft.util.EnumChatFormatting;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
-import rubik.mods.ModDraggable;
+import rubik.mods.ModDraggableText;
 
-public class CPSDisplay extends ModDraggable {
+public class CPSDisplay extends ModDraggableText {
 	public enum CPSMode {
 		LEFT(1),
 		RIGHT(2),
@@ -29,11 +29,8 @@ public class CPSDisplay extends ModDraggable {
 		}
 	}
 	
-	private boolean showBackground = false;
-	private boolean textShadow = true;
-	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	private CPSMode mode = CPSMode.LEFT_RIGHT;
-	private boolean textChroma = false;
+	private boolean showBackground = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();
     private boolean wasLeftPressed;
@@ -44,11 +41,8 @@ public class CPSDisplay extends ModDraggable {
     private long lastRightPressed;
     
     public CPSDisplay() {
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setMode((int) ((long) getFromFile("mode", mode.getIndex())));
-		setTextChroma((boolean) getFromFile("textChroma", textChroma));
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 	}
 	
 	@Override
@@ -127,36 +121,6 @@ public class CPSDisplay extends ModDraggable {
 		return showBackground ? cpsText : "[" + cpsText + "]";
 	}
 	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
-	}
-	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
-		
-		setToFile("textShadow", enabled);
-	}
-	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
-	}
-	
-	public void setTextColor(int rgb) {
-		this.textColor = ColorManager.fromRGB(rgb);
-		
-		setToFile("textColor", rgb);
-	}
-	
-	public ColorManager getTextColor() {
-		return textColor;
-	}
-	
 	public void setMode(int modeIndex) {
 		switch (modeIndex) {
 			case 1:
@@ -180,13 +144,13 @@ public class CPSDisplay extends ModDraggable {
 		return mode;
 	}
 	
-	public void setTextChroma(boolean enabled) {
-		this.textChroma = enabled;
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
 		
-		setToFile("textChroma", enabled);
+		setToFile("showBackground", enabled);
 	}
 	
-	public boolean isTextChromaEnabled() {
-		return textChroma;
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
 	}
 }

@@ -9,9 +9,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
-import rubik.mods.ModDraggable;
+import rubik.mods.ModDraggableText;
 
-public class ArmorStatus extends ModDraggable {
+public class ArmorStatus extends ModDraggableText {
 	private boolean equippedItem = false;
 	private boolean right = false;
 	private boolean showPercentage = false;
@@ -19,9 +19,6 @@ public class ArmorStatus extends ModDraggable {
 	private boolean showMaxDamage = false;
 	private boolean damageOverlays = true;
 	private boolean dynamicColors = true;
-	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
-	private boolean textShadow = true;
-	private boolean textChroma = false;
 	
 	public ArmorStatus() {
 		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
@@ -31,9 +28,6 @@ public class ArmorStatus extends ModDraggable {
 		setShowMaxDamage((boolean) getFromFile("showMaxDamage", showMaxDamage));
 		setDamageOverlays((boolean) getFromFile("damageOverlays", damageOverlays));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
-		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 	}
 	
 	@Override
@@ -247,35 +241,5 @@ public class ArmorStatus extends ModDraggable {
 	
 	public boolean isDynamicColorsEnabled() {
 		return dynamicColors;
-	}
-	
-	public void setTextColor(int rgb) {
-		this.textColor = ColorManager.fromRGB(rgb);
-		
-		setToFile("textColor", rgb);
-	}
-	
-	public ColorManager getTextColor() {
-		return textColor;
-	}
-	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
-		
-		setToFile("textShadow", enabled);
-	}
-	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
-	}
-	
-	public void setTextChroma(boolean enabled) {
-		this.textChroma = enabled;
-		
-		setToFile("textChroma", enabled);
-	}
-	
-	public boolean isTextChromaEnabled() {
-		return textChroma;
 	}
 }

@@ -1,5 +1,6 @@
 package rubik.gui;
 
+import java.awt.Color;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
@@ -12,19 +13,35 @@ import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 public class GuiToggleSprintSneak extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
+
+	private GuiDropClientSlider sliderFlyBoostFactor;
 	
 	public GuiToggleSprintSneak(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
-    @Override
+	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
+    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
-        this.drawCenteredString(this.fontRendererObj, "Toggle Sprint / Sneak", this.width / 2, 15, 0xFFFFFFFF);
-        this.drawCenteredString(this.fontRendererObj, "Settings", this.width / 2, 30, 0xFFFFFFFF);
+        this.drawScaledText("Toggle Sprint Sneak", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+        this.drawText("Toggle Sprint", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
+        this.drawText("Toggle Sneak", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Fly Boost", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Fly Boost Factor", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        this.drawText(String.format("%.1f", mod.getFlyBoostFactor()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.1f", mod.getFlyBoostFactor())) - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
+    }
+    
+    @Override
+    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+    	mod.setFlyBoostFactor(sliderFlyBoostFactor.getSliderPosition() * 8.0F);
+    	
+    	if (mod.getFlyBoostFactor() < 2.0F) {
+    		mod.setFlyBoostFactor(2.0F);
+    	}
     }
 
     @Override
@@ -34,44 +51,45 @@ public class GuiToggleSprintSneak extends GuiDropClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setEnabled(!mod.isEnabled());
-            	this.initGui();
-                break;
-            case 2:
             	mod.setToggleSprint(!mod.isToggleSprintEnabled());
             	this.initGui();
             	break;
-            case 3:
+            case 2:
             	mod.setToggleSneak(!mod.isToggleSneakEnabled());
             	this.initGui();
             	break;
-            case 4:
+            case 3:
             	mod.setFlyBoost(!mod.isFlyBoostEnabled());
             	this.initGui();
             	break;
+            case 4:
+            	mod.setFlyBoostFactor(sliderFlyBoostFactor.getSliderPosition() * 8.0F);
+            	
+            	if (mod.getFlyBoostFactor() < 2.0F) {
+            		mod.setFlyBoostFactor(2.0F);
+            	}
+            	break;
             case 5:
-            	mod.setFlyBoostFactor((mod.getFlyBoostFactor() < 8 && mod.getFlyBoostFactor() >= 2) ? mod.getFlyBoostFactor() + 1 : 2);
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
             case 6:
-            	this.mc.displayGuiScreen(new GuiToggleSprintSneakText(this));
-            	break;
+            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Toggle Sprint Sneak"));
         }
     }
 	
 	@Override
     public void initGui() {
+		super.initGui();
+		
         this.buttonList.clear();
         
-        int i = -12;
-        int j = -155;
-        
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 75, this.height / 6 + i + 24, 150, 20, "Toggled: " + (mod.isEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 + j, this.height / 6 + i + 48, 150, 20, "Toggle Sprint: " + (mod.isToggleSprintEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 + j + 160, this.height / 6 + i + 48, 150, 20, "Toggle Sneak: " + (mod.isToggleSneakEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + j, this.height / 6 + i + 72, 150, 20, "Fly Boost: " + (mod.isFlyBoostEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(new GuiButton(5, this.width / 2 + j + 160, this.height / 6 + i + 72, 150, 20, "Fly Boost Factor: " + mod.getFlyBoostFactor() + "x"));
-        this.buttonList.add(new GuiButton(6, this.width / 2 + j, this.height / 6 + i + 96, 150, 20, "Text"));
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+    	this.buttonList.add(new GuiButtonToggled(1, mod.isToggleSprintEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isToggleSneakEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(3, mod.isFlyBoostEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
+    	this.buttonList.add(sliderFlyBoostFactor = new GuiDropClientSlider(4, (this.width - 300) / 2 + 130, (this.height - 200) / 2 + 30 + 15 * 3 + 15 + 1, 100, 5, 0, 8, mod.getFlyBoostFactor()));
+    	this.buttonList.add(new GuiButtonToggled(5, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+        this.buttonList.add(new GuiButtonText(6, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, "Text Color"));
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

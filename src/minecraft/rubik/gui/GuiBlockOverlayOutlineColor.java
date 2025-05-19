@@ -9,13 +9,13 @@ import net.minecraft.client.resources.I18n;
 import rubik.ColorManager;
 import rubik.mods.Mod;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.Keystrokes;
+import rubik.mods.impl.BlockOverlay;
 
-public class GuiKeystrokesReleasedText extends GuiModColor {
-	private static final Keystrokes mod = ModInstances.getKeystrokesMod();
+public class GuiBlockOverlayOutlineColor extends GuiModColor {
+	private static final BlockOverlay mod = ModInstances.getBlockOverlayMod();
 	
-	public GuiKeystrokesReleasedText(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getReleasedTextColor(), mod, "releasedTextColor", "Keystrokes", "Released Text Color");
+	public GuiBlockOverlayOutlineColor(GuiScreen previousGuiScreen) {
+		super(previousGuiScreen, mod.getOutlineColor(), mod, "outlineColor", "Block Overlay", "Outline Color");
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class GuiKeystrokesReleasedText extends GuiModColor {
     	super.actionPerformed(button);
     	
         if (button.id == 5) {
-        	mod.setReleasedTextChroma(!mod.isReleasedTextChromaEnabled());
+        	mod.setOutlineChroma(!mod.isOutlineChromaEnabled());
         	this.initGui();
         }
     }
@@ -39,6 +39,6 @@ public class GuiKeystrokesReleasedText extends GuiModColor {
     public void initGui() {
 		super.initGui();
 
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isReleasedTextChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(5, mod.isOutlineChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     }
 }

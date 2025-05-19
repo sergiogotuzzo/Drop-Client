@@ -6,24 +6,18 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import rubik.ColorManager;
 import rubik.gui.hud.ScreenPosition;
-import rubik.mods.ModDraggable;
+import rubik.mods.ModDraggableText;
 
-public class CoordinatesDisplay extends ModDraggable {
-	private boolean textShadow = true;
-	private ColorManager textColor = ColorManager.fromColor(Color.WHITE);
+public class CoordinatesDisplay extends ModDraggableText {
 	private boolean showBiome = true;
 	private boolean showTowards = true;
-	private boolean textChroma = false;
 	
 	private final int padding = 12;
 	private final int gap = 10;
 	
 	public CoordinatesDisplay() {
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setShowBiome((boolean) getFromFile("showBiome", showBiome));
 		setShowTowards((boolean) getFromFile("showTowards", showTowards));
-		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 	}
 	
 	@Override
@@ -184,26 +178,6 @@ public class CoordinatesDisplay extends ModDraggable {
 	    }
 	}
 	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
-		
-		setToFile("textShadow", enabled);
-	}
-	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
-	}
-	
-	public void setTextColor(int rgb) {
-		this.textColor = ColorManager.fromRGB(rgb);
-		
-		setToFile("textColor", rgb);
-	}
-	
-	public ColorManager getTextColor() {
-		return textColor;
-	}
-	
 	public void setShowBiome(boolean enabled) {
 		showBiome = enabled;
 		
@@ -222,15 +196,5 @@ public class CoordinatesDisplay extends ModDraggable {
 	
 	public boolean isShowTowardsEnabled() {
 		return showTowards;
-	}
-	
-	public void setTextChroma(boolean enabled) {
-		this.textChroma = enabled;
-		
-		setToFile("textChroma", enabled);
-	}
-	
-	public boolean isTextChromaEnabled() {
-		return textChroma;
 	}
 }

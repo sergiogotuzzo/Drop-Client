@@ -14,49 +14,76 @@ public class GuiModColor extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final ColorManager color;
 	private final Mod mod;
-    private final String key;
+	private final String colorKey;
+	private final String title;
+	private final String subtitle;
+	private final boolean showAlphaSlider;
 	
-	private GuiSlider sliderRed;
-    private GuiSlider sliderGreen;
-    private GuiSlider sliderBlue;
+	private GuiDropClientSlider sliderRed;
+    private GuiDropClientSlider sliderGreen;
+    private GuiDropClientSlider sliderBlue;
+    private GuiDropClientSlider sliderAlpha;
 	
-	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod) {
-		this(previousGuiScreen, color, mod, "textColor");
+    public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String title) {
+		this(previousGuiScreen, color,  mod, "textColor", title, "Text Color", false);
+	}
+    
+    public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String title, String subtitle) {
+		this(previousGuiScreen, color,  mod, "textColor", title, subtitle, false);
+	}
+    
+    public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String colorKey, String title, String subtitle) {
+		this(previousGuiScreen, color, mod, colorKey, title, subtitle, false);
 	}
 	
-	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String key) {
+	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String colorKey, String title, String subtitle, boolean showAlphaSlider) {
 		this.previousGuiScreen = previousGuiScreen;
 		this.color = color;
 		this.mod = mod;
-		this.key = key;
+		this.colorKey = colorKey;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.showAlphaSlider = showAlphaSlider;
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
+    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
+    	
+    	String redText = String.valueOf(color.getRed());
+    	String greenText = String.valueOf(color.getGreen());
+    	String blueText = String.valueOf(color.getBlue());
         
-        this.drawCenteredString(this.fontRendererObj, "Customize Mod Color", this.width / 2, 40, 0xFFFFFFFF);
+        this.drawScaledText(title, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+        this.drawScaledText(subtitle, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB()).setAlpha(255).getRGB(), false, false);
+        this.drawText("Red", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Green", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Blue", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        this.drawText(redText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(redText) - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText(greenText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(greenText) - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText(blueText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(blueText) - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        
+        if (showAlphaSlider) {
+        	String alphaText = String.valueOf(color.getAlpha());
+        	
+            this.drawText("Alpha", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+            this.drawText(alphaText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(alphaText) - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        }
         
         super.drawScreen(mouseX, mouseY, partialTicks);
-        
-        int rectLeft = this.width / 2 - 75;
-        int rectTop = this.height / 4 + 80;
-        int rectWidth = 150 - 1;
-        int rectHeight = 20 - 1;
-        
-        drawRect(rectLeft, rectTop, rectLeft + rectWidth, rectTop + rectHeight, color.getRGB());
-        drawHollowRect(rectLeft, rectTop, rectWidth, rectHeight, Color.BLACK.getRGB());
-        
-        this.fontRendererObj.drawStringWithShadow("Current Color", (rectLeft + (rectWidth - this.fontRendererObj.getStringWidth("Current Color")) / 2) + 1, (rectTop + (rectHeight - this.fontRendererObj.FONT_HEIGHT) / 2) + 1, Color.WHITE.getRGB());
     }
     
     @Override
     public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	color.setRed((int) (sliderRed.func_175217_d() * 255.0F));
-    	color.setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
-    	color.setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
+    	color.setRed((int) (sliderRed.getSliderPosition() * 255.0F));
+    	color.setGreen((int) (sliderGreen.getSliderPosition() * 255.0F));
+    	color.setBlue((int) (sliderBlue.getSliderPosition() * 255.0F));
     	
-    	mod.setToFile(key, color.getRGB());
+    	if (showAlphaSlider) {
+        	color.setAlpha((int) (sliderAlpha.getSliderPosition() * 255.0F));
+    	}
+    	
+    	mod.setToFile(colorKey, color.getRGB());
     }
 
     @Override
@@ -66,30 +93,38 @@ public class GuiModColor extends GuiDropClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	color.setRed((int) (sliderRed.func_175217_d() * 255.0F));
-            	mod.setToFile(key, color.getRGB());
+            	color.setRed((int) (sliderRed.getSliderPosition() * 255.0F));
+            	mod.setToFile(colorKey, color.getRGB());
             	break;
             case 2:
-            	color.setGreen((int) (sliderGreen.func_175217_d() * 255.0F));
-            	mod.setToFile(key, color.getRGB());
+            	color.setGreen((int) (sliderGreen.getSliderPosition() * 255.0F));
+            	mod.setToFile(colorKey, color.getRGB());
             	break;
             case 3:
-            	color.setBlue((int) (sliderBlue.func_175217_d() * 255.0F));
-            	mod.setToFile(key, color.getRGB());
+            	color.setBlue((int) (sliderBlue.getSliderPosition() * 255.0F));
+            	mod.setToFile(colorKey, color.getRGB());
+            	break;
+            case 4:
+            	color.setAlpha((int) (sliderAlpha.getSliderPosition() * 255.0F));
+            	mod.setToFile(colorKey, color.getRGB());
             	break;
         }
     }
 	
 	@Override
     public void initGui() {
+		super.initGui();
+		
         this.buttonList.clear();
         
-        int i = -16;
-        int j = 75;
-        
-		this.buttonList.add(sliderRed = new GuiSlider(1, this.width / 2 - j, this.height / 4 + 24 + i, 150, 20, "Red", 0, 255, color.getRed()));
-        this.buttonList.add(sliderGreen = new GuiSlider(2, this.width / 2 - j, this.height / 4 + 48 + i, 150, 20, "Green", 0, 255, color.getGreen()));
-        this.buttonList.add(sliderBlue = new GuiSlider(3, this.width / 2 - j, this.height / 4 + 72 + i, 150, 20, "Blue", 0, 255, color.getBlue()));
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
+    	this.buttonList.add(sliderRed = new GuiDropClientSlider(1, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 0, 255, color.getRed()));
+    	this.buttonList.add(sliderGreen = new GuiDropClientSlider(2, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 2 + 15 + 1, 100, 5, 0, 255, color.getGreen()));
+    	this.buttonList.add(sliderBlue = new GuiDropClientSlider(3, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 3 + 15 + 1, 100, 5, 0, 255, color.getBlue()));
+
+    	if (showAlphaSlider) {
+        	this.buttonList.add(sliderAlpha = new GuiDropClientSlider(4, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 4 + 15 + 1, 100, 5, 0, 255, color.getAlpha()));
+    	}
+    	
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
