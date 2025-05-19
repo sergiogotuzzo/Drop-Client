@@ -29,6 +29,7 @@ public class ArmorStatus extends ModDraggable {
 		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
 		setShowDamage((boolean) getFromFile("showDamage", showDamage));
 		setShowMaxDamage((boolean) getFromFile("showMaxDamage", showMaxDamage));
+		setDamageOverlays((boolean) getFromFile("damageOverlays", damageOverlays));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
@@ -85,9 +86,13 @@ public class ArmorStatus extends ModDraggable {
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			setRight(false);
+			if (right == true) {
+				setRight(false);
+			}
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			setRight(true);
+			if (right == false) {
+				setRight(true);
+			}
 		}
 		
 		if (equippedItem) {
