@@ -18,6 +18,7 @@ public class OldAnimations extends Mod {
 		setOldFishingRod((boolean) getFromFile("showBackground", oldFishingRod));
 		setOldBow((boolean) getFromFile("textShadow", oldBow));
 		setBlockHit((boolean) getFromFile("blockHit", blockHit));
+		setOldSneaking((boolean) getFromFile("oldSneaking", oldSneaking));
 		setArmorHitAnimation((boolean) getFromFile("armorHitAnimation", armorHitAnimation));
 	}
 	
