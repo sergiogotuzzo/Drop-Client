@@ -6,7 +6,8 @@ import rubik.mods.Mod;
 import rubik.mods.ModInstances;
 
 public class Fullbright extends Mod {
-	private final float fullbrightGamma = 10.0F;
+	private static final float fullbrightGamma = 10.0F;
+	
 	private boolean toggled = true;
 	
 	public Fullbright() {
@@ -32,7 +33,7 @@ public class Fullbright extends Mod {
 		return toggled;
 	}
 	
-	public float getFullbrightGamma() {
+	public static float getFullbrightGamma() {
 		return fullbrightGamma;
 	}
 }
