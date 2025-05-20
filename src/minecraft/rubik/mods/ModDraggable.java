@@ -74,7 +74,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	}
 	
 	public void drawCenteredText(String text, int x, int y, int color, boolean textShadow, boolean chroma) {
-		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2 + 1, y + getHeight() / 2 - 4, color, textShadow, chroma);
+		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2, y + getHeight() / 2 - 4, color, textShadow, chroma);
 	}
 	
 	public void drawAlignedText(String text, int x, int y, int color, boolean textShadow, boolean chroma) {
