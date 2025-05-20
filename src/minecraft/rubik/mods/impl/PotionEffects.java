@@ -58,11 +58,11 @@ public class PotionEffects extends ModDraggable {
     @Override
     public void render(ScreenPosition pos) {
     	if (pos.getRelativeX() < 1.0 / 3.0) {
-			if (right == true) {
+			if (right) {
 				setRight(false);
 			}
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			if (right == false) {
+			if (!right) {
 				setRight(true);
 			}
 		}
@@ -81,11 +81,11 @@ public class PotionEffects extends ModDraggable {
     @Override
     public void renderDummy(ScreenPosition pos) {
     	if (pos.getRelativeX() < 1.0 / 3.0) {
-			if (right == true) {
+			if (right) {
 				setRight(false);
 			}
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			if (right == false) {
+			if (!right) {
 				setRight(true);
 			}
 		}
@@ -129,10 +129,8 @@ public class PotionEffects extends ModDraggable {
         }
 
         Potion potion = Potion.potionTypes[pe.getPotionID()];
-                
-        int i = 2;
         
-        int iconX = right ? pos.getAbsoluteX() + getWidth() - 18 : pos.getAbsoluteX() + 2;
+        int iconX = right ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX();
 
         if (potion.hasStatusIcon()) {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
@@ -141,31 +139,33 @@ public class PotionEffects extends ModDraggable {
             
             int iconIndex = potion.getStatusIconIndex();
               
-            drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + i, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+            drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + 2, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
         }
 
         String potionName = getPotionName(pe);
         String durationString = Potion.getDurationString(pe);
         
-        int textX = right ? pos.getAbsoluteX() + 2 : pos.getAbsoluteX() + getWidth() - font.getStringWidth(showName ? getLongestEffectName(getPlayerPotionEffects()) : durationString);
+        int durationX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - 20 - 2: pos.getAbsoluteX() + 20 + 2;
         
         if (showName) {
-        	drawText(potionName, textX, pos.getAbsoluteY() + offsetY + i, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
+            int nameX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - 20 - 2: pos.getAbsoluteX() + 20 + 2;
+
+        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
         	
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
         	}
         } else {
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, textX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - i, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
         	}
         }
     }

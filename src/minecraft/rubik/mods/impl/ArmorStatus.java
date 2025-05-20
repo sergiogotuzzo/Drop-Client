@@ -53,11 +53,11 @@ public class ArmorStatus extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			if (right == true) {
+			if (right) {
 				setRight(false);
 			}
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			if (right == false) {
+			if (!right) {
 				setRight(true);
 			}
 		}
@@ -84,11 +84,11 @@ public class ArmorStatus extends ModDraggableText {
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			if (right == true) {
+			if (right) {
 				setRight(false);
 			}
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			if (right == false) {
+			if (!right) {
 				setRight(true);
 			}
 		}
