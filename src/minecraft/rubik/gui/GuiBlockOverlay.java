@@ -22,6 +22,8 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
 
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		this.drawDefaultBackground();
+		
     	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
         this.drawScaledText("Block Overlay", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
@@ -74,8 +76,6 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
 	
 	@Override
     public void initGui() {
-		super.initGui();
-		
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isOutlineEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));

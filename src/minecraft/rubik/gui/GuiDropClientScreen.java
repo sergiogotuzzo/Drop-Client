@@ -17,11 +17,6 @@ public abstract class GuiDropClientScreen extends GuiScreen {
         
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
-	
-	@Override
-	public void initGui() {
-    	mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/menu_blur.json"));
-	}
     
     public void drawHollowRect(int x, int y, int width, int height, int color) {
 		this.drawHorizontalLine(x, x + width, y, color);
@@ -60,10 +55,5 @@ public abstract class GuiDropClientScreen extends GuiScreen {
 		drawText(text, x, y, color, textShadow, chroma);
 		
 		GlStateManager.popMatrix();
-	}
-    
-    @Override
-	public void onGuiClosed() {
-		mc.entityRenderer.stopUseShader();
 	}
 }

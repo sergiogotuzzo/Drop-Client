@@ -102,6 +102,8 @@ public abstract class GuiContainer extends GuiDropClientScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
+    	this.drawDefaultBackground();
+    	
         int i = this.guiLeft;
         int j = this.guiTop;
         this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);

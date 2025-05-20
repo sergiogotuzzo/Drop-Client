@@ -27,8 +27,6 @@ public class GuiIngameMenu extends GuiDropClientScreen
      */
     public void initGui()
     {
-    	super.initGui();
-    	
         this.field_146445_a = 0;
         this.buttonList.clear();
         int i = -16;
@@ -128,6 +126,8 @@ public class GuiIngameMenu extends GuiDropClientScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
+    	this.drawDefaultBackground();
+    	
         super.drawScreen(mouseX, mouseY, partialTicks);
         
         GL11.glColor3f(1.0F, 1.0F, 1.0F);

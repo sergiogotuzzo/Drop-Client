@@ -38,7 +38,7 @@ public class GuiBlockOverlayOverlayColor extends GuiModColor {
 	@Override
     public void initGui() {
 		super.initGui();
-
+		
     	this.buttonList.add(new GuiButtonToggled(5, mod.isOverlayChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
     }
 }

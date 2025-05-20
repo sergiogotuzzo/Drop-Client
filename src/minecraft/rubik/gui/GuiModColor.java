@@ -48,6 +48,8 @@ public class GuiModColor extends GuiDropClientScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    	this.drawDefaultBackground();
+    	
     	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
     	
     	String redText = String.valueOf(color.getRed());
@@ -113,8 +115,6 @@ public class GuiModColor extends GuiDropClientScreen {
 	
 	@Override
     public void initGui() {
-		super.initGui();
-		
         this.buttonList.clear();
         
     	this.buttonList.add(sliderRed = new GuiDropClientSlider(1, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 0, 255, color.getRed()));

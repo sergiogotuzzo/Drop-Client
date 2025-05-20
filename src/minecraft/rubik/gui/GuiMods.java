@@ -38,6 +38,8 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    	this.drawDefaultBackground();
+    	
         drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         drawScaledText("Mods", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
 
@@ -120,7 +122,6 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     public void initGui() {
-        super.initGui();
         this.buttonList.clear();
 
         int i = 0;
