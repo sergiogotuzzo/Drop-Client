@@ -71,7 +71,7 @@ public class GuiCPSDisplay extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-        this.buttonList.add(new GuiButtonText(2, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(mod.getMode().name()) - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, mod.getMode().name()));
+        this.buttonList.add(new GuiButtonText(2, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(mod.getMode().name().replace("LEFT_RIGHT", "LEFT / RIGHT")) - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, mod.getMode().name().replace("LEFT_RIGHT", "LEFT / RIGHT")));
         this.buttonList.add(new GuiButtonToggled(3, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
         this.buttonList.add(new GuiButtonText(4, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, "Text Color"));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
