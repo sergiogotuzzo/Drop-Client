@@ -89,6 +89,7 @@ import net.optifine.util.TextureUtils;
 import net.optifine.util.TimedEvent;
 import rubik.gui.GuiDropClientMainMenu;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.Fullbright;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1191,8 +1192,10 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     {
                         f10 = 1.0F;
                     }
+                    
+                    final Fullbright fullbrightMod = ModInstances.getFullbrightMod();
 
-                    float f16 = ModInstances.getFullbrightMod().isEnabled() ? 10.0F : this.mc.gameSettings.gammaSetting;
+                    float f16 = fullbrightMod.isEnabled() && fullbrightMod.isToggled() ? fullbrightMod.getFullbrightGamma() : this.mc.gameSettings.gammaSetting;
                     float f17 = 1.0F - f8;
                     float f13 = 1.0F - f9;
                     float f14 = 1.0F - f10;

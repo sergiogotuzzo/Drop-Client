@@ -95,21 +95,24 @@ public class GuiMods extends GuiDropClientScreen {
 	    		mc.displayGuiScreen(new GuiFPSDisplay(this));
 	    		break;
 	    	case 106:
-	    		mc.displayGuiScreen(new GuiFreelook(this));
+	    		mc.displayGuiScreen(new GuiFullbright(this));
 	    		break;
 	    	case 107:
-	    		mc.displayGuiScreen(new GuiKeystrokes(this));
+	    		mc.displayGuiScreen(new GuiFreelook(this));
 	    		break;
 	    	case 108:
-	    		mc.displayGuiScreen(new GuiOldAnimations(this));
+	    		mc.displayGuiScreen(new GuiKeystrokes(this));
 	    		break;
 	    	case 109:
-	    		mc.displayGuiScreen(new GuiPingDisplay(this));
+	    		mc.displayGuiScreen(new GuiOldAnimations(this));
 	    		break;
 	    	case 110:
-	    		mc.displayGuiScreen(new GuiPotionEffects(this));
+	    		mc.displayGuiScreen(new GuiPingDisplay(this));
 	    		break;
 	    	case 111:
+	    		mc.displayGuiScreen(new GuiPotionEffects(this));
+	    		break;
+	    	case 112:
 	    		mc.displayGuiScreen(new GuiToggleSprintSneak(this));
 	    		break;
         }

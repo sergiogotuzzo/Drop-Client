@@ -112,6 +112,7 @@ public class ModInstances {
 			    getCoordinatesDisplayMod(),
 			    getCPSDisplayMod(),
 			    getFPSDisplayMod(),
+			    getFullbrightMod(),
 			    getFreelookMod(),
 			    getKeystrokesMod(),
 			    getOldAnimationsMod(),
