@@ -38,8 +38,16 @@ public class PotionEffects extends ModDraggable {
 	}
 
 	@Override
-    public int getWidth() {    	
-        return 20 + 2 + (showName ? font.getStringWidth(getLongestEffectName(getPlayerPotionEffects())) : font.getStringWidth("00:00"));
+    public int getWidth() {
+		int width = 20 + 2;
+		
+		if (showName) {
+			width += font.getStringWidth(getLongestEffectName(getPlayerPotionEffects()));
+		} else {
+			width += font.getStringWidth("00:00");
+		}
+		
+        return width;
     }
 
     @Override
@@ -82,18 +90,14 @@ public class PotionEffects extends ModDraggable {
 			}
 		}
     	
-        if (mc.thePlayer.getActivePotionEffects().size() == 0) {
-        	int offsetY = 0;
+        int offsetY = 0;
 
-            for (int i = 0; i < dummyPotionEffects.size(); i++) {
-                PotionEffect potionEffect = (PotionEffect) dummyPotionEffects.toArray()[i];
+        for (int i = 0; i < getPlayerPotionEffects().size(); i++) {
+            PotionEffect potionEffect = (PotionEffect) getPlayerPotionEffects().toArray()[i];
 
-                drawPotionEffect(pos, offsetY, potionEffect);
-                
-                offsetY += 20;
-            }
-        } else {
-        	render(pos);
+            drawPotionEffect(pos, offsetY, potionEffect);
+            
+            offsetY += 20;
         }
     }
     
@@ -106,20 +110,17 @@ public class PotionEffects extends ModDraggable {
             return null;
         }
         
-        PotionEffect longestEffect = null;
-        
-        int maxLength = 0;
+        String longestText = "";
         
         for (PotionEffect effect : effects) {
             String effectName = getPotionName(effect);
             
-            if (effectName.length() > maxLength) {
-                maxLength = effectName.length();
-                longestEffect = effect;
+            if (font.getStringWidth(effectName) > font.getStringWidth(longestText)) {
+                longestText = effectName;
             }
         }
         
-        return getPotionName(longestEffect);
+        return longestText;
     }
 
     private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect pe) {
