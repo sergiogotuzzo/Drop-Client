@@ -65,55 +65,47 @@ public class CoordinatesDisplay extends ModDraggableText {
 				ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
 				);
 		
-		int i = 4;
-		int j = 6;
+		int i = 11;
 		
-		drawText(getCoordinatesXText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 1 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
-		drawText(getCoordinatesYText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 2 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
-		drawText(getCoordinatesZText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 3 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+		String textX = "X: " + (int) mc.getRenderViewEntity().posX;
+		String textY = "Y: " + (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
+		String textZ = "Z: " + (int) mc.getRenderViewEntity().posZ;
+		
+		drawText(textX, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 1 - 6, textColor.getRGB(), textShadow, textChroma);
+		drawText(textY, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 2 - 6, textColor.getRGB(), textShadow, textChroma);
+		drawText(textZ, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 3 - 6, textColor.getRGB(), textShadow, textChroma);
 		
 		if (showTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - j, pos.getAbsoluteY() + 1 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - j, pos.getAbsoluteY() + 2 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - j, pos.getAbsoluteY() + 3 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - 6, pos.getAbsoluteY() + i * 1 - 6, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - 6, pos.getAbsoluteY() + i * 2 - 6, textColor.getRGB(), textShadow, textChroma);
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - 6, pos.getAbsoluteY() + i * 3 - 6, textColor.getRGB(), textShadow, textChroma);
 		}
 		
 		if (showBiome) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + j, pos.getAbsoluteY() + 4 * 11 - 10 + i, textColor.getRGB(), textShadow, textChroma);
+			drawText(getBiomeText(), pos.getAbsoluteX() + 6, pos.getAbsoluteY() + 4 * 11 - 6, textColor.getRGB(), textShadow, textChroma);
 		}
 	}
 	
 	private String getLongestCoordinateText() {
-		int x = (int) mc.getRenderViewEntity().posX;
-		int y = (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
-		int z = (int) mc.getRenderViewEntity().posZ;
+		String longestText = "";
 		
-		int max = x;
-		String text = String.valueOf(x);
+		String textX = "X: " + (int) mc.getRenderViewEntity().posX;
+		String textY = "Y: " + (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
+		String textZ = "Z: " + (int) mc.getRenderViewEntity().posZ;
 		
-		if (Math.abs(y) > max) {
-			max = Math.abs(y);
-			text = String.valueOf(y);
+		if (font.getStringWidth(textX) > font.getStringWidth(longestText)) {
+			longestText = textX;
 		}
 		
-		if (Math.abs(z) > max) {
-			max = Math.abs(z);
-			text = String.valueOf(z);
+		if (font.getStringWidth(textY) > font.getStringWidth(longestText)) {
+			longestText = textY;
 		}
 		
-		return "C: " + text;
-	}
-	
-	private String getCoordinatesXText() {
-		return "X: " + (int) mc.getRenderViewEntity().posX;
-	}
-	
-	private String getCoordinatesYText() {
-		return "Y: " + (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
-	}
-	
-	private String getCoordinatesZText() {
-		return "Z: " + (int) mc.getRenderViewEntity().posZ;
+		if (font.getStringWidth(textZ) > font.getStringWidth(longestText)) {
+			longestText = textZ;
+		}
+		
+		return longestText;
 	}
 	
 	private String getBiomeText() {
@@ -135,16 +127,12 @@ public class CoordinatesDisplay extends ModDraggableText {
 	
 	private String getFacingTowardsX() {
         switch (getDirectionFacing()) {
-	        case 0:
-	            return "";
 	        case 1:
 	            return "-";
 	        case 2:
 	            return "-";
 	        case 3:
 	        	return "-";
-	        case 4:
-	        	return "";
 	        case 5:
 	        	return "+";
 	        case 6:
@@ -185,16 +173,12 @@ public class CoordinatesDisplay extends ModDraggableText {
 	            return "+";
 	        case 1:
 	            return "+";
-	        case 2:
-	            return "";
 	        case 3:
 	        	return "-";
 	        case 4:
 	        	return "-";
 	        case 5:
 	        	return "-";
-	        case 6:
-	        	return "";
 	        case 7:
 	        	return "+";
 	        default:
