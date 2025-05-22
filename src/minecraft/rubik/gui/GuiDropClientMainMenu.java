@@ -44,9 +44,6 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
     	switch (button.id) {
-    		case 0:
-    			this.mc.shutdown();
-    			break;
     		case 1:
     			this.mc.displayGuiScreen(new GuiSelectWorld(this));
     			break;
@@ -62,6 +59,9 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     		case 5:
     			this.mc.displayGuiScreen(new GuiMods(this));
     			break;
+    		case 6:
+    			this.mc.shutdown();
+    			break;
     	}
     }
 	
@@ -71,9 +71,10 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 				
 		this.buttonList.add(new GuiButton(1, this.width / 2 - 150 / 2, this.height / 2 + 24, 150, 20, I18n.format("menu.singleplayer", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 - 150 / 2, this.height / 2 + 24 * 2, 150, 20, I18n.format("menu.multiplayer", new Object[0])));
-        this.buttonList.add(new GuiButtonIcon(5, new ResourceLocation("rubik/icon.png"), this.width / 2 - 2 * 3 - 40, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
-    	this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("rubik/options.png"), this.width / 2 + 2, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8, 14, 14));
+        
+        this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("rubik/icon.png"), this.width / 2 - 2 * 3 - 40, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
         this.buttonList.add(new GuiButtonLanguage(4, this.width / 2 - 2 - 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
-        this.buttonList.add(new GuiButtonIcon(0, new ResourceLocation("rubik/quit.png"), this.width / 2 + 2 * 3 + 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
+    	this.buttonList.add(new GuiButtonIcon(5, new ResourceLocation("rubik/options.png"), this.width / 2 + 2, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8, 14, 14));
+        this.buttonList.add(new GuiButtonIcon(6, new ResourceLocation("rubik/quit.png"), this.width / 2 + 2 * 3 + 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
     }
 }
