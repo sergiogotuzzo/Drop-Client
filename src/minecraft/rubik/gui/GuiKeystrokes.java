@@ -29,7 +29,7 @@ public class GuiKeystrokes extends GuiDropClientScreen {
         this.drawText("Show Mouse", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText("Show Spacebar", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Show Movement Keys", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-        this.drawText("Arrows", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        this.drawText("Use Arrows", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
         this.drawText("Released Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
         this.drawText("Pressed Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
 
@@ -55,7 +55,7 @@ public class GuiKeystrokes extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 4:
-            	mod.setArrows(!mod.isArrowsEnabled());
+            	mod.setUseArrows(!mod.isUseArrowsEnabled());
             	this.initGui();
             	break;
             case 5:
@@ -82,7 +82,7 @@ public class GuiKeystrokes extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(1, mod.isShowMouseEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(2, mod.isShowSpacebarEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isShowMovementKeysEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(4, mod.isArrowsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(4, mod.isUseArrowsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(5, mod.isReleasedTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
         this.buttonList.add(new GuiButtonText(6, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, "Released Text Color"));
     	this.buttonList.add(new GuiButtonToggled(7, mod.isPressedTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));

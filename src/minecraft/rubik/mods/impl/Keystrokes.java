@@ -118,7 +118,7 @@ public class Keystrokes extends ModDraggable {
 	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
-	private boolean arrows = false;
+	private boolean useArrows = false;
 	private boolean pressedTextChroma = false;
 	private boolean releasedTextChroma = false;
 	
@@ -138,7 +138,7 @@ public class Keystrokes extends ModDraggable {
 		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
 		setShowMouse((boolean) getFromFile("showMouse", showMouse));
 		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
-		setArrows((boolean) getFromFile("arrows", arrows));
+		setUseArrows((boolean) getFromFile("useArrows", useArrows));
 		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
 		setReleasedTextChroma((boolean) getFromFile("releasedTextChroma", releasedTextChroma));
 	}
@@ -179,7 +179,7 @@ public class Keystrokes extends ModDraggable {
 	    for (Key key : mode.getKeys()) {
 	        int textWidth = font.getStringWidth(key.getName());
 	        
-	        if (arrows) {
+	        if (useArrows) {
 	        	switch (key.getName()) {
 		        	case "W":
 		        		key.setName("▲");
@@ -334,14 +334,14 @@ public class Keystrokes extends ModDraggable {
 		return showSpacebar;
 	}
 	
-	public void setArrows(boolean enabled) {
-		arrows = enabled;
+	public void setUseArrows(boolean enabled) {
+		useArrows = enabled;
 		
-		setToFile("arrows", enabled);
+		setToFile("useArrows", enabled);
 	}
 	
-	public boolean isArrowsEnabled() {
-		return arrows;
+	public boolean isUseArrowsEnabled() {
+		return useArrows;
 	}
 	
 	public void setPressedTextChroma(boolean enabled) {
