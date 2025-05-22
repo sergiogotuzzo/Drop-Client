@@ -27,8 +27,9 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
         
         this.drawScaledText("Coordinates Display", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Show Biome", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Show Towards", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Show Facing", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Show Facing Towards", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -44,14 +45,18 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 2:
-            	mod.setShowTowards(!mod.isShowTowardsEnabled());
+            	mod.setShowFacing(!mod.isShowFacingEnabled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setShowFacingTowards(!mod.isShowFacingTowardsEnabled());
             	this.initGui();
             	break;
             case 4:
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	this.initGui();
+            	break;
+            case 5:
             	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Coordinates Display"));
             	break;
         }
@@ -62,9 +67,10 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isShowBiomeEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(2, mod.isShowTowardsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(3, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
-        this.buttonList.add(new GuiButtonText(4, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, "Text Color"));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isShowFacingEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(3, mod.isShowFacingTowardsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(4, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
+        this.buttonList.add(new GuiButtonText(5, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, "Text Color"));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

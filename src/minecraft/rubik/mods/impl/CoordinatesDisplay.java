@@ -10,11 +10,13 @@ import rubik.mods.ModDraggableText;
 
 public class CoordinatesDisplay extends ModDraggableText {
 	private boolean showBiome = true;
-	private boolean showTowards = true;
+	private boolean showFacing = true;
+	private boolean showFacingTowards = true;
 	
 	public CoordinatesDisplay() {
 		setShowBiome((boolean) getFromFile("showBiome", showBiome));
-		setShowTowards((boolean) getFromFile("showTowards", showTowards));
+		setShowFacing((boolean) getFromFile("showFacing", showFacing));
+		setShowFacingTowards((boolean) getFromFile("showFacingTowards", showFacingTowards));
 	}
 	
 	@Override
@@ -24,10 +26,6 @@ public class CoordinatesDisplay extends ModDraggableText {
 		if (showBiome) {
 			int biomeWidth = font.getStringWidth(getBiomeText());
 			int coordsWidth = font.getStringWidth(getLongestCoordinateText());
-			
-			if (showTowards) {
-				coordsWidth += 10 + 6;
-			}
 
 			if (biomeWidth > coordsWidth) {
 				width = biomeWidth;
@@ -35,11 +33,15 @@ public class CoordinatesDisplay extends ModDraggableText {
 				width = coordsWidth;
 			}
 
+			if (showFacing || showFacingTowards) {
+				width += 10 + 6;
+			}
+
 			width += 12;
 		} else {
 			width = font.getStringWidth(getLongestCoordinateText());
-
-			if (showTowards) {
+			
+			if (showFacing || showFacingTowards) {
 				width += 10 + 6;
 			}
 
@@ -83,9 +85,12 @@ public class CoordinatesDisplay extends ModDraggableText {
 		drawText(textY, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 2 - 6, textColor.getRGB(), textShadow, textChroma);
 		drawText(textZ, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 3 - 6, textColor.getRGB(), textShadow, textChroma);
 		
-		if (showTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - 6, pos.getAbsoluteY() + i * 1 - 6, textColor.getRGB(), textShadow, textChroma);
+		if (showFacing) {
 			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - 6, pos.getAbsoluteY() + i * 2 - 6, textColor.getRGB(), textShadow, textChroma);
+		}
+		
+		if (showFacingTowards) {
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - 6, pos.getAbsoluteY() + i * 1 - 6, textColor.getRGB(), textShadow, textChroma);
 			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - 6, pos.getAbsoluteY() + i * 3 - 6, textColor.getRGB(), textShadow, textChroma);
 		}
 		
@@ -204,13 +209,23 @@ public class CoordinatesDisplay extends ModDraggableText {
 		return showBiome;
 	}
 	
-	public void setShowTowards(boolean enabled) {
-		showTowards = enabled;
+	public void setShowFacing(boolean enabled) {
+		showFacing = enabled;
 		
-		setToFile("showTowards", enabled);
+		setToFile("showFacing", enabled);
 	}
 	
-	public boolean isShowTowardsEnabled() {
-		return showTowards;
+	public boolean isShowFacingEnabled() {
+		return showFacing;
+	}
+	
+	public void setShowFacingTowards(boolean enabled) {
+		showFacingTowards = enabled;
+		
+		setToFile("showFacingTowards", enabled);
+	}
+	
+	public boolean isShowFacingTowardsEnabled() {
+		return showFacingTowards;
 	}
 }
