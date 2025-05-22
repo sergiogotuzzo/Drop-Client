@@ -52,7 +52,15 @@ public class CoordinatesDisplay extends ModDraggableText {
 
 	@Override
 	public int getHeight() {
-		return (showBiome ? 38 : 28) + 12;
+		int height = 12;
+		
+		if (showBiome) {
+			height += 38;
+		} else {
+			height += 28;
+		}
+		
+		return height;
 	}
 
 	@Override
