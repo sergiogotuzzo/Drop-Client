@@ -15,6 +15,7 @@ public class ToggleSprintSneak extends ModDraggableText {
 	private boolean toggleSneak = false;
 	private boolean flyBoost = true;
 	private float flyBoostFactor = 4.0F;
+	private boolean showText = true;
 	
 	private String textToRender = "";
 	
@@ -23,6 +24,7 @@ public class ToggleSprintSneak extends ModDraggableText {
 		setToggleSneak((boolean) getFromFile("toggleSneak", toggleSneak));
 		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
 		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
+		setShowText((boolean) getFromFile("showText", showText));
 	}
 
 	@Override
@@ -37,16 +39,20 @@ public class ToggleSprintSneak extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-	    textToRender = mc.thePlayer.movementInput.getDisplayText();
-	    
-	    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+	    if (showText) {
+	    	textToRender = mc.thePlayer.movementInput.getDisplayText();
+		    
+		    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+	    }
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		textToRender = "[Walking]";
+		if (showText) {
+			textToRender = "[Walking]";
 
-		drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+			drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
+		}
 	}
 	
 	public void setSprinting(boolean sprinting) {
@@ -103,5 +109,15 @@ public class ToggleSprintSneak extends ModDraggableText {
 	
 	public float getFlyBoostFactor() {
 		return flyBoostFactor;
+	}
+	
+	public void setShowText(boolean enabled) {
+		showText = enabled;
+		
+		setToFile("showText", enabled);
+	}
+	
+	public boolean isShowTextEnabled() {
+		return showText;
 	}
 }
