@@ -614,7 +614,7 @@ public class GuiIngame extends Gui
         for (Score score : collection)
         {
             ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(score.getPlayerName());
-            String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
+            String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + (ModInstances.getScoreboardMod().isHideNumbersEnabled() ? "" : ": " + EnumChatFormatting.RED + score.getScorePoints());
             i = Math.max(i, this.getFontRenderer().getStringWidth(s));
         }
 
