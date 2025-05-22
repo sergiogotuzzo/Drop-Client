@@ -12,24 +12,7 @@ import rubik.gui.hud.ScreenPosition;
 import rubik.mods.ModDraggableText;
 
 public class CPSDisplay extends ModDraggableText {
-	public enum CPSMode {
-		LEFT(1),
-		RIGHT(2),
-		LEFT_RIGHT(3),
-		HIGHER(4);
-		
-		private int index;
-		
-		CPSMode(int index) {
-			this.index = index;
-		}
-		
-		public int getIndex() {
-			return index;
-		}
-	}
-	
-	private CPSMode mode = CPSMode.LEFT_RIGHT;
+	public boolean showRightCPS = false;
 	private boolean showBackground = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();
@@ -41,7 +24,7 @@ public class CPSDisplay extends ModDraggableText {
     private long lastRightPressed;
     
     public CPSDisplay() {
-		setMode((int) ((long) getFromFile("mode", mode.getIndex())));
+		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 	}
 	
@@ -100,48 +83,25 @@ public class CPSDisplay extends ModDraggableText {
     }
 	
 	private String getCPSText() {
-		String cpsText = "";
-		String line = textChroma ? " ⎟ " : " " + EnumChatFormatting.GRAY + "⎟" + " " + EnumChatFormatting.RESET;
+		String text = String.valueOf(getCPS(leftClicks));
 		
-		switch (mode.getIndex()) {
-			case 1:
-				cpsText = getCPS(leftClicks) + " CPS";
-				break;
-			case 2:
-				cpsText = getCPS(rightClicks) + " CPS";
-				break;
-			case 3:
-				cpsText = getCPS(leftClicks) + line + getCPS(rightClicks) + " CPS";
-				break;
-			case 4:
-				cpsText = (getCPS(leftClicks) > getCPS(rightClicks) ? getCPS(leftClicks) : getCPS(rightClicks)) + " CPS";
-				break;
+		if (showRightCPS) {
+			text += " ⎟ " + getCPS(rightClicks);
 		}
 		
-		return showBackground ? cpsText : "[" + cpsText + "]";
-	}
-	
-	public void setMode(int modeIndex) {
-		switch (modeIndex) {
-			case 1:
-				this.mode = CPSMode.LEFT;
-				break;
-			case 2:
-				this.mode = CPSMode.RIGHT;
-				break;
-			case 3:
-				this.mode = CPSMode.LEFT_RIGHT;
-				break;
-			case 4:
-				this.mode = CPSMode.HIGHER;
-				break;
-		}
+		text += " CPS";
 		
-		setToFile("mode", modeIndex);
+		return showBackground ? text : "[" + text + "]";
 	}
 	
-	public CPSMode getMode() {
-		return mode;
+	public void setShowRightCPS(boolean enabled) {
+		showRightCPS = enabled;
+		
+		setToFile("showRightCPS", enabled);
+	}
+	
+	public boolean isShowRightCPSEnabled() {
+		return showRightCPS;
 	}
 	
 	public void setShowBackground(boolean enabled) {
