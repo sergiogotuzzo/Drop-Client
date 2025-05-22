@@ -26,7 +26,7 @@ public class GuiFreelook extends GuiDropClientScreen {
     	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
         this.drawScaledText("Freelook", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawText("Return On Release", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
+        this.drawText("Hold", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText("Invert Yaw", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Invert Pitch", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
 
@@ -40,7 +40,7 @@ public class GuiFreelook extends GuiDropClientScreen {
             	this.mc.displayGuiScreen(this.previousGuiScreen);
             	break;
             case 1:
-            	mod.setReturnOnRelease(!mod.isReturnOnReleaseEnabled());
+            	mod.setHold(!mod.isHoldEnabled());
             	this.initGui();
             	break;
             case 2:
@@ -58,7 +58,7 @@ public class GuiFreelook extends GuiDropClientScreen {
     public void initGui() {
         this.buttonList.clear();
         
-    	this.buttonList.add(new GuiButtonToggled(1, mod.isReturnOnReleaseEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(1, mod.isHoldEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(2, mod.isInvertYawEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isInvertPitchEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));

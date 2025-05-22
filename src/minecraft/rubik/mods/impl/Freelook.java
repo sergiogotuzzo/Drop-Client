@@ -8,7 +8,7 @@ import rubik.events.impl.KeyEvent;
 import rubik.mods.Mod;
 
 public class Freelook extends Mod {
-	private boolean returnOnRelease = true;
+	private boolean hold = true;
 	private boolean invertYaw = false;
 	private boolean invertPitch = false;
 	
@@ -20,7 +20,7 @@ public class Freelook extends Mod {
 	private int previousPerspective = 0;
 	
 	public Freelook() {
-		setReturnOnRelease((boolean) getFromFile("returnOnRelease", returnOnRelease));
+		setHold((boolean) getFromFile("hold", hold));
 		setInvertYaw((boolean) getFromFile("invertYaw", invertYaw));
 		setInvertPitch((boolean) getFromFile("invertPitch", invertPitch));
 	}
@@ -40,7 +40,7 @@ public class Freelook extends Mod {
 				} else {
 					mc.gameSettings.thirdPersonView = previousPerspective;
 				}
-			} else if (returnOnRelease) {
+			} else if (hold) {
 				perspectiveToggled = false;
 				mc.gameSettings.thirdPersonView = previousPerspective;
 			}
@@ -88,14 +88,14 @@ public class Freelook extends Mod {
 		return false;
 	}
 	
-	public void setReturnOnRelease(boolean enabled) {
-		this.returnOnRelease = enabled;
+	public void setHold(boolean enabled) {
+		this.hold = enabled;
 		
-		setToFile("returnOnRelease", enabled);
+		setToFile("hold", enabled);
 	}
 	
-	public boolean isReturnOnReleaseEnabled() {
-		return returnOnRelease;
+	public boolean isHoldEnabled() {
+		return hold;
 	}
 	
 	public void setInvertYaw(boolean enabled) {
