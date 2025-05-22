@@ -27,9 +27,10 @@ public class GuiPotionEffects extends GuiDropClientScreen {
         
         this.drawScaledText("Potion Effects", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Blink", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Duration Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Show Name", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
-        this.drawText("Name Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        this.drawText("Show Icon", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Duration Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Show Name", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        this.drawText("Name Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -45,21 +46,25 @@ public class GuiPotionEffects extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 2:
-            	mod.setDurationTextShadow(!mod.isDurationTextShadowEnabled());
+            	mod.setShowIcon(!mod.isShowIconEnabled());
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiPotionEffectsDurationTextColor(this));
+            	mod.setDurationTextShadow(!mod.isDurationTextShadowEnabled());
+            	this.initGui();
             	break;
             case 4:
+            	mc.displayGuiScreen(new GuiPotionEffectsDurationTextColor(this));
+            	break;
+            case 5:
             	mod.setShowName(!mod.isShowNameEnabled());
             	this.initGui();
             	break;
-            case 5:
+            case 6:
             	mod.setNameTextShadow(!mod.isNameTextShadowEnabled());
             	this.initGui();
             	break;
-            case 6:
+            case 7:
             	mc.displayGuiScreen(new GuiPotionEffectsNameTextColor(this));
             	break;
         }
@@ -70,11 +75,12 @@ public class GuiPotionEffects extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isBlinkEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(2, mod.isDurationTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
-        this.buttonList.add(new GuiButtonText(3, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, "Duration Text Color"));
-    	this.buttonList.add(new GuiButtonToggled(4, mod.isShowNameEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isNameTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
-        this.buttonList.add(new GuiButtonText(6, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, "Name Text Color"));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isShowIconEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(3, mod.isDurationTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
+        this.buttonList.add(new GuiButtonText(4, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, "Duration Text Color"));
+    	this.buttonList.add(new GuiButtonToggled(5, mod.isShowNameEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(6, mod.isNameTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
+        this.buttonList.add(new GuiButtonText(7, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, "Name Text Color"));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
