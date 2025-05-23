@@ -16,6 +16,7 @@ import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Fullbright;
 import rubik.mods.impl.Keystrokes;
+import rubik.mods.impl.MemoryUsage;
 import rubik.mods.impl.OldAnimations;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
@@ -32,6 +33,7 @@ public class ModInstances {
 	private static PotionEffects potionEffectsMod;
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
+	private static MemoryUsage memoryUsageMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldAnimations oldAnimationsMod = new OldAnimations();
@@ -49,6 +51,7 @@ public class ModInstances {
 		manager.register(potionEffectsMod = new PotionEffects());
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
+		manager.register(memoryUsageMod = new MemoryUsage());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -81,6 +84,10 @@ public class ModInstances {
 	
 	public static ToggleSprintSneak getToggleSprintSneakMod() {
 		return toggleSprintSneakMod;
+	}
+	
+	public static MemoryUsage getMemoryUsageMod() {
+		return memoryUsageMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -122,6 +129,7 @@ public class ModInstances {
 			    getFullbrightMod(),
 			    getFreelookMod(),
 			    getKeystrokesMod(),
+			    getMemoryUsageMod(),
 			    getOldAnimationsMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
