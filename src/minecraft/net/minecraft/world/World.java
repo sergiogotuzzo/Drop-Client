@@ -52,6 +52,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldInfo;
+import rubik.mods.ModInstances;
 
 public abstract class World implements IBlockAccess
 {
@@ -1492,7 +1493,7 @@ public abstract class World implements IBlockAccess
      */
     public float getCelestialAngle(float partialTicks)
     {
-        return this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), partialTicks);
+        return ModInstances.getTimeChangerMod().isEnabled() ? ModInstances.getTimeChangerMod().getTime() : this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), partialTicks);
     }
 
     public int getMoonPhase()

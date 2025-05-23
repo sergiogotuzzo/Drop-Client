@@ -21,6 +21,7 @@ import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import rubik.mods.impl.Scoreboard;
+import rubik.mods.impl.TimeChanger;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -37,6 +38,7 @@ public class ModInstances {
 	private static Scoreboard scoreboardMod = new Scoreboard();
 	private static Chat chatMod = new Chat();
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
+	private static TimeChanger timeChangerMod = new TimeChanger();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -105,6 +107,10 @@ public class ModInstances {
 		return blockOverlayMod;
 	}
 	
+	public static TimeChanger getTimeChangerMod() {
+		return timeChangerMod;
+	}
+	
 	public static Collection<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -120,6 +126,7 @@ public class ModInstances {
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
 			    getScoreboardMod(),
+			    getTimeChangerMod(),
 			    getToggleSprintSneakMod()
 			);
 

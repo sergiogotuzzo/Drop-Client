@@ -121,6 +121,9 @@ public class GuiMods extends GuiDropClientScreen {
 	    		mc.displayGuiScreen(new GuiScoreboard(this));
 	    		break;
 	    	case 114:
+	    		mc.displayGuiScreen(new GuiTimeChanger(this));
+	    		break;
+	    	case 115:
 	    		mc.displayGuiScreen(new GuiToggleSprintSneak(this));
 	    		break;
         }
