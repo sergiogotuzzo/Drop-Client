@@ -51,13 +51,13 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     			this.mc.displayGuiScreen(new GuiMultiplayer(this, true));
     			break;
     		case 3:
-    			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
+    			this.mc.displayGuiScreen(new GuiMods(this));
     			break;
     		case 4:
     			this.mc.displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.getLanguageManager()));
     			break;
     		case 5:
-    			this.mc.displayGuiScreen(new GuiMods(this));
+    			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
     			break;
     		case 6:
     			this.mc.shutdown();
