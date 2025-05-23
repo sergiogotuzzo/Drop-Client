@@ -30,7 +30,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     	this.mc.getTextureManager().bindTexture(backgroundResourceLocation);
     	drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, this.width + 20, this.height + 20, (float)(this.width + 21), (float)(this.height + 20));
     	
-    	drawRect((this.width - 170) / 2, (this.height - 150) / 2, (this.width - 170) / 2 + 170, (this.height - 150) / 2 + 150, new Color(0, 0, 0, 127).getRGB());
+    	drawRect((this.width - 140) / 2, (this.height - 150) / 2, (this.width - 140) / 2 + 140, (this.height - 150) / 2 + 150, new Color(0, 0, 0, 127).getRGB());
     	
         this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0xFFFFFF);
         this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0xFFFFFF);
@@ -69,8 +69,8 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     public void initGui() {
 		Client.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
 				
-		this.buttonList.add(new GuiButton(1, this.width / 2 - 150 / 2, this.height / 2 + 24, 150, 20, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 150 / 2, this.height / 2 + 24 * 2, 150, 20, I18n.format("menu.multiplayer", new Object[0])));
+		this.buttonList.add(new GuiButton(1, this.width / 2 - 120 / 2, this.height / 2 + 24, 120, 20, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 120 / 2, this.height / 2 + 24 * 2, 120, 20, I18n.format("menu.multiplayer", new Object[0])));
         
         this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("rubik/icon.png"), this.width / 2 - 2 * 3 - 40, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
         this.buttonList.add(new GuiButtonLanguage(4, this.width / 2 - 2 - 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
