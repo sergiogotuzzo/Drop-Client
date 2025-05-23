@@ -31,33 +31,22 @@ public class ScreenChatOptions extends GuiDropClientScreen
     {
         int i = 0;
         this.field_146401_i = I18n.format("options.chat.title", new Object[0]);
-        
-        int k = -6;
 
         for (GameSettings.Options gamesettings$options : field_146399_a)
         {
             if (gamesettings$options.getEnumFloat())
             {
-                this.buttonList.add(new GuiOptionSlider(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1) + k, gamesettings$options));
+                this.buttonList.add(new GuiOptionSlider(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), gamesettings$options));
             }
             else
             {
-                this.buttonList.add(new GuiOptionButton(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1) + k, gamesettings$options, this.game_settings.getKeyBinding(gamesettings$options)));
+                this.buttonList.add(new GuiOptionButton(gamesettings$options.returnEnumOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), gamesettings$options, this.game_settings.getKeyBinding(gamesettings$options)));
             }
 
             ++i;
         }
-        
-        this.buttonList.add(new GuiButton(43, this.width / 2 - 155, this.height / 6 + 120 + k, 150, 20, "Text Shadow: " + (chatMod.isTextShadowEnabled() ? "ON" : "OFF")));
-        this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(44, this.width / 2 - 155 + 160, this.height / 6 + 120 + k, 150, 20, "Background Opacity", 0, 127, chatMod.getBackgroundOpacity()));
-        this.buttonList.add(new GuiButton(45, this.width / 2 - 155, this.height / 6 + 144 + k, 150, 20, "Chat Height Fix: " + (chatMod.isChatHeightFixEnabled() ? "ON" : "OFF")));
 
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
-    }
-    
-    @Override
-    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	chatMod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
     }
 
     /**
@@ -71,20 +60,6 @@ public class ScreenChatOptions extends GuiDropClientScreen
             {
                 this.game_settings.setOptionValue(((GuiOptionButton)button).returnEnumOptions(), 1);
                 button.displayString = this.game_settings.getKeyBinding(GameSettings.Options.getEnumOptions(button.id));
-            }
-            
-            if (button.id == 43) {
-            	chatMod.setTextShadow(!chatMod.isTextShadowEnabled());
-            	button.displayString = "Text Shadow: " + (chatMod.isTextShadowEnabled() ? "ON" : "OFF");
-            }
-            
-            if (button.id == 44) {
-            	chatMod.setBackgroundOpacity((int) (sliderBackgroundOpacity.func_175217_d() * 127.0F));
-            }
-            
-            if (button.id == 45) {
-            	chatMod.setChatHeightFix(!chatMod.isChatHeightFixEnabled());
-            	button.displayString = "Chat Height Fix: " + (chatMod.isChatHeightFixEnabled() ? "ON" : "OFF");
             }
 
             if (button.id == 200)

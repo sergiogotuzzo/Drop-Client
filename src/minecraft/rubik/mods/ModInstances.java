@@ -109,6 +109,7 @@ public class ModInstances {
 		return Arrays.asList(
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
+			    getChatMod(),
 			    getCoordinatesDisplayMod(),
 			    getCPSDisplayMod(),
 			    getFPSDisplayMod(),
@@ -118,6 +119,7 @@ public class ModInstances {
 			    getOldAnimationsMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
+			    getScoreboardMod(),
 			    getToggleSprintSneakMod()
 			);
 
