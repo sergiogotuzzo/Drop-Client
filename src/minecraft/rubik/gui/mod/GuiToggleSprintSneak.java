@@ -9,6 +9,7 @@ import net.minecraft.client.resources.I18n;
 import rubik.Client;
 import rubik.gui.GuiButtonToggled;
 import rubik.gui.GuiDropClientScreen;
+import rubik.gui.GuiRect;
 import rubik.gui.GuiSlider;
 import rubik.gui.GuiText;
 import rubik.mods.ModInstances;
@@ -38,6 +39,7 @@ public class GuiToggleSprintSneak extends GuiDropClientScreen {
         this.drawText(String.format("%.1f", mod.getFlyBoostFactor()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.1f", mod.getFlyBoostFactor())) - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
         this.drawText("Show Text", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
+        this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -100,7 +102,7 @@ public class GuiToggleSprintSneak extends GuiDropClientScreen {
     	this.buttonList.add(sliderFlyBoostFactor = new GuiSlider(4, (this.width - 300) / 2 + 130, (this.height - 200) / 2 + 30 + 15 * 3 + 15 + 1, 100, 5, 0, 8, mod.getFlyBoostFactor()));
     	this.buttonList.add(new GuiButtonToggled(5, mod.isShowTextEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(6, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
-        this.buttonList.add(new GuiText(7, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, "Text Color"));
+        this.buttonList.add(new GuiRect(7, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2 * 2, mod.getTextColor().getRGB()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

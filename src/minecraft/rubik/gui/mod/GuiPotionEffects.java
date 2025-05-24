@@ -10,6 +10,7 @@ import rubik.Client;
 import rubik.events.EventTarget;
 import rubik.gui.GuiButtonToggled;
 import rubik.gui.GuiDropClientScreen;
+import rubik.gui.GuiRect;
 import rubik.gui.GuiText;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.PotionEffects;
@@ -32,8 +33,10 @@ public class GuiPotionEffects extends GuiDropClientScreen {
         this.drawText("Blink", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText("Show Icon", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Duration Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Duration Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
         this.drawText("Show Name", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
         this.drawText("Name Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
+        this.drawText("Name Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -80,10 +83,10 @@ public class GuiPotionEffects extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(1, mod.isBlinkEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(2, mod.isShowIconEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isDurationTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
-        this.buttonList.add(new GuiText(4, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, "Duration Text Color"));
+        this.buttonList.add(new GuiRect(4, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2 * 2, mod.getDurationTextColor().getRGB()));
     	this.buttonList.add(new GuiButtonToggled(5, mod.isShowNameEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(6, mod.isNameTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
-        this.buttonList.add(new GuiText(7, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, "Name Text Color"));
+        this.buttonList.add(new GuiRect(7, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2 * 2, mod.getNameTextColor().getRGB()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

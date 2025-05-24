@@ -10,6 +10,7 @@ import rubik.Client;
 import rubik.events.EventTarget;
 import rubik.gui.GuiButtonToggled;
 import rubik.gui.GuiDropClientScreen;
+import rubik.gui.GuiRect;
 import rubik.gui.GuiText;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.PingDisplay;
@@ -32,6 +33,7 @@ public class GuiPingDisplay extends GuiDropClientScreen {
         this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText("Dynamic Colors", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -67,7 +69,7 @@ public class GuiPingDisplay extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(1, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(2, mod.isDynamicColorsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
-        this.buttonList.add(new GuiText(4, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, "Text Color"));
+        this.buttonList.add(new GuiRect(4, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2 * 2, mod.getTextColor().getRGB()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
