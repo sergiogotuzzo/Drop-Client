@@ -5,7 +5,6 @@ import net.minecraft.client.gui.FontRenderer;
 import rubik.Client;
 import rubik.FileManager;
 import rubik.events.EventManager;
-import rubik.gui.hud.ScreenPosition;
 
 public abstract class Mod {
 	private boolean enabled = true;

@@ -6,8 +6,8 @@ import rubik.events.EventManager;
 import rubik.events.EventTarget;
 import rubik.events.impl.RenderEvent;
 import rubik.events.impl.TickEvent;
-import rubik.gui.GuiModPositioning;
-import rubik.gui.hud.HUDManager;
+import rubik.gui.mod.GuiModPositioning;
+import rubik.gui.mod.hud.HUDManager;
 import rubik.mods.ModInstances;
 import rubik.mods.impl.Fullbright;
 

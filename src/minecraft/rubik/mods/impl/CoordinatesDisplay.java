@@ -5,7 +5,7 @@ import java.awt.Color;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import rubik.ColorManager;
-import rubik.gui.hud.ScreenPosition;
+import rubik.gui.mod.hud.ScreenPosition;
 import rubik.mods.ModDraggableText;
 
 public class CoordinatesDisplay extends ModDraggableText {

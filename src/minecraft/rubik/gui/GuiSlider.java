@@ -1,44 +1,50 @@
 package rubik.gui;
 
-import java.text.DecimalFormat;
+import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 
-public class GuiSlider extends GuiButton
-{
-    private float sliderPosition = 1.0F;
+public class GuiSlider extends GuiButton {
     public boolean isMouseDown;
-    private String name;
-    private final float min;
-    private final float max;
+	private final float min;
+	private final float max;
+	private float sliderPosition;
+	
+	public GuiSlider(int buttonId, int x, int y, int widthIn, int heightIn, float min, float max, float defaultValue) {
+		super(buttonId, x, y, widthIn, heightIn, "");
+		
+		this.min = min;
+		this.max = max;
+		this.sliderPosition = (defaultValue - min) / (max - min);
+	}
 
-    public GuiSlider(int idIn, int x, int y, int width, int height, String name, float min, float max, float defaultValue)
-    {
-        super(idIn, x, y, width, height, name);
-        
-        this.name = name;
-        this.min = min;
-        this.max = max;
-        this.sliderPosition = (defaultValue - min) / (max - min);
-        this.displayString = this.getDisplayString();
+	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+        if (this.visible) {
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+            this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+
+            GlStateManager.enableBlend();
+            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+            GlStateManager.blendFunc(770, 771);
+
+            this.mouseDragged(mc, mouseX, mouseY);
+            
+            drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, this.hovered ? 50 : 100).getRGB());
+        	drawRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 5)), this.yPosition, this.xPosition + (int)(this.sliderPosition * (float)(this.width - 5)) + 5, this.yPosition + this.height, new Color(255, 255, 255, this.hovered ? 110 : 100).getRGB());
+        }
     }
-    
-    @Override
-    protected int getHoverState(boolean mouseOver)
-    {
-        return 0;
-    }
-    
-    @Override
+	
+	@Override
     protected void mouseDragged(Minecraft mc, int mouseX, int mouseY)
     {
         if (this.visible) {
             if (this.isMouseDown) {
-                this.sliderPosition = (float)(mouseX - (this.xPosition + 4)) / (float)(this.width - 8);
-
+            	this.sliderPosition = (float)(mouseX - (this.xPosition)) / (float)(this.width - 5);
+                
                 if (this.sliderPosition < 0.0F) {
                     this.sliderPosition = 0.0F;
                 }
@@ -46,14 +52,9 @@ public class GuiSlider extends GuiButton
                 if (this.sliderPosition > 1.0F) {
                     this.sliderPosition = 1.0F;
                 }
-
-                this.displayString = this.getDisplayString();
             }
 
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            
-            this.drawTexturedModalRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 8)), this.yPosition, 0, 66, 4, 20);
-            this.drawTexturedModalRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 8)) + 4, this.yPosition, 196, 66, 4, 20);
         }
     }
     
@@ -65,7 +66,7 @@ public class GuiSlider extends GuiButton
     @Override
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
         if (super.mousePressed(mc, mouseX, mouseY)) {
-            this.sliderPosition = (float)(mouseX - (this.xPosition + 4)) / (float)(this.width - 8);
+            this.sliderPosition = (float)(mouseX - (this.xPosition)) / (float)(this.width - 5);
 
             if (this.sliderPosition < 0.0F) {
                 this.sliderPosition = 0.0F;
@@ -75,7 +76,6 @@ public class GuiSlider extends GuiButton
                 this.sliderPosition = 1.0F;
             }
 
-            this.displayString = this.getDisplayString();
             this.isMouseDown = true;
             
             return true;
@@ -83,28 +83,12 @@ public class GuiSlider extends GuiButton
             return false;
         }
     }
-
-    public float func_175220_c() {
-        return this.min + (this.max - this.min) * this.sliderPosition;
+    
+    public void setSliderPosition(float position) {
+    	this.sliderPosition = position;
     }
-
-    public void func_175218_a(float p_175218_1_) {
-        this.sliderPosition = (p_175218_1_ - this.min) / (this.max - this.min);
-        this.displayString = this.getDisplayString();
-    }
-
-    public float func_175217_d() {
-        return this.sliderPosition;
-    }
-
-    private String getDisplayString() {
-        int value = Math.round(func_175220_c());
-
-        return I18n.format(this.name, new Object[0]) + ": " + value;
-    }
-
-    public void func_175219_a(float p_175219_1_) {
-        this.sliderPosition = p_175219_1_;
-        this.displayString = this.getDisplayString();
-    }
+	
+	public float getSliderPosition() {
+		return sliderPosition;
+	}
 }

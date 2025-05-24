@@ -3,10 +3,7 @@ package rubik.mods;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.minecraft.client.Minecraft;
-import rubik.FileManager;
-import rubik.gui.hud.HUDManager;
-import rubik.gui.hud.ScreenPosition;
+import rubik.gui.mod.hud.HUDManager;
 import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.BlockOverlay;
 import rubik.mods.impl.CPSDisplay;

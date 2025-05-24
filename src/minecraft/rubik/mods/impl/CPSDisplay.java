@@ -8,7 +8,7 @@ import org.lwjgl.input.Mouse;
 
 import net.minecraft.util.EnumChatFormatting;
 import rubik.ColorManager;
-import rubik.gui.hud.ScreenPosition;
+import rubik.gui.mod.hud.ScreenPosition;
 import rubik.mods.ModDraggableText;
 
 public class CPSDisplay extends ModDraggableText {

@@ -3,7 +3,7 @@ package rubik.mods.impl;
 import java.awt.Color;
 
 import rubik.ColorManager;
-import rubik.gui.hud.ScreenPosition;
+import rubik.gui.mod.hud.ScreenPosition;
 import rubik.mods.ModDraggableText;
 
 public class FPSDisplay extends ModDraggableText {

@@ -11,7 +11,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import rubik.ColorManager;
-import rubik.gui.hud.ScreenPosition;
+import rubik.gui.mod.hud.ScreenPosition;
 import rubik.mods.ModDraggable;
 
 public class Keystrokes extends ModDraggable {

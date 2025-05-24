@@ -3,7 +3,7 @@ package rubik.mods.impl.togglesprintsneak;
 import java.awt.Color;
 
 import rubik.ColorManager;
-import rubik.gui.hud.ScreenPosition;
+import rubik.gui.mod.hud.ScreenPosition;
 import rubik.mods.ModDraggableText;
 
 public class ToggleSprintSneak extends ModDraggableText {

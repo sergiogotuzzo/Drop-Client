@@ -16,8 +16,7 @@ import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import rubik.Client;
-import rubik.gui.GuiMods;
-import rubik.gui.hud.IRenderer;
+import rubik.gui.mod.GuiMods;
 
 public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 {

@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import rubik.Client;
 import rubik.gui.GuiDropClientMainMenu;
 import rubik.gui.GuiDropClientScreen;
-import rubik.gui.GuiMods;
+import rubik.gui.mod.GuiMods;
 
 public class GuiIngameMenu extends GuiDropClientScreen
 {
