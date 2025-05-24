@@ -20,6 +20,7 @@ import org.lwjgl.util.glu.Project;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
+import drop.Client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -39,7 +40,6 @@ import net.minecraft.world.storage.WorldInfo;
 import net.optifine.CustomPanorama;
 import net.optifine.CustomPanoramaProperties;
 import net.optifine.reflect.Reflector;
-import rubik.Client;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 {

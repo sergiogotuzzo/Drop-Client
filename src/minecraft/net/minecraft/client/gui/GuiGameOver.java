@@ -5,7 +5,7 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
-import rubik.gui.GuiDropClientMainMenu;
+import drop.gui.GuiDropClientMainMenu;
 
 public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
 {

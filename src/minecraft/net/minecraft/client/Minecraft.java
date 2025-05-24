@@ -56,6 +56,7 @@ import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 
+import drop.Client;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -187,11 +188,10 @@ import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
-import rubik.Client;
-import rubik.events.impl.KeyEvent;
-import rubik.events.impl.TickEvent;
-import rubik.gui.GuiDropClientMainMenu;
-import rubik.mods.impl.togglesprintsneak.RubikClientMovementInput;
+import drop.events.impl.KeyEvent;
+import drop.events.impl.TickEvent;
+import drop.gui.GuiDropClientMainMenu;
+import drop.mods.impl.togglesprintsneak.RubikClientMovementInput;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {

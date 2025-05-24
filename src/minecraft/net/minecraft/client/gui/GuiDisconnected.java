@@ -3,10 +3,10 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 import java.util.List;
 
+import drop.Client;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;
-import rubik.Client;
 
 public class GuiDisconnected extends GuiScreen
 {

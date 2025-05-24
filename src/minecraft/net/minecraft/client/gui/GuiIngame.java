@@ -4,6 +4,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import drop.ColorManager;
+
 import java.awt.Color;
 import java.util.Collection;
 import java.util.List;
@@ -46,9 +48,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
-import rubik.ColorManager;
-import rubik.events.impl.RenderEvent;
-import rubik.mods.ModInstances;
+import drop.events.impl.RenderEvent;
+import drop.mods.ModInstances;
 
 public class GuiIngame extends Gui
 {

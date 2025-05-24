@@ -19,8 +19,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldSettings;
-import rubik.mods.ModInstances;
-import rubik.mods.impl.TabOverlay;
+import drop.mods.ModInstances;
+import drop.mods.impl.TabOverlay;
 
 public class GuiPlayerTabOverlay extends Gui
 {

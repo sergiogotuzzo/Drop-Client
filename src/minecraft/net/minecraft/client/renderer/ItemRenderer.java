@@ -30,7 +30,7 @@ import net.minecraft.world.storage.MapData;
 import net.optifine.DynamicLights;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
-import rubik.mods.ModInstances;
+import drop.mods.ModInstances;
 
 import org.lwjgl.opengl.GL11;
 

@@ -2,6 +2,8 @@
 
 import com.google.common.collect.Lists;
 
+import drop.ColorManager;
+
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
@@ -11,10 +13,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
-import rubik.ColorManager;
-import rubik.mods.Mod;
-import rubik.mods.ModInstances;
-import rubik.mods.impl.Chat;
+import drop.mods.Mod;
+import drop.mods.ModInstances;
+import drop.mods.impl.Chat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

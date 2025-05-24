@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.lwjgl.opengl.GL11;
 
+import drop.Client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
@@ -11,10 +12,9 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
-import rubik.Client;
-import rubik.gui.GuiDropClientMainMenu;
-import rubik.gui.GuiDropClientScreen;
-import rubik.gui.mod.GuiMods;
+import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiMods;
 
 public class GuiIngameMenu extends GuiDropClientScreen
 {
@@ -131,7 +131,7 @@ public class GuiIngameMenu extends GuiDropClientScreen
         super.drawScreen(mouseX, mouseY, partialTicks);
         
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(new ResourceLocation("rubik/icon.png"));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation("drop/icon.png"));
         Gui.drawModalRectWithCustomSizedTexture(this.width / 2 - 20, this.height / 4 - 40, 0.0f, 0.0f, 40, 40, (float)(40), (float)(40));
     }
 }

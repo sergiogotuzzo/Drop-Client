@@ -1,6 +1,9 @@
 package net.minecraft.client.gui.inventory;
 
 import com.google.common.collect.Sets;
+
+import drop.Client;
+
 import java.io.IOException;
 import java.util.Set;
 import net.minecraft.client.Minecraft;
@@ -17,8 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import rubik.Client;
-import rubik.gui.GuiDropClientScreen;
+import drop.gui.GuiDropClientScreen;
 
 import org.lwjgl.input.Keyboard;
 

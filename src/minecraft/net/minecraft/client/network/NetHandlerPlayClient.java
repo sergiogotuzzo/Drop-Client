@@ -209,7 +209,7 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
-import rubik.gui.GuiDropClientMainMenu;
+import drop.gui.GuiDropClientMainMenu;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

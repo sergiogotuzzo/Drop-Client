@@ -3,10 +3,10 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import rubik.gui.GuiDropClientScreen;
-import rubik.gui.GuiSlider;
-import rubik.mods.ModInstances;
-import rubik.mods.impl.Chat;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiSlider;
+import drop.mods.ModInstances;
+import drop.mods.impl.Chat;
 
 public class ScreenChatOptions extends GuiDropClientScreen
 {

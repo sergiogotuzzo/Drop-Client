@@ -87,9 +87,9 @@ import net.optifine.shaders.ShadersRender;
 import net.optifine.util.MemoryMonitor;
 import net.optifine.util.TextureUtils;
 import net.optifine.util.TimedEvent;
-import rubik.gui.GuiDropClientMainMenu;
-import rubik.mods.ModInstances;
-import rubik.mods.impl.Fullbright;
+import drop.gui.GuiDropClientMainMenu;
+import drop.mods.ModInstances;
+import drop.mods.impl.Fullbright;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

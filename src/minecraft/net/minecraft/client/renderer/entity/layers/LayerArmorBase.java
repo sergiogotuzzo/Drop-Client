@@ -16,7 +16,7 @@ import net.optifine.reflect.Reflector;
 import net.optifine.reflect.ReflectorForge;
 import net.optifine.shaders.Shaders;
 import net.optifine.shaders.ShadersRender;
-import rubik.mods.ModInstances;
+import drop.mods.ModInstances;
 
 public abstract class LayerArmorBase<T extends ModelBase> implements LayerRenderer<EntityLivingBase>
 {

@@ -51,7 +51,7 @@ import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
-import rubik.mods.impl.togglesprintsneak.RubikClientMovementInput;
+import drop.mods.impl.togglesprintsneak.RubikClientMovementInput;
 
 public class EntityPlayerSP extends AbstractClientPlayer
 {

@@ -14,7 +14,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
-import rubik.gui.GuiDropClientScreen;
+import drop.gui.GuiDropClientScreen;
 
 public class GuiOptions extends GuiDropClientScreen implements GuiYesNoCallback
 {

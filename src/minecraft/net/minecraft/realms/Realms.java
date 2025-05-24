@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.Session;
 import net.minecraft.world.WorldSettings;
-import rubik.gui.GuiDropClientMainMenu;
+import drop.gui.GuiDropClientMainMenu;
 
 public class Realms
 {
