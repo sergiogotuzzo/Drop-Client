@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileManager {
-	private static final File rootDir = new File("rubik");
+	private static final File rootDir = new File("drop");
     private static final File modsFile = new File(rootDir, "mods.json");
         
     public static void init() {
