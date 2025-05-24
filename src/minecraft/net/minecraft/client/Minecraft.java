@@ -191,7 +191,7 @@ import net.minecraft.world.storage.WorldInfo;
 import drop.events.impl.KeyEvent;
 import drop.events.impl.TickEvent;
 import drop.gui.GuiDropClientMainMenu;
-import drop.mods.impl.togglesprintsneak.RubikClientMovementInput;
+import drop.mods.impl.togglesprintsneak.DropClientMovementInput;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {
@@ -2439,7 +2439,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
             this.thePlayer.preparePlayerToSpawn();
             worldClientIn.spawnEntityInWorld(this.thePlayer);
-            this.thePlayer.movementInput = new RubikClientMovementInput(this.gameSettings);
+            this.thePlayer.movementInput = new DropClientMovementInput(this.gameSettings);
             this.playerController.setPlayerCapabilities(this.thePlayer);
             this.renderViewEntity = this.thePlayer;
         }
@@ -2477,7 +2477,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.thePlayer.setClientBrand(s);
         this.theWorld.spawnEntityInWorld(this.thePlayer);
         this.playerController.flipPlayer(this.thePlayer);
-        this.thePlayer.movementInput = new RubikClientMovementInput(this.gameSettings);
+        this.thePlayer.movementInput = new DropClientMovementInput(this.gameSettings);
         this.thePlayer.setEntityId(i);
         this.playerController.setPlayerCapabilities(this.thePlayer);
         this.thePlayer.setReducedDebug(entityplayersp.hasReducedDebug());

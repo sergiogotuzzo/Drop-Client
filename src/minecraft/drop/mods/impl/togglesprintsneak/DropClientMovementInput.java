@@ -9,7 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.MovementInput;
 import drop.mods.ModInstances;
 
-public class RubikClientMovementInput extends MovementInput {
+public class DropClientMovementInput extends MovementInput {
 	private boolean sprint = false;
 	private GameSettings gameSettings;
 	private int sneakWasPressed = 0;
@@ -23,7 +23,7 @@ public class RubikClientMovementInput extends MovementInput {
 	
 	private ToggleSprintSneak toggleSprintSneakMod = ModInstances.getToggleSprintSneakMod();
 	
-	public RubikClientMovementInput(GameSettings gameSettings) {
+	public DropClientMovementInput(GameSettings gameSettings) {
 		this.gameSettings = gameSettings;
 		this.mc = Minecraft.getMinecraft();
 		this.sprint = toggleSprintSneakMod.isSprinting();
