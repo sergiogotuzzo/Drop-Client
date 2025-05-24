@@ -287,10 +287,10 @@ public class GameSettings
     public KeyBinding ofKeyBindZoom;
     private File optionsFileOF;
     
-    /** Rubik Client keybindings */
-    public KeyBinding keyBindModPositioning = new KeyBinding("Mod Positioning", Keyboard.KEY_RSHIFT, "Rubik Client");
-    public KeyBinding keyBindFreelook = new KeyBinding("Freelook", Keyboard.KEY_F, "Rubik Client");
-    public KeyBinding keyBindFullbright = new KeyBinding("Fullbright", Keyboard.KEY_L, "Rubik Client");
+    /** Drop Client keybindings */
+    public KeyBinding keyBindModPositioning = new KeyBinding("Mod Positioning", Keyboard.KEY_RSHIFT, "Drop Client");
+    public KeyBinding keyBindFreelook = new KeyBinding("Freelook", Keyboard.KEY_F, "Drop Client");
+    public KeyBinding keyBindFullbright = new KeyBinding("Fullbright", Keyboard.KEY_L, "Drop Client");
     
     public GameSettings(Minecraft mcIn, File optionsFileIn)
     {
