@@ -29,7 +29,7 @@ public class ToggleSprintSneak extends ModDraggableText {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth("[Walking]");
+		return font.getStringWidth("[Sprinting (Toggled)]");
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class ToggleSprintSneak extends ModDraggableText {
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (showText) {
-			textToRender = "[Walking]";
+			textToRender = "[Sprinting (Toggled)]";
 
 			drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
 		}
