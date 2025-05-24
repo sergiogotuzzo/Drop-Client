@@ -20,13 +20,9 @@ import drop.gui.mod.GuiMods;
 
 public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 {
-	private ResourceLocation backgroundResourceLocation = new ResourceLocation("drop/background.png");
-    private ResourceLocation iconResourceLocation = new ResourceLocation("drop/icon.png");
-    private int iconSide = 84;
-
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.mc.getTextureManager().bindTexture(backgroundResourceLocation);
+    	this.mc.getTextureManager().bindTexture(new ResourceLocation("drop/background.png"));
     	drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, this.width + 20, this.height + 20, (float)(this.width + 21), (float)(this.height + 20));
     	
     	drawRect((this.width - 140) / 2, (this.height - 150) / 2, (this.width - 140) / 2 + 140, (this.height - 150) / 2 + 150, new Color(0, 0, 0, 127).getRGB());
@@ -34,8 +30,8 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
         this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0xFFFFFF);
         this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0xFFFFFF);
         
-        this.mc.getTextureManager().bindTexture(iconResourceLocation);
-        this.drawModalRectWithCustomSizedTexture(this.width / 2 - iconSide / 2, this.height / 2 - iconSide + 12, 0.0f, 0.0f, iconSide, iconSide, (float)(iconSide), (float)(iconSide));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation("drop/icon.png"));
+        this.drawModalRectWithCustomSizedTexture(this.width / 2 - 84 / 2, this.height / 2 - 84 + 12, 0.0f, 0.0f, 84, 84, (float)(84), (float)(84));
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
