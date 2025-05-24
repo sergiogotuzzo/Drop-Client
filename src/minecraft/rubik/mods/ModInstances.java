@@ -6,6 +6,7 @@ import java.util.Collection;
 import rubik.gui.mod.hud.HUDManager;
 import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.BlockOverlay;
+import rubik.mods.impl.Bossbar;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.Chat;
 import rubik.mods.impl.Clock;
@@ -44,6 +45,7 @@ public class ModInstances {
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
 	private static TimeChanger timeChangerMod = new TimeChanger();
 	private static TabOverlay tabOverlayMod = new TabOverlay();
+	private static Bossbar bossbarMod = new Bossbar();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -135,10 +137,15 @@ public class ModInstances {
 		return tabOverlayMod;
 	}
 	
+	public static Bossbar getBossbarMod() {
+		return bossbarMod;
+	}
+	
 	public static Collection<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
+			    getBossbarMod(),
 			    getChatMod(),
 			    getClockMod(),
 			    getCoordinatesDisplayMod(),
