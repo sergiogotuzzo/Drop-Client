@@ -1195,7 +1195,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     
                     final Fullbright fullbrightMod = ModInstances.getFullbrightMod();
 
-                    float f16 = fullbrightMod.isEnabled() && fullbrightMod.isToggled() ? Fullbright.getFullbrightGamma() : this.mc.gameSettings.gammaSetting;
+                    float f16 = fullbrightMod.isEnabled() ? Fullbright.getFullbrightGamma() : this.mc.gameSettings.gammaSetting;
                     float f17 = 1.0F - f8;
                     float f13 = 1.0F - f9;
                     float f14 = 1.0F - f10;

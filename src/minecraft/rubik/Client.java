@@ -46,6 +46,12 @@ public class Client {
 		if (mc.gameSettings.keyBindModPositioning.isPressed()) {
 			mc.displayGuiScreen(new GuiModPositioning(hudManager));
 		}
+		
+		if (mc.gameSettings.keyBindFullbright.isPressed()) {
+			Fullbright mod = ModInstances.getFullbrightMod();
+			
+			mod.setEnabled(!mod.isEnabled());
+		}
 	}
 	
 	public static final Client getInstance() {
