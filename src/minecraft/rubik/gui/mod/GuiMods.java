@@ -18,6 +18,8 @@ import rubik.gui.GuiDropClientScreen;
 import rubik.gui.GuiText;
 import rubik.mods.Mod;
 import rubik.mods.ModInstances;
+import rubik.mods.impl.Bossbar;
+import rubik.mods.impl.Fullbright;
 
 public class GuiMods extends GuiDropClientScreen {
     private final GuiScreen previousScreen;
@@ -158,7 +160,13 @@ public class GuiMods extends GuiDropClientScreen {
             if (buttonY >= (this.height - 200) / 2 + 30 && buttonY <= (this.height - 200) / 2 + 200 - 10) {
                 String modName = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
                 
-                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, modName));
+                boolean hovering = true;
+                
+                if (mod instanceof Bossbar || mod instanceof Fullbright) {
+                	hovering = false;
+                }
+                
+                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, modName, hovering));
                 this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 20 - 15, buttonY - 2 + 15));
             }
 

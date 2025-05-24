@@ -8,11 +8,18 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 
 public class GuiText extends GuiButton {
+	public final boolean hovering;
+	
 	public GuiText(int buttonId, int x, int y, String text) {
+		this(buttonId, x, y, text, true);
+	}
+	
+	public GuiText(int buttonId, int x, int y, String text, boolean hovering) {
 		super(buttonId, x, y, 0, 0, text);
 		
 		this.width = Minecraft.getMinecraft().fontRendererObj.getStringWidth(text);
 		this.height = Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT;
+		this.hovering = hovering;
 	}
 
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
@@ -30,7 +37,7 @@ public class GuiText extends GuiButton {
                                
             int textColor = -1;
             
-        	if (this.hovered) {
+        	if (this.hovering && this.hovered) {
         		textColor = 16777120;
         	}
         	
