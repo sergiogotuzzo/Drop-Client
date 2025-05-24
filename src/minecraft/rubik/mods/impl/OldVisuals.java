@@ -3,7 +3,7 @@ package rubik.mods.impl;
 import net.minecraft.entity.Entity;
 import rubik.mods.Mod;
 
-public class OldAnimations extends Mod {
+public class OldVisuals extends Mod {
 	private static long sneak = 0L;
     private static boolean is = false;
     private static int value = 0;
@@ -14,7 +14,7 @@ public class OldAnimations extends Mod {
 	private boolean oldSneaking = true;
 	private boolean armorHitAnimation = true;
 	
-	public OldAnimations() {
+	public OldVisuals() {
 		setOldFishingRod((boolean) getFromFile("showBackground", oldFishingRod));
 		setOldBow((boolean) getFromFile("textShadow", oldBow));
 		setBlockHit((boolean) getFromFile("blockHit", blockHit));

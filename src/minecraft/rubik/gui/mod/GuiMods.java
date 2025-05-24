@@ -115,7 +115,7 @@ public class GuiMods extends GuiDropClientScreen {
 	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
 	    		break;
 	    	case 111:
-	    		mc.displayGuiScreen(new GuiOldAnimations(this));
+	    		mc.displayGuiScreen(new GuiOldVisuals(this));
 	    		break;
 	    	case 112:
 	    		mc.displayGuiScreen(new GuiPingDisplay(this));

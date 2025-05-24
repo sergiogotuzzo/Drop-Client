@@ -11,13 +11,13 @@ import rubik.events.EventTarget;
 import rubik.gui.GuiButtonToggled;
 import rubik.gui.GuiDropClientScreen;
 import rubik.mods.ModInstances;
-import rubik.mods.impl.OldAnimations;
+import rubik.mods.impl.OldVisuals;
 
-public class GuiOldAnimations extends GuiDropClientScreen {
+public class GuiOldVisuals extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final OldAnimations mod = ModInstances.getOldAnimationsMod();
+	private final OldVisuals mod = ModInstances.getOldAnimationsMod();
 	
-	public GuiOldAnimations(GuiScreen previousGuiScreen) {
+	public GuiOldVisuals(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
 	}
 
@@ -27,7 +27,7 @@ public class GuiOldAnimations extends GuiDropClientScreen {
     	
     	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
-        this.drawScaledText("Old Animations", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+        this.drawScaledText("Old Visuals", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Old Fishing Rod", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText("Old Rod", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Block Hit", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);

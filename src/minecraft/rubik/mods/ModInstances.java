@@ -14,7 +14,7 @@ import rubik.mods.impl.Freelook;
 import rubik.mods.impl.Fullbright;
 import rubik.mods.impl.Keystrokes;
 import rubik.mods.impl.MemoryUsage;
-import rubik.mods.impl.OldAnimations;
+import rubik.mods.impl.OldVisuals;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
@@ -33,7 +33,7 @@ public class ModInstances {
 	private static MemoryUsage memoryUsageMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
-	private static OldAnimations oldAnimationsMod = new OldAnimations();
+	private static OldVisuals oldAnimationsMod = new OldVisuals();
 	private static Scoreboard scoreboardMod = new Scoreboard();
 	private static Chat chatMod = new Chat();
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
@@ -95,7 +95,7 @@ public class ModInstances {
 		return fullbrightMod;
 	}
 	
-	public static OldAnimations getOldAnimationsMod() {
+	public static OldVisuals getOldAnimationsMod() {
 		return oldAnimationsMod;
 	}
 	
