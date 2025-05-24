@@ -17,6 +17,7 @@ import rubik.mods.impl.MemoryUsage;
 import rubik.mods.impl.OldVisuals;
 import rubik.mods.impl.PingDisplay;
 import rubik.mods.impl.PotionEffects;
+import rubik.mods.impl.PotsCounter;
 import rubik.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import rubik.mods.impl.Scoreboard;
 import rubik.mods.impl.TabOverlay;
@@ -32,6 +33,7 @@ public class ModInstances {
 	private static CoordinatesDisplay coordinatesDisplayMod;
 	private static ToggleSprintSneak toggleSprintSneakMod;
 	private static MemoryUsage memoryUsageMod;
+	private static PotsCounter potsCounterMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldAnimationsMod = new OldVisuals();
@@ -51,6 +53,7 @@ public class ModInstances {
 		manager.register(coordinatesDisplayMod = new CoordinatesDisplay());
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
 		manager.register(memoryUsageMod = new MemoryUsage());
+		manager.register(potsCounterMod = new PotsCounter());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -87,6 +90,10 @@ public class ModInstances {
 	
 	public static MemoryUsage getMemoryUsageMod() {
 		return memoryUsageMod;
+	}
+	
+	public static PotsCounter getPotsCounterMod() {
+		return potsCounterMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -136,6 +143,7 @@ public class ModInstances {
 			    getOldAnimationsMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
+			    getPotsCounterMod(),
 			    getScoreboardMod(),
 			    getTabOverlayMod(),
 			    getTimeChangerMod(),
