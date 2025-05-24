@@ -19,6 +19,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldSettings;
+import rubik.mods.ModInstances;
+import rubik.mods.impl.TabOverlay;
 
 public class GuiPlayerTabOverlay extends Gui
 {
@@ -176,21 +178,25 @@ public class GuiPlayerTabOverlay extends Gui
                 String s1 = this.getPlayerName(networkplayerinfo1);
                 GameProfile gameprofile = networkplayerinfo1.getGameProfile();
 
-                EntityPlayer entityplayer = this.mc.theWorld.getPlayerEntityByUUID(gameprofile.getId());
-                boolean flag1 = entityplayer != null && entityplayer.isWearing(EnumPlayerModelParts.CAPE) && (gameprofile.getName().equals("Dinnerbone") || gameprofile.getName().equals("Grumm"));
-                this.mc.getTextureManager().bindTexture(networkplayerinfo1.getLocationSkin());
-                int l2 = 8 + (flag1 ? 8 : 0);
-                int i3 = 8 * (flag1 ? -1 : 1);
-                Gui.drawScaledCustomSizeModalRect(j2, k2, 8.0F, (float)l2, 8, i3, 8, 8, 64.0F, 64.0F);
+                TabOverlay tabOverlayMod = ModInstances.getTabOverlayMod();
+                
+                if (tabOverlayMod.isEnabled() && tabOverlayMod.isShowPlayerHeadsEnabled()) {
+                	EntityPlayer entityplayer = this.mc.theWorld.getPlayerEntityByUUID(gameprofile.getId());
+                    boolean flag1 = entityplayer != null && entityplayer.isWearing(EnumPlayerModelParts.CAPE) && (gameprofile.getName().equals("Dinnerbone") || gameprofile.getName().equals("Grumm"));
+                    this.mc.getTextureManager().bindTexture(networkplayerinfo1.getLocationSkin());
+                    int l2 = 8 + (flag1 ? 8 : 0);
+                    int i3 = 8 * (flag1 ? -1 : 1);
+                    Gui.drawScaledCustomSizeModalRect(j2, k2, 8.0F, (float)l2, 8, i3, 8, 8, 64.0F, 64.0F);
 
-                if (entityplayer != null && entityplayer.isWearing(EnumPlayerModelParts.HAT))
-                {
-                    int j3 = 8 + (flag1 ? 8 : 0);
-                    int k3 = 8 * (flag1 ? -1 : 1);
-                    Gui.drawScaledCustomSizeModalRect(j2, k2, 40.0F, (float)j3, 8, k3, 8, 8, 64.0F, 64.0F);
+                    if (entityplayer != null && entityplayer.isWearing(EnumPlayerModelParts.HAT))
+                    {
+                        int j3 = 8 + (flag1 ? 8 : 0);
+                        int k3 = 8 * (flag1 ? -1 : 1);
+                        Gui.drawScaledCustomSizeModalRect(j2, k2, 40.0F, (float)j3, 8, k3, 8, 8, 64.0F, 64.0F);
+                    }
+
+                    j2 += 9;
                 }
-
-                j2 += 9;
 
                 if (networkplayerinfo1.getGameType() == WorldSettings.GameType.SPECTATOR)
                 {
