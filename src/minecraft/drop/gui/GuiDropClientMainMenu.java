@@ -22,7 +22,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 {
 	private ResourceLocation backgroundResourceLocation = new ResourceLocation("drop/background.png");
     private ResourceLocation iconResourceLocation = new ResourceLocation("drop/icon.png");
-    private int iconSide = 98;
+    private int iconSide = 84;
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -35,7 +35,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
         this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0xFFFFFF);
         
         this.mc.getTextureManager().bindTexture(iconResourceLocation);
-        this.drawModalRectWithCustomSizedTexture(this.width / 2 - iconSide / 2, this.height / 2 - iconSide + 24, 0.0f, 0.0f, iconSide, iconSide, (float)(iconSide), (float)(iconSide));
+        this.drawModalRectWithCustomSizedTexture(this.width / 2 - iconSide / 2, this.height / 2 - iconSide + 12, 0.0f, 0.0f, iconSide, iconSide, (float)(iconSide), (float)(iconSide));
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -68,8 +68,8 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     public void initGui() {
 		Client.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
 				
-		this.buttonList.add(new GuiButton(1, this.width / 2 - 120 / 2, this.height / 2 + 24, 120, 20, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 120 / 2, this.height / 2 + 24 * 2, 120, 20, I18n.format("menu.multiplayer", new Object[0])));
+		this.buttonList.add(new GuiButton(1, this.width / 2 - 120 / 2, this.height / 2 + 24 - 6, 120, 20, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 120 / 2, this.height / 2 + 24 * 2 - 6, 120, 20, I18n.format("menu.multiplayer", new Object[0])));
         
         this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("drop/icon.png"), this.width / 2 - 2 * 3 - 40, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
         this.buttonList.add(new GuiButtonLanguage(4, this.width / 2 - 2 - 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
