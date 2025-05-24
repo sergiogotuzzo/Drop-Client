@@ -39,7 +39,7 @@ public class ModInstances {
 	private static Clock clockMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
-	private static OldVisuals oldAnimationsMod = new OldVisuals();
+	private static OldVisuals oldVisualsMod = new OldVisuals();
 	private static Scoreboard scoreboardMod = new Scoreboard();
 	private static Chat chatMod = new Chat();
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
@@ -113,8 +113,8 @@ public class ModInstances {
 		return fullbrightMod;
 	}
 	
-	public static OldVisuals getOldAnimationsMod() {
-		return oldAnimationsMod;
+	public static OldVisuals getOldVisualsMod() {
+		return oldVisualsMod;
 	}
 	
 	public static Scoreboard getScoreboardMod() {
@@ -155,7 +155,7 @@ public class ModInstances {
 			    getFreelookMod(),
 			    getKeystrokesMod(),
 			    getMemoryUsageMod(),
-			    getOldAnimationsMod(),
+			    getOldVisualsMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
 			    getPotsCounterMod(),

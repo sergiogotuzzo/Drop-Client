@@ -1,107 +1,57 @@
 package drop.mods.impl;
 
 import net.minecraft.entity.Entity;
+
+import java.awt.Color;
+
+import drop.ColorManager;
 import drop.mods.Mod;
 
 public class OldVisuals extends Mod {
-	private static long sneak = 0L;
-    private static boolean is = false;
-    private static int value = 0;
-    
-	private boolean oldFishingRod = true;
-	private boolean oldBow = true;
-	private boolean blockHit = true;
-	private boolean oldSneaking = true;
+	private boolean fishingRod = true;
+	private boolean bow = true;
+	private boolean blockHitting = true;
 	private boolean armorHitAnimation = true;
-	
+	private ColorManager hitArmorColor = ColorManager.fromColor(Color.RED).setAlpha(76);
+	private boolean hitArmorChroma = false;
+
 	public OldVisuals() {
-		setOldFishingRod((boolean) getFromFile("showBackground", oldFishingRod));
-		setOldBow((boolean) getFromFile("textShadow", oldBow));
-		setBlockHit((boolean) getFromFile("blockHit", blockHit));
-		setOldSneaking((boolean) getFromFile("oldSneaking", oldSneaking));
+		setFishingRod((boolean) getFromFile("fishingRod", fishingRod));
+		setBow((boolean) getFromFile("bow", bow));
+		setBlockHitting((boolean) getFromFile("blockHitting", blockHitting));
 		setArmorHitAnimation((boolean) getFromFile("armorHitAnimation", armorHitAnimation));
+		setHitArmorColor((int) ((long) getFromFile("hitArmorColor", hitArmorColor.getRGB())));
+		setHitArmorChroma((boolean) getFromFile("hitArmorChroma", hitArmorChroma));
 	}
 	
-	public float getCustomEyeHeight(Entity entity)
-    {
-        if (is != entity.isSneaking() || sneak <= 0L)
-        {
-            sneak = System.currentTimeMillis();
-        }
-
-        is = entity.isSneaking();
-        
-        float f = 1.62F;
-
-        if (entity.isSneaking()) {
-            int i = (int) (sneak + 8L - System.currentTimeMillis());
-
-            if (i > -50) {
-                f = (float) (f + i * 0.0017D);
-
-                if (f < 0.0F || f > 10.0F)
-                {
-                    f = 1.54F;
-                }
-            } else {
-                f = (float) (f - 0.08D);
-            }
-        } else {
-            int j = (int) (sneak + 8L - System.currentTimeMillis());
-
-            if (j > -50) {
-                f = (float) (f - j * 0.0017D);
-                f = (float) (f - 0.08D);
-
-                if (f < 0.0F) {
-                    f = 1.62F;
-                }
-            } else {
-                f = f - 0.0F;
-            }
-        }
-
-        return f;
-    }
-	
-	public void setOldFishingRod(boolean enabled) {
-		this.oldFishingRod = enabled;
+	public void setFishingRod(boolean enabled) {
+		this.fishingRod = enabled;
 		
-		setToFile("oldFishingRod", enabled);
+		setToFile("fishingRod", enabled);
 	}
 	
-	public boolean isOldFishingRodEnabled() {
-		return oldFishingRod;
+	public boolean isFishingRodEnabled() {
+		return fishingRod;
 	}
 	
-	public void setOldBow(boolean enabled) {
-		this.oldBow = enabled;
+	public void setBow(boolean enabled) {
+		this.bow = enabled;
 		
-		setToFile("oldBow", enabled);
+		setToFile("bow", enabled);
 	}
 	
-	public boolean isOldBowEnabled() {
-		return oldBow;
+	public boolean isBowEnabled() {
+		return bow;
 	}
 	
-	public void setBlockHit(boolean enabled) {
-		this.blockHit = enabled;
+	public void setBlockHitting(boolean enabled) {
+		this.blockHitting = enabled;
 		
-		setToFile("blockHit", enabled);
+		setToFile("blockHitting", enabled);
 	}
 	
-	public boolean isBlockHitEnabled() {
-		return blockHit;
-	}
-	
-	public void setOldSneaking(boolean enabled) {
-		this.oldSneaking = enabled;
-		
-		setToFile("oldSneaking", enabled);
-	}
-	
-	public boolean isOldSneakingEnabled() {
-		return oldSneaking;
+	public boolean isBlockHittingEnabled() {
+		return blockHitting;
 	}
 	
 	public void setArmorHitAnimation(boolean enabled) {
@@ -112,5 +62,25 @@ public class OldVisuals extends Mod {
 	
 	public boolean isArmorHitAnimationEnabled() {
 		return armorHitAnimation;
+	}
+	
+	public void setHitArmorColor(int rgb) {
+		this.hitArmorColor = ColorManager.fromRGB(rgb);
+		
+		setToFile("hitArmorColor", rgb);
+	}
+	
+	public ColorManager getHitArmorColor() {
+		return hitArmorColor;
+	}
+	
+	public void setHitArmorChroma(boolean enabled) {
+		this.hitArmorChroma = enabled;
+		
+		setToFile("hitArmorChroma", enabled);
+	}
+	
+	public boolean isHitArmorChromaEnabled() {
+		return hitArmorChroma;
 	}
 }

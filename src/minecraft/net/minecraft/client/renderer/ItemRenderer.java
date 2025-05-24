@@ -31,6 +31,7 @@ import net.optifine.DynamicLights;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
 import drop.mods.ModInstances;
+import drop.mods.impl.OldVisuals;
 
 import org.lwjgl.opengl.GL11;
 
@@ -308,19 +309,27 @@ public class ItemRenderer
      */
     private void transformFirstPersonItem(float equipProgress, float swingProgress)
     {
-    	if (ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isOldBowEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
-			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
-		}
+    	OldVisuals oldVisualMod = ModInstances.getOldVisualsMod();
+    	
+    	if (oldVisualMod.isEnabled()) {
+    		if (oldVisualMod.isBowEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+    			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
+    		}
+    		
+    		if (oldVisualMod.isBowEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+    			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
+    		}
 
-		if (ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isOldFishingRodEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
-			GlStateManager.translate(0.08f, -0.027f, -0.33f);
-			GlStateManager.scale(0.93f, 1.0f, 1.0f);
-		}
+    		if (oldVisualMod.isFishingRodEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
+    			GlStateManager.translate(0.08f, -0.027f, -0.33f);
+    			GlStateManager.scale(0.93f, 1.0f, 1.0f);
+    		}
 
-		if (ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isBlockHitEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.isSwingInProgress && this.mc.thePlayer.getCurrentEquippedItem() != null && !this.mc.thePlayer.isEating() && !this.mc.thePlayer.isBlocking()) {
-			GlStateManager.scale(0.85f, 0.85f, 0.85f);
-			GlStateManager.translate(-0.078f, 0.003f, 0.05f);
-		}
+    		if (oldVisualMod.isBlockHittingEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.isSwingInProgress && this.mc.thePlayer.getCurrentEquippedItem() != null && !this.mc.thePlayer.isEating() && !this.mc.thePlayer.isBlocking()) {
+    			GlStateManager.scale(0.85f, 0.85f, 0.85f);
+    			GlStateManager.translate(-0.078f, 0.003f, 0.05f);
+    		}
+    	}
 		
         GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
         GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
@@ -403,26 +412,28 @@ public class ItemRenderer
                 else if (abstractclientplayer.getItemInUseCount() > 0)
                 {
                     EnumAction enumaction = this.itemToRender.getItemUseAction();
+                    
+                    float swingProgress = ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isBlockHittingEnabled() ? f1 : 0.0F;
 
                     switch (enumaction)
                     {
                         case NONE:
-                        	this.transformFirstPersonItem(f, ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isBlockHitEnabled() ? f1 : 0.0F);
+                        	this.transformFirstPersonItem(f, swingProgress);
                             break;
 
                         case EAT:
                         case DRINK:
                             this.performDrinking(abstractclientplayer, partialTicks);
-                            this.transformFirstPersonItem(f, ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isBlockHitEnabled() ? f1 : 0.0F);
+                            this.transformFirstPersonItem(f, swingProgress);
                             break;
 
                         case BLOCK:
-                        	this.transformFirstPersonItem(f, ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isBlockHitEnabled() ? f1 : 0.0F);
+                        	this.transformFirstPersonItem(f, swingProgress);
                             this.doBlockTransformations();
                             break;
 
                         case BOW:
-                        	this.transformFirstPersonItem(f, ModInstances.getOldAnimationsMod().isEnabled() && ModInstances.getOldAnimationsMod().isBlockHitEnabled() ? f1 : 0.0F);
+                        	this.transformFirstPersonItem(f, swingProgress);
                             this.doBowTransformations(partialTicks, abstractclientplayer);
                     }
                 }

@@ -413,7 +413,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         Entity entity = this.mc.getRenderViewEntity();
         double d2 = entity.posX;
-        double d0 = entity.posY + (double)(double)(ModInstances.getOldAnimationsMod().isOldSneakingEnabled() ? ModInstances.getOldAnimationsMod().getCustomEyeHeight(entity) : entity.getEyeHeight());
+        double d0 = entity.posY + (double)entity.getEyeHeight();
         double d1 = entity.posZ;
         float f2 = this.mc.theWorld.getLightBrightness(new BlockPos(d2, d0, d1));
         float f3 = (float)this.mc.gameSettings.renderDistanceChunks / 16.0F;
@@ -728,7 +728,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
     private void orientCamera(float partialTicks)
     {
         Entity entity = this.mc.getRenderViewEntity();
-        float f = (ModInstances.getOldAnimationsMod().isOldSneakingEnabled() ? ModInstances.getOldAnimationsMod().getCustomEyeHeight(entity) : entity.getEyeHeight());
+        float f = entity.getEyeHeight();
         double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * (double)partialTicks;
         double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * (double)partialTicks + (double)f;
         double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * (double)partialTicks;
@@ -1501,7 +1501,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             GlStateManager.matrixMode(5888);
             GlStateManager.loadIdentity();
             this.orientCamera(partialTicks);
-            GlStateManager.translate(0.0F, (ModInstances.getOldAnimationsMod().isOldSneakingEnabled() ? ModInstances.getOldAnimationsMod().getCustomEyeHeight(entity) : entity.getEyeHeight()), 0.0F);
+            GlStateManager.translate(0.0F, entity.getEyeHeight(), 0.0F);
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.005D, 1.0E-4D, 1.0E-4D), 255, 0, 0, 255);
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0E-4D, 1.0E-4D, 0.005D), 0, 0, 255, 255);
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0E-4D, 0.0033D, 1.0E-4D), 0, 255, 0, 255);
@@ -1645,7 +1645,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         this.setupFog(0, partialTicks);
         GlStateManager.shadeModel(7425);
 
-        if (entity.posY + (double)(ModInstances.getOldAnimationsMod().isOldSneakingEnabled() ? ModInstances.getOldAnimationsMod().getCustomEyeHeight(entity) : entity.getEyeHeight()) < 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
+        if (entity.posY + (double)entity.getEyeHeight() < 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
         {
             this.renderCloudsCheck(renderglobal, partialTicks, pass);
         }
@@ -1890,7 +1890,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         GlStateManager.disableBlend();
         GlStateManager.disableFog();
 
-        if (entity.posY + (double)(ModInstances.getOldAnimationsMod().isOldSneakingEnabled() ? ModInstances.getOldAnimationsMod().getCustomEyeHeight(entity) : entity.getEyeHeight()) >= 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
+        if (entity.posY + (double)entity.getEyeHeight() >= 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
         {
             this.mc.mcProfiler.endStartSection("aboveClouds");
             this.renderCloudsCheck(renderglobal, partialTicks, pass);
