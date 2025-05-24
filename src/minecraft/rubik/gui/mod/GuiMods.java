@@ -94,48 +94,51 @@ public class GuiMods extends GuiDropClientScreen {
 	    		mc.displayGuiScreen(new GuiChat(this));
 	    		break;
 	    	case 104:
-	    		mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
+	    		mc.displayGuiScreen(new GuiClock(this));
 	    		break;
 	    	case 105:
-	    		mc.displayGuiScreen(new GuiCPSDisplay(this));
+	    		mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
 	    		break;
 	    	case 106:
-	    		mc.displayGuiScreen(new GuiFPSDisplay(this));
+	    		mc.displayGuiScreen(new GuiCPSDisplay(this));
 	    		break;
 	    	case 107:
-	    		mc.displayGuiScreen(new GuiFullbright(this));
+	    		mc.displayGuiScreen(new GuiFPSDisplay(this));
 	    		break;
 	    	case 108:
-	    		mc.displayGuiScreen(new GuiFreelook(this));
+	    		mc.displayGuiScreen(new GuiFullbright(this));
 	    		break;
 	    	case 109:
-	    		mc.displayGuiScreen(new GuiKeystrokes(this));
+	    		mc.displayGuiScreen(new GuiFreelook(this));
 	    		break;
 	    	case 110:
-	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
+	    		mc.displayGuiScreen(new GuiKeystrokes(this));
 	    		break;
 	    	case 111:
-	    		mc.displayGuiScreen(new GuiOldVisuals(this));
+	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
 	    		break;
 	    	case 112:
-	    		mc.displayGuiScreen(new GuiPingDisplay(this));
+	    		mc.displayGuiScreen(new GuiOldVisuals(this));
 	    		break;
 	    	case 113:
-	    		mc.displayGuiScreen(new GuiPotionEffects(this));
+	    		mc.displayGuiScreen(new GuiPingDisplay(this));
 	    		break;
 	    	case 114:
-	    		mc.displayGuiScreen(new GuiPotsCounter(this));
+	    		mc.displayGuiScreen(new GuiPotionEffects(this));
 	    		break;
 	    	case 115:
-	    		mc.displayGuiScreen(new GuiScoreboard(this));
+	    		mc.displayGuiScreen(new GuiPotsCounter(this));
 	    		break;
 	    	case 116:
-	    		mc.displayGuiScreen(new GuiTabOverlay(this));
+	    		mc.displayGuiScreen(new GuiScoreboard(this));
 	    		break;
 	    	case 117:
-	    		mc.displayGuiScreen(new GuiTimeChanger(this));
+	    		mc.displayGuiScreen(new GuiTabOverlay(this));
 	    		break;
 	    	case 118:
+	    		mc.displayGuiScreen(new GuiTimeChanger(this));
+	    		break;
+	    	case 119:
 	    		mc.displayGuiScreen(new GuiToggleSprintSneak(this));
 	    		break;
         }

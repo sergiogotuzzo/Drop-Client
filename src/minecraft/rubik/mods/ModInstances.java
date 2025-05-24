@@ -8,6 +8,7 @@ import rubik.mods.impl.ArmorStatus;
 import rubik.mods.impl.BlockOverlay;
 import rubik.mods.impl.CPSDisplay;
 import rubik.mods.impl.Chat;
+import rubik.mods.impl.Clock;
 import rubik.mods.impl.CoordinatesDisplay;
 import rubik.mods.impl.FPSDisplay;
 import rubik.mods.impl.Freelook;
@@ -34,6 +35,7 @@ public class ModInstances {
 	private static ToggleSprintSneak toggleSprintSneakMod;
 	private static MemoryUsage memoryUsageMod;
 	private static PotsCounter potsCounterMod;
+	private static Clock clockMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldAnimationsMod = new OldVisuals();
@@ -54,6 +56,7 @@ public class ModInstances {
 		manager.register(toggleSprintSneakMod = new ToggleSprintSneak());
 		manager.register(memoryUsageMod = new MemoryUsage());
 		manager.register(potsCounterMod = new PotsCounter());
+		manager.register(clockMod = new Clock());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -96,6 +99,10 @@ public class ModInstances {
 		return potsCounterMod;
 	}
 	
+	public static Clock getClockMod() {
+		return clockMod;
+	}
+	
 	public static Freelook getFreelookMod() {
 		return freelookMod;
 	}
@@ -133,6 +140,7 @@ public class ModInstances {
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
 			    getChatMod(),
+			    getClockMod(),
 			    getCoordinatesDisplayMod(),
 			    getCPSDisplayMod(),
 			    getFPSDisplayMod(),
