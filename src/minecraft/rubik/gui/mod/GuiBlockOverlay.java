@@ -43,8 +43,8 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
     public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
     	mod.setOutlineWidth(sliderOutlineWidth.getSliderPosition() * 5.0F);
     	
-    	if (mod.getOutlineWidth() < 1.0F) {
-    		mod.setOutlineWidth(1.0F);
+    	if (mod.getOutlineWidth() < 0.4F) {
+    		mod.setOutlineWidth(0.4F);
     	}
     }
 
@@ -64,8 +64,8 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
             case 3:
             	mod.setOutlineWidth(sliderOutlineWidth.getSliderPosition() * 5.0F);
             	
-            	if (mod.getOutlineWidth() < 1.0F) {
-            		mod.setOutlineWidth(1.0F);
+            	if (mod.getOutlineWidth() < 0.4F) {
+            		mod.setOutlineWidth(0.4F);
             	}
             	break;
             case 4:
