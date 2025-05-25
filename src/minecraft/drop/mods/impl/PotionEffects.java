@@ -17,7 +17,7 @@ public class PotionEffects extends ModDraggable {
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
     private boolean blink = true;
-	private boolean showIcon = false;
+	private boolean showIcon = true;
     private boolean durationTextShadow = true;
     private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE);
     private boolean durationTextChroma = false;
