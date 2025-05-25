@@ -113,7 +113,7 @@ public class Keystrokes extends ModDraggable {
 
 	private boolean pressedTextShadow = true;
 	private boolean releasedTextShadow = true;
-	private ColorManager pressedTextColor = ColorManager.fromColor(Color.BLACK);
+	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE);
 	private ColorManager releasedTextColor = ColorManager.fromColor(Color.WHITE);
 	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
