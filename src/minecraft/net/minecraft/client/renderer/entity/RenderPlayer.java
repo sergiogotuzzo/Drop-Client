@@ -1,5 +1,6 @@
 package net.minecraft.client.renderer.entity;
 
+import drop.mods.ModInstances;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelPlayer;
@@ -61,6 +62,10 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
 
             this.setModelVisibilities(entity);
             super.doRender(entity, x, d0, z, entityYaw, partialTicks);
+            
+            if (ModInstances.getNametagsMod().isShowInThirdPersonToggled() && entity instanceof EntityPlayerSP) {                
+                this.renderLivingLabel(entity, entity.getDisplayName().getFormattedText(), x, d0, z, 64);
+             }
         }
     }
 

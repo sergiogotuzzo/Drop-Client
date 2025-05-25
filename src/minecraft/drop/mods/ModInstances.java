@@ -16,6 +16,7 @@ import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
 import drop.mods.impl.Keystrokes;
 import drop.mods.impl.MemoryUsage;
+import drop.mods.impl.Nametags;
 import drop.mods.impl.OldVisuals;
 import drop.mods.impl.PingDisplay;
 import drop.mods.impl.PotionEffects;
@@ -46,6 +47,7 @@ public class ModInstances {
 	private static TimeChanger timeChangerMod = new TimeChanger();
 	private static TabOverlay tabOverlayMod = new TabOverlay();
 	private static Bossbar bossbarMod = new Bossbar();
+	private static Nametags nametagsMod = new Nametags();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -141,6 +143,10 @@ public class ModInstances {
 		return bossbarMod;
 	}
 	
+	public static Nametags getNametagsMod() {
+		return nametagsMod;
+	}
+	
 	public static Collection<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -155,6 +161,7 @@ public class ModInstances {
 			    getFreelookMod(),
 			    getKeystrokesMod(),
 			    getMemoryUsageMod(),
+			    getNametagsMod(),
 			    getOldVisualsMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
