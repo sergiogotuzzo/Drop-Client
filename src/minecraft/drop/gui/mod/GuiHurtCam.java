@@ -9,12 +9,15 @@ import net.minecraft.client.resources.I18n;
 import drop.events.EventTarget;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
 import drop.mods.impl.HurtCam;
 
 public class GuiHurtCam extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private final HurtCam mod = ModInstances.getHurtCamMod();
+	
+	private GuiSlider sliderHurtShakeIntensity;
 	
 	public GuiHurtCam(GuiScreen previousGuiScreen) {
 		this.previousGuiScreen = previousGuiScreen;
@@ -28,8 +31,19 @@ public class GuiHurtCam extends GuiDropClientScreen {
         
         this.drawScaledText("Hurt Cam", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Hurt Shake", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
+        this.drawText("Hurt Shake Intensity", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText(String.format("%.1f", mod.getHurtShakeIntensity()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.1f", mod.getHurtShakeIntensity())) - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
+    }
+    
+    @Override
+    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+    	mod.setHurtShakeIntensity(sliderHurtShakeIntensity.getSliderPosition() * 20.0F);
+    	
+    	if (mod.getHurtShakeIntensity() < 1.0F) {
+    		mod.setHurtShakeIntensity(1.0F);
+    	}
     }
 
     @Override
@@ -42,6 +56,13 @@ public class GuiHurtCam extends GuiDropClientScreen {
             	mod.setHurtShake(!mod.isHurtShakeToggled());
             	this.initGui();
             	break;
+            case 2:
+            	mod.setHurtShakeIntensity(sliderHurtShakeIntensity.getSliderPosition() * 20.0F);
+            	
+            	if (mod.getHurtShakeIntensity() < 1.0F) {
+            		mod.setHurtShakeIntensity(1.0F);
+            	}
+            	break;
         }
     }
 	
@@ -50,6 +71,7 @@ public class GuiHurtCam extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isHurtShakeToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
+    	this.buttonList.add(sliderHurtShakeIntensity = new GuiSlider(2, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 1, 20, mod.getHurtShakeIntensity()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
