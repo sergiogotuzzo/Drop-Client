@@ -913,9 +913,11 @@ public class EntityRenderer implements IResourceManagerReloadListener
             GlStateManager.translate((float)(pass * 2 - 1) * 0.1F, 0.0F, 0.0F);
         }
 
-        this.hurtCameraEffect(partialTicks);
+        if ((ModInstances.getHurtCamMod().isEnabled() && ModInstances.getHurtCamMod().isHurtShakeToggled()) || !ModInstances.getHurtCamMod().isEnabled()) {
+        	this.hurtCameraEffect(partialTicks);
+        }
 
-        if (this.mc.gameSettings.viewBobbing)
+        if (this.mc.gameSettings.viewBobbing && !(ModInstances.getBobbingMod().isEnabled() && ModInstances.getBobbingMod().isMinimalViewBobbingToggled()))
         {
             this.setupViewBobbing(partialTicks);
         }

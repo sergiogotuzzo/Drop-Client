@@ -6,6 +6,7 @@ import java.util.Collection;
 import drop.gui.mod.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.BlockOverlay;
+import drop.mods.impl.Bobbing;
 import drop.mods.impl.Bossbar;
 import drop.mods.impl.CPSDisplay;
 import drop.mods.impl.Chat;
@@ -14,6 +15,7 @@ import drop.mods.impl.CoordinatesDisplay;
 import drop.mods.impl.FPSDisplay;
 import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
+import drop.mods.impl.HurtCam;
 import drop.mods.impl.Keystrokes;
 import drop.mods.impl.MemoryUsage;
 import drop.mods.impl.Nametags;
@@ -48,6 +50,8 @@ public class ModInstances {
 	private static TabOverlay tabOverlayMod = new TabOverlay();
 	private static Bossbar bossbarMod = new Bossbar();
 	private static Nametags nametagsMod = new Nametags();
+	private static Bobbing bobbingMod = new Bobbing();
+	private static HurtCam hurtCamMod = new HurtCam();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -147,10 +151,19 @@ public class ModInstances {
 		return nametagsMod;
 	}
 	
+	public static Bobbing getBobbingMod() {
+		return bobbingMod;
+	}
+	
+	public static HurtCam getHurtCamMod() {
+		return hurtCamMod;
+	}
+	
 	public static Collection<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
+			    getBobbingMod(),
 			    getBossbarMod(),
 			    getChatMod(),
 			    getClockMod(),
@@ -159,6 +172,7 @@ public class ModInstances {
 			    getFPSDisplayMod(),
 			    getFullbrightMod(),
 			    getFreelookMod(),
+			    getHurtCamMod(),
 			    getKeystrokesMod(),
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
