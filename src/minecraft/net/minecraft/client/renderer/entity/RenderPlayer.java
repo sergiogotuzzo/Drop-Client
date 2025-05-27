@@ -63,7 +63,11 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
             this.setModelVisibilities(entity);
             super.doRender(entity, x, d0, z, entityYaw, partialTicks);
             
-            if (ModInstances.getNametagsMod().isShowInThirdPersonToggled() && entity instanceof EntityPlayerSP) {                
+            if (ModInstances.getNametagsMod().isShowInThirdPersonToggled() && entity instanceof EntityPlayerSP) {     
+            	if (entity.isSneaking()) {
+            		d0 = y - 0.125D;
+            	}
+            	
                 this.renderLivingLabel(entity, entity.getDisplayName().getFormattedText(), x, d0, z, 64);
              }
         }
