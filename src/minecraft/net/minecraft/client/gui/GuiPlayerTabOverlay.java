@@ -98,7 +98,6 @@ public class GuiPlayerTabOverlay extends Gui
             ++j4;
         }
 
-        boolean flag = this.mc.isIntegratedServerRunning() || this.mc.getNetHandler().getNetworkManager().getIsencrypted();
         int l;
 
         if (scoreObjectiveIn != null)
@@ -116,8 +115,13 @@ public class GuiPlayerTabOverlay extends Gui
         {
             l = 0;
         }
+        
+        TabOverlay tabOverlayMod = ModInstances.getTabOverlayMod();
 
-        int i1 = Math.min(j4 * (9 + i + l + 13), width - 50) / j4;
+        int playerHeadWidth = tabOverlayMod.isEnabled() && tabOverlayMod.isShowPlayerHeadsEnabled() ? 9 : 0;
+        int pingIconWidth = tabOverlayMod.isPingIconToggled() ? 13 : mc.fontRendererObj.getStringWidth("000") + 3;
+        
+        int i1 = Math.min(j4 * (playerHeadWidth + i + l + (tabOverlayMod.isEnabled() ? pingIconWidth : 13)), width - 50) / j4;
         int j1 = width / 2 - (i1 * j4 + (j4 - 1) * 5) / 2;
         int k1 = 10;
         int l1 = i1 * j4 + (j4 - 1) * 5;
@@ -177,8 +181,6 @@ public class GuiPlayerTabOverlay extends Gui
                 NetworkPlayerInfo networkplayerinfo1 = (NetworkPlayerInfo)list.get(k4);
                 String s1 = this.getPlayerName(networkplayerinfo1);
                 GameProfile gameprofile = networkplayerinfo1.getGameProfile();
-
-                TabOverlay tabOverlayMod = ModInstances.getTabOverlayMod();
                 
                 if (tabOverlayMod.isEnabled() && tabOverlayMod.isShowPlayerHeadsEnabled()) {
                 	EntityPlayer entityplayer = this.mc.theWorld.getPlayerEntityByUUID(gameprofile.getId());
@@ -218,8 +220,12 @@ public class GuiPlayerTabOverlay extends Gui
                         this.drawScoreboardValues(scoreObjectiveIn, k2, gameprofile.getName(), k5, l5, networkplayerinfo1);
                     }
                 }
-
-                this.drawPing(i1, j2 - 9, k2, networkplayerinfo1);
+                
+                if (tabOverlayMod.isEnabled() && !tabOverlayMod.isPingIconToggled()) {
+                    TabOverlay.writePing(mc.fontRendererObj, i1, j2 - (tabOverlayMod.isShowPlayerHeadsEnabled() ? 9 : 0), k2, networkplayerinfo1); 
+                } else {
+                	this.drawPing(i1, j2 - (tabOverlayMod.isEnabled() && tabOverlayMod.isShowPlayerHeadsEnabled() ? 9 : 0), k2, networkplayerinfo1);
+                }
             }
         }
 
