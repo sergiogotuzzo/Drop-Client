@@ -190,5 +190,4 @@ public class GuiMods extends GuiDropClientScreen {
 
         this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
-
 }
