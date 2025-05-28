@@ -20,7 +20,6 @@ import drop.mods.Mod;
 import drop.mods.ModInstances;
 import drop.mods.impl.Bossbar;
 import drop.mods.impl.Fullbright;
-import drop.mods.impl.LeftHand;
 
 public class GuiMods extends GuiDropClientScreen {
     private final GuiScreen previousScreen;
@@ -94,67 +93,62 @@ public class GuiMods extends GuiDropClientScreen {
 	    		mc.displayGuiScreen(new GuiBlockOverlay(this));
 	    		break;
 	    	case 103:
-	    		mc.displayGuiScreen(new GuiBobbing(this));
 	    		break;
 	    	case 104:
-	    		break;
-	    	case 105:
 	    		mc.displayGuiScreen(new GuiChat(this));
 	    		break;
-	    	case 106:
+	    	case 105:
 	    		mc.displayGuiScreen(new GuiClock(this));
 	    		break;
-	    	case 107:
+	    	case 106:
 	    		mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
 	    		break;
-	    	case 108:
+	    	case 107:
 	    		mc.displayGuiScreen(new GuiCPSDisplay(this));
 	    		break;
-	    	case 109:
+	    	case 108:
 	    		mc.displayGuiScreen(new GuiFPSDisplay(this));
 	    		break;
-	    	case 110:
+	    	case 109:
 	    		break;
-	    	case 111:
+	    	case 110:
 	    		mc.displayGuiScreen(new GuiFreelook(this));
 	    		break;
-	    	case 112:
-	    		mc.displayGuiScreen(new GuiHurtCam(this));
-	    		break;
-	    	case 113:
+	    	case 111:
 	    		mc.displayGuiScreen(new GuiKeystrokes(this));
 	    		break;
-	    	case 114:
-	    		break;
-	    	case 115:
+	    	case 112:
 	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
 	    		break;
-	    	case 116:
+	    	case 113:
 	    		mc.displayGuiScreen(new GuiNametags(this));
 	    		break;
-	    	case 117:
+	    	case 114:
 	    		mc.displayGuiScreen(new GuiOldVisuals(this));
 	    		break;
-	    	case 118:
+	    	case 115:
 	    		mc.displayGuiScreen(new GuiPingDisplay(this));
 	    		break;
-	    	case 119:
+	    	case 116:
 	    		mc.displayGuiScreen(new GuiPotionEffects(this));
 	    		break;
-	    	case 120:
+	    	case 117:
 	    		mc.displayGuiScreen(new GuiPotsCounter(this));
 	    		break;
-	    	case 121:
+	    	case 118:
 	    		mc.displayGuiScreen(new GuiScoreboard(this));
 	    		break;
-	    	case 122:
+	    	case 119:
 	    		mc.displayGuiScreen(new GuiTabOverlay(this));
 	    		break;
-	    	case 123:
+	    	case 120:
 	    		mc.displayGuiScreen(new GuiTimeChanger(this));
 	    		break;
-	    	case 124:
+	    	case 121:
 	    		mc.displayGuiScreen(new GuiToggleSprintSneak(this));
+	    		break;
+	    	case 122:
+	    		mc.displayGuiScreen(new GuiVisualTweaks(this));
 	    		break;
         }
     }
@@ -174,7 +168,7 @@ public class GuiMods extends GuiDropClientScreen {
                 
                 boolean hovering = true;
                 
-                if (mod instanceof Bossbar || mod instanceof Fullbright || mod instanceof LeftHand) {
+                if (mod instanceof Bossbar || mod instanceof Fullbright) {
                 	hovering = false;
                 }
                 

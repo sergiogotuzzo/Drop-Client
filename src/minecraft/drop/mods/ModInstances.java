@@ -6,7 +6,6 @@ import java.util.Collection;
 import drop.gui.mod.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.BlockOverlay;
-import drop.mods.impl.Bobbing;
 import drop.mods.impl.Bossbar;
 import drop.mods.impl.CPSDisplay;
 import drop.mods.impl.Chat;
@@ -15,9 +14,7 @@ import drop.mods.impl.CoordinatesDisplay;
 import drop.mods.impl.FPSDisplay;
 import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
-import drop.mods.impl.HurtCam;
 import drop.mods.impl.Keystrokes;
-import drop.mods.impl.LeftHand;
 import drop.mods.impl.MemoryUsage;
 import drop.mods.impl.Nametags;
 import drop.mods.impl.OldVisuals;
@@ -28,6 +25,7 @@ import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import drop.mods.impl.Scoreboard;
 import drop.mods.impl.TabOverlay;
 import drop.mods.impl.TimeChanger;
+import drop.mods.impl.VisualTweaks;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -51,9 +49,7 @@ public class ModInstances {
 	private static TabOverlay tabOverlayMod = new TabOverlay();
 	private static Bossbar bossbarMod = new Bossbar();
 	private static Nametags nametagsMod = new Nametags();
-	private static Bobbing bobbingMod = new Bobbing();
-	private static HurtCam hurtCamMod = new HurtCam();
-	private static LeftHand leftHandMod = new LeftHand();
+	private static VisualTweaks visualTweaksMod = new VisualTweaks();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -153,23 +149,14 @@ public class ModInstances {
 		return nametagsMod;
 	}
 	
-	public static Bobbing getBobbingMod() {
-		return bobbingMod;
-	}
-	
-	public static HurtCam getHurtCamMod() {
-		return hurtCamMod;
-	}
-	
-	public static LeftHand getLeftHandMod() {
-		return leftHandMod;
+	public static VisualTweaks getVisualTweaksMod() {
+		return visualTweaksMod;
 	}
 	
 	public static Collection<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
-			    getBobbingMod(),
 			    getBossbarMod(),
 			    getChatMod(),
 			    getClockMod(),
@@ -178,9 +165,7 @@ public class ModInstances {
 			    getFPSDisplayMod(),
 			    getFullbrightMod(),
 			    getFreelookMod(),
-			    getHurtCamMod(),
 			    getKeystrokesMod(),
-			    getLeftHandMod(),
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
 			    getOldVisualsMod(),
@@ -190,7 +175,8 @@ public class ModInstances {
 			    getScoreboardMod(),
 			    getTabOverlayMod(),
 			    getTimeChangerMod(),
-			    getToggleSprintSneakMod()
+			    getToggleSprintSneakMod(),
+			    getVisualTweaksMod()
 			);
 
 	}
