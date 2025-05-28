@@ -1,7 +1,7 @@
 package drop.gui.mod.hud;
 
 public interface IRendererConfig {
-	public void save(ScreenPosition pos);
+	public void setPosition(ScreenPosition pos);
 	
-	public ScreenPosition load();
+	public ScreenPosition getPosition();
 }

@@ -36,7 +36,7 @@ public class GuiModPositioning extends GuiDropClientScreen {
 				continue;
 			}
 			
-			ScreenPosition pos = renderer.load();
+			ScreenPosition pos = renderer.getPosition();
 			
 			if (pos == null) {
 				pos = ScreenPosition.fromRelativePosition(0.5, 0.5);
@@ -87,7 +87,7 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
 		if (keyCode == Keyboard.KEY_ESCAPE) {
 			renderers.entrySet().forEach((entry) -> {
-				entry.getKey().save(entry.getValue());
+				entry.getKey().setPosition(entry.getValue());
 			});
 			
 			this.mc.displayGuiScreen(null);
@@ -115,7 +115,7 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	@Override
 	public void onGuiClosed() {
 		for (IRenderer renderer : renderers.keySet()) {
-			renderer.save(renderers.get(renderer));
+			renderer.setPosition(renderers.get(renderer));
 		}
 	}
 	
