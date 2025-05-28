@@ -11,6 +11,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiKeystrokes;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 
@@ -141,6 +143,11 @@ public class Keystrokes extends ModDraggable {
 		setUseArrows((boolean) getFromFile("useArrows", useArrows));
 		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
 		setReleasedTextChroma((boolean) getFromFile("releasedTextChroma", releasedTextChroma));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiKeystrokes(previousGuiScreen);
 	}
 
 	@Override

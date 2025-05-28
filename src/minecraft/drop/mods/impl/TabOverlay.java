@@ -2,6 +2,8 @@ package drop.mods.impl;
 
 import java.awt.Color;
 
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiTabOverlay;
 import drop.mods.Mod;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -15,6 +17,11 @@ public class TabOverlay extends Mod {
 		setShowPlayerHeads((boolean) getFromFile("showPlayerHeads", showPlayerHeads));
 		setShowPing((boolean) getFromFile("showPing", showPing));
 		setPingIcon((boolean) getFromFile("pingIcon", pingIcon));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiTabOverlay(previousGuiScreen);
 	}
 
 	public static void writePing(FontRenderer font, int p_175245_1_, int p_175245_2_, int p_175245_3_, NetworkPlayerInfo networkPlayerInfoIn) {

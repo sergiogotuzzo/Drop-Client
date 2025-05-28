@@ -5,6 +5,8 @@ import net.minecraft.entity.Entity;
 import java.awt.Color;
 
 import drop.ColorManager;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiOldVisuals;
 import drop.mods.Mod;
 
 public class OldVisuals extends Mod {
@@ -14,7 +16,7 @@ public class OldVisuals extends Mod {
 	private boolean armorHitAnimation = true;
 	private ColorManager hitArmorColor = ColorManager.fromColor(Color.RED).setAlpha(76);
 	private boolean hitArmorChroma = false;
-
+	
 	public OldVisuals() {
 		setFishingRod((boolean) getFromFile("fishingRod", fishingRod));
 		setBow((boolean) getFromFile("bow", bow));
@@ -22,6 +24,11 @@ public class OldVisuals extends Mod {
 		setArmorHitAnimation((boolean) getFromFile("armorHitAnimation", armorHitAnimation));
 		setHitArmorColor((int) ((long) getFromFile("hitArmorColor", hitArmorColor.getRGB())));
 		setHitArmorChroma((boolean) getFromFile("hitArmorChroma", hitArmorChroma));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiOldVisuals(previousGuiScreen);
 	}
 	
 	public void setFishingRod(boolean enabled) {

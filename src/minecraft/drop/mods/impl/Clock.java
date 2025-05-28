@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 import drop.ColorManager;
 import net.minecraft.item.ItemStack;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiClock;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -14,6 +16,11 @@ public class Clock extends ModDraggableText {
 	
 	public Clock() {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiClock(previousGuiScreen);
 	}
 	
 	@Override

@@ -5,6 +5,8 @@ import org.lwjgl.opengl.Display;
 
 import drop.events.EventTarget;
 import drop.events.impl.KeyEvent;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiFreelook;
 import drop.mods.Mod;
 
 public class Freelook extends Mod {
@@ -23,6 +25,11 @@ public class Freelook extends Mod {
 		setHold((boolean) getFromFile("hold", hold));
 		setInvertYaw((boolean) getFromFile("invertYaw", invertYaw));
 		setInvertPitch((boolean) getFromFile("invertPitch", invertPitch));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiFreelook(previousGuiScreen);
 	}
 	
 	@EventTarget

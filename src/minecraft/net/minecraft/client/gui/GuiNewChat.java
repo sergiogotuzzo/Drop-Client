@@ -29,7 +29,7 @@ public class GuiNewChat extends Gui
     private final List<ChatLine> drawnChatLines = Lists.<ChatLine>newArrayList();
     private int scrollPos;
     private boolean isScrolled;
-    private final Chat chatMod = ModInstances.getChatMod();
+
 
     public GuiNewChat(Minecraft mcIn)
     {
@@ -86,6 +86,8 @@ public class GuiNewChat extends Gui
 
                             if (l1 > 3)
                             {
+                                final Chat chatMod = ModInstances.getChatMod();
+                                
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
                                 int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
@@ -273,6 +275,8 @@ public class GuiNewChat extends Gui
             int k = mouseY / i - 27;
             j = MathHelper.floor_float((float)j / f);
             k = MathHelper.floor_float((float)k / f);
+            
+            final Chat chatMod = ModInstances.getChatMod();
             
             int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
             k += h;

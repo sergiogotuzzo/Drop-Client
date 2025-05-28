@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import drop.FileManager;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiChat;
 import drop.mods.Mod;
 
 public class Chat extends Mod {
@@ -15,6 +17,11 @@ public class Chat extends Mod {
 		setChatHeightFix((boolean) getFromFile("chatHeightFix", chatHeightFix));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiChat(previousGuiScreen);
 	}
 	
 	public void setChatHeightFix(boolean enabled) {

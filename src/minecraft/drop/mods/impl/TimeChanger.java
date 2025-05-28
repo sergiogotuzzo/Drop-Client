@@ -1,5 +1,7 @@
 package drop.mods.impl;
 
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiTimeChanger;
 import drop.mods.Mod;
 
 public class TimeChanger extends Mod {
@@ -7,6 +9,11 @@ public class TimeChanger extends Mod {
 	
 	public TimeChanger() {
 		setTime((float) ((double) getFromFile("time", time)));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiTimeChanger(previousGuiScreen);
 	}
 	
 	public void setTime(float time) {

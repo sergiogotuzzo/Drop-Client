@@ -5,6 +5,7 @@ import drop.FileManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import drop.events.EventManager;
+import drop.gui.GuiDropClientScreen;
 
 public abstract class Mod {
 	private boolean enabled = true;
@@ -12,13 +13,17 @@ public abstract class Mod {
 	protected final Minecraft mc;
 	protected final FontRenderer font;
 	protected final Client client;
-	
+		
 	public Mod() {
 		mc = Minecraft.getMinecraft();
 		font = mc.fontRendererObj;
 		client = Client.getInstance();
 		
 		setEnabled((boolean) getFromFile("enabled", enabled));
+	}
+	
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return null;
 	}
 
 	public void setEnabled(boolean enabled) {

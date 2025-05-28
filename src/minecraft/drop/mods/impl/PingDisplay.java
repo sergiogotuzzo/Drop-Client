@@ -3,16 +3,23 @@ package drop.mods.impl;
 import java.awt.Color;
 
 import drop.ColorManager;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiPingDisplay;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class PingDisplay extends ModDraggableText {
 	private boolean showBackground = false;
 	private boolean dynamicColors = true;
-	
+
 	public PingDisplay() {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiPingDisplay(previousGuiScreen);
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package drop.mods.impl;
 
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiVisualTweaks;
 import drop.mods.Mod;
 
 public class VisualTweaks extends Mod {
@@ -13,6 +15,11 @@ public class VisualTweaks extends Mod {
 		setLeftHand((boolean) getFromFile("leftHand", leftHand));
 		setHurtShake((boolean) getFromFile("hurtShake", hurtShake));
 		setHurtShakeIntensity((float) ((double) getFromFile("hurtShakeIntensity", hurtShakeIntensity)));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiVisualTweaks(previousGuiScreen);
 	}
 	
 	public void setMinimalViewBobbing(boolean toggled) {

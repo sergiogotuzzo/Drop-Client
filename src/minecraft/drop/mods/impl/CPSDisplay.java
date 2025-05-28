@@ -6,6 +6,8 @@ import java.util.List;
 
 import drop.ColorManager;
 import net.minecraft.util.EnumChatFormatting;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiCPSDisplay;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -21,9 +23,14 @@ public class CPSDisplay extends ModDraggableText {
     private boolean wasRightPressed;
     private long lastRightPressed;
     
-    public CPSDisplay() {
+	public CPSDisplay() {
 		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiCPSDisplay(previousGuiScreen);
 	}
 	
 	@Override

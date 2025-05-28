@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.hud.IRenderer;
 import drop.gui.mod.hud.ScreenPosition;
 

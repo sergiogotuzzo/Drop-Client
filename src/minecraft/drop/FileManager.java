@@ -14,6 +14,8 @@ import java.io.IOException;
 public class FileManager {
 	private static final File rootDir = new File("drop");
     private static final File modsFile = new File(rootDir, "mods.json");
+    
+    private static final Logger logger = LogManager.getLogger();
         
     public static void init() {
 		if (!rootDir.exists()) {
@@ -39,6 +41,8 @@ public class FileManager {
         jsonObject.put(key, value);
         
         writeJsonToFile(jsonObject);
+        
+        // logger.info("[DropClient] (FileManager) " + key + ": " + value);
     }
 
     public static Object get(String key) {

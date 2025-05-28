@@ -5,6 +5,8 @@ import java.awt.Color;
 import drop.ColorManager;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiCoordinatesDisplay;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -17,6 +19,11 @@ public class CoordinatesDisplay extends ModDraggableText {
 		setShowBiome((boolean) getFromFile("showBiome", showBiome));
 		setShowFacing((boolean) getFromFile("showFacing", showFacing));
 		setShowFacingTowards((boolean) getFromFile("showFacingTowards", showFacingTowards));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiCoordinatesDisplay(previousGuiScreen);
 	}
 	
 	@Override

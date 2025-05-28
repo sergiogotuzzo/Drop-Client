@@ -5,6 +5,8 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import drop.ColorManager;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiBlockOverlay;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -28,6 +30,11 @@ public class BlockOverlay extends Mod {
 		setOverlay((boolean) getFromFile("overlay", overlay));
 		setOverlayColor((int) ((long) getFromFile("overlayColor", overlayColor.getRGB())));
 		setOverlayChroma((boolean) getFromFile("overlayChroma", overlayChroma));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiBlockOverlay(previousGuiScreen);
 	}
     
     public static void drawSelectionOverlay(AxisAlignedBB axisAlignedBBIn, int red, int green, int blue, int alpha) {

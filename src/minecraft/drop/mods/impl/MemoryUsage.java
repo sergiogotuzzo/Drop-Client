@@ -3,6 +3,8 @@ package drop.mods.impl;
 import java.awt.Color;
 
 import drop.ColorManager;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiMemoryUsage;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -11,6 +13,11 @@ public class MemoryUsage extends ModDraggableText {
 	
 	public MemoryUsage() {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiMemoryUsage(previousGuiScreen);
 	}
 	
 	@Override

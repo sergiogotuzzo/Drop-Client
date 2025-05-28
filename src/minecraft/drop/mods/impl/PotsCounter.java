@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import net.minecraft.item.ItemStack;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiPotsCounter;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -12,6 +14,11 @@ public class PotsCounter extends ModDraggableText {
 	
 	public PotsCounter() {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiPotsCounter(previousGuiScreen);
 	}
 	
 	@Override

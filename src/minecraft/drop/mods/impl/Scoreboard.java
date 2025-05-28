@@ -1,5 +1,7 @@
 package drop.mods.impl;
 
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiScoreboard;
 import drop.mods.Mod;
 
 public class Scoreboard extends Mod {
@@ -11,6 +13,11 @@ public class Scoreboard extends Mod {
 		setHideNumbers((boolean) getFromFile("hideNumbers", textShadow));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiScoreboard(previousGuiScreen);
 	}
 	
 	public void setHideNumbers(boolean enabled) {

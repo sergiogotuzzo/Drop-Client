@@ -18,8 +18,6 @@ import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiText;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
-import drop.mods.impl.Bossbar;
-import drop.mods.impl.Fullbright;
 
 public class GuiMods extends GuiDropClientScreen {
     private final GuiScreen previousScreen;
@@ -78,78 +76,20 @@ public class GuiMods extends GuiDropClientScreen {
         List<Mod> mods = new ArrayList<>(ModInstances.getAllMods());
         
         if (id >= 1 && id <= 100) {
-            Mod mod = mods.get(id - 1);	
-            
+            Mod mod = mods.get(id - 1);
             mod.setEnabled(!mod.isEnabled());
             
             this.initGui();
         }
         
-        switch (button.id) {
-	    	case 101:
-	    		mc.displayGuiScreen(new GuiArmorStatus(this));
-	    		break;
-	    	case 102:
-	    		mc.displayGuiScreen(new GuiBlockOverlay(this));
-	    		break;
-	    	case 103:
-	    		break;
-	    	case 104:
-	    		mc.displayGuiScreen(new GuiChat(this));
-	    		break;
-	    	case 105:
-	    		mc.displayGuiScreen(new GuiClock(this));
-	    		break;
-	    	case 106:
-	    		mc.displayGuiScreen(new GuiCoordinatesDisplay(this));
-	    		break;
-	    	case 107:
-	    		mc.displayGuiScreen(new GuiCPSDisplay(this));
-	    		break;
-	    	case 108:
-	    		mc.displayGuiScreen(new GuiFPSDisplay(this));
-	    		break;
-	    	case 109:
-	    		break;
-	    	case 110:
-	    		mc.displayGuiScreen(new GuiFreelook(this));
-	    		break;
-	    	case 111:
-	    		mc.displayGuiScreen(new GuiKeystrokes(this));
-	    		break;
-	    	case 112:
-	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
-	    		break;
-	    	case 113:
-	    		mc.displayGuiScreen(new GuiNametags(this));
-	    		break;
-	    	case 114:
-	    		mc.displayGuiScreen(new GuiOldVisuals(this));
-	    		break;
-	    	case 115:
-	    		mc.displayGuiScreen(new GuiPingDisplay(this));
-	    		break;
-	    	case 116:
-	    		mc.displayGuiScreen(new GuiPotionEffects(this));
-	    		break;
-	    	case 117:
-	    		mc.displayGuiScreen(new GuiPotsCounter(this));
-	    		break;
-	    	case 118:
-	    		mc.displayGuiScreen(new GuiScoreboard(this));
-	    		break;
-	    	case 119:
-	    		mc.displayGuiScreen(new GuiTabOverlay(this));
-	    		break;
-	    	case 120:
-	    		mc.displayGuiScreen(new GuiTimeChanger(this));
-	    		break;
-	    	case 121:
-	    		mc.displayGuiScreen(new GuiToggleSprintSneak(this));
-	    		break;
-	    	case 122:
-	    		mc.displayGuiScreen(new GuiVisualTweaks(this));
-	    		break;
+        if (id >= 101) {
+            Mod mod = mods.get(id - 101);
+            
+            if (mod.getGui(this) == null) {
+            	return;
+            }
+            
+        	mc.displayGuiScreen(mod.getGui(this));
         }
     }
 
@@ -168,7 +108,7 @@ public class GuiMods extends GuiDropClientScreen {
                 
                 boolean hovering = true;
                 
-                if (mod instanceof Bossbar || mod instanceof Fullbright) {
+                if (mod.getGui(this) == null) {
                 	hovering = false;
                 }
                 

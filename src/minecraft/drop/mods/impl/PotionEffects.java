@@ -10,6 +10,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiPotionEffects;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 
@@ -26,8 +28,8 @@ public class PotionEffects extends ModDraggable {
     private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE);
     private boolean nameTextChroma = false;
     private boolean right = false;
-    
-    public PotionEffects() {
+	
+	public PotionEffects() {
 		setBlink((boolean) getFromFile("blink", blink));
 		setShowIcon((boolean) getFromFile("showIcon", showIcon));
 		setDurationTextShadow((boolean) getFromFile("durationTextShadow", durationTextShadow));
@@ -38,6 +40,11 @@ public class PotionEffects extends ModDraggable {
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
 		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextChroma));
 		setRight((boolean) getFromFile("right", right));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiPotionEffects(previousGuiScreen);
 	}
 
 	@Override

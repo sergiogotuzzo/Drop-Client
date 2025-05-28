@@ -1,5 +1,7 @@
 package drop.mods.impl;
 
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiNametags;
 import drop.mods.Mod;
 
 public class Nametags extends Mod {
@@ -7,6 +9,11 @@ public class Nametags extends Mod {
 	
 	public Nametags() {
 		setShowInThirdPerson((boolean) getFromFile("showInThirdPerson", showInThirdPerson));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiNametags(previousGuiScreen);
 	}
 	
 	public void setShowInThirdPerson(boolean toggled) {

@@ -3,6 +3,8 @@ package drop.mods.impl.togglesprintsneak;
 import java.awt.Color;
 
 import drop.ColorManager;
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiToggleSprintSneak;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -25,6 +27,11 @@ public class ToggleSprintSneak extends ModDraggableText {
 		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
 		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
 		setShowText((boolean) getFromFile("showText", showText));
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiToggleSprintSneak(previousGuiScreen);
 	}
 
 	@Override
