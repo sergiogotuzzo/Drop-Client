@@ -8,10 +8,12 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 
 public class TabOverlay extends Mod {
 	private boolean showPlayerHeads = true;
+	private boolean showPing = true;
 	private boolean pingIcon = true;
 	
 	public TabOverlay() {
 		setShowPlayerHeads((boolean) getFromFile("showPlayerHeads", showPlayerHeads));
+		setShowPing((boolean) getFromFile("showPing", showPing));
 		setPingIcon((boolean) getFromFile("pingIcon", pingIcon));
 	}
 
@@ -44,6 +46,16 @@ public class TabOverlay extends Mod {
 	
 	public boolean isShowPlayerHeadsEnabled() {
 		return showPlayerHeads;
+	}
+
+	public void setShowPing(boolean toggled) {
+		this.showPing = toggled;
+		
+		setToFile("showPing", showPing);
+	}
+	
+	public boolean isShowPingToggled() {
+		return showPing;
 	}
 
 	public void setPingIcon(boolean toggled) {
