@@ -17,6 +17,7 @@ import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
 import drop.mods.impl.HurtCam;
 import drop.mods.impl.Keystrokes;
+import drop.mods.impl.LeftHand;
 import drop.mods.impl.MemoryUsage;
 import drop.mods.impl.Nametags;
 import drop.mods.impl.OldVisuals;
@@ -52,6 +53,7 @@ public class ModInstances {
 	private static Nametags nametagsMod = new Nametags();
 	private static Bobbing bobbingMod = new Bobbing();
 	private static HurtCam hurtCamMod = new HurtCam();
+	private static LeftHand leftHandMod = new LeftHand();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -159,6 +161,10 @@ public class ModInstances {
 		return hurtCamMod;
 	}
 	
+	public static LeftHand getLeftHandMod() {
+		return leftHandMod;
+	}
+	
 	public static Collection<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -174,6 +180,7 @@ public class ModInstances {
 			    getFreelookMod(),
 			    getHurtCamMod(),
 			    getKeystrokesMod(),
+			    getLeftHandMod(),
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
 			    getOldVisualsMod(),

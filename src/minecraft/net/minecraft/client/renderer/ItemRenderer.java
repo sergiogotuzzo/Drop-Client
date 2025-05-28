@@ -402,6 +402,11 @@ public class ItemRenderer
             this.rotateWithPlayerRotations((EntityPlayerSP)abstractclientplayer, partialTicks);
             GlStateManager.enableRescaleNormal();
             GlStateManager.pushMatrix();
+            
+            if (ModInstances.getLeftHandMod().isEnabled()) {
+            	GL11.glScaled(-1.0D, 1.0D, 1.0D);
+            	GlStateManager.disableCull();
+            }
 
             if (this.itemToRender != null)
             {

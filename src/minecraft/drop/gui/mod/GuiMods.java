@@ -20,6 +20,7 @@ import drop.mods.Mod;
 import drop.mods.ModInstances;
 import drop.mods.impl.Bossbar;
 import drop.mods.impl.Fullbright;
+import drop.mods.impl.LeftHand;
 
 public class GuiMods extends GuiDropClientScreen {
     private final GuiScreen previousScreen;
@@ -124,33 +125,35 @@ public class GuiMods extends GuiDropClientScreen {
 	    		mc.displayGuiScreen(new GuiKeystrokes(this));
 	    		break;
 	    	case 114:
-	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
 	    		break;
 	    	case 115:
-	    		mc.displayGuiScreen(new GuiNametags(this));
+	    		mc.displayGuiScreen(new GuiMemoryUsage(this));
 	    		break;
 	    	case 116:
-	    		mc.displayGuiScreen(new GuiOldVisuals(this));
+	    		mc.displayGuiScreen(new GuiNametags(this));
 	    		break;
 	    	case 117:
-	    		mc.displayGuiScreen(new GuiPingDisplay(this));
+	    		mc.displayGuiScreen(new GuiOldVisuals(this));
 	    		break;
 	    	case 118:
-	    		mc.displayGuiScreen(new GuiPotionEffects(this));
+	    		mc.displayGuiScreen(new GuiPingDisplay(this));
 	    		break;
 	    	case 119:
-	    		mc.displayGuiScreen(new GuiPotsCounter(this));
+	    		mc.displayGuiScreen(new GuiPotionEffects(this));
 	    		break;
 	    	case 120:
-	    		mc.displayGuiScreen(new GuiScoreboard(this));
+	    		mc.displayGuiScreen(new GuiPotsCounter(this));
 	    		break;
 	    	case 121:
-	    		mc.displayGuiScreen(new GuiTabOverlay(this));
+	    		mc.displayGuiScreen(new GuiScoreboard(this));
 	    		break;
 	    	case 122:
-	    		mc.displayGuiScreen(new GuiTimeChanger(this));
+	    		mc.displayGuiScreen(new GuiTabOverlay(this));
 	    		break;
 	    	case 123:
+	    		mc.displayGuiScreen(new GuiTimeChanger(this));
+	    		break;
+	    	case 124:
 	    		mc.displayGuiScreen(new GuiToggleSprintSneak(this));
 	    		break;
         }
@@ -171,7 +174,7 @@ public class GuiMods extends GuiDropClientScreen {
                 
                 boolean hovering = true;
                 
-                if (mod instanceof Bossbar || mod instanceof Fullbright) {
+                if (mod instanceof Bossbar || mod instanceof Fullbright || mod instanceof LeftHand) {
                 	hovering = false;
                 }
                 
