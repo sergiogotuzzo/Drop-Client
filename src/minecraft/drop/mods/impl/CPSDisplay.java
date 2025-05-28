@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
-
 import drop.ColorManager;
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.mod.hud.ScreenPosition;
@@ -40,8 +38,8 @@ public class CPSDisplay extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		final boolean leftPressed = Mouse.isButtonDown(0);
-        final boolean rightPressed = Mouse.isButtonDown(1);
+		final boolean leftPressed = mc.gameSettings.keyBindAttack.isKeyDown();
+        final boolean rightPressed = mc.gameSettings.keyBindUseItem.isKeyDown();
 
         if (leftPressed != this.wasLeftPressed) {
             this.lastLeftPressed = System.currentTimeMillis();
