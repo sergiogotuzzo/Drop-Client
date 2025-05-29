@@ -148,9 +148,9 @@ public class PotionEffects extends ModDraggable {
             int iconX = right ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX();
 
             if (potion.hasStatusIcon()) {
-                mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
-                
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+                mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
                 
                 int iconIndex = potion.getStatusIconIndex();
                   
