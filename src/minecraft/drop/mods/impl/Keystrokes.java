@@ -213,14 +213,6 @@ public class Keystrokes extends ModDraggable {
 	    }
 	}
 	
-	private int getCPS(List<Long> clicks) {
-        final long time = System.currentTimeMillis();
-
-        clicks.removeIf((aLong) -> aLong + 1000 < time);
-
-        return clicks.size();
-    }
-	
 	private void updateMode() {
 		if (showMovementKeys && showMouse && showSpacebar) {
 			mode = KeystrokesMode.WASD_MOUSE_JUMP;
