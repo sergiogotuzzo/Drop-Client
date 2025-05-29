@@ -163,29 +163,22 @@ public class PotionEffects extends ModDraggable {
         
         int i = showIcon ? 20 : 0;
         
-        int durationX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2;
-        
         if (showName) {
             int nameX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2;
 
         	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow, nameTextChroma);
-        	
-        	if (blink) {
-        		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextChroma);
-                }
-        	} else {
-        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextChroma);
-        	}
-        } else {
-        	if (blink) {
-        		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor, durationTextShadow, durationTextChroma);
-                }
-        	} else {
-        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor, durationTextShadow, durationTextChroma);
-        	}
         }
+        
+        int durationX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2;
+        int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2);
+        
+        if (blink) {
+    		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+        		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextChroma);
+            }
+    	} else {
+    		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextChroma);
+    	}
     }
     
     private String getPotionName(PotionEffect pe) {
