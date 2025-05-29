@@ -90,7 +90,17 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	}
 	
 	public void drawAlignedText(String text, int x, int y, int color, boolean textShadow, boolean chroma) {
-		drawText(text, getAlignedAbsoluteX(text), y, color, textShadow, chroma);
+		int alignedX;
+		
+		if (pos.getRelativeX() < 1.0 / 3.0) {
+			alignedX = pos.getAbsoluteX();
+		} else if (pos.getRelativeX() > 2.0 / 3.0) {
+			alignedX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text);
+		} else {
+			alignedX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
+		}
+		
+		drawText(text, alignedX, y, color, textShadow, chroma);
 	}
 	
 	public void drawScaledText(String text, int x, int y, double scale, int color, boolean textShadow, boolean chroma) {
@@ -102,19 +112,5 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, x, y, color, textShadow, chroma);
 		
 		GlStateManager.popMatrix();
-	}
-	
-	public int getAlignedAbsoluteX(String text) {
-		int positionX;
-		
-		if (pos.getRelativeX() < 1.0 / 3.0) {
-			positionX = pos.getAbsoluteX();
-		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			positionX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text);
-		} else {
-			positionX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
-		}
-	    
-	    return positionX;
 	}
 }
