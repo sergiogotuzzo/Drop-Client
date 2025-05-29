@@ -33,7 +33,7 @@ public class MemoryUsage extends ModDraggableText {
 			drawRect(pos);
 		}
 		
-		drawCenteredText(getMemoryText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);
+		drawCenteredText(getMemoryText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	private String getMemoryText() {

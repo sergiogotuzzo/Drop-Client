@@ -168,22 +168,22 @@ public class PotionEffects extends ModDraggable {
         if (showName) {
             int nameX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2;
 
-        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor.getRGB(), nameTextShadow, nameTextChroma);
+        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow, nameTextChroma);
         	
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextChroma);
         	}
         } else {
         	if (blink) {
         		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+            		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor, durationTextShadow, durationTextChroma);
                 }
         	} else {
-        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor.getRGB(), durationTextShadow, durationTextChroma);
+        		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT - 2, durationTextColor, durationTextShadow, durationTextChroma);
         	}
         }
     }

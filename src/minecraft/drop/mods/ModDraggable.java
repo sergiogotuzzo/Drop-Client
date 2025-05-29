@@ -40,29 +40,12 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	}
 	
 	public void drawRect(ScreenPosition pos, ColorManager color) {
-		drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), color.getRGB());
+		drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), color);
 	}
 	
 	public void drawRect(ScreenPosition pos) {
 		drawRect(pos, ColorManager.fromColor(Color.BLACK).setAlpha(102));
 	}
-
-	public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)
-    {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        
-        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos((double)(x + 0), (double)(y + height), (double)this.zLevel).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + height) * f1)).endVertex();
-        worldrenderer.pos((double)(x + width), (double)(y + height), (double)this.zLevel).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + height) * f1)).endVertex();
-        worldrenderer.pos((double)(x + width), (double)(y + 0), (double)this.zLevel).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + 0) * f1)).endVertex();
-        worldrenderer.pos((double)(x + 0), (double)(y + 0), (double)this.zLevel).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + 0) * f1)).endVertex();
-        
-        tessellator.draw();
-    }
 	
 	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
 		if (chroma) {
@@ -85,8 +68,16 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		}
 	}
 	
+	public void drawText(String text, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
+		drawText(text, x, y, color.getRGB(), dropShadow, chroma);
+	}
+	
 	public void drawCenteredText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
 		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2, y + getHeight() / 2 - 4, color, dropShadow, chroma);
+	}
+	
+	public void drawCenteredText(String text, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
+		drawCenteredText(text, x, y, color.getRGB(), dropShadow, chroma);
 	}
 	
 	public void drawAlignedText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
@@ -103,6 +94,10 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, alignedX, y, color, dropShadow, chroma);
 	}
 	
+	public void drawAlignedText(String text, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
+		drawAlignedText(text, x, y, color.getRGB(), dropShadow, chroma);
+	}
+	
 	public void drawScaledText(String text, int x, int y, double scale, int color, boolean dropShadow, boolean chroma) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, 0);
@@ -112,5 +107,25 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, x, y, color, dropShadow, chroma);
 		
 		GlStateManager.popMatrix();
+	}
+	
+	public void drawScaledText(String text, int x, int y, double scale, ColorManager color, boolean dropShadow, boolean chroma) {
+		drawScaledText(text, x, y, scale, color.getRGB(), dropShadow, chroma);
+	}
+	
+	public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height) {
+		float f = 0.00390625F;
+		float f1 = 0.00390625F;
+        
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+		
+		worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		worldRenderer.pos((double)(x + 0), (double)(y + height), (double)this.zLevel).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + height) * f1)).endVertex();
+		worldRenderer.pos((double)(x + width), (double)(y + height), (double)this.zLevel).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + height) * f1)).endVertex();
+		worldRenderer.pos((double)(x + width), (double)(y + 0), (double)this.zLevel).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + 0) * f1)).endVertex();
+		worldRenderer.pos((double)(x + 0), (double)(y + 0), (double)this.zLevel).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + 0) * f1)).endVertex();
+		
+		tessellator.draw();
 	}
 }

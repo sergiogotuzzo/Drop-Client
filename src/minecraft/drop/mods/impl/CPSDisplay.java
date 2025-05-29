@@ -68,7 +68,7 @@ public class CPSDisplay extends ModDraggableText {
         	drawRect(pos);
         }
                 
-        drawCenteredText(getCPSText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);
+        drawCenteredText(getCPSText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	private int getCPS(List<Long> clicks) {

@@ -37,7 +37,7 @@ public class Clock extends ModDraggableText {
 			drawRect(pos);
 		}
 		
-		drawCenteredText(getTimeText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);
+		drawCenteredText(getTimeText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	private String getTimeText() {
