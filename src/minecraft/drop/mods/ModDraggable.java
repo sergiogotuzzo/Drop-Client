@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.hud.IRenderer;
 import drop.gui.mod.hud.ScreenPosition;
@@ -32,6 +33,18 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	
 	public void drawRect(int left, int top, int right, int bottom, int color) {
 		Gui.drawRect(left, top, right, bottom, color);
+	}
+	
+	public void drawRect(int left, int top, int right, int bottom, ColorManager color) {
+		drawRect(left, top, right, bottom, color.getRGB());
+	}
+	
+	public void drawRect(ScreenPosition pos, ColorManager color) {
+		drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), color.getRGB());
+	}
+	
+	public void drawRect(ScreenPosition pos) {
+		drawRect(pos, ColorManager.fromColor(Color.BLACK).setAlpha(102));
 	}
 
 	public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)

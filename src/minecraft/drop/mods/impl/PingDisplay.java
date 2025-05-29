@@ -2,7 +2,6 @@ package drop.mods.impl;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiPingDisplay;
 import drop.gui.mod.hud.ScreenPosition;
@@ -35,13 +34,7 @@ public class PingDisplay extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
-					);
+			drawRect(pos);
 		}
 		
 		Color dynamicColor = Color.WHITE;

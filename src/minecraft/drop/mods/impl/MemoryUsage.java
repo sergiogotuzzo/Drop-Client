@@ -1,8 +1,5 @@
 package drop.mods.impl;
 
-import java.awt.Color;
-
-import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiMemoryUsage;
 import drop.gui.mod.hud.ScreenPosition;
@@ -33,13 +30,7 @@ public class MemoryUsage extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
-					);
+			drawRect(pos);
 		}
 		
 		drawCenteredText(getMemoryText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);

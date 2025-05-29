@@ -1,10 +1,8 @@
 package drop.mods.impl;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import drop.ColorManager;
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiCPSDisplay;
@@ -67,13 +65,7 @@ public class CPSDisplay extends ModDraggableText {
         }
         
         if (showBackground) {
-			drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
-					);
+        	drawRect(pos);
         }
                 
         drawCenteredText(getCPSText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);

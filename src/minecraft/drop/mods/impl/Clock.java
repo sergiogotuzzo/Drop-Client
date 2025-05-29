@@ -1,10 +1,8 @@
 package drop.mods.impl;
 
-import java.awt.Color;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import drop.ColorManager;
 import net.minecraft.item.ItemStack;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiClock;
@@ -36,13 +34,7 @@ public class Clock extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			drawRect(
-					pos.getAbsoluteX(),
-					pos.getAbsoluteY(),
-					pos.getAbsoluteX() + getWidth(),
-					pos.getAbsoluteY() + getHeight(),
-					ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
-					);
+			drawRect(pos);
 		}
 		
 		drawCenteredText(getTimeText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor.getRGB(), textShadow, textChroma);

@@ -1,8 +1,5 @@
 package drop.mods.impl;
 
-import java.awt.Color;
-
-import drop.ColorManager;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import drop.gui.GuiDropClientScreen;
@@ -74,13 +71,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		drawRect(
-				pos.getAbsoluteX(),
-				pos.getAbsoluteY(),
-				pos.getAbsoluteX() + getWidth(),
-				pos.getAbsoluteY() + getHeight(),
-				ColorManager.fromColor(Color.BLACK).setAlpha(102).getRGB()
-				);
+		drawRect(pos);
 		
 		int i = 11;
 		
