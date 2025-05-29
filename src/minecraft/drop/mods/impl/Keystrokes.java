@@ -4,12 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
-
 import drop.ColorManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiKeystrokes;
@@ -162,27 +159,6 @@ public class Keystrokes extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		final boolean leftPressed = Mouse.isButtonDown(0);
-        final boolean rightPressed = Mouse.isButtonDown(1);
-
-        if (leftPressed != this.wasLeftPressed) {
-            this.lastLeftPressed = System.currentTimeMillis();
-            this.wasLeftPressed = leftPressed;
-
-            if (leftPressed) {
-                this.leftClicks.add(this.lastLeftPressed);
-            }
-        }
-
-        if (rightPressed != this.wasRightPressed) {
-            this.lastRightPressed = System.currentTimeMillis();
-            this.wasRightPressed = rightPressed;
-
-            if (rightPressed) {
-                this.rightClicks.add(this.lastRightPressed);
-            }
-        }
-        
 	    for (Key key : mode.getKeys()) {
 	        int textWidth = font.getStringWidth(key.getName());
 	        
