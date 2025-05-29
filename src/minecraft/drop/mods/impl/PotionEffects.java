@@ -184,14 +184,11 @@ public class PotionEffects extends ModDraggable {
     private String getPotionName(PotionEffect pe) {
     	String potionName = I18n.format(pe.getEffectName(), new Object[0]);
     	
-    	if (pe.getAmplifier() == 1)
-        {
+    	if (pe.getAmplifier() == 1) {
     		potionName = potionName + " " + I18n.format("enchantment.level.2", new Object[0]);
-        } else if (pe.getAmplifier() == 2)
-        {
+        } else if (pe.getAmplifier() == 2) {
         	potionName = potionName + " " + I18n.format("enchantment.level.3", new Object[0]);
-        } else if (pe.getAmplifier() == 3)
-        {
+        } else if (pe.getAmplifier() == 3) {
         	potionName = potionName + " " + I18n.format("enchantment.level.4", new Object[0]);
         }
     	

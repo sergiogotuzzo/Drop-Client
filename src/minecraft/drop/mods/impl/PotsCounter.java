@@ -34,10 +34,6 @@ public class PotsCounter extends ModDraggableText {
 			drawRect(pos);
 		}
 		
-		drawCenteredText(getMemoryText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
-	}
-	
-	private String getMemoryText() {
 		int potsCount = 0;
 		
 		for (int i = 0; i < mc.thePlayer.inventory.getSizeInventory(); i++) {
@@ -50,7 +46,7 @@ public class PotsCounter extends ModDraggableText {
 		
 		String text = potsCount + " pots";
 		
-		return showBackground ? text : "[" + text + "]";
+		drawCenteredText(showBackground ? text : "[" + text + "]", pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	public void setShowBackground(boolean enabled) {

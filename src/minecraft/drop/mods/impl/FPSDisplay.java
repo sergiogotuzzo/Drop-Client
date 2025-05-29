@@ -33,13 +33,9 @@ public class FPSDisplay extends ModDraggableText {
 			drawRect(pos);
 		}
 		
-		drawCenteredText(getFPSText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
-	}
-	
-	private String getFPSText() {
-		String fpsText = mc.getDebugFPS() + " FPS";
+		String text = mc.getDebugFPS() + " FPS";
 		
-		return showBackground ? fpsText : "[" + fpsText + "]";
+		drawCenteredText(showBackground ? text : "[" + text + "]", pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	public void setShowBackground(boolean enabled) {

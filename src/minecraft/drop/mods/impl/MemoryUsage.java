@@ -30,21 +30,16 @@ public class MemoryUsage extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			drawRect(pos);
+			drawRect(pos);			
 		}
-		
-		drawCenteredText(getMemoryText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
-	}
-	
-	private String getMemoryText() {
+
 		long maxMemory = Runtime.getRuntime().maxMemory();
 		long totalMemory = Runtime.getRuntime().totalMemory();
 		long freeMemory = Runtime.getRuntime().freeMemory();
 		long usingMemory = totalMemory - freeMemory;
-		
 		String text = String.format("Mem: %1d%%", Long.valueOf(usingMemory * 100L / maxMemory));
 		
-		return showBackground ? text : "[" + text + "]";
+		drawCenteredText(showBackground ? text : "[" + text + "]", pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	public void setShowBackground(boolean enabled) {

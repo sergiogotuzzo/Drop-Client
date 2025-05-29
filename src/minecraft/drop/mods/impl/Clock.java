@@ -37,15 +37,11 @@ public class Clock extends ModDraggableText {
 			drawRect(pos);
 		}
 		
-		drawCenteredText(getTimeText(), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
-	}
-	
-	private String getTimeText() {
 		LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String text = currentTime.format(formatter);
 		
-		return showBackground ? text : "[" + text + "]";
+		drawCenteredText(showBackground ? text : "[" + text + "]", pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	public void setShowBackground(boolean enabled) {

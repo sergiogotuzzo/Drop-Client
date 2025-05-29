@@ -37,11 +37,10 @@ public class PingDisplay extends ModDraggableText {
 			drawRect(pos);
 		}
 		
+		int ping = mc.isSingleplayer() ? -1 : mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
 		Color dynamicColor = Color.WHITE;
 		
 		if (dynamicColors) {
-			int ping = getPing();
-			
 			if (ping > 300) {
 				dynamicColor = new Color(170, 0, 0);
 			} else if (ping > 200) {
@@ -55,17 +54,9 @@ public class PingDisplay extends ModDraggableText {
 			}
 		}
 		
-		drawCenteredText(getPingText(), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
-	}
-	
-	private String getPingText() {
-		String pingText = getPing() + " ms";
+		String text = ping + " ms";
 		
-		return showBackground ? pingText : "[" + pingText + "]";
-	}
-	
-	private int getPing() {
-		return mc.isSingleplayer() ? -1 : mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
+		drawCenteredText(showBackground ? text : "[" + text + "]", pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
 	}
 	
 	public void setShowBackground(boolean enabled) {
