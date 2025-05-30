@@ -156,30 +156,30 @@ public class DropClientMovementInput extends MovementInput {
 		
 		if (isFlying) {
 			if (originalFlySpeed > 0.0F) {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)" : "[Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)]") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)") + spacing;
 			} else {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Flying" : "[Flying]") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Flying") + spacing;
 			}
 		}
 		
 		if (isRiding) {
-			displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Riding" : "[Riding]") + spacing;
+			displayText += toggleSprintSneakMod.getBrackets().wrap("Riding") + spacing;
 		}
 		
 		if (sneak) {
 			if (isFlying) {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Descending" : "[Descending]") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Descending") + spacing;
 			} else if (isRiding) {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Dismounting" : "[Dismounting]") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Dismounting") + spacing;
 			} else if (isHoldingSneak) {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Sneaking (Key Held)" : "[Sneaking (Key Held)]") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Sneaking (Key Held)") + spacing;
 			} else {
 			}
 		} else if (sprint && !isFlying && !isRiding) {
 			if (isHoldingSprint) {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Sprinting (Key Held)" : "[Sprinting (Key Held)]") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Sprinting (Key Held)") + spacing;
 			} else {
-				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Sprinting (Toggled)" : "[Sprinting (Toggled)") + spacing;
+				displayText += toggleSprintSneakMod.getBrackets().wrap("Sprinting (Toggled)") + spacing;
 			}
 		}
 		

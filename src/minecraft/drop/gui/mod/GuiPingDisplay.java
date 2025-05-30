@@ -13,6 +13,7 @@ import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
 import drop.gui.GuiText;
 import drop.mods.ModInstances;
+import drop.mods.ModDraggableText.Brackets;
 import drop.mods.impl.PingDisplay;
 
 public class GuiPingDisplay extends GuiDropClientScreen {
@@ -34,6 +35,7 @@ public class GuiPingDisplay extends GuiDropClientScreen {
         this.drawText("Dynamic Colors", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
         this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        this.drawText("Brackets", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -59,6 +61,10 @@ public class GuiPingDisplay extends GuiDropClientScreen {
             case 4:
             	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Ping Display"));
             	break;
+            case 5:
+            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.CURLY ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -70,6 +76,7 @@ public class GuiPingDisplay extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(2, mod.isDynamicColorsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
         this.buttonList.add(new GuiRect(4, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2 * 2, mod.getTextColor().getRGB()));
+        this.buttonList.add(new GuiText(5, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(mod.getBrackets().getName()), (this.height - 200) / 2 + 30 + 15 * 4 + 15, mod.getBrackets().getName()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

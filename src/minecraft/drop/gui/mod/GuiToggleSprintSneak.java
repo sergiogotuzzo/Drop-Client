@@ -13,6 +13,7 @@ import drop.gui.GuiRect;
 import drop.gui.GuiSlider;
 import drop.gui.GuiText;
 import drop.mods.ModInstances;
+import drop.mods.ModDraggableText.Brackets;
 import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
 public class GuiToggleSprintSneak extends GuiDropClientScreen {
@@ -41,6 +42,7 @@ public class GuiToggleSprintSneak extends GuiDropClientScreen {
         this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
         this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
+        this.drawText("Brackets", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 8 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -94,6 +96,10 @@ public class GuiToggleSprintSneak extends GuiDropClientScreen {
             case 8:
             	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Toggle Sprint Sneak"));
             	break;
+            case 9:
+            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.CURLY ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -109,6 +115,7 @@ public class GuiToggleSprintSneak extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(6, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(7, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
         this.buttonList.add(new GuiRect(8, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 7 + 15 - 2 * 2, mod.getTextColor().getRGB()));
+        this.buttonList.add(new GuiText(9, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(mod.getBrackets().getName()), (this.height - 200) / 2 + 30 + 15 * 8 + 15, mod.getBrackets().getName()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

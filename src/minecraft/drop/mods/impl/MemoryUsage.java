@@ -39,7 +39,7 @@ public class MemoryUsage extends ModDraggableText {
 		long usingMemory = totalMemory - freeMemory;
 		String text = String.format("Mem: %1d%%", Long.valueOf(usingMemory * 100L / maxMemory));
 		
-		drawCenteredText(showBackground ? text : "[" + text + "]", pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	public void setShowBackground(boolean enabled) {
