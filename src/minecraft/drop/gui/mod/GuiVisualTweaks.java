@@ -83,7 +83,7 @@ public class GuiVisualTweaks extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(1, mod.isMinimalViewBobbingToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(2, mod.isLeftHandToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isHurtShakeToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
-    	this.buttonList.add(sliderHurtShakeIntensity = new GuiSlider(4, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 3 + 15 + 1, 100, 5, 5, 35, mod.getHurtShakeIntensity()));
+    	this.buttonList.add(sliderHurtShakeIntensity = new GuiSlider(4, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 3 + 15 + 1, 100, 5, 5.0F, 35.0F, mod.getHurtShakeIntensity()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
