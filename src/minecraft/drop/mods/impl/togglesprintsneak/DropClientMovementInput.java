@@ -152,33 +152,34 @@ public class DropClientMovementInput extends MovementInput {
 		boolean isHoldingSneak = gameSettings.keyBindSneak.isKeyDown();
 		boolean isHoldingSprint = gameSettings.keyBindSprint.isKeyDown();
 		
+		String spacing = "  ";
+		
 		if (isFlying) {
 			if (originalFlySpeed > 0.0F) {
-				displayText += "[Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)" : "[Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)]") + spacing;
 			} else {
-				displayText += "[Flying]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Flying" : "[Flying]") + spacing;
 			}
 		}
 		
 		if (isRiding) {
-			displayText += "[Riding]  ";
+			displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Riding" : "[Riding]") + spacing;
 		}
 		
 		if (sneak) {
 			if (isFlying) {
-				displayText += "[Descending]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Descending" : "[Descending]") + spacing;
 			} else if (isRiding) {
-				displayText += "[Dismounting]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Dismounting" : "[Dismounting]") + spacing;
 			} else if (isHoldingSneak) {
-				displayText += "[Sneaking (Key Held)]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Sneaking (Key Held)" : "[Sneaking (Key Held)]") + spacing;
 			} else {
-				displayText += "[Sneaking (Toggled)]  ";
 			}
 		} else if (sprint && !isFlying && !isRiding) {
 			if (isHoldingSprint) {
-				displayText += "[Sprinting (Key Held)]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Sprinting (Key Held)" : "[Sprinting (Key Held)]") + spacing;
 			} else {
-				displayText += "[Sprinting (Toggled)]  ";
+				displayText += (toggleSprintSneakMod.isShowBackgroundEnabled() ? "Sprinting (Toggled)" : "[Sprinting (Toggled)") + spacing;
 			}
 		}
 		
