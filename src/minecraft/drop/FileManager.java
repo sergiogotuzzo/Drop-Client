@@ -15,7 +15,7 @@ public class FileManager {
 	private static final File rootDir = new File("drop");
     private static final File modsFile = new File(rootDir, "mods.json");
     
-    private static final Logger logger = LogManager.getLogger();
+    // private static final Logger logger = LogManager.getLogger();
         
     public static void init() {
 		if (!rootDir.exists()) {
