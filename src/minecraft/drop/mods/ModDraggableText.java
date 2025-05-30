@@ -11,7 +11,8 @@ public abstract class ModDraggableText extends ModDraggable {
 	    NONE(0, "", ""),
 	    ROUND(1, "(", ")"),
 	    SQUARE(2, "[", "]"),
-	    CURLY(3, "{", "}");
+	    CURLY(3, "{", "}"),
+		ANGULAR(4, "<", ">");
 
 	    private final int id;
 	    private final String open;

@@ -60,7 +60,7 @@ public class GuiModDraggableText extends GuiDropClientScreen {
             	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ")));
             	break;
             case 4:
-            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.CURLY ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
+            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
             	this.initGui();
             	break;
         }
