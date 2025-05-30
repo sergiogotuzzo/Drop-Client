@@ -152,7 +152,7 @@ public class DropClientMovementInput extends MovementInput {
 		boolean isHoldingSneak = gameSettings.keyBindSneak.isKeyDown();
 		boolean isHoldingSprint = gameSettings.keyBindSprint.isKeyDown();
 		
-		String spacing = "  ";
+		String spacing = " ";
 		
 		if (isFlying) {
 			if (originalFlySpeed > 0.0F) {
