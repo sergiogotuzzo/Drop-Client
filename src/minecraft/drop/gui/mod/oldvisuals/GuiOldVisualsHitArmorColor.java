@@ -1,4 +1,4 @@
-package drop.gui.mod;
+package drop.gui.mod.oldvisuals;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
+import drop.gui.mod.GuiModColor;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
 import drop.mods.impl.OldVisuals;

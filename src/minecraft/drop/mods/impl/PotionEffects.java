@@ -11,7 +11,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiPotionEffects;
+import drop.gui.mod.potioneffects.GuiPotionEffects;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 

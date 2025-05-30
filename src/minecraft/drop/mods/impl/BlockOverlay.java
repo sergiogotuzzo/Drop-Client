@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiBlockOverlay;
+import drop.gui.mod.blockoverlay.GuiBlockOverlay;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;

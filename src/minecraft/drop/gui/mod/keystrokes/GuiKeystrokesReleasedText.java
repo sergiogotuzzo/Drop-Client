@@ -1,4 +1,4 @@
-package drop.gui.mod;
+package drop.gui.mod.keystrokes;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -8,15 +8,16 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
+import drop.gui.mod.GuiModColor;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
-import drop.mods.impl.PotionEffects;
+import drop.mods.impl.Keystrokes;
 
-public class GuiPotionEffectsDurationTextColor extends GuiModColor {
-	private static final PotionEffects mod = ModInstances.getPotionEffectsMod();
+public class GuiKeystrokesReleasedText extends GuiModColor {
+	private static final Keystrokes mod = ModInstances.getKeystrokesMod();
 	
-	public GuiPotionEffectsDurationTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getDurationTextColor(), mod, "durationTextColor", "Potion Effects", "Duration Text Color");
+	public GuiKeystrokesReleasedText(GuiScreen previousGuiScreen) {
+		super(previousGuiScreen, mod.getReleasedTextColor(), mod, "releasedTextColor", "Keystrokes", "Released Text Color");
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ public class GuiPotionEffectsDurationTextColor extends GuiModColor {
     	super.actionPerformed(button);
     	
         if (button.id == 5) {
-        	mod.setDurationTextChroma(!mod.isDurationTextChromaEnabled());
+        	mod.setReleasedTextChroma(!mod.isReleasedTextChromaEnabled());
         	this.initGui();
         }
     }
@@ -40,6 +41,6 @@ public class GuiPotionEffectsDurationTextColor extends GuiModColor {
     public void initGui() {
 		super.initGui();
 		
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isDurationTextChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(5, mod.isReleasedTextChromaEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     }
 }

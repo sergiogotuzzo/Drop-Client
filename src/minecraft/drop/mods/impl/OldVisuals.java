@@ -6,7 +6,7 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiOldVisuals;
+import drop.gui.mod.oldvisuals.GuiOldVisuals;
 import drop.mods.Mod;
 
 public class OldVisuals extends Mod {

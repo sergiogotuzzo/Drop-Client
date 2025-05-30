@@ -1,4 +1,4 @@
-package drop.gui.mod;
+package drop.gui.mod.potioneffects;
 
 import java.awt.Color;
 import java.io.IOException;

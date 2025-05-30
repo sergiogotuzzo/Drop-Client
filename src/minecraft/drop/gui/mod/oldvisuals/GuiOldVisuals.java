@@ -1,4 +1,4 @@
-package drop.gui.mod;
+package drop.gui.mod.oldvisuals;
 
 import java.awt.Color;
 import java.io.IOException;
