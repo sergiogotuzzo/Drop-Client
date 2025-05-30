@@ -18,7 +18,7 @@ public class ToggleSprintSneak extends ModDraggableText {
 	private boolean flyBoost = true;
 	private float flyBoostFactor = 4.0F;
 	private boolean showText = true;
-	private boolean showBackground = true;
+	private boolean showBackground = false;
 	
 	private String textToRender = "";
 	
