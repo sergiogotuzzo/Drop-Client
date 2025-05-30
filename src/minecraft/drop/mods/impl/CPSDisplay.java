@@ -3,6 +3,8 @@ package drop.mods.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Mouse;
+
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiCPSDisplay;
@@ -43,8 +45,8 @@ public class CPSDisplay extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		final boolean leftPressed = mc.gameSettings.keyBindAttack.isKeyDown();
-        final boolean rightPressed = mc.gameSettings.keyBindUseItem.isKeyDown();
+		final boolean leftPressed = Mouse.isButtonDown(0);
+        final boolean rightPressed = Mouse.isButtonDown(1);
 
         if (leftPressed != this.wasLeftPressed) {
             this.lastLeftPressed = System.currentTimeMillis();
