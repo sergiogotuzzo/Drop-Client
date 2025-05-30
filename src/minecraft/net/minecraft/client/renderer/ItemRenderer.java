@@ -403,7 +403,7 @@ public class ItemRenderer
             GlStateManager.enableRescaleNormal();
             GlStateManager.pushMatrix();
             
-            if (ModInstances.getVisualTweaksMod().isEnabled() && ModInstances.getVisualTweaksMod().isLeftHandToggled()) {
+            if (ModInstances.getLeftHandMod().isEnabled()) {
             	GL11.glScaled(-1.0D, 1.0D, 1.0D);
             	GlStateManager.disableCull();
             }
