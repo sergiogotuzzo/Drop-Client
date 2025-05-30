@@ -20,21 +20,25 @@ import drop.mods.Mod;
 import drop.mods.ModInstances;
 
 public class GuiMods extends GuiDropClientScreen {
-    private final GuiScreen previousScreen;
+    private final GuiScreen previousGuiScreen;
+    
     private int scrollOffset = 0;
     private int maxScroll = 0;
 
-    public GuiMods(GuiScreen previousScreen) {
-        this.previousScreen = previousScreen;
+    public GuiMods(GuiScreen previousGuiScreen) {
+        this.previousGuiScreen = previousGuiScreen;
     }
 
     @Override
     public void handleMouseInput() throws IOException {
         super.handleMouseInput();
+        
         int dWheel = Mouse.getDWheel();
+        
         if (dWheel != 0) {
             scrollOffset -= Integer.signum(dWheel) * 15;
             scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
+            
             initGui();
         }
     }
@@ -67,7 +71,7 @@ public class GuiMods extends GuiDropClientScreen {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 0) {
-            mc.displayGuiScreen(previousScreen);
+            mc.displayGuiScreen(previousGuiScreen);
             
             return;
         }
@@ -77,6 +81,7 @@ public class GuiMods extends GuiDropClientScreen {
         
         if (id >= 1 && id <= 100) {
             Mod mod = mods.get(id - 1);
+            
             mod.setEnabled(!mod.isEnabled());
             
             this.initGui();
