@@ -38,7 +38,7 @@ public class ToggleSprintSneak extends ModDraggableText {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth("[Sprinting (Toggled)]") + (showBackground ? 20 : 0);
+		return showBackground ? font.getStringWidth("Sprinting (Toggled)") + 20 : font.getStringWidth("[Sprinting (Toggled)]");
 	}
 
 	@Override
@@ -49,45 +49,42 @@ public class ToggleSprintSneak extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 	    if (showText && mc.thePlayer.movementInput.getDisplayText() != "") {
-	    	textToRender = mc.thePlayer.movementInput.getDisplayText();
-	    	
-	    	if (showBackground) {
-	    		if (pos.getRelativeX() < 1.0 / 3.0) {
-			    	drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + font.getStringWidth(textToRender) + 20, pos.getAbsoluteY() + getHeight(), ColorManager.fromColor(Color.BLACK).setAlpha(102));
-	    			drawText(textToRender, pos.getAbsoluteX() + 20 / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
-	    		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			    	drawRect(pos.getAbsoluteX() - font.getStringWidth(textToRender) + getWidth() - 20, pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), ColorManager.fromColor(Color.BLACK).setAlpha(102));
-	    			drawText(textToRender, pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender) - 20 / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
-	    		} else {
-	    			drawRect(pos.getAbsoluteX() - (font.getStringWidth(textToRender) + 20) / 2 + getWidth() / 2, pos.getAbsoluteY(), pos.getAbsoluteX() + (font.getStringWidth(textToRender) + 20) / 2 + getWidth() / 2, pos.getAbsoluteY() + getHeight(), ColorManager.fromColor(Color.BLACK).setAlpha(102));
-	    			drawText(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
-	    		}
-	    	} else {
-			    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
-	    	}
+	    	drawTextToRender(pos, textToRender = mc.thePlayer.movementInput.getDisplayText());
 	    }
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (showText) {
-	    	textToRender = "[Sprinting (Toggled)]";
-	    	
-	    	if (showBackground) {
-	    		if (pos.getRelativeX() < 1.0 / 3.0) {
-			    	drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + font.getStringWidth(textToRender) + 20, pos.getAbsoluteY() + getHeight(), ColorManager.fromColor(Color.BLACK).setAlpha(102));
-	    			drawText(textToRender, pos.getAbsoluteX() + 20 / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
-	    		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			    	drawRect(pos.getAbsoluteX() - font.getStringWidth(textToRender) + getWidth() - 20, pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), ColorManager.fromColor(Color.BLACK).setAlpha(102));
-	    			drawText(textToRender, pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender) - 20 / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
-	    		} else {
-	    			drawRect(pos.getAbsoluteX() - (font.getStringWidth(textToRender) + 20) / 2 + getWidth() / 2, pos.getAbsoluteY(), pos.getAbsoluteX() + (font.getStringWidth(textToRender) + 20) / 2 + getWidth() / 2, pos.getAbsoluteY() + getHeight(), ColorManager.fromColor(Color.BLACK).setAlpha(102));
-	    			drawText(textToRender, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
-	    		}
-	    	} else {
-			    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor.getRGB(), textShadow, textChroma);
-	    	}
+	    	drawTextToRender(pos, textToRender = showBackground ? "Sprinting (Toggled)" : "[Sprinting (Toggled)]");
 	    }
+	}
+	
+	private void drawTextToRender(ScreenPosition pos, String textToRender) {
+		if (showBackground) {
+    		int rectLeft;
+    		int rectRight;
+    		int textX;
+    		
+    		if (pos.getRelativeX() < 1.0 / 3.0) {
+    			rectLeft = pos.getAbsoluteX();
+    			rectRight = pos.getAbsoluteX() + font.getStringWidth(textToRender) + 20;
+    			textX = pos.getAbsoluteX() + 20 / 2;
+    		} else if (pos.getRelativeX() > 2.0 / 3.0) {
+    			rectLeft = pos.getAbsoluteX() - font.getStringWidth(textToRender) + getWidth() - 20;
+    			rectRight = pos.getAbsoluteX() + getWidth();
+    			textX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(textToRender) - 20 / 2;
+    		} else {
+    			rectLeft = pos.getAbsoluteX() - (font.getStringWidth(textToRender) + 20) / 2 + getWidth() / 2;
+    			rectRight = pos.getAbsoluteX() + (font.getStringWidth(textToRender) + 20) / 2 + getWidth() / 2;
+    			textX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(textToRender)) / 2;
+    		}
+    		
+	    	drawRect(rectLeft, pos.getAbsoluteY(), rectRight, pos.getAbsoluteY() + getHeight());
+			drawText(textToRender, textX, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
+    	} else {
+		    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow, textChroma);
+    	}
 	}
 	
 	public void setSprinting(boolean sprinting) {

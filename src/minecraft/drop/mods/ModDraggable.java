@@ -39,6 +39,10 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawRect(left, top, right, bottom, color.getRGB());
 	}
 	
+	public void drawRect(int left, int top, int right, int bottom) {
+		drawRect(left, top, right, bottom, ColorManager.fromColor(Color.BLACK).setAlpha(102));
+	}
+	
 	public void drawRect(ScreenPosition pos, ColorManager color) {
 		drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), color);
 	}
