@@ -1,20 +1,14 @@
 package drop.mods.impl;
 
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiMemoryUsage;
+import drop.gui.mod.GuiModDraggableText;
 import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class MemoryUsage extends ModDraggableText {
-	private boolean showBackground = false;
-	
-	public MemoryUsage() {
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
-	}
-	
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiMemoryUsage(previousGuiScreen);
+		return new GuiModDraggableText(previousGuiScreen, this);
 	}
 	
 	@Override
@@ -40,15 +34,5 @@ public class MemoryUsage extends ModDraggableText {
 		String text = String.format("Mem: %1d%%", Long.valueOf(usingMemory * 100L / maxMemory));
 		
 		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
-	}
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
 	}
 }

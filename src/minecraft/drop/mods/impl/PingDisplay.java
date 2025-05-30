@@ -8,11 +8,9 @@ import drop.gui.mod.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class PingDisplay extends ModDraggableText {
-	private boolean showBackground = false;
 	private boolean dynamicColors = true;
 
 	public PingDisplay() {
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 	}
 	
@@ -57,16 +55,6 @@ public class PingDisplay extends ModDraggableText {
 		String text = ping + " ms";
 		
 		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
-	}
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
 	}
 	
 	public void setDynamicColors(boolean enabled) {

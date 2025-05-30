@@ -3,6 +3,8 @@ package drop.gui.mod;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import drop.Client;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -12,16 +14,17 @@ import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
 import drop.gui.GuiText;
+import drop.mods.ModDraggableText;
 import drop.mods.ModDraggableText.Brackets;
 import drop.mods.ModInstances;
-import drop.mods.impl.Clock;
 
-public class GuiClock extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	private final Clock mod = ModInstances.getClockMod();
+public class GuiModDraggableText extends GuiDropClientScreen {
+	protected final GuiScreen previousGuiScreen;
+	private final ModDraggableText mod;
 	
-	public GuiClock(GuiScreen previousGuiScreen) {
+	public GuiModDraggableText(GuiScreen previousGuiScreen, ModDraggableText mod) {
 		this.previousGuiScreen = previousGuiScreen;
+		this.mod = mod;
 	}
 
     @Override
@@ -30,7 +33,7 @@ public class GuiClock extends GuiDropClientScreen {
     	
     	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
-        this.drawScaledText("Clock", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+        this.drawScaledText(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " "), (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
@@ -54,7 +57,7 @@ public class GuiClock extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Clock"));
+            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ")));
             	break;
             case 4:
             	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.CURLY ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));

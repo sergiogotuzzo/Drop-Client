@@ -54,16 +54,28 @@ public abstract class ModDraggableText extends ModDraggable {
 	    }
 	}
 
+	protected boolean showBackground = false;
 	protected ColorManager textColor = ColorManager.fromColor(Color.WHITE);
 	protected boolean textShadow = true;
 	protected boolean textChroma = false;
 	protected Brackets brackets = Brackets.SQUARE;
 	
 	public ModDraggableText() {
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 		setBrackets(Brackets.fromId((int) ((long) getFromFile("brackets", brackets.getId()))));
+	}
+	
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
+	}
+	
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
 	}
 	
 	public void setTextColor(int rgb) {

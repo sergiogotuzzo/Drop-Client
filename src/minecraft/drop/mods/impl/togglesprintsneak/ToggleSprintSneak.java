@@ -18,7 +18,6 @@ public class ToggleSprintSneak extends ModDraggableText {
 	private boolean flyBoost = true;
 	private float flyBoostFactor = 4.0F;
 	private boolean showText = true;
-	private boolean showBackground = false;
 	
 	private String textToRender = "";
 	
@@ -28,7 +27,6 @@ public class ToggleSprintSneak extends ModDraggableText {
 		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
 		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
 		setShowText((boolean) getFromFile("showText", showText));
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 	}
 	
 	@Override
@@ -151,15 +149,5 @@ public class ToggleSprintSneak extends ModDraggableText {
 	
 	public boolean isShowTextEnabled() {
 		return showText;
-	}
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
 	}
 }

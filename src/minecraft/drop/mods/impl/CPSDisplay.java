@@ -13,7 +13,6 @@ import drop.mods.ModDraggableText;
 
 public class CPSDisplay extends ModDraggableText {
 	public boolean showRightCPS = false;
-	private boolean showBackground = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();
     private boolean wasLeftPressed;
@@ -25,7 +24,6 @@ public class CPSDisplay extends ModDraggableText {
     
 	public CPSDisplay() {
 		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 	}
 	
 	@Override
@@ -91,15 +89,5 @@ public class CPSDisplay extends ModDraggableText {
 	
 	public boolean isShowRightCPSEnabled() {
 		return showRightCPS;
-	}
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
 	}
 }
