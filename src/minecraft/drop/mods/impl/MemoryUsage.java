@@ -2,7 +2,7 @@ package drop.mods.impl;
 
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModDraggableText;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class MemoryUsage extends ModDraggableText {

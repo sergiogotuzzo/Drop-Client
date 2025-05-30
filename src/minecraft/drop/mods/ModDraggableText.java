@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.hud.ScreenPosition;
 
 public abstract class ModDraggableText extends ModDraggable {
 	public static enum Brackets {

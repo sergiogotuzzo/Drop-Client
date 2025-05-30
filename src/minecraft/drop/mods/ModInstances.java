@@ -3,7 +3,7 @@ package drop.mods;
 import java.util.Arrays;
 import java.util.Collection;
 
-import drop.gui.mod.hud.HUDManager;
+import drop.mods.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.BlockOverlay;
 import drop.mods.impl.Bobbing;

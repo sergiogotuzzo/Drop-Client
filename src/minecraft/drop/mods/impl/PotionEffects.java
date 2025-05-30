@@ -12,7 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiPotionEffects;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 
 public class PotionEffects extends ModDraggable {

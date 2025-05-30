@@ -1,4 +1,4 @@
-package drop.gui.mod.hud;
+package drop.mods.hud;
 
 public interface IRenderer extends IRendererConfig {
 	int getWidth();

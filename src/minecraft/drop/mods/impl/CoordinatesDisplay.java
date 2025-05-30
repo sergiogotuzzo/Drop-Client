@@ -4,7 +4,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiCoordinatesDisplay;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class CoordinatesDisplay extends ModDraggableText {

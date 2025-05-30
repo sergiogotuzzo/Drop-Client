@@ -10,7 +10,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiKeystrokes;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 
 public class Keystrokes extends ModDraggable {

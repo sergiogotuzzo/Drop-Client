@@ -7,7 +7,7 @@ import drop.events.EventTarget;
 import drop.events.impl.RenderEvent;
 import drop.events.impl.TickEvent;
 import drop.gui.mod.GuiModPositioning;
-import drop.gui.mod.hud.HUDManager;
+import drop.mods.hud.HUDManager;
 import drop.mods.ModInstances;
 import drop.mods.impl.Fullbright;
 

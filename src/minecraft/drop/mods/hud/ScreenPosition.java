@@ -1,4 +1,4 @@
-package drop.gui.mod.hud;
+package drop.mods.hud;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;

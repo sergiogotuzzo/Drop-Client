@@ -8,7 +8,7 @@ import org.lwjgl.input.Mouse;
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiCPSDisplay;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class CPSDisplay extends ModDraggableText {

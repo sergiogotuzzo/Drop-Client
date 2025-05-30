@@ -1,4 +1,4 @@
-package drop.gui.mod.hud;
+package drop.mods.hud;
 
 import java.util.Collection;
 import java.util.Set;

@@ -5,7 +5,7 @@ import java.awt.Color;
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiToggleSprintSneak;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class ToggleSprintSneak extends ModDraggableText {

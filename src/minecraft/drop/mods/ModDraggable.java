@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.hud.IRenderer;
-import drop.gui.mod.hud.ScreenPosition;
+import drop.mods.hud.IRenderer;
+import drop.mods.hud.ScreenPosition;
 
 public abstract class ModDraggable extends Mod implements IRenderer {
 	protected ScreenPosition pos;
