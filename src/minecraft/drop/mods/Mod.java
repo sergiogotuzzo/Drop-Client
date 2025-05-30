@@ -8,7 +8,7 @@ import drop.events.EventManager;
 import drop.gui.GuiDropClientScreen;
 
 public abstract class Mod {
-	private boolean enabled = true;
+	protected boolean enabled = true;
 	
 	protected final Minecraft mc;
 	protected final FontRenderer font;
