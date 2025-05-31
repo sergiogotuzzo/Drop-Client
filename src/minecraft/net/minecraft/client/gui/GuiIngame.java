@@ -254,6 +254,8 @@ public class GuiIngame extends Gui
             this.renderDemo(scaledresolution);
         }
 
+    	new RenderEvent().call();
+
         if (this.mc.gameSettings.showDebugInfo)
         {
             this.overlayDebug.renderDebugInfo(scaledresolution);
@@ -373,8 +375,6 @@ public class GuiIngame extends Gui
         {
             this.overlayPlayerList.updatePlayerList(false);
         }
-
-    	new RenderEvent().call();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
