@@ -119,7 +119,7 @@ public class GuiPlayerTabOverlay extends Gui
         TabOverlay tabOverlayMod = ModInstances.getTabOverlayMod();
 
         int playerHeadWidth = tabOverlayMod.isEnabled() && tabOverlayMod.isShowPlayerHeadsEnabled() ? 9 : 0;
-        int pingIconWidth = tabOverlayMod.isShowPingToggled() ? tabOverlayMod.isPingIconToggled() ? 13 : mc.fontRendererObj.getStringWidth("000") + 3 : 0;
+        int pingIconWidth = tabOverlayMod.isHidePingToggled() ? 0 : tabOverlayMod.isPingNumbersToggled() ? mc.fontRendererObj.getStringWidth("000") + 3 : 13;
         
         int i1 = Math.min(j4 * (playerHeadWidth + i + l + (tabOverlayMod.isEnabled() ? pingIconWidth : 13)), width - 50) / j4;
         int j1 = width / 2 - (i1 * j4 + (j4 - 1) * 5) / 2;
@@ -222,13 +222,13 @@ public class GuiPlayerTabOverlay extends Gui
                 }
                 
                 if (tabOverlayMod.isEnabled()) {
-                	if (tabOverlayMod.isShowPingToggled()) {
+                	if (!tabOverlayMod.isHidePingToggled()) {
                 		int playerHeadsWidth = tabOverlayMod.isShowPlayerHeadsEnabled() ? 9 : 0;
                 		
-                		if (tabOverlayMod.isPingIconToggled()) {
-                        	this.drawPing(i1, j2 - playerHeadsWidth, k2, networkplayerinfo1);
+                		if (tabOverlayMod.isPingNumbersToggled()) {
+                        	TabOverlay.writePing(mc.fontRendererObj, i1, j2 - playerHeadsWidth, k2, networkplayerinfo1); 
                         } else {
-                            TabOverlay.writePing(mc.fontRendererObj, i1, j2 - playerHeadsWidth, k2, networkplayerinfo1); 
+                        	this.drawPing(i1, j2 - playerHeadsWidth, k2, networkplayerinfo1);
                         }
                 	}
                 } else {

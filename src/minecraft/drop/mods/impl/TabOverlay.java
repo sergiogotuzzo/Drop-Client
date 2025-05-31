@@ -10,13 +10,13 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 
 public class TabOverlay extends Mod {
 	private boolean showPlayerHeads = true;
-	private boolean showPing = true;
-	private boolean pingIcon = true;
+	private boolean hidePing = false;
+	private boolean pingNumbers = false;
 	
 	public TabOverlay() {
 		setShowPlayerHeads((boolean) getFromFile("showPlayerHeads", showPlayerHeads));
-		setShowPing((boolean) getFromFile("showPing", showPing));
-		setPingIcon((boolean) getFromFile("pingIcon", pingIcon));
+		setHidePing((boolean) getFromFile("hidePing", hidePing));
+		setPingNumbers((boolean) getFromFile("pingNumbers", pingNumbers));
 	}
 	
 	@Override
@@ -55,23 +55,23 @@ public class TabOverlay extends Mod {
 		return showPlayerHeads;
 	}
 
-	public void setShowPing(boolean toggled) {
-		this.showPing = toggled;
+	public void setHidePing(boolean toggled) {
+		this.hidePing = toggled;
 		
-		setToFile("showPing", showPing);
+		setToFile("hidePing", hidePing);
 	}
 	
-	public boolean isShowPingToggled() {
-		return showPing;
+	public boolean isHidePingToggled() {
+		return hidePing;
 	}
 
-	public void setPingIcon(boolean toggled) {
-		this.pingIcon = toggled;
+	public void setPingNumbers(boolean toggled) {
+		this.pingNumbers = toggled;
 		
-		setToFile("pingIcon", pingIcon);
+		setToFile("pingNumbers", pingNumbers);
 	}
 	
-	public boolean isPingIconToggled() {
-		return pingIcon;
+	public boolean isPingNumbersToggled() {
+		return pingNumbers;
 	}
 }

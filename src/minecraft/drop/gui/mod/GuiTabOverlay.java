@@ -28,8 +28,8 @@ public class GuiTabOverlay extends GuiDropClientScreen {
         
         this.drawScaledText("Tab Overlay", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Show Player Heads", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Show Ping", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Ping Icon", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Hide Ping", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Ping Numbers", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -45,11 +45,11 @@ public class GuiTabOverlay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 2:
-            	mod.setShowPing(!mod.isShowPingToggled());
+            	mod.setHidePing(!mod.isHidePingToggled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setPingIcon(!mod.isPingIconToggled());
+            	mod.setPingNumbers(!mod.isPingNumbersToggled());
             	this.initGui();
             	break;
         }
@@ -60,8 +60,8 @@ public class GuiTabOverlay extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isShowPlayerHeadsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(2, mod.isShowPingToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(3, mod.isPingIconToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isHidePingToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(3, mod.isPingNumbersToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
