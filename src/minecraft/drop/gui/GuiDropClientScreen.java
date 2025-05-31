@@ -13,7 +13,7 @@ public abstract class GuiDropClientScreen extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0x808080);
-        this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0x808080);
+        this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0x808080);
         
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

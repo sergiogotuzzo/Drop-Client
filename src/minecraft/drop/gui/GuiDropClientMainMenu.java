@@ -28,7 +28,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     	drawRect((this.width - 140) / 2, (this.height - 150) / 2, (this.width - 140) / 2 + 140, (this.height - 150) / 2 + 150, new Color(0, 0, 0, 127).getRGB());
     	
         this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0xFFFFFF);
-        this.drawString(this.fontRendererObj, "Minecraft 1.8.9", this.width - this.fontRendererObj.getStringWidth("Minecraft 1.8.9") - 2, this.height - 10, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0xFFFFFF);
         
         this.mc.getTextureManager().bindTexture(new ResourceLocation("drop/icon.png"));
         this.drawModalRectWithCustomSizedTexture(this.width / 2 - 84 / 2, this.height / 2 - 84 + 12, 0.0f, 0.0f, 84, 84, (float)(84), (float)(84));
