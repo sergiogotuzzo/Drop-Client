@@ -11,9 +11,9 @@ import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.keystrokes.GuiKeystrokes;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggable;
+import drop.mods.ModDraggableText;
 
-public class Keystrokes extends ModDraggable {
+public class Keystrokes extends ModDraggableText {
 	public static enum KeystrokesMode {
 		WASD(Key.W, Key.A, Key.S, Key.D),
 		WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
@@ -111,15 +111,12 @@ public class Keystrokes extends ModDraggable {
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 
 	private boolean pressedTextShadow = true;
-	private boolean releasedTextShadow = true;
 	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE);
-	private ColorManager releasedTextColor = ColorManager.fromColor(Color.WHITE);
 	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
 	private boolean useArrows = false;
 	private boolean pressedTextChroma = false;
-	private boolean releasedTextChroma = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();
     private boolean wasLeftPressed;
@@ -131,15 +128,12 @@ public class Keystrokes extends ModDraggable {
 	
 	public Keystrokes() {
 		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
-		setReleasedTextShadow((boolean) getFromFile("releasedTextShadow", releasedTextShadow));
 		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
-		setReleasedTextColor((int) ((long) getFromFile("releasedTextColor", releasedTextColor.getRGB())));
 		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
 		setShowMouse((boolean) getFromFile("showMouse", showMouse));
 		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
 		setUseArrows((boolean) getFromFile("useArrows", useArrows));
 		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
-		setReleasedTextChroma((boolean) getFromFile("releasedTextChroma", releasedTextChroma));
 	}
 	
 	@Override
@@ -206,9 +200,9 @@ public class Keystrokes extends ModDraggable {
 	        		key.getName(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-	                key.isDown() ? pressedTextColor : releasedTextColor,
-	                key.isDown() ? pressedTextShadow : releasedTextShadow,
-	                key.isDown() ? pressedTextChroma : releasedTextChroma
+	                key.isDown() ? pressedTextColor : textColor,
+	                key.isDown() ? pressedTextShadow : textShadow,
+	                key.isDown() ? pressedTextChroma : textChroma
 	        		);
 	    }
 	}
@@ -243,16 +237,6 @@ public class Keystrokes extends ModDraggable {
 		return pressedTextShadow;
 	}
 	
-	public void setReleasedTextShadow(boolean enabled) {
-		releasedTextShadow = enabled;
-		
-		setToFile("releasedTextShadow", enabled);
-	}
-	
-	public boolean isReleasedTextShadowEnabled() {
-		return releasedTextShadow;
-	}
-	
 	public void setPressedTextColor(int rgb) {
 		this.pressedTextColor = ColorManager.fromRGB(rgb);
 		
@@ -261,16 +245,6 @@ public class Keystrokes extends ModDraggable {
 	
 	public ColorManager getPressedTextColor() {
 		return pressedTextColor;
-	}
-	
-	public void setReleasedTextColor(int rgb) {
-		this.releasedTextColor = ColorManager.fromRGB(rgb);
-		
-		setToFile("releasedTextColor", rgb);
-	}
-	
-	public ColorManager getReleasedTextColor() {
-		return releasedTextColor;
 	}
 	
 	public void setShowMovementKeys(boolean enabled) {
@@ -327,15 +301,5 @@ public class Keystrokes extends ModDraggable {
 	
 	public boolean isPressedTextChromaEnabled() {
 		return pressedTextChroma;
-	}
-	
-	public void setReleasedTextChroma(boolean enabled) {
-		this.releasedTextChroma = enabled;
-		
-		setToFile("releasedTextChroma", enabled);
-	}
-	
-	public boolean isReleasedTextChromaEnabled() {
-		return releasedTextChroma;
 	}
 }

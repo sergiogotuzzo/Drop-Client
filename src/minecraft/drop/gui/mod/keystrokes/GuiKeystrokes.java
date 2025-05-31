@@ -12,6 +12,7 @@ import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
 import drop.gui.GuiText;
+import drop.gui.mod.GuiModDraggableTextColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.Keystrokes;
 
@@ -34,10 +35,10 @@ public class GuiKeystrokes extends GuiDropClientScreen {
         this.drawText("Show Spacebar", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Show Movement Keys", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
         this.drawText("Use Arrows", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
-        this.drawText("Released Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
-        this.drawText("Released Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
-        this.drawText("Pressed Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
-        this.drawText("Pressed Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
+        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
+        this.drawText("Text Shadow (Pressed)", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
+        this.drawText("Text Color (Pressed)", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -65,11 +66,11 @@ public class GuiKeystrokes extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 5:
-            	mod.setReleasedTextShadow(!mod.isReleasedTextShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
             case 6:
-            	mc.displayGuiScreen(new GuiKeystrokesReleasedText(this));
+            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Keystrokes"));
             	break;
             case 7:
             	mod.setPressedTextShadow(!mod.isPressedTextShadowEnabled());
@@ -89,8 +90,8 @@ public class GuiKeystrokes extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(2, mod.isShowSpacebarEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(3, mod.isShowMovementKeysEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(4, mod.isUseArrowsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isReleasedTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
-        this.buttonList.add(new GuiRect(6, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2 * 2, mod.getReleasedTextColor().getRGB()));
+    	this.buttonList.add(new GuiButtonToggled(5, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+        this.buttonList.add(new GuiRect(6, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2 * 2, mod.getTextColor().getRGB()));
     	this.buttonList.add(new GuiButtonToggled(7, mod.isPressedTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
         this.buttonList.add(new GuiRect(8, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 7 + 15 - 2 * 2, mod.getPressedTextColor().getRGB()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));

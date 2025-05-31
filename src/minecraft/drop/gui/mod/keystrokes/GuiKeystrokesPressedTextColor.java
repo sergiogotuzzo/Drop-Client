@@ -17,7 +17,7 @@ public class GuiKeystrokesPressedTextColor extends GuiModColor {
 	private static final Keystrokes mod = ModInstances.getKeystrokesMod();
 	
 	public GuiKeystrokesPressedTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getPressedTextColor(), mod, "pressedTextColor", "Keystrokes", "Pressed Text Color");
+		super(previousGuiScreen, mod.getPressedTextColor(), mod, "pressedTextColor", "Keystrokes", "Text Color (Pressed)");
 	}
 	
 	@Override
