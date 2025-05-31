@@ -21,7 +21,7 @@ public class CPSDisplay extends ModDraggableDisplayText {
     private List<Long> rightClicks = new ArrayList<>();
     private boolean wasRightPressed;
     private long lastRightPressed;
-    
+        
 	public CPSDisplay() {
 		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
 	}
@@ -33,12 +33,12 @@ public class CPSDisplay extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return 58;
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap(getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"));
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -67,10 +67,8 @@ public class CPSDisplay extends ModDraggableDisplayText {
         if (showBackground) {
         	drawRect(pos);
         }
-        
-		String text = String.valueOf(getCPS(leftClicks)) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS";
-        
-        drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+                
+        drawCenteredText(brackets.wrap(getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	private int getCPS(List<Long> clicks) {

@@ -13,12 +13,12 @@ public class MemoryUsage extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return 58;
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap(String.format("Mem: %1d%%", Long.valueOf((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100L / Runtime.getRuntime().maxMemory()))));
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -26,13 +26,7 @@ public class MemoryUsage extends ModDraggableDisplayText {
 		if (showBackground) {
 			drawRect(pos);			
 		}
-
-		long maxMemory = Runtime.getRuntime().maxMemory();
-		long totalMemory = Runtime.getRuntime().totalMemory();
-		long freeMemory = Runtime.getRuntime().freeMemory();
-		long usingMemory = totalMemory - freeMemory;
-		String text = String.format("Mem: %1d%%", Long.valueOf(usingMemory * 100L / maxMemory));
-		
-		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+				
+		drawCenteredText(brackets.wrap(String.format("Mem: %1d%%", Long.valueOf((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 100L / Runtime.getRuntime().maxMemory()))), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 }

@@ -9,7 +9,7 @@ import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
-public class Clock extends ModDraggableDisplayText {
+public class Clock extends ModDraggableDisplayText {    
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return new GuiModDraggableDisplayText(previousGuiScreen, this);
@@ -17,12 +17,12 @@ public class Clock extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return 58;
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))));
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -31,10 +31,6 @@ public class Clock extends ModDraggableDisplayText {
 			drawRect(pos);
 		}
 		
-		LocalTime currentTime = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String text = currentTime.format(formatter);
-		
-		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+		drawCenteredText(brackets.wrap(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 }

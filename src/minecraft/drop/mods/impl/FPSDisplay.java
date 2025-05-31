@@ -13,12 +13,12 @@ public class FPSDisplay extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return 58;
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap(mc.getDebugFPS() + " FPS"));
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override

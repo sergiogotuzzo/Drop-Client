@@ -14,12 +14,12 @@ public class PotsCounter extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return 58;
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap((mc.thePlayer != null ? getPotsCount() : 0) + " pots"));
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -28,6 +28,10 @@ public class PotsCounter extends ModDraggableDisplayText {
 			drawRect(pos);
 		}
 		
+		drawCenteredText(brackets.wrap(getPotsCount() + " pots"), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+	}
+	
+	private int getPotsCount() {
 		int potsCount = 0;
 		
 		for (int i = 0; i < mc.thePlayer.inventory.getSizeInventory(); i++) {
@@ -38,8 +42,6 @@ public class PotsCounter extends ModDraggableDisplayText {
 			}
 		}
 		
-		String text = potsCount + " pots";
-		
-		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+		return potsCount;
 	}
 }

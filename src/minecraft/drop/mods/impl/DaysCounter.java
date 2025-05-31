@@ -13,16 +13,16 @@ public class DaysCounter extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(brackets.wrap("0000 DAYS")) + 20;
+		return font.getStringWidth(brackets.wrap(Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days")) + (showBackground ? 20 : 0);
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
-	public void render(ScreenPosition pos) {
+	public void render(ScreenPosition pos) {		
 		if (showBackground) {
 			drawRect(pos);
 		}

@@ -21,12 +21,12 @@ public class PingDisplay extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return 58;
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap((mc.isSingleplayer() ? -1 : mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime()) + " ms"));
 	}
 
 	@Override
 	public int getHeight() {
-		return 18;
+		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -51,10 +51,8 @@ public class PingDisplay extends ModDraggableDisplayText {
 				dynamicColor = new Color(85, 255, 85);
 			}
 		}
-		
-		String text = ping + " ms";
-		
-		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
+
+		drawCenteredText(brackets.wrap(ping + " ms"), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
 	}
 	
 	public void setDynamicColors(boolean enabled) {
