@@ -12,7 +12,7 @@ import drop.mods.ModInstances;
 import drop.mods.impl.Fullbright;
 
 public class Client {
-	public static final String nameVersion = "Drop Client (1.8.9-f9a555f/main)";
+	public static final String nameVersion = "Drop Client (1.8.9-78e288f/main)";
 	
 	private static final Client instance = new Client();
 	
