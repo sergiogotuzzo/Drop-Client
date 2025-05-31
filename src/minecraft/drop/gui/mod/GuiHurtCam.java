@@ -39,10 +39,10 @@ public class GuiHurtCam extends GuiDropClientScreen {
     
     @Override
     public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	mod.setHurtShakeIntensity(sliderHurtShakeIntensity.getSliderPosition() * 20.0F);
+    	mod.setHurtShakeIntensity(sliderHurtShakeIntensity.getSliderPosition() * 35.0F);
     	
-    	if (mod.getHurtShakeIntensity() < 1.0F) {
-    		mod.setHurtShakeIntensity(1.0F);
+    	if (mod.getHurtShakeIntensity() < 5.0F) {
+    		mod.setHurtShakeIntensity(5.0F);
     	}
     }
 
@@ -57,10 +57,10 @@ public class GuiHurtCam extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 2:
-            	mod.setHurtShakeIntensity(sliderHurtShakeIntensity.getSliderPosition() * 20.0F);
+            	mod.setHurtShakeIntensity(sliderHurtShakeIntensity.getSliderPosition() * 35.0F);
             	
-            	if (mod.getHurtShakeIntensity() < 1.0F) {
-            		mod.setHurtShakeIntensity(1.0F);
+            	if (mod.getHurtShakeIntensity() < 5.0F) {
+            		mod.setHurtShakeIntensity(5.0F);
             	}
             	break;
         }
@@ -71,7 +71,7 @@ public class GuiHurtCam extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isHurtShakeToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(sliderHurtShakeIntensity = new GuiSlider(2, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 1, 20, mod.getHurtShakeIntensity()));
+    	this.buttonList.add(sliderHurtShakeIntensity = new GuiSlider(2, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 5.0F, 35.0F, mod.getHurtShakeIntensity()));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
