@@ -1,0 +1,34 @@
+package drop.mods.impl;
+
+import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiModDraggableDisplayText;
+import drop.mods.hud.ScreenPosition;
+import drop.mods.ModDraggableDisplayText;
+
+public class DaysCounter extends ModDraggableDisplayText {
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiModDraggableDisplayText(previousGuiScreen, this);
+	}
+	
+	@Override
+	public int getWidth() {
+		return font.getStringWidth(brackets.wrap("0000 DAYS")) + 20;
+	}
+
+	@Override
+	public int getHeight() {
+		return 18;
+	}
+
+	@Override
+	public void render(ScreenPosition pos) {
+		if (showBackground) {
+			drawRect(pos);
+		}
+		
+		String text = Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days";
+		
+		drawCenteredText(brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+	}
+}
