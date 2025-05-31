@@ -7,6 +7,7 @@ import drop.Client;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
@@ -31,7 +32,8 @@ public class GuiTimeChanger extends GuiDropClientScreen {
         this.drawScaledText("Time Changer", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Time", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
         this.drawText(String.format("%.2f", mod.getTime()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.2f", mod.getTime())) - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-
+        this.drawText("Use Real Current Time", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     
@@ -49,6 +51,10 @@ public class GuiTimeChanger extends GuiDropClientScreen {
             case 1:
             	mod.setTime(sliderTime.getSliderPosition());
             	break;
+            case 2:
+            	mod.setUseRealCurrentTime(!mod.isUseRealCurrentTimeToggled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -57,6 +63,7 @@ public class GuiTimeChanger extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(sliderTime = new GuiSlider(1, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 0 + 15 + 1, 100, 5, 0.0F, 1.0F, mod.getTime()));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isUseRealCurrentTimeToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

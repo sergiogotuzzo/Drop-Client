@@ -3,6 +3,8 @@ package net.minecraft.world;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
@@ -53,6 +55,7 @@ import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldInfo;
 import drop.mods.ModInstances;
+import drop.mods.impl.TimeChanger;
 
 public abstract class World implements IBlockAccess
 {
@@ -1493,7 +1496,7 @@ public abstract class World implements IBlockAccess
      */
     public float getCelestialAngle(float partialTicks)
     {
-        return ModInstances.getTimeChangerMod().isEnabled() ? ModInstances.getTimeChangerMod().getTime() : this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), partialTicks);
+        return ModInstances.getTimeChangerMod().isEnabled() ? ModInstances.getTimeChangerMod().isUseRealCurrentTimeToggled() ? TimeChanger.getRealCurrentTimeInMinecraftTime() : ModInstances.getTimeChangerMod().getTime() : this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), partialTicks);
     }
 
     public int getMoonPhase()
