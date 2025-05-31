@@ -6,9 +6,9 @@ import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiToggleSprintSneak;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableText;
+import drop.mods.ModDraggableDisplayText;
 
-public class ToggleSprintSneak extends ModDraggableText {
+public class ToggleSprintSneak extends ModDraggableDisplayText {
 	public int keyHoldTicks = 7;
 	private boolean sprinting = false;
 	private boolean sneaking = false;

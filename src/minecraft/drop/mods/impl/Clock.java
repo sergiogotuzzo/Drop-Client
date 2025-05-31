@@ -5,14 +5,14 @@ import java.time.format.DateTimeFormatter;
 
 import net.minecraft.item.ItemStack;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableText;
+import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableText;
+import drop.mods.ModDraggableDisplayText;
 
-public class Clock extends ModDraggableText {
+public class Clock extends ModDraggableDisplayText {
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableText(previousGuiScreen, this);
+		return new GuiModDraggableDisplayText(previousGuiScreen, this);
 	}
 	
 	@Override

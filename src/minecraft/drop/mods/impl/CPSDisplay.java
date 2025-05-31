@@ -9,9 +9,9 @@ import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiCPSDisplay;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableText;
+import drop.mods.ModDraggableDisplayText;
 
-public class CPSDisplay extends ModDraggableText {
+public class CPSDisplay extends ModDraggableDisplayText {
 	public boolean showRightCPS = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();

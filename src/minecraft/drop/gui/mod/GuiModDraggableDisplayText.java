@@ -14,15 +14,15 @@ import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
 import drop.gui.GuiText;
-import drop.mods.ModDraggableText;
-import drop.mods.ModDraggableText.Brackets;
+import drop.mods.ModDraggableDisplayText;
+import drop.mods.ModDraggableDisplayText.Brackets;
 import drop.mods.ModInstances;
 
-public class GuiModDraggableText extends GuiDropClientScreen {
+public class GuiModDraggableDisplayText extends GuiDropClientScreen {
 	protected final GuiScreen previousGuiScreen;
-	private final ModDraggableText mod;
+	private final ModDraggableDisplayText mod;
 	
-	public GuiModDraggableText(GuiScreen previousGuiScreen, ModDraggableText mod) {
+	public GuiModDraggableDisplayText(GuiScreen previousGuiScreen, ModDraggableDisplayText mod) {
 		this.previousGuiScreen = previousGuiScreen;
 		this.mod = mod;
 	}

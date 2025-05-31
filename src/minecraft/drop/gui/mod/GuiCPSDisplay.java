@@ -8,7 +8,7 @@ import drop.gui.GuiButtonToggled;
 import drop.mods.ModInstances;
 import drop.mods.impl.CPSDisplay;
 
-public class GuiCPSDisplay extends GuiModDraggableText {
+public class GuiCPSDisplay extends GuiModDraggableDisplayText {
 	private final CPSDisplay mod = ModInstances.getCPSDisplayMod();
 	
 	public GuiCPSDisplay(GuiScreen previousGuiScreen) {

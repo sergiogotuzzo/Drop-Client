@@ -5,9 +5,9 @@ import java.awt.Color;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiPingDisplay;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableText;
+import drop.mods.ModDraggableDisplayText;
 
-public class PingDisplay extends ModDraggableText {
+public class PingDisplay extends ModDraggableDisplayText {
 	private boolean dynamicColors = true;
 
 	public PingDisplay() {

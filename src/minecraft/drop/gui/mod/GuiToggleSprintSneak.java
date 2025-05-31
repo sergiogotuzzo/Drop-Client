@@ -9,7 +9,7 @@ import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
 import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
-public class GuiToggleSprintSneak extends GuiModDraggableText {
+public class GuiToggleSprintSneak extends GuiModDraggableDisplayText {
 	private final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
 
 	private GuiSlider sliderFlyBoostFactor;

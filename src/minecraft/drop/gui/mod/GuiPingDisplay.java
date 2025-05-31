@@ -8,7 +8,7 @@ import drop.gui.GuiButtonToggled;
 import drop.mods.ModInstances;
 import drop.mods.impl.PingDisplay;
 
-public class GuiPingDisplay extends GuiModDraggableText {
+public class GuiPingDisplay extends GuiModDraggableDisplayText {
 	private final PingDisplay mod = ModInstances.getPingDisplayMod();
 	
 	public GuiPingDisplay(GuiScreen previousGuiScreen) {
