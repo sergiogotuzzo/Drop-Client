@@ -121,6 +121,10 @@ public class LoadingScreenRenderer implements IProgressUpdate
      */
     public void setLoadingProgress(int progress)
     {
+    	if (mc.theWorld != null && !mc.isSingleplayer()) {
+    		return;
+    	}
+    	
         if (!this.mc.running)
         {
             if (!this.loadingSuccess)

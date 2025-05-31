@@ -2449,7 +2449,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.thePlayer = null;
         }
 
-        System.gc();
+        // System.gc();
         this.systemTime = 0L;
     }
 
