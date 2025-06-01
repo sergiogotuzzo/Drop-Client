@@ -1,4 +1,4 @@
-package drop.gui.mod;
+package drop.gui.mod.packdisplay;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
+import drop.gui.mod.GuiModDraggableTextColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.PackDisplay;
 
@@ -29,10 +30,12 @@ public class GuiPackDisplay extends GuiDropClientScreen {
         
         this.drawScaledText("Pack Display", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
         this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-        this.drawText("Show Icon", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
-        this.drawText("Show Description", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        this.drawText("Name Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
+        this.drawText("Name Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
+        this.drawText("Description Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
+        this.drawText("Description Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        this.drawText("Show Icon", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
+        this.drawText("Show Description", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -48,17 +51,24 @@ public class GuiPackDisplay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setNameTextShadow(!mod.isNameTextShadowEnabled());
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Pack Display"));
+            	mc.displayGuiScreen(new GuiPackDisplayNameTextColor(this));
             	break;
             case 4:
-            	mod.setShowIcon(!mod.isShowIconToggled());
+            	mod.setDescriptionTextShadow(!mod.isDescriptionTextShadowEnabled());
             	this.initGui();
             	break;
             case 5:
+            	mc.displayGuiScreen(new GuiPackDisplayDescriptionTextColor(this));
+            	break;
+            case 6:
+            	mod.setShowIcon(!mod.isShowIconToggled());
+            	this.initGui();
+            	break;
+            case 7:
             	mod.setShowDescription(!mod.isShowDescriptionToggled());
             	this.initGui();
             	break;
@@ -70,10 +80,12 @@ public class GuiPackDisplay extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(2, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
-        this.buttonList.add(new GuiRect(3, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2 * 2, mod.getTextColor().getRGB()));
-    	this.buttonList.add(new GuiButtonToggled(4, mod.isShowIconToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isShowDescriptionToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(2, mod.isNameTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
+        this.buttonList.add(new GuiRect(3, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2 * 2, mod.getNameTextColor().getRGB()));
+        this.buttonList.add(new GuiButtonToggled(4, mod.isDescriptionTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
+        this.buttonList.add(new GuiRect(5, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2 * 2, mod.getDescriptionTextColor().getRGB()));
+    	this.buttonList.add(new GuiButtonToggled(6, mod.isShowIconToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(7, mod.isShowDescriptionToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
