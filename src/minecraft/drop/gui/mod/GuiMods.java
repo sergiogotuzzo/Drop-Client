@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
@@ -21,6 +22,9 @@ import drop.mods.ModInstances;
 
 public class GuiMods extends GuiDropClientScreen {
     private final GuiScreen previousGuiScreen;
+    
+    private GuiTextField textFieldSearchMod;
+    private String textFieldText = "";
     
     private int scrollOffset = 0;
     private int maxScroll = 0;
@@ -59,6 +63,8 @@ public class GuiMods extends GuiDropClientScreen {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         
         new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])).drawButton(mc, mouseX, mouseY);
+        
+        textFieldSearchMod.drawTextBox();
     }
 
     private void scissorBox(int x, int y, int width, int height) {
@@ -66,6 +72,22 @@ public class GuiMods extends GuiDropClientScreen {
         int factor = mc.displayHeight / this.height;
         
         GL11.glScissor(x * factor, (this.height - y - height) * factor, width * factor, height * factor);
+    }
+
+    @Override
+    protected void keyTyped(char typedChar, int key) throws IOException {
+        textFieldSearchMod.textboxKeyTyped(typedChar, key);
+        
+        textFieldText = textFieldSearchMod.getText();
+        
+        this.initGui();
+    }
+
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        
+        textFieldSearchMod.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
@@ -102,6 +124,12 @@ public class GuiMods extends GuiDropClientScreen {
     public void initGui() {
         this.buttonList.clear();
 
+        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+        
+        textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15, 120, 20);
+        textFieldSearchMod.setText(textFieldText);
+        textFieldSearchMod.setFocused(true);
+
         int i = 0;
         int baseY = (this.height - 200) / 2 + 30 - scrollOffset;
 
@@ -110,7 +138,11 @@ public class GuiMods extends GuiDropClientScreen {
 
             if (buttonY >= (this.height - 200) / 2 + 30 && buttonY <= (this.height - 200) / 2 + 200 - 10) {
                 String modName = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
-                
+
+                if (!textFieldSearchMod.getText().isEmpty() && !modName.toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
+                	continue;
+                }
+
                 boolean hovering = true;
                 
                 if (mod.getGui(this) == null) {
@@ -126,7 +158,10 @@ public class GuiMods extends GuiDropClientScreen {
 
         int totalHeight = 15 * ModInstances.getAllMods().size();
         maxScroll = Math.max(0, totalHeight - (200 - 50));
+    }
 
-        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+    @Override
+    public void updateScreen() {
+        this.textFieldSearchMod.updateCursorCounter();
     }
 }
