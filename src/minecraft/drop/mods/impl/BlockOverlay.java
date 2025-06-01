@@ -19,8 +19,8 @@ public class BlockOverlay extends Mod {
 	private ColorManager outlineColor = ColorManager.fromColor(Color.BLACK);
 	private boolean outlineChroma = false;
 	private boolean overlay = false;
-	private ColorManager overlayColor = ColorManager.fromColor(Color.WHITE).setAlpha(50);
-	private boolean overlayChroma = true;
+	private ColorManager overlayColor = ColorManager.fromColor(Color.WHITE).setAlpha(80);
+	private boolean overlayChroma = false;
 	
 	public BlockOverlay() {
 		setOutline((boolean) getFromFile("outline", outline));
