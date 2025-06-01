@@ -65,9 +65,7 @@ public class PackDisplay extends ModDraggableText {
 		String packName = selectedPack.getTexturePackDescription().replace("§r", "");
 
 		drawText(selectedPack.getResourcePackName(), packX, packNameY, textColor, textShadow, packName.contains("§") ? false : textChroma);
-		
-		System.out.println(packName);
-		
+				
 		if (showDescription) {
 			drawText(packName, packX, pos.getAbsoluteY() + offsetY + 32 - font.FONT_HEIGHT - 5, textColor, textShadow, packName.contains("§") ? false : textChroma);
 		}
