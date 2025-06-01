@@ -13,7 +13,7 @@ import drop.mods.impl.CPSDisplay;
 import drop.mods.impl.Chat;
 import drop.mods.impl.Clock;
 import drop.mods.impl.CoordinatesDisplay;
-import drop.mods.impl.DaysCounter;
+import drop.mods.impl.DayCounter;
 import drop.mods.impl.FPSDisplay;
 import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
@@ -45,7 +45,7 @@ public class ModInstances {
 	private static MemoryUsage memoryUsageMod;
 	private static PotsCounter potsCounterMod;
 	private static Clock clockMod;
-	private static DaysCounter daysCounterMod;
+	private static DayCounter dayCounterMod;
 	private static PackDisplay packDisplayMod;
 	private static ServerAddress serverAddressMod;
 	private static Freelook freelookMod = new Freelook();
@@ -74,7 +74,7 @@ public class ModInstances {
 		manager.register(memoryUsageMod = new MemoryUsage());
 		manager.register(potsCounterMod = new PotsCounter());
 		manager.register(clockMod = new Clock());
-		manager.register(daysCounterMod = new DaysCounter());
+		manager.register(dayCounterMod = new DayCounter());
 		manager.register(packDisplayMod = new PackDisplay());
 		manager.register(serverAddressMod = new ServerAddress());
 	}
@@ -123,8 +123,8 @@ public class ModInstances {
 		return clockMod;
 	}
 	
-	public static DaysCounter getDaysCounterMod() {
-		return daysCounterMod;
+	public static DayCounter getdayCounterMod() {
+		return dayCounterMod;
 	}
 	
 	public static PackDisplay getPackDisplayMod() {
@@ -197,7 +197,7 @@ public class ModInstances {
 			    getClockMod(),
 			    getCoordinatesDisplayMod(),
 			    getCPSDisplayMod(),
-			    getDaysCounterMod(),
+			    getdayCounterMod(),
 			    getFPSDisplayMod(),
 			    getFullbrightMod(),
 			    getFreelookMod(),

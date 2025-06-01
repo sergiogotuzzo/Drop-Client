@@ -5,7 +5,7 @@ import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
-public class DaysCounter extends ModDraggableDisplayText {
+public class DayCounter extends ModDraggableDisplayText {
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return new GuiModDraggableDisplayText(previousGuiScreen, this);
