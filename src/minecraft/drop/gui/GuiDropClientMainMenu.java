@@ -7,7 +7,6 @@ import org.lwjgl.input.Mouse;
 
 import drop.Client;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiButtonLanguage;
 import net.minecraft.client.gui.GuiLanguage;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
@@ -68,7 +67,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
         this.buttonList.add(new GuiButton(2, this.width / 2 - 120 / 2, this.height / 2 + 24 * 2 - 4, 120, 20, I18n.format("menu.multiplayer", new Object[0])));
         
         this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("drop/icon.png"), this.width / 2 - 2 * 3 - 40, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
-        this.buttonList.add(new GuiButtonLanguage(4, this.width / 2 - 2 - 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
+        this.buttonList.add(new GuiButtonIcon(4, new ResourceLocation("drop/language.png"), this.width / 2 - 2 - 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8, 14, 14));
     	this.buttonList.add(new GuiButtonIcon(5, new ResourceLocation("drop/options.png"), this.width / 2 + 2, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8, 14, 14));
         this.buttonList.add(new GuiButtonIcon(6, new ResourceLocation("drop/quit.png"), this.width / 2 + 2 * 3 + 20, this.height - 20 - fontRendererObj.FONT_HEIGHT - 8));
     }
