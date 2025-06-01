@@ -28,6 +28,7 @@ import drop.mods.impl.PotionEffects;
 import drop.mods.impl.PotsCounter;
 import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import drop.mods.impl.Scoreboard;
+import drop.mods.impl.ServerAddress;
 import drop.mods.impl.TabOverlay;
 import drop.mods.impl.TimeChanger;
 
@@ -45,6 +46,7 @@ public class ModInstances {
 	private static Clock clockMod;
 	private static DaysCounter daysCounterMod;
 	private static PackDisplay packDisplayMod;
+	private static ServerAddress serverAddressMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldVisualsMod = new OldVisuals();
@@ -73,6 +75,7 @@ public class ModInstances {
 		manager.register(clockMod = new Clock());
 		manager.register(daysCounterMod = new DaysCounter());
 		manager.register(packDisplayMod = new PackDisplay());
+		manager.register(serverAddressMod = new ServerAddress());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -125,6 +128,10 @@ public class ModInstances {
 	
 	public static PackDisplay getPackDisplayMod() {
 		return packDisplayMod;
+	}
+	
+	public static ServerAddress getServerAddressMod() {
+		return serverAddressMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -204,6 +211,7 @@ public class ModInstances {
 			    getPotionEffectsMod(),
 			    getPotsCounterMod(),
 			    getScoreboardMod(),
+			    getServerAddressMod(),
 			    getTabOverlayMod(),
 			    getTimeChangerMod(),
 			    getToggleSprintSneakMod()
