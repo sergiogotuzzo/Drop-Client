@@ -103,11 +103,29 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	}
 	
 	public void drawCenteredText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
-		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2, y + getHeight() / 2 - 4, color, dropShadow, chroma);
+		drawText(text, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, color, dropShadow, chroma);
 	}
 	
 	public void drawCenteredText(String text, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
 		drawCenteredText(text, x, y, color.getRGB(), dropShadow, chroma);
+	}
+	
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
+		int textX;
+		
+		if (pos.getRelativeX() < 1.0 / 3.0) {
+			textX = pos.getAbsoluteX() + 20 / 2;
+		} else if (pos.getRelativeX() > 2.0 / 3.0) {
+			textX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - 20 / 2;
+		} else {
+			textX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
+		}
+		
+		drawText(text, textX, pos.getAbsoluteY() + getHeight() / 2 - 4, color, dropShadow, chroma);
+	}
+	
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
+		drawCenteredAlignedText(pos, text, x, y, color.getRGB(), dropShadow, chroma);
 	}
 	
 	public void drawAlignedText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
