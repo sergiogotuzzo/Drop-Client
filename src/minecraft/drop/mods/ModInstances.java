@@ -2,6 +2,7 @@ package drop.mods;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import drop.mods.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
@@ -186,7 +187,7 @@ public class ModInstances {
 		return leftHandMod;
 	}
 	
-	public static Collection<Mod> getAllMods() {
+	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),

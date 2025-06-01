@@ -124,39 +124,39 @@ public class GuiMods extends GuiDropClientScreen {
     public void initGui() {
         this.buttonList.clear();
 
-        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
-        
+        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done")));
+
         textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15 - 3, 120, 20);
         textFieldSearchMod.setText(textFieldText);
         textFieldSearchMod.setFocused(true);
 
-        int i = 0;
-        int baseY = (this.height - 200) / 2 + 30 - scrollOffset;
+        int drawn = 0;
+        int totalHeight = 0;
 
-        for (Mod mod : ModInstances.getAllMods()) {
-            int buttonY = baseY + 15 * i;
+        List<Mod> mods = ModInstances.getAllMods();
+        for (int i = 0; i < mods.size(); i++) {
+            Mod mod = mods.get(i);
+            String modName = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
 
-            if (buttonY >= (this.height - 200) / 2 + 30 && buttonY <= (this.height - 200) / 2 + 200 - 10) {
-                String modName = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
-
-                if (!textFieldSearchMod.getText().isEmpty() && !modName.toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
-                	continue;
-                }
-
-                boolean hovering = true;
-                
-                if (mod.getGui(this) == null) {
-                	hovering = false;
-                }
-                
-                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, modName, hovering));
-                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 20 - 15, buttonY - 2 + 15));
+            if (!textFieldSearchMod.getText().isEmpty() && !modName.toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
+            	if (scrollOffset > 0) {
+                	scrollOffset = 0;
+            	}
+            	continue;
             }
 
-            i++;
+            int buttonY = (this.height - 200) / 2 + 30 + totalHeight - scrollOffset;
+
+            if (buttonY >= (this.height - 200) / 2 + 30 && buttonY <= (this.height - 200) / 2 + 200 - 20) {
+                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, modName, mod.getGui(this) != null));
+                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 20 - 15, buttonY - 2 + 15));
+
+                drawn++;
+            }
+
+            totalHeight += 15;
         }
 
-        int totalHeight = 15 * ModInstances.getAllMods().size();
         maxScroll = Math.max(0, totalHeight - (200 - 50));
     }
 
