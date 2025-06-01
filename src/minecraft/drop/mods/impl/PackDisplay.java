@@ -27,13 +27,13 @@ public class PackDisplay extends ModDraggableText {
 
 	@Override
 	public int getHeight() {
-		return mc.getResourcePackRepository().getRepositoryEntries().isEmpty() ? 32 : 32 * mc.getResourcePackRepository().getRepositoryEntries().size();
+		return mc.getResourcePackRepository().getRepositoryEntries().isEmpty() ? 28 : 28 * mc.getResourcePackRepository().getRepositoryEntries().size();
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			drawRect(pos.getAbsoluteX() + (showIcon ? 32 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight());
+			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight());
 		}
 		
 		List<ResourcePackRepository.Entry> selectedPacks = mc.getResourcePackRepository().getRepositoryEntries();
@@ -46,7 +46,7 @@ public class PackDisplay extends ModDraggableText {
 				
 				drawSelectedPack(selectedPack, offsetY);
 				
-				offsetY += 32;
+				offsetY += 28;
 			}
 		}
 	}
@@ -57,17 +57,17 @@ public class PackDisplay extends ModDraggableText {
 			
 			selectedPack.bindTexturePackIcon(mc.getTextureManager());
 			
-			Gui.drawModalRectWithCustomSizedTexture(pos.getAbsoluteX(), pos.getAbsoluteY() + offsetY, 0.0F, 0.0F, 32, 32, 32, 32);
+			Gui.drawModalRectWithCustomSizedTexture(pos.getAbsoluteX(), pos.getAbsoluteY() + offsetY, 0.0F, 0.0F, 28, 28, 28, 28);
 		}
 
-		int packX = pos.getAbsoluteX() + 4 + (showIcon ? 32 : 0);
-		int packNameY = pos.getAbsoluteY() + offsetY + (showDescription ? 5 : (32 - font.FONT_HEIGHT) / 2);
+		int packX = pos.getAbsoluteX() + 4 + (showIcon ? 28 : 0);
+		int packNameY = pos.getAbsoluteY() + offsetY + (showDescription ? 4 : (28 - font.FONT_HEIGHT) / 2);
 		String packName = selectedPack.getTexturePackDescription().replace("§r", "");
 
 		drawText(selectedPack.getResourcePackName(), packX, packNameY, textColor, textShadow, packName.contains("§") ? false : textChroma);
 				
 		if (showDescription) {
-			drawText(packName, packX, pos.getAbsoluteY() + offsetY + 32 - font.FONT_HEIGHT - 5, textColor, textShadow, packName.contains("§") ? false : textChroma);
+			drawText(packName, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, textColor, textShadow, packName.contains("§") ? false : textChroma);
 		}
 	}
 	
