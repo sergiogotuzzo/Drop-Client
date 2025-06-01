@@ -62,7 +62,7 @@ public class GuiMods extends GuiDropClientScreen {
         
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         
-        new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])).drawButton(mc, mouseX, mouseY);
+        new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])).drawButton(mc, mouseX, mouseY);
         
         textFieldSearchMod.drawTextBox();
     }
@@ -124,9 +124,9 @@ public class GuiMods extends GuiDropClientScreen {
     public void initGui() {
         this.buttonList.clear();
 
-        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
         
-        textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15, 120, 20);
+        textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15 - 3, 120, 20);
         textFieldSearchMod.setText(textFieldText);
         textFieldSearchMod.setFocused(true);
 
