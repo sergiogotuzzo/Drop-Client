@@ -51,6 +51,32 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawRect(pos, ColorManager.fromColor(Color.BLACK).setAlpha(102));
 	}
 	
+	public void drawAlignedRect(ScreenPosition pos, String text, int color) {
+		int rectLeft;
+		int rectRight;
+		
+		if (pos.getRelativeX() < 1.0 / 3.0) {
+			rectLeft = pos.getAbsoluteX();
+			rectRight = pos.getAbsoluteX() + font.getStringWidth(text) + 20;
+		} else if (pos.getRelativeX() > 2.0 / 3.0) {
+			rectLeft = pos.getAbsoluteX() - font.getStringWidth(text) + getWidth() - 20;
+			rectRight = pos.getAbsoluteX() + getWidth();
+		} else {
+			rectLeft = pos.getAbsoluteX() - (font.getStringWidth(text) + 20) / 2 + getWidth() / 2;
+			rectRight = pos.getAbsoluteX() + (font.getStringWidth(text) + 20) / 2 + getWidth() / 2;
+		}
+		
+    	drawRect(rectLeft, pos.getAbsoluteY(), rectRight, pos.getAbsoluteY() + getHeight(), color);
+	}
+	
+	public void drawAlignedRect(ScreenPosition pos, String text, ColorManager color) {
+		drawAlignedRect(pos, text, color.getRGB());
+	}
+	
+	public void drawAlignedRect(ScreenPosition pos, String text) {
+		drawAlignedRect(pos, text, ColorManager.fromColor(Color.BLACK).setAlpha(102));
+	}
+	
 	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
 		if (chroma) {
 			int textCharX = x;

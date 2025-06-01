@@ -42,25 +42,17 @@ public class ServerAddress extends ModDraggableDisplayText {
 	
 	private void drawServerAddress(ScreenPosition pos, ServerData serverData) {
 		if (showBackground) {
-    		int rectLeft;
-    		int rectRight;
     		int textX;
     		
     		if (pos.getRelativeX() < 1.0 / 3.0) {
-    			rectLeft = pos.getAbsoluteX();
-    			rectRight = pos.getAbsoluteX() + font.getStringWidth(brackets.wrap(serverData.serverIP)) + 20;
     			textX = pos.getAbsoluteX() + 20 / 2;
     		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-    			rectLeft = pos.getAbsoluteX() - font.getStringWidth(brackets.wrap(serverData.serverIP)) + getWidth() - 20;
-    			rectRight = pos.getAbsoluteX() + getWidth();
     			textX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(brackets.wrap(serverData.serverIP)) - 20 / 2;
     		} else {
-    			rectLeft = pos.getAbsoluteX() - (font.getStringWidth(brackets.wrap(serverData.serverIP)) + 20) / 2 + getWidth() / 2;
-    			rectRight = pos.getAbsoluteX() + (font.getStringWidth(brackets.wrap(serverData.serverIP)) + 20) / 2 + getWidth() / 2;
     			textX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(brackets.wrap(serverData.serverIP))) / 2;
     		}
     		
-	    	drawRect(rectLeft, pos.getAbsoluteY(), rectRight, pos.getAbsoluteY() + getHeight());
+	    	drawAlignedRect(pos, brackets.wrap(serverData.serverIP));
 			drawText(brackets.wrap(serverData.serverIP), textX, pos.getAbsoluteY() + getHeight() / 2 - 4, textColor, textShadow, textChroma);
     	} else {
 		    drawAlignedText(brackets.wrap(serverData.serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow, textChroma);
