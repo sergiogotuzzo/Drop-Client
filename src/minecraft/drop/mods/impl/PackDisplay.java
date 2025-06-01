@@ -57,7 +57,7 @@ public class PackDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		int width = 4 * 2;
+		int width = 8;
 		
 		if (showIcon) {
 			width += 28;

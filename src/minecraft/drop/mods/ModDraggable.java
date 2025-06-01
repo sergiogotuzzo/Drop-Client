@@ -51,30 +51,30 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawRect(pos, ColorManager.fromColor(Color.BLACK).setAlpha(102));
 	}
 	
-	public void drawAlignedRect(ScreenPosition pos, String text, int color) {
+	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, int color) {
 		int rectLeft;
 		int rectRight;
 		
 		if (pos.getRelativeX() < 1.0 / 3.0) {
 			rectLeft = pos.getAbsoluteX();
-			rectRight = pos.getAbsoluteX() + font.getStringWidth(text) + 20;
+			rectRight = pos.getAbsoluteX() + font.getStringWidth(text) + widthBackground;
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			rectLeft = pos.getAbsoluteX() - font.getStringWidth(text) + getWidth() - 20;
+			rectLeft = pos.getAbsoluteX() - font.getStringWidth(text) + getWidth() - widthBackground;
 			rectRight = pos.getAbsoluteX() + getWidth();
 		} else {
-			rectLeft = pos.getAbsoluteX() - (font.getStringWidth(text) + 20) / 2 + getWidth() / 2;
-			rectRight = pos.getAbsoluteX() + (font.getStringWidth(text) + 20) / 2 + getWidth() / 2;
+			rectLeft = pos.getAbsoluteX() - (font.getStringWidth(text) + widthBackground) / 2 + getWidth() / 2;
+			rectRight = pos.getAbsoluteX() + (font.getStringWidth(text) + widthBackground) / 2 + getWidth() / 2;
 		}
 		
     	drawRect(rectLeft, pos.getAbsoluteY(), rectRight, pos.getAbsoluteY() + getHeight(), color);
 	}
 	
-	public void drawAlignedRect(ScreenPosition pos, String text, ColorManager color) {
-		drawAlignedRect(pos, text, color.getRGB());
+	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, ColorManager color) {
+		drawAlignedRect(pos, text, widthBackground, color.getRGB());
 	}
 	
-	public void drawAlignedRect(ScreenPosition pos, String text) {
-		drawAlignedRect(pos, text, ColorManager.fromColor(Color.BLACK).setAlpha(102));
+	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground) {
+		drawAlignedRect(pos, text, widthBackground, ColorManager.fromColor(Color.BLACK).setAlpha(102));
 	}
 	
 	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
@@ -110,13 +110,13 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawCenteredText(text, x, y, color.getRGB(), dropShadow, chroma);
 	}
 	
-	public void drawCenteredAlignedText(ScreenPosition pos, String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, int color, boolean dropShadow, boolean chroma) {
 		int textX;
 		
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			textX = pos.getAbsoluteX() + 20 / 2;
+			textX = pos.getAbsoluteX() + widthBackground / 2;
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			textX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - 20 / 2;
+			textX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - widthBackground / 2;
 		} else {
 			textX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
 		}
@@ -124,8 +124,8 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, textX, pos.getAbsoluteY() + getHeight() / 2 - 4, color, dropShadow, chroma);
 	}
 	
-	public void drawCenteredAlignedText(ScreenPosition pos, String text, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
-		drawCenteredAlignedText(pos, text, x, y, color.getRGB(), dropShadow, chroma);
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
+		drawCenteredAlignedText(pos, text, widthBackground, x, y, color.getRGB(), dropShadow, chroma);
 	}
 	
 	public void drawAlignedText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
