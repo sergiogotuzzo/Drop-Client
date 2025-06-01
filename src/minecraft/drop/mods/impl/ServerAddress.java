@@ -37,7 +37,7 @@ public class ServerAddress extends ModDraggableDisplayText {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		drawServerAddress(pos, getCurrentServerData());
+		drawServerAddress(pos, dummyServerData);
 	}
 	
 	private void drawServerAddress(ScreenPosition pos, ServerData serverData) {
@@ -47,9 +47,5 @@ public class ServerAddress extends ModDraggableDisplayText {
     	} else {
 		    drawAlignedText(brackets.wrap(serverData.serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow, textChroma);
     	}
-	}
-	
-	private ServerData getCurrentServerData() {
-		return mc.getCurrentServerData() != null ? mc.getCurrentServerData() : dummyServerData;
 	}
 }
