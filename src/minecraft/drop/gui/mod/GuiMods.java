@@ -76,6 +76,8 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     protected void keyTyped(char typedChar, int key) throws IOException {
+    	super.keyTyped(typedChar, key);
+    	
         textFieldSearchMod.textboxKeyTyped(typedChar, key);
         
         textFieldText = textFieldSearchMod.getText();
@@ -142,6 +144,7 @@ public class GuiMods extends GuiDropClientScreen {
             	if (scrollOffset > 0) {
                 	scrollOffset = 0;
             	}
+            	
             	continue;
             }
 
