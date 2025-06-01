@@ -22,6 +22,7 @@ import drop.mods.impl.LeftHand;
 import drop.mods.impl.MemoryUsage;
 import drop.mods.impl.Nametags;
 import drop.mods.impl.OldVisuals;
+import drop.mods.impl.PackDisplay;
 import drop.mods.impl.PingDisplay;
 import drop.mods.impl.PotionEffects;
 import drop.mods.impl.PotsCounter;
@@ -43,6 +44,7 @@ public class ModInstances {
 	private static PotsCounter potsCounterMod;
 	private static Clock clockMod;
 	private static DaysCounter daysCounterMod;
+	private static PackDisplay packDisplayMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldVisualsMod = new OldVisuals();
@@ -70,6 +72,7 @@ public class ModInstances {
 		manager.register(potsCounterMod = new PotsCounter());
 		manager.register(clockMod = new Clock());
 		manager.register(daysCounterMod = new DaysCounter());
+		manager.register(packDisplayMod = new PackDisplay());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -118,6 +121,10 @@ public class ModInstances {
 	
 	public static DaysCounter getDaysCounterMod() {
 		return daysCounterMod;
+	}
+	
+	public static PackDisplay getPackDisplayMod() {
+		return packDisplayMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -192,6 +199,7 @@ public class ModInstances {
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
 			    getOldVisualsMod(),
+			    getPackDisplayMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
 			    getPotsCounterMod(),

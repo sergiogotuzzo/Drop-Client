@@ -59,7 +59,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	            long t = System.currentTimeMillis() - (textCharX * 10 - y * 10);
 	            int c = Color.HSBtoRGB(t % (int) 2000.0F / 2000.0F, 0.8F, 0.8F);
 	            
-	            if (text.startsWith("ï¿½m")) {
+	            if (text.startsWith("§m")) {
 	            	drawText(text, x, y, c, dropShadow, false);
 	            } else {
 		            drawText(String.valueOf(textChar), textCharX, y, c, dropShadow, false);
