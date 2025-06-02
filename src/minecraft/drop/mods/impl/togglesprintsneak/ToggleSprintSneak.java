@@ -47,7 +47,7 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	@Override
 	public void render(ScreenPosition pos) {
 	    if (showText && mc.thePlayer.movementInput.getDisplayText() != "") {
-	    	drawTextToRender(pos, textToRender = mc.thePlayer.movementInput.getDisplayText());
+	    	drawTextToRender(pos, textToRender = brackets.wrap(mc.thePlayer.movementInput.getDisplayText()));
 	    }
 	}
 	

@@ -155,31 +155,40 @@ public class DropClientMovementInput extends MovementInput {
 		String spacing = " ";
 		
 		if (isFlying) {
+			displayText = "Flying" + spacing;
+			
 			if (originalFlySpeed > 0.0F) {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Flying (" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)") + spacing;
-			} else {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Flying") + spacing;
+				displayText += "(" + df.format(boostedFlySpeed / originalFlySpeed) + "x Boost)" + spacing;
+			}
+			
+			if (sneak) {
+				displayText += "(Descending)" + spacing;
 			}
 		}
 		
 		if (isRiding) {
-			displayText += toggleSprintSneakMod.getBrackets().wrap("Riding") + spacing;
+			displayText = "Riding" + spacing;
+			
+			if (sneak) {
+				displayText += "(Dismounting)" + spacing;
+			}
 		}
 		
-		if (sneak) {
-			if (isFlying) {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Descending") + spacing;
-			} else if (isRiding) {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Dismounting") + spacing;
-			} else if (isHoldingSneak) {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Sneaking (Key Held)") + spacing;
+		if (sneak && !isFlying && !isRiding) {
+			displayText = "Sneaking" + spacing;
+			
+			if (isHoldingSneak) {
+				displayText += "(Key Held)" + spacing;
 			} else {
+				displayText += "(Toggled)" + spacing;
 			}
 		} else if (sprint && !isFlying && !isRiding) {
+			displayText = "Sprinting" + spacing;
+			
 			if (isHoldingSprint) {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Sprinting (Key Held)") + spacing;
+				displayText += "(Key Held)" + spacing;
 			} else {
-				displayText += toggleSprintSneakMod.getBrackets().wrap("Sprinting (Toggled)") + spacing;
+				displayText += "(Toggled)" + spacing;
 			}
 		}
 		
