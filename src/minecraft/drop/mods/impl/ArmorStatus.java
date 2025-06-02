@@ -1,6 +1,8 @@
 package drop.mods.impl;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,7 +15,7 @@ import drop.gui.mod.GuiArmorStatus;
 import drop.mods.ModDraggableText;
 import drop.mods.hud.ScreenPosition;
 
-public class ArmorStatus extends ModDraggableText {
+public class ArmorStatus extends ModDraggableText {	
 	private boolean equippedItem = false;
 	private boolean showPercentage = false;
 	private boolean showDamage = true;
@@ -42,19 +44,19 @@ public class ArmorStatus extends ModDraggableText {
 		int width = 0;
 		
 		if (showPercentage) {
-			width = 2 + font.getStringWidth("100%");
+			width = font.getStringWidth("100%");
 		} else if (showDamage && !showMaxDamage) {
-			width = 2 + (equippedItem ? font.getStringWidth("1561") : font.getStringWidth("528"));
+			width = (equippedItem ? font.getStringWidth("1561") : font.getStringWidth("528"));
 		} else if (showDamage && showMaxDamage) {
-			width = 2 + (equippedItem ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
+			width = (equippedItem ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
 		}
 		
-		return 16 + width;
+		return 16 + 2 + width;
 	}
 
 	@Override
 	public int getHeight() {
-		return equippedItem ? 16 * 5 : 16 * 4;
+		return 16 * (equippedItem ? 5 : 4);
 	}
 
 	@Override
@@ -67,20 +69,10 @@ public class ArmorStatus extends ModDraggableText {
 		
 		int i = 0;
 		
-		if (equippedItem) {
-			if (mc.thePlayer.inventory.getCurrentItem() != null) {
-				drawItemStack(pos, 0, mc.thePlayer.inventory.getCurrentItem());
-				
-				i = 1;
-			}
-		}
-		
-		for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
-			if (itemStack != null) {
-				drawItemStack(pos, i, itemStack);
-				
-				i++;
-			}
+		for (ItemStack itemStack : getPlayerInventory()) {
+			drawItemStack(pos, i, itemStack);
+			
+			i++;
 		}
 	}
 	
@@ -92,17 +84,23 @@ public class ArmorStatus extends ModDraggableText {
 			setReverse(true);
 		}
 		
+		Collection<ItemStack> dummyPlayerInventory = new ArrayList<ItemStack>();
+		
 		if (equippedItem) {
-			drawItemStack(pos, 4, new ItemStack(Items.diamond_helmet));
-			drawItemStack(pos, 3, new ItemStack(Items.diamond_chestplate));
-			drawItemStack(pos, 2, new ItemStack(Items.diamond_leggings));
-			drawItemStack(pos, 1, new ItemStack(Items.diamond_boots));
-			drawItemStack(pos, 0, new ItemStack(Items.diamond_sword));
-		} else {
-			drawItemStack(pos, 3, new ItemStack(Items.diamond_helmet));
-			drawItemStack(pos, 2, new ItemStack(Items.diamond_chestplate));
-			drawItemStack(pos, 1, new ItemStack(Items.diamond_leggings));
-			drawItemStack(pos, 0, new ItemStack(Items.diamond_boots));
+			dummyPlayerInventory.add(new ItemStack(Items.diamond_sword));
+		}
+		
+		dummyPlayerInventory.add(new ItemStack(Items.diamond_boots));
+		dummyPlayerInventory.add(new ItemStack(Items.diamond_leggings));
+		dummyPlayerInventory.add(new ItemStack(Items.diamond_chestplate));
+		dummyPlayerInventory.add(new ItemStack(Items.diamond_helmet));
+		
+		int i = 0;
+		
+		for (ItemStack itemStack : dummyPlayerInventory) {
+			drawItemStack(pos, i, itemStack);
+			
+			i++;
 		}
 	}
 
@@ -113,7 +111,7 @@ public class ArmorStatus extends ModDraggableText {
 		
 		GL11.glPushMatrix();
 		
-		int yAdd = (-16 * i) + getHeight() - 16;
+		int offsetY = (-16 * i) + getHeight() - 16;
 		Color dynamicColor = Color.WHITE;
 		
 		if (dynamicColors) {
@@ -139,18 +137,18 @@ public class ArmorStatus extends ModDraggableText {
 		int itemX = reverse ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
 		int damageX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
 		
-		mc.getRenderItem().renderItemAndEffectIntoGUI(is, itemX, pos.getAbsoluteY() + yAdd);
+		mc.getRenderItem().renderItemAndEffectIntoGUI(is, itemX, pos.getAbsoluteY() + offsetY);
 		
 		if (is.isStackable()) {
-			mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
+			mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + offsetY);
 		}
 		
 		if ((showDamage || showPercentage) && is.getItem().isDamageable()) {
 			if (damageOverlays) {
-				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + yAdd);
+				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + offsetY);
 			}
 			
-			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + yAdd + 5, dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
+			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
 		}
 		
 		GL11.glPopMatrix();
@@ -170,6 +168,24 @@ public class ArmorStatus extends ModDraggableText {
 	
 	private double getDamagePercentage(ItemStack is) {
 		return ((is.getMaxDamage() - is.getItemDamage()) / (double) is.getMaxDamage()) * 100;
+	}
+	
+	private Collection<ItemStack> getPlayerInventory() {
+		Collection<ItemStack> playerInventory = new ArrayList<ItemStack>();
+		
+		if (equippedItem) {
+			if (mc.thePlayer.inventory.getCurrentItem() != null) {
+				playerInventory.add(mc.thePlayer.inventory.getCurrentItem());
+			}
+		}
+		
+		for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
+			if (itemStack != null) {
+				playerInventory.add(itemStack);
+			}
+		}
+		
+		return playerInventory;
 	}
 	
 	public void setEquippedItem(boolean enabled) {
