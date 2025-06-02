@@ -27,7 +27,7 @@ public class PotionEffects extends ModDraggable {
     private boolean nameTextShadow = true;
     private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE);
     private boolean nameTextChroma = false;
-    private boolean right = false;
+	private boolean reverse = false;
 	
 	public PotionEffects() {
 		setBlink((boolean) getFromFile("blink", blink));
@@ -39,7 +39,7 @@ public class PotionEffects extends ModDraggable {
     	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
 		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextChroma));
-		setRight((boolean) getFromFile("right", right));
+		setReverse((boolean) getFromFile("reverse", reverse));
 	}
 	
 	@Override
@@ -71,10 +71,10 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
-    	if (pos.getRelativeX() < 1.0 / 3.0 && right) {
-			setRight(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !right) {
-			setRight(true);
+    	if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
+			setReverse(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
+			setReverse(true);
 		}
     	
         int offsetY = 0;
@@ -90,10 +90,10 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-    	if (pos.getRelativeX() < 1.0 / 3.0 && right) {
-			setRight(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !right) {
-			setRight(true);
+    	if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
+			setReverse(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
+			setReverse(true);
 		}
     	
         int offsetY = 0;
@@ -137,7 +137,7 @@ public class PotionEffects extends ModDraggable {
         if (showIcon) {
         	Potion potion = Potion.potionTypes[pe.getPotionID()];
             
-            int iconX = right ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX();
+            int iconX = reverse ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX();
 
             if (potion.hasStatusIcon()) {
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -156,12 +156,12 @@ public class PotionEffects extends ModDraggable {
         int i = showIcon ? 20 : 0;
         
         if (showName) {
-            int nameX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2;
+            int nameX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2;
 
         	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow, nameTextChroma);
         }
         
-        int durationX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2;
+        int durationX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2;
         int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2);
         
         if (blink) {
@@ -277,13 +277,13 @@ public class PotionEffects extends ModDraggable {
 		return nameTextChroma;
 	}
 	
-	public void setRight(boolean enabled) {
-		this.right = enabled;
+	public void setReverse(boolean toggled) {
+		reverse = toggled;
 		
-		setToFile("right", enabled);
+		setToFile("reverse", toggled);
 	}
 	
-	public boolean isRightEnabled() {
-		return right;
+	public boolean isReverseToggled() {
+		return reverse;
 	}
 }

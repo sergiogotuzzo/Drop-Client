@@ -15,21 +15,21 @@ import drop.mods.hud.ScreenPosition;
 
 public class ArmorStatus extends ModDraggableText {
 	private boolean equippedItem = false;
-	private boolean right = false;
 	private boolean showPercentage = false;
 	private boolean showDamage = true;
 	private boolean showMaxDamage = false;
 	private boolean damageOverlays = true;
 	private boolean dynamicColors = true;
-	
+	private boolean reverse = false;
+
 	public ArmorStatus() {
 		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
-		setRight((boolean) getFromFile("right", right));
 		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
 		setShowDamage((boolean) getFromFile("showDamage", showDamage));
 		setShowMaxDamage((boolean) getFromFile("showMaxDamage", showMaxDamage));
 		setDamageOverlays((boolean) getFromFile("damageOverlays", damageOverlays));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
+		setReverse((boolean) getFromFile("reverse", reverse));
 	}
 
 	@Override
@@ -59,10 +59,10 @@ public class ArmorStatus extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (pos.getRelativeX() < 1.0 / 3.0 && right) {
-			setRight(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !right) {
-			setRight(true);
+		if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
+			setReverse(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
+			setReverse(true);
 		}
 		
 		int i = 0;
@@ -86,10 +86,10 @@ public class ArmorStatus extends ModDraggableText {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (pos.getRelativeX() < 1.0 / 3.0 && right) {
-			setRight(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !right) {
-			setRight(true);
+		if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
+			setReverse(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
+			setReverse(true);
 		}
 		
 		if (equippedItem) {
@@ -136,8 +136,8 @@ public class ArmorStatus extends ModDraggableText {
 		
 		RenderHelper.enableGUIStandardItemLighting();
 		
-		int itemX = right ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
-		int damageX = right ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
+		int itemX = reverse ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
+		int damageX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(getDamageText(is)) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
 		
 		mc.getRenderItem().renderItemAndEffectIntoGUI(is, itemX, pos.getAbsoluteY() + yAdd);
 		
@@ -180,16 +180,6 @@ public class ArmorStatus extends ModDraggableText {
 	
 	public boolean isEquippedItemEnabled() {
 		return equippedItem;
-	}
-	
-	public void setRight(boolean enabled) {
-		right = enabled;
-		
-		setToFile("right", enabled);
-	}
-	
-	public boolean isRightEnabled() {
-		return right;
 	}
 	
 	public void setShowPercentage(boolean enabled) {
@@ -240,5 +230,15 @@ public class ArmorStatus extends ModDraggableText {
 	
 	public boolean isDynamicColorsEnabled() {
 		return dynamicColors;
+	}
+	
+	public void setReverse(boolean toggled) {
+		reverse = toggled;
+		
+		setToFile("reverse", toggled);
+	}
+	
+	public boolean isReverseToggled() {
+		return reverse;
 	}
 }
