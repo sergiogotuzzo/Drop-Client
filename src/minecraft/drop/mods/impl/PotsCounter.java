@@ -28,7 +28,9 @@ public class PotsCounter extends ModDraggableDisplayText {
 			drawRect(pos);
 		}
 		
-		drawCenteredText(brackets.wrap(getPotsCount() + " pots"), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+		String text = getPotsCount() + " pots";
+		
+		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
 	}
 	
 	private int getPotsCount() {

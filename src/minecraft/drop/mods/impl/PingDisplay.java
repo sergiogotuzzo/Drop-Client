@@ -52,8 +52,10 @@ public class PingDisplay extends ModDraggableDisplayText {
 					dynamicColor = new Color(85, 255, 85);
 				}
 			}
+			
+			String text = ping + " ms";
 
-			drawCenteredText(brackets.wrap(ping + " ms"), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
+			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
 		}
 	}
 	
@@ -79,8 +81,10 @@ public class PingDisplay extends ModDraggableDisplayText {
 				dynamicColor = new Color(85, 255, 85);
 			}
 		}
+		
+		String text = ping + " ms";
 
-		drawCenteredText(brackets.wrap(ping + " ms"), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
+		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textChroma && !dynamicColors);
 	}
 	
 	public void setDynamicColors(boolean enabled) {

@@ -36,7 +36,7 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(brackets.wrap("Sprinting (Toggled)")) + (showBackground ? 20 : 0);
+		return showBackground ? font.getStringWidth("Sprinting (Toggled)") + 20 : font.getStringWidth(brackets.wrap("Sprinting (Toggled)"));
 	}
 
 	@Override
@@ -47,14 +47,18 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	@Override
 	public void render(ScreenPosition pos) {
 	    if (showText && mc.thePlayer.movementInput.getDisplayText() != "") {
-	    	drawTextToRender(pos, textToRender = brackets.wrap(mc.thePlayer.movementInput.getDisplayText()));
+	    	String text = mc.thePlayer.movementInput.getDisplayText();
+	    	
+	    	drawTextToRender(pos, textToRender = (showBackground ? text : brackets.wrap(text)));
 	    }
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (showText) {
-	    	drawTextToRender(pos, textToRender = brackets.wrap("Sprinting (Toggled)"));
+			String text = "Sprinting (Toggled)";
+	    	
+	    	drawTextToRender(pos, textToRender = (showBackground ? text : brackets.wrap(text)));
 	    }
 	}
 	

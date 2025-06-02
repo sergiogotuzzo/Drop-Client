@@ -42,8 +42,8 @@ public class ServerAddress extends ModDraggableDisplayText {
 	
 	private void drawServerAddress(ScreenPosition pos, ServerData serverData) {
 		if (showBackground) {
-			drawAlignedRect(pos, brackets.wrap(serverData.serverIP), 8);
-			drawCenteredAlignedText(pos, brackets.wrap(serverData.serverIP), 8, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+			drawAlignedRect(pos, serverData.serverIP, 8);
+			drawCenteredAlignedText(pos, serverData.serverIP, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
     	} else {
 		    drawAlignedText(brackets.wrap(serverData.serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow, textChroma);
     	}
