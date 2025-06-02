@@ -13,7 +13,7 @@ public class DayCounter extends ModDraggableDisplayText {
 	
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(brackets.wrap(Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days")) + (showBackground ? 20 : 0);
+		return showBackground ? font.getStringWidth(Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days") + 20 : font.getStringWidth(brackets.wrap(Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days"));
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class ServerAddress extends ModDraggableDisplayText {
 
 	@Override
 	public int getWidth() {
-		return font.getStringWidth(brackets.wrap(dummyServerData.serverIP)) + (showBackground ? 8 : 0);
+		return showBackground ? font.getStringWidth(dummyServerData.serverIP) + 8 : font.getStringWidth(brackets.wrap(dummyServerData.serverIP));
 	}
 
 	@Override
