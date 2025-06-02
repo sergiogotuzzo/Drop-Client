@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiArmorStatus;
+import drop.gui.mod.armorstatus.GuiArmorStatus;
 import drop.mods.ModDraggableText;
 import drop.mods.hud.ScreenPosition;
 

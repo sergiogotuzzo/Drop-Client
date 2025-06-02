@@ -1,4 +1,4 @@
-package drop.gui.mod;
+package drop.gui.mod.armorstatus;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -11,7 +11,6 @@ import drop.events.EventTarget;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
-import drop.gui.GuiText;
 import drop.mods.ModInstances;
 import drop.mods.impl.ArmorStatus;
 
@@ -37,7 +36,6 @@ public class GuiArmorStatus extends GuiDropClientScreen {
         this.drawText("Damage Overlays", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
         this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
-        this.drawText("Dynamic Colors", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -73,11 +71,7 @@ public class GuiArmorStatus extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 7:
-            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Armor Status"));
-            	break;
-            case 8:
-            	mod.setDynamicColors(!mod.isDynamicColorsEnabled());
-            	this.initGui();
+            	mc.displayGuiScreen(new GuiArmorStatusTextColor(this));
             	break;
         }
     }
@@ -93,7 +87,6 @@ public class GuiArmorStatus extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(5, mod.isDamageOverlaysEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(6, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
         this.buttonList.add(new GuiRect(7, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2 * 2, mod.getTextColor().getRGB()));
-    	this.buttonList.add(new GuiButtonToggled(8, mod.isDynamicColorsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
