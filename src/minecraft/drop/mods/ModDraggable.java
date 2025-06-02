@@ -114,14 +114,14 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		int textX;
 		
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			textX = pos.getAbsoluteX() + widthBackground / 2;
+			textX = x + widthBackground / 2;
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			textX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - widthBackground / 2;
+			textX = x + getWidth() - font.getStringWidth(text) - widthBackground / 2;
 		} else {
-			textX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
+			textX = x + (getWidth() - font.getStringWidth(text)) / 2;
 		}
 		
-		drawText(text, textX, pos.getAbsoluteY() + getHeight() / 2 - 4, color, dropShadow, chroma);
+		drawText(text, textX, y + getHeight() / 2 - 4, color, dropShadow, chroma);
 	}
 	
 	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, ColorManager color, boolean dropShadow, boolean chroma) {
@@ -132,11 +132,11 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		int alignedX;
 		
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			alignedX = pos.getAbsoluteX();
+			alignedX = x;
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			alignedX = pos.getAbsoluteX() + getWidth() - font.getStringWidth(text);
+			alignedX = x + getWidth() - font.getStringWidth(text);
 		} else {
-			alignedX = pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2;
+			alignedX = x + (getWidth() - font.getStringWidth(text)) / 2;
 		}
 		
 		drawText(text, alignedX, y, color, dropShadow, chroma);
