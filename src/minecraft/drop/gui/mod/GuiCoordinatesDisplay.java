@@ -35,6 +35,7 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
         this.drawText("Show Facing Towards", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
         this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
         this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
+        this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -64,6 +65,10 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
             case 5:
             	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Coordinates Display"));
             	break;
+            case 6:
+            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -76,6 +81,7 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(3, mod.isShowFacingTowardsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(4, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
         this.buttonList.add(new GuiRect(5, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2 * 2, mod.getTextColor().getRGB()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+    	this.buttonList.add(new GuiButtonToggled(6, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
+    	this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

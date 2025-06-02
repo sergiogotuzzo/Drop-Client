@@ -8,6 +8,7 @@ import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class CoordinatesDisplay extends ModDraggableText {
+	private boolean showBackground = false;
 	private boolean showBiome = true;
 	private boolean showFacing = true;
 	private boolean showFacingTowards = true;
@@ -41,7 +42,9 @@ public class CoordinatesDisplay extends ModDraggableText {
 				width += 10 + 6;
 			}
 
-			width += 12;
+			if (showBackground) {
+				width += 12;
+			}
 		} else {
 			width = font.getStringWidth(getLongestCoordinateText());
 			
@@ -49,7 +52,9 @@ public class CoordinatesDisplay extends ModDraggableText {
 				width += 10 + 6;
 			}
 
-			width += 12;
+			if (showBackground) {
+				width += 12;
+			}
 		}
 
 		return width;
@@ -58,12 +63,17 @@ public class CoordinatesDisplay extends ModDraggableText {
 
 	@Override
 	public int getHeight() {
-		int height = 12;
+		int height = 0;
 		
-		if (showBiome) {
-			height += 38;
+		int lines = showBiome ? 4 : 3;
+		
+		if (showBackground) {
+			height += 12;
+						
+			height += 10 * lines;
 		} else {
-			height += 28;
+			height += 11 * lines;
+			height -= 2;
 		}
 		
 		return height;
@@ -71,7 +81,9 @@ public class CoordinatesDisplay extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		drawRect(pos);
+		if (showBackground) {
+			drawRect(pos);
+		}
 		
 		int i = 11;
 		
@@ -79,21 +91,24 @@ public class CoordinatesDisplay extends ModDraggableText {
 		String textY = "Y: " + (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
 		String textZ = "Z: " + (int) mc.getRenderViewEntity().posZ;
 		
-		drawText(textX, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 1 - 6, textColor, textShadow, textChroma);
-		drawText(textY, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 2 - 6, textColor, textShadow, textChroma);
-		drawText(textZ, pos.getAbsoluteX() + 6, pos.getAbsoluteY() + i * 3 - 6, textColor, textShadow, textChroma);
+		int k = showBackground ? 6 : 1;
+		int j = showBackground ? 6 : font.FONT_HEIGHT + 1;
+		
+		drawText(textX, pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textChroma);
+		drawText(textY, pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textChroma);
+		drawText(textZ, pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textChroma);
 		
 		if (showFacing) {
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - 6, pos.getAbsoluteY() + i * 2 - 6, textColor, textShadow, textChroma);
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textChroma);
 		}
 		
 		if (showFacingTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - 6, pos.getAbsoluteY() + i * 1 - 6, textColor, textShadow, textChroma);
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - 6, pos.getAbsoluteY() + i * 3 - 6, textColor, textShadow, textChroma);
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textChroma);
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textChroma);
 		}
 		
 		if (showBiome) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + 6, pos.getAbsoluteY() + 4 * 11 - 6, textColor, textShadow, textChroma);
+			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j, textColor, textShadow, textChroma);
 		}
 	}
 	
@@ -195,6 +210,16 @@ public class CoordinatesDisplay extends ModDraggableText {
 	        default:
 	        	return "";
 	    }
+	}
+	
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
+	}
+	
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
 	}
 	
 	public void setShowBiome(boolean enabled) {
