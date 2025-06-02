@@ -30,6 +30,9 @@ public class GuiScreenResourcePacks extends GuiScreen
     private GuiResourcePackSelected selectedResourcePacksList;
     private boolean changed = false;
 
+    private GuiTextField textFieldSearchPack;
+    private String textFieldText = "";
+
     public GuiScreenResourcePacks(GuiScreen parentScreenIn)
     {
         this.parentScreen = parentScreenIn;
@@ -41,6 +44,12 @@ public class GuiScreenResourcePacks extends GuiScreen
      */
     public void initGui()
     {
+    	this.buttonList.clear();
+    	
+    	textFieldSearchPack = new GuiTextField(999, this.fontRendererObj, this.width / 2 - 190 - 9, this.height - 48 - 28, 190, 20);
+    	textFieldSearchPack.setText(textFieldText);
+    	textFieldSearchPack.setFocused(true);
+    	
         this.buttonList.add(new GuiOptionButton(2, this.width / 2 - 154, this.height - 48, I18n.format("resourcePack.openFolder", new Object[0])));
         this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 4, this.height - 48, I18n.format("gui.done", new Object[0])));
 
@@ -54,7 +63,11 @@ public class GuiScreenResourcePacks extends GuiScreen
             list.removeAll(resourcepackrepository.getRepositoryEntries());
 
             for (ResourcePackRepository.Entry resourcepackrepository$entry : list)
-            {
+            {            	
+            	if (!textFieldSearchPack.getText().isEmpty() && !resourcepackrepository$entry.getResourcePackName().toLowerCase().contains(textFieldText.toLowerCase())) {
+            		continue;
+            	}
+            	
                 this.availableResourcePacks.add(new ResourcePackListEntryFound(this, resourcepackrepository$entry));
             }
 
@@ -202,6 +215,17 @@ public class GuiScreenResourcePacks extends GuiScreen
         }
     }
 
+    @Override
+    protected void keyTyped(char typedChar, int key) throws IOException {
+    	super.keyTyped(typedChar, key);
+    	
+        textFieldSearchPack.textboxKeyTyped(typedChar, key);
+        
+        textFieldText = textFieldSearchPack.getText();
+        
+        this.initGui();
+    }
+
     /**
      * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
      */
@@ -231,6 +255,7 @@ public class GuiScreenResourcePacks extends GuiScreen
         this.drawCenteredString(this.fontRendererObj, I18n.format("resourcePack.title", new Object[0]), this.width / 2, 16, 16777215);
         this.drawCenteredString(this.fontRendererObj, I18n.format("resourcePack.folderInfo", new Object[0]), this.width / 2 - 77, this.height - 26, 8421504);
         super.drawScreen(mouseX, mouseY, partialTicks);
+    	textFieldSearchPack.drawTextBox();
     }
 
     /**
@@ -239,5 +264,9 @@ public class GuiScreenResourcePacks extends GuiScreen
     public void markChanged()
     {
         this.changed = true;
+    }
+
+    public void updateScreen() {
+        textFieldSearchPack.updateCursorCounter();
     }
 }
