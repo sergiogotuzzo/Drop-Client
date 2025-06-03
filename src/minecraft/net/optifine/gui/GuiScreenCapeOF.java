@@ -33,6 +33,8 @@ public class GuiScreenCapeOF extends GuiScreenOF
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         int i = 0;
         this.title = I18n.format("of.options.capeOF.title", new Object[0]);
         i = i + 2;

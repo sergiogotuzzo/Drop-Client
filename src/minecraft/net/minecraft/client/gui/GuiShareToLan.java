@@ -1,13 +1,15 @@
 package net.minecraft.client.gui;
 
 import java.io.IOException;
+
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.WorldSettings;
 
-public class GuiShareToLan extends GuiScreen
+public class GuiShareToLan extends GuiDropClientScreen
 {
     private final GuiScreen field_146598_a;
     private GuiButton field_146596_f;
@@ -26,6 +28,8 @@ public class GuiShareToLan extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(101, this.width / 2 - 155, this.height - 28, 150, 20, I18n.format("lanServer.start", new Object[0])));
         this.buttonList.add(new GuiButton(102, this.width / 2 + 5, this.height - 28, 150, 20, I18n.format("gui.cancel", new Object[0])));

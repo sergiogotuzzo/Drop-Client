@@ -10,13 +10,22 @@ import net.minecraft.util.ResourceLocation;
 
 public abstract class GuiDropClientScreen extends GuiScreen {
 	@Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0x808080);
         this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0x808080);
         
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
+	
+	@Override
+	public void initGui() {
+    	mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/menu_blur.json"));
+    }
+	
+	@Override
+	public void onGuiClosed() {
+    	mc.entityRenderer.stopUseShader();
+	}
     
     public void drawHollowRect(int x, int y, int width, int height, int color) {
 		this.drawHorizontalLine(x, x + width, y, color);

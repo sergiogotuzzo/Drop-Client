@@ -1,5 +1,6 @@
 package net.optifine.gui;
 
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -7,7 +8,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiQualitySettingsOF extends GuiScreen
+public class GuiQualitySettingsOF extends GuiDropClientScreen
 {
     private GuiScreen prevScreen;
     protected String title;
@@ -27,6 +28,8 @@ public class GuiQualitySettingsOF extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.title = I18n.format("of.options.qualityTitle", new Object[0]);
         this.buttonList.clear();
 

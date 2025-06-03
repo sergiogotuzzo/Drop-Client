@@ -39,6 +39,8 @@ public class GuiVideoSettings extends GuiScreenOF
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.screenTitle = I18n.format("options.videoTitle", new Object[0]);
         this.buttonList.clear();
 
@@ -217,10 +219,10 @@ public class GuiVideoSettings extends GuiScreenOF
             s = "OptiFine M5 Light";
         }
 
-        this.drawString(this.fontRendererObj, s, 2, this.height - 10, 8421504);
+        this.drawString(this.fontRendererObj, s, 2, this.height - 10 - mc.fontRendererObj.FONT_HEIGHT, 8421504);
         String s2 = "Minecraft 1.8.9";
         int i = this.fontRendererObj.getStringWidth(s2);
-        this.drawString(this.fontRendererObj, s2, this.width - i - 2, this.height - 10, 8421504);
+        this.drawString(this.fontRendererObj, s2, this.width - i - 2, this.height - 10 - mc.fontRendererObj.FONT_HEIGHT, 8421504);
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.tooltipManager.drawTooltips(mouseX, mouseY, this.buttonList);
     }

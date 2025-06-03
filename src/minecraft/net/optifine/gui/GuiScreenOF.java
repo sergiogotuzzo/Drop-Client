@@ -2,11 +2,14 @@ package net.optifine.gui;
 
 import java.io.IOException;
 import java.util.List;
+
+import drop.Client;
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiVideoSettings;
 
-public class GuiScreenOF extends GuiScreen
+public class GuiScreenOF extends GuiDropClientScreen
 {
     protected void actionPerformedRightClick(GuiButton button) throws IOException
     {

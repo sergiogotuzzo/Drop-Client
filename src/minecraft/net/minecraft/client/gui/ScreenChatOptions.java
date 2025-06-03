@@ -29,6 +29,8 @@ public class ScreenChatOptions extends GuiDropClientScreen
      */
     public void initGui()
     {
+    	super.initGui();
+
         int i = 0;
         this.field_146401_i = I18n.format("options.chat.title", new Object[0]);
 

@@ -1,6 +1,9 @@
 package net.minecraft.client.gui.stream;
 
 import com.google.common.collect.Lists;
+
+import drop.gui.GuiDropClientScreen;
+
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
@@ -22,7 +25,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import tv.twitch.ErrorCode;
 
-public class GuiStreamUnavailable extends GuiScreen
+public class GuiStreamUnavailable extends GuiDropClientScreen
 {
     private static final Logger field_152322_a = LogManager.getLogger();
     private final IChatComponent field_152324_f;
@@ -51,6 +54,8 @@ public class GuiStreamUnavailable extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         if (this.field_152323_r.isEmpty())
         {
             this.field_152323_r.addAll(this.fontRendererObj.listFormattedStringToWidth(this.field_152326_h.func_152561_a().getFormattedText(), (int)((float)this.width * 0.75F)));

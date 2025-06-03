@@ -14,6 +14,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import drop.Client;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiText;
@@ -64,7 +65,10 @@ public class GuiMods extends GuiDropClientScreen {
         
         new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])).drawButton(mc, mouseX, mouseY);
         
-        textFieldSearchMod.drawTextBox();
+        textFieldSearchMod.drawTextBox();   
+        
+        this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0x808080);
+        this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0x808080);
     }
 
     private void scissorBox(int x, int y, int width, int height) {
@@ -76,13 +80,13 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     protected void keyTyped(char typedChar, int key) throws IOException {
-    	super.keyTyped(typedChar, key);
-    	
         textFieldSearchMod.textboxKeyTyped(typedChar, key);
         
         textFieldText = textFieldSearchMod.getText();
         
         this.initGui();
+        
+        super.keyTyped(typedChar, key);
     }
 
     @Override
@@ -124,6 +128,8 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     public void initGui() {
+    	super.initGui();
+    	
         this.buttonList.clear();
 
         this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done")));

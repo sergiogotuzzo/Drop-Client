@@ -49,6 +49,8 @@ public class GuiShaders extends GuiScreenOF
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.screenTitle = I18n.format("of.options.shadersTitle", new Object[0]);
 
         if (Shaders.shadersConfig == null)

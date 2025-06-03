@@ -49,9 +49,7 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	}
 	
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		this.drawDefaultBackground();
-		
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {		
 	    final float zBackup = this.zLevel;
 	    
 	    this.zLevel = 200.0F;
@@ -114,6 +112,8 @@ public class GuiModPositioning extends GuiDropClientScreen {
 
 	@Override
 	public void onGuiClosed() {
+		super.onGuiClosed();
+		
 		for (IRenderer renderer : renderers.keySet()) {
 			renderer.setPosition(renderers.get(renderer));
 		}

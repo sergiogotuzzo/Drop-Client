@@ -1,11 +1,14 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+
+import drop.gui.GuiDropClientScreen;
+
 import java.io.IOException;
 import java.util.List;
 import net.minecraft.client.resources.I18n;
 
-public class GuiYesNo extends GuiScreen
+public class GuiYesNo extends GuiDropClientScreen
 {
     /**
      * A reference to the screen object that created this. Used for navigating between screens.
@@ -49,6 +52,8 @@ public class GuiYesNo extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.buttonList.add(new GuiOptionButton(0, this.width / 2 - 155, this.height / 6 + 96, this.confirmButtonText));
         this.buttonList.add(new GuiOptionButton(1, this.width / 2 - 155 + 160, this.height / 6 + 96, this.cancelButtonText));
         this.field_175298_s.clear();

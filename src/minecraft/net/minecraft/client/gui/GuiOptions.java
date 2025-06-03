@@ -39,6 +39,8 @@ public class GuiOptions extends GuiDropClientScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
+    	super.initGui();
+
         int i = 0;
         this.field_146442_a = I18n.format("options.title", new Object[0]);
 

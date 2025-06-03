@@ -4,6 +4,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 
 import drop.Client;
+import drop.gui.GuiDropClientScreen;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback
+public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallback
 {
     private static final Logger logger = LogManager.getLogger();
     private final OldServerPinger oldServerPinger = new OldServerPinger();

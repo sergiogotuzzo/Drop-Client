@@ -117,6 +117,8 @@ public class GuiModColor extends GuiDropClientScreen {
 	
 	@Override
     public void initGui() {
+		super.initGui();
+		
         this.buttonList.clear();
         
     	this.buttonList.add(sliderRed = new GuiSlider(1, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 0.0F, 255.0F, color.getRed()));

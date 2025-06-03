@@ -2,6 +2,9 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import drop.gui.GuiDropClientScreen;
+
 import java.io.IOException;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
@@ -10,7 +13,7 @@ import net.minecraft.client.resources.Language;
 import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiLanguage extends GuiScreen
+public class GuiLanguage extends GuiDropClientScreen
 {
     /** The parent Gui screen */
     protected GuiScreen parentScreen;

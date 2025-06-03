@@ -1,12 +1,14 @@
 package net.minecraft.client.gui;
 
 import java.io.IOException;
+
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.optifine.gui.GuiButtonOF;
 import net.optifine.gui.GuiScreenCapeOF;
 
-public class GuiCustomizeSkin extends GuiScreen
+public class GuiCustomizeSkin extends GuiDropClientScreen
 {
     /** The parent GUI for this GUI */
     private final GuiScreen parentScreen;
@@ -25,6 +27,8 @@ public class GuiCustomizeSkin extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         int i = 0;
         this.title = I18n.format("options.skinCustomisation.title", new Object[0]);
 

@@ -3,6 +3,10 @@ package net.minecraft.client.gui;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import drop.ColorManager;
+
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
@@ -37,6 +41,8 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ResourceLocation;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -660,6 +666,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
      */
     public void onGuiClosed()
     {
+    	mc.entityRenderer.stopUseShader();
     }
 
     /**
@@ -674,7 +681,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
     {
         if (this.mc.theWorld != null)
         {
-            this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
+    		this.drawRect(0, 0, this.width, this.height, ColorManager.fromColor(Color.BLACK).setAlpha(90).getRGB());
         }
         else
         {

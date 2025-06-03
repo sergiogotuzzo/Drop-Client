@@ -1,6 +1,9 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+
+import drop.gui.GuiDropClientScreen;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -16,7 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.Sys;
 
-public class GuiScreenResourcePacks extends GuiScreen
+public class GuiScreenResourcePacks extends GuiDropClientScreen
 {
     private static final Logger logger = LogManager.getLogger();
     private final GuiScreen parentScreen;

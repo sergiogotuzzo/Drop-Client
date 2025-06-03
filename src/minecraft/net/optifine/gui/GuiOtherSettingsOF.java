@@ -1,5 +1,6 @@
 package net.optifine.gui;
 
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -8,7 +9,7 @@ import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiOtherSettingsOF extends GuiScreen implements GuiYesNoCallback
+public class GuiOtherSettingsOF extends GuiDropClientScreen implements GuiYesNoCallback
 {
     private GuiScreen prevScreen;
     protected String title;
@@ -28,6 +29,8 @@ public class GuiOtherSettingsOF extends GuiScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.title = I18n.format("of.options.otherTitle", new Object[0]);
         this.buttonList.clear();
 

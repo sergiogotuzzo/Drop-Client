@@ -60,6 +60,8 @@ public class GuiTimeChanger extends GuiDropClientScreen {
 	
 	@Override
     public void initGui() {
+		super.initGui();
+
         this.buttonList.clear();
         
     	this.buttonList.add(sliderTime = new GuiSlider(1, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 0 + 15 + 1, 100, 5, 0.0F, 1.0F, mod.getTime()));

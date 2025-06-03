@@ -68,6 +68,8 @@ public class GuiHurtCam extends GuiDropClientScreen {
 	
 	@Override
     public void initGui() {
+		super.initGui();
+
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isHurtShakeToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));

@@ -23,7 +23,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 
-public class GuiAchievements extends GuiScreen implements IProgressMeter
+import drop.gui.GuiDropClientScreen;
+
+public class GuiAchievements extends GuiDropClientScreen implements IProgressMeter
 {
     private static final int field_146572_y = AchievementList.minDisplayColumn * 24 - 112;
     private static final int field_146571_z = AchievementList.minDisplayRow * 24 - 112;
@@ -62,6 +64,8 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.mc.getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.REQUEST_STATS));
         this.buttonList.clear();
         this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 74, 80, 20, I18n.format("gui.done", new Object[0])));

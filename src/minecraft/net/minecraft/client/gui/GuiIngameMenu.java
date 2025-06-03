@@ -27,6 +27,8 @@ public class GuiIngameMenu extends GuiDropClientScreen
      */
     public void initGui()
     {
+    	super.initGui();
+
         this.field_146445_a = 0;
         this.buttonList.clear();
         int i = -16;

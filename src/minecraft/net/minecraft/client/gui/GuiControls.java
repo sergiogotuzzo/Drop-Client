@@ -1,12 +1,14 @@
 package net.minecraft.client.gui;
 
 import java.io.IOException;
+
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 
-public class GuiControls extends GuiScreen
+public class GuiControls extends GuiDropClientScreen
 {
     private static final GameSettings.Options[] optionsArr = new GameSettings.Options[] {GameSettings.Options.INVERT_MOUSE, GameSettings.Options.SENSITIVITY, GameSettings.Options.TOUCHSCREEN};
 
@@ -36,7 +38,7 @@ public class GuiControls extends GuiScreen
      * window resizes, the buttonList is cleared beforehand.
      */
     public void initGui()
-    {
+    {    	
         this.keyBindingList = new GuiKeyBindingList(this, this.mc);
         this.buttonList.add(new GuiButton(200, this.width / 2 - 155, this.height - 29, 150, 20, I18n.format("gui.done", new Object[0])));
         this.buttonList.add(this.buttonReset = new GuiButton(201, this.width / 2 - 155 + 160, this.height - 29, 150, 20, I18n.format("controls.resetAll", new Object[0])));

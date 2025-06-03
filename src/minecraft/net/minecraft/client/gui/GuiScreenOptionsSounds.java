@@ -1,6 +1,8 @@
 package net.minecraft.client.gui;
 
 import java.io.IOException;
+
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
@@ -11,7 +13,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiScreenOptionsSounds extends GuiScreen
+public class GuiScreenOptionsSounds extends GuiDropClientScreen
 {
     private final GuiScreen field_146505_f;
 
@@ -32,6 +34,8 @@ public class GuiScreenOptionsSounds extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         int i = 0;
         this.field_146507_a = I18n.format("options.sounds.title", new Object[0]);
         this.field_146508_h = I18n.format("options.off", new Object[0]);

@@ -1,5 +1,6 @@
 package net.optifine.gui;
 
+import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -8,7 +9,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
 
-public class GuiAnimationSettingsOF extends GuiScreen
+public class GuiAnimationSettingsOF extends GuiDropClientScreen
 {
     private GuiScreen prevScreen;
     protected String title;
@@ -27,6 +28,8 @@ public class GuiAnimationSettingsOF extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         this.title = I18n.format("of.options.animationsTitle", new Object[0]);
         this.buttonList.clear();
 
