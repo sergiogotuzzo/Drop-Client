@@ -37,6 +37,7 @@ public class GuiPotionEffects extends GuiDropClientScreen {
         this.drawText("Show Name", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
         this.drawText("Name Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
         this.drawText("Name Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
+        this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -73,6 +74,10 @@ public class GuiPotionEffects extends GuiDropClientScreen {
             case 7:
             	mc.displayGuiScreen(new GuiModColor(this, mod.getNameTextColor(), mod, "nameTextColor", "nameTextChroma", "Potion Effects", "Name Text Color", false));
             	break;
+            case 8:
+            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -89,6 +94,7 @@ public class GuiPotionEffects extends GuiDropClientScreen {
     	this.buttonList.add(new GuiButtonToggled(5, mod.isShowNameEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(6, mod.isNameTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
         this.buttonList.add(new GuiRect(7, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2 * 2, mod.getNameTextColor().getRGB()));
+    	this.buttonList.add(new GuiButtonToggled(8, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
