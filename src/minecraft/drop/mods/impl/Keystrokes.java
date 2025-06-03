@@ -237,7 +237,7 @@ public class Keystrokes extends ModDraggableText {
 	}
 	
 	public void setPressedTextColor(int rgb) {
-		this.pressedTextColor = ColorManager.fromRGB(rgb, pressedTextColor.isChromaToggled());
+		pressedTextColor.setRGB(rgb);
 		
 		setToFile("pressedTextColor", rgb);
 	}

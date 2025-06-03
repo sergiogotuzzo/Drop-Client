@@ -73,8 +73,13 @@ public class ColorManager {
 		return alpha;
 	}
 	
-	public Color getColor() {
-		return new Color(red, green, blue, alpha);
+	public ColorManager setRGB(int rgb) {
+		this.red = (rgb >> 16) & 0xFF;
+		this.green = (rgb >> 8) & 0xFF;
+		this.blue = (rgb >> 0) & 0xFF;
+		this.alpha = (rgb >> 24) & 0xFF;
+		
+		return this;
 	}
 	
 	public int getRGB() {
@@ -89,5 +94,9 @@ public class ColorManager {
 	
 	public boolean isChromaToggled() {
 		return chroma;
+	}
+	
+	public Color getColor() {
+		return new Color(red, green, blue, alpha);
 	}
 }

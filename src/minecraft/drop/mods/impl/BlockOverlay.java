@@ -88,7 +88,7 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOutlineColor(int rgb) {
-		this.outlineColor = ColorManager.fromRGB(rgb, this.outlineColor.isChromaToggled());
+		outlineColor.setRGB(rgb);
 		
 		setToFile("outlineColor", rgb);
 	}
@@ -118,7 +118,7 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOverlayColor(int rgb) {
-		this.overlayColor = ColorManager.fromRGB(rgb, this.overlayColor.isChromaToggled());
+		overlayColor.setRGB(rgb);
 		
 		setToFile("overlayColor", rgb);
 	}

@@ -209,7 +209,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	public void setNameTextColor(int rgb) {
-		this.nameTextColor = ColorManager.fromRGB(rgb, nameTextColor.isChromaToggled());
+		nameTextColor.setRGB(rgb);
 		
 		setToFile("nameTextColor", rgb);
 	}
@@ -239,7 +239,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	public void setDescriptionTextColor(int rgb) {
-		this.descriptionTextColor = ColorManager.fromRGB(rgb, descriptionTextColor.isChromaToggled());
+		descriptionTextColor.setRGB(rgb);
 		
 		setToFile("descriptionTextColor", rgb);
 	}

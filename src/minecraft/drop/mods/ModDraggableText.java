@@ -16,7 +16,7 @@ public abstract class ModDraggableText extends ModDraggable {
 	}
 	
 	public void setTextColor(int rgb) {
-		this.textColor = ColorManager.fromRGB(rgb, textColor.isChromaToggled());
+		textColor.setRGB(rgb);
 		
 		setToFile("textColor", rgb);
 	}

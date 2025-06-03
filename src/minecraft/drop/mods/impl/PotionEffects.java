@@ -216,7 +216,7 @@ public class PotionEffects extends ModDraggable {
 	}
     
     public void setDurationTextColor(int rgb) {
-		this.durationTextColor = ColorManager.fromRGB(rgb, durationTextColor.isChromaToggled());
+    	durationTextColor.setRGB(rgb);
 		
 		setToFile("durationTextColor", rgb);
 	}
@@ -256,7 +256,7 @@ public class PotionEffects extends ModDraggable {
 	}
 	
 	public void setNameTextColor(int rgb) {
-		this.nameTextColor = ColorManager.fromRGB(rgb, nameTextColor.isChromaToggled());
+		nameTextColor.setRGB(rgb);
 		
 		setToFile("nameTextColor", rgb);
 	}
