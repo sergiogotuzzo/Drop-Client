@@ -91,24 +91,25 @@ public class CoordinatesDisplay extends ModDraggableText {
 		String textY = "Y: " + (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
 		String textZ = "Z: " + (int) mc.getRenderViewEntity().posZ;
 		
-		int k = showBackground ? 6 : 1;
+		int k = showBackground ? 6 : 0;
 		int j = showBackground ? 6 : font.FONT_HEIGHT + 1;
+		int h = showBackground ? 0 : 1;
 		
-		drawText(textX, pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textColor.isChromaToggled());
-		drawText(textY, pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textColor.isChromaToggled());
-		drawText(textZ, pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textColor.isChromaToggled());
+		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textColor.isChromaToggled());
+		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textColor.isChromaToggled());
+		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textColor.isChromaToggled());
 		
 		if (showFacing) {
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textColor.isChromaToggled());
 		}
 		
 		if (showFacingTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textColor.isChromaToggled());
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textColor.isChromaToggled());
 		}
 		
 		if (showBiome) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h, textColor, textShadow, textColor.isChromaToggled());
 		}
 	}
 	
