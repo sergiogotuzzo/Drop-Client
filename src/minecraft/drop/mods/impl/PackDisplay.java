@@ -35,6 +35,7 @@ public class PackDisplay extends ModDraggable {
 	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
 	private boolean showIcon = true;
 	private boolean showDescription = false;
+	private boolean showAllSelectedPacks = true;
 	
 	public PackDisplay() {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
@@ -46,6 +47,7 @@ public class PackDisplay extends ModDraggable {
 		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
 		setShowIcon((boolean) getFromFile("showIcon", showIcon));
 		setShowDescription((boolean) getFromFile("showDescription", showDescription));
+		setShowAllSelectedPacks((boolean) getFromFile("showAllSelectedPacks", showAllSelectedPacks));
 	}
 	
 	@Override
@@ -80,18 +82,20 @@ public class PackDisplay extends ModDraggable {
 		List<ResourcePackRepository.Entry> selectedPacks = mc.getResourcePackRepository().getRepositoryEntries();
 		
 		if (!selectedPacks.isEmpty()) {
-			if (showBackground) {
-				drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight());
-			}
-			
 			int offsetY = 0;
-			
-			for (int i = 0; i < selectedPacks.size(); i++) {
-				ResourcePackRepository.Entry selectedPack = selectedPacks.get(i);
+
+			if (showAllSelectedPacks) {
+				for (int i = 0; i < selectedPacks.size(); i++) {
+					ResourcePackRepository.Entry selectedPack = selectedPacks.get(i);
+					
+					drawSelectedPack(selectedPack, offsetY);
+					
+					offsetY += 28;
+				}
+			} else {
+				ResourcePackRepository.Entry selectedPack = selectedPacks.get(0);
 				
 				drawSelectedPack(selectedPack, offsetY);
-				
-				offsetY += 28;
 			}
 		}
 	}
@@ -99,31 +103,33 @@ public class PackDisplay extends ModDraggable {
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		List<ResourcePackRepository.Entry> selectedPacks = mc.getResourcePackRepository().getRepositoryEntries();
-		
+
 		if (!selectedPacks.isEmpty()) {
-			if (showBackground) {
-				drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight());
-			}
-			
 			int offsetY = 0;
-			
-			for (int i = 0; i < selectedPacks.size(); i++) {
-				ResourcePackRepository.Entry selectedPack = selectedPacks.get(i);
+
+			if (showAllSelectedPacks) {
+				for (int i = 0; i < selectedPacks.size(); i++) {
+					ResourcePackRepository.Entry selectedPack = selectedPacks.get(i);
+					
+					drawSelectedPack(selectedPack, offsetY);
+					
+					offsetY += 28;
+				}
+			} else {
+				ResourcePackRepository.Entry selectedPack = selectedPacks.get(0);
 				
 				drawSelectedPack(selectedPack, offsetY);
-				
-				offsetY += 28;
 			}
 		} else {
-			if (showBackground) {
-				drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight());
-			}
-			
 			drawDefaultPack();
 		}
 	}
 	
-	private void drawSelectedPack(ResourcePackRepository.Entry selectedPack, int offsetY) {		
+	private void drawSelectedPack(ResourcePackRepository.Entry selectedPack, int offsetY) {
+		if (showBackground) {
+			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28);
+		}
+		
 		if (showIcon) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			
@@ -146,6 +152,10 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	private void drawDefaultPack() {
+		if (showBackground) {
+			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28);
+		}
+		
 		if (showIcon) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			
@@ -286,5 +296,15 @@ public class PackDisplay extends ModDraggable {
 	
 	public boolean isShowDescriptionToggled() {
 		return showDescription;
+	}
+	
+	public void setShowAllSelectedPacks(boolean toggled) {
+		showAllSelectedPacks = toggled;
+		
+		setToFile("showAllSelectedPacks", toggled);
+	}
+	
+	public boolean isShowAllSelectedPacksToggled() {
+		return showAllSelectedPacks;
 	}
 }

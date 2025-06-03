@@ -35,6 +35,7 @@ public class GuiPackDisplay extends GuiDropClientScreen {
         this.drawText("Description Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
         this.drawText("Show Icon", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
         this.drawText("Show Description", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
+        this.drawText("Show All Selected Packs", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -71,6 +72,10 @@ public class GuiPackDisplay extends GuiDropClientScreen {
             	mod.setShowDescription(!mod.isShowDescriptionToggled());
             	this.initGui();
             	break;
+            case 8:
+            	mod.setShowAllSelectedPacks(!mod.isShowAllSelectedPacksToggled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -87,6 +92,7 @@ public class GuiPackDisplay extends GuiDropClientScreen {
         this.buttonList.add(new GuiRect(5, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2 * 2, mod.getDescriptionTextColor().getRGB()));
     	this.buttonList.add(new GuiButtonToggled(6, mod.isShowIconToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(7, mod.isShowDescriptionToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(8, mod.isShowAllSelectedPacksToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15 - 2));
         this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
