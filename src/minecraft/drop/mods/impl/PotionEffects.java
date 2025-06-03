@@ -167,7 +167,7 @@ public class PotionEffects extends ModDraggable {
         		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
             }
     	} else {
-    		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
+    		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
     	}
     }
     
