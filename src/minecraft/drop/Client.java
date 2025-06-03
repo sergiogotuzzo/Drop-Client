@@ -7,6 +7,7 @@ import drop.events.EventTarget;
 import drop.events.impl.RenderEvent;
 import drop.events.impl.TickEvent;
 import drop.gui.mod.GuiModPositioning;
+import drop.gui.mod.GuiMods;
 import drop.mods.hud.HUDManager;
 import drop.mods.ModInstances;
 import drop.mods.impl.Fullbright;
@@ -45,6 +46,10 @@ public class Client {
 	public void onTick(TickEvent event) {
 		if (mc.gameSettings.keyBindModPositioning.isPressed()) {
 			mc.displayGuiScreen(new GuiModPositioning(hudManager));
+		}
+		
+		if (mc.gameSettings.keyBindModsMenu.isPressed()) {
+			mc.displayGuiScreen(new GuiMods(null));
 		}
 		
 		if (mc.gameSettings.keyBindFullbright.isPressed()) {
