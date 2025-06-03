@@ -79,6 +79,8 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	    }
 
 	    this.zLevel = zBackup;
+	    
+	    super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 	
 	@Override
