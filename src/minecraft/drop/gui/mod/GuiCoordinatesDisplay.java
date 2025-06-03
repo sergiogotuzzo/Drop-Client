@@ -63,7 +63,7 @@ public class GuiCoordinatesDisplay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Coordinates Display"));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod, "Coordinates Display"));
             	break;
             case 6:
             	mod.setShowBackground(!mod.isShowBackgroundEnabled());

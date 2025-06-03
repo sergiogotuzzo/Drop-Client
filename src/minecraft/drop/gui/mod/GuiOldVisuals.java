@@ -1,4 +1,4 @@
-package drop.gui.mod.oldvisuals;
+package drop.gui.mod;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class GuiOldVisuals extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiOldVisualsHitArmorColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getHitArmorColor(), mod, "hitArmorColor", "hitArmorChroma", "Old Visuals", "Hit Armor Color", true));
             	break;
         }
     }

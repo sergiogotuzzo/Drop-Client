@@ -7,27 +7,30 @@ public class ColorManager {
 	private int green;
 	private int blue;
 	private int alpha;
+	private boolean chroma;
 	
-	private ColorManager(Color color) {
+	private ColorManager(Color color, boolean chroma) {
 		this.red = color.getRed();
 		this.green = color.getGreen();
 		this.blue = color.getBlue();
 		this.alpha = color.getAlpha();
+		this.chroma = chroma;
 	}
 	
-	private ColorManager(int rgb) {
+	private ColorManager(int rgb, boolean chroma) {
 		this.red = (rgb >> 16) & 0xFF;
 		this.green = (rgb >> 8) & 0xFF;
 		this.blue = (rgb >> 0) & 0xFF;
 		this.alpha = (rgb >> 24) & 0xFF;
+		this.chroma = chroma;
 	}
 	
-	public static ColorManager fromColor(Color color) {
-		return new ColorManager(color);
+	public static ColorManager fromColor(Color color, boolean chroma) {
+		return new ColorManager(color, chroma);
 	}
 	
-	public static ColorManager fromRGB(int rgb) {
-		return new ColorManager(rgb);
+	public static ColorManager fromRGB(int rgb, boolean chroma) {
+		return new ColorManager(rgb, chroma);
 	}
 	
 	public ColorManager setRed(int red) {
@@ -76,5 +79,15 @@ public class ColorManager {
 	
 	public int getRGB() {
 		return getColor().getRGB();
+	}
+	
+	public ColorManager setChromaToggled(boolean toggled) {
+		this.chroma = toggled;
+		
+		return this;
+	}
+	
+	public boolean isChromaToggled() {
+		return chroma;
 	}
 }

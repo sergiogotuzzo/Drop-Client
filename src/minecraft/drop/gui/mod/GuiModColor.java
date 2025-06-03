@@ -8,18 +8,20 @@ import drop.ColorManager;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
 import drop.mods.Mod;
 
 public class GuiModColor extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final ColorManager color;
-	private final Mod mod;
-	private final String colorKey;
-	private final String title;
-	private final String subtitle;
-	private final boolean showAlphaSlider;
+	protected final ColorManager color;
+	protected final Mod mod;
+	protected final String colorKey;
+	protected final String colorChromaKey;
+	protected final String title;
+	protected final String subtitle;
+	protected final boolean showAlphaSlider;
 	
 	private GuiSlider sliderRed;
     private GuiSlider sliderGreen;
@@ -27,20 +29,21 @@ public class GuiModColor extends GuiDropClientScreen {
     private GuiSlider sliderAlpha;
 	
     public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String title) {
-		this(previousGuiScreen, color,  mod, "textColor", title, "Text Color", false);
+		this(previousGuiScreen, color,  mod, "textColor", "textChroma", title, "Text Color", false);
 	}
     
     public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String title, String subtitle) {
-		this(previousGuiScreen, color,  mod, "textColor", title, subtitle, false);
+		this(previousGuiScreen, color,  mod, "textColor", "textChroma", title, subtitle, false);
 	}
     
-    public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String colorKey, String title, String subtitle) {
-		this(previousGuiScreen, color, mod, colorKey, title, subtitle, false);
+    public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String colorKey, String colorChromaKey, String title, String subtitle) {
+		this(previousGuiScreen, color, mod, colorKey, colorChromaKey, title, subtitle, false);
 	}
 	
-	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String colorKey, String title, String subtitle, boolean showAlphaSlider) {
+	public GuiModColor(GuiScreen previousGuiScreen, ColorManager color, Mod mod, String colorKey, String colorChromaKey, String title, String subtitle, boolean showAlphaSlider) {
 		this.previousGuiScreen = previousGuiScreen;
 		this.color = color;
+		this.colorChromaKey = colorChromaKey;
 		this.mod = mod;
 		this.colorKey = colorKey;
 		this.title = title;
@@ -59,14 +62,15 @@ public class GuiModColor extends GuiDropClientScreen {
     	String blueText = String.valueOf(color.getBlue());
         
         this.drawScaledText(title, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawScaledText(subtitle, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB()).setAlpha(255).getRGB(), false, false);
+        this.drawScaledText(subtitle, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB(), color.isChromaToggled()).setAlpha(255).getRGB(), false, false);
         this.drawText("Red", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText("Green", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
         this.drawText("Blue", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
         this.drawText(redText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(redText) - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
         this.drawText(greenText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(greenText) - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
         this.drawText(blueText, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(blueText) - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
-        
+        this.drawText("Chroma", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * (showAlphaSlider ? 5 : 4) + 15, -1, false, false);
+
         if (showAlphaSlider) {
         	String alphaText = String.valueOf(color.getAlpha());
         	
@@ -112,6 +116,11 @@ public class GuiModColor extends GuiDropClientScreen {
             	color.setAlpha((int) (sliderAlpha.getSliderPosition() * 255.0F));
             	mod.setToFile(colorKey, color.getRGB());
             	break;
+            case 5:
+            	color.setChromaToggled(!color.isChromaToggled());
+            	mod.setToFile(colorChromaKey, color.isChromaToggled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -120,10 +129,11 @@ public class GuiModColor extends GuiDropClientScreen {
 		super.initGui();
 		
         this.buttonList.clear();
-        
+                
     	this.buttonList.add(sliderRed = new GuiSlider(1, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 0.0F, 255.0F, color.getRed()));
     	this.buttonList.add(sliderGreen = new GuiSlider(2, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 2 + 15 + 1, 100, 5, 0.0F, 255.0F, color.getGreen()));
     	this.buttonList.add(sliderBlue = new GuiSlider(3, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 3 + 15 + 1, 100, 5, 0.0F, 255.0F, color.getBlue()));
+    	this.buttonList.add(new GuiButtonToggled(5, color.isChromaToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * (showAlphaSlider ? 5 : 4) + 15 - 2));
 
     	if (showAlphaSlider) {
         	this.buttonList.add(sliderAlpha = new GuiSlider(4, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 4 + 15 + 1, 100, 5, 0.0F, 255.0F, color.getAlpha()));

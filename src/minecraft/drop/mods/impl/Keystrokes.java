@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.keystrokes.GuiKeystrokes;
+import drop.gui.mod.GuiKeystrokes;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
@@ -111,12 +111,11 @@ public class Keystrokes extends ModDraggableText {
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 
 	private boolean pressedTextShadow = true;
-	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE);
+	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE, false);
 	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
 	private boolean useArrows = false;
-	private boolean pressedTextChroma = false;
 	
 	private List<Long> leftClicks = new ArrayList<>();
     private boolean wasLeftPressed;
@@ -129,11 +128,11 @@ public class Keystrokes extends ModDraggableText {
 	public Keystrokes() {
 		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
 		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
+		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
 		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
 		setShowMouse((boolean) getFromFile("showMouse", showMouse));
 		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
 		setUseArrows((boolean) getFromFile("useArrows", useArrows));
-		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextChroma));
 	}
 	
 	@Override
@@ -193,7 +192,7 @@ public class Keystrokes extends ModDraggableText {
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? ColorManager.fromColor(Color.WHITE).setAlpha(102) : ColorManager.fromColor(Color.BLACK).setAlpha(102)
+	                key.isDown() ? new Color(255, 255, 255, 102) : new Color(0, 0, 0, 102)
 	                );
 	        
 	        drawText(
@@ -202,7 +201,7 @@ public class Keystrokes extends ModDraggableText {
 	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
 	                key.isDown() ? pressedTextColor : textColor,
 	                key.isDown() ? pressedTextShadow : textShadow,
-	                key.isDown() ? pressedTextChroma : textChroma
+	                key.isDown() ? pressedTextColor.isChromaToggled() : textColor.isChromaToggled()
 	        		);
 	    }
 	}
@@ -238,7 +237,7 @@ public class Keystrokes extends ModDraggableText {
 	}
 	
 	public void setPressedTextColor(int rgb) {
-		this.pressedTextColor = ColorManager.fromRGB(rgb);
+		this.pressedTextColor = ColorManager.fromRGB(rgb, pressedTextColor.isChromaToggled());
 		
 		setToFile("pressedTextColor", rgb);
 	}
@@ -294,12 +293,12 @@ public class Keystrokes extends ModDraggableText {
 	}
 	
 	public void setPressedTextChroma(boolean enabled) {
-		this.pressedTextChroma = enabled;
+		pressedTextColor.setChromaToggled(enabled);
 		
 		setToFile("pressedTextChroma", enabled);
 	}
 	
 	public boolean isPressedTextChromaEnabled() {
-		return pressedTextChroma;
+		return pressedTextColor.isChromaToggled();
 	}
 }

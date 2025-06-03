@@ -11,7 +11,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.potioneffects.GuiPotionEffects;
+import drop.gui.mod.GuiPotionEffects;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 
@@ -21,12 +21,10 @@ public class PotionEffects extends ModDraggable {
     private boolean blink = true;
 	private boolean showIcon = true;
     private boolean durationTextShadow = true;
-    private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE);
-    private boolean durationTextChroma = false;
+    private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE, false);
     private boolean showName = true;
     private boolean nameTextShadow = true;
-    private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE);
-    private boolean nameTextChroma = false;
+    private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
 	private boolean reverse = false;
 	
 	public PotionEffects() {
@@ -34,11 +32,11 @@ public class PotionEffects extends ModDraggable {
 		setShowIcon((boolean) getFromFile("showIcon", showIcon));
 		setDurationTextShadow((boolean) getFromFile("durationTextShadow", durationTextShadow));
 		setDurationTextColor((int) ((long) getFromFile("durationTextColor", durationTextColor.getRGB())));
-		setDurationTextChroma((boolean) getFromFile("durationTextChroma", durationTextChroma));
+		setDurationTextChroma((boolean) getFromFile("durationTextChroma", durationTextColor.isChromaToggled()));
     	setShowName((boolean) getFromFile("showName", showName));
     	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
-		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextChroma));
+		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
 		setReverse((boolean) getFromFile("reverse", reverse));
 	}
 	
@@ -158,7 +156,7 @@ public class PotionEffects extends ModDraggable {
         if (showName) {
             int nameX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2;
 
-        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow, nameTextChroma);
+        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow, nameTextColor.isChromaToggled());
         }
         
         int durationX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2;
@@ -166,10 +164,10 @@ public class PotionEffects extends ModDraggable {
         
         if (blink) {
     		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-        		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextChroma);
+        		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
             }
     	} else {
-    		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextChroma);
+    		drawText(durationString, durationX, pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + 2, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
     	}
     }
     
@@ -218,7 +216,7 @@ public class PotionEffects extends ModDraggable {
 	}
     
     public void setDurationTextColor(int rgb) {
-		this.durationTextColor = ColorManager.fromRGB(rgb);
+		this.durationTextColor = ColorManager.fromRGB(rgb, durationTextColor.isChromaToggled());
 		
 		setToFile("durationTextColor", rgb);
 	}
@@ -228,13 +226,13 @@ public class PotionEffects extends ModDraggable {
 	}
 	
 	public void setDurationTextChroma(boolean enabled) {
-		this.durationTextChroma = enabled;
+		durationTextColor.setChromaToggled(enabled);
 		
 		setToFile("durationTextChroma", enabled);
 	}
 	
 	public boolean isDurationTextChromaEnabled() {
-		return durationTextChroma;
+		return durationTextColor.isChromaToggled();
 	}
     
     public void setShowName(boolean enabled) {
@@ -258,7 +256,7 @@ public class PotionEffects extends ModDraggable {
 	}
 	
 	public void setNameTextColor(int rgb) {
-		this.nameTextColor = ColorManager.fromRGB(rgb);
+		this.nameTextColor = ColorManager.fromRGB(rgb, nameTextColor.isChromaToggled());
 		
 		setToFile("nameTextColor", rgb);
 	}
@@ -268,13 +266,13 @@ public class PotionEffects extends ModDraggable {
 	}
 	
 	public void setNameTextChroma(boolean enabled) {
-		this.nameTextChroma = enabled;
+		nameTextColor.setChromaToggled(enabled);
 		
 		setToFile("nameTextChroma", enabled);
 	}
 	
 	public boolean isNameTextChromaEnabled() {
-		return nameTextChroma;
+		return nameTextColor.isChromaToggled();
 	}
 	
 	public void setReverse(boolean toggled) {

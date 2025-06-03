@@ -5,7 +5,7 @@ import java.util.List;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.packdisplay.GuiPackDisplay;
+import drop.gui.mod.GuiPackDisplay;
 import drop.mods.hud.ScreenPosition;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,11 +30,9 @@ public class PackDisplay extends ModDraggable {
 	
 	private boolean showBackground = true;
 	private boolean nameTextShadow = true;
-	private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE);
-	private boolean nameTextChroma = false;
+	private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
 	private boolean descriptionTextShadow = true;
-	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY);
-	private boolean descriptionTextChroma = false;
+	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
 	private boolean showIcon = true;
 	private boolean showDescription = false;
 	
@@ -42,10 +40,10 @@ public class PackDisplay extends ModDraggable {
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
 		setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
-		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextChroma));
+		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
 		setDescriptionTextColor((int) ((long) getFromFile("descriptionTextColor", descriptionTextColor.getRGB())));
 		setDescriptionTextShadow((boolean) getFromFile("descriptionTextShadow", descriptionTextShadow));
-		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextChroma));
+		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
 		setShowIcon((boolean) getFromFile("showIcon", showIcon));
 		setShowDescription((boolean) getFromFile("showDescription", showDescription));
 	}
@@ -140,10 +138,10 @@ public class PackDisplay extends ModDraggable {
 		String packName = selectedPack.getResourcePackName();
 		String packDescription = selectedPack.getTexturePackDescription().replace("§r", "");
 
-		drawText(packName, packX, packNameY, nameTextColor, nameTextShadow, !packName.contains("§") && nameTextChroma);
+		drawText(packName, packX, packNameY, nameTextColor, nameTextShadow, !packName.contains("§") && nameTextColor.isChromaToggled());
 				
 		if (showDescription) {
-			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor, descriptionTextShadow, !packDescription.contains("§") && descriptionTextChroma);
+			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor, descriptionTextShadow, !packDescription.contains("§") && descriptionTextColor.isChromaToggled());
 		}
 	}
 	
@@ -159,10 +157,10 @@ public class PackDisplay extends ModDraggable {
 		int packX = pos.getAbsoluteX() + 4 + (showIcon ? 28 : 0);
 		int packNameY = pos.getAbsoluteY() + (showDescription ? 4 : 28 / 2 - 4);
 		
-		drawText(DefaultPack.getPackName(), packX, packNameY, nameTextColor, nameTextShadow, nameTextChroma);
+		drawText(DefaultPack.getPackName(), packX, packNameY, nameTextColor, nameTextShadow, nameTextColor.isChromaToggled());
 		
 		if (showDescription) {
-			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, descriptionTextColor, descriptionTextShadow, descriptionTextChroma);
+			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, descriptionTextColor, descriptionTextShadow, descriptionTextColor.isChromaToggled());
 		}
 	}
 	
@@ -211,7 +209,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	public void setNameTextColor(int rgb) {
-		this.nameTextColor = ColorManager.fromRGB(rgb);
+		this.nameTextColor = ColorManager.fromRGB(rgb, nameTextColor.isChromaToggled());
 		
 		setToFile("nameTextColor", rgb);
 	}
@@ -231,17 +229,17 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	public void setNameTextChroma(boolean enabled) {
-		this.nameTextChroma = enabled;
+		nameTextColor.setChromaToggled(enabled);
 		
 		setToFile("nameTextChroma", enabled);
 	}
 	
 	public boolean isNameTextChromaEnabled() {
-		return nameTextChroma;
+		return nameTextColor.isChromaToggled();
 	}
 	
 	public void setDescriptionTextColor(int rgb) {
-		this.descriptionTextColor = ColorManager.fromRGB(rgb);
+		this.descriptionTextColor = ColorManager.fromRGB(rgb, descriptionTextColor.isChromaToggled());
 		
 		setToFile("descriptionTextColor", rgb);
 	}
@@ -261,13 +259,13 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	public void setDescriptionTextChroma(boolean enabled) {
-		this.descriptionTextChroma = enabled;
+		descriptionTextColor.setChromaToggled(enabled);
 		
 		setToFile("descriptionTextChroma", enabled);
 	}
 	
 	public boolean isDescriptionTextChromaEnabled() {
-		return descriptionTextChroma;
+		return descriptionTextColor.isChromaToggled();
 	}
 	
 	public void setShowIcon(boolean toggled) {

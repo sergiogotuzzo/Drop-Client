@@ -1,4 +1,4 @@
-package drop.gui.mod.packdisplay;
+package drop.gui.mod;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
-import drop.gui.mod.GuiModDraggableTextColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.PackDisplay;
 
@@ -55,14 +54,14 @@ public class GuiPackDisplay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiPackDisplayNameTextColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getNameTextColor(), mod, "nameTextColor", "nameTextChroma", "Pack Display", "Name Text Color", false));
             	break;
             case 4:
             	mod.setDescriptionTextShadow(!mod.isDescriptionTextShadowEnabled());
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiPackDisplayDescriptionTextColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getDescriptionTextColor(), mod, "descriptionTextColor", "descriptionTextChroma", "Pack Display", "Description Text Color", false));
             	break;
             case 6:
             	mod.setShowIcon(!mod.isShowIconToggled());

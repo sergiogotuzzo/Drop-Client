@@ -1,4 +1,4 @@
-package drop.gui.mod.potioneffects;
+package drop.gui.mod;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -60,7 +60,7 @@ public class GuiPotionEffects extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 4:
-            	mc.displayGuiScreen(new GuiPotionEffectsDurationTextColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getDurationTextColor(), mod, "durationTextColor", "durationTextChroma", "Potion Effects", "Duration Text Color", false));
             	break;
             case 5:
             	mod.setShowName(!mod.isShowNameEnabled());
@@ -71,7 +71,7 @@ public class GuiPotionEffects extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 7:
-            	mc.displayGuiScreen(new GuiPotionEffectsNameTextColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getNameTextColor(), mod, "nameTextColor", "nameTextChroma", "Potion Effects", "Name Text Color", false));
             	break;
         }
     }

@@ -6,7 +6,7 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.oldvisuals.GuiOldVisuals;
+import drop.gui.mod.GuiOldVisuals;
 import drop.mods.Mod;
 
 public class OldVisuals extends Mod {
@@ -14,8 +14,7 @@ public class OldVisuals extends Mod {
 	private boolean bow = true;
 	private boolean blockHitting = true;
 	private boolean armorHitAnimation = true;
-	private ColorManager hitArmorColor = ColorManager.fromColor(Color.RED).setAlpha(76);
-	private boolean hitArmorChroma = false;
+	private ColorManager hitArmorColor = ColorManager.fromColor(Color.RED, false).setAlpha(76);
 	
 	public OldVisuals() {
 		setFishingRod((boolean) getFromFile("fishingRod", fishingRod));
@@ -23,7 +22,7 @@ public class OldVisuals extends Mod {
 		setBlockHitting((boolean) getFromFile("blockHitting", blockHitting));
 		setArmorHitAnimation((boolean) getFromFile("armorHitAnimation", armorHitAnimation));
 		setHitArmorColor((int) ((long) getFromFile("hitArmorColor", hitArmorColor.getRGB())));
-		setHitArmorChroma((boolean) getFromFile("hitArmorChroma", hitArmorChroma));
+		setHitArmorChroma((boolean) getFromFile("hitArmorChroma", hitArmorColor.isChromaToggled()));
 	}
 	
 	@Override
@@ -72,7 +71,7 @@ public class OldVisuals extends Mod {
 	}
 	
 	public void setHitArmorColor(int rgb) {
-		this.hitArmorColor = ColorManager.fromRGB(rgb);
+		this.hitArmorColor = ColorManager.fromRGB(rgb, hitArmorColor.isChromaToggled());
 		
 		setToFile("hitArmorColor", rgb);
 	}
@@ -82,12 +81,12 @@ public class OldVisuals extends Mod {
 	}
 	
 	public void setHitArmorChroma(boolean enabled) {
-		this.hitArmorChroma = enabled;
+		hitArmorColor.setChromaToggled(enabled);
 		
 		setToFile("hitArmorChroma", enabled);
 	}
 	
 	public boolean isHitArmorChromaEnabled() {
-		return hitArmorChroma;
+		return hitArmorColor.isChromaToggled();
 	}
 }

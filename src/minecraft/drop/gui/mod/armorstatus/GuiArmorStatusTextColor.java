@@ -3,18 +3,18 @@ package drop.gui.mod.armorstatus;
 import java.io.IOException;
 
 import drop.gui.GuiButtonToggled;
-import drop.gui.mod.GuiModDraggableTextColor;
+import drop.gui.mod.GuiModColor;
 import drop.mods.ModDraggableText;
 import drop.mods.ModInstances;
 import drop.mods.impl.ArmorStatus;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
-public class GuiArmorStatusTextColor extends GuiModDraggableTextColor {
+public class GuiArmorStatusTextColor extends GuiModColor {
 	private static final ArmorStatus mod = ModInstances.getArmorStatusMod();
 	
 	public GuiArmorStatusTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod, "Armor Status");
+		super(previousGuiScreen, mod.getTextColor(), mod, "Armor Status");
 	}
 	
 	@Override

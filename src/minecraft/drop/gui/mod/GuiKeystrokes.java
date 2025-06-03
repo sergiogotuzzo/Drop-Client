@@ -1,4 +1,4 @@
-package drop.gui.mod.keystrokes;
+package drop.gui.mod;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -12,7 +12,6 @@ import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiRect;
 import drop.gui.GuiText;
-import drop.gui.mod.GuiModDraggableTextColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.Keystrokes;
 
@@ -70,14 +69,14 @@ public class GuiKeystrokes extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 6:
-            	mc.displayGuiScreen(new GuiModDraggableTextColor(this, mod, "Keystrokes"));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod, "Keystrokes"));
             	break;
             case 7:
             	mod.setPressedTextShadow(!mod.isPressedTextShadowEnabled());
             	this.initGui();
             	break;
             case 8:
-            	mc.displayGuiScreen(new GuiKeystrokesPressedTextColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getPressedTextColor(), mod, "pressedTextColor", "pressedTextChroma", "Keystrokes", "Pressed Text Color", false));
             	break;
         }
     }

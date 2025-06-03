@@ -1,4 +1,4 @@
-package drop.gui.mod.blockoverlay;
+package drop.gui.mod;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -62,7 +62,7 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 2:
-            	mc.displayGuiScreen(new GuiBlockOverlayOutlineColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getOutlineColor(), mod, "outlineColor", "outlineChroma", "Block Overlay", "Outline Color", false));
             	break;
             case 3:
             	mod.setOutlineWidth(sliderOutlineWidth.getSliderPosition() * 5.0F);
@@ -76,7 +76,7 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiBlockOverlayOverlayColor(this));
+            	mc.displayGuiScreen(new GuiModColor(this, mod.getOverlayColor(), mod, "overlayColor", "overlayChroma", "Block Overlay", "Overlay Color", true));
             	break;
         }
     }

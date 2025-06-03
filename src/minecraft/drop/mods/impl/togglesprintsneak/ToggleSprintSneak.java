@@ -65,9 +65,9 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	private void drawTextToRender(ScreenPosition pos, String textToRender) {
 		if (showBackground) {
 	    	drawAlignedRect(pos, textToRender, 20);
-			drawCenteredAlignedText(pos, textToRender, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+			drawCenteredAlignedText(pos, textToRender, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textColor.isChromaToggled());
     	} else {
-		    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow, textChroma);
+		    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow, textColor.isChromaToggled());
     	}
 	}
 	

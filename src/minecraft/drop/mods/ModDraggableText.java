@@ -6,18 +6,17 @@ import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 
 public abstract class ModDraggableText extends ModDraggable {
-	protected ColorManager textColor = ColorManager.fromColor(Color.WHITE);
+	protected ColorManager textColor = ColorManager.fromColor(Color.WHITE, false);
 	protected boolean textShadow = true;
-	protected boolean textChroma = false;
 	
 	public ModDraggableText() {
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
+		setTextChroma((boolean) getFromFile("textChroma", textColor.isChromaToggled()));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setTextChroma((boolean) getFromFile("textChroma", textChroma));
 	}
 	
 	public void setTextColor(int rgb) {
-		this.textColor = ColorManager.fromRGB(rgb);
+		this.textColor = ColorManager.fromRGB(rgb, textColor.isChromaToggled());
 		
 		setToFile("textColor", rgb);
 	}
@@ -37,12 +36,12 @@ public abstract class ModDraggableText extends ModDraggable {
 	}
 	
 	public void setTextChroma(boolean enabled) {
-		this.textChroma = enabled;
+		textColor.setChromaToggled(enabled);
 		
 		setToFile("textChroma", enabled);
 	}
 	
 	public boolean isTextChromaEnabled() {
-		return textChroma;
+		return textColor.isChromaToggled();
 	}
 }

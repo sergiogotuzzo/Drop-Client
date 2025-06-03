@@ -35,20 +35,20 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		Gui.drawRect(left, top, right, bottom, color);
 	}
 	
-	public void drawRect(int left, int top, int right, int bottom, ColorManager color) {
+	public void drawRect(int left, int top, int right, int bottom, Color color) {
 		drawRect(left, top, right, bottom, color.getRGB());
 	}
 	
 	public void drawRect(int left, int top, int right, int bottom) {
-		drawRect(left, top, right, bottom, ColorManager.fromColor(Color.BLACK).setAlpha(102));
+		drawRect(left, top, right, bottom, new Color(0, 0, 0, 102).getRGB());
 	}
 	
-	public void drawRect(ScreenPosition pos, ColorManager color) {
+	public void drawRect(ScreenPosition pos, Color color) {
 		drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), color);
 	}
 	
 	public void drawRect(ScreenPosition pos) {
-		drawRect(pos, ColorManager.fromColor(Color.BLACK).setAlpha(102));
+		drawRect(pos, new Color(0, 0, 0, 102));
 	}
 	
 	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, int color) {
@@ -69,12 +69,12 @@ public abstract class ModDraggable extends Mod implements IRenderer {
     	drawRect(rectLeft, pos.getAbsoluteY(), rectRight, pos.getAbsoluteY() + getHeight(), color);
 	}
 	
-	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, ColorManager color) {
+	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, Color color) {
 		drawAlignedRect(pos, text, widthBackground, color.getRGB());
 	}
 	
 	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground) {
-		drawAlignedRect(pos, text, widthBackground, ColorManager.fromColor(Color.BLACK).setAlpha(102));
+		drawAlignedRect(pos, text, widthBackground, new Color(0, 0, 0, 102));
 	}
 	
 	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {

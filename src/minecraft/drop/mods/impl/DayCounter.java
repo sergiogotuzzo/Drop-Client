@@ -29,6 +29,6 @@ public class DayCounter extends ModDraggableDisplayText {
 		
 		String text = Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days";
 		
-		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textChroma);
+		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textColor.isChromaToggled());
 	}
 }

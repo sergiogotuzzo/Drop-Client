@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.blockoverlay.GuiBlockOverlay;
+import drop.gui.mod.GuiBlockOverlay;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -16,20 +16,18 @@ import drop.mods.Mod;
 public class BlockOverlay extends Mod {
 	private boolean outline = true;
 	private float outlineWidth = 2.0F;
-	private ColorManager outlineColor = ColorManager.fromColor(Color.BLACK);
-	private boolean outlineChroma = false;
+	private ColorManager outlineColor = ColorManager.fromColor(Color.BLACK, false);
 	private boolean overlay = false;
-	private ColorManager overlayColor = ColorManager.fromColor(Color.WHITE).setAlpha(80);
-	private boolean overlayChroma = false;
+	private ColorManager overlayColor = ColorManager.fromColor(Color.WHITE, false).setAlpha(80);
 	
 	public BlockOverlay() {
 		setOutline((boolean) getFromFile("outline", outline));
 		setOutlineWidth((float) ((double) getFromFile("outlineWidth", outlineWidth)));
 		setOutlineColor((int) ((long) getFromFile("outlineColor", outlineColor.getRGB())));
-		setOutlineChroma((boolean) getFromFile("outlineChroma", outlineChroma));
+		setOutlineChroma((boolean) getFromFile("outlineChroma", outlineColor.isChromaToggled()));
 		setOverlay((boolean) getFromFile("overlay", overlay));
 		setOverlayColor((int) ((long) getFromFile("overlayColor", overlayColor.getRGB())));
-		setOverlayChroma((boolean) getFromFile("overlayChroma", overlayChroma));
+		setOverlayChroma((boolean) getFromFile("overlayChroma", overlayColor.isChromaToggled()));
 	}
 	
 	@Override
@@ -90,7 +88,7 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOutlineColor(int rgb) {
-		this.outlineColor = ColorManager.fromRGB(rgb);
+		this.outlineColor = ColorManager.fromRGB(rgb, this.outlineColor.isChromaToggled());
 		
 		setToFile("outlineColor", rgb);
 	}
@@ -100,13 +98,13 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOutlineChroma(boolean enabled) {
-		this.outlineChroma = enabled;
+		outlineColor.setChromaToggled(enabled);
 		
 		setToFile("outlineChroma", enabled);
 	}
 	
 	public boolean isOutlineChromaEnabled() {
-		return outlineChroma;
+		return outlineColor.isChromaToggled();
 	}
 	
 	public void setOverlay(boolean enabled) {
@@ -120,7 +118,7 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOverlayColor(int rgb) {
-		this.overlayColor = ColorManager.fromRGB(rgb);
+		this.overlayColor = ColorManager.fromRGB(rgb, this.overlayColor.isChromaToggled());
 		
 		setToFile("overlayColor", rgb);
 	}
@@ -130,12 +128,12 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOverlayChroma(boolean enabled) {
-		this.overlayChroma = enabled;
+		this.overlayColor.setChromaToggled(enabled);
 		
 		setToFile("overlayChroma", enabled);
 	}
 	
 	public boolean isOverlayChromaEnabled() {
-		return overlayChroma;
+		return overlayColor.isChromaToggled();
 	}
 }

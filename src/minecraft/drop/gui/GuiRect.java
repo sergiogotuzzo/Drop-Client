@@ -39,10 +39,10 @@ public class GuiRect extends GuiButton {
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             GlStateManager.blendFunc(770, 771);
             
-            ColorManager rectColor = ColorManager.fromRGB(color);
+            ColorManager rectColor = ColorManager.fromRGB(color, false);
             
             if (this.hovered) {
-            	int alpha = ColorManager.fromRGB(color).getAlpha();
+            	int alpha = ColorManager.fromRGB(color, false).getAlpha();
             	
             	if (alpha >= 0 && alpha <= 127) {
             		alpha += 50;

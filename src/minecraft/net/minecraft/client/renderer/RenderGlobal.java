@@ -2627,7 +2627,7 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
             if (blockOverlayMod.isEnabled()) {
             	if (blockOverlayMod.isOutlineEnabled()) {
             		if (blockOverlayMod.isOutlineChromaEnabled()) {
-                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F));
+                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                         GlStateManager.color(chromaColor.getRed() / 255.0F, chromaColor.getGreen() / 255.0F, chromaColor.getBlue() / 255.0F, 0.4F);
             		} else {
@@ -2673,7 +2673,7 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
                 	int alpha = blockOverlayMod.getOverlayColor().getAlpha();
 
                 	if (blockOverlayMod.isOverlayChromaEnabled()) {
-                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F));
+                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
                     	red = chromaColor.getRed();
                     	green = chromaColor.getGreen();
                     	blue = chromaColor.getBlue();

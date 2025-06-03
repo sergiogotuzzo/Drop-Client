@@ -430,7 +430,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             	float alpha = oldVisualsMod.isEnabled() ? oldVisualsMod.getHitArmorColor().getAlpha() : 76.0F;
             	
             	if (oldVisualsMod.isHitArmorChromaEnabled()) {
-                	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F));
+                	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                 	red = chromaColor.getRed();
                 	green = chromaColor.getGreen();
