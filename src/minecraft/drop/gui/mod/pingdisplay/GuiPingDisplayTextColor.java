@@ -1,19 +1,19 @@
-package drop.gui.mod.armorstatus;
+package drop.gui.mod.pingdisplay;
 
 import java.io.IOException;
 
 import drop.gui.GuiButtonToggled;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
-import drop.mods.impl.ArmorStatus;
+import drop.mods.impl.PingDisplay;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
-public class GuiArmorStatusTextColor extends GuiModColor {
-	private static final ArmorStatus mod = ModInstances.getArmorStatusMod();
+public class GuiPingDisplayTextColor extends GuiModColor {
+	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
 	
-	public GuiArmorStatusTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getTextColor(), mod, "Armor Status");
+	public GuiPingDisplayTextColor(GuiScreen previousGuiScreen) {
+		super(previousGuiScreen, mod.getTextColor(), mod, "Ping Display");
 	}
 	
 	@Override

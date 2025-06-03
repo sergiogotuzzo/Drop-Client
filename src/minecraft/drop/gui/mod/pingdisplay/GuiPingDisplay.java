@@ -1,10 +1,11 @@
-package drop.gui.mod;
+package drop.gui.mod.pingdisplay;
 
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.GuiButtonToggled;
+import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.ModInstances;
 import drop.mods.impl.PingDisplay;
 
