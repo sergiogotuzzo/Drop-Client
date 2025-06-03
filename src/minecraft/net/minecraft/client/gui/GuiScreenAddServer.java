@@ -1,13 +1,16 @@
 package net.minecraft.client.gui;
 
 import com.google.common.base.Predicate;
+
+import drop.gui.GuiDropClientScreen;
+
 import java.io.IOException;
 import java.net.IDN;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
-public class GuiScreenAddServer extends GuiScreen
+public class GuiScreenAddServer extends GuiDropClientScreen
 {
     private final GuiScreen parentScreen;
     private final ServerData serverData;
@@ -67,6 +70,8 @@ public class GuiScreenAddServer extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 18, I18n.format("addServer.add", new Object[0])));
@@ -87,6 +92,8 @@ public class GuiScreenAddServer extends GuiScreen
      */
     public void onGuiClosed()
     {
+    	super.onGuiClosed();
+    	
         Keyboard.enableRepeatEvents(false);
     }
 
@@ -121,6 +128,8 @@ public class GuiScreenAddServer extends GuiScreen
      */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
+    	super.keyTyped(typedChar, keyCode);
+    	
         this.serverNameField.textboxKeyTyped(typedChar, keyCode);
         this.serverIPField.textboxKeyTyped(typedChar, keyCode);
 

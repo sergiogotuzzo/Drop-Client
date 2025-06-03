@@ -5,7 +5,9 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
-public class GuiScreenServerList extends GuiScreen
+import drop.gui.GuiDropClientScreen;
+
+public class GuiScreenServerList extends GuiDropClientScreen
 {
     private final GuiScreen field_146303_a;
     private final ServerData field_146301_f;
@@ -31,6 +33,8 @@ public class GuiScreenServerList extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 12, I18n.format("selectServer.select", new Object[0])));
@@ -47,6 +51,8 @@ public class GuiScreenServerList extends GuiScreen
      */
     public void onGuiClosed()
     {
+    	super.onGuiClosed();
+    	
         Keyboard.enableRepeatEvents(false);
         this.mc.gameSettings.lastServer = this.field_146302_g.getText();
         this.mc.gameSettings.saveOptions();
@@ -77,6 +83,8 @@ public class GuiScreenServerList extends GuiScreen
      */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
+    	super.keyTyped(typedChar, keyCode);
+
         if (this.field_146302_g.textboxKeyTyped(typedChar, keyCode))
         {
             ((GuiButton)this.buttonList.get(0)).enabled = this.field_146302_g.getText().length() > 0 && this.field_146302_g.getText().split(":").length > 0;
