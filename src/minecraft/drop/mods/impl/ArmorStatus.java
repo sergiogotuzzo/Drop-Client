@@ -35,21 +35,21 @@ public class ArmorStatus extends ModDraggableText {
 	private boolean reverse = false;
 
 	public ArmorStatus() {
-		setVeryHighTextColor((int) ((long) getFromFile("textColor", veryHighTextColor.getRGB())));
-		setVeryHighTextChroma((boolean) getFromFile("textChroma", veryHighTextColor.isChromaToggled()));
-		setVeryHighTextShadow((boolean) getFromFile("textShadow", veryHighTextShadow));
-		setHighTextColor((int) ((long) getFromFile("textColor", highTextColor.getRGB())));
-		setHighTextChroma((boolean) getFromFile("textChroma", highTextColor.isChromaToggled()));
-		setHighTextShadow((boolean) getFromFile("textShadow", highTextShadow));
-		setMediumTextColor((int) ((long) getFromFile("textColor", mediumTextColor.getRGB())));
-		setMediumTextChroma((boolean) getFromFile("textChroma", mediumTextColor.isChromaToggled()));
-		setMediumTextShadow((boolean) getFromFile("textShadow", mediumTextShadow));
-		setLowTextColor((int) ((long) getFromFile("textColor", lowTextColor.getRGB())));
-		setLowTextChroma((boolean) getFromFile("textChroma", lowTextColor.isChromaToggled()));
-		setLowTextShadow((boolean) getFromFile("textShadow", lowTextShadow));
-		setVeryLowTextColor((int) ((long) getFromFile("textColor", veryLowTextColor.getRGB())));
-		setVeryLowTextChroma((boolean) getFromFile("textChroma", veryLowTextColor.isChromaToggled()));
-		setVeryLowTextShadow((boolean) getFromFile("textShadow", veryLowTextShadow));
+		setVeryHighTextColor((int) ((long) getFromFile("veryHighTextColor", veryHighTextColor.getRGB())));
+		setVeryHighTextChroma((boolean) getFromFile("veryHighTextChroma", veryHighTextColor.isChromaToggled()));
+		setVeryHighTextShadow((boolean) getFromFile("veryHighTextShadow", veryHighTextShadow));
+		setHighTextColor((int) ((long) getFromFile("highTextColor", highTextColor.getRGB())));
+		setHighTextChroma((boolean) getFromFile("highTextChroma", highTextColor.isChromaToggled()));
+		setHighTextShadow((boolean) getFromFile("highTextShadow", highTextShadow));
+		setMediumTextColor((int) ((long) getFromFile("mediumTextColor", mediumTextColor.getRGB())));
+		setMediumTextChroma((boolean) getFromFile("mediumTextChroma", mediumTextColor.isChromaToggled()));
+		setMediumTextShadow((boolean) getFromFile("mediumTextShadow", mediumTextShadow));
+		setLowTextColor((int) ((long) getFromFile("lowTextColor", lowTextColor.getRGB())));
+		setLowTextChroma((boolean) getFromFile("lowTextChroma", lowTextColor.isChromaToggled()));
+		setLowTextShadow((boolean) getFromFile("lowTextShadow", lowTextShadow));
+		setVeryLowTextColor((int) ((long) getFromFile("veryLowTextColor", veryLowTextColor.getRGB())));
+		setVeryLowTextChroma((boolean) getFromFile("veryLowTextChroma", veryLowTextColor.isChromaToggled()));
+		setVeryLowTextShadow((boolean) getFromFile("veryLowTextShadow", veryLowTextShadow));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
 		setShowDamage((boolean) getFromFile("showDamage", showDamage));
@@ -230,7 +230,7 @@ public class ArmorStatus extends ModDraggableText {
 	public void setVeryHighTextChroma(boolean enabled) {
 		veryHighTextColor.setChromaToggled(enabled);
 		
-		setToFile("veryHighTextColor", enabled);
+		setToFile("veryHighTextChroma", enabled);
 	}
 	
 	public boolean isVeryHighTextChromaEnabled() {
