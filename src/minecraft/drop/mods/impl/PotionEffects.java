@@ -23,7 +23,6 @@ public class PotionEffects extends ModDraggable {
     private boolean showName = true;
     private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
     private boolean nameTextShadow = true;
-	private boolean showBackground = true;
 	private boolean showIcon = true;
     private boolean blink = true;
 	private boolean reverse = false;
@@ -36,7 +35,6 @@ public class PotionEffects extends ModDraggable {
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
 		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
     	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setShowIcon((boolean) getFromFile("showIcon", showIcon));
 		setBlink((boolean) getFromFile("blink", blink));
 		setReverse((boolean) getFromFile("reverse", reverse));
@@ -61,16 +59,12 @@ public class PotionEffects extends ModDraggable {
 			width += font.getStringWidth("00:00");
 		}
 		
-		if (showBackground) {
-			width += 8;
-		}
-		
         return width;
     }
 
     @Override
     public int getHeight() {    	
-        return getPlayerPotionEffects().size() * 20 + (showBackground ? 8 : 0);
+        return getPlayerPotionEffects().size() * 20;
     }
 
     @Override
@@ -88,7 +82,7 @@ public class PotionEffects extends ModDraggable {
 
             drawPotionEffect(pos, offsetY, potionEffect);
             
-            offsetY += (20 + (showBackground ? 4 : 0));
+            offsetY += 20;
         }
     }
 
@@ -107,7 +101,7 @@ public class PotionEffects extends ModDraggable {
 
             drawPotionEffect(pos, offsetY, potionEffect);
             
-            offsetY += (20 + (showBackground ? 4 : 0));
+            offsetY += 20;
         }
     }
     
@@ -137,15 +131,11 @@ public class PotionEffects extends ModDraggable {
         if (pe == null) {
             return;
         }
-        
-        if (showBackground) {
-        	drawRect(pos.getAbsoluteX(), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 24);
-        }
 
         if (showIcon) {
         	Potion potion = Potion.potionTypes[pe.getPotionID()];
             
-            int iconX = (reverse ? pos.getAbsoluteX() + getWidth() - 20 + (showBackground ? -4 : 0) : pos.getAbsoluteX() + (showBackground ? 4 : 0));
+            int iconX = (reverse ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
 
             if (potion.hasStatusIcon()) {
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -154,7 +144,7 @@ public class PotionEffects extends ModDraggable {
                 
                 int iconIndex = potion.getStatusIconIndex();
                   
-                drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + 2 + (showBackground ? 2 : 0), iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+                drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + 2, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
             }
         }
 
@@ -164,13 +154,13 @@ public class PotionEffects extends ModDraggable {
         int i = showIcon ? 20 : 0;
         
         if (showName) {
-            int nameX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2 + (showBackground ? -2 : 0): pos.getAbsoluteX() + i + 2 + (showBackground ? 2 : 0));
+            int nameX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
 
-        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2 + (showBackground ? 2 : 0), nameTextColor, nameTextShadow);
+        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow);
         }
         
-        int durationX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2 + (showBackground ? -2 : 0): pos.getAbsoluteX() + i + 2 + (showBackground ? 2 : 0));
-        int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2) + (showBackground ? 2 : 0);
+        int durationX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
+        int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2);
         
         if (blink) {
     		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
@@ -263,16 +253,6 @@ public class PotionEffects extends ModDraggable {
 	
 	public boolean isNameTextShadowEnabled() {
 		return nameTextShadow;
-	}
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
 	}
     
     public void setShowIcon(boolean enabled) {

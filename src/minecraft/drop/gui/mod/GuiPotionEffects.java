@@ -23,9 +23,8 @@ public class GuiPotionEffects extends GuiMod {
         this.writeOptionText("Show Name", 3);
         this.writeOptionText("Name Text Color", 4);
         this.writeOptionText("Name Text Shadow", 5);
-        this.writeOptionText("Show Background", 6);
-        this.writeOptionText("Show Icon", 7);
-        this.writeOptionText("Blink", 8);
+        this.writeOptionText("Show Icon", 6);
+        this.writeOptionText("Blink", 7);
     }
 
     @Override
@@ -52,14 +51,10 @@ public class GuiPotionEffects extends GuiMod {
             	this.initGui();
             	break;
             case 6:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
-            	this.initGui();
-            	break;
-            case 7:
             	mod.setShowIcon(!mod.isShowIconEnabled());
             	this.initGui();
             	break;
-            case 8:
+            case 7:
             	mod.setBlink(!mod.isBlinkEnabled());
             	this.initGui();
             	break;
@@ -75,8 +70,7 @@ public class GuiPotionEffects extends GuiMod {
     	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowNameEnabled(), 3));
         this.buttonList.add(this.createGuiRect(4, mod.getNameTextColor().getRGB(), 4));
     	this.buttonList.add(this.createGuiButtonToggled(5, mod.isNameTextShadowEnabled(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowBackgroundEnabled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowIconEnabled(), 7));
-    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isBlinkEnabled(), 8));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowIconEnabled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isBlinkEnabled(), 7));
     }
 }
