@@ -14,28 +14,27 @@ public class GuiPingDisplayTextColor extends GuiModColor {
 	public GuiPingDisplayTextColor(GuiScreen previousGuiScreen) {
 		super(previousGuiScreen, mod, mod.getTextColor());
 	}
-	
-	@Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        super.drawScreen(mouseX, mouseY, partialTicks);
-
-        this.writeOptionText("Dynamic Colors", 6);
-    }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
     	super.actionPerformed(button);
     	
-        if (button.id == 6) {
-        	mod.setDynamicColors(!mod.isDynamicColorsEnabled());
-        	this.initGui();
-        }
+    	switch (button.id) {
+	    	case 6:
+	    		mc.displayGuiScreen(new GuiPingDisplayDynamicColors(this));
+	    		break;
+	    	case 7:
+	    		mod.setDynamicColors(!mod.isDynamicColorsEnabled());
+	        	this.initGui();
+	        	break;
+		}
     }
 	
 	@Override
     public void initGui() {
 		super.initGui();
 		
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isDynamicColorsEnabled(), 6));
+		this.buttonList.add(this.createGuiText(6, (this.width - 300) / 2 + 15, "Dynamic Colors", 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isDynamicColorsEnabled(), 6));
     }
 }

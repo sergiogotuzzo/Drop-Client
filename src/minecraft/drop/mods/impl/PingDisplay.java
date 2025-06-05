@@ -9,9 +9,34 @@ import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
 public class PingDisplay extends ModDraggableDisplayText {
+	private ColorManager excellentTextColor = ColorManager.fromRGB(85, 255, 85, false);
+	private boolean excellentTextShadow = true;
+	private ColorManager goodTextColor = ColorManager.fromRGB(255, 255, 85, false);
+	private boolean goodTextShadow = true;
+	private ColorManager moderateTextColor = ColorManager.fromRGB(255, 170, 0, false);
+	private boolean moderateTextShadow = true;
+	private ColorManager weakTextColor = ColorManager.fromRGB(255, 85, 85, false);
+	private boolean weakTextShadow = true;
+	private ColorManager unstableTextColor = ColorManager.fromRGB(170, 0, 0, false);
+	private boolean unstableTextShadow = true;
 	private boolean dynamicColors = true;
 
 	public PingDisplay() {
+		setExcellentTextColor((int) ((long) getFromFile("textColor", excellentTextColor.getRGB())));
+		setExcellentTextChroma((boolean) getFromFile("textChroma", excellentTextColor.isChromaToggled()));
+		setExcellentTextShadow((boolean) getFromFile("textShadow", excellentTextShadow));
+		setGoodTextColor((int) ((long) getFromFile("textColor", goodTextColor.getRGB())));
+		setGoodTextChroma((boolean) getFromFile("textChroma", goodTextColor.isChromaToggled()));
+		setGoodTextShadow((boolean) getFromFile("textShadow", goodTextShadow));
+		setModerateTextColor((int) ((long) getFromFile("textColor", moderateTextColor.getRGB())));
+		setModerateTextChroma((boolean) getFromFile("textChroma", moderateTextColor.isChromaToggled()));
+		setModerateTextShadow((boolean) getFromFile("textShadow", moderateTextShadow));
+		setWeakTextColor((int) ((long) getFromFile("textColor", weakTextColor.getRGB())));
+		setWeakTextChroma((boolean) getFromFile("textChroma", weakTextColor.isChromaToggled()));
+		setWeakTextShadow((boolean) getFromFile("textShadow", weakTextShadow));
+		setUnstableTextColor((int) ((long) getFromFile("textColor", unstableTextColor.getRGB())));
+		setUnstableTextChroma((boolean) getFromFile("textChroma", unstableTextColor.isChromaToggled()));
+		setUnstableTextShadow((boolean) getFromFile("textShadow", unstableTextShadow));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 	}
 	
@@ -86,6 +111,156 @@ public class PingDisplay extends ModDraggableDisplayText {
 		String text = ping + " ms";
 
 		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), color, textShadow);
+	}
+	
+	public void setExcellentTextColor(int rgb) {
+		excellentTextColor.setRGB(rgb);
+		
+		setToFile("excellentTextColor", rgb);
+	}
+	
+	public ColorManager getExcellentTextColor() {
+		return excellentTextColor;
+	}
+	
+	public void setExcellentTextChroma(boolean enabled) {
+		excellentTextColor.setChromaToggled(enabled);
+		
+		setToFile("excellentTextColor", enabled);
+	}
+	
+	public boolean isExcellentTextChromaEnabled() {
+		return excellentTextColor.isChromaToggled();
+	}
+	
+	public void setExcellentTextShadow(boolean enabled) {
+		excellentTextShadow = enabled;
+		
+		setToFile("excellentTextShadow", enabled);
+	}
+	
+	public boolean isExcellentTextShadowEnabled() {
+		return excellentTextShadow;
+	}
+	
+	public void setGoodTextColor(int rgb) {
+		goodTextColor.setRGB(rgb);
+		
+		setToFile("goodTextColor", rgb);
+	}
+	
+	public ColorManager getGoodTextColor() {
+		return goodTextColor;
+	}
+	
+	public void setGoodTextChroma(boolean enabled) {
+		goodTextColor.setChromaToggled(enabled);
+		
+		setToFile("goodTextChroma", enabled);
+	}
+	
+	public boolean isGoodTextChromaEnabled() {
+		return goodTextColor.isChromaToggled();
+	}
+	
+	public void setGoodTextShadow(boolean enabled) {
+		goodTextShadow = enabled;
+		
+		setToFile("goodTextShadow", enabled);
+	}
+	
+	public boolean isGoodTextShadowEnabled() {
+		return goodTextShadow;
+	}
+	
+	public void setModerateTextColor(int rgb) {
+		moderateTextColor.setRGB(rgb);
+		
+		setToFile("moderateTextColor", rgb);
+	}
+	
+	public ColorManager getModerateTextColor() {
+		return moderateTextColor;
+	}
+	
+	public void setModerateTextChroma(boolean enabled) {
+		moderateTextColor.setChromaToggled(enabled);
+		
+		setToFile("moderateTextChroma", enabled);
+	}
+	
+	public boolean isModerateTextChromaEnabled() {
+		return moderateTextColor.isChromaToggled();
+	}
+	
+	public void setModerateTextShadow(boolean enabled) {
+		moderateTextShadow = enabled;
+		
+		setToFile("moderateTextShadow", enabled);
+	}
+	
+	public boolean isModerateTextShadowEnabled() {
+		return moderateTextShadow;
+	}
+	
+	public void setWeakTextColor(int rgb) {
+		weakTextColor.setRGB(rgb);
+		
+		setToFile("weakTextColor", rgb);
+	}
+	
+	public ColorManager getWeakTextColor() {
+		return weakTextColor;
+	}
+	
+	public void setWeakTextChroma(boolean enabled) {
+		weakTextColor.setChromaToggled(enabled);
+		
+		setToFile("weakTextChroma", enabled);
+	}
+	
+	public boolean isWeakTextChromaEnabled() {
+		return weakTextColor.isChromaToggled();
+	}
+	
+	public void setWeakTextShadow(boolean enabled) {
+		weakTextShadow = enabled;
+		
+		setToFile("WeakTextShadow", enabled);
+	}
+	
+	public boolean isWeakTextShadowEnabled() {
+		return weakTextShadow;
+	}
+	
+	public void setUnstableTextColor(int rgb) {
+		unstableTextColor.setRGB(rgb);
+		
+		setToFile("unstableTextColor", rgb);
+	}
+	
+	public ColorManager getUnstableTextColor() {
+		return unstableTextColor;
+	}
+	
+	public void setUnstableTextChroma(boolean enabled) {
+		unstableTextColor.setChromaToggled(enabled);
+		
+		setToFile("unstableTextChroma", enabled);
+	}
+	
+	public boolean isUnstableTextChromaEnabled() {
+		return unstableTextColor.isChromaToggled();
+	}
+	
+	public void setUnstableTextShadow(boolean enabled) {
+		unstableTextShadow = enabled;
+		
+		setToFile("unstableTextShadow", enabled);
+	}
+	
+	public boolean isUnstableTextShadowEnabled() {
+		return unstableTextShadow;
 	}
 	
 	public void setDynamicColors(boolean enabled) {
