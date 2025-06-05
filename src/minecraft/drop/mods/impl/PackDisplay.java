@@ -144,10 +144,10 @@ public class PackDisplay extends ModDraggable {
 		String packName = selectedPack.getResourcePackName();
 		String packDescription = selectedPack.getTexturePackDescription().replace("§r", "");
 
-		drawText(packName, packX, packNameY, nameTextColor, nameTextShadow, !packName.contains("§") && nameTextColor.isChromaToggled());
+		drawText(packName, packX, packNameY, nameTextColor.getRGB(), nameTextShadow, !packName.contains("§") && nameTextColor.isChromaToggled());
 				
 		if (showDescription) {
-			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor, descriptionTextShadow, !packDescription.contains("§") && descriptionTextColor.isChromaToggled());
+			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, !packDescription.contains("§") && descriptionTextColor.isChromaToggled());
 		}
 	}
 	
@@ -167,10 +167,10 @@ public class PackDisplay extends ModDraggable {
 		int packX = pos.getAbsoluteX() + 4 + (showIcon ? 28 : 0);
 		int packNameY = pos.getAbsoluteY() + (showDescription ? 4 : 28 / 2 - 4);
 		
-		drawText(DefaultPack.getPackName(), packX, packNameY, nameTextColor, nameTextShadow, nameTextColor.isChromaToggled());
+		drawText(DefaultPack.getPackName(), packX, packNameY, nameTextColor.getRGB(), nameTextShadow, nameTextColor.isChromaToggled());
 		
 		if (showDescription) {
-			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, descriptionTextColor, descriptionTextShadow, descriptionTextColor.isChromaToggled());
+			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, descriptionTextColor.isChromaToggled());
 		}
 	}
 	

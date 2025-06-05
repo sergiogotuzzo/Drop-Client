@@ -70,7 +70,7 @@ public class CPSDisplay extends ModDraggableDisplayText {
         
         String text = getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS";
                 
-        drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textColor.isChromaToggled());
+        drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
 	}
 	
 	private int getCPS(List<Long> clicks) {

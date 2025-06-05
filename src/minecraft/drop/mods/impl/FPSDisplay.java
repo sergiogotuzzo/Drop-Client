@@ -29,6 +29,6 @@ public class FPSDisplay extends ModDraggableDisplayText {
 		
 		String text = mc.getDebugFPS() + " FPS";
 		
-		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textColor.isChromaToggled());
+		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
 	}
 }

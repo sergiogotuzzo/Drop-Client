@@ -56,7 +56,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 			
 			String text = ping + " ms";
 
-			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), color, textShadow, color.isChromaToggled());
+			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), color, textShadow);
 		}
 	}
 	

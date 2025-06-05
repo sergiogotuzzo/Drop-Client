@@ -166,7 +166,7 @@ public class PotionEffects extends ModDraggable {
         if (showName) {
             int nameX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2 + (showBackground ? -2 : 0): pos.getAbsoluteX() + i + 2 + (showBackground ? 2 : 0));
 
-        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2 + (showBackground ? 2 : 0), nameTextColor, nameTextShadow, nameTextColor.isChromaToggled());
+        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2 + (showBackground ? 2 : 0), nameTextColor, nameTextShadow);
         }
         
         int durationX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2 + (showBackground ? -2 : 0): pos.getAbsoluteX() + i + 2 + (showBackground ? 2 : 0));
@@ -174,10 +174,10 @@ public class PotionEffects extends ModDraggable {
         
         if (blink) {
     		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
-        		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
+        		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
             }
     	} else {
-    		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow, durationTextColor.isChromaToggled());
+    		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
     	}
     }
     

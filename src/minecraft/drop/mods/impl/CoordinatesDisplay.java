@@ -96,21 +96,21 @@ public class CoordinatesDisplay extends ModDraggableText {
 		int j = showBackground ? 6 : font.FONT_HEIGHT + 1;
 		int h = showBackground ? 0 : 1;
 		
-		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textColor.isChromaToggled());
-		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textColor.isChromaToggled());
-		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textColor.isChromaToggled());
+		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow);
+		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow);
+		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow);
 		
 		if (showFacing) {
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow);
 		}
 		
 		if (showFacingTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow, textColor.isChromaToggled());
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow);
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow);
 		}
 		
 		if (showBiome) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h, textColor, textShadow, textColor.isChromaToggled());
+			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h, textColor, textShadow);
 		}
 	}
 	

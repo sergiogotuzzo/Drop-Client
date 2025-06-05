@@ -146,7 +146,7 @@ public class ArmorStatus extends ModDraggableText {
 				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + offsetY);
 			}
 			
-			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, color.getRGB(), textShadow, color.isChromaToggled());
+			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, color, textShadow);
 		}
 		
 		GL11.glPopMatrix();

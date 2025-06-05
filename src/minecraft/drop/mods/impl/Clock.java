@@ -33,6 +33,6 @@ public class Clock extends ModDraggableDisplayText {
 		
 		String text = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
 		
-		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow, textColor.isChromaToggled());
+		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
 	}
 }

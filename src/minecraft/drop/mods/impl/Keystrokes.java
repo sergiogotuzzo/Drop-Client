@@ -200,8 +200,7 @@ public class Keystrokes extends ModDraggableText {
 	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
 	                key.isDown() ? pressedTextColor : textColor,
-	                key.isDown() ? pressedTextShadow : textShadow,
-	                key.isDown() ? pressedTextColor.isChromaToggled() : textColor.isChromaToggled()
+	                key.isDown() ? pressedTextShadow : textShadow
 	        		);
 	    }
 	}
