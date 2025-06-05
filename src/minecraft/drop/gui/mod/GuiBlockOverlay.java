@@ -1,45 +1,32 @@
 package drop.gui.mod;
 
-import java.awt.Color;
 import java.io.IOException;
 
-import drop.Client;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import drop.gui.GuiButtonToggled;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.GuiRect;
 import drop.gui.GuiSlider;
-import drop.gui.GuiText;
 import drop.mods.ModInstances;
 import drop.mods.impl.BlockOverlay;
 
-public class GuiBlockOverlay extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	private final BlockOverlay mod = ModInstances.getBlockOverlayMod();
+public class GuiBlockOverlay extends GuiMod {
+	private static final BlockOverlay mod = ModInstances.getBlockOverlayMod();
 
 	private GuiSlider sliderOutlineWidth;
 	
 	public GuiBlockOverlay(GuiScreen previousGuiScreen) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod);
 	}
 
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
 		
-    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText("Block Overlay", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawText("Outline", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Outline Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Outline Width", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-        this.drawText(String.format("%.1f", mod.getOutlineWidth()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.1f", mod.getOutlineWidth())) - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-        this.drawText("Overlay", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
-        this.drawText("Overlay Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
+		this.writeOptionText("Outline", 1);
+		this.writeOptionText("Outline Color", 2);
+		this.writeOptionText("Outline Width", 3);
+		this.writeOptionValue(String.format("%.1f", mod.getOutlineWidth()), 3);
+		this.writeOptionText("Overlay", 4);
+		this.writeOptionText("Overlay Color", 5);
     }
     
     @Override
@@ -53,10 +40,9 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+    	super.actionPerformed(button);
+    	
         switch (button.id) {
-            case 0:
-            	this.mc.displayGuiScreen(this.previousGuiScreen);
-            	break;
             case 1:
             	mod.setOutline(!mod.isOutlineEnabled());
             	this.initGui();
@@ -84,14 +70,11 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-    	this.buttonList.add(new GuiButtonToggled(1, mod.isOutlineEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-        this.buttonList.add(new GuiRect(2, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2 * 2, mod.getOutlineColor().getRGB()));
-    	this.buttonList.add(sliderOutlineWidth = new GuiSlider(3, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 2 + 15 + 1, 100, 5, 0.4F, 5.0F, mod.getOutlineWidth()));
-    	this.buttonList.add(new GuiButtonToggled(4, mod.isOverlayEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
-    	this.buttonList.add(new GuiRect(5, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2 * 2, mod.getOverlayColor().getRGB()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+		
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isOutlineEnabled(), 1));
+        this.buttonList.add(this.createGuiRect(2, mod.getOutlineColor().getRGB(), 2));
+    	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 0.4F, 5.0F, mod.getOutlineWidth(), 3));
+    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isOverlayEnabled(), 4));
+    	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), 5));
     }
 }

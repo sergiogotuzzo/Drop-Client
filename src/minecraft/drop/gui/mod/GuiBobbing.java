@@ -1,57 +1,40 @@
 package drop.gui.mod;
 
-import java.awt.Color;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import drop.events.EventTarget;
-import drop.gui.GuiButtonToggled;
-import drop.gui.GuiDropClientScreen;
 import drop.mods.ModInstances;
 import drop.mods.impl.Bobbing;
 
-public class GuiBobbing extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	private final Bobbing mod = ModInstances.getBobbingMod();
+public class GuiBobbing extends GuiMod {
+	private static final Bobbing mod = ModInstances.getBobbingMod();
 	
 	public GuiBobbing(GuiScreen previousGuiScreen) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod);
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
+    	super.drawScreen(mouseX, mouseY, partialTicks);
     	
-    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText("Bobbing", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawText("Minimal View Bobbing", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
+    	this.writeOptionText("Minimal View Bobbing", 1);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        switch (button.id) {
-            case 0:
-            	this.mc.displayGuiScreen(this.previousGuiScreen);
-            	break;
-            case 1:
-            	mod.setMinimalViewBobbing(!mod.isMinimalViewBobbingToggled());
-            	this.initGui();
-            	break;
-        }
+    	super.actionPerformed(button);
+    	
+    	if (button.id == 1) {
+    		mod.setMinimalViewBobbing(!mod.isMinimalViewBobbingToggled());
+        	this.initGui();
+    	}
     }
 	
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
         
-    	this.buttonList.add(new GuiButtonToggled(1, mod.isMinimalViewBobbingToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isMinimalViewBobbingToggled(), 1));
     }
 }

@@ -1,41 +1,31 @@
 package drop.gui.mod;
 
-import java.awt.Color;
 import java.io.IOException;
 
-import drop.Client;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
 import drop.mods.impl.Chat;
 
-public class GuiChat extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	private final Chat mod = ModInstances.getChatMod();
+public class GuiChat extends GuiMod {
+	private static final Chat mod = ModInstances.getChatMod();
 
 	private GuiSlider sliderBackgroundOpacity;
 	
 	public GuiChat(GuiScreen previousGuiScreen) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod);
 	}
 
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
 		
-    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText("Chat", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawText("Chat Height Fix", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Background Opacity", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-        this.drawText(String.valueOf(mod.getBackgroundOpacity()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.valueOf(mod.getBackgroundOpacity())) - 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
+		this.writeOptionText("Chat Height Fix", 1);
+		this.writeOptionText("Text Shadow", 2);
+		this.writeOptionText("Background Opacity", 3);
+		this.writeOptionValue(String.valueOf(mod.getBackgroundOpacity()), 3);
     }
     
     @Override
@@ -45,10 +35,9 @@ public class GuiChat extends GuiDropClientScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+    	super.actionPerformed(button);
+    	
         switch (button.id) {
-            case 0:
-            	this.mc.displayGuiScreen(this.previousGuiScreen);
-            	break;
             case 1:
             	mod.setChatHeightFix(!mod.isChatHeightFixEnabled());
             	this.initGui();
@@ -66,12 +55,9 @@ public class GuiChat extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-    	this.buttonList.add(new GuiButtonToggled(1, mod.isChatHeightFixEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(2, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
-    	this.buttonList.add(sliderBackgroundOpacity = new GuiSlider(3, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 2 + 15 + 1, 100, 5, 0, 127, mod.getBackgroundOpacity()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+		
+		this.buttonList.add(this.createGuiButtonToggled(1, mod.isChatHeightFixEnabled(), 1));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
+		this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 0.0F, 127.0F, mod.getBackgroundOpacity(), 40, 3));
     }
 }

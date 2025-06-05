@@ -13,28 +13,22 @@ import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
 import drop.mods.impl.HurtCam;
 
-public class GuiHurtCam extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	private final HurtCam mod = ModInstances.getHurtCamMod();
+public class GuiHurtCam extends GuiMod {
+	private static final HurtCam mod = ModInstances.getHurtCamMod();
 	
 	private GuiSlider sliderHurtShakeIntensity;
 	
 	public GuiHurtCam(GuiScreen previousGuiScreen) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod);
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
+    	super.drawScreen(mouseX, mouseY, partialTicks);
     	
-    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText("Hurt Cam", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawText("Hurt Shake", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Hurt Shake Intensity", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText(String.format("%.1f", mod.getHurtShakeIntensity()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.1f", mod.getHurtShakeIntensity())) - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
+    	this.writeOptionText("Hurt Shake", 1);
+    	this.writeOptionText("Hurt Shake Intensity", 2);
+    	this.writeOptionValue(String.format("%.1f", mod.getHurtShakeIntensity()), 2);
     }
     
     @Override
@@ -48,10 +42,9 @@ public class GuiHurtCam extends GuiDropClientScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+    	super.actionPerformed(button);
+    	
         switch (button.id) {
-            case 0:
-            	this.mc.displayGuiScreen(this.previousGuiScreen);
-            	break;
             case 1:
             	mod.setHurtShake(!mod.isHurtShakeToggled());
             	this.initGui();
@@ -69,11 +62,8 @@ public class GuiHurtCam extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-    	this.buttonList.add(new GuiButtonToggled(1, mod.isHurtShakeToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(sliderHurtShakeIntensity = new GuiSlider(2, (this.width - 300) / 2 + 140, (this.height - 200) / 2 + 30 + 15 * 1 + 15 + 1, 100, 5, 5.0F, 35.0F, mod.getHurtShakeIntensity()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+		
+		this.buttonList.add(this.createGuiButtonToggled(1, mod.isHurtShakeToggled(), 1));
+		this.buttonList.add(sliderHurtShakeIntensity = this.createGuiSlider(2, 5.0F, 35.0F, mod.getHurtShakeIntensity(), 40, 2));
     }
 }

@@ -1,53 +1,39 @@
 package drop.gui.mod;
 
-import java.awt.Color;
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import drop.Client;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import drop.events.EventTarget;
-import drop.gui.GuiButtonToggled;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.GuiRect;
-import drop.gui.GuiText;
 import drop.mods.ModDraggableDisplayText;
 import drop.mods.ModDraggableDisplayText.Brackets;
 import drop.mods.ModInstances;
 
-public class GuiModDraggableDisplayText extends GuiDropClientScreen {
-	protected final GuiScreen previousGuiScreen;
-	private final ModDraggableDisplayText mod;
+public class GuiModDraggableDisplayText extends GuiMod {
+	private static ModDraggableDisplayText mod;
 	
 	public GuiModDraggableDisplayText(GuiScreen previousGuiScreen, ModDraggableDisplayText mod) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod);
+		
 		this.mod = mod;
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
+    	super.drawScreen(mouseX, mouseY, partialTicks);
     	
-    	drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " "), (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
-        this.drawText("Show Background", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15, -1, false, false);
-        this.drawText("Text Shadow", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15, -1, false, false);
-        this.drawText("Text Color", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 2 + 15, -1, false, false);
-        this.drawText("Brackets", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15, -1, false, false);
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
+    	this.writeOptionText("Show Background", 1);
+    	this.writeOptionText("Text Shadow", 2);
+    	this.writeOptionText("Text Color", 3);
+    	this.writeOptionText("Brackets", 4);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+    	super.actionPerformed(button);
+    	
         switch (button.id) {
-            case 0:
-            	this.mc.displayGuiScreen(this.previousGuiScreen);
-            	break;
             case 1:
             	mod.setShowBackground(!mod.isShowBackgroundEnabled());
             	this.initGui();
@@ -69,13 +55,10 @@ public class GuiModDraggableDisplayText extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-    	this.buttonList.add(new GuiButtonToggled(1, mod.isShowBackgroundEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(2, mod.isTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 1 + 15 - 2));
-        this.buttonList.add(new GuiRect(3, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 2 + 15 - 2 * 2, mod.getTextColor().getRGB()));
-        this.buttonList.add(new GuiText(4, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(mod.getBrackets().getName()), (this.height - 200) / 2 + 30 + 15 * 3 + 15, mod.getBrackets().getName()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+		
+		this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowBackgroundEnabled(), 1));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
+		this.buttonList.add(this.createGuiRect(3, mod.getTextColor().getRGB(), 3));
+		this.buttonList.add(this.createGuiText(4, mod.getBrackets().getName(), 4));
     }
 }

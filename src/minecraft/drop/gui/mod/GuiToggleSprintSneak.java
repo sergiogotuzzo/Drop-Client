@@ -10,24 +10,24 @@ import drop.mods.ModInstances;
 import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 
 public class GuiToggleSprintSneak extends GuiModDraggableDisplayText {
-	private final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
+	private static final ToggleSprintSneak mod = ModInstances.getToggleSprintSneakMod();
 
 	private GuiSlider sliderFlyBoostFactor;
 	
 	public GuiToggleSprintSneak(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, ModInstances.getToggleSprintSneakMod());
+		super(previousGuiScreen, mod);
 	}
 
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
         
-        this.drawText("Toggle Sprint", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15, -1, false, false);
-        this.drawText("Toggle Sneak", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
-        this.drawText("Fly Boost", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15, -1, false, false);
-        this.drawText("Fly Boost Factor", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
-        this.drawText(String.format("%.1f", mod.getFlyBoostFactor()), (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(String.format("%.1f", mod.getFlyBoostFactor())) - 15, (this.height - 200) / 2 + 30 + 15 * 7 + 15, -1, false, false);
-        this.drawText("Show Text", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 8 + 15, -1, false, false);
+        this.writeOptionText("Toggle Sprint", 5);
+        this.writeOptionText("Toggle Sneak", 6);
+        this.writeOptionText("Fly Boost", 7);
+        this.writeOptionText("Fly Boost Factor", 8);
+        this.writeOptionValue(String.format("%.1f", mod.getFlyBoostFactor()), 8);
+        this.writeOptionText("Show Text", 9);
     }
     
     @Override
@@ -74,10 +74,10 @@ public class GuiToggleSprintSneak extends GuiModDraggableDisplayText {
     public void initGui() {
         super.initGui();
         
-    	this.buttonList.add(new GuiButtonToggled(5, mod.isToggleSprintEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(6, mod.isToggleSneakEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
-    	this.buttonList.add(new GuiButtonToggled(7, mod.isFlyBoostEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
-    	this.buttonList.add(sliderFlyBoostFactor = new GuiSlider(8, (this.width - 300) / 2 + 130, (this.height - 200) / 2 + 30 + 15 * 7 + 15 + 1, 100, 5, 2.0F, 8.0F, mod.getFlyBoostFactor()));
-    	this.buttonList.add(new GuiButtonToggled(9, mod.isShowTextEnabled(), (this.width + 300) / 2 - 20 - 15 - 3, (this.height - 200) / 2 + 30 + 15 * 8 + 15 - 2));
+    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isToggleSprintEnabled(), 5));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isToggleSneakEnabled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isFlyBoostEnabled(), 7));
+    	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(8, 2.0F, 8.0F, mod.getFlyBoostFactor(), 30, 8));
+    	this.buttonList.add(this.createGuiButtonToggled(9, mod.isShowTextEnabled(), 9));
     }
 }
