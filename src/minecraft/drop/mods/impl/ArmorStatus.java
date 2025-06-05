@@ -112,24 +112,22 @@ public class ArmorStatus extends ModDraggableText {
 		GL11.glPushMatrix();
 		
 		int offsetY = (-16 * i) + getHeight() - 16;
-		Color dynamicColor = Color.WHITE;
+		ColorManager color = textColor; // Default
 		
 		if (dynamicColors) {
 			double damagePercentage = getDamagePercentage(is);
 			
-			if (damagePercentage > 80) {
-				dynamicColor = Color.WHITE;
-			} else if (damagePercentage > 60) {
-				dynamicColor = new Color(85, 255, 85);
-			} else if (damagePercentage > 40) {
-				dynamicColor = new Color(255, 255, 85);
-			} else if (damagePercentage > 25) {
-				dynamicColor = new Color(255, 170, 0);
-			} else if (damagePercentage > 10) {
-				dynamicColor = new Color(255, 85, 85);
-			} else if (damagePercentage < 10) {
-				dynamicColor = new Color(170, 0, 0);
-			}
+			if (damagePercentage <= 10) {
+		        color = ColorManager.fromRGB(170, 0, 0, false); // Very low
+		    } else if (damagePercentage <= 25) {
+		        color = ColorManager.fromRGB(255, 85, 85, false); // Low
+		    } else if (damagePercentage <= 40) {
+		        color = ColorManager.fromRGB(255, 170, 0, false); // Medium
+		    } else if (damagePercentage <= 60) {
+		        color = ColorManager.fromRGB(255, 255, 85, false); // High
+		    } else if (damagePercentage <= 80) {
+		        color = ColorManager.fromRGB(85, 255, 85, false); // Very high
+		    }
 		}
 		
 		RenderHelper.enableGUIStandardItemLighting();
@@ -148,7 +146,7 @@ public class ArmorStatus extends ModDraggableText {
 				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + offsetY);
 			}
 			
-			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textColor.isChromaToggled() && !dynamicColors);
+			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, color.getRGB(), textShadow, color.isChromaToggled());
 		}
 		
 		GL11.glPopMatrix();

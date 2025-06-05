@@ -2,6 +2,7 @@ package drop.mods.impl;
 
 import java.awt.Color;
 
+import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.pingdisplay.GuiPingDisplay;
 import drop.mods.hud.ScreenPosition;
@@ -37,25 +38,25 @@ public class PingDisplay extends ModDraggableDisplayText {
 			}
 			
 			int ping = mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
-			Color dynamicColor = Color.WHITE;
+			ColorManager color = textColor; // Default
 			
 			if (dynamicColors) {
 				if (ping > 300) {
-					dynamicColor = new Color(170, 0, 0);
+					color = ColorManager.fromRGB(170, 0, 0, false); // Unstable
 				} else if (ping > 200) {
-					dynamicColor = new Color(255, 85, 85);
+					color = ColorManager.fromRGB(255, 85, 85, false); // Weak
 				} else if (ping > 150) {
-					dynamicColor = new Color(255, 170, 0);
+					color = ColorManager.fromRGB(255, 170, 0, false); // Moderate
 				} else if (ping > 100) {
-					dynamicColor = new Color(255, 255, 85);
+					color = ColorManager.fromRGB(255, 255, 85, false); // Good
 				} else if (ping > 50) {
-					dynamicColor = new Color(85, 255, 85);
+					color = ColorManager.fromRGB(85, 255, 85, false); // Excellent
 				}
 			}
 			
 			String text = ping + " ms";
 
-			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), dynamicColors ? dynamicColor.getRGB() : textColor.getRGB(), textShadow, textColor.isChromaToggled() && !dynamicColors);
+			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), color, textShadow, color.isChromaToggled());
 		}
 	}
 	
