@@ -110,8 +110,8 @@ public class Keystrokes extends ModDraggableText {
 	
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
 
-	private boolean pressedTextShadow = true;
 	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE, false);
+	private boolean pressedTextShadow = true;
 	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
@@ -126,9 +126,9 @@ public class Keystrokes extends ModDraggableText {
     private long lastRightPressed;
 	
 	public Keystrokes() {
-		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
 		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
 		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
+		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
 		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
 		setShowMouse((boolean) getFromFile("showMouse", showMouse));
 		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
@@ -225,16 +225,6 @@ public class Keystrokes extends ModDraggableText {
 		}
 	}
 	
-	public void setPressedTextShadow(boolean enabled) {
-		pressedTextShadow = enabled;
-		
-		setToFile("pressedTextShadow", enabled);
-	}
-	
-	public boolean isPressedTextShadowEnabled() {
-		return pressedTextShadow;
-	}
-	
 	public void setPressedTextColor(int rgb) {
 		pressedTextColor.setRGB(rgb);
 		
@@ -243,6 +233,16 @@ public class Keystrokes extends ModDraggableText {
 	
 	public ColorManager getPressedTextColor() {
 		return pressedTextColor;
+	}
+	
+	public void setPressedTextShadow(boolean enabled) {
+		pressedTextShadow = enabled;
+		
+		setToFile("pressedTextShadow", enabled);
+	}
+	
+	public boolean isPressedTextShadowEnabled() {
+		return pressedTextShadow;
 	}
 	
 	public void setShowMovementKeys(boolean enabled) {

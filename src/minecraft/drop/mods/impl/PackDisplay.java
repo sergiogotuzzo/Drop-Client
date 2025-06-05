@@ -28,25 +28,25 @@ public class PackDisplay extends ModDraggable {
 		}
 	}
 	
-	private boolean showBackground = true;
-	private boolean nameTextShadow = true;
 	private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
-	private boolean descriptionTextShadow = true;
-	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
-	private boolean showIcon = true;
+	private boolean nameTextShadow = true;
 	private boolean showDescription = false;
+	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
+	private boolean descriptionTextShadow = true;
+	private boolean showBackground = true;
+	private boolean showIcon = true;
 	private boolean showAllSelectedPacks = true;
 	
 	public PackDisplay() {
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
-		setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
 		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
-		setDescriptionTextColor((int) ((long) getFromFile("descriptionTextColor", descriptionTextColor.getRGB())));
-		setDescriptionTextShadow((boolean) getFromFile("descriptionTextShadow", descriptionTextShadow));
-		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
-		setShowIcon((boolean) getFromFile("showIcon", showIcon));
+		setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
 		setShowDescription((boolean) getFromFile("showDescription", showDescription));
+		setDescriptionTextColor((int) ((long) getFromFile("descriptionTextColor", descriptionTextColor.getRGB())));
+		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
+		setDescriptionTextShadow((boolean) getFromFile("descriptionTextShadow", descriptionTextShadow));
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+		setShowIcon((boolean) getFromFile("showIcon", showIcon));
 		setShowAllSelectedPacks((boolean) getFromFile("showAllSelectedPacks", showAllSelectedPacks));
 	}
 	
@@ -208,16 +208,6 @@ public class PackDisplay extends ModDraggable {
 		return longest;
 	}
 	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
-	}
-	
 	public void setNameTextColor(int rgb) {
 		nameTextColor.setRGB(rgb);
 		
@@ -226,16 +216,6 @@ public class PackDisplay extends ModDraggable {
 	
 	public ColorManager getNameTextColor() {
 		return nameTextColor;
-	}
-	
-	public void setNameTextShadow(boolean enabled) {
-		nameTextShadow = enabled;
-		
-		setToFile("nameTextShadow", enabled);
-	}
-	
-	public boolean isNameTextShadowEnabled() {
-		return nameTextShadow;
 	}
 	
 	public void setNameTextChroma(boolean enabled) {
@@ -248,6 +228,26 @@ public class PackDisplay extends ModDraggable {
 		return nameTextColor.isChromaToggled();
 	}
 	
+	public void setNameTextShadow(boolean enabled) {
+		nameTextShadow = enabled;
+		
+		setToFile("nameTextShadow", enabled);
+	}
+	
+	public boolean isNameTextShadowEnabled() {
+		return nameTextShadow;
+	}
+	
+	public void setShowDescription(boolean toggled) {
+		showDescription = toggled;
+		
+		setToFile("showDescription", toggled);
+	}
+	
+	public boolean isShowDescriptionToggled() {
+		return showDescription;
+	}
+	
 	public void setDescriptionTextColor(int rgb) {
 		descriptionTextColor.setRGB(rgb);
 		
@@ -256,16 +256,6 @@ public class PackDisplay extends ModDraggable {
 	
 	public ColorManager getDescriptionTextColor() {
 		return descriptionTextColor;
-	}
-	
-	public void setDescriptionTextShadow(boolean enabled) {
-		descriptionTextShadow = enabled;
-		
-		setToFile("descriptionTextShadow", enabled);
-	}
-	
-	public boolean isDescriptionTextShadowEnabled() {
-		return descriptionTextShadow;
 	}
 	
 	public void setDescriptionTextChroma(boolean enabled) {
@@ -278,6 +268,26 @@ public class PackDisplay extends ModDraggable {
 		return descriptionTextColor.isChromaToggled();
 	}
 	
+	public void setDescriptionTextShadow(boolean enabled) {
+		descriptionTextShadow = enabled;
+		
+		setToFile("descriptionTextShadow", enabled);
+	}
+	
+	public boolean isDescriptionTextShadowEnabled() {
+		return descriptionTextShadow;
+	}
+	
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
+	}
+	
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
+	}
+	
 	public void setShowIcon(boolean toggled) {
 		showIcon = toggled;
 		
@@ -286,16 +296,6 @@ public class PackDisplay extends ModDraggable {
 	
 	public boolean isShowIconToggled() {
 		return showIcon;
-	}
-	
-	public void setShowDescription(boolean toggled) {
-		showDescription = toggled;
-		
-		setToFile("showDescription", toggled);
-	}
-	
-	public boolean isShowDescriptionToggled() {
-		return showDescription;
 	}
 	
 	public void setShowAllSelectedPacks(boolean toggled) {

@@ -2,12 +2,11 @@ package drop.gui.mod.pingdisplay;
 
 import java.io.IOException;
 
-import drop.gui.GuiButtonToggled;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.PingDisplay;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 
 public class GuiPingDisplayTextColor extends GuiModColor {
 	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
@@ -20,7 +19,7 @@ public class GuiPingDisplayTextColor extends GuiModColor {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        this.drawText("Dynamic Colors", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15, -1, false, false);
+        this.writeOptionText("Dynamic Colors", 6);
     }
 
     @Override
@@ -37,6 +36,6 @@ public class GuiPingDisplayTextColor extends GuiModColor {
     public void initGui() {
 		super.initGui();
 		
-    	this.buttonList.add(new GuiButtonToggled(6, mod.isDynamicColorsEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isDynamicColorsEnabled(), 6));
     }
 }

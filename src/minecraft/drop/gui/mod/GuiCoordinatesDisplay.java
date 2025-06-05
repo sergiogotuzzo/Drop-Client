@@ -17,13 +17,13 @@ public class GuiCoordinatesDisplay extends GuiMod {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
-    	
-    	this.writeOptionText("Show Biome", 1);
-    	this.writeOptionText("Show Facing", 2);
-    	this.writeOptionText("Show Facing Towards", 3);
-    	this.writeOptionText("Text Shadow", 4);
-    	this.writeOptionText("Text Color", 5);
-    	this.writeOptionText("Show Background", 6);
+
+    	this.writeOptionText("Text Color", 1);
+    	this.writeOptionText("Text Shadow", 2);
+    	this.writeOptionText("Show Background", 3);
+    	this.writeOptionText("Show Biome", 4);
+    	this.writeOptionText("Show Facing", 5);
+    	this.writeOptionText("Show Facing Towards", 6);
     }
 
     @Override
@@ -31,27 +31,27 @@ public class GuiCoordinatesDisplay extends GuiMod {
     	super.actionPerformed(button);
     	
         switch (button.id) {
-            case 1:
-            	mod.setShowBiome(!mod.isShowBiomeEnabled());
-            	this.initGui();
-            	break;
+	        case 1:
+	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
+	        	break;
             case 2:
-            	mod.setShowFacing(!mod.isShowFacingEnabled());
-            	this.initGui();
-            	break;
-            case 3:
-            	mod.setShowFacingTowards(!mod.isShowFacingTowardsEnabled());
-            	this.initGui();
-            	break;
-            case 4:
             	mod.setTextShadow(!mod.isTextShadowEnabled());
             	this.initGui();
             	break;
+            case 3:
+            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	this.initGui();
+            	break;
+            case 4:
+            	mod.setShowBiome(!mod.isShowBiomeEnabled());
+            	this.initGui();
+            	break;
             case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
+            	mod.setShowFacing(!mod.isShowFacingEnabled());
+            	this.initGui();
             	break;
             case 6:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	mod.setShowFacingTowards(!mod.isShowFacingTowardsEnabled());
             	this.initGui();
             	break;
         }
@@ -61,11 +61,11 @@ public class GuiCoordinatesDisplay extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-        this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowBiomeEnabled(), 1));
-        this.buttonList.add(this.createGuiButtonToggled(2, mod.isShowFacingEnabled(), 2));
-        this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowFacingTowardsEnabled(), 3));
-        this.buttonList.add(this.createGuiButtonToggled(4, mod.isTextShadowEnabled(), 4));
-        this.buttonList.add(this.createGuiRect(5, mod.getTextColor().getRGB(), 5));
-        this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowBackgroundEnabled(), 6));
+        this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
+        this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
+        this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundEnabled(), 3));
+        this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBiomeEnabled(), 4));
+        this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowFacingEnabled(), 5));
+        this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowFacingTowardsEnabled(), 6));
     }
 }

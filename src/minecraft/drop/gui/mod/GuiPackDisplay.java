@@ -18,13 +18,13 @@ public class GuiPackDisplay extends GuiMod {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
         
-        this.writeOptionText("Show Background", 1);
+        this.writeOptionText("Name Text Color", 1);
         this.writeOptionText("Name Text Shadow", 2);
-        this.writeOptionText("Name Text Color", 3);
-        this.writeOptionText("Description Text Shadow", 4);
-        this.writeOptionText("Description Text Color", 5);
-        this.writeOptionText("Show Icon", 6);
-        this.writeOptionText("Show Description", 7);
+        this.writeOptionText("Show Description", 3);
+        this.writeOptionText("Description Text Color", 4);
+        this.writeOptionText("Description Text Shadow", 5);
+        this.writeOptionText("Show Background", 6);
+        this.writeOptionText("Show Icon", 7);
         this.writeOptionText("Show All Selected Packs", 8);
     }
 
@@ -34,29 +34,29 @@ public class GuiPackDisplay extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
-            	this.initGui();
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getNameTextColor(), "nameTextColor", "nameTextChroma", "Name Text Color"));
             	break;
             case 2:
             	mod.setNameTextShadow(!mod.isNameTextShadowEnabled());
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getNameTextColor(), "nameTextColor", "nameTextChroma", "Name Text Color"));
+            	mod.setShowDescription(!mod.isShowDescriptionToggled());
+            	this.initGui();
             	break;
             case 4:
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getDescriptionTextColor(), "descriptionTextColor", "descriptionTextChroma", "Description Text Color"));
+            	break;
+            case 5:
             	mod.setDescriptionTextShadow(!mod.isDescriptionTextShadowEnabled());
             	this.initGui();
             	break;
-            case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getDescriptionTextColor(), "descriptionTextColor", "descriptionTextChroma", "Description Text Color"));
-            	break;
             case 6:
-            	mod.setShowIcon(!mod.isShowIconToggled());
+            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
             	this.initGui();
             	break;
             case 7:
-            	mod.setShowDescription(!mod.isShowDescriptionToggled());
+            	mod.setShowIcon(!mod.isShowIconToggled());
             	this.initGui();
             	break;
             case 8:
@@ -70,13 +70,13 @@ public class GuiPackDisplay extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowBackgroundEnabled(), 1));
+        this.buttonList.add(this.createGuiRect(1, mod.getNameTextColor().getRGB(), 1));
     	this.buttonList.add(this.createGuiButtonToggled(2, mod.isNameTextShadowEnabled(), 2));
-        this.buttonList.add(this.createGuiRect(3, mod.getNameTextColor().getRGB(), 3));
-        this.buttonList.add(this.createGuiButtonToggled(4, mod.isDescriptionTextShadowEnabled(), 4));
-        this.buttonList.add(this.createGuiRect(5, mod.getDescriptionTextColor().getRGB(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowIconToggled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowDescriptionToggled(), 7));
+    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowDescriptionToggled(), 3));
+        this.buttonList.add(this.createGuiRect(4, mod.getDescriptionTextColor().getRGB(), 4));
+        this.buttonList.add(this.createGuiButtonToggled(5, mod.isDescriptionTextShadowEnabled(), 5));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowBackgroundEnabled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowIconToggled(), 7));
     	this.buttonList.add(this.createGuiButtonToggled(8, mod.isShowAllSelectedPacksToggled(), 8));
     }
 }

@@ -18,14 +18,14 @@ public class GuiPingDisplay extends GuiModDraggableDisplayText {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {    	
         switch (button.id) {
+        	case 1:
+        		mc.displayGuiScreen(new GuiPingDisplayTextColor(this));
+        		break;
         	case 0:
-            case 1:
             case 2:
+            case 3:
             case 4:
             	super.actionPerformed(button);
-            	break;
-            case 3:
-            	mc.displayGuiScreen(new GuiPingDisplayTextColor(this));
             	break;
         }
     }

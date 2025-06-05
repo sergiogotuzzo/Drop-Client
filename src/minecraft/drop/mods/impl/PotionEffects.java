@@ -18,27 +18,27 @@ import drop.mods.ModDraggable;
 public class PotionEffects extends ModDraggable {
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
-    private boolean blink = true;
-	private boolean showIcon = true;
-	private boolean showBackground = true;
-    private boolean durationTextShadow = true;
     private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE, false);
+    private boolean durationTextShadow = true;
     private boolean showName = true;
-    private boolean nameTextShadow = true;
     private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
+    private boolean nameTextShadow = true;
+	private boolean showBackground = true;
+	private boolean showIcon = true;
+    private boolean blink = true;
 	private boolean reverse = false;
 	
 	public PotionEffects() {
-		setBlink((boolean) getFromFile("blink", blink));
-		setShowIcon((boolean) getFromFile("showIcon", showIcon));
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
-		setDurationTextShadow((boolean) getFromFile("durationTextShadow", durationTextShadow));
 		setDurationTextColor((int) ((long) getFromFile("durationTextColor", durationTextColor.getRGB())));
+		setDurationTextShadow((boolean) getFromFile("durationTextShadow", durationTextShadow));
 		setDurationTextChroma((boolean) getFromFile("durationTextChroma", durationTextColor.isChromaToggled()));
     	setShowName((boolean) getFromFile("showName", showName));
-    	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
 		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
 		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
+    	setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+		setShowIcon((boolean) getFromFile("showIcon", showIcon));
+		setBlink((boolean) getFromFile("blink", blink));
 		setReverse((boolean) getFromFile("reverse", reverse));
 	}
 	
@@ -194,46 +194,6 @@ public class PotionEffects extends ModDraggable {
     	
     	return potionName;
     }
-	
-	public void setBlink(boolean enabled) {
-		this.blink = enabled;
-		
-		setToFile("blink", enabled);
-	}
-	
-	public boolean isBlinkEnabled() {
-		return blink;
-	}
-    
-    public void setShowIcon(boolean enabled) {
-    	showIcon = enabled;
-		
-    	setToFile("showIcon", enabled);
-    }
-
-    public boolean isShowIconEnabled() {
-        return showIcon;
-    }
-	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
-		
-		setToFile("showBackground", enabled);
-	}
-	
-	public boolean isShowBackgroundEnabled() {
-		return showBackground;
-	}
-	
-	public void setDurationTextShadow(boolean enabled) {
-		durationTextShadow = enabled;
-		
-		setToFile("durationTextShadow", enabled);
-	}
-	
-	public boolean isDurationTextShadowEnabled() {
-		return durationTextShadow;
-	}
     
     public void setDurationTextColor(int rgb) {
     	durationTextColor.setRGB(rgb);
@@ -251,6 +211,16 @@ public class PotionEffects extends ModDraggable {
 		setToFile("durationTextChroma", enabled);
 	}
 	
+	public void setDurationTextShadow(boolean enabled) {
+		durationTextShadow = enabled;
+		
+		setToFile("durationTextShadow", enabled);
+	}
+	
+	public boolean isDurationTextShadowEnabled() {
+		return durationTextShadow;
+	}
+	
 	public boolean isDurationTextChromaEnabled() {
 		return durationTextColor.isChromaToggled();
 	}
@@ -264,16 +234,6 @@ public class PotionEffects extends ModDraggable {
     public boolean isShowNameEnabled() {
         return showName;
     }
-
-	public void setNameTextShadow(boolean enabled) {
-		nameTextShadow = enabled;
-		
-		setToFile("nameTextShadow", enabled);
-	}
-	
-	public boolean isNameTextShadowEnabled() {
-		return nameTextShadow;
-	}
 	
 	public void setNameTextColor(int rgb) {
 		nameTextColor.setRGB(rgb);
@@ -293,6 +253,46 @@ public class PotionEffects extends ModDraggable {
 	
 	public boolean isNameTextChromaEnabled() {
 		return nameTextColor.isChromaToggled();
+	}
+
+	public void setNameTextShadow(boolean enabled) {
+		nameTextShadow = enabled;
+		
+		setToFile("nameTextShadow", enabled);
+	}
+	
+	public boolean isNameTextShadowEnabled() {
+		return nameTextShadow;
+	}
+	
+	public void setShowBackground(boolean enabled) {
+		showBackground = enabled;
+		
+		setToFile("showBackground", enabled);
+	}
+	
+	public boolean isShowBackgroundEnabled() {
+		return showBackground;
+	}
+    
+    public void setShowIcon(boolean enabled) {
+    	showIcon = enabled;
+		
+    	setToFile("showIcon", enabled);
+    }
+
+    public boolean isShowIconEnabled() {
+        return showIcon;
+    }
+	
+	public void setBlink(boolean enabled) {
+		this.blink = enabled;
+		
+		setToFile("blink", enabled);
+	}
+	
+	public boolean isBlinkEnabled() {
+		return blink;
 	}
 	
 	public void setReverse(boolean toggled) {

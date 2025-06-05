@@ -15,22 +15,22 @@ import drop.gui.mod.armorstatus.GuiArmorStatus;
 import drop.mods.ModDraggableText;
 import drop.mods.hud.ScreenPosition;
 
-public class ArmorStatus extends ModDraggableText {	
-	private boolean equippedItem = false;
+public class ArmorStatus extends ModDraggableText {
+	private boolean dynamicColors = true;
 	private boolean showPercentage = false;
 	private boolean showDamage = true;
 	private boolean showMaxDamage = false;
+	private boolean equippedItem = false;
 	private boolean damageOverlays = true;
-	private boolean dynamicColors = true;
 	private boolean reverse = false;
 
 	public ArmorStatus() {
-		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
+		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
 		setShowDamage((boolean) getFromFile("showDamage", showDamage));
 		setShowMaxDamage((boolean) getFromFile("showMaxDamage", showMaxDamage));
+		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
 		setDamageOverlays((boolean) getFromFile("damageOverlays", damageOverlays));
-		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 		setReverse((boolean) getFromFile("reverse", reverse));
 	}
 
@@ -186,14 +186,14 @@ public class ArmorStatus extends ModDraggableText {
 		return playerInventory;
 	}
 	
-	public void setEquippedItem(boolean enabled) {
-		equippedItem = enabled;
+	public void setDynamicColors(boolean enabled) {
+		dynamicColors = enabled;
 		
-		setToFile("equippedItem", enabled);
+		setToFile("dynamicColors", enabled);
 	}
 	
-	public boolean isEquippedItemEnabled() {
-		return equippedItem;
+	public boolean isDynamicColorsEnabled() {
+		return dynamicColors;
 	}
 	
 	public void setShowPercentage(boolean enabled) {
@@ -226,6 +226,16 @@ public class ArmorStatus extends ModDraggableText {
 		return showMaxDamage;
 	}
 	
+	public void setEquippedItem(boolean enabled) {
+		equippedItem = enabled;
+		
+		setToFile("equippedItem", enabled);
+	}
+	
+	public boolean isEquippedItemEnabled() {
+		return equippedItem;
+	}
+	
 	public void setDamageOverlays(boolean enabled) {
 		damageOverlays = enabled;
 		
@@ -234,16 +244,6 @@ public class ArmorStatus extends ModDraggableText {
 	
 	public boolean isDamageOverlaysEnabled() {
 		return damageOverlays;
-	}
-	
-	public void setDynamicColors(boolean enabled) {
-		dynamicColors = enabled;
-		
-		setToFile("dynamicColors", enabled);
-	}
-	
-	public boolean isDynamicColorsEnabled() {
-		return dynamicColors;
 	}
 	
 	public void setReverse(boolean toggled) {
