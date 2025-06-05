@@ -48,7 +48,7 @@ public class GuiCoordinatesDisplay extends GuiMod {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod, "Coordinates Display"));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
             	break;
             case 6:
             	mod.setShowBackground(!mod.isShowBackgroundEnabled());

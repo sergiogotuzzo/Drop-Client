@@ -2,8 +2,6 @@ package drop.gui.mod;
 
 import java.io.IOException;
 
-import org.apache.commons.lang3.StringUtils;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.mods.ModDraggableDisplayText;
@@ -43,7 +41,7 @@ public class GuiModDraggableDisplayText extends GuiMod {
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod, StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ")));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
             	break;
             case 4:
             	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));

@@ -46,7 +46,7 @@ public class GuiPotionEffects extends GuiMod {
             	this.initGui();
             	break;
             case 4:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getDurationTextColor(), mod, "durationTextColor", "durationTextChroma", "Potion Effects", "Duration Text Color", false));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getDurationTextColor(), "durationTextColor", "durationTextChroma", "Duration Text Color"));
             	break;
             case 5:
             	mod.setShowName(!mod.isShowNameEnabled());
@@ -57,7 +57,7 @@ public class GuiPotionEffects extends GuiMod {
             	this.initGui();
             	break;
             case 7:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getNameTextColor(), mod, "nameTextColor", "nameTextChroma", "Potion Effects", "Name Text Color", false));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getNameTextColor(), "nameTextColor", "nameTextChroma", "Name Text Color"));
             	break;
             case 8:
             	mod.setShowBackground(!mod.isShowBackgroundEnabled());

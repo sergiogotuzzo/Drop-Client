@@ -15,7 +15,7 @@ import drop.mods.Mod;
 
 public class GuiMod extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
-	private final Mod mod;
+	protected final Mod mod;
 	
 	public GuiMod(GuiScreen previousGuiScreen, Mod mod) {
 		this.previousGuiScreen = previousGuiScreen;

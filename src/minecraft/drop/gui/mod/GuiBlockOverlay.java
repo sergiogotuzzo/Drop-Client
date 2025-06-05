@@ -48,7 +48,7 @@ public class GuiBlockOverlay extends GuiMod {
             	this.initGui();
             	break;
             case 2:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getOutlineColor(), mod, "outlineColor", "outlineChroma", "Block Overlay", "Outline Color", false));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOutlineColor(), "outlineColor", "outlineChroma", "Outline Color"));
             	break;
             case 3:
             	mod.setOutlineWidth(sliderOutlineWidth.getSliderPosition() * 5.0F);
@@ -62,7 +62,7 @@ public class GuiBlockOverlay extends GuiMod {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getOverlayColor(), mod, "overlayColor", "overlayChroma", "Block Overlay", "Overlay Color", true));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOverlayColor(), "overlayColor", "overlayChroma", "Overlay Color", true));
             	break;
         }
     }

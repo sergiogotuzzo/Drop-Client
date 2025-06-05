@@ -13,7 +13,7 @@ public class GuiArmorStatusTextColor extends GuiModColor {
 	private static final ArmorStatus mod = ModInstances.getArmorStatusMod();
 	
 	public GuiArmorStatusTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getTextColor(), mod, "Armor Status");
+		super(previousGuiScreen, mod, mod.getTextColor());
 	}
 	
 	@Override

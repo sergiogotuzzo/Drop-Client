@@ -13,7 +13,7 @@ public class GuiPingDisplayTextColor extends GuiModColor {
 	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
 	
 	public GuiPingDisplayTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod.getTextColor(), mod, "Ping Display");
+		super(previousGuiScreen, mod, mod.getTextColor());
 	}
 	
 	@Override

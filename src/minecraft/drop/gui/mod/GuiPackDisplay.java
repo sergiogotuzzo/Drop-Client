@@ -42,14 +42,14 @@ public class GuiPackDisplay extends GuiMod {
             	this.initGui();
             	break;
             case 3:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getNameTextColor(), mod, "nameTextColor", "nameTextChroma", "Pack Display", "Name Text Color", false));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getNameTextColor(), "nameTextColor", "nameTextChroma", "Name Text Color"));
             	break;
             case 4:
             	mod.setDescriptionTextShadow(!mod.isDescriptionTextShadowEnabled());
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getDescriptionTextColor(), mod, "descriptionTextColor", "descriptionTextChroma", "Pack Display", "Description Text Color", false));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getDescriptionTextColor(), "descriptionTextColor", "descriptionTextChroma", "Description Text Color"));
             	break;
             case 6:
             	mod.setShowIcon(!mod.isShowIconToggled());

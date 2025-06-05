@@ -47,7 +47,7 @@ public class GuiOldVisuals extends GuiMod {
             	this.initGui();
             	break;
             case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getHitArmorColor(), mod, "hitArmorColor", "hitArmorChroma", "Old Visuals", "Hit Armor Color", true));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getHitArmorColor(), "hitArmorColor", "hitArmorChroma", "Hit Armor Color", true));
             	break;
         }
     }

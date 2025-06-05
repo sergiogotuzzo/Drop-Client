@@ -54,14 +54,14 @@ public class GuiKeystrokes extends GuiMod {
             	this.initGui();
             	break;
             case 6:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getTextColor(), mod, "Keystrokes"));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
             	break;
             case 7:
             	mod.setPressedTextShadow(!mod.isPressedTextShadowEnabled());
             	this.initGui();
             	break;
             case 8:
-            	mc.displayGuiScreen(new GuiModColor(this, mod.getPressedTextColor(), mod, "pressedTextColor", "pressedTextChroma", "Keystrokes", "Pressed Text Color", false));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getPressedTextColor(), "pressedTextColor", "pressedTextChroma", "Pressed Text Color"));
             	break;
         }
     }
