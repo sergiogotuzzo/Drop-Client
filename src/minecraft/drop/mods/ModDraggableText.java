@@ -25,16 +25,6 @@ public abstract class ModDraggableText extends ModDraggable {
 		return textColor;
 	}
 	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
-		
-		setToFile("textShadow", enabled);
-	}
-	
-	public boolean isTextShadowEnabled() {
-		return textShadow;
-	}
-	
 	public void setTextChroma(boolean enabled) {
 		textColor.setChromaToggled(enabled);
 		
@@ -43,5 +33,15 @@ public abstract class ModDraggableText extends ModDraggable {
 	
 	public boolean isTextChromaEnabled() {
 		return textColor.isChromaToggled();
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
+	}
+	
+	public boolean isTextShadowEnabled() {
+		return textShadow;
 	}
 }
