@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -144,9 +143,8 @@ public class GuiMods extends GuiDropClientScreen {
         List<Mod> mods = ModInstances.getAllMods();
         for (int i = 0; i < mods.size(); i++) {
             Mod mod = mods.get(i);
-            String modName = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(mod.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
-
-            if (!textFieldSearchMod.getText().isEmpty() && !modName.toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
+            
+            if (!textFieldSearchMod.getText().isEmpty() && !mod.getName().toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
             	if (scrollOffset > 0) {
                 	scrollOffset = 0;
             	}
@@ -157,7 +155,7 @@ public class GuiMods extends GuiDropClientScreen {
             int buttonY = (this.height - 200) / 2 + 30 + totalHeight - scrollOffset;
 
             if (buttonY >= (this.height - 200) / 2 + 30 && buttonY <= (this.height - 200) / 2 + 200 - 20) {
-                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, modName, mod.getGui(this) != null));
+                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
                 this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 20 - 15, buttonY - 2 + 15));
 
                 drawn++;

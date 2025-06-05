@@ -1,5 +1,7 @@
 package drop.mods;
 
+import org.apache.commons.lang3.StringUtils;
+
 import drop.Client;
 import drop.FileManager;
 import net.minecraft.client.Minecraft;
@@ -43,7 +45,7 @@ public abstract class Mod {
 	}
 	
 	public void setToFile(String key, Object value) {
-		FileManager.set(getName() + "." + key, value);
+		FileManager.set(this.getClass().getSimpleName() + "." + key, value);
 	}
 	
 	public Object getFromFile(String key, Object defaultValue) {
@@ -51,14 +53,14 @@ public abstract class Mod {
 			setToFile(key, defaultValue);
 		}
 		
-		return FileManager.get(getName() + "." + key);
+		return FileManager.get(this.getClass().getSimpleName() + "." + key);
 	}
 	
 	public boolean hasInFile(String key) {
-		return FileManager.has(getName() + "." + key);
+		return FileManager.has(this.getClass().getSimpleName() + "." + key);
 	}
 	
 	public String getName() {
-		return this.getClass().getSimpleName();
+		return StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(this.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
 	}
 }
