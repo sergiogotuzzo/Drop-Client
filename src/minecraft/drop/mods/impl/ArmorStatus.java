@@ -16,6 +16,16 @@ import drop.mods.ModDraggableText;
 import drop.mods.hud.ScreenPosition;
 
 public class ArmorStatus extends ModDraggableText {
+	private ColorManager veryHighTextColor = ColorManager.fromRGB(85, 255, 85, false);
+	private boolean veryHighTextShadow = true;
+	private ColorManager highTextColor = ColorManager.fromRGB(255, 255, 85, false);
+	private boolean highTextShadow = true;
+	private ColorManager mediumTextColor = ColorManager.fromRGB(255, 170, 0, false);
+	private boolean mediumTextShadow = true;
+	private ColorManager lowTextColor = ColorManager.fromRGB(255, 85, 85, false);
+	private boolean lowTextShadow = true;
+	private ColorManager veryLowTextColor = ColorManager.fromRGB(170, 0, 0, false);
+	private boolean veryLowTextShadow = true;
 	private boolean dynamicColors = true;
 	private boolean showPercentage = false;
 	private boolean showDamage = true;
@@ -25,6 +35,21 @@ public class ArmorStatus extends ModDraggableText {
 	private boolean reverse = false;
 
 	public ArmorStatus() {
+		setVeryHighTextColor((int) ((long) getFromFile("textColor", veryHighTextColor.getRGB())));
+		setVeryHighTextChroma((boolean) getFromFile("textChroma", veryHighTextColor.isChromaToggled()));
+		setVeryHighTextShadow((boolean) getFromFile("textShadow", veryHighTextShadow));
+		setHighTextColor((int) ((long) getFromFile("textColor", highTextColor.getRGB())));
+		setHighTextChroma((boolean) getFromFile("textChroma", highTextColor.isChromaToggled()));
+		setHighTextShadow((boolean) getFromFile("textShadow", highTextShadow));
+		setMediumTextColor((int) ((long) getFromFile("textColor", mediumTextColor.getRGB())));
+		setMediumTextChroma((boolean) getFromFile("textChroma", mediumTextColor.isChromaToggled()));
+		setMediumTextShadow((boolean) getFromFile("textShadow", mediumTextShadow));
+		setLowTextColor((int) ((long) getFromFile("textColor", lowTextColor.getRGB())));
+		setLowTextChroma((boolean) getFromFile("textChroma", lowTextColor.isChromaToggled()));
+		setLowTextShadow((boolean) getFromFile("textShadow", lowTextShadow));
+		setVeryLowTextColor((int) ((long) getFromFile("textColor", veryLowTextColor.getRGB())));
+		setVeryLowTextChroma((boolean) getFromFile("textChroma", veryLowTextColor.isChromaToggled()));
+		setVeryLowTextShadow((boolean) getFromFile("textShadow", veryLowTextShadow));
 		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
 		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
 		setShowDamage((boolean) getFromFile("showDamage", showDamage));
@@ -113,20 +138,26 @@ public class ArmorStatus extends ModDraggableText {
 		
 		int offsetY = (-16 * i) + getHeight() - 16;
 		ColorManager color = textColor; // Default
+		boolean dropShadow = textShadow;
 		
 		if (dynamicColors) {
 			double damagePercentage = getDamagePercentage(is);
 			
 			if (damagePercentage <= 10) {
-		        color = ColorManager.fromRGB(170, 0, 0, false); // Very low
+		        color = veryLowTextColor; // Very low
+		        dropShadow = veryLowTextShadow;
 		    } else if (damagePercentage <= 25) {
-		        color = ColorManager.fromRGB(255, 85, 85, false); // Low
+		        color = lowTextColor; // Low
+		        dropShadow = lowTextShadow;
 		    } else if (damagePercentage <= 40) {
-		        color = ColorManager.fromRGB(255, 170, 0, false); // Medium
+		        color = mediumTextColor; // Medium
+		        dropShadow = mediumTextShadow;
 		    } else if (damagePercentage <= 60) {
-		        color = ColorManager.fromRGB(255, 255, 85, false); // High
+		        color = highTextColor; // High
+		        dropShadow = highTextShadow;
 		    } else if (damagePercentage <= 80) {
-		        color = ColorManager.fromRGB(85, 255, 85, false); // Very high
+		        color = veryHighTextColor; // Very high
+		        dropShadow = veryHighTextShadow;
 		    }
 		}
 		
@@ -146,7 +177,7 @@ public class ArmorStatus extends ModDraggableText {
 				mc.getRenderItem().renderItemOverlays(font, is, itemX, pos.getAbsoluteY() + offsetY);
 			}
 			
-			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, color, textShadow);
+			drawText(getDamageText(is), damageX, pos.getAbsoluteY() + offsetY + 5, color, dropShadow);
 		}
 		
 		GL11.glPopMatrix();
@@ -184,6 +215,156 @@ public class ArmorStatus extends ModDraggableText {
 		}
 		
 		return playerInventory;
+	}
+	
+	public void setVeryHighTextColor(int rgb) {
+		veryHighTextColor.setRGB(rgb);
+		
+		setToFile("veryHighTextColor", rgb);
+	}
+	
+	public ColorManager getVeryHighTextColor() {
+		return veryHighTextColor;
+	}
+	
+	public void setVeryHighTextChroma(boolean enabled) {
+		veryHighTextColor.setChromaToggled(enabled);
+		
+		setToFile("veryHighTextColor", enabled);
+	}
+	
+	public boolean isVeryHighTextChromaEnabled() {
+		return veryHighTextColor.isChromaToggled();
+	}
+	
+	public void setVeryHighTextShadow(boolean enabled) {
+		veryHighTextShadow = enabled;
+		
+		setToFile("veryHighTextShadow", enabled);
+	}
+	
+	public boolean isVeryHighTextShadowEnabled() {
+		return veryHighTextShadow;
+	}
+	
+	public void setHighTextColor(int rgb) {
+		highTextColor.setRGB(rgb);
+		
+		setToFile("highTextColor", rgb);
+	}
+	
+	public ColorManager getHighTextColor() {
+		return highTextColor;
+	}
+	
+	public void setHighTextChroma(boolean enabled) {
+		highTextColor.setChromaToggled(enabled);
+		
+		setToFile("highTextChroma", enabled);
+	}
+	
+	public boolean isHighTextChromaEnabled() {
+		return highTextColor.isChromaToggled();
+	}
+	
+	public void setHighTextShadow(boolean enabled) {
+		highTextShadow = enabled;
+		
+		setToFile("highTextShadow", enabled);
+	}
+	
+	public boolean isHighTextShadowEnabled() {
+		return highTextShadow;
+	}
+	
+	public void setMediumTextColor(int rgb) {
+		mediumTextColor.setRGB(rgb);
+		
+		setToFile("mediumTextColor", rgb);
+	}
+	
+	public ColorManager getMediumTextColor() {
+		return mediumTextColor;
+	}
+	
+	public void setMediumTextChroma(boolean enabled) {
+		mediumTextColor.setChromaToggled(enabled);
+		
+		setToFile("mediumTextChroma", enabled);
+	}
+	
+	public boolean isMediumTextChromaEnabled() {
+		return mediumTextColor.isChromaToggled();
+	}
+	
+	public void setMediumTextShadow(boolean enabled) {
+		mediumTextShadow = enabled;
+		
+		setToFile("mediumTextShadow", enabled);
+	}
+	
+	public boolean isMediumTextShadowEnabled() {
+		return mediumTextShadow;
+	}
+	
+	public void setLowTextColor(int rgb) {
+		lowTextColor.setRGB(rgb);
+		
+		setToFile("lowTextColor", rgb);
+	}
+	
+	public ColorManager getLowTextColor() {
+		return lowTextColor;
+	}
+	
+	public void setLowTextChroma(boolean enabled) {
+		lowTextColor.setChromaToggled(enabled);
+		
+		setToFile("lowTextChroma", enabled);
+	}
+	
+	public boolean isLowTextChromaEnabled() {
+		return lowTextColor.isChromaToggled();
+	}
+	
+	public void setLowTextShadow(boolean enabled) {
+		lowTextShadow = enabled;
+		
+		setToFile("lowTextShadow", enabled);
+	}
+	
+	public boolean isLowTextShadowEnabled() {
+		return lowTextShadow;
+	}
+	
+	public void setVeryLowTextColor(int rgb) {
+		veryLowTextColor.setRGB(rgb);
+		
+		setToFile("veryLowTextColor", rgb);
+	}
+	
+	public ColorManager getVeryLowTextColor() {
+		return veryLowTextColor;
+	}
+	
+	public void setVeryLowTextChroma(boolean enabled) {
+		veryLowTextColor.setChromaToggled(enabled);
+		
+		setToFile("veryLowTextChroma", enabled);
+	}
+	
+	public boolean isVeryLowTextChromaEnabled() {
+		return veryLowTextColor.isChromaToggled();
+	}
+	
+	public void setVeryLowTextShadow(boolean enabled) {
+		veryLowTextShadow = enabled;
+		
+		setToFile("veryLowTextShadow", enabled);
+	}
+	
+	public boolean isVeryLowTextShadowEnabled() {
+		return veryLowTextShadow;
 	}
 	
 	public void setDynamicColors(boolean enabled) {
