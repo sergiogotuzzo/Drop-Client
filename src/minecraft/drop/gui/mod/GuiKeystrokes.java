@@ -95,6 +95,6 @@ public class GuiKeystrokes extends GuiDropClientScreen {
         this.buttonList.add(new GuiRect(6, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2 * 2, mod.getTextColor().getRGB()));
     	this.buttonList.add(new GuiButtonToggled(7, mod.isPressedTextShadowEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
         this.buttonList.add(new GuiRect(8, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 7 + 15 - 2 * 2, mod.getPressedTextColor().getRGB()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

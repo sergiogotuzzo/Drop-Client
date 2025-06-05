@@ -139,6 +139,6 @@ public class GuiModColor extends GuiDropClientScreen {
         	this.buttonList.add(sliderAlpha = new GuiSlider(4, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 4 + 15 + 1, 100, 5, 0.0F, 255.0F, color.getAlpha()));
     	}
     	
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

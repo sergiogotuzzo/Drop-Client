@@ -52,6 +52,6 @@ public class GuiBobbing extends GuiDropClientScreen {
         this.buttonList.clear();
         
     	this.buttonList.add(new GuiButtonToggled(1, mod.isMinimalViewBobbingToggled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 2));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }

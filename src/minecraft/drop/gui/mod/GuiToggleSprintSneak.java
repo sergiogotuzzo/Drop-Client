@@ -78,6 +78,6 @@ public class GuiToggleSprintSneak extends GuiModDraggableDisplayText {
     	this.buttonList.add(new GuiButtonToggled(6, mod.isToggleSneakEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 5 + 15 - 2));
     	this.buttonList.add(new GuiButtonToggled(7, mod.isFlyBoostEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 6 + 15 - 2));
     	this.buttonList.add(sliderFlyBoostFactor = new GuiSlider(8, (this.width - 300) / 2 + 130, (this.height - 200) / 2 + 30 + 15 * 7 + 15 + 1, 100, 5, 2.0F, 8.0F, mod.getFlyBoostFactor()));
-    	this.buttonList.add(new GuiButtonToggled(9, mod.isShowTextEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 8 + 15 - 2));
+    	this.buttonList.add(new GuiButtonToggled(9, mod.isShowTextEnabled(), (this.width + 300) / 2 - 20 - 15 - 3, (this.height - 200) / 2 + 30 + 15 * 8 + 15 - 2));
     }
 }

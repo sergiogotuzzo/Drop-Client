@@ -92,6 +92,6 @@ public class GuiBlockOverlay extends GuiDropClientScreen {
     	this.buttonList.add(sliderOutlineWidth = new GuiSlider(3, (this.width - 300) / 2 + 100, (this.height - 200) / 2 + 30 + 15 * 2 + 15 + 1, 100, 5, 0.4F, 5.0F, mod.getOutlineWidth()));
     	this.buttonList.add(new GuiButtonToggled(4, mod.isOverlayEnabled(), (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 * 3 + 15 - 2));
     	this.buttonList.add(new GuiRect(5, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 * 4 + 15 - 2 * 2, mod.getOverlayColor().getRGB()));
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15, 50, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 }
