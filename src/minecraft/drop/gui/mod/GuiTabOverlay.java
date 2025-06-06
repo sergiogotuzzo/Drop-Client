@@ -29,7 +29,7 @@ public class GuiTabOverlay extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setShowPlayerHeads(!mod.isShowPlayerHeadsEnabled());
+            	mod.setShowPlayerHeads(!mod.isShowPlayerHeadsToggled());
             	this.initGui();
             	break;
             case 2:
@@ -47,7 +47,7 @@ public class GuiTabOverlay extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowPlayerHeadsEnabled(), 1));
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowPlayerHeadsToggled(), 1));
     	this.buttonList.add(this.createGuiButtonToggled(2, mod.isHidePingToggled(), 2));
     	this.buttonList.add(this.createGuiButtonToggled(3, mod.isPingNumbersToggled(), 3));
     }

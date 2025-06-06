@@ -207,11 +207,11 @@ public class PotionEffects extends ModDraggable {
 		setToFile("durationTextShadow", enabled);
 	}
 	
-	public boolean isDurationTextShadowEnabled() {
+	public boolean isDurationTextShadowToggled() {
 		return durationTextShadow;
 	}
 	
-	public boolean isDurationTextChromaEnabled() {
+	public boolean isDurationTextChromaToggled() {
 		return durationTextColor.isChromaToggled();
 	}
     
@@ -221,7 +221,7 @@ public class PotionEffects extends ModDraggable {
     	setToFile("showName", enabled);
     }
 
-    public boolean isShowNameEnabled() {
+    public boolean isShowNameToggled() {
         return showName;
     }
 	
@@ -241,7 +241,7 @@ public class PotionEffects extends ModDraggable {
 		setToFile("nameTextChroma", enabled);
 	}
 	
-	public boolean isNameTextChromaEnabled() {
+	public boolean isNameTextChromaToggled() {
 		return nameTextColor.isChromaToggled();
 	}
 
@@ -251,7 +251,7 @@ public class PotionEffects extends ModDraggable {
 		setToFile("nameTextShadow", enabled);
 	}
 	
-	public boolean isNameTextShadowEnabled() {
+	public boolean isNameTextShadowToggled() {
 		return nameTextShadow;
 	}
     
@@ -261,7 +261,7 @@ public class PotionEffects extends ModDraggable {
     	setToFile("showIcon", enabled);
     }
 
-    public boolean isShowIconEnabled() {
+    public boolean isShowIconToggled() {
         return showIcon;
     }
 	
@@ -271,7 +271,7 @@ public class PotionEffects extends ModDraggable {
 		setToFile("blink", enabled);
 	}
 	
-	public boolean isBlinkEnabled() {
+	public boolean isBlinkToggled() {
 		return blink;
 	}
 	

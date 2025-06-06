@@ -233,7 +233,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("veryHighTextChroma", enabled);
 	}
 	
-	public boolean isVeryHighTextChromaEnabled() {
+	public boolean isVeryHighTextChromaToggled() {
 		return veryHighTextColor.isChromaToggled();
 	}
 	
@@ -243,7 +243,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("veryHighTextShadow", enabled);
 	}
 	
-	public boolean isVeryHighTextShadowEnabled() {
+	public boolean isVeryHighTextShadowToggled() {
 		return veryHighTextShadow;
 	}
 	
@@ -263,7 +263,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("highTextChroma", enabled);
 	}
 	
-	public boolean isHighTextChromaEnabled() {
+	public boolean isHighTextChromaToggled() {
 		return highTextColor.isChromaToggled();
 	}
 	
@@ -273,7 +273,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("highTextShadow", enabled);
 	}
 	
-	public boolean isHighTextShadowEnabled() {
+	public boolean isHighTextShadowToggled() {
 		return highTextShadow;
 	}
 	
@@ -293,7 +293,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("mediumTextChroma", enabled);
 	}
 	
-	public boolean isMediumTextChromaEnabled() {
+	public boolean isMediumTextChromaToggled() {
 		return mediumTextColor.isChromaToggled();
 	}
 	
@@ -303,7 +303,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("mediumTextShadow", enabled);
 	}
 	
-	public boolean isMediumTextShadowEnabled() {
+	public boolean isMediumTextShadowToggled() {
 		return mediumTextShadow;
 	}
 	
@@ -323,7 +323,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("lowTextChroma", enabled);
 	}
 	
-	public boolean isLowTextChromaEnabled() {
+	public boolean isLowTextChromaToggled() {
 		return lowTextColor.isChromaToggled();
 	}
 	
@@ -333,7 +333,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("lowTextShadow", enabled);
 	}
 	
-	public boolean isLowTextShadowEnabled() {
+	public boolean isLowTextShadowToggled() {
 		return lowTextShadow;
 	}
 	
@@ -353,7 +353,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("veryLowTextChroma", enabled);
 	}
 	
-	public boolean isVeryLowTextChromaEnabled() {
+	public boolean isVeryLowTextChromaToggled() {
 		return veryLowTextColor.isChromaToggled();
 	}
 	
@@ -363,7 +363,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("veryLowTextShadow", enabled);
 	}
 	
-	public boolean isVeryLowTextShadowEnabled() {
+	public boolean isVeryLowTextShadowToggled() {
 		return veryLowTextShadow;
 	}
 	
@@ -373,7 +373,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("dynamicColors", enabled);
 	}
 	
-	public boolean isDynamicColorsEnabled() {
+	public boolean isDynamicColorsToggled() {
 		return dynamicColors;
 	}
 	
@@ -383,7 +383,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("showPercentage", enabled);
 	}
 	
-	public boolean isShowPercentageEnabled() {
+	public boolean isShowPercentageToggled() {
 		return showPercentage;
 	}
 	
@@ -393,7 +393,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("showDamage", enabled);
 	}
 	
-	public boolean isShowDamageEnabled() {
+	public boolean isShowDamageToggled() {
 		return showDamage;
 	}
 	
@@ -403,7 +403,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("showMaxDamage", enabled);
 	}
 	
-	public boolean isShowMaxDamageEnabled() {
+	public boolean isShowMaxDamageToggled() {
 		return showMaxDamage;
 	}
 	
@@ -413,7 +413,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("equippedItem", enabled);
 	}
 	
-	public boolean isEquippedItemEnabled() {
+	public boolean isEquippedItemToggled() {
 		return equippedItem;
 	}
 	
@@ -423,7 +423,7 @@ public class ArmorStatus extends ModDraggableText {
 		setToFile("damageOverlays", enabled);
 	}
 	
-	public boolean isDamageOverlaysEnabled() {
+	public boolean isDamageOverlaysToggled() {
 		return damageOverlays;
 	}
 	

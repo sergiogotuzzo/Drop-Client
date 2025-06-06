@@ -50,18 +50,18 @@ public class GuiToggleSprintSneak extends GuiMod {
     	
         switch (button.id) {
 	        case 1:
-	        	mod.setShowText(!mod.isShowTextEnabled());
+	        	mod.setShowText(!mod.isShowTextToggled());
 	        	this.initGui();
 	        	break;
 	        case 2:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
 	        	break;
 	        case 3:
-	        	mod.setTextShadow(!mod.isTextShadowEnabled());
+	        	mod.setTextShadow(!mod.isTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 4:
-	        	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+	        	mod.setShowBackground(!mod.isShowBackgroundToggled());
 	        	this.initGui();
 	        	break;
 	        case 5:
@@ -69,15 +69,15 @@ public class GuiToggleSprintSneak extends GuiMod {
 	        	this.initGui();
 	        	break;
             case 6:
-            	mod.setToggleSprint(!mod.isToggleSprintEnabled());
+            	mod.setToggleSprint(!mod.isToggleSprintToggled());
             	this.initGui();
             	break;
             case 7:
-            	mod.setToggleSneak(!mod.isToggleSneakEnabled());
+            	mod.setToggleSneak(!mod.isToggleSneakToggled());
             	this.initGui();
             	break;
             case 8:
-            	mod.setFlyBoost(!mod.isFlyBoostEnabled());
+            	mod.setFlyBoost(!mod.isFlyBoostToggled());
             	this.initGui();
             	break;
             case 9:
@@ -94,14 +94,14 @@ public class GuiToggleSprintSneak extends GuiMod {
     public void initGui() {
         super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowTextEnabled(), 1));
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowTextToggled(), 1));
     	this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isTextShadowEnabled(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBackgroundEnabled(), 4));
+		this.buttonList.add(this.createGuiButtonToggled(3, mod.isTextShadowToggled(), 3));
+		this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBackgroundToggled(), 4));
 		this.buttonList.add(this.createGuiText(5, mod.getBrackets().getName(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isToggleSprintEnabled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isToggleSneakEnabled(), 7));
-    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isFlyBoostEnabled(), 8));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isToggleSprintToggled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isToggleSneakToggled(), 7));
+    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isFlyBoostToggled(), 8));
     	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(9, 2.0F, 8.0F, mod.getFlyBoostFactor(), 30, 9));
     }
 }

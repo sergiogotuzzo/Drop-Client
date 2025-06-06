@@ -29,15 +29,15 @@ public class GuiFreelook extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setHold(!mod.isHoldEnabled());
+            	mod.setHold(!mod.isHoldToggled());
             	this.initGui();
             	break;
             case 2:
-            	mod.setInvertYaw(!mod.isInvertYawEnabled());
+            	mod.setInvertYaw(!mod.isInvertYawToggled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setInvertPitch(!mod.isInvertPitchEnabled());
+            	mod.setInvertPitch(!mod.isInvertPitchToggled());
             	this.initGui();
             	break;
         }
@@ -47,8 +47,8 @@ public class GuiFreelook extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiButtonToggled(1, mod.isHoldEnabled(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isInvertYawEnabled(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isInvertPitchEnabled(), 3));
+		this.buttonList.add(this.createGuiButtonToggled(1, mod.isHoldToggled(), 1));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isInvertYawToggled(), 2));
+		this.buttonList.add(this.createGuiButtonToggled(3, mod.isInvertPitchToggled(), 3));
     }
 }

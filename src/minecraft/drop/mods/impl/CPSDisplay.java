@@ -87,7 +87,7 @@ public class CPSDisplay extends ModDraggableDisplayText {
 		setToFile("showRightCPS", enabled);
 	}
 	
-	public boolean isShowRightCPSEnabled() {
+	public boolean isShowRightCPSToggled() {
 		return showRightCPS;
 	}
 }

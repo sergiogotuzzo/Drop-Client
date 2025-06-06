@@ -241,7 +241,7 @@ public class Keystrokes extends ModDraggableText {
 		setToFile("pressedTextShadow", enabled);
 	}
 	
-	public boolean isPressedTextShadowEnabled() {
+	public boolean isPressedTextShadowToggled() {
 		return pressedTextShadow;
 	}
 	
@@ -253,7 +253,7 @@ public class Keystrokes extends ModDraggableText {
 		updateMode();
 	}
 	
-	public boolean isShowMovementKeysEnabled() {
+	public boolean isShowMovementKeysToggled() {
 		return showMovementKeys;
 	}
 	
@@ -265,7 +265,7 @@ public class Keystrokes extends ModDraggableText {
 		updateMode();
 	}
 	
-	public boolean isShowMouseEnabled() {
+	public boolean isShowMouseToggled() {
 		return showMouse;
 	}
 	
@@ -277,7 +277,7 @@ public class Keystrokes extends ModDraggableText {
 		updateMode();
 	}
 	
-	public boolean isShowSpacebarEnabled() {
+	public boolean isShowSpacebarToggled() {
 		return showSpacebar;
 	}
 	
@@ -287,7 +287,7 @@ public class Keystrokes extends ModDraggableText {
 		setToFile("useArrows", enabled);
 	}
 	
-	public boolean isUseArrowsEnabled() {
+	public boolean isUseArrowsToggled() {
 		return useArrows;
 	}
 	
@@ -297,7 +297,7 @@ public class Keystrokes extends ModDraggableText {
 		setToFile("pressedTextChroma", enabled);
 	}
 	
-	public boolean isPressedTextChromaEnabled() {
+	public boolean isPressedTextChromaToggled() {
 		return pressedTextColor.isChromaToggled();
 	}
 }

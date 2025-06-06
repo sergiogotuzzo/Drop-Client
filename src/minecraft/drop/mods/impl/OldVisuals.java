@@ -36,7 +36,7 @@ public class OldVisuals extends Mod {
 		setToFile("fishingRod", enabled);
 	}
 	
-	public boolean isFishingRodEnabled() {
+	public boolean isFishingRodToggled() {
 		return fishingRod;
 	}
 	
@@ -46,7 +46,7 @@ public class OldVisuals extends Mod {
 		setToFile("bow", enabled);
 	}
 	
-	public boolean isBowEnabled() {
+	public boolean isBowToggled() {
 		return bow;
 	}
 	
@@ -56,7 +56,7 @@ public class OldVisuals extends Mod {
 		setToFile("blockHitting", enabled);
 	}
 	
-	public boolean isBlockHittingEnabled() {
+	public boolean isBlockHittingToggled() {
 		return blockHitting;
 	}
 	
@@ -66,7 +66,7 @@ public class OldVisuals extends Mod {
 		setToFile("armorHitAnimation", enabled);
 	}
 	
-	public boolean isArmorHitAnimationEnabled() {
+	public boolean isArmorHitAnimationToggled() {
 		return armorHitAnimation;
 	}
 	
@@ -86,7 +86,7 @@ public class OldVisuals extends Mod {
 		setToFile("hitArmorChroma", enabled);
 	}
 	
-	public boolean isHitArmorChromaEnabled() {
+	public boolean isHitArmorChromaToggled() {
 		return hitArmorColor.isChromaToggled();
 	}
 }

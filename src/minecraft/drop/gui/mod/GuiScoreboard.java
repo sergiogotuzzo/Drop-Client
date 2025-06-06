@@ -38,11 +38,11 @@ public class GuiScoreboard extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setHideNumbers(!mod.isHideNumbersEnabled());
+            	mod.setHideNumbers(!mod.isHideNumbersToggled());
             	this.initGui();
             	break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowToggled());
             	this.initGui();
             	break;
             case 3:
@@ -55,8 +55,8 @@ public class GuiScoreboard extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isHideNumbersEnabled(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isHideNumbersToggled(), 1));
+    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
     	this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 0.0F, 127.0F, mod.getBackgroundOpacity(), 40, 3));
     }
 }

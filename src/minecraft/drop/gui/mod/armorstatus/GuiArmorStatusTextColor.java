@@ -24,7 +24,7 @@ public class GuiArmorStatusTextColor extends GuiModColor {
 	    		mc.displayGuiScreen(new GuiArmorStatusDynamicColors(this));
 	    		break;
 	    	case 7:
-	    		mod.setDynamicColors(!mod.isDynamicColorsEnabled());
+	    		mod.setDynamicColors(!mod.isDynamicColorsToggled());
 	        	this.initGui();
 	        	break;
     	}
@@ -35,6 +35,6 @@ public class GuiArmorStatusTextColor extends GuiModColor {
 		super.initGui();
 		
 		this.buttonList.add(this.createGuiText(6, (this.width - 300) / 2 + 15, "Dynamic Colors", 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isDynamicColorsEnabled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isDynamicColorsToggled(), 6));
     }
 }

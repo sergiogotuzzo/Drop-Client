@@ -31,7 +31,7 @@ public abstract class ModDraggableText extends ModDraggable {
 		setToFile("textChroma", enabled);
 	}
 	
-	public boolean isTextChromaEnabled() {
+	public boolean isTextChromaToggled() {
 		return textColor.isChromaToggled();
 	}
 	
@@ -41,7 +41,7 @@ public abstract class ModDraggableText extends ModDraggable {
 		setToFile("textShadow", enabled);
 	}
 	
-	public boolean isTextShadowEnabled() {
+	public boolean isTextShadowToggled() {
 		return textShadow;
 	}
 }

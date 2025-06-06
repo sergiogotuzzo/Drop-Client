@@ -39,11 +39,11 @@ public class GuiChat extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setChatHeightFix(!mod.isChatHeightFixEnabled());
+            	mod.setChatHeightFix(!mod.isChatHeightFixToggled());
             	this.initGui();
             	break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowToggled());
             	this.initGui();
             	break;
             case 3:
@@ -56,8 +56,8 @@ public class GuiChat extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiButtonToggled(1, mod.isChatHeightFixEnabled(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
+		this.buttonList.add(this.createGuiButtonToggled(1, mod.isChatHeightFixToggled(), 1));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
 		this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 0.0F, 127.0F, mod.getBackgroundOpacity(), 40, 3));
     }
 }

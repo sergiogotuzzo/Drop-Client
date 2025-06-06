@@ -220,7 +220,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 		setToFile("showBackground", enabled);
 	}
 	
-	public boolean isShowBackgroundEnabled() {
+	public boolean isShowBackgroundToggled() {
 		return showBackground;
 	}
 	
@@ -230,7 +230,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 		setToFile("showBiome", enabled);
 	}
 	
-	public boolean isShowBiomeEnabled() {
+	public boolean isShowBiomeToggled() {
 		return showBiome;
 	}
 	
@@ -240,7 +240,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 		setToFile("showFacing", enabled);
 	}
 	
-	public boolean isShowFacingEnabled() {
+	public boolean isShowFacingToggled() {
 		return showFacing;
 	}
 	
@@ -250,7 +250,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 		setToFile("showFacingTowards", enabled);
 	}
 	
-	public boolean isShowFacingTowardsEnabled() {
+	public boolean isShowFacingTowardsToggled() {
 		return showFacingTowards;
 	}
 }

@@ -41,35 +41,35 @@ public class GuiPingDisplayDynamicColors extends GuiMod {
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getExcellentTextColor(), "excellentTextColor", "excellentTextChroma", "Excellent Text Color"));
 	        	break;
 	        case 2:
-	        	mod.setExcellentTextShadow(!mod.isExcellentTextShadowEnabled());
+	        	mod.setExcellentTextShadow(!mod.isExcellentTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 3:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getGoodTextColor(), "goodTextColor", "goodTextChroma", "Good Text Color"));
 	        	break;
 	        case 4:
-	        	mod.setGoodTextShadow(!mod.isGoodTextShadowEnabled());
+	        	mod.setGoodTextShadow(!mod.isGoodTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 5:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getModerateTextColor(), "moderateTextColor", "moderateTextChroma", "Moderate Text Color"));
 	        	break;
 	        case 6:
-	        	mod.setModerateTextShadow(!mod.isModerateTextShadowEnabled());
+	        	mod.setModerateTextShadow(!mod.isModerateTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 7:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getWeakTextColor(), "weakTextColor", "weakTextChroma", "Weak Text Color"));
 	        	break;
 	        case 8:
-	        	mod.setWeakTextShadow(!mod.isWeakTextShadowEnabled());
+	        	mod.setWeakTextShadow(!mod.isWeakTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 9:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getUnstableTextColor(), "unstableTextColor", "unstableTextChroma", "Unstable Text Color"));
 	        	break;
 	        case 10:
-	        	mod.setUnstableTextShadow(!mod.isUnstableTextShadowEnabled());
+	        	mod.setUnstableTextShadow(!mod.isUnstableTextShadowToggled());
 	        	this.initGui();
 	        	break;
         }
@@ -80,14 +80,14 @@ public class GuiPingDisplayDynamicColors extends GuiMod {
 		super.initGui();
 
 		this.buttonList.add(this.createGuiRect(1, mod.getExcellentTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isExcellentTextShadowEnabled(), 2));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isExcellentTextShadowToggled(), 2));
 		this.buttonList.add(this.createGuiRect(3, mod.getGoodTextColor().getRGB(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isGoodTextShadowEnabled(), 4));
+		this.buttonList.add(this.createGuiButtonToggled(4, mod.isGoodTextShadowToggled(), 4));
 		this.buttonList.add(this.createGuiRect(5, mod.getModerateTextColor().getRGB(), 5));
-		this.buttonList.add(this.createGuiButtonToggled(6, mod.isModerateTextShadowEnabled(), 6));
+		this.buttonList.add(this.createGuiButtonToggled(6, mod.isModerateTextShadowToggled(), 6));
 		this.buttonList.add(this.createGuiRect(7, mod.getWeakTextColor().getRGB(), 7));
-		this.buttonList.add(this.createGuiButtonToggled(8, mod.isWeakTextShadowEnabled(), 8));
+		this.buttonList.add(this.createGuiButtonToggled(8, mod.isWeakTextShadowToggled(), 8));
 		this.buttonList.add(this.createGuiRect(9, mod.getUnstableTextColor().getRGB(), 9));
-		this.buttonList.add(this.createGuiButtonToggled(10, mod.isUnstableTextShadowEnabled(), 10));
+		this.buttonList.add(this.createGuiButtonToggled(10, mod.isUnstableTextShadowToggled(), 10));
     }
 }

@@ -90,7 +90,7 @@ public class GuiNewChat extends Gui
                                 
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
+                                int h = chatMod.isChatHeightFixToggled() ? -12 : 0;
                                 
                                 int backgroundRGB = new Color(0, 0, 0, (int)((chatMod.getBackgroundOpacity() / 255.0F) * l1)).getRGB();
                                 
@@ -99,7 +99,7 @@ public class GuiNewChat extends Gui
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.isTextShadowEnabled());
+                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.isTextShadowToggled());
                                 
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -278,7 +278,7 @@ public class GuiNewChat extends Gui
             
             final Chat chatMod = ModInstances.getChatMod();
             
-            int h = chatMod.isChatHeightFixEnabled() ? -12 : 0;
+            int h = chatMod.isChatHeightFixToggled() ? -12 : 0;
             k += h;
 
             if (j >= 0 && k >= 0)

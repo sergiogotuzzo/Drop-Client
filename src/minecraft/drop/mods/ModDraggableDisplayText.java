@@ -68,7 +68,7 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 		setToFile("showBackground", enabled);
 	}
 	
-	public boolean isShowBackgroundEnabled() {
+	public boolean isShowBackgroundToggled() {
 		return showBackground;
 	}
 	

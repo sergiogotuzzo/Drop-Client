@@ -136,7 +136,7 @@ public class GuiIngame extends Gui
 
     public void renderGameOverlay(float partialTicks)
     {
-    	if (ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isBlockHittingEnabled() && this.mc.thePlayer.getHeldItem() != null) {
+    	if (ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isBlockHittingToggled() && this.mc.thePlayer.getHeldItem() != null) {
 			this.attemptSwing();
 		}
     	
@@ -618,7 +618,7 @@ public class GuiIngame extends Gui
         for (Score score : collection)
         {
             ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(score.getPlayerName());
-            String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + (ModInstances.getScoreboardMod().isHideNumbersEnabled() ? "" : ": " + EnumChatFormatting.RED + score.getScorePoints());
+            String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + (ModInstances.getScoreboardMod().isHideNumbersToggled() ? "" : ": " + EnumChatFormatting.RED + score.getScorePoints());
             i = Math.max(i, this.getFontRenderer().getStringWidth(s));
         }
 
@@ -642,10 +642,10 @@ public class GuiIngame extends Gui
             	
             	drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, backgroundRGB);
                 
-            	this.getFontRenderer().drawString(s1, l1, k, 553648127, ModInstances.getScoreboardMod().isTextShadowEnabled());
+            	this.getFontRenderer().drawString(s1, l1, k, 553648127, ModInstances.getScoreboardMod().isTextShadowToggled());
             	
-            	if (!ModInstances.getScoreboardMod().isHideNumbersEnabled()) {
-            		this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127, ModInstances.getScoreboardMod().isTextShadowEnabled());
+            	if (!ModInstances.getScoreboardMod().isHideNumbersToggled()) {
+            		this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127, ModInstances.getScoreboardMod().isTextShadowToggled());
             	}
 
                 if (j == collection.size())
@@ -655,7 +655,7 @@ public class GuiIngame extends Gui
                 	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, backgroundRGB);
                     drawRect(l1 - 2, k - 1, l, k, backgroundRGB);
                     
-                	this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127, ModInstances.getScoreboardMod().isTextShadowEnabled());
+                	this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127, ModInstances.getScoreboardMod().isTextShadowToggled());
                 }
             }
         }

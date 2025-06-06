@@ -101,7 +101,7 @@ public class Freelook extends Mod {
 		setToFile("hold", enabled);
 	}
 	
-	public boolean isHoldEnabled() {
+	public boolean isHoldToggled() {
 		return hold;
 	}
 	
@@ -111,7 +111,7 @@ public class Freelook extends Mod {
 		setToFile("invertYaw", enabled);
 	}
 	
-	public boolean isInvertYawEnabled() {
+	public boolean isInvertYawToggled() {
 		return invertYaw;
 	}
 	
@@ -121,7 +121,7 @@ public class Freelook extends Mod {
 		setToFile("invertPitch", enabled);
 	}
 	
-	public boolean isInvertPitchEnabled() {
+	public boolean isInvertPitchToggled() {
 		return invertPitch;
 	}
 }

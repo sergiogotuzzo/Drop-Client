@@ -129,7 +129,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("excellentTextChroma", enabled);
 	}
 	
-	public boolean isExcellentTextChromaEnabled() {
+	public boolean isExcellentTextChromaToggled() {
 		return excellentTextColor.isChromaToggled();
 	}
 	
@@ -139,7 +139,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("excellentTextShadow", enabled);
 	}
 	
-	public boolean isExcellentTextShadowEnabled() {
+	public boolean isExcellentTextShadowToggled() {
 		return excellentTextShadow;
 	}
 	
@@ -159,7 +159,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("goodTextChroma", enabled);
 	}
 	
-	public boolean isGoodTextChromaEnabled() {
+	public boolean isGoodTextChromaToggled() {
 		return goodTextColor.isChromaToggled();
 	}
 	
@@ -169,7 +169,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("goodTextShadow", enabled);
 	}
 	
-	public boolean isGoodTextShadowEnabled() {
+	public boolean isGoodTextShadowToggled() {
 		return goodTextShadow;
 	}
 	
@@ -189,7 +189,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("moderateTextChroma", enabled);
 	}
 	
-	public boolean isModerateTextChromaEnabled() {
+	public boolean isModerateTextChromaToggled() {
 		return moderateTextColor.isChromaToggled();
 	}
 	
@@ -199,7 +199,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("moderateTextShadow", enabled);
 	}
 	
-	public boolean isModerateTextShadowEnabled() {
+	public boolean isModerateTextShadowToggled() {
 		return moderateTextShadow;
 	}
 	
@@ -219,7 +219,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("weakTextChroma", enabled);
 	}
 	
-	public boolean isWeakTextChromaEnabled() {
+	public boolean isWeakTextChromaToggled() {
 		return weakTextColor.isChromaToggled();
 	}
 	
@@ -229,7 +229,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("WeakTextShadow", enabled);
 	}
 	
-	public boolean isWeakTextShadowEnabled() {
+	public boolean isWeakTextShadowToggled() {
 		return weakTextShadow;
 	}
 	
@@ -249,7 +249,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("unstableTextChroma", enabled);
 	}
 	
-	public boolean isUnstableTextChromaEnabled() {
+	public boolean isUnstableTextChromaToggled() {
 		return unstableTextColor.isChromaToggled();
 	}
 	
@@ -259,7 +259,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("unstableTextShadow", enabled);
 	}
 	
-	public boolean isUnstableTextShadowEnabled() {
+	public boolean isUnstableTextShadowToggled() {
 		return unstableTextShadow;
 	}
 	
@@ -269,7 +269,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 		setToFile("dynamicColors", enabled);
 	}
 	
-	public boolean isDynamicColorsEnabled() {
+	public boolean isDynamicColorsToggled() {
 		return dynamicColors;
 	}
 }

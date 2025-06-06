@@ -31,19 +31,19 @@ public class GuiOldVisuals extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setFishingRod(!mod.isFishingRodEnabled());
+            	mod.setFishingRod(!mod.isFishingRodToggled());
             	this.initGui();
             	break;
             case 2:
-            	mod.setBow(!mod.isBowEnabled());
+            	mod.setBow(!mod.isBowToggled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setBlockHitting(!mod.isBlockHittingEnabled());
+            	mod.setBlockHitting(!mod.isBlockHittingToggled());
             	this.initGui();
             	break;
             case 4:
-            	mod.setArmorHitAnimation(!mod.isArmorHitAnimationEnabled());
+            	mod.setArmorHitAnimation(!mod.isArmorHitAnimationToggled());
             	this.initGui();
             	break;
             case 5:
@@ -56,10 +56,10 @@ public class GuiOldVisuals extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isFishingRodEnabled(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isBowEnabled(), 2));
-    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isBlockHittingEnabled(), 3));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isArmorHitAnimationEnabled(), 4));
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isFishingRodToggled(), 1));
+    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isBowToggled(), 2));
+    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isBlockHittingToggled(), 3));
+    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isArmorHitAnimationToggled(), 4));
         this.buttonList.add(this.createGuiRect(5, mod.getHitArmorColor().getRGB(), 5));
     }
 }

@@ -26,7 +26,7 @@ public class Scoreboard extends Mod {
 		setToFile("hideNumbers", enabled);
 	}
 	
-	public boolean isHideNumbersEnabled() {
+	public boolean isHideNumbersToggled() {
 		return hideNumbers;
 	}
 	
@@ -36,7 +36,7 @@ public class Scoreboard extends Mod {
 		setToFile("textShadow", enabled);
 	}
 	
-	public boolean isTextShadowEnabled() {
+	public boolean isTextShadowToggled() {
 		return textShadow;
 	}
 	

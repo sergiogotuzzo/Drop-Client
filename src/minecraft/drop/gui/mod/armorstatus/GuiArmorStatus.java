@@ -37,27 +37,27 @@ public class GuiArmorStatus extends GuiMod {
 	        	mc.displayGuiScreen(new GuiArmorStatusTextColor(this));
 	        	break;
 	        case 2:
-	        	mod.setTextShadow(!mod.isTextShadowEnabled());
+	        	mod.setTextShadow(!mod.isTextShadowToggled());
 	        	this.initGui();
 	        	break;
             case 3:
-            	mod.setShowPercentage(!mod.isShowPercentageEnabled());
+            	mod.setShowPercentage(!mod.isShowPercentageToggled());
             	this.initGui();
             	break;
             case 4:
-            	mod.setShowDamage(!mod.isShowDamageEnabled());
+            	mod.setShowDamage(!mod.isShowDamageToggled());
             	this.initGui();
             	break;
             case 5:
-            	mod.setShowMaxDamage(!mod.isShowMaxDamageEnabled());
+            	mod.setShowMaxDamage(!mod.isShowMaxDamageToggled());
             	this.initGui();
             	break;
             case 6:
-            	mod.setEquippedItem(!mod.isEquippedItemEnabled());
+            	mod.setEquippedItem(!mod.isEquippedItemToggled());
             	this.initGui();
             	break;
             case 7:
-            	mod.setDamageOverlays(!mod.isDamageOverlaysEnabled());
+            	mod.setDamageOverlays(!mod.isDamageOverlaysToggled());
             	this.initGui();
             	break;
         }
@@ -68,11 +68,11 @@ public class GuiArmorStatus extends GuiMod {
 		super.initGui();
 
 		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowPercentageEnabled(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowDamageEnabled(), 4));
-		this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowMaxDamageEnabled(), 5));
-		this.buttonList.add(this.createGuiButtonToggled(6, mod.isEquippedItemEnabled(), 6));
-		this.buttonList.add(this.createGuiButtonToggled(7, mod.isDamageOverlaysEnabled(), 7));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowPercentageToggled(), 3));
+		this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowDamageToggled(), 4));
+		this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowMaxDamageToggled(), 5));
+		this.buttonList.add(this.createGuiButtonToggled(6, mod.isEquippedItemToggled(), 6));
+		this.buttonList.add(this.createGuiButtonToggled(7, mod.isDamageOverlaysToggled(), 7));
     }
 }

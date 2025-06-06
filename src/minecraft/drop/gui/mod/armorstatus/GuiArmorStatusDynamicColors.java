@@ -41,35 +41,35 @@ public class GuiArmorStatusDynamicColors extends GuiMod {
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getVeryHighTextColor(), "veryHighTextColor", "veryHighTextChroma", "Very High Text Color"));
 	        	break;
 	        case 2:
-	        	mod.setVeryHighTextShadow(!mod.isVeryHighTextShadowEnabled());
+	        	mod.setVeryHighTextShadow(!mod.isVeryHighTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 3:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getHighTextColor(), "highTextColor", "highTextChroma", "High Text Color"));
 	        	break;
 	        case 4:
-	        	mod.setHighTextShadow(!mod.isHighTextShadowEnabled());
+	        	mod.setHighTextShadow(!mod.isHighTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 5:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getMediumTextColor(), "mediumTextColor", "mediumTextChroma", "Medium Text Color"));
 	        	break;
 	        case 6:
-	        	mod.setMediumTextShadow(!mod.isMediumTextShadowEnabled());
+	        	mod.setMediumTextShadow(!mod.isMediumTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 7:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getLowTextColor(), "lowTextColor", "lowTextChroma", "Low Text Color"));
 	        	break;
 	        case 8:
-	        	mod.setLowTextShadow(!mod.isLowTextShadowEnabled());
+	        	mod.setLowTextShadow(!mod.isLowTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 9:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getVeryLowTextColor(), "veryLowTextColor", "veryLowTextChroma", "Very Low Text Color"));
 	        	break;
 	        case 10:
-	        	mod.setVeryLowTextShadow(!mod.isVeryLowTextShadowEnabled());
+	        	mod.setVeryLowTextShadow(!mod.isVeryLowTextShadowToggled());
 	        	this.initGui();
 	        	break;
         }
@@ -80,14 +80,14 @@ public class GuiArmorStatusDynamicColors extends GuiMod {
 		super.initGui();
 
 		this.buttonList.add(this.createGuiRect(1, mod.getVeryHighTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isVeryHighTextShadowEnabled(), 2));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isVeryHighTextShadowToggled(), 2));
 		this.buttonList.add(this.createGuiRect(3, mod.getHighTextColor().getRGB(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isHighTextShadowEnabled(), 4));
+		this.buttonList.add(this.createGuiButtonToggled(4, mod.isHighTextShadowToggled(), 4));
 		this.buttonList.add(this.createGuiRect(5, mod.getMediumTextColor().getRGB(), 5));
-		this.buttonList.add(this.createGuiButtonToggled(6, mod.isMediumTextShadowEnabled(), 6));
+		this.buttonList.add(this.createGuiButtonToggled(6, mod.isMediumTextShadowToggled(), 6));
 		this.buttonList.add(this.createGuiRect(7, mod.getLowTextColor().getRGB(), 7));
-		this.buttonList.add(this.createGuiButtonToggled(8, mod.isLowTextShadowEnabled(), 8));
+		this.buttonList.add(this.createGuiButtonToggled(8, mod.isLowTextShadowToggled(), 8));
 		this.buttonList.add(this.createGuiRect(9, mod.getVeryLowTextColor().getRGB(), 9));
-		this.buttonList.add(this.createGuiButtonToggled(10, mod.isVeryLowTextShadowEnabled(), 10));
+		this.buttonList.add(this.createGuiButtonToggled(10, mod.isVeryLowTextShadowToggled(), 10));
     }
 }

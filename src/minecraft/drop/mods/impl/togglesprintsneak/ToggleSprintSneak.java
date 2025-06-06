@@ -87,13 +87,17 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 		return sneaking;
 	}
 	
-	public void setShowText(boolean enabled) {
-		showText = enabled;
+	public void setShowText(boolean toggled) {
+		showText = toggled;
 		
-		setToFile("showText", enabled);
+		setToFile("showText", toggled);
 	}
 	
-	public boolean isShowTextEnabled() {
+	public void toggleShowText() {
+		setShowText(!showText);
+	}
+	
+	public boolean isShowTextToggled() {
 		return showText;
 	}
 	
@@ -103,7 +107,7 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 		setToFile("toggleSprint", enabled);
 	}
 	
-	public boolean isToggleSprintEnabled() {
+	public boolean isToggleSprintToggled() {
 		return toggleSprint;
 	}
 	
@@ -113,7 +117,7 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 		setToFile("toggleSneak", enabled);
 	}
 	
-	public boolean isToggleSneakEnabled() {
+	public boolean isToggleSneakToggled() {
 		return toggleSneak;
 	}
 	
@@ -123,7 +127,7 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 		setToFile("flyBoost", enabled);
 	}
 	
-	public boolean isFlyBoostEnabled() {
+	public boolean isFlyBoostToggled() {
 		return flyBoost;
 	}
 	

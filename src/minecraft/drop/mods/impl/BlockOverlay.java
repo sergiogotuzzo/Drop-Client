@@ -73,7 +73,7 @@ public class BlockOverlay extends Mod {
 		setToFile("outline", enabled);
 	}
 	
-	public boolean isOutlineEnabled() {
+	public boolean isOutlineToggled() {
 		return outline;
 	}
 	
@@ -103,7 +103,7 @@ public class BlockOverlay extends Mod {
 		setToFile("outlineChroma", enabled);
 	}
 	
-	public boolean isOutlineChromaEnabled() {
+	public boolean isOutlineChromaToggled() {
 		return outlineColor.isChromaToggled();
 	}
 	
@@ -113,7 +113,7 @@ public class BlockOverlay extends Mod {
 		setToFile("overlay", enabled);
 	}
 	
-	public boolean isOverlayEnabled() {
+	public boolean isOverlayToggled() {
 		return overlay;
 	}
 	
@@ -133,7 +133,7 @@ public class BlockOverlay extends Mod {
 		setToFile("overlayChroma", enabled);
 	}
 	
-	public boolean isOverlayChromaEnabled() {
+	public boolean isOverlayChromaToggled() {
 		return overlayColor.isChromaToggled();
 	}
 }

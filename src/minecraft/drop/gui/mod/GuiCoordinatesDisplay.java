@@ -35,23 +35,23 @@ public class GuiCoordinatesDisplay extends GuiMod {
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
 	        	break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowToggled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	mod.setShowBackground(!mod.isShowBackgroundToggled());
             	this.initGui();
             	break;
             case 4:
-            	mod.setShowBiome(!mod.isShowBiomeEnabled());
+            	mod.setShowBiome(!mod.isShowBiomeToggled());
             	this.initGui();
             	break;
             case 5:
-            	mod.setShowFacing(!mod.isShowFacingEnabled());
+            	mod.setShowFacing(!mod.isShowFacingToggled());
             	this.initGui();
             	break;
             case 6:
-            	mod.setShowFacingTowards(!mod.isShowFacingTowardsEnabled());
+            	mod.setShowFacingTowards(!mod.isShowFacingTowardsToggled());
             	this.initGui();
             	break;
         }
@@ -62,10 +62,10 @@ public class GuiCoordinatesDisplay extends GuiMod {
 		super.initGui();
         
         this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-        this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
-        this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundEnabled(), 3));
-        this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBiomeEnabled(), 4));
-        this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowFacingEnabled(), 5));
-        this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowFacingTowardsEnabled(), 6));
+        this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
+        this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundToggled(), 3));
+        this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBiomeToggled(), 4));
+        this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowFacingToggled(), 5));
+        this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowFacingTowardsToggled(), 6));
     }
 }

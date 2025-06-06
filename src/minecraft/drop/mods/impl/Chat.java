@@ -30,7 +30,7 @@ public class Chat extends Mod {
 		setToFile("chatHeightFix", enabled);
 	}
 	
-	public boolean isChatHeightFixEnabled() {
+	public boolean isChatHeightFixToggled() {
 		return chatHeightFix;
 	}
 	
@@ -40,7 +40,7 @@ public class Chat extends Mod {
 		setToFile("textShadow", enabled);
 	}
 	
-	public boolean isTextShadowEnabled() {
+	public boolean isTextShadowToggled() {
 		return textShadow;
 	}
 	

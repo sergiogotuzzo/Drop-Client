@@ -36,26 +36,26 @@ public class GuiPotionEffects extends GuiMod {
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getDurationTextColor(), "durationTextColor", "durationTextChroma", "Duration Text Color"));
 	        	break;
             case 2:
-            	mod.setDurationTextShadow(!mod.isDurationTextShadowEnabled());
+            	mod.setDurationTextShadow(!mod.isDurationTextShadowToggled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setShowName(!mod.isShowNameEnabled());
+            	mod.setShowName(!mod.isShowNameToggled());
             	this.initGui();
             	break;
             case 4:
             	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getNameTextColor(), "nameTextColor", "nameTextChroma", "Name Text Color"));
             	break;
             case 5:
-            	mod.setNameTextShadow(!mod.isNameTextShadowEnabled());
+            	mod.setNameTextShadow(!mod.isNameTextShadowToggled());
             	this.initGui();
             	break;
             case 6:
-            	mod.setShowIcon(!mod.isShowIconEnabled());
+            	mod.setShowIcon(!mod.isShowIconToggled());
             	this.initGui();
             	break;
             case 7:
-            	mod.setBlink(!mod.isBlinkEnabled());
+            	mod.setBlink(!mod.isBlinkToggled());
             	this.initGui();
             	break;
         }
@@ -66,11 +66,11 @@ public class GuiPotionEffects extends GuiMod {
 		super.initGui();
         
         this.buttonList.add(this.createGuiRect(1, mod.getDurationTextColor().getRGB(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isDurationTextShadowEnabled(), 2));
-    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowNameEnabled(), 3));
+    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isDurationTextShadowToggled(), 2));
+    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowNameToggled(), 3));
         this.buttonList.add(this.createGuiRect(4, mod.getNameTextColor().getRGB(), 4));
-    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isNameTextShadowEnabled(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowIconEnabled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isBlinkEnabled(), 7));
+    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isNameTextShadowToggled(), 5));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowIconToggled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isBlinkToggled(), 7));
     }
 }

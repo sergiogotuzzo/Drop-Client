@@ -51,7 +51,7 @@ public class TabOverlay extends Mod {
 		setToFile("showPlayerHeads", showPlayerHeads);
 	}
 	
-	public boolean isShowPlayerHeadsEnabled() {
+	public boolean isShowPlayerHeadsToggled() {
 		return showPlayerHeads;
 	}
 

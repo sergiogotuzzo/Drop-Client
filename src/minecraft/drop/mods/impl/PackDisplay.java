@@ -142,12 +142,12 @@ public class PackDisplay extends ModDraggable {
 		int packNameY = pos.getAbsoluteY() + offsetY + (showDescription ? 4 : 28 / 2 - 4);
 		
 		String packName = selectedPack.getResourcePackName();
-		String packDescription = selectedPack.getTexturePackDescription().replace("§r", "");
+		String packDescription = selectedPack.getTexturePackDescription().replace("ï¿½r", "");
 
-		drawText(packName, packX, packNameY, nameTextColor.getRGB(), nameTextShadow, !packName.contains("§") && nameTextColor.isChromaToggled());
+		drawText(packName, packX, packNameY, nameTextColor.getRGB(), nameTextShadow, !packName.contains("ï¿½") && nameTextColor.isChromaToggled());
 				
 		if (showDescription) {
-			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, !packDescription.contains("§") && descriptionTextColor.isChromaToggled());
+			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, !packDescription.contains("ï¿½") && descriptionTextColor.isChromaToggled());
 		}
 	}
 	
@@ -224,7 +224,7 @@ public class PackDisplay extends ModDraggable {
 		setToFile("nameTextChroma", enabled);
 	}
 	
-	public boolean isNameTextChromaEnabled() {
+	public boolean isNameTextChromaToggled() {
 		return nameTextColor.isChromaToggled();
 	}
 	
@@ -234,7 +234,7 @@ public class PackDisplay extends ModDraggable {
 		setToFile("nameTextShadow", enabled);
 	}
 	
-	public boolean isNameTextShadowEnabled() {
+	public boolean isNameTextShadowToggled() {
 		return nameTextShadow;
 	}
 	
@@ -264,7 +264,7 @@ public class PackDisplay extends ModDraggable {
 		setToFile("descriptionTextChroma", enabled);
 	}
 	
-	public boolean isDescriptionTextChromaEnabled() {
+	public boolean isDescriptionTextChromaToggled() {
 		return descriptionTextColor.isChromaToggled();
 	}
 	
@@ -274,7 +274,7 @@ public class PackDisplay extends ModDraggable {
 		setToFile("descriptionTextShadow", enabled);
 	}
 	
-	public boolean isDescriptionTextShadowEnabled() {
+	public boolean isDescriptionTextShadowToggled() {
 		return descriptionTextShadow;
 	}
 	
@@ -284,7 +284,7 @@ public class PackDisplay extends ModDraggable {
 		setToFile("showBackground", enabled);
 	}
 	
-	public boolean isShowBackgroundEnabled() {
+	public boolean isShowBackgroundToggled() {
 		return showBackground;
 	}
 	

@@ -36,11 +36,11 @@ public class GuiModDraggableDisplayText extends GuiMod {
             	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
             	break;
             case 2:
-            	mod.setTextShadow(!mod.isTextShadowEnabled());
+            	mod.setTextShadow(!mod.isTextShadowToggled());
             	this.initGui();
             	break;
             case 3:
-            	mod.setShowBackground(!mod.isShowBackgroundEnabled());
+            	mod.setShowBackground(!mod.isShowBackgroundToggled());
             	this.initGui();
             	break;
             case 4:
@@ -55,8 +55,8 @@ public class GuiModDraggableDisplayText extends GuiMod {
 		super.initGui();
 		
 		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundEnabled(), 3));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundToggled(), 3));
 		this.buttonList.add(this.createGuiText(4, mod.getBrackets().getName(), 4));
     }
 }

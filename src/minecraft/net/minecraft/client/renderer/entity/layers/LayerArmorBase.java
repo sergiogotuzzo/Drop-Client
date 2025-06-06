@@ -47,7 +47,7 @@ public abstract class LayerArmorBase<T extends ModelBase> implements LayerRender
 
     public boolean shouldCombineTextures()
     {
-        return ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isArmorHitAnimationEnabled();
+        return ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isArmorHitAnimationToggled();
     }
 
     private void renderLayer(EntityLivingBase entitylivingbaseIn, float p_177182_2_, float p_177182_3_, float partialTicks, float p_177182_5_, float p_177182_6_, float p_177182_7_, float scale, int armorSlot)

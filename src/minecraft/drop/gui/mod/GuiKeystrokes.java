@@ -37,30 +37,30 @@ public class GuiKeystrokes extends GuiMod {
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
 	        	break;
 	        case 2:
-	        	mod.setTextShadow(!mod.isTextShadowEnabled());
+	        	mod.setTextShadow(!mod.isTextShadowToggled());
 	        	this.initGui();
 	        	break;
 	        case 3:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getPressedTextColor(), "pressedTextColor", "pressedTextChroma", "Pressed Text Color"));
 	        	break;
 	        case 4:
-	        	mod.setPressedTextShadow(!mod.isPressedTextShadowEnabled());
+	        	mod.setPressedTextShadow(!mod.isPressedTextShadowToggled());
 	        	this.initGui();
 	        	break;
             case 5:
-            	mod.setShowMouse(!mod.isShowMouseEnabled());
+            	mod.setShowMouse(!mod.isShowMouseToggled());
             	this.initGui();
             	break;
             case 6:
-            	mod.setShowSpacebar(!mod.isShowSpacebarEnabled());
+            	mod.setShowSpacebar(!mod.isShowSpacebarToggled());
             	this.initGui();
             	break;
             case 7:
-            	mod.setShowMovementKeys(!mod.isShowMovementKeysEnabled());
+            	mod.setShowMovementKeys(!mod.isShowMovementKeysToggled());
             	this.initGui();
             	break;
             case 8:
-            	mod.setUseArrows(!mod.isUseArrowsEnabled());
+            	mod.setUseArrows(!mod.isUseArrowsToggled());
             	this.initGui();
             	break;
         }
@@ -71,12 +71,12 @@ public class GuiKeystrokes extends GuiMod {
 		super.initGui();
 
         this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowEnabled(), 2));
+    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
         this.buttonList.add(this.createGuiRect(3, mod.getPressedTextColor().getRGB(), 3));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isPressedTextShadowEnabled(), 4));
-    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowMouseEnabled(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowSpacebarEnabled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowMovementKeysEnabled(), 7));
-    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isUseArrowsEnabled(), 8));
+    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isPressedTextShadowToggled(), 4));
+    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowMouseToggled(), 5));
+    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowSpacebarToggled(), 6));
+    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowMovementKeysToggled(), 7));
+    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isUseArrowsToggled(), 8));
     }
 }

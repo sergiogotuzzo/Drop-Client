@@ -44,7 +44,7 @@ public class GuiBlockOverlay extends GuiMod {
     	
         switch (button.id) {
             case 1:
-            	mod.setOutline(!mod.isOutlineEnabled());
+            	mod.setOutline(!mod.isOutlineToggled());
             	this.initGui();
             	break;
             case 2:
@@ -58,7 +58,7 @@ public class GuiBlockOverlay extends GuiMod {
             	}
             	break;
             case 4:
-            	mod.setOverlay(!mod.isOverlayEnabled());
+            	mod.setOverlay(!mod.isOverlayToggled());
             	this.initGui();
             	break;
             case 5:
@@ -71,10 +71,10 @@ public class GuiBlockOverlay extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isOutlineEnabled(), 1));
+    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isOutlineToggled(), 1));
         this.buttonList.add(this.createGuiRect(2, mod.getOutlineColor().getRGB(), 2));
     	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 0.4F, 5.0F, mod.getOutlineWidth(), 3));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isOverlayEnabled(), 4));
+    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isOverlayToggled(), 4));
     	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), 5));
     }
 }
