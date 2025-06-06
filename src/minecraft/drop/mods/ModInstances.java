@@ -6,6 +6,7 @@ import java.util.List;
 
 import drop.mods.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
+import drop.mods.impl.BPSDisplay;
 import drop.mods.impl.BlockOverlay;
 import drop.mods.impl.Bobbing;
 import drop.mods.impl.Bossbar;
@@ -49,6 +50,7 @@ public class ModInstances {
 	private static DayCounter dayCounterMod;
 	private static PackDisplay packDisplayMod;
 	private static ServerAddress serverAddressMod;
+	private static BPSDisplay bpsDisplayMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldVisualsMod = new OldVisuals();
@@ -79,6 +81,7 @@ public class ModInstances {
 		manager.register(dayCounterMod = new DayCounter());
 		manager.register(packDisplayMod = new PackDisplay());
 		manager.register(serverAddressMod = new ServerAddress());
+		manager.register(bpsDisplayMod = new BPSDisplay());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -135,6 +138,10 @@ public class ModInstances {
 	
 	public static ServerAddress getServerAddressMod() {
 		return serverAddressMod;
+	}
+	
+	public static BPSDisplay getBPSDisplayMod() {
+		return bpsDisplayMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -199,6 +206,7 @@ public class ModInstances {
 			    getBlockOverlayMod(),
 			    getBobbingMod(),
 			    getBossbarMod(),
+			    getBPSDisplayMod(),
 			    getChatMod(),
 			    getClockMod(),
 			    getCoordinatesDisplayMod(),
