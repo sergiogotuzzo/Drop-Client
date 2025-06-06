@@ -210,6 +210,7 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
 import drop.gui.GuiDropClientMainMenu;
+import drop.mods.ModInstances;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1030,6 +1031,8 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (entity != null)
         {
+        	ModInstances.getComboCounterMod().onEntityHit(packetIn);
+        	
             if (packetIn.getOpCode() == 21)
             {
                 this.gameController.getSoundHandler().playSound(new GuardianSound((EntityGuardian)entity));

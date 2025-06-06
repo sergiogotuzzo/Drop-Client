@@ -3,6 +3,9 @@ package net.minecraft.entity.player;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
+
+import drop.mods.ModInstances;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -1306,6 +1309,8 @@ public abstract class EntityPlayer extends EntityLivingBase
     {
         if (targetEntity.canAttackWithItem())
         {
+        	ModInstances.getComboCounterMod().onAttack(this);
+        	
             if (!targetEntity.hitByEntity(this))
             {
                 float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();

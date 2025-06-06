@@ -13,6 +13,7 @@ import drop.mods.impl.Bossbar;
 import drop.mods.impl.CPSDisplay;
 import drop.mods.impl.Chat;
 import drop.mods.impl.Clock;
+import drop.mods.impl.ComboCounter;
 import drop.mods.impl.CoordinatesDisplay;
 import drop.mods.impl.DayCounter;
 import drop.mods.impl.FPSDisplay;
@@ -51,6 +52,7 @@ public class ModInstances {
 	private static PackDisplay packDisplayMod;
 	private static ServerAddress serverAddressMod;
 	private static BPSDisplay bpsDisplayMod;
+	private static ComboCounter comboCounterMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldVisualsMod = new OldVisuals();
@@ -82,6 +84,7 @@ public class ModInstances {
 		manager.register(packDisplayMod = new PackDisplay());
 		manager.register(serverAddressMod = new ServerAddress());
 		manager.register(bpsDisplayMod = new BPSDisplay());
+		manager.register(comboCounterMod = new ComboCounter());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -142,6 +145,10 @@ public class ModInstances {
 	
 	public static BPSDisplay getBPSDisplayMod() {
 		return bpsDisplayMod;
+	}
+	
+	public static ComboCounter getComboCounterMod() {
+		return comboCounterMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -209,6 +216,7 @@ public class ModInstances {
 			    getBPSDisplayMod(),
 			    getChatMod(),
 			    getClockMod(),
+			    getComboCounterMod(),
 			    getCoordinatesDisplayMod(),
 			    getCPSDisplayMod(),
 			    getdayCounterMod(),
