@@ -32,6 +32,7 @@ import drop.mods.impl.Scoreboard;
 import drop.mods.impl.ServerAddress;
 import drop.mods.impl.TabOverlay;
 import drop.mods.impl.TimeChanger;
+import drop.mods.impl.Zoom;
 
 public class ModInstances {
 	private static FPSDisplay fpsDisplayMod;
@@ -61,6 +62,7 @@ public class ModInstances {
 	private static Bobbing bobbingMod = new Bobbing();
 	private static HurtCam hurtCamMod = new HurtCam();
 	private static LeftHand leftHandMod = new LeftHand();
+	private static Zoom zoomMod = new Zoom();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -187,6 +189,10 @@ public class ModInstances {
 		return leftHandMod;
 	}
 	
+	public static Zoom getZoomMod() {
+		return zoomMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -215,7 +221,8 @@ public class ModInstances {
 			    getServerAddressMod(),
 			    getTabOverlayMod(),
 			    getTimeChangerMod(),
-			    getToggleSprintSneakMod()
+			    getToggleSprintSneakMod(),
+			    getZoomMod()
 			);
 
 	}

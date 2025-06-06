@@ -162,6 +162,7 @@ import net.minecraft.profiler.PlayerUsageSnooper;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.integrated.IntegratedServer;
+import net.minecraft.src.Config;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.IStatStringFormat;
 import net.minecraft.stats.StatFileWriter;
@@ -191,6 +192,7 @@ import net.minecraft.world.storage.WorldInfo;
 import drop.events.impl.KeyEvent;
 import drop.events.impl.TickEvent;
 import drop.gui.GuiDropClientMainMenu;
+import drop.mods.ModInstances;
 import drop.mods.impl.togglesprintsneak.DropClientMovementInput;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
@@ -1890,7 +1892,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         }
                         else
                         {
-                            this.thePlayer.inventory.changeCurrentItem(j);
+                        	if (!Config.zoomMode || Config.zoomMode && !ModInstances.getZoomMod().isScrollToZoomToggled()) {
+                        		this.thePlayer.inventory.changeCurrentItem(j);
+                        	}
                         }
                     }
 

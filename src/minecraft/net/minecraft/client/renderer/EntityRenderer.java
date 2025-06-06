@@ -226,6 +226,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
     private float avgServerTickDiff = 0.0F;
     private ShaderGroup[] fxaaShaders = new ShaderGroup[10];
     private boolean loadVisibleChunks = false;
+    
+    /* Drop Client Zoom Mod */
+    int scrollTotal = 4;
 
     public EntityRenderer(Minecraft mcIn, IResourceManager resourceManagerIn)
     {
@@ -630,7 +633,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
             boolean flag = false;
 
-            if (this.mc.currentScreen == null)
+            if (ModInstances.getZoomMod().isEnabled() && this.mc.currentScreen == null)
             {
                 GameSettings gamesettings = this.mc.gameSettings;
                 flag = GameSettings.isKeyDown(this.mc.gameSettings.ofKeyBindZoom);
@@ -641,19 +644,28 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 if (!Config.zoomMode)
                 {
                     Config.zoomMode = true;
-                    Config.zoomSmoothCamera = this.mc.gameSettings.smoothCamera;
-                    this.mc.gameSettings.smoothCamera = true;
+                    
+                    if (ModInstances.getZoomMod().isSmoothCameraToggled()) {
+                    	Config.zoomSmoothCamera = this.mc.gameSettings.smoothCamera;
+                        this.mc.gameSettings.smoothCamera = true;
+                    }
+                    
                     this.mc.renderGlobal.displayListEntitiesDirty = true;
                 }
 
                 if (Config.zoomMode)
                 {
-                    f /= 4.0F;
+                	f /= (ModInstances.getZoomMod().isScrollToZoomToggled() ? getScrollAmount() : 4.0F);
                 }
             }
             else if (Config.zoomMode)
             {
                 Config.zoomMode = false;
+
+                if (ModInstances.getZoomMod().isScrollToZoomToggled()) {
+                	this.scrollTotal = 4;
+                }
+                
                 this.mc.gameSettings.smoothCamera = Config.zoomSmoothCamera;
                 this.mouseFilterXAxis = new MouseFilter();
                 this.mouseFilterYAxis = new MouseFilter();
@@ -675,6 +687,32 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
             return Reflector.ForgeHooksClient_getFOVModifier.exists() ? Reflector.callFloat(Reflector.ForgeHooksClient_getFOVModifier, new Object[] {this, entity, block, Float.valueOf(partialTicks), Float.valueOf(f)}): f;
         }
+    }
+    
+    private int getScrollAmount() {
+    	if (ModInstances.getZoomMod().isEnabled() && ModInstances.getZoomMod().isScrollToZoomToggled()) {
+    		int dWheel = Mouse.getDWheel();
+    		
+    		if (dWheel != 0) {
+    			if (dWheel > 1) {
+    				scrollTotal++;
+    			}
+
+    			if (dWheel < -1) {
+    				scrollTotal--;
+    			}
+    			
+    			if (scrollTotal > 16) {
+    				scrollTotal = 16;
+    			}
+    			
+    			if (scrollTotal < 4) {
+    				scrollTotal = 4;
+    			}
+    		}
+    	}
+    	
+    	return scrollTotal;
     }
 
     private void hurtCameraEffect(float partialTicks)
