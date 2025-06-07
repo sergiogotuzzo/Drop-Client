@@ -63,7 +63,7 @@ public class ModInstances {
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
 	private static TimeChanger timeChangerMod = new TimeChanger();
 	private static TabOverlay tabOverlayMod = new TabOverlay();
-	private static Bossbar bossbarMod = new Bossbar();
+	private static Bossbar bossbarMod;
 	private static Nametags nametagsMod = new Nametags();
 	private static Bobbing bobbingMod = new Bobbing();
 	private static HurtCam hurtCamMod = new HurtCam();
@@ -88,6 +88,7 @@ public class ModInstances {
 		manager.register(bpsDisplayMod = new BPSDisplay());
 		manager.register(comboCounterMod = new ComboCounter());
 		manager.register(reachDisplayMod = new ReachDisplay());
+		manager.register(bossbarMod = new Bossbar());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
