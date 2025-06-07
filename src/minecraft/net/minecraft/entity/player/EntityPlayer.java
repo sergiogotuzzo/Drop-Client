@@ -1310,6 +1310,7 @@ public abstract class EntityPlayer extends EntityLivingBase
         if (targetEntity.canAttackWithItem())
         {
         	ModInstances.getComboCounterMod().onAttack(this);
+        	ModInstances.getReachDisplayMod().onEntityHit(targetEntity);
         	
             if (!targetEntity.hitByEntity(this))
             {

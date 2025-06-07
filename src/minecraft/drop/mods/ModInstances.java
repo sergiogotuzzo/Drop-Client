@@ -29,6 +29,7 @@ import drop.mods.impl.PackDisplay;
 import drop.mods.impl.PingDisplay;
 import drop.mods.impl.PotionEffects;
 import drop.mods.impl.PotsCounter;
+import drop.mods.impl.ReachDisplay;
 import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import drop.mods.impl.Scoreboard;
 import drop.mods.impl.ServerAddress;
@@ -53,6 +54,7 @@ public class ModInstances {
 	private static ServerAddress serverAddressMod;
 	private static BPSDisplay bpsDisplayMod;
 	private static ComboCounter comboCounterMod;
+	private static ReachDisplay reachDisplayMod;
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldVisualsMod = new OldVisuals();
@@ -85,6 +87,7 @@ public class ModInstances {
 		manager.register(serverAddressMod = new ServerAddress());
 		manager.register(bpsDisplayMod = new BPSDisplay());
 		manager.register(comboCounterMod = new ComboCounter());
+		manager.register(reachDisplayMod = new ReachDisplay());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {
@@ -149,6 +152,10 @@ public class ModInstances {
 	
 	public static ComboCounter getComboCounterMod() {
 		return comboCounterMod;
+	}
+	
+	public static ReachDisplay getReachDisplayMod() {
+		return reachDisplayMod;
 	}
 	
 	public static Freelook getFreelookMod() {
@@ -233,6 +240,7 @@ public class ModInstances {
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
 			    getPotsCounterMod(),
+			    getReachDisplayMod(),
 			    getScoreboardMod(),
 			    getServerAddressMod(),
 			    getTabOverlayMod(),
