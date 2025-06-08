@@ -21,14 +21,6 @@ public class Keystrokes extends ModDraggableText {
 	private boolean showSpacebar = true;
 	private boolean useArrows = false;
 	
-	private List<Long> leftClicks = new ArrayList<>();
-    private boolean wasLeftPressed;
-    private long lastLeftPressed;
-    
-    private List<Long> rightClicks = new ArrayList<>();
-    private boolean wasRightPressed;
-    private long lastRightPressed;
-	
 	public Keystrokes() {
 		super(true, 0.5, 0.5);
 		
