@@ -12,7 +12,8 @@ public class ReachDisplay extends ModDraggableDisplayText {
 	}
 	
 	float range = 0.0F;
-	
+	private long lastHit;
+
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return new GuiModDraggableDisplayText(previousGuiScreen, this);
@@ -34,14 +35,17 @@ public class ReachDisplay extends ModDraggableDisplayText {
 			drawRect(pos);
 		}
 		
+		if (System.currentTimeMillis() - lastHit >= 3000) {
+			this.range = 0.0F;
+		}
+		
 		String text = String.format("%.1f", range) + " blocks";
 		
 		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
 	}
 	
 	public void onEntityHit(Entity entity) {
-		System.out.println(entity.getName());
-		
 		this.range = mc.thePlayer.getDistanceToEntity(entity);
+		this.lastHit = System.currentTimeMillis();
 	}
 }
