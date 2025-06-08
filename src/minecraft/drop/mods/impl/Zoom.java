@@ -9,6 +9,8 @@ public class Zoom extends Mod {
 	private boolean smoothCamera = true;
 	
 	public Zoom() {
+		super(true);
+		
 		setScrollToZoom((boolean) getFromFile("scrollToZoom", scrollToZoom));
 		setSmoothCamera((boolean) getFromFile("smoothCamera", smoothCamera));
 	}

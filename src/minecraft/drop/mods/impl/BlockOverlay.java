@@ -21,6 +21,8 @@ public class BlockOverlay extends Mod {
 	private ColorManager overlayColor = ColorManager.fromColor(Color.WHITE, false).setAlpha(80);
 	
 	public BlockOverlay() {
+		super(false);
+		
 		setOutline((boolean) getFromFile("outline", outline));
 		setOutlineWidth((float) ((double) getFromFile("outlineWidth", outlineWidth)));
 		setOutlineColor((int) ((long) getFromFile("outlineColor", outlineColor.getRGB())));

@@ -14,6 +14,33 @@ import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableText;
 
 public class Keystrokes extends ModDraggableText {
+	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE, false);
+	private boolean pressedTextShadow = true;
+	private boolean showMovementKeys = true;
+	private boolean showMouse = true;
+	private boolean showSpacebar = true;
+	private boolean useArrows = false;
+	
+	private List<Long> leftClicks = new ArrayList<>();
+    private boolean wasLeftPressed;
+    private long lastLeftPressed;
+    
+    private List<Long> rightClicks = new ArrayList<>();
+    private boolean wasRightPressed;
+    private long lastRightPressed;
+	
+	public Keystrokes() {
+		super(true, 0.5, 0.5);
+		
+		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
+		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
+		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
+		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
+		setShowMouse((boolean) getFromFile("showMouse", showMouse));
+		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
+		setUseArrows((boolean) getFromFile("useArrows", useArrows));
+	}
+	
 	public static enum KeystrokesMode {
 		WASD(Key.W, Key.A, Key.S, Key.D),
 		WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
@@ -109,31 +136,6 @@ public class Keystrokes extends ModDraggableText {
 	}
 	
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
-
-	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE, false);
-	private boolean pressedTextShadow = true;
-	private boolean showMovementKeys = true;
-	private boolean showMouse = true;
-	private boolean showSpacebar = true;
-	private boolean useArrows = false;
-	
-	private List<Long> leftClicks = new ArrayList<>();
-    private boolean wasLeftPressed;
-    private long lastLeftPressed;
-    
-    private List<Long> rightClicks = new ArrayList<>();
-    private boolean wasRightPressed;
-    private long lastRightPressed;
-	
-	public Keystrokes() {
-		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
-		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
-		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
-		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
-		setShowMouse((boolean) getFromFile("showMouse", showMouse));
-		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
-		setUseArrows((boolean) getFromFile("useArrows", useArrows));
-	}
 	
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {

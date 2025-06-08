@@ -11,6 +11,8 @@ public class TimeChanger extends Mod {
 	private boolean useRealCurrentTime = false;
 	
 	public TimeChanger() {
+		super(false);
+		
 		setTime((float) ((double) getFromFile("time", time)));
 	}
 	

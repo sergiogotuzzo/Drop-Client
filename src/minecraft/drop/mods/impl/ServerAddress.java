@@ -11,6 +11,10 @@ import net.minecraft.client.multiplayer.ServerData;
 import drop.mods.ModDraggableDisplayText;
 
 public class ServerAddress extends ModDraggableDisplayText {
+	public ServerAddress() {
+		super(false, 0.5, 0.5);
+	}
+	
 	private ServerData dummyServerData = new ServerData("Example", "mc.example.org", false);
 	
 	@Override

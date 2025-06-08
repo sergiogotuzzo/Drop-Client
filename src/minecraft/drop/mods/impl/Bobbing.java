@@ -8,6 +8,8 @@ public class Bobbing extends Mod {
 	private boolean minimalViewBobbing = true;
 	
 	public Bobbing() {
+		super(false);
+		
 		setMinimalViewBobbing((boolean) getFromFile("minimalViewBobbing", minimalViewBobbing));
 	}
 	

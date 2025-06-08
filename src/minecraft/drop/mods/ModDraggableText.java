@@ -9,7 +9,9 @@ public abstract class ModDraggableText extends ModDraggable {
 	protected ColorManager textColor = ColorManager.fromColor(Color.WHITE, false);
 	protected boolean textShadow = true;
 	
-	public ModDraggableText() {
+	public ModDraggableText(boolean enabled, double relativeX, double relativeY) {
+		super(enabled, relativeX, relativeY);
+		
 		setTextColor((int) ((long) getFromFile("textColor", textColor.getRGB())));
 		setTextChroma((boolean) getFromFile("textChroma", textColor.isChromaToggled()));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));

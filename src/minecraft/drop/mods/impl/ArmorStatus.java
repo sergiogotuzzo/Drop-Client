@@ -35,6 +35,8 @@ public class ArmorStatus extends ModDraggableText {
 	private boolean reverse = false;
 
 	public ArmorStatus() {
+		super(true, 0.5, 0.5);
+		
 		setVeryHighTextColor((int) ((long) getFromFile("veryHighTextColor", veryHighTextColor.getRGB())));
 		setVeryHighTextChroma((boolean) getFromFile("veryHighTextChroma", veryHighTextColor.isChromaToggled()));
 		setVeryHighTextShadow((boolean) getFromFile("veryHighTextShadow", veryHighTextShadow));

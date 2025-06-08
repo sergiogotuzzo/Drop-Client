@@ -9,6 +9,8 @@ public class HurtCam extends Mod {
 	private float hurtShakeIntensity = 14.0F;
 	
 	public HurtCam() {
+		super(false);
+		
 		setHurtShake((boolean) getFromFile("hurtShake", hurtShake));
 		setHurtShakeIntensity((float) ((double) getFromFile("hurtShakeIntensity", hurtShakeIntensity)));
 	}

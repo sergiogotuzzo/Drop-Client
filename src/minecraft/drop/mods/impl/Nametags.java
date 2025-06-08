@@ -8,6 +8,8 @@ public class Nametags extends Mod {
 	private boolean showInThirdPerson = true;
 	
 	public Nametags() {
+		super(false);
+		
 		setShowInThirdPerson((boolean) getFromFile("showInThirdPerson", showInThirdPerson));
 	}
 	

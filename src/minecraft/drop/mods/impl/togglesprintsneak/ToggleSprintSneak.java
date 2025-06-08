@@ -9,25 +9,27 @@ import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
 public class ToggleSprintSneak extends ModDraggableDisplayText {
-	public int keyHoldTicks = 7;
-	private boolean sprinting = false;
-	private boolean sneaking = false;
-
 	private boolean showText = true;
 	private boolean toggleSprint = true;
 	private boolean toggleSneak = false;
 	private boolean flyBoost = true;
 	private float flyBoostFactor = 4.0F;
 	
-	private String textToRender = "";
-	
 	public ToggleSprintSneak() {
+		super(true, 0.5, 0.5);
+		
 		setShowText((boolean) getFromFile("showText", showText));
 		setToggleSprint((boolean) getFromFile("toggleSprint", toggleSprint));
 		setToggleSneak((boolean) getFromFile("toggleSneak", toggleSneak));
 		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
 		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
 	}
+	
+	public int keyHoldTicks = 7;
+	private boolean sprinting = false;
+	private boolean sneaking = false;
+	
+	private String textToRender = "";
 	
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {

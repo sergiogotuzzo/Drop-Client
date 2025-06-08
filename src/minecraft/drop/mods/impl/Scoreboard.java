@@ -10,6 +10,8 @@ public class Scoreboard extends Mod {
 	private int backgroundOpacity = 127;
 	
 	public Scoreboard() {
+		super(true);
+		
 		setHideNumbers((boolean) getFromFile("hideNumbers", textShadow));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));

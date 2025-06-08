@@ -57,7 +57,9 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 	protected boolean showBackground = false;
 	protected Brackets brackets = Brackets.SQUARE;
 	
-	public ModDraggableDisplayText() {
+	public ModDraggableDisplayText(boolean enabled, double relativeX, double relativeY) {
+		super(enabled, relativeX, relativeY);
+		
 		setShowBackground((boolean) getFromFile("showBackground", showBackground));
 		setBrackets(Brackets.fromId((int) ((long) getFromFile("brackets", brackets.getId()))));
 	}

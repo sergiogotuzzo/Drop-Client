@@ -16,15 +16,17 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	protected ScreenPosition pos;
 	protected float zLevel;
 	
-	public ModDraggable() {
-		setPosition(ScreenPosition.fromRelativePosition((double) getFromFile("posX", 0.5), (double) getFromFile("posY", 0.5)));
+	public ModDraggable(boolean enabled, double relativeX, double relativeY) {
+		super(enabled);
+		
+		setPosition(ScreenPosition.fromRelativePosition((double) getFromFile("x", relativeX), (double) getFromFile("y", relativeY)));
 	}
 	
 	public void setPosition(ScreenPosition pos) {
 		this.pos = pos;
 		
-		setToFile("posX", pos.getRelativeX());
-		setToFile("posY", pos.getRelativeY());
+		setToFile("x", pos.getRelativeX());
+		setToFile("y", pos.getRelativeY());
 	}
 	
 	public ScreenPosition getPosition() {

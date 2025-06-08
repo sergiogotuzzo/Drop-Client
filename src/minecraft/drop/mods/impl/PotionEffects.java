@@ -15,9 +15,7 @@ import drop.gui.mod.GuiPotionEffects;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggable;
 
-public class PotionEffects extends ModDraggable {
-	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
-	
+public class PotionEffects extends ModDraggable {	
     private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE, false);
     private boolean durationTextShadow = true;
     private boolean showName = true;
@@ -28,6 +26,8 @@ public class PotionEffects extends ModDraggable {
 	private boolean reverse = false;
 	
 	public PotionEffects() {
+		super(true, 0.5, 0.5);
+		
 		setDurationTextColor((int) ((long) getFromFile("durationTextColor", durationTextColor.getRGB())));
 		setDurationTextShadow((boolean) getFromFile("durationTextShadow", durationTextShadow));
 		setDurationTextChroma((boolean) getFromFile("durationTextChroma", durationTextColor.isChromaToggled()));
@@ -39,6 +39,8 @@ public class PotionEffects extends ModDraggable {
 		setBlink((boolean) getFromFile("blink", blink));
 		setReverse((boolean) getFromFile("reverse", reverse));
 	}
+	
+	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
 	
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {

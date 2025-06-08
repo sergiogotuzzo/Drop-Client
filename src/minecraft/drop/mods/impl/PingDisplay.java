@@ -22,6 +22,8 @@ public class PingDisplay extends ModDraggableDisplayText {
 	private boolean dynamicColors = true;
 
 	public PingDisplay() {
+		super(false, 0.5, 0.5);
+		
 		setExcellentTextColor((int) ((long) getFromFile("excellentTextColor", excellentTextColor.getRGB())));
 		setExcellentTextChroma((boolean) getFromFile("excellentTextChroma", excellentTextColor.isChromaToggled()));
 		setExcellentTextShadow((boolean) getFromFile("excellentTextShadow", excellentTextShadow));

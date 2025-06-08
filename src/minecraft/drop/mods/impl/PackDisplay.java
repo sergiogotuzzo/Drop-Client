@@ -14,6 +14,30 @@ import net.minecraft.util.ResourceLocation;
 import drop.mods.ModDraggable;
 
 public class PackDisplay extends ModDraggable {
+	private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
+	private boolean nameTextShadow = true;
+	private boolean showDescription = false;
+	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
+	private boolean descriptionTextShadow = true;
+	private boolean showBackground = true;
+	private boolean showIcon = true;
+	private boolean showAllSelectedPacks = true;
+	
+	public PackDisplay() {
+		super(false, 0.5, 0.5);
+		
+		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
+		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
+		setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
+		setShowDescription((boolean) getFromFile("showDescription", showDescription));
+		setDescriptionTextColor((int) ((long) getFromFile("descriptionTextColor", descriptionTextColor.getRGB())));
+		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
+		setDescriptionTextShadow((boolean) getFromFile("descriptionTextShadow", descriptionTextShadow));
+		setShowBackground((boolean) getFromFile("showBackground", showBackground));
+		setShowIcon((boolean) getFromFile("showIcon", showIcon));
+		setShowAllSelectedPacks((boolean) getFromFile("showAllSelectedPacks", showAllSelectedPacks));
+	}
+	
 	private static class DefaultPack {
 		public static ResourceLocation getResourceLocation() {
 			return new ResourceLocation("drop/pack.png");
@@ -26,28 +50,6 @@ public class PackDisplay extends ModDraggable {
 		public static String getPackDescription() {
 			return "The default look of Minecraft";
 		}
-	}
-	
-	private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
-	private boolean nameTextShadow = true;
-	private boolean showDescription = false;
-	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
-	private boolean descriptionTextShadow = true;
-	private boolean showBackground = true;
-	private boolean showIcon = true;
-	private boolean showAllSelectedPacks = true;
-	
-	public PackDisplay() {
-		setNameTextColor((int) ((long) getFromFile("nameTextColor", nameTextColor.getRGB())));
-		setNameTextChroma((boolean) getFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
-		setNameTextShadow((boolean) getFromFile("nameTextShadow", nameTextShadow));
-		setShowDescription((boolean) getFromFile("showDescription", showDescription));
-		setDescriptionTextColor((int) ((long) getFromFile("descriptionTextColor", descriptionTextColor.getRGB())));
-		setDescriptionTextChroma((boolean) getFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
-		setDescriptionTextShadow((boolean) getFromFile("descriptionTextShadow", descriptionTextShadow));
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
-		setShowIcon((boolean) getFromFile("showIcon", showIcon));
-		setShowAllSelectedPacks((boolean) getFromFile("showAllSelectedPacks", showAllSelectedPacks));
 	}
 	
 	@Override

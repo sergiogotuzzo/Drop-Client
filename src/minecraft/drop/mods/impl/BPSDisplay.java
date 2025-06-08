@@ -6,6 +6,10 @@ import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
 public class BPSDisplay extends ModDraggableDisplayText {
+	public BPSDisplay() {
+		super(false, 0.5, 0.5);
+	}
+
 	float blocks;
 	
 	@Override

@@ -14,6 +14,8 @@ public class Chat extends Mod {
 	private int backgroundOpacity = 127;
 	
 	public Chat() {
+		super(true);
+		
 		setChatHeightFix((boolean) getFromFile("chatHeightFix", chatHeightFix));
 		setTextShadow((boolean) getFromFile("textShadow", textShadow));
 		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));

@@ -13,6 +13,12 @@ import drop.mods.ModDraggableDisplayText;
 
 public class CPSDisplay extends ModDraggableDisplayText {
 	public boolean showRightCPS = false;
+        
+	public CPSDisplay() {
+		super(true, 0.5, 0.5);
+		
+		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
+	}
 	
 	private List<Long> leftClicks = new ArrayList<>();
     private boolean wasLeftPressed;
@@ -21,10 +27,6 @@ public class CPSDisplay extends ModDraggableDisplayText {
     private List<Long> rightClicks = new ArrayList<>();
     private boolean wasRightPressed;
     private long lastRightPressed;
-        
-	public CPSDisplay() {
-		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
-	}
 	
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {

@@ -8,6 +8,10 @@ import net.minecraft.network.play.server.S19PacketEntityStatus;
 import drop.mods.ModDraggableDisplayText;
 
 public class ComboCounter extends ModDraggableDisplayText {
+	public ComboCounter() {
+		super(false, 0.5, 0.5);
+	}
+
 	private boolean attacked = false;
 	private int combo = 0;
 	private long lastCombo;

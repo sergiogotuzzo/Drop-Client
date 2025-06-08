@@ -17,6 +17,8 @@ public class OldVisuals extends Mod {
 	private ColorManager hitArmorColor = ColorManager.fromColor(Color.RED, false).setAlpha(76);
 	
 	public OldVisuals() {
+		super(true);
+		
 		setFishingRod((boolean) getFromFile("fishingRod", fishingRod));
 		setBow((boolean) getFromFile("bow", bow));
 		setBlockHitting((boolean) getFromFile("blockHitting", blockHitting));

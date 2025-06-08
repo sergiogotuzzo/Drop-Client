@@ -16,6 +16,8 @@ public class Bossbar extends ModDraggableText {
 	private boolean showHealth = true;
 	
 	public Bossbar() {
+		super(true, 0.5, 0.5);
+		
 		setShowName((boolean) getFromFile("showName", showName));
 		setShowHealth((boolean) getFromFile("showHealth", showHealth));
 	}

@@ -14,18 +14,20 @@ public class Freelook extends Mod {
 	private boolean invertYaw = false;
 	private boolean invertPitch = false;
 	
+	public Freelook() {
+		super(true);
+		
+		setHold((boolean) getFromFile("hold", hold));
+		setInvertYaw((boolean) getFromFile("invertYaw", invertYaw));
+		setInvertPitch((boolean) getFromFile("invertPitch", invertPitch));
+	}
+	
 	private boolean perspectiveToggled = false;
 	
 	private float cameraYaw = 0F;
 	private float cameraPitch = 0F;
 	
 	private int previousPerspective = 0;
-	
-	public Freelook() {
-		setHold((boolean) getFromFile("hold", hold));
-		setInvertYaw((boolean) getFromFile("invertYaw", invertYaw));
-		setInvertPitch((boolean) getFromFile("invertPitch", invertPitch));
-	}
 	
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {

@@ -10,13 +10,13 @@ import drop.events.EventManager;
 import drop.gui.GuiDropClientScreen;
 
 public abstract class Mod {
-	protected boolean enabled = true;
+	protected boolean enabled;
 	
 	protected final Minecraft mc;
 	protected final FontRenderer font;
 	protected final Client client;
 		
-	public Mod() {
+	public Mod(boolean enabled) {
 		mc = Minecraft.getMinecraft();
 		font = mc.fontRendererObj;
 		client = Client.getInstance();

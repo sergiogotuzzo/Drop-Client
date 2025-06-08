@@ -7,6 +7,10 @@ import net.minecraft.entity.Entity;
 import drop.mods.ModDraggableDisplayText;
 
 public class ReachDisplay extends ModDraggableDisplayText {
+	public ReachDisplay() {
+		super(false, 0.5, 0.5);
+	}
+	
 	float range = 0.0F;
 	
 	@Override
