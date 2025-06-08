@@ -10,7 +10,7 @@ public class Bobbing extends Mod {
 	public Bobbing() {
 		super(false);
 		
-		setMinimalViewBobbing((boolean) getFromFile("minimalViewBobbing", minimalViewBobbing));
+		setMinimalViewBobbing(getBooleanFromFile("minimalViewBobbing", minimalViewBobbing));
 	}
 	
 	@Override

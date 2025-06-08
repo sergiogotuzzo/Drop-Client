@@ -17,7 +17,7 @@ public class CPSDisplay extends ModDraggableDisplayText {
 	public CPSDisplay() {
 		super(true, 0.5, 0.5);
 		
-		setShowRightCPS((boolean) getFromFile("showRightCPS", showRightCPS));
+		setShowRightCPS(getBooleanFromFile("showRightCPS", showRightCPS));
 	}
 	
 	private List<Long> leftClicks = new ArrayList<>();

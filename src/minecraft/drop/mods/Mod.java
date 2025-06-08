@@ -48,12 +48,32 @@ public abstract class Mod {
 		FileManager.set(this.getClass().getSimpleName() + "." + key, value);
 	}
 	
-	public Object getFromFile(String key, Object defaultValue) {
+	private Object getFromFile(String key, Object defaultValue) {
 		if (!hasInFile(key)) {
 			setToFile(key, defaultValue);
 		}
 		
 		return FileManager.get(this.getClass().getSimpleName() + "." + key);
+	}
+	
+	public boolean getBooleanFromFile(String key, boolean defaultValue) {
+		return (boolean) getFromFile(key, defaultValue);
+	}
+	
+	public double getDoubleFromFile(String key, double defaultValue) {
+		return (double) getFromFile(key, defaultValue);
+	}
+	
+	public float getFloatFromFile(String key, float defaultValue) {
+		return (float) getDoubleFromFile(key, defaultValue);
+	}
+	
+	public long getLongFromFile(String key, long defaultValue) {
+		return (long) getFromFile(key, defaultValue);
+	}
+	
+	public int getIntFromFile(String key, int defaultValue) {
+		return (int) getLongFromFile(key, defaultValue);
 	}
 	
 	public boolean hasInFile(String key) {

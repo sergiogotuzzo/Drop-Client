@@ -16,9 +16,9 @@ public class TabOverlay extends Mod {
 	public TabOverlay() {
 		super(true);
 		
-		setShowPlayerHeads((boolean) getFromFile("showPlayerHeads", showPlayerHeads));
-		setHidePing((boolean) getFromFile("hidePing", hidePing));
-		setPingNumbers((boolean) getFromFile("pingNumbers", pingNumbers));
+		setShowPlayerHeads(getBooleanFromFile("showPlayerHeads", showPlayerHeads));
+		setHidePing(getBooleanFromFile("hidePing", hidePing));
+		setPingNumbers(getBooleanFromFile("pingNumbers", pingNumbers));
 	}
 	
 	@Override

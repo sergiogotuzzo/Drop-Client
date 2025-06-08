@@ -37,28 +37,28 @@ public class ArmorStatus extends ModDraggableText {
 	public ArmorStatus() {
 		super(true, 0.5, 0.5);
 		
-		setVeryHighTextColor((int) ((long) getFromFile("veryHighTextColor", veryHighTextColor.getRGB())));
-		setVeryHighTextChroma((boolean) getFromFile("veryHighTextChroma", veryHighTextColor.isChromaToggled()));
-		setVeryHighTextShadow((boolean) getFromFile("veryHighTextShadow", veryHighTextShadow));
-		setHighTextColor((int) ((long) getFromFile("highTextColor", highTextColor.getRGB())));
-		setHighTextChroma((boolean) getFromFile("highTextChroma", highTextColor.isChromaToggled()));
-		setHighTextShadow((boolean) getFromFile("highTextShadow", highTextShadow));
-		setMediumTextColor((int) ((long) getFromFile("mediumTextColor", mediumTextColor.getRGB())));
-		setMediumTextChroma((boolean) getFromFile("mediumTextChroma", mediumTextColor.isChromaToggled()));
-		setMediumTextShadow((boolean) getFromFile("mediumTextShadow", mediumTextShadow));
-		setLowTextColor((int) ((long) getFromFile("lowTextColor", lowTextColor.getRGB())));
-		setLowTextChroma((boolean) getFromFile("lowTextChroma", lowTextColor.isChromaToggled()));
-		setLowTextShadow((boolean) getFromFile("lowTextShadow", lowTextShadow));
-		setVeryLowTextColor((int) ((long) getFromFile("veryLowTextColor", veryLowTextColor.getRGB())));
-		setVeryLowTextChroma((boolean) getFromFile("veryLowTextChroma", veryLowTextColor.isChromaToggled()));
-		setVeryLowTextShadow((boolean) getFromFile("veryLowTextShadow", veryLowTextShadow));
-		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
-		setShowPercentage((boolean) getFromFile("showPercentage", showPercentage));
-		setShowDamage((boolean) getFromFile("showDamage", showDamage));
-		setShowMaxDamage((boolean) getFromFile("showMaxDamage", showMaxDamage));
-		setEquippedItem((boolean) getFromFile("equippedItem", equippedItem));
-		setDamageOverlays((boolean) getFromFile("damageOverlays", damageOverlays));
-		setReverse((boolean) getFromFile("reverse", reverse));
+		setVeryHighTextColor(getIntFromFile("veryHighTextColor", veryHighTextColor.getRGB()));
+		setVeryHighTextChroma(getBooleanFromFile("veryHighTextChroma", veryHighTextColor.isChromaToggled()));
+		setVeryHighTextShadow(getBooleanFromFile("veryHighTextShadow", veryHighTextShadow));
+		setHighTextColor(getIntFromFile("highTextColor", highTextColor.getRGB()));
+		setHighTextChroma(getBooleanFromFile("highTextChroma", highTextColor.isChromaToggled()));
+		setHighTextShadow(getBooleanFromFile("highTextShadow", highTextShadow));
+		setMediumTextColor(getIntFromFile("mediumTextColor", mediumTextColor.getRGB()));
+		setMediumTextChroma(getBooleanFromFile("mediumTextChroma", mediumTextColor.isChromaToggled()));
+		setMediumTextShadow(getBooleanFromFile("mediumTextShadow", mediumTextShadow));
+		setLowTextColor(getIntFromFile("lowTextColor", lowTextColor.getRGB()));
+		setLowTextChroma(getBooleanFromFile("lowTextChroma", lowTextColor.isChromaToggled()));
+		setLowTextShadow(getBooleanFromFile("lowTextShadow", lowTextShadow));
+		setVeryLowTextColor(getIntFromFile("veryLowTextColor", veryLowTextColor.getRGB()));
+		setVeryLowTextChroma(getBooleanFromFile("veryLowTextChroma", veryLowTextColor.isChromaToggled()));
+		setVeryLowTextShadow(getBooleanFromFile("veryLowTextShadow", veryLowTextShadow));
+		setDynamicColors(getBooleanFromFile("dynamicColors", dynamicColors));
+		setShowPercentage(getBooleanFromFile("showPercentage", showPercentage));
+		setShowDamage(getBooleanFromFile("showDamage", showDamage));
+		setShowMaxDamage(getBooleanFromFile("showMaxDamage", showMaxDamage));
+		setEquippedItem(getBooleanFromFile("equippedItem", equippedItem));
+		setDamageOverlays(getBooleanFromFile("damageOverlays", damageOverlays));
+		setReverse(getBooleanFromFile("reverse", reverse));
 	}
 
 	@Override

@@ -16,9 +16,9 @@ public class Chat extends Mod {
 	public Chat() {
 		super(true);
 		
-		setChatHeightFix((boolean) getFromFile("chatHeightFix", chatHeightFix));
-		setTextShadow((boolean) getFromFile("textShadow", textShadow));
-		setBackgroundOpacity((int) ((long) getFromFile("backgroundOpacity", backgroundOpacity)));
+		setChatHeightFix(getBooleanFromFile("chatHeightFix", chatHeightFix));
+		setTextShadow(getBooleanFromFile("textShadow", textShadow));
+		setBackgroundOpacity(getIntFromFile("backgroundOpacity", backgroundOpacity));
 	}
 	
 	@Override

@@ -23,13 +23,13 @@ public class BlockOverlay extends Mod {
 	public BlockOverlay() {
 		super(false);
 		
-		setOutline((boolean) getFromFile("outline", outline));
-		setOutlineWidth((float) ((double) getFromFile("outlineWidth", outlineWidth)));
-		setOutlineColor((int) ((long) getFromFile("outlineColor", outlineColor.getRGB())));
-		setOutlineChroma((boolean) getFromFile("outlineChroma", outlineColor.isChromaToggled()));
-		setOverlay((boolean) getFromFile("overlay", overlay));
-		setOverlayColor((int) ((long) getFromFile("overlayColor", overlayColor.getRGB())));
-		setOverlayChroma((boolean) getFromFile("overlayChroma", overlayColor.isChromaToggled()));
+		setOutline(getBooleanFromFile("outline", outline));
+		setOutlineWidth(getFloatFromFile("outlineWidth", outlineWidth));
+		setOutlineColor(getIntFromFile("outlineColor", outlineColor.getRGB()));
+		setOutlineChroma(getBooleanFromFile("outlineChroma", outlineColor.isChromaToggled()));
+		setOverlay(getBooleanFromFile("overlay", overlay));
+		setOverlayColor(getIntFromFile("overlayColor", overlayColor.getRGB()));
+		setOverlayChroma(getBooleanFromFile("overlayChroma", overlayColor.isChromaToggled()));
 	}
 	
 	@Override

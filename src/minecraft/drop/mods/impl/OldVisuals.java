@@ -19,12 +19,12 @@ public class OldVisuals extends Mod {
 	public OldVisuals() {
 		super(true);
 		
-		setFishingRod((boolean) getFromFile("fishingRod", fishingRod));
-		setBow((boolean) getFromFile("bow", bow));
-		setBlockHitting((boolean) getFromFile("blockHitting", blockHitting));
-		setArmorHitAnimation((boolean) getFromFile("armorHitAnimation", armorHitAnimation));
-		setHitArmorColor((int) ((long) getFromFile("hitArmorColor", hitArmorColor.getRGB())));
-		setHitArmorChroma((boolean) getFromFile("hitArmorChroma", hitArmorColor.isChromaToggled()));
+		setFishingRod(getBooleanFromFile("fishingRod", fishingRod));
+		setBow(getBooleanFromFile("bow", bow));
+		setBlockHitting(getBooleanFromFile("blockHitting", blockHitting));
+		setArmorHitAnimation(getBooleanFromFile("armorHitAnimation", armorHitAnimation));
+		setHitArmorColor(getIntFromFile("hitArmorColor", hitArmorColor.getRGB()));
+		setHitArmorChroma(getBooleanFromFile("hitArmorChroma", hitArmorColor.isChromaToggled()));
 	}
 	
 	@Override

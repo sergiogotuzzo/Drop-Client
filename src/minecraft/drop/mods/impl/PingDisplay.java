@@ -24,22 +24,22 @@ public class PingDisplay extends ModDraggableDisplayText {
 	public PingDisplay() {
 		super(false, 0.5, 0.5);
 		
-		setExcellentTextColor((int) ((long) getFromFile("excellentTextColor", excellentTextColor.getRGB())));
-		setExcellentTextChroma((boolean) getFromFile("excellentTextChroma", excellentTextColor.isChromaToggled()));
-		setExcellentTextShadow((boolean) getFromFile("excellentTextShadow", excellentTextShadow));
-		setGoodTextColor((int) ((long) getFromFile("goodTextColor", goodTextColor.getRGB())));
-		setGoodTextChroma((boolean) getFromFile("goodTextChroma", goodTextColor.isChromaToggled()));
-		setGoodTextShadow((boolean) getFromFile("goodTextShadow", goodTextShadow));
-		setModerateTextColor((int) ((long) getFromFile("moderateTextColor", moderateTextColor.getRGB())));
-		setModerateTextChroma((boolean) getFromFile("moderateTextChroma", moderateTextColor.isChromaToggled()));
-		setModerateTextShadow((boolean) getFromFile("moderateTextShadow", moderateTextShadow));
-		setWeakTextColor((int) ((long) getFromFile("weakTextColor", weakTextColor.getRGB())));
-		setWeakTextChroma((boolean) getFromFile("weakTextChroma", weakTextColor.isChromaToggled()));
-		setWeakTextShadow((boolean) getFromFile("weakTextShadow", weakTextShadow));
-		setUnstableTextColor((int) ((long) getFromFile("unstableTextColor", unstableTextColor.getRGB())));
-		setUnstableTextChroma((boolean) getFromFile("unstableTextChroma", unstableTextColor.isChromaToggled()));
-		setUnstableTextShadow((boolean) getFromFile("unstableTextShadow", unstableTextShadow));
-		setDynamicColors((boolean) getFromFile("dynamicColors", dynamicColors));
+		setExcellentTextColor(getIntFromFile("excellentTextColor", excellentTextColor.getRGB()));
+		setExcellentTextChroma(getBooleanFromFile("excellentTextChroma", excellentTextColor.isChromaToggled()));
+		setExcellentTextShadow(getBooleanFromFile("excellentTextShadow", excellentTextShadow));
+		setGoodTextColor(getIntFromFile("goodTextColor", goodTextColor.getRGB()));
+		setGoodTextChroma(getBooleanFromFile("goodTextChroma", goodTextColor.isChromaToggled()));
+		setGoodTextShadow(getBooleanFromFile("goodTextShadow", goodTextShadow));
+		setModerateTextColor(getIntFromFile("moderateTextColor", moderateTextColor.getRGB()));
+		setModerateTextChroma(getBooleanFromFile("moderateTextChroma", moderateTextColor.isChromaToggled()));
+		setModerateTextShadow(getBooleanFromFile("moderateTextShadow", moderateTextShadow));
+		setWeakTextColor(getIntFromFile("weakTextColor", weakTextColor.getRGB()));
+		setWeakTextChroma(getBooleanFromFile("weakTextChroma", weakTextColor.isChromaToggled()));
+		setWeakTextShadow(getBooleanFromFile("weakTextShadow", weakTextShadow));
+		setUnstableTextColor(getIntFromFile("unstableTextColor", unstableTextColor.getRGB()));
+		setUnstableTextChroma(getBooleanFromFile("unstableTextChroma", unstableTextColor.isChromaToggled()));
+		setUnstableTextShadow(getBooleanFromFile("unstableTextShadow", unstableTextShadow));
+		setDynamicColors(getBooleanFromFile("dynamicColors", dynamicColors));
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ public class TimeChanger extends Mod {
 	public TimeChanger() {
 		super(false);
 		
-		setTime((float) ((double) getFromFile("time", time)));
+		setTime(getFloatFromFile("time", time));
 	}
 	
 	@Override

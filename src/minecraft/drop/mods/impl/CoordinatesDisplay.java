@@ -16,10 +16,10 @@ public class CoordinatesDisplay extends ModDraggableText {
 	public CoordinatesDisplay() {
 		super(false, 0.5, 0.5);
 		
-		setShowBackground((boolean) getFromFile("showBackground", showBackground));
-		setShowBiome((boolean) getFromFile("showBiome", showBiome));
-		setShowFacing((boolean) getFromFile("showFacing", showFacing));
-		setShowFacingTowards((boolean) getFromFile("showFacingTowards", showFacingTowards));
+		setShowBackground(getBooleanFromFile("showBackground", showBackground));
+		setShowBiome(getBooleanFromFile("showBiome", showBiome));
+		setShowFacing(getBooleanFromFile("showFacing", showFacing));
+		setShowFacingTowards(getBooleanFromFile("showFacingTowards", showFacingTowards));
 	}
 	
 	@Override

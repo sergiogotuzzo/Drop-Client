@@ -32,13 +32,13 @@ public class Keystrokes extends ModDraggableText {
 	public Keystrokes() {
 		super(true, 0.5, 0.5);
 		
-		setPressedTextColor((int) ((long) getFromFile("pressedTextColor", pressedTextColor.getRGB())));
-		setPressedTextChroma((boolean) getFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
-		setPressedTextShadow((boolean) getFromFile("pressedTextShadow", pressedTextShadow));
-		setShowMovementKeys((boolean) getFromFile("showMovementKeys", showMovementKeys));
-		setShowMouse((boolean) getFromFile("showMouse", showMouse));
-		setShowSpacebar((boolean) getFromFile("showSpacebar", showSpacebar));
-		setUseArrows((boolean) getFromFile("useArrows", useArrows));
+		setPressedTextColor(getIntFromFile("pressedTextColor", pressedTextColor.getRGB()));
+		setPressedTextChroma(getBooleanFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
+		setPressedTextShadow(getBooleanFromFile("pressedTextShadow", pressedTextShadow));
+		setShowMovementKeys(getBooleanFromFile("showMovementKeys", showMovementKeys));
+		setShowMouse(getBooleanFromFile("showMouse", showMouse));
+		setShowSpacebar(getBooleanFromFile("showSpacebar", showSpacebar));
+		setUseArrows(getBooleanFromFile("useArrows", useArrows));
 	}
 	
 	public static enum KeystrokesMode {

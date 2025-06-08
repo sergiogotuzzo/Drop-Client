@@ -11,8 +11,8 @@ public class HurtCam extends Mod {
 	public HurtCam() {
 		super(false);
 		
-		setHurtShake((boolean) getFromFile("hurtShake", hurtShake));
-		setHurtShakeIntensity((float) ((double) getFromFile("hurtShakeIntensity", hurtShakeIntensity)));
+		setHurtShake(getBooleanFromFile("hurtShake", hurtShake));
+		setHurtShakeIntensity(getFloatFromFile("hurtShakeIntensity", hurtShakeIntensity));
 	}
 	
 	@Override

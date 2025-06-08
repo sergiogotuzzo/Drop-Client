@@ -18,11 +18,11 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	public ToggleSprintSneak() {
 		super(true, 0.5, 0.5);
 		
-		setShowText((boolean) getFromFile("showText", showText));
-		setToggleSprint((boolean) getFromFile("toggleSprint", toggleSprint));
-		setToggleSneak((boolean) getFromFile("toggleSneak", toggleSneak));
-		setFlyBoost((boolean) getFromFile("flyBoost", flyBoost));
-		setFlyBoostFactor((float) ((double) getFromFile("flyBoostFactor", flyBoostFactor)));
+		setShowText(getBooleanFromFile("showText", showText));
+		setToggleSprint(getBooleanFromFile("toggleSprint", toggleSprint));
+		setToggleSneak(getBooleanFromFile("toggleSneak", toggleSneak));
+		setFlyBoost(getBooleanFromFile("flyBoost", flyBoost));
+		setFlyBoostFactor(getFloatFromFile("flyBoostFactor", flyBoostFactor));
 	}
 	
 	public int keyHoldTicks = 7;

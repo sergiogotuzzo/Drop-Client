@@ -10,7 +10,7 @@ public class Nametags extends Mod {
 	public Nametags() {
 		super(false);
 		
-		setShowInThirdPerson((boolean) getFromFile("showInThirdPerson", showInThirdPerson));
+		setShowInThirdPerson(getBooleanFromFile("showInThirdPerson", showInThirdPerson));
 	}
 	
 	@Override

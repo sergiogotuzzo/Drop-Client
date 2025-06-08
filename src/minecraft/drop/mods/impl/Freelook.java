@@ -17,9 +17,9 @@ public class Freelook extends Mod {
 	public Freelook() {
 		super(true);
 		
-		setHold((boolean) getFromFile("hold", hold));
-		setInvertYaw((boolean) getFromFile("invertYaw", invertYaw));
-		setInvertPitch((boolean) getFromFile("invertPitch", invertPitch));
+		setHold(getBooleanFromFile("hold", hold));
+		setInvertYaw(getBooleanFromFile("invertYaw", invertYaw));
+		setInvertPitch(getBooleanFromFile("invertPitch", invertPitch));
 	}
 	
 	private boolean perspectiveToggled = false;
