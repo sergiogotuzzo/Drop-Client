@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiTabOverlay;
+import drop.gui.mod.taboverlay.GuiTabOverlay;
 import drop.mods.Mod;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -85,7 +85,24 @@ public class TabOverlay extends Mod {
 		
 		String pingText = String.valueOf(ping);
 		
-		font.drawString(pingText, p_175245_2_ + p_175245_1_ - font.getStringWidth(pingText), p_175245_3_, color.getRGB(), dropShadow);
+		if (color.isChromaToggled()) {
+			int textCharX = p_175245_2_ + p_175245_1_ - font.getStringWidth(pingText);
+			
+	        for (char textChar : pingText.toCharArray()) {
+	            long t = System.currentTimeMillis() - (textCharX * 10 - p_175245_3_ * 10);
+	            int c = Color.HSBtoRGB(t % (int) 2000.0F / 2000.0F, 0.8F, 0.8F);
+	            
+	            if (pingText.startsWith("§m")) {
+	            	font.drawString(pingText, p_175245_2_ + p_175245_1_ - font.getStringWidth(pingText), p_175245_3_, c, dropShadow);
+	            } else {
+	            	font.drawString(String.valueOf(textChar), textCharX, p_175245_3_, c, dropShadow);
+	            }
+	            
+	            textCharX += font.getCharWidth(textChar);
+	        }
+		} else {
+			font.drawString(pingText, p_175245_2_ + p_175245_1_ - font.getStringWidth(pingText), p_175245_3_, color.getRGB(), dropShadow);
+		}
 	}
 	
 	public void setTextColor(int rgb) {

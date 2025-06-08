@@ -1,9 +1,10 @@
-package drop.gui.mod;
+package drop.gui.mod.taboverlay;
 
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import drop.gui.mod.GuiMod;
 import drop.mods.ModInstances;
 import drop.mods.impl.TabOverlay;
 
@@ -18,9 +19,11 @@ public class GuiTabOverlay extends GuiMod {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	
-        this.writeOptionText("Show Player Heads", 1);
-        this.writeOptionText("Hide Ping", 2);
-        this.writeOptionText("Ping Numbers", 3);
+    	this.writeOptionText("Text Color", 1);
+        this.writeOptionText("Text Shadow", 2);
+        this.writeOptionText("Show Player Heads", 3);
+        this.writeOptionText("Hide Ping", 4);
+        this.writeOptionText("Ping Numbers", 5);
     }
 
     @Override
@@ -28,15 +31,21 @@ public class GuiTabOverlay extends GuiMod {
     	super.actionPerformed(button);
     	
         switch (button.id) {
-            case 1:
+        	case 1:
+        		mc.displayGuiScreen(new GuiTabOverlayTextColor(this));
+        		break;
+        	case 2:
+        		mod.setTextShadow(!mod.isTextShadowToggled());
+        		break;
+            case 3:
             	mod.setShowPlayerHeads(!mod.isShowPlayerHeadsToggled());
             	this.initGui();
             	break;
-            case 2:
+            case 4:
             	mod.setHidePing(!mod.isHidePingToggled());
             	this.initGui();
             	break;
-            case 3:
+            case 5:
             	mod.setPingNumbers(!mod.isPingNumbersToggled());
             	this.initGui();
             	break;
@@ -47,8 +56,10 @@ public class GuiTabOverlay extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowPlayerHeadsToggled(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isHidePingToggled(), 2));
-    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isPingNumbersToggled(), 3));
+		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
+		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
+    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowPlayerHeadsToggled(), 3));
+    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isHidePingToggled(), 4));
+    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isPingNumbersToggled(), 5));
     }
 }
