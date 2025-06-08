@@ -226,7 +226,7 @@ public class GuiPlayerTabOverlay extends Gui
                 		int playerHeadsWidth = tabOverlayMod.isShowPlayerHeadsToggled() ? 9 : 0;
                 		
                 		if (tabOverlayMod.isPingNumbersToggled()) {
-                        	TabOverlay.writePing(mc.fontRendererObj, i1, j2 - playerHeadsWidth, k2, networkplayerinfo1); 
+                        	tabOverlayMod.writePing(mc.fontRendererObj, i1, j2 - playerHeadsWidth, k2, networkplayerinfo1); 
                         } else {
                         	this.drawPing(i1, j2 - playerHeadsWidth, k2, networkplayerinfo1);
                         }
