@@ -66,24 +66,30 @@ public class PingDisplay extends ModDraggableDisplayText {
 			
 			int ping = mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
 			ColorManager color = textColor; // Default
+			boolean dropShadow = textShadow;
 			
 			if (dynamicColors) {
 				if (ping > 300) {
-					color = ColorManager.fromRGB(170, 0, 0, false); // Unstable
+					color = unstableTextColor; // Unstable
+					dropShadow = unstableTextShadow;
 				} else if (ping > 200) {
-					color = ColorManager.fromRGB(255, 85, 85, false); // Weak
+					color = weakTextColor; // Weak
+					dropShadow = weakTextShadow;
 				} else if (ping > 150) {
-					color = ColorManager.fromRGB(255, 170, 0, false); // Moderate
+					color = moderateTextColor; // Moderate
+					dropShadow = moderateTextShadow;
 				} else if (ping > 100) {
-					color = ColorManager.fromRGB(255, 255, 85, false); // Good
+					color = goodTextColor; // Good
+					dropShadow = goodTextShadow;
 				} else if (ping > 50) {
-					color = ColorManager.fromRGB(85, 255, 85, false); // Excellent
+					color = excellentTextColor; // Excellent
+					dropShadow = excellentTextShadow;
 				}
 			}
 			
 			String text = ping + " ms";
 
-			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), color, textShadow);
+			drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), color, dropShadow);
 		}
 	}
 	
