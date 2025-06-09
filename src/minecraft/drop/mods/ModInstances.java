@@ -135,7 +135,7 @@ public class ModInstances {
 		return clockMod;
 	}
 	
-	public static DayCounter getdayCounterMod() {
+	public static DayCounter getDayCounterMod() {
 		return dayCounterMod;
 	}
 	
@@ -227,7 +227,7 @@ public class ModInstances {
 			    getComboCounterMod(),
 			    getCoordinatesDisplayMod(),
 			    getCPSDisplayMod(),
-			    getdayCounterMod(),
+			    getDayCounterMod(),
 			    getFPSDisplayMod(),
 			    getFullbrightMod(),
 			    getFreelookMod(),
