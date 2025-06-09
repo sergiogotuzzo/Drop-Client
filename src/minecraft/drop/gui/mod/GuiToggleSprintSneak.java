@@ -98,7 +98,7 @@ public class GuiToggleSprintSneak extends GuiMod {
     	this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
 		this.buttonList.add(this.createGuiButtonToggled(3, mod.isTextShadowToggled(), 3));
 		this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBackgroundToggled(), 4));
-		this.buttonList.add(this.createGuiText(5, mod.getBrackets().getName(), 5));
+		this.buttonList.add(this.createGuiText(5, mod.getBrackets().getName(), true, 5));
     	this.buttonList.add(this.createGuiButtonToggled(6, mod.isToggleSprintToggled(), 6));
     	this.buttonList.add(this.createGuiButtonToggled(7, mod.isToggleSneakToggled(), 7));
     	this.buttonList.add(this.createGuiButtonToggled(8, mod.isFlyBoostToggled(), 8));

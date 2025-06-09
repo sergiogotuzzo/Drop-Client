@@ -34,7 +34,7 @@ public class GuiTabOverlayTextColor extends GuiModColor {
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiText(6, (this.width - 300) / 2 + 15, "Dynamic Colors", 9));
+		this.buttonList.add(this.createGuiText(6, "Dynamic Colors", false, 9));
     	this.buttonList.add(this.createGuiButtonToggled(7, mod.isDynamicColorsToggled(), 9));
     }
 }
