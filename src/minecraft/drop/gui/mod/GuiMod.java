@@ -65,8 +65,8 @@ public class GuiMod extends GuiDropClientScreen {
     	return new GuiRect(id, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), color);
 	}
 	
-	protected GuiSlider createGuiSlider(int id, float min, float max, float defaultValue, int line) {
-    	return new GuiSlider(id, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 1 + 15 * (line - 1), 300 - 15 * 2, 5, min, max, defaultValue);
+	protected GuiSlider createGuiSlider(int id, float max, float defaultValue, int line) {
+    	return new GuiSlider(id, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 1 + 15 * (line - 1), 300 - 15 * 2, 5, 0.0F, max, defaultValue);
 	}
 	
 	protected GuiText createGuiText(int id, int x, String text, int line) {

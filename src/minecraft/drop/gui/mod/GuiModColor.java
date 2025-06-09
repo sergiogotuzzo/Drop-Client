@@ -105,12 +105,12 @@ public class GuiModColor extends GuiMod {
     public void initGui() {
 		super.initGui();
                 
-    	this.buttonList.add(sliderRed = this.createGuiSlider(1, 0.0F, 255.0F, color.getRed(), 3));
-    	this.buttonList.add(sliderGreen = this.createGuiSlider(2, 0.0F, 255.0F, color.getGreen(), 5));
-    	this.buttonList.add(sliderBlue = this.createGuiSlider(3, 0.0F, 255.0F, color.getBlue(), 7));
+    	this.buttonList.add(sliderRed = this.createGuiSlider(1, 255.0F, color.getRed(), 3));
+    	this.buttonList.add(sliderGreen = this.createGuiSlider(2,255.0F, color.getGreen(), 5));
+    	this.buttonList.add(sliderBlue = this.createGuiSlider(3, 255.0F, color.getBlue(), 7));
 
     	if (showAlphaSlider) {
-        	this.buttonList.add(sliderAlpha = this.createGuiSlider(4, 0.0F, 255.0F, color.getAlpha(), 9));
+        	this.buttonList.add(sliderAlpha = this.createGuiSlider(4, 255.0F, color.getAlpha(), 9));
     	}
     	
     	this.buttonList.add(this.createGuiButtonToggled(5, color.isChromaToggled(), showAlphaSlider ? 10 : 8));

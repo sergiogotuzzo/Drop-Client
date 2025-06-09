@@ -50,7 +50,7 @@ public class GuiTimeChanger extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(sliderTime = this.createGuiSlider(1, 0.0F, 1.0F, mod.getTime(), 2));
+    	this.buttonList.add(sliderTime = this.createGuiSlider(1, 1.0F, mod.getTime(), 2));
     	this.buttonList.add(this.createGuiButtonToggled(2, mod.isUseRealCurrentTimeToggled(), 3));
     }
 }

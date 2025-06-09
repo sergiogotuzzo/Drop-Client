@@ -64,6 +64,6 @@ public class GuiHurtCam extends GuiMod {
 		super.initGui();
 		
 		this.buttonList.add(this.createGuiButtonToggled(1, mod.isHurtShakeToggled(), 1));
-		this.buttonList.add(sliderHurtShakeIntensity = this.createGuiSlider(2, 5.0F, 35.0F, mod.getHurtShakeIntensity(), 3));
+		this.buttonList.add(sliderHurtShakeIntensity = this.createGuiSlider(2, 35.0F, mod.getHurtShakeIntensity(), 3));
     }
 }
