@@ -102,6 +102,6 @@ public class GuiToggleSprintSneak extends GuiMod {
     	this.buttonList.add(this.createGuiButtonToggled(6, mod.isToggleSprintToggled(), 6));
     	this.buttonList.add(this.createGuiButtonToggled(7, mod.isToggleSneakToggled(), 7));
     	this.buttonList.add(this.createGuiButtonToggled(8, mod.isFlyBoostToggled(), 8));
-    	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(9, 2.0F, 8.0F, mod.getFlyBoostFactor(), 30, 9));
+    	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(9, 2.0F, 8.0F, mod.getFlyBoostFactor(), 10));
     }
 }

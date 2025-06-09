@@ -46,17 +46,17 @@ public class GuiModColor extends GuiMod {
         
         this.writeOptionText("Red", 2);
         this.writeOptionValue(String.valueOf(color.getRed()), 2);
-        this.writeOptionText("Green", 3);
-        this.writeOptionValue(String.valueOf(color.getGreen()), 3);
-        this.writeOptionText("Blue", 4);
-        this.writeOptionValue(String.valueOf(color.getBlue()), 4);
+        this.writeOptionText("Green", 4);
+        this.writeOptionValue(String.valueOf(color.getGreen()), 4);
+        this.writeOptionText("Blue", 6);
+        this.writeOptionValue(String.valueOf(color.getBlue()), 6);
 
         if (showAlphaSlider) {
-            this.writeOptionText("Alpha", 5);
-            this.writeOptionValue(String.valueOf(color.getAlpha()), 5);
+            this.writeOptionText("Alpha", 8);
+            this.writeOptionValue(String.valueOf(color.getAlpha()), 8);
         }
         
-        this.writeOptionText("Chroma", showAlphaSlider ? 6 : 5);
+        this.writeOptionText("Chroma", showAlphaSlider ? 10 : 8);
     }
     
     @Override
@@ -105,14 +105,14 @@ public class GuiModColor extends GuiMod {
     public void initGui() {
 		super.initGui();
                 
-    	this.buttonList.add(sliderRed = this.createGuiSlider(1, 0.0F, 255.0F, color.getRed(), 2));
-    	this.buttonList.add(sliderGreen = this.createGuiSlider(2, 0.0F, 255.0F, color.getGreen(), 3));
-    	this.buttonList.add(sliderBlue = this.createGuiSlider(3, 0.0F, 255.0F, color.getBlue(), 4));
+    	this.buttonList.add(sliderRed = this.createGuiSlider(1, 0.0F, 255.0F, color.getRed(), 3));
+    	this.buttonList.add(sliderGreen = this.createGuiSlider(2, 0.0F, 255.0F, color.getGreen(), 5));
+    	this.buttonList.add(sliderBlue = this.createGuiSlider(3, 0.0F, 255.0F, color.getBlue(), 7));
 
     	if (showAlphaSlider) {
-        	this.buttonList.add(sliderAlpha = this.createGuiSlider(4, 0.0F, 255.0F, color.getAlpha(), 5));
+        	this.buttonList.add(sliderAlpha = this.createGuiSlider(4, 0.0F, 255.0F, color.getAlpha(), 9));
     	}
     	
-    	this.buttonList.add(this.createGuiButtonToggled(5, color.isChromaToggled(), showAlphaSlider ? 6 : 5));
+    	this.buttonList.add(this.createGuiButtonToggled(5, color.isChromaToggled(), showAlphaSlider ? 10 : 8));
     }
 }

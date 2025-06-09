@@ -25,8 +25,8 @@ public class GuiBlockOverlay extends GuiMod {
 		this.writeOptionText("Outline Color", 2);
 		this.writeOptionText("Outline Width", 3);
 		this.writeOptionValue(String.format("%.1f", mod.getOutlineWidth()), 3);
-		this.writeOptionText("Overlay", 4);
-		this.writeOptionText("Overlay Color", 5);
+		this.writeOptionText("Overlay", 5);
+		this.writeOptionText("Overlay Color", 6);
     }
     
     @Override
@@ -73,8 +73,8 @@ public class GuiBlockOverlay extends GuiMod {
 		
     	this.buttonList.add(this.createGuiButtonToggled(1, mod.isOutlineToggled(), 1));
         this.buttonList.add(this.createGuiRect(2, mod.getOutlineColor().getRGB(), 2));
-    	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 0.4F, 5.0F, mod.getOutlineWidth(), 3));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isOverlayToggled(), 4));
-    	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), 5));
+    	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 0.4F, 5.0F, mod.getOutlineWidth(), 4));
+    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isOverlayToggled(), 5));
+    	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), 6));
     }
 }

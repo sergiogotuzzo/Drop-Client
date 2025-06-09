@@ -23,7 +23,7 @@ public class GuiTimeChanger extends GuiMod {
 		
         this.writeOptionText("Time", 1);
         this.writeOptionValue(String.format("%.2f", mod.getTime()), 1);
-        this.writeOptionText("Use Real Current Time", 2);
+        this.writeOptionText("Use Real Current Time", 3);
     }
     
     @Override
@@ -50,7 +50,7 @@ public class GuiTimeChanger extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(sliderTime = this.createGuiSlider(1, 0.0F, 1.0F, mod.getTime(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isUseRealCurrentTimeToggled(), 2));
+    	this.buttonList.add(sliderTime = this.createGuiSlider(1, 0.0F, 1.0F, mod.getTime(), 2));
+    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isUseRealCurrentTimeToggled(), 3));
     }
 }
