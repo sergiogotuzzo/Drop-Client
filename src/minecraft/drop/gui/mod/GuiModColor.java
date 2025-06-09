@@ -42,7 +42,7 @@ public class GuiModColor extends GuiMod {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	
-        this.drawScaledText(subtitle, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB(), color.isChromaToggled()).setAlpha(255).getRGB(), false, false);
+        this.drawScaledText(subtitle, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB(), color.isChromaToggled()).setAlpha(255).getRGB(), false, color.isChromaToggled());
         
         this.writeOptionText("Red", 2);
         this.writeOptionValue(String.valueOf(color.getRed()), 2);
