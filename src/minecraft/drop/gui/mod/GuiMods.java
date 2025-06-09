@@ -6,14 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import drop.Client;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiText;
@@ -43,7 +40,7 @@ public class GuiMods extends GuiDropClientScreen {
             scrollOffset -= Integer.signum(dWheel) * 15;
             scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
             
-            initGui();
+            this.initGui();
         }
     }
 
@@ -51,37 +48,20 @@ public class GuiMods extends GuiDropClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	this.drawDefaultBackground();
     	
-        drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
-        drawScaledText("Mods", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+    	this.drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
+        
+    	this.drawScaledText("Mods", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0, 0xFFFFFFFF, false, false);
 
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        
-        scissorBox((this.width - 300) / 2, (this.height - 200) / 2 + 30 + 15 - 2, 300, 200 - 40 - 15 + 2);
-        
+    	this.textFieldSearchMod.drawTextBox();
+
         super.drawScreen(mouseX, mouseY, partialTicks);
-        
-        GL11.glDisable(GL11.GL_SCISSOR_TEST);
-        
-        new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])).drawButton(mc, mouseX, mouseY);
-        
-        textFieldSearchMod.drawTextBox();   
-        
-        this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0x808080);
-        this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0x808080);
-    }
-
-    private void scissorBox(int x, int y, int width, int height) {
-        int scale = mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale;
-        int factor = mc.displayHeight / this.height;
-        
-        GL11.glScissor(x * factor, (this.height - y - height) * factor, width * factor, height * factor);
     }
 
     @Override
     protected void keyTyped(char typedChar, int key) throws IOException {
-        textFieldSearchMod.textboxKeyTyped(typedChar, key);
+    	this.textFieldSearchMod.textboxKeyTyped(typedChar, key);
         
-        textFieldText = textFieldSearchMod.getText();
+        this.textFieldText = textFieldSearchMod.getText();
         
         this.initGui();
         
@@ -92,15 +72,13 @@ public class GuiMods extends GuiDropClientScreen {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         
-        textFieldSearchMod.mouseClicked(mouseX, mouseY, mouseButton);
+        this.textFieldSearchMod.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 0) {
             mc.displayGuiScreen(previousGuiScreen);
-            
-            return;
         }
 
         int id = button.id;
@@ -121,7 +99,7 @@ public class GuiMods extends GuiDropClientScreen {
             	return;
             }
             
-        	mc.displayGuiScreen(mod.getGui(this));
+            this.mc.displayGuiScreen(mod.getGui(this));
         }
     }
 
@@ -133,14 +111,14 @@ public class GuiMods extends GuiDropClientScreen {
 
         this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done")));
 
-        textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15 - 3, 120, 20);
-        textFieldSearchMod.setText(textFieldText);
-        textFieldSearchMod.setFocused(true);
+        this.textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15 - 3, 120, 20);
+        this.textFieldSearchMod.setText(textFieldText);
+        this.textFieldSearchMod.setFocused(true);
 
-        int drawn = 0;
         int totalHeight = 0;
 
         List<Mod> mods = ModInstances.getAllMods();
+        
         for (int i = 0; i < mods.size(); i++) {
             Mod mod = mods.get(i);
             
@@ -154,17 +132,15 @@ public class GuiMods extends GuiDropClientScreen {
 
             int buttonY = (this.height - 200) / 2 + 30 + totalHeight - scrollOffset;
 
-            if (buttonY >= (this.height - 200) / 2 + 30 && buttonY <= (this.height - 200) / 2 + 200 - 20) {
+            if (buttonY >= (this.height - 200) / 2 + 30 && buttonY + 15 <= (this.height - 200) / 2 + 200 - 20) {
                 this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
                 this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 20 - 15, buttonY - 2 + 15));
-
-                drawn++;
             }
 
             totalHeight += 15;
         }
 
-        maxScroll = Math.max(0, totalHeight - (200 - 50));
+        this.maxScroll = Math.max(0, totalHeight - (200 - 50));
     }
 
     @Override
