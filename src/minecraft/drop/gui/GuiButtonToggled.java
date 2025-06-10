@@ -37,11 +37,12 @@ public class GuiButtonToggled extends GuiButton {
             
             int textColor = new Color(255, 255, 255).getRGB();
             
-        	drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, this.hovered ? 50 : 100).getRGB());
         	
         	if (this.toggled) {
+            	drawRect(this.xPosition, this.yPosition, this.xPosition + this.width - 5, this.yPosition + this.height, new Color(0, 0, 0, this.hovered ? 50 : 100).getRGB());
             	drawRect(this.xPosition + this.width - 5, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 255, 0, this.hovered ? 110 : 100).getRGB());
         	} else {
+            	drawRect(this.xPosition + 5, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, this.hovered ? 50 : 100).getRGB());
             	drawRect(this.xPosition, this.yPosition, this.xPosition + 5, this.yPosition + this.height, new Color(255, 0, 0, this.hovered ? 110 : 100).getRGB());
         	}
         }
