@@ -1892,7 +1892,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         }
                         else
                         {
-                        	if (!Config.zoomMode || Config.zoomMode && !ModInstances.getZoomMod().isScrollToZoomToggled()) {
+                        	if (!ModInstances.getNoHotbarScrollingMod().isEnabled() && (!Config.zoomMode || Config.zoomMode && !ModInstances.getZoomMod().isScrollToZoomToggled())) {
                         		this.thePlayer.inventory.changeCurrentItem(j);
                         	}
                         }

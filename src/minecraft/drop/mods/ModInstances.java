@@ -9,6 +9,7 @@ import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.BPSDisplay;
 import drop.mods.impl.BlockOverlay;
 import drop.mods.impl.NoBobbing;
+import drop.mods.impl.NoHotbarScrolling;
 import drop.mods.impl.NoPumpkinOverlay;
 import drop.mods.impl.Bossbar;
 import drop.mods.impl.CPSDisplay;
@@ -71,6 +72,7 @@ public class ModInstances {
 	private static LeftHand leftHandMod = new LeftHand();
 	private static Zoom zoomMod = new Zoom();
 	private static NoPumpkinOverlay noPumpkinOverlayMod = new NoPumpkinOverlay();
+	private static NoHotbarScrolling noHotbarScrollingMod = new NoHotbarScrolling();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -221,6 +223,10 @@ public class ModInstances {
 		return noPumpkinOverlayMod;
 	}
 	
+	public static NoHotbarScrolling getNoHotbarScrollingMod() {
+		return noHotbarScrollingMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -242,6 +248,7 @@ public class ModInstances {
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
 			    getNoBobbingMod(),
+			    getNoHotbarScrollingMod(),
 			    getNoPumpkinOverlayMod(),
 			    getOldVisualsMod(),
 			    getPackDisplayMod(),
