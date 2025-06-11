@@ -6,6 +6,8 @@ import drop.mods.Mod;
 
 public class Nametags extends Mod {
 	private boolean showInThirdPerson = true;
+	private boolean textShadow = false;
+	private int backgroundOpacity = 64;
 	
 	public Nametags() {
 		super(false);
@@ -26,5 +28,25 @@ public class Nametags extends Mod {
 	
 	public boolean isShowInThirdPersonToggled() {
 		return showInThirdPerson;
+	}
+	
+	public void setTextShadow(boolean enabled) {
+		textShadow = enabled;
+		
+		setToFile("textShadow", enabled);
+	}
+	
+	public boolean isTextShadowToggled() {
+		return textShadow;
+	}
+	
+	public void setBackgroundOpacity(int opacity) {
+		backgroundOpacity = opacity;
+		
+		setToFile("backgroundOpacity", opacity);
+	}
+	
+	public int getBackgroundOpacity() {
+		return backgroundOpacity;
 	}
 }

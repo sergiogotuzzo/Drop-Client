@@ -25,6 +25,8 @@ import net.optifine.entity.model.IEntityRenderer;
 import net.optifine.shaders.Shaders;
 import org.lwjgl.opengl.GL11;
 
+import drop.mods.ModInstances;
+
 public abstract class Render<T extends Entity> implements IEntityRenderer
 {
     private static final ResourceLocation shadowTextures = new ResourceLocation("textures/misc/shadow.png");
@@ -394,13 +396,13 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             worldrenderer.pos((double)(-j - 1), (double)(-1 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             worldrenderer.pos((double)(-j - 1), (double)(8 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             worldrenderer.pos((double)(j + 1), (double)(8 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            worldrenderer.pos((double)(j + 1), (double)(-1 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+            worldrenderer.pos((double)(j + 1), (double)(-1 + i), 0.0D).color(0.0F, 0.0F, 0.0F, ModInstances.getNametagsMod().isEnabled() ? ModInstances.getNametagsMod().getBackgroundOpacity() / 255.0F : 0.25F).endVertex();
             tessellator.draw();
             GlStateManager.enableTexture2D();
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127);
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127, ModInstances.getNametagsMod().isEnabled() && ModInstances.getNametagsMod().isTextShadowToggled());
             GlStateManager.enableDepth();
             GlStateManager.depthMask(true);
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, -1);
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, -1, ModInstances.getNametagsMod().isEnabled() && ModInstances.getNametagsMod().isTextShadowToggled());
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
