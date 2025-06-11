@@ -8,7 +8,7 @@ import drop.mods.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.BPSDisplay;
 import drop.mods.impl.BlockOverlay;
-import drop.mods.impl.Bobbing;
+import drop.mods.impl.NoBobbing;
 import drop.mods.impl.Bossbar;
 import drop.mods.impl.CPSDisplay;
 import drop.mods.impl.Chat;
@@ -65,7 +65,7 @@ public class ModInstances {
 	private static TabOverlay tabOverlayMod = new TabOverlay();
 	private static Bossbar bossbarMod;
 	private static Nametags nametagsMod = new Nametags();
-	private static Bobbing bobbingMod = new Bobbing();
+	private static NoBobbing noBobbingMod = new NoBobbing();
 	private static HurtCam hurtCamMod = new HurtCam();
 	private static LeftHand leftHandMod = new LeftHand();
 	private static Zoom zoomMod = new Zoom();
@@ -199,8 +199,8 @@ public class ModInstances {
 		return nametagsMod;
 	}
 	
-	public static Bobbing getBobbingMod() {
-		return bobbingMod;
+	public static NoBobbing getNoBobbingMod() {
+		return noBobbingMod;
 	}
 	
 	public static HurtCam getHurtCamMod() {
@@ -219,7 +219,6 @@ public class ModInstances {
 		return Arrays.asList(
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
-			    getBobbingMod(),
 			    getBossbarMod(),
 			    getBPSDisplayMod(),
 			    getChatMod(),
@@ -236,6 +235,7 @@ public class ModInstances {
 			    getLeftHandMod(),
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
+			    getNoBobbingMod(),
 			    getOldVisualsMod(),
 			    getPackDisplayMod(),
 			    getPingDisplayMod(),

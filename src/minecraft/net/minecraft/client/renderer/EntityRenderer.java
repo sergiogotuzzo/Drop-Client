@@ -955,7 +955,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         this.hurtCameraEffect(partialTicks);
 
-        if (this.mc.gameSettings.viewBobbing && !(ModInstances.getBobbingMod().isEnabled() && ModInstances.getBobbingMod().isMinimalViewBobbingToggled()))
+        if (this.mc.gameSettings.viewBobbing && !ModInstances.getNoBobbingMod().isEnabled())
         {
             this.setupViewBobbing(partialTicks);
         }
