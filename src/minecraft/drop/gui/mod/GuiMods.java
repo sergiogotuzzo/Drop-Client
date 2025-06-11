@@ -134,7 +134,7 @@ public class GuiMods extends GuiDropClientScreen {
 
             if (buttonY >= (this.height - 200) / 2 + 30 && buttonY + 15 <= (this.height - 200) / 2 + 200 - 20) {
                 this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
-                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 20 - 15, buttonY - 2 + 15));
+                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 18 - 15, buttonY - 2 + 15));
             }
 
             totalHeight += 15;
