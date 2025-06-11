@@ -40,6 +40,7 @@ public class GuiTabOverlay extends GuiMod {
         		break;
         	case 3:
         		mod.setTextShadow(!mod.isTextShadowToggled());
+        		this.initGui();
         		break;
             case 4:
             	mod.setPingNumbers(!mod.isPingNumbersToggled());
