@@ -28,7 +28,7 @@ public class GuiMod extends GuiDropClientScreen {
     	
     	this.drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
-        this.drawScaledText(mod.getName(), (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, false, false);
+        this.drawScaledText(mod.getName(), (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -50,10 +50,18 @@ public class GuiMod extends GuiDropClientScreen {
     }
 	
 	protected void writeOptionText(String text, int line) {
-        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, false, false);
+        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+	}
+	
+	protected void writeOptionText(String text, int line, boolean chroma) {
+        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, chroma);
+	}
+	
+	protected void writeOptionText(String text, int line, int color) {
+        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), color, true, false);
 	}
 	
 	protected void writeOptionValue(String text, int line) {
-        this.drawText(text, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(text) - 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, false, false);
+        this.drawText(text, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(text) - 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
 	}
 }

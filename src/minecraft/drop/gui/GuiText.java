@@ -41,7 +41,7 @@ public class GuiText extends GuiButton {
         		textColor = 16777120;
         	}
         	
-        	mc.fontRendererObj.drawString(displayString, this.xPosition, this.yPosition, textColor);
+        	mc.fontRendererObj.drawStringWithShadow(displayString, this.xPosition, this.yPosition, textColor);
         }
     }
 }

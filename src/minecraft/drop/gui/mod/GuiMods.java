@@ -50,7 +50,7 @@ public class GuiMods extends GuiDropClientScreen {
     	
     	this.drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
         
-    	this.drawScaledText("Mods", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0, 0xFFFFFFFF, false, false);
+    	this.drawScaledText("Mods", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0, 0xFFFFFFFF, true, false);
 
     	this.textFieldSearchMod.drawTextBox();
 
