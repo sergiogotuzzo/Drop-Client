@@ -33,8 +33,8 @@ public class GuiSlider extends GuiButton {
 
             this.mouseDragged(mc, mouseX, mouseY);
             
-            drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, this.hovered ? 50 : 100).getRGB());
-        	drawRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 5)), this.yPosition, this.xPosition + (int)(this.sliderPosition * (float)(this.width - 5)) + 5, this.yPosition + this.height, new Color(255, 255, 255, this.hovered ? 110 : 100).getRGB());
+            drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, 100).getRGB());
+        	drawRect(this.xPosition + (int)(this.sliderPosition * (float)(this.width - 5)), this.yPosition, this.xPosition + (int)(this.sliderPosition * (float)(this.width - 5)) + 5, this.yPosition + this.height, new Color(255, 255, 255, this.hovered ? 150 : 100).getRGB());
         }
     }
 	
