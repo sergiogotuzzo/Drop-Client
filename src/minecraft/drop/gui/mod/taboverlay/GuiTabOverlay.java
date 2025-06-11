@@ -18,12 +18,12 @@ public class GuiTabOverlay extends GuiMod {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
-    	
-    	this.writeOptionText("Text Color", 1);
-        this.writeOptionText("Text Shadow", 2);
-        this.writeOptionText("Show Player Heads", 3);
-        this.writeOptionText("Hide Ping", 4);
-        this.writeOptionText("Ping Numbers", 5);
+
+        this.writeOptionText("Hide Ping", 1);
+    	this.writeOptionText("Ping Text Color", 2);
+        this.writeOptionText("Ping Text Shadow", 3);
+        this.writeOptionText("Ping Numbers", 4);
+        this.writeOptionText("Show Player Heads", 5);
     }
 
     @Override
@@ -31,22 +31,22 @@ public class GuiTabOverlay extends GuiMod {
     	super.actionPerformed(button);
     	
         switch (button.id) {
-        	case 1:
+	        case 1:
+	        	mod.setHidePing(!mod.isHidePingToggled());
+	        	this.initGui();
+	        	break;
+        	case 2:
         		mc.displayGuiScreen(new GuiTabOverlayTextColor(this));
         		break;
-        	case 2:
+        	case 3:
         		mod.setTextShadow(!mod.isTextShadowToggled());
         		break;
-            case 3:
-            	mod.setShowPlayerHeads(!mod.isShowPlayerHeadsToggled());
-            	this.initGui();
-            	break;
             case 4:
-            	mod.setHidePing(!mod.isHidePingToggled());
+            	mod.setPingNumbers(!mod.isPingNumbersToggled());
             	this.initGui();
             	break;
             case 5:
-            	mod.setPingNumbers(!mod.isPingNumbersToggled());
+            	mod.setShowPlayerHeads(!mod.isShowPlayerHeadsToggled());
             	this.initGui();
             	break;
         }
@@ -55,11 +55,11 @@ public class GuiTabOverlay extends GuiMod {
 	@Override
     public void initGui() {
 		super.initGui();
-        
-		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
-    	this.buttonList.add(this.createGuiCheckBox(3, mod.isShowPlayerHeadsToggled(), 3));
-    	this.buttonList.add(this.createGuiCheckBox(4, mod.isHidePingToggled(), 4));
-    	this.buttonList.add(this.createGuiCheckBox(5, mod.isPingNumbersToggled(), 5));
+
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isHidePingToggled(), 1));
+		this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
+		this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
+    	this.buttonList.add(this.createGuiCheckBox(4, mod.isPingNumbersToggled(), 4));
+    	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowPlayerHeadsToggled(), 5));
     }
 }
