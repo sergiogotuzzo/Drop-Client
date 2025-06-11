@@ -1360,6 +1360,10 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                     if (flag2)
                     {
+                    	if (ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isAlwaysSharpnessToggled()) {
+                    		this.onEnchantmentCritical(targetEntity);
+                    	}
+                    	
                         if (i > 0)
                         {
                             targetEntity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F));
@@ -1379,12 +1383,14 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                         if (flag)
                         {
-                            this.onCriticalHit(targetEntity);
+                            if (!ModInstances.getParticlesMod().isEnabled() || ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isShowCriticalsToggled()) {
+                            	this.onCriticalHit(targetEntity);
+                            }
                         }
 
                         if (f1 > 0.0F)
                         {
-                            this.onEnchantmentCritical(targetEntity);
+                        	this.onEnchantmentCritical(targetEntity);
                         }
 
                         if (f >= 18.0F)

@@ -28,6 +28,7 @@ import drop.mods.impl.MemoryUsage;
 import drop.mods.impl.Nametags;
 import drop.mods.impl.OldVisuals;
 import drop.mods.impl.PackDisplay;
+import drop.mods.impl.Particles;
 import drop.mods.impl.PingDisplay;
 import drop.mods.impl.PotionEffects;
 import drop.mods.impl.PotsCounter;
@@ -73,6 +74,7 @@ public class ModInstances {
 	private static Zoom zoomMod = new Zoom();
 	private static NoPumpkinOverlay noPumpkinOverlayMod = new NoPumpkinOverlay();
 	private static NoHotbarScrolling noHotbarScrollingMod = new NoHotbarScrolling();
+	private static Particles particlesMod = new Particles();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -227,6 +229,10 @@ public class ModInstances {
 		return noHotbarScrollingMod;
 	}
 	
+	public static Particles getParticlesMod() {
+		return particlesMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -252,6 +258,7 @@ public class ModInstances {
 			    getNoPumpkinOverlayMod(),
 			    getOldVisualsMod(),
 			    getPackDisplayMod(),
+			    getParticlesMod(),
 			    getPingDisplayMod(),
 			    getPotionEffectsMod(),
 			    getPotsCounterMod(),
