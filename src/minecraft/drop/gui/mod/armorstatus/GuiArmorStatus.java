@@ -68,11 +68,11 @@ public class GuiArmorStatus extends GuiMod {
 		super.initGui();
 
 		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowPercentageToggled(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowDamageToggled(), 4));
-		this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowMaxDamageToggled(), 5));
-		this.buttonList.add(this.createGuiButtonToggled(6, mod.isEquippedItemToggled(), 6));
-		this.buttonList.add(this.createGuiButtonToggled(7, mod.isDamageOverlaysToggled(), 7));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiCheckBox(3, mod.isShowPercentageToggled(), 3));
+		this.buttonList.add(this.createGuiCheckBox(4, mod.isShowDamageToggled(), 4));
+		this.buttonList.add(this.createGuiCheckBox(5, mod.isShowMaxDamageToggled(), 5));
+		this.buttonList.add(this.createGuiCheckBox(6, mod.isEquippedItemToggled(), 6));
+		this.buttonList.add(this.createGuiCheckBox(7, mod.isDamageOverlaysToggled(), 7));
     }
 }

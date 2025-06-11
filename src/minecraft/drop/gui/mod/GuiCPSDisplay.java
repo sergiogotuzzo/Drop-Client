@@ -36,6 +36,6 @@ public class GuiCPSDisplay extends GuiModDraggableDisplayText {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowRightCPSToggled(), 5));
+    	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowRightCPSToggled(), 5));
     }
 }

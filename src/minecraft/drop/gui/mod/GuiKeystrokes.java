@@ -71,12 +71,12 @@ public class GuiKeystrokes extends GuiMod {
 		super.initGui();
 
         this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
+    	this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
         this.buttonList.add(this.createGuiRect(3, mod.getPressedTextColor().getRGB(), 3));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isPressedTextShadowToggled(), 4));
-    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowMouseToggled(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowSpacebarToggled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowMovementKeysToggled(), 7));
-    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isUseArrowsToggled(), 8));
+    	this.buttonList.add(this.createGuiCheckBox(4, mod.isPressedTextShadowToggled(), 4));
+    	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowMouseToggled(), 5));
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowSpacebarToggled(), 6));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowMovementKeysToggled(), 7));
+    	this.buttonList.add(this.createGuiCheckBox(8, mod.isUseArrowsToggled(), 8));
     }
 }

@@ -47,8 +47,8 @@ public class GuiFreelook extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiButtonToggled(1, mod.isHoldToggled(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isInvertYawToggled(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isInvertPitchToggled(), 3));
+		this.buttonList.add(this.createGuiCheckBox(1, mod.isHoldToggled(), 1));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isInvertYawToggled(), 2));
+		this.buttonList.add(this.createGuiCheckBox(3, mod.isInvertPitchToggled(), 3));
     }
 }

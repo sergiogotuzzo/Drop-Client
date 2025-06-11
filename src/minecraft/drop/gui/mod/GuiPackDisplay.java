@@ -71,12 +71,12 @@ public class GuiPackDisplay extends GuiMod {
 		super.initGui();
         
         this.buttonList.add(this.createGuiRect(1, mod.getNameTextColor().getRGB(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isNameTextShadowToggled(), 2));
-    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowDescriptionToggled(), 3));
+    	this.buttonList.add(this.createGuiCheckBox(2, mod.isNameTextShadowToggled(), 2));
+    	this.buttonList.add(this.createGuiCheckBox(3, mod.isShowDescriptionToggled(), 3));
         this.buttonList.add(this.createGuiRect(4, mod.getDescriptionTextColor().getRGB(), 4));
-        this.buttonList.add(this.createGuiButtonToggled(5, mod.isDescriptionTextShadowToggled(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowBackgroundToggled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isShowIconToggled(), 7));
-    	this.buttonList.add(this.createGuiButtonToggled(8, mod.isShowAllSelectedPacksToggled(), 8));
+        this.buttonList.add(this.createGuiCheckBox(5, mod.isDescriptionTextShadowToggled(), 5));
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowBackgroundToggled(), 6));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowIconToggled(), 7));
+    	this.buttonList.add(this.createGuiCheckBox(8, mod.isShowAllSelectedPacksToggled(), 8));
     }
 }

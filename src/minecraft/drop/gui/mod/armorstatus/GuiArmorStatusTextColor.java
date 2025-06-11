@@ -35,6 +35,6 @@ public class GuiArmorStatusTextColor extends GuiModColor {
 		super.initGui();
 		
 		this.buttonList.add(this.createGuiText(6, "Dynamic Colors", false, 9));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isDynamicColorsToggled(), 9));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isDynamicColorsToggled(), 9));
     }
 }

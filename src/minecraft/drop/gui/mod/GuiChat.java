@@ -56,8 +56,8 @@ public class GuiChat extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiButtonToggled(1, mod.isChatHeightFixToggled(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiCheckBox(1, mod.isChatHeightFixToggled(), 1));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
 		this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 127.0F, mod.getBackgroundOpacity(), 4));
     }
 }

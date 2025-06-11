@@ -80,14 +80,14 @@ public class GuiArmorStatusDynamicColors extends GuiMod {
 		super.initGui();
 
 		this.buttonList.add(this.createGuiRect(1, mod.getVeryHighTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isVeryHighTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isVeryHighTextShadowToggled(), 2));
 		this.buttonList.add(this.createGuiRect(3, mod.getHighTextColor().getRGB(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isHighTextShadowToggled(), 4));
+		this.buttonList.add(this.createGuiCheckBox(4, mod.isHighTextShadowToggled(), 4));
 		this.buttonList.add(this.createGuiRect(5, mod.getMediumTextColor().getRGB(), 5));
-		this.buttonList.add(this.createGuiButtonToggled(6, mod.isMediumTextShadowToggled(), 6));
+		this.buttonList.add(this.createGuiCheckBox(6, mod.isMediumTextShadowToggled(), 6));
 		this.buttonList.add(this.createGuiRect(7, mod.getLowTextColor().getRGB(), 7));
-		this.buttonList.add(this.createGuiButtonToggled(8, mod.isLowTextShadowToggled(), 8));
+		this.buttonList.add(this.createGuiCheckBox(8, mod.isLowTextShadowToggled(), 8));
 		this.buttonList.add(this.createGuiRect(9, mod.getVeryLowTextColor().getRGB(), 9));
-		this.buttonList.add(this.createGuiButtonToggled(10, mod.isVeryLowTextShadowToggled(), 10));
+		this.buttonList.add(this.createGuiCheckBox(10, mod.isVeryLowTextShadowToggled(), 10));
     }
 }

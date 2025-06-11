@@ -66,11 +66,11 @@ public class GuiPotionEffects extends GuiMod {
 		super.initGui();
         
         this.buttonList.add(this.createGuiRect(1, mod.getDurationTextColor().getRGB(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isDurationTextShadowToggled(), 2));
-    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowNameToggled(), 3));
+    	this.buttonList.add(this.createGuiCheckBox(2, mod.isDurationTextShadowToggled(), 2));
+    	this.buttonList.add(this.createGuiCheckBox(3, mod.isShowNameToggled(), 3));
         this.buttonList.add(this.createGuiRect(4, mod.getNameTextColor().getRGB(), 4));
-    	this.buttonList.add(this.createGuiButtonToggled(5, mod.isNameTextShadowToggled(), 5));
-    	this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowIconToggled(), 6));
-    	this.buttonList.add(this.createGuiButtonToggled(7, mod.isBlinkToggled(), 7));
+    	this.buttonList.add(this.createGuiCheckBox(5, mod.isNameTextShadowToggled(), 5));
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowIconToggled(), 6));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isBlinkToggled(), 7));
     }
 }

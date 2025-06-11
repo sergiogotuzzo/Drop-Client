@@ -113,6 +113,6 @@ public class GuiModColor extends GuiMod {
         	this.buttonList.add(sliderAlpha = this.createGuiSlider(4, 255.0F, color.getAlpha(), 9));
     	}
     	
-    	this.buttonList.add(this.createGuiButtonToggled(5, color.isChromaToggled(), showAlphaSlider ? 10 : 8));
+    	this.buttonList.add(this.createGuiCheckBox(5, color.isChromaToggled(), showAlphaSlider ? 10 : 8));
     }
 }

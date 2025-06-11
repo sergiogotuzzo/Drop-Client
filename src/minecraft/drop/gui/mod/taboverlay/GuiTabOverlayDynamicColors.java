@@ -80,14 +80,14 @@ public class GuiTabOverlayDynamicColors extends GuiMod {
 		super.initGui();
 
 		this.buttonList.add(this.createGuiRect(1, mod.getExcellentTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isExcellentTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isExcellentTextShadowToggled(), 2));
 		this.buttonList.add(this.createGuiRect(3, mod.getGoodTextColor().getRGB(), 3));
-		this.buttonList.add(this.createGuiButtonToggled(4, mod.isGoodTextShadowToggled(), 4));
+		this.buttonList.add(this.createGuiCheckBox(4, mod.isGoodTextShadowToggled(), 4));
 		this.buttonList.add(this.createGuiRect(5, mod.getModerateTextColor().getRGB(), 5));
-		this.buttonList.add(this.createGuiButtonToggled(6, mod.isModerateTextShadowToggled(), 6));
+		this.buttonList.add(this.createGuiCheckBox(6, mod.isModerateTextShadowToggled(), 6));
 		this.buttonList.add(this.createGuiRect(7, mod.getWeakTextColor().getRGB(), 7));
-		this.buttonList.add(this.createGuiButtonToggled(8, mod.isWeakTextShadowToggled(), 8));
+		this.buttonList.add(this.createGuiCheckBox(8, mod.isWeakTextShadowToggled(), 8));
 		this.buttonList.add(this.createGuiRect(9, mod.getUnstableTextColor().getRGB(), 9));
-		this.buttonList.add(this.createGuiButtonToggled(10, mod.isUnstableTextShadowToggled(), 10));
+		this.buttonList.add(this.createGuiCheckBox(10, mod.isUnstableTextShadowToggled(), 10));
     }
 }

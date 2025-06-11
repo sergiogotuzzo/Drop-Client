@@ -71,10 +71,10 @@ public class GuiBlockOverlay extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isOutlineToggled(), 1));
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isOutlineToggled(), 1));
         this.buttonList.add(this.createGuiRect(2, mod.getOutlineColor().getRGB(), 2));
     	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 5.0F, mod.getOutlineWidth(), 4));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isOverlayToggled(), 5));
+    	this.buttonList.add(this.createGuiCheckBox(4, mod.isOverlayToggled(), 5));
     	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), 6));
     }
 }

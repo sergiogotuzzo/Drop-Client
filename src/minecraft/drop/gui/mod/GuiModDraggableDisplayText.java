@@ -55,8 +55,8 @@ public class GuiModDraggableDisplayText extends GuiMod {
 		super.initGui();
 		
 		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
-		this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundToggled(), 3));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
+		this.buttonList.add(this.createGuiCheckBox(3, mod.isShowBackgroundToggled(), 3));
 		this.buttonList.add(this.createGuiText(4, mod.getBrackets().getName(), true, 4));
     }
 }

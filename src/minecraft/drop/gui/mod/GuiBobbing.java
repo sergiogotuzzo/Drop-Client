@@ -35,6 +35,6 @@ public class GuiBobbing extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isMinimalViewBobbingToggled(), 1));
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isMinimalViewBobbingToggled(), 1));
     }
 }

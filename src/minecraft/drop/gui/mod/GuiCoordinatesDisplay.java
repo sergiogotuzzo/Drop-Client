@@ -62,10 +62,10 @@ public class GuiCoordinatesDisplay extends GuiMod {
 		super.initGui();
         
         this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-        this.buttonList.add(this.createGuiButtonToggled(2, mod.isTextShadowToggled(), 2));
-        this.buttonList.add(this.createGuiButtonToggled(3, mod.isShowBackgroundToggled(), 3));
-        this.buttonList.add(this.createGuiButtonToggled(4, mod.isShowBiomeToggled(), 4));
-        this.buttonList.add(this.createGuiButtonToggled(5, mod.isShowFacingToggled(), 5));
-        this.buttonList.add(this.createGuiButtonToggled(6, mod.isShowFacingTowardsToggled(), 6));
+        this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
+        this.buttonList.add(this.createGuiCheckBox(3, mod.isShowBackgroundToggled(), 3));
+        this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBiomeToggled(), 4));
+        this.buttonList.add(this.createGuiCheckBox(5, mod.isShowFacingToggled(), 5));
+        this.buttonList.add(this.createGuiCheckBox(6, mod.isShowFacingTowardsToggled(), 6));
     }
 }

@@ -37,6 +37,6 @@ public class GuiNametags extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isShowInThirdPersonToggled(), 1));
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isShowInThirdPersonToggled(), 1));
     }
 }

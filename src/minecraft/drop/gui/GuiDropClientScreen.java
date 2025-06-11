@@ -42,7 +42,7 @@ public abstract class GuiDropClientScreen extends GuiScreen {
 	            long t = System.currentTimeMillis() - (textCharX * 10 - y * 10);
 	            int c = Color.HSBtoRGB(t % (int) 2000.0F / 2000.0F, 0.8F, 0.8F);
 	            
-	            if (text.startsWith("§m")) {
+	            if (text.startsWith("ï¿½m")) {
 	            	drawText(text, x, y, c, textShadow, false);
 	            } else {
 		            drawText(String.valueOf(textChar), textCharX, y, c, textShadow, false);
@@ -66,8 +66,8 @@ public abstract class GuiDropClientScreen extends GuiScreen {
 		GlStateManager.popMatrix();
 	}
 	
-	protected GuiButtonToggled createGuiButtonToggled(int id, boolean toggled, int line) {
-    	return new GuiButtonToggled(id, toggled, (this.width + 300) / 2 - 20 - 15, (this.height - 200) / 2 + 30 + 15 - 2 + 15 * (line - 1));
+	protected GuiCheckBox createGuiCheckBox(int id, boolean toggled, int line) {
+    	return new GuiCheckBox(id, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), toggled);
 	}
 	
 	protected GuiRect createGuiRect(int id, int color, int line) {

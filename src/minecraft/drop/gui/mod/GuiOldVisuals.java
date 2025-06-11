@@ -56,10 +56,10 @@ public class GuiOldVisuals extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiButtonToggled(1, mod.isFishingRodToggled(), 1));
-    	this.buttonList.add(this.createGuiButtonToggled(2, mod.isBowToggled(), 2));
-    	this.buttonList.add(this.createGuiButtonToggled(3, mod.isBlockHittingToggled(), 3));
-    	this.buttonList.add(this.createGuiButtonToggled(4, mod.isArmorHitAnimationToggled(), 4));
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isFishingRodToggled(), 1));
+    	this.buttonList.add(this.createGuiCheckBox(2, mod.isBowToggled(), 2));
+    	this.buttonList.add(this.createGuiCheckBox(3, mod.isBlockHittingToggled(), 3));
+    	this.buttonList.add(this.createGuiCheckBox(4, mod.isArmorHitAnimationToggled(), 4));
         this.buttonList.add(this.createGuiRect(5, mod.getHitArmorColor().getRGB(), 5));
     }
 }
