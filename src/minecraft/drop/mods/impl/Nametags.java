@@ -13,6 +13,8 @@ public class Nametags extends Mod {
 		super(false);
 		
 		setShowInThirdPerson(getBooleanFromFile("showInThirdPerson", showInThirdPerson));
+		setTextShadow(getBooleanFromFile("textShadow", textShadow));
+		setBackgroundOpacity(getIntFromFile("backgroundOpacity", backgroundOpacity));
 	}
 	
 	@Override
