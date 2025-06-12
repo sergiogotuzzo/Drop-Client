@@ -26,6 +26,7 @@ import drop.mods.impl.Keystrokes;
 import drop.mods.impl.LeftHand;
 import drop.mods.impl.MemoryUsage;
 import drop.mods.impl.Nametags;
+import drop.mods.impl.NoAchievementNotifications;
 import drop.mods.impl.OldVisuals;
 import drop.mods.impl.PackDisplay;
 import drop.mods.impl.Particles;
@@ -75,6 +76,7 @@ public class ModInstances {
 	private static NoPumpkinOverlay noPumpkinOverlayMod = new NoPumpkinOverlay();
 	private static NoHotbarScrolling noHotbarScrollingMod = new NoHotbarScrolling();
 	private static Particles particlesMod = new Particles();
+	private static NoAchievementNotifications noAchievementNotificationsMod = new NoAchievementNotifications();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -233,6 +235,10 @@ public class ModInstances {
 		return particlesMod;
 	}
 	
+	public static NoAchievementNotifications getNoAchievementNotificationsMod() {
+		return noAchievementNotificationsMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -253,6 +259,7 @@ public class ModInstances {
 			    getLeftHandMod(),
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
+			    getNoAchievementNotificationsMod(),
 			    getNoBobbingMod(),
 			    getNoHotbarScrollingMod(),
 			    getNoPumpkinOverlayMod(),
