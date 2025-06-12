@@ -10,7 +10,7 @@ import drop.mods.Mod;
 
 public class Chat extends Mod {
 	private boolean chatHeightFix = true;
-	private boolean textShadow = true;
+	private boolean textShadow = false;
 	private boolean compactChat = true;
 	private int backgroundOpacity = 127;
 	
