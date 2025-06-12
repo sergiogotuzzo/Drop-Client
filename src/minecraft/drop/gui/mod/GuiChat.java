@@ -30,7 +30,7 @@ public class GuiChat extends GuiMod {
     
     @Override
     public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 127.0F));
+    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 255.0F));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class GuiChat extends GuiMod {
             	this.initGui();
             	break;
             case 3:
-            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 127.0F));
+            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 255.0F));
             	break;
         }
     }
@@ -58,6 +58,6 @@ public class GuiChat extends GuiMod {
 		
 		this.buttonList.add(this.createGuiCheckBox(1, mod.isChatHeightFixToggled(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
-		this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 127.0F, mod.getBackgroundOpacity(), 4));
+		this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 255.0F, mod.getBackgroundOpacity(), 4));
     }
 }
