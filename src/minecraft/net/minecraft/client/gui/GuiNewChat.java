@@ -1,6 +1,7 @@
  package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+import com.mojang.realmsclient.gui.ChatFormatting;
 
 import drop.ColorManager;
 
@@ -140,10 +141,33 @@ public class GuiNewChat extends Gui
         this.chatLines.clear();
         this.sentMessages.clear();
     }
-
+    
+	private String lastMessage = "";
+	private int sameMessageAmount = 0;
+	private int line = 0;
+    
     public void printChatMessage(IChatComponent chatComponent)
     {
-        this.printChatMessageWithOptionalDeletion(chatComponent, 0);
+    	if (chatComponent.getUnformattedText().equals(lastMessage)) {    		
+    		sameMessageAmount++;
+    		lastMessage = chatComponent.getUnformattedText();
+    		
+    		if (ModInstances.getChatMod().isEnabled() && ModInstances.getChatMod().isCompactChatToggled()) {
+    			mc.ingameGUI.getChatGUI().deleteChatLine(line);
+        		chatComponent.appendText(ChatFormatting.RED + " (" + sameMessageAmount + "x)");
+    		}
+    	} else {
+    		sameMessageAmount = 1;
+    		lastMessage = chatComponent.getUnformattedText();
+    	}
+    	
+    	line++;
+ 
+    	if (line > 256) {
+    		line = 0;
+    	}
+    	
+        this.printChatMessageWithOptionalDeletion(chatComponent, line);
     }
 
     /**

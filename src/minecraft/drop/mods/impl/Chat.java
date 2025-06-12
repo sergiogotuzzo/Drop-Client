@@ -11,12 +11,14 @@ import drop.mods.Mod;
 public class Chat extends Mod {
 	private boolean chatHeightFix = true;
 	private boolean textShadow = true;
+	private boolean compactChat = true;
 	private int backgroundOpacity = 127;
 	
 	public Chat() {
 		super(true);
 		
 		setChatHeightFix(getBooleanFromFile("chatHeightFix", chatHeightFix));
+		setCompactChat(getBooleanFromFile("compactChat", compactChat));
 		setTextShadow(getBooleanFromFile("textShadow", textShadow));
 		setBackgroundOpacity(getIntFromFile("backgroundOpacity", backgroundOpacity));
 	}
@@ -34,6 +36,16 @@ public class Chat extends Mod {
 	
 	public boolean isChatHeightFixToggled() {
 		return chatHeightFix;
+	}
+	
+	public void setCompactChat(boolean toggled) {
+		compactChat = toggled;
+		
+		setToFile("compactChat", toggled);
+	}
+	
+	public boolean isCompactChatToggled() {
+		return compactChat;
 	}
 	
 	public void setTextShadow(boolean enabled) {
