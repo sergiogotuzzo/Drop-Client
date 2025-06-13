@@ -21,20 +21,20 @@ public class Scoreboard extends Mod {
 		return new GuiScoreboard(previousGuiScreen);
 	}
 	
-	public void setHideNumbers(boolean enabled) {
-		hideNumbers = enabled;
+	public void setHideNumbers(boolean toggled) {
+		hideNumbers = toggled;
 		
-		setToFile("hideNumbers", enabled);
+		setToFile("hideNumbers", toggled);
 	}
 	
 	public boolean isHideNumbersToggled() {
 		return hideNumbers;
 	}
 	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
+	public void setTextShadow(boolean toggled) {
+		textShadow = toggled;
 		
-		setToFile("textShadow", enabled);
+		setToFile("textShadow", toggled);
 	}
 	
 	public boolean isTextShadowToggled() {

@@ -23,10 +23,8 @@ public class Freelook extends Mod {
 	}
 	
 	private boolean perspectiveToggled = false;
-	
 	private float cameraYaw = 0F;
 	private float cameraPitch = 0F;
-	
 	private int previousPerspective = 0;
 	
 	@Override
@@ -97,30 +95,30 @@ public class Freelook extends Mod {
 		return false;
 	}
 	
-	public void setHold(boolean enabled) {
-		this.hold = enabled;
+	public void setHold(boolean toggled) {
+		hold = toggled;
 		
-		setToFile("hold", enabled);
+		setToFile("hold", toggled);
 	}
 	
 	public boolean isHoldToggled() {
 		return hold;
 	}
 	
-	public void setInvertYaw(boolean enabled) {
-		this.invertYaw = enabled;
+	public void setInvertYaw(boolean toggled) {
+		invertYaw = toggled;
 		
-		setToFile("invertYaw", enabled);
+		setToFile("invertYaw", toggled);
 	}
 	
 	public boolean isInvertYawToggled() {
 		return invertYaw;
 	}
 	
-	public void setInvertPitch(boolean enabled) {
-		this.invertPitch = enabled;
+	public void setInvertPitch(boolean toggled) {
+		invertPitch = toggled;
 		
-		setToFile("invertPitch", enabled);
+		setToFile("invertPitch", toggled);
 	}
 	
 	public boolean isInvertPitchToggled() {

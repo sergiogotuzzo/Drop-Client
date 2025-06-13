@@ -26,9 +26,8 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	}
 	
 	public int keyHoldTicks = 7;
-	private boolean sprinting = false;
-	private boolean sneaking = false;
-	
+	public boolean sprinting = false;
+	public boolean sneaking = false;
 	private String textToRender = "";
 	
 	@Override
@@ -73,60 +72,40 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
     	}
 	}
 	
-	public void setSprinting(boolean sprinting) {
-		this.sprinting = sprinting;
-	}
-	
-	public boolean isSprinting() {
-		return sprinting;
-	}
-	
-	public void setSneaking(boolean sneaking) {
-		this.sneaking = sneaking;
-	}
-	
-	public boolean isSneaking() {
-		return sneaking;
-	}
-	
 	public void setShowText(boolean toggled) {
 		showText = toggled;
 		
 		setToFile("showText", toggled);
 	}
 	
-	public void toggleShowText() {
-		setShowText(!showText);
-	}
-	
 	public boolean isShowTextToggled() {
 		return showText;
 	}
 	
-	public void setToggleSprint(boolean enabled) {
-		toggleSprint = enabled;
+	public void setToggleSprint(boolean toggled) {
+		toggleSprint = toggled;
 		
-		setToFile("toggleSprint", enabled);
+		setToFile("toggleSprint", toggled);
 	}
 	
 	public boolean isToggleSprintToggled() {
 		return toggleSprint;
 	}
 	
-	public void setToggleSneak(boolean enabled) {
-		toggleSneak = enabled;
+	public void setToggleSneak(boolean toggled) {
+		toggleSneak = toggled;
 		
-		setToFile("toggleSneak", enabled);
+		setToFile("toggleSneak", toggled);
 	}
 	
 	public boolean isToggleSneakToggled() {
 		return toggleSneak;
 	}
 	
-	public void setFlyBoost(boolean enabled) {
-		flyBoost = enabled;
+	public void setFlyBoost(boolean toggled) {
+		flyBoost = toggled;
 		
-		setToFile("flyBoost", enabled);
+		setToFile("flyBoost", toggled);
 	}
 	
 	public boolean isFlyBoostToggled() {

@@ -1,7 +1,5 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import net.minecraft.entity.Entity;
 import drop.mods.ModDraggableDisplayText;
@@ -13,11 +11,6 @@ public class ReachDisplay extends ModDraggableDisplayText {
 	
 	float range = 0.0F;
 	private long lastHit;
-
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableDisplayText(previousGuiScreen, this);
-	}
 	
 	@Override
 	public int getWidth() {

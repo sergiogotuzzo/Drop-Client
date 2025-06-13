@@ -1,11 +1,5 @@
 package drop.mods.impl;
 
-import java.awt.Color;
-
-import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableDisplayText;
-import drop.gui.mod.GuiToggleSprintSneak;
 import drop.mods.hud.ScreenPosition;
 import net.minecraft.client.multiplayer.ServerData;
 import drop.mods.ModDraggableDisplayText;
@@ -16,11 +10,6 @@ public class ServerAddress extends ModDraggableDisplayText {
 	}
 	
 	private ServerData dummyServerData = new ServerData("Example", "mc.example.org", false);
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableDisplayText(previousGuiScreen, this);
-	}
 
 	@Override
 	public int getWidth() {

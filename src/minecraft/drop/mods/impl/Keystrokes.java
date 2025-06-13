@@ -229,20 +229,20 @@ public class Keystrokes extends ModDraggableText {
 		return pressedTextColor;
 	}
 	
-	public void setPressedTextShadow(boolean enabled) {
-		pressedTextShadow = enabled;
+	public void setPressedTextShadow(boolean toggled) {
+		pressedTextShadow = toggled;
 		
-		setToFile("pressedTextShadow", enabled);
+		setToFile("pressedTextShadow", toggled);
 	}
 	
 	public boolean isPressedTextShadowToggled() {
 		return pressedTextShadow;
 	}
 	
-	public void setShowMovementKeys(boolean enabled) {
-		showMovementKeys = enabled;
+	public void setShowMovementKeys(boolean toggled) {
+		showMovementKeys = toggled;
 		
-		setToFile("showMovementKeys", enabled);
+		setToFile("showMovementKeys", toggled);
 		
 		updateMode();
 	}
@@ -251,10 +251,10 @@ public class Keystrokes extends ModDraggableText {
 		return showMovementKeys;
 	}
 	
-	public void setShowMouse(boolean enabled) {
-		showMouse = enabled;
+	public void setShowMouse(boolean toggled) {
+		showMouse = toggled;
 		
-		setToFile("showMouse", enabled);
+		setToFile("showMouse", toggled);
 		
 		updateMode();
 	}
@@ -263,10 +263,10 @@ public class Keystrokes extends ModDraggableText {
 		return showMouse;
 	}
 	
-	public void setShowSpacebar(boolean enabled) {
-		showSpacebar = enabled;
+	public void setShowSpacebar(boolean toggled) {
+		showSpacebar = toggled;
 		
-		setToFile("showSpacebar", enabled);
+		setToFile("showSpacebar", toggled);
 		
 		updateMode();
 	}
@@ -275,20 +275,20 @@ public class Keystrokes extends ModDraggableText {
 		return showSpacebar;
 	}
 	
-	public void setUseArrows(boolean enabled) {
-		useArrows = enabled;
+	public void setUseArrows(boolean toggled) {
+		useArrows = toggled;
 		
-		setToFile("useArrows", enabled);
+		setToFile("useArrows", toggled);
 	}
 	
 	public boolean isUseArrowsToggled() {
 		return useArrows;
 	}
 	
-	public void setPressedTextChroma(boolean enabled) {
-		pressedTextColor.setChromaToggled(enabled);
+	public void setPressedTextChroma(boolean toggled) {
+		pressedTextColor.setChromaToggled(toggled);
 		
-		setToFile("pressedTextChroma", enabled);
+		setToFile("pressedTextChroma", toggled);
 	}
 	
 	public boolean isPressedTextChromaToggled() {

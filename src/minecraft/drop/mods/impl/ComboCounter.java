@@ -1,7 +1,5 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.play.server.S19PacketEntityStatus;
@@ -15,11 +13,6 @@ public class ComboCounter extends ModDraggableDisplayText {
 	private boolean attacked = false;
 	private int combo = 0;
 	private long lastCombo;
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableDisplayText(previousGuiScreen, this);
-	}
 	
 	@Override
 	public int getWidth() {
@@ -38,7 +31,7 @@ public class ComboCounter extends ModDraggableDisplayText {
 		}
 		
 		if (mc.thePlayer.hurtTime > 3 || System.currentTimeMillis() - lastCombo >= 5000) {
-			this.combo = 0;
+			combo = 0;
 		}
 		
 		String text = combo + " combo";
@@ -46,15 +39,15 @@ public class ComboCounter extends ModDraggableDisplayText {
 		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
 	}
 	
-	public void onAttack(Entity entity) {
-		this.attacked = true;
+	public void onAttack() {
+		attacked = true;
 	}
 	
 	public void onEntityHit(S19PacketEntityStatus event) {
-		if (this.attacked && event.getOpCode() == 2) {
-			this.combo++;
-			this.lastCombo = System.currentTimeMillis();
-			this.attacked = false;
+		if (attacked && event.getOpCode() == 2) {
+			combo++;
+			lastCombo = System.currentTimeMillis();
+			attacked = false;
 		}
 	}
 }

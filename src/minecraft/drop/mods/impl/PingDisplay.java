@@ -131,20 +131,20 @@ public class PingDisplay extends ModDraggableDisplayText {
 		return excellentTextColor;
 	}
 	
-	public void setExcellentTextChroma(boolean enabled) {
-		excellentTextColor.setChromaToggled(enabled);
+	public void setExcellentTextChroma(boolean toggled) {
+		excellentTextColor.setChromaToggled(toggled);
 		
-		setToFile("excellentTextChroma", enabled);
+		setToFile("excellentTextChroma", toggled);
 	}
 	
 	public boolean isExcellentTextChromaToggled() {
 		return excellentTextColor.isChromaToggled();
 	}
 	
-	public void setExcellentTextShadow(boolean enabled) {
-		excellentTextShadow = enabled;
+	public void setExcellentTextShadow(boolean toggled) {
+		excellentTextShadow = toggled;
 		
-		setToFile("excellentTextShadow", enabled);
+		setToFile("excellentTextShadow", toggled);
 	}
 	
 	public boolean isExcellentTextShadowToggled() {
@@ -161,20 +161,20 @@ public class PingDisplay extends ModDraggableDisplayText {
 		return goodTextColor;
 	}
 	
-	public void setGoodTextChroma(boolean enabled) {
-		goodTextColor.setChromaToggled(enabled);
+	public void setGoodTextChroma(boolean toggled) {
+		goodTextColor.setChromaToggled(toggled);
 		
-		setToFile("goodTextChroma", enabled);
+		setToFile("goodTextChroma", toggled);
 	}
 	
 	public boolean isGoodTextChromaToggled() {
 		return goodTextColor.isChromaToggled();
 	}
 	
-	public void setGoodTextShadow(boolean enabled) {
-		goodTextShadow = enabled;
+	public void setGoodTextShadow(boolean toggled) {
+		goodTextShadow = toggled;
 		
-		setToFile("goodTextShadow", enabled);
+		setToFile("goodTextShadow", toggled);
 	}
 	
 	public boolean isGoodTextShadowToggled() {
@@ -191,20 +191,20 @@ public class PingDisplay extends ModDraggableDisplayText {
 		return moderateTextColor;
 	}
 	
-	public void setModerateTextChroma(boolean enabled) {
-		moderateTextColor.setChromaToggled(enabled);
+	public void setModerateTextChroma(boolean toggled) {
+		moderateTextColor.setChromaToggled(toggled);
 		
-		setToFile("moderateTextChroma", enabled);
+		setToFile("moderateTextChroma", toggled);
 	}
 	
 	public boolean isModerateTextChromaToggled() {
 		return moderateTextColor.isChromaToggled();
 	}
 	
-	public void setModerateTextShadow(boolean enabled) {
-		moderateTextShadow = enabled;
+	public void setModerateTextShadow(boolean toggled) {
+		moderateTextShadow = toggled;
 		
-		setToFile("moderateTextShadow", enabled);
+		setToFile("moderateTextShadow", toggled);
 	}
 	
 	public boolean isModerateTextShadowToggled() {
@@ -221,20 +221,20 @@ public class PingDisplay extends ModDraggableDisplayText {
 		return weakTextColor;
 	}
 	
-	public void setWeakTextChroma(boolean enabled) {
-		weakTextColor.setChromaToggled(enabled);
+	public void setWeakTextChroma(boolean toggled) {
+		weakTextColor.setChromaToggled(toggled);
 		
-		setToFile("weakTextChroma", enabled);
+		setToFile("weakTextChroma", toggled);
 	}
 	
 	public boolean isWeakTextChromaToggled() {
 		return weakTextColor.isChromaToggled();
 	}
 	
-	public void setWeakTextShadow(boolean enabled) {
-		weakTextShadow = enabled;
+	public void setWeakTextShadow(boolean toggled) {
+		weakTextShadow = toggled;
 		
-		setToFile("WeakTextShadow", enabled);
+		setToFile("WeakTextShadow", toggled);
 	}
 	
 	public boolean isWeakTextShadowToggled() {
@@ -251,30 +251,30 @@ public class PingDisplay extends ModDraggableDisplayText {
 		return unstableTextColor;
 	}
 	
-	public void setUnstableTextChroma(boolean enabled) {
-		unstableTextColor.setChromaToggled(enabled);
+	public void setUnstableTextChroma(boolean toggled) {
+		unstableTextColor.setChromaToggled(toggled);
 		
-		setToFile("unstableTextChroma", enabled);
+		setToFile("unstableTextChroma", toggled);
 	}
 	
 	public boolean isUnstableTextChromaToggled() {
 		return unstableTextColor.isChromaToggled();
 	}
 	
-	public void setUnstableTextShadow(boolean enabled) {
-		unstableTextShadow = enabled;
+	public void setUnstableTextShadow(boolean toggled) {
+		unstableTextShadow = toggled;
 		
-		setToFile("unstableTextShadow", enabled);
+		setToFile("unstableTextShadow", toggled);
 	}
 	
 	public boolean isUnstableTextShadowToggled() {
 		return unstableTextShadow;
 	}
 	
-	public void setDynamicColors(boolean enabled) {
-		dynamicColors = enabled;
+	public void setDynamicColors(boolean toggled) {
+		dynamicColors = toggled;
 		
-		setToFile("dynamicColors", enabled);
+		setToFile("dynamicColors", toggled);
 	}
 	
 	public boolean isDynamicColorsToggled() {

@@ -129,58 +129,56 @@ public class PotionEffects extends ModDraggable {
         return longestText;
     }
 
-    private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect pe) {
-        if (pe == null) {
-            return;
-        }
-
-        if (showIcon) {
-        	Potion potion = Potion.potionTypes[pe.getPotionID()];
-            
-            int iconX = (reverse ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
-
-            if (potion.hasStatusIcon()) {
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
-                mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
+    private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect potionEffect) {
+        if (potionEffect != null) {
+        	if (showIcon) {
+            	Potion potion = Potion.potionTypes[potionEffect.getPotionID()];
                 
-                int iconIndex = potion.getStatusIconIndex();
-                  
-                drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + 2, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+                int iconX = (reverse ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
+
+                if (potion.hasStatusIcon()) {
+                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+                    mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
+                    
+                    int iconIndex = potion.getStatusIconIndex();
+                      
+                    drawTexturedModalRect(iconX, pos.getAbsoluteY() + offsetY + 2, iconIndex % 8 * 18, 198 + iconIndex / 8 * 18, 18, 18);
+                }
             }
-        }
+            
+            int i = showIcon ? 20 : 0;
+            
+            if (showName) {
+                String potionName = getPotionName(potionEffect);
 
-        String potionName = getPotionName(pe);
-        String durationString = Potion.getDurationString(pe);
-        
-        int i = showIcon ? 20 : 0;
-        
-        if (showName) {
-            int nameX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
+                int nameX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
 
-        	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow);
-        }
-        
-        int durationX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
-        int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2);
-        
-        if (blink) {
-    		if (pe.getDuration() >= 20 * 10 || pe.getDuration() % 20 < 10) {
+            	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow);
+            }
+            
+        	String durationString = Potion.getDurationString(potionEffect);
+            int durationX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
+            int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2);
+            
+            if (blink) {
+        		if (potionEffect.getDuration() >= 20 * 10 || potionEffect.getDuration() % 20 < 10) {
+            		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
+                }
+        	} else {
         		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
-            }
-    	} else {
-    		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
-    	}
+        	}
+        }
     }
     
-    private String getPotionName(PotionEffect pe) {
-    	String potionName = I18n.format(pe.getEffectName(), new Object[0]);
+    private String getPotionName(PotionEffect potionEffect) {
+    	String potionName = I18n.format(potionEffect.getEffectName(), new Object[0]);
     	
-    	if (pe.getAmplifier() == 1) {
+    	if (potionEffect.getAmplifier() == 1) {
     		potionName = potionName + " " + I18n.format("enchantment.level.2", new Object[0]);
-        } else if (pe.getAmplifier() == 2) {
+        } else if (potionEffect.getAmplifier() == 2) {
         	potionName = potionName + " " + I18n.format("enchantment.level.3", new Object[0]);
-        } else if (pe.getAmplifier() == 3) {
+        } else if (potionEffect.getAmplifier() == 3) {
         	potionName = potionName + " " + I18n.format("enchantment.level.4", new Object[0]);
         }
     	
@@ -197,16 +195,16 @@ public class PotionEffects extends ModDraggable {
 		return durationTextColor;
 	}
 	
-	public void setDurationTextChroma(boolean enabled) {
-		durationTextColor.setChromaToggled(enabled);
+	public void setDurationTextChroma(boolean toggled) {
+		durationTextColor.setChromaToggled(toggled);
 		
-		setToFile("durationTextChroma", enabled);
+		setToFile("durationTextChroma", toggled);
 	}
 	
-	public void setDurationTextShadow(boolean enabled) {
-		durationTextShadow = enabled;
+	public void setDurationTextShadow(boolean toggled) {
+		durationTextShadow = toggled;
 		
-		setToFile("durationTextShadow", enabled);
+		setToFile("durationTextShadow", toggled);
 	}
 	
 	public boolean isDurationTextShadowToggled() {
@@ -217,10 +215,10 @@ public class PotionEffects extends ModDraggable {
 		return durationTextColor.isChromaToggled();
 	}
     
-    public void setShowName(boolean enabled) {
-    	showName = enabled;
+    public void setShowName(boolean toggled) {
+    	showName = toggled;
 		
-    	setToFile("showName", enabled);
+    	setToFile("showName", toggled);
     }
 
     public boolean isShowNameToggled() {
@@ -237,40 +235,40 @@ public class PotionEffects extends ModDraggable {
 		return nameTextColor;
 	}
 	
-	public void setNameTextChroma(boolean enabled) {
-		nameTextColor.setChromaToggled(enabled);
+	public void setNameTextChroma(boolean toggled) {
+		nameTextColor.setChromaToggled(toggled);
 		
-		setToFile("nameTextChroma", enabled);
+		setToFile("nameTextChroma", toggled);
 	}
 	
 	public boolean isNameTextChromaToggled() {
 		return nameTextColor.isChromaToggled();
 	}
 
-	public void setNameTextShadow(boolean enabled) {
-		nameTextShadow = enabled;
+	public void setNameTextShadow(boolean toggled) {
+		nameTextShadow = toggled;
 		
-		setToFile("nameTextShadow", enabled);
+		setToFile("nameTextShadow", toggled);
 	}
 	
 	public boolean isNameTextShadowToggled() {
 		return nameTextShadow;
 	}
     
-    public void setShowIcon(boolean enabled) {
-    	showIcon = enabled;
+    public void setShowIcon(boolean toggled) {
+    	showIcon = toggled;
 		
-    	setToFile("showIcon", enabled);
+    	setToFile("showIcon", toggled);
     }
 
     public boolean isShowIconToggled() {
         return showIcon;
     }
 	
-	public void setBlink(boolean enabled) {
-		this.blink = enabled;
+	public void setBlink(boolean toggled) {
+		this.blink = toggled;
 		
-		setToFile("blink", enabled);
+		setToFile("blink", toggled);
 	}
 	
 	public boolean isBlinkToggled() {

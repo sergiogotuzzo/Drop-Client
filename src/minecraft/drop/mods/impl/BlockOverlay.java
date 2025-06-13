@@ -69,10 +69,10 @@ public class BlockOverlay extends Mod {
     	tessellator.draw();
     }
 	
-	public void setOutline(boolean enabled) {
-		this.outline = enabled;
+	public void setOutline(boolean toggled) {
+		outline = toggled;
 		
-		setToFile("outline", enabled);
+		setToFile("outline", toggled);
 	}
 	
 	public boolean isOutlineToggled() {
@@ -80,7 +80,7 @@ public class BlockOverlay extends Mod {
 	}
 	
 	public void setOutlineWidth(float width) {
-		this.outlineWidth = width;
+		outlineWidth = width;
 		
 		setToFile("outlineWidth", width);
 	}
@@ -99,20 +99,20 @@ public class BlockOverlay extends Mod {
 		return outlineColor;
 	}
 	
-	public void setOutlineChroma(boolean enabled) {
-		outlineColor.setChromaToggled(enabled);
+	public void setOutlineChroma(boolean toggled) {
+		outlineColor.setChromaToggled(toggled);
 		
-		setToFile("outlineChroma", enabled);
+		setToFile("outlineChroma", toggled);
 	}
 	
 	public boolean isOutlineChromaToggled() {
 		return outlineColor.isChromaToggled();
 	}
 	
-	public void setOverlay(boolean enabled) {
-		this.overlay = enabled;
+	public void setOverlay(boolean toggled) {
+		overlay = toggled;
 		
-		setToFile("overlay", enabled);
+		setToFile("overlay", toggled);
 	}
 	
 	public boolean isOverlayToggled() {
@@ -129,10 +129,10 @@ public class BlockOverlay extends Mod {
 		return overlayColor;
 	}
 	
-	public void setOverlayChroma(boolean enabled) {
-		this.overlayColor.setChromaToggled(enabled);
+	public void setOverlayChroma(boolean toggled) {
+		overlayColor.setChromaToggled(toggled);
 		
-		setToFile("overlayChroma", enabled);
+		setToFile("overlayChroma", toggled);
 	}
 	
 	public boolean isOverlayChromaToggled() {

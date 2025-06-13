@@ -26,8 +26,8 @@ public class DropClientMovementInput extends MovementInput {
 	public DropClientMovementInput(GameSettings gameSettings) {
 		this.gameSettings = gameSettings;
 		this.mc = Minecraft.getMinecraft();
-		this.sprint = toggleSprintSneakMod.isSprinting();
-		this.sneak = toggleSprintSneakMod.isSneaking();
+		this.sprint = toggleSprintSneakMod.sprinting;
+		this.sneak = toggleSprintSneakMod.sneaking;
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public class DropClientMovementInput extends MovementInput {
 			moveForward *= 0.3F;
 		}
 		
-		toggleSprintSneakMod.setSneaking(sneak);
+		toggleSprintSneakMod.sneaking = sneak;
 		
 		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.isToggleSprintToggled()) {
 			if (gameSettings.keyBindSprint.isKeyDown() && !player.capabilities.isFlying) {
@@ -117,7 +117,7 @@ public class DropClientMovementInput extends MovementInput {
 			player.setSprinting(true);
 		}
 		
-		toggleSprintSneakMod.setSprinting(sprint);
+		toggleSprintSneakMod.sprinting = sprint;
 		
 		if (toggleSprintSneakMod.isFlyBoostToggled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && mc.gameSettings.keyBindSprint.isKeyDown()) {
 			if (originalFlySpeed < 0.0F || this.player.capabilities.getFlySpeed() != boostedFlySpeed) {

@@ -1,18 +1,11 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
 public class MemoryUsage extends ModDraggableDisplayText {
 	public MemoryUsage() {
 		super(false, 0.5, 0.5);
-	}
-
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableDisplayText(previousGuiScreen, this);
 	}
 	
 	@Override

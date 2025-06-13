@@ -83,10 +83,10 @@ public class CPSDisplay extends ModDraggableDisplayText {
         return clicks.size();
     }
 	
-	public void setShowRightCPS(boolean enabled) {
-		showRightCPS = enabled;
+	public void setShowRightCPS(boolean toggled) {
+		showRightCPS = toggled;
 		
-		setToFile("showRightCPS", enabled);
+		setToFile("showRightCPS", toggled);
 	}
 	
 	public boolean isShowRightCPSToggled() {

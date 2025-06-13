@@ -32,40 +32,40 @@ public class OldVisuals extends Mod {
 		return new GuiOldVisuals(previousGuiScreen);
 	}
 	
-	public void setFishingRod(boolean enabled) {
-		this.fishingRod = enabled;
+	public void setFishingRod(boolean toggled) {
+		this.fishingRod = toggled;
 		
-		setToFile("fishingRod", enabled);
+		setToFile("fishingRod", toggled);
 	}
 	
 	public boolean isFishingRodToggled() {
 		return fishingRod;
 	}
 	
-	public void setBow(boolean enabled) {
-		this.bow = enabled;
+	public void setBow(boolean toggled) {
+		this.bow = toggled;
 		
-		setToFile("bow", enabled);
+		setToFile("bow", toggled);
 	}
 	
 	public boolean isBowToggled() {
 		return bow;
 	}
 	
-	public void setBlockHitting(boolean enabled) {
-		this.blockHitting = enabled;
+	public void setBlockHitting(boolean toggled) {
+		this.blockHitting = toggled;
 		
-		setToFile("blockHitting", enabled);
+		setToFile("blockHitting", toggled);
 	}
 	
 	public boolean isBlockHittingToggled() {
 		return blockHitting;
 	}
 	
-	public void setArmorHitAnimation(boolean enabled) {
-		this.armorHitAnimation = enabled;
+	public void setArmorHitAnimation(boolean toggled) {
+		this.armorHitAnimation = toggled;
 		
-		setToFile("armorHitAnimation", enabled);
+		setToFile("armorHitAnimation", toggled);
 	}
 	
 	public boolean isArmorHitAnimationToggled() {
@@ -82,10 +82,10 @@ public class OldVisuals extends Mod {
 		return hitArmorColor;
 	}
 	
-	public void setHitArmorChroma(boolean enabled) {
-		hitArmorColor.setChromaToggled(enabled);
+	public void setHitArmorChroma(boolean toggled) {
+		hitArmorColor.setChromaToggled(toggled);
 		
-		setToFile("hitArmorChroma", enabled);
+		setToFile("hitArmorChroma", toggled);
 	}
 	
 	public boolean isHitArmorChromaToggled() {

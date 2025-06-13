@@ -220,20 +220,20 @@ public class PackDisplay extends ModDraggable {
 		return nameTextColor;
 	}
 	
-	public void setNameTextChroma(boolean enabled) {
-		nameTextColor.setChromaToggled(enabled);
+	public void setNameTextChroma(boolean toggled) {
+		nameTextColor.setChromaToggled(toggled);
 		
-		setToFile("nameTextChroma", enabled);
+		setToFile("nameTextChroma", toggled);
 	}
 	
 	public boolean isNameTextChromaToggled() {
 		return nameTextColor.isChromaToggled();
 	}
 	
-	public void setNameTextShadow(boolean enabled) {
-		nameTextShadow = enabled;
+	public void setNameTextShadow(boolean toggled) {
+		nameTextShadow = toggled;
 		
-		setToFile("nameTextShadow", enabled);
+		setToFile("nameTextShadow", toggled);
 	}
 	
 	public boolean isNameTextShadowToggled() {
@@ -260,30 +260,30 @@ public class PackDisplay extends ModDraggable {
 		return descriptionTextColor;
 	}
 	
-	public void setDescriptionTextChroma(boolean enabled) {
-		descriptionTextColor.setChromaToggled(enabled);
+	public void setDescriptionTextChroma(boolean toggled) {
+		descriptionTextColor.setChromaToggled(toggled);
 		
-		setToFile("descriptionTextChroma", enabled);
+		setToFile("descriptionTextChroma", toggled);
 	}
 	
 	public boolean isDescriptionTextChromaToggled() {
 		return descriptionTextColor.isChromaToggled();
 	}
 	
-	public void setDescriptionTextShadow(boolean enabled) {
-		descriptionTextShadow = enabled;
+	public void setDescriptionTextShadow(boolean toggled) {
+		descriptionTextShadow = toggled;
 		
-		setToFile("descriptionTextShadow", enabled);
+		setToFile("descriptionTextShadow", toggled);
 	}
 	
 	public boolean isDescriptionTextShadowToggled() {
 		return descriptionTextShadow;
 	}
 	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
+	public void setShowBackground(boolean toggled) {
+		showBackground = toggled;
 		
-		setToFile("showBackground", enabled);
+		setToFile("showBackground", toggled);
 	}
 	
 	public boolean isShowBackgroundToggled() {

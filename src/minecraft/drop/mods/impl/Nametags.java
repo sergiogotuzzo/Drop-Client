@@ -32,10 +32,10 @@ public class Nametags extends Mod {
 		return showInThirdPerson;
 	}
 	
-	public void setTextShadow(boolean enabled) {
-		textShadow = enabled;
+	public void setTextShadow(boolean toggled) {
+		textShadow = toggled;
 		
-		setToFile("textShadow", enabled);
+		setToFile("textShadow", toggled);
 	}
 	
 	public boolean isTextShadowToggled() {

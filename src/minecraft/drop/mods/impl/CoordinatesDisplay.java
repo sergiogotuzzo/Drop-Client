@@ -216,40 +216,40 @@ public class CoordinatesDisplay extends ModDraggableText {
 	    }
 	}
 	
-	public void setShowBackground(boolean enabled) {
-		showBackground = enabled;
+	public void setShowBackground(boolean toggled) {
+		showBackground = toggled;
 		
-		setToFile("showBackground", enabled);
+		setToFile("showBackground", toggled);
 	}
 	
 	public boolean isShowBackgroundToggled() {
 		return showBackground;
 	}
 	
-	public void setShowBiome(boolean enabled) {
-		showBiome = enabled;
+	public void setShowBiome(boolean toggled) {
+		showBiome = toggled;
 		
-		setToFile("showBiome", enabled);
+		setToFile("showBiome", toggled);
 	}
 	
 	public boolean isShowBiomeToggled() {
 		return showBiome;
 	}
 	
-	public void setShowFacing(boolean enabled) {
-		showFacing = enabled;
+	public void setShowFacing(boolean toggled) {
+		showFacing = toggled;
 		
-		setToFile("showFacing", enabled);
+		setToFile("showFacing", toggled);
 	}
 	
 	public boolean isShowFacingToggled() {
 		return showFacing;
 	}
 	
-	public void setShowFacingTowards(boolean enabled) {
-		showFacingTowards = enabled;
+	public void setShowFacingTowards(boolean toggled) {
+		showFacingTowards = toggled;
 		
-		setToFile("showFacingTowards", enabled);
+		setToFile("showFacingTowards", toggled);
 	}
 	
 	public boolean isShowFacingTowardsToggled() {

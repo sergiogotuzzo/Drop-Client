@@ -6,10 +6,10 @@ import drop.mods.ModDraggableText;
 import drop.mods.ModInstances;
 import drop.mods.hud.ScreenPosition;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.util.ResourceLocation;
 
 public class Bossbar extends ModDraggableText {
 	private boolean showName = true;
@@ -32,7 +32,7 @@ public class Bossbar extends ModDraggableText {
 		int width = 0;
 		
 		if (showName) {
-			width = font.getStringWidth(BossStatus.bossName);
+			width = font.getStringWidth(BossStatus.bossName != null && BossStatus.statusBarTime > 0 ? BossStatus.bossName : "Ender Dragon");
 		}
 		
 		if (showHealth) {
@@ -62,57 +62,47 @@ public class Bossbar extends ModDraggableText {
 		if (BossStatus.bossName != null && BossStatus.statusBarTime > 0) {
 			--BossStatus.statusBarTime;
 			
-			this.renderBossbar(pos);
+			this.renderBossbar(pos, BossStatus.healthScale, BossStatus.bossName);
 		}
 	}
 
 	@Override
 	public void renderDummy(ScreenPosition pos) {
+		float bossHealthScale = 1.0F;
+		String bossName = "Ender Dragon";
+		
 		if (BossStatus.bossName != null && BossStatus.statusBarTime > 0) {
-			this.renderBossbar(pos);
-		} else {
-			if (showHealth) {
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				
-				mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/icons.png"));
-				
-				int healthY = pos.getAbsoluteY() + (showName ? font.FONT_HEIGHT + 1 : 0);
-
-	            drawTexturedModalRect(pos.getAbsoluteX(), healthY, 0, 74, 182, 5);
-	            
-	            drawTexturedModalRect(pos.getAbsoluteX(), healthY, 0, 79, 183, 5);
-			}
-			
-			if (showName) {
-				drawText("Ender Dragon", pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth("Ender Dragon") / 2, pos.getAbsoluteY(), textColor, textShadow);
-			}
+			bossHealthScale = BossStatus.healthScale;
+			bossName = BossStatus.bossName;
 		}
+		
+		this.renderBossbar(pos, bossHealthScale, bossName);
 	}
 	
-	private void renderBossbar(ScreenPosition pos) {
+	private void renderBossbar(ScreenPosition pos, float bossHealthScale, String bossName) {
 		if (showHealth) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			
-			mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/icons.png"));
+			mc.getTextureManager().bindTexture(Gui.icons);
 			
 			int healthY = pos.getAbsoluteY() + (showName ? font.FONT_HEIGHT + 1 : 0);
 
             drawTexturedModalRect(pos.getAbsoluteX(), healthY, 0, 74, 182, 5);
             
-            int health = (int) (BossStatus.healthScale * (182.0F + 1.0F));
+            int healthWidth = (int) (bossHealthScale * (182.0F + 1.0F));
             
-            if (health > 0) {
-            	drawTexturedModalRect(pos.getAbsoluteX(), healthY, 0, 79, health, 5);
+            if (healthWidth > 0) {
+            	drawTexturedModalRect(pos.getAbsoluteX(), healthY, 0, 79, healthWidth, 5);
             }
 		}
 		
 		if (showName) {
-			drawText(BossStatus.bossName.replace("§r", ""), pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(BossStatus.bossName) / 2, pos.getAbsoluteY(), textColor, textShadow);
+			drawText(bossName.replace("§r", ""), pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(bossName) / 2, pos.getAbsoluteY(), textColor, textShadow);
 		}
 	}
 	
 	public void setShowName(boolean toggled) {
-		this.showName = toggled;
+		showName = toggled;
 		
 		setToFile("showName", toggled);
 	}
@@ -122,7 +112,7 @@ public class Bossbar extends ModDraggableText {
 	}
 	
 	public void setShowHealth(boolean toggled) {
-		this.showHealth = toggled;
+		showHealth = toggled;
 		
 		setToFile("showHealth", toggled);
 	}

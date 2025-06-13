@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiModDraggableDisplayText;
 
 public abstract class ModDraggableDisplayText extends ModDraggableText {
 	public static enum Brackets {
@@ -62,6 +63,11 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 		
 		setShowBackground(getBooleanFromFile("showBackground", showBackground));
 		setBrackets(Brackets.fromId(getIntFromFile("brackets", brackets.getId())));
+	}
+
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return new GuiModDraggableDisplayText(previousGuiScreen, this);
 	}
 	
 	public void setShowBackground(boolean enabled) {

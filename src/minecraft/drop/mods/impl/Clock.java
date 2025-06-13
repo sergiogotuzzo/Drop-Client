@@ -3,20 +3,12 @@ package drop.mods.impl;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import net.minecraft.item.ItemStack;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
 public class Clock extends ModDraggableDisplayText {    
 	public Clock() {
 		super(false, 0.5, 0.5);
-	}
-
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableDisplayText(previousGuiScreen, this);
 	}
 	
 	@Override

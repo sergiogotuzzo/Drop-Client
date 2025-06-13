@@ -1,7 +1,5 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiModDraggableDisplayText;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
@@ -11,11 +9,6 @@ public class BPSDisplay extends ModDraggableDisplayText {
 	}
 
 	float blocks;
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiModDraggableDisplayText(previousGuiScreen, this);
-	}
 	
 	@Override
 	public int getWidth() {
@@ -30,6 +23,7 @@ public class BPSDisplay extends ModDraggableDisplayText {
 	@Override
 	public void render(ScreenPosition pos) {
 		float ticks = mc.timer.ticksPerSecond * mc.timer.timerSpeed;
+		
         this.blocks = (float) (mc.thePlayer.getDistance(mc.thePlayer.lastTickPosX, mc.thePlayer.posY, mc.thePlayer.lastTickPosZ) * ticks);
         
 		if (showBackground) {
