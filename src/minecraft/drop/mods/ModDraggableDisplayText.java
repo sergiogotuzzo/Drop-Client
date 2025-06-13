@@ -5,6 +5,7 @@ import java.awt.Color;
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModDraggableDisplayText;
+import drop.mods.hud.ScreenPosition;
 
 public abstract class ModDraggableDisplayText extends ModDraggableText {
 	public static enum Brackets {
@@ -57,9 +58,12 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 
 	protected boolean showBackground = false;
 	protected Brackets brackets = Brackets.SQUARE;
+	protected String dummyText = "";
 	
-	public ModDraggableDisplayText(boolean enabled, double relativeX, double relativeY) {
+	public ModDraggableDisplayText(boolean enabled, double relativeX, double relativeY, String dummyText) {
 		super(enabled, relativeX, relativeY);
+		
+		this.dummyText = dummyText;
 		
 		setShowBackground(getBooleanFromFile("showBackground", showBackground));
 		setBrackets(Brackets.fromId(getIntFromFile("brackets", brackets.getId())));
@@ -68,6 +72,35 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return new GuiModDraggableDisplayText(previousGuiScreen, this);
+	}
+	
+	@Override
+	public int getWidth() {
+		return showBackground ? 58 : font.getStringWidth(brackets.wrap(dummyText));
+	}
+
+	@Override
+	public int getHeight() {
+		return showBackground ? 18 : font.FONT_HEIGHT;
+	}
+	
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		drawTextToRender(pos, dummyText);
+	}
+	
+	@Override
+	public void drawCenteredText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
+		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2 + (showBackground ? 0 : 1), y + getHeight() / 2 - 4 + (showBackground ? 0 : 1), color, dropShadow, chroma);
+	}
+	
+	public void drawTextToRender(ScreenPosition pos, String textToRender) {
+		if (showBackground) {
+	    	drawRect(pos);
+			drawCenteredText(textToRender, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+    	} else {
+		    drawAlignedText(brackets.wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);
+    	}
 	}
 	
 	public void setShowBackground(boolean enabled) {
@@ -88,10 +121,5 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 	
 	public Brackets getBrackets() {
 		return brackets;
-	}
-	
-	@Override
-	public void drawCenteredText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
-		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2 + (showBackground ? 0 : 1), y + getHeight() / 2 - 4 + (showBackground ? 0 : 1), color, dropShadow, chroma);
 	}
 }

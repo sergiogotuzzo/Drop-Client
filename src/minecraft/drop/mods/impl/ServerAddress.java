@@ -6,7 +6,7 @@ import drop.mods.ModDraggableDisplayText;
 
 public class ServerAddress extends ModDraggableDisplayText {
 	public ServerAddress() {
-		super(false, 0.5, 0.5);
+		super(false, 0.5, 0.5, "mc.example.org");
 	}
 	
 	private ServerData dummyServerData = new ServerData("Example", "mc.example.org", false);
@@ -24,21 +24,22 @@ public class ServerAddress extends ModDraggableDisplayText {
 	@Override
 	public void render(ScreenPosition pos) {
     	if (mc.getCurrentServerData() != null) {
-    		drawServerAddress(pos, mc.getCurrentServerData());
+    		drawTextToRender(pos, mc.getCurrentServerData().serverIP);
     	}
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		drawServerAddress(pos, dummyServerData);
+		drawTextToRender(pos, dummyServerData.serverIP);
 	}
 	
-	private void drawServerAddress(ScreenPosition pos, ServerData serverData) {
+	@Override
+	public void drawTextToRender(ScreenPosition pos, String textToRender) {
 		if (showBackground) {
-			drawAlignedRect(pos, serverData.serverIP, 8);
-			drawCenteredAlignedText(pos, serverData.serverIP, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+			drawAlignedRect(pos, textToRender, 8);
+			drawCenteredAlignedText(pos, textToRender, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
     	} else {
-		    drawAlignedText(brackets.wrap(serverData.serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);
+		    drawAlignedText(brackets.wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);
     	}
 	}
 }

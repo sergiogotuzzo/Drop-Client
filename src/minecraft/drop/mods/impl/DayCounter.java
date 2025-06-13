@@ -5,27 +5,11 @@ import drop.mods.ModDraggableDisplayText;
 
 public class DayCounter extends ModDraggableDisplayText {
 	public DayCounter() {
-		super(false, 0.5, 0.5);
-	}
-	
-	@Override
-	public int getWidth() {
-		return showBackground ? font.getStringWidth(Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days") + 20 : font.getStringWidth(brackets.wrap(Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days"));
+		super(false, 0.5, 0.5, "365 days");
 	}
 
 	@Override
-	public int getHeight() {
-		return showBackground ? 18 : font.FONT_HEIGHT;
-	}
-
-	@Override
-	public void render(ScreenPosition pos) {		
-		if (showBackground) {
-			drawRect(pos);
-		}
-		
-		String text = Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days";
-		
-		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+	public void render(ScreenPosition pos) {
+		drawTextToRender(pos, Long.valueOf(this.mc.theWorld.getWorldTime() / 24000L) + " days");
 	}
 }

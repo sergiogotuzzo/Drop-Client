@@ -6,31 +6,11 @@ import drop.mods.ModDraggableDisplayText;
 
 public class PotsCounter extends ModDraggableDisplayText {
 	public PotsCounter() {
-		super(false, 0.5, 0.5);
-	}
-	
-	@Override
-	public int getWidth() {
-		return showBackground ? 58 : font.getStringWidth(brackets.wrap((mc.thePlayer != null ? getPotsCount() : 0) + " pots"));
-	}
-
-	@Override
-	public int getHeight() {
-		return showBackground ? 18 : font.FONT_HEIGHT;
+		super(false, 0.5, 0.5, "0 pots");
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (showBackground) {
-			drawRect(pos);
-		}
-		
-		String text = getPotsCount() + " pots";
-		
-		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
-	}
-	
-	private int getPotsCount() {
 		int potsCount = 0;
 		
 		for (int i = 0; i < mc.thePlayer.inventory.getSizeInventory(); i++) {
@@ -41,6 +21,6 @@ public class PotsCounter extends ModDraggableDisplayText {
 			}
 		}
 		
-		return potsCount;
+		drawTextToRender(pos, potsCount + " pots");
 	}
 }

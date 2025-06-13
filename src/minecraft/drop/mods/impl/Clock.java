@@ -8,27 +8,11 @@ import drop.mods.ModDraggableDisplayText;
 
 public class Clock extends ModDraggableDisplayText {    
 	public Clock() {
-		super(false, 0.5, 0.5);
-	}
-	
-	@Override
-	public int getWidth() {
-		return showBackground ? 58 : font.getStringWidth(brackets.wrap(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))));
-	}
-
-	@Override
-	public int getHeight() {
-		return showBackground ? 18 : font.FONT_HEIGHT;
+		super(false, 0.5, 0.5, "12:00");
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (showBackground) {
-			drawRect(pos);
-		}
-		
-		String text = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-		
-		drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+		drawTextToRender(pos, LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
 	}
 }

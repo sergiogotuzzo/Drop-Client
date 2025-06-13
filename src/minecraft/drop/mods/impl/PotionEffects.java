@@ -56,7 +56,7 @@ public class PotionEffects extends ModDraggable {
 		}
 		
 		if (showName) {
-			width += font.getStringWidth(getLongestEffectName(getPlayerPotionEffects()));
+			width += font.getStringWidth("Strenght IV");
 		} else {
 			width += font.getStringWidth("00:00");
 		}
@@ -66,7 +66,7 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public int getHeight() {    	
-        return getPlayerPotionEffects().size() * 20;
+        return dummyPotionEffects.size() * 20;
     }
 
     @Override
@@ -98,35 +98,13 @@ public class PotionEffects extends ModDraggable {
     	
         int offsetY = 0;
 
-        for (int i = 0; i < getPlayerPotionEffects().size(); i++) {
-            PotionEffect potionEffect = (PotionEffect) getPlayerPotionEffects().toArray()[i];
+        for (int i = 0; i < dummyPotionEffects.size(); i++) {
+            PotionEffect potionEffect = (PotionEffect) dummyPotionEffects.toArray()[i];
 
             drawPotionEffect(pos, offsetY, potionEffect);
             
             offsetY += 20;
         }
-    }
-    
-    private Collection<PotionEffect> getPlayerPotionEffects() {
-    	return mc.thePlayer.getActivePotionEffects().size() == 0 ? dummyPotionEffects : mc.thePlayer.getActivePotionEffects();
-    }
-    
-    private String getLongestEffectName(Collection<PotionEffect> effects) {
-        if (effects == null || effects.isEmpty()) {
-            return null;
-        }
-        
-        String longestText = "";
-        
-        for (PotionEffect effect : effects) {
-            String effectName = getPotionName(effect);
-            
-            if (font.getStringWidth(effectName) > font.getStringWidth(longestText)) {
-                longestText = effectName;
-            }
-        }
-        
-        return longestText;
     }
 
     private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect potionEffect) {

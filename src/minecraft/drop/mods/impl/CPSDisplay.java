@@ -15,9 +15,13 @@ public class CPSDisplay extends ModDraggableDisplayText {
 	public boolean showRightCPS = false;
         
 	public CPSDisplay() {
-		super(true, 0.5, 0.5);
+		super(true, 0.5, 0.5, "0 CPS");
 		
 		setShowRightCPS(getBooleanFromFile("showRightCPS", showRightCPS));
+		
+		if (showRightCPS) {
+			dummyText = "0 ⎟ 0 CPS";
+		}
 	}
 	
 	private List<Long> leftClicks = new ArrayList<>();
@@ -31,16 +35,6 @@ public class CPSDisplay extends ModDraggableDisplayText {
 	@Override
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return new GuiCPSDisplay(previousGuiScreen);
-	}
-	
-	@Override
-	public int getWidth() {
-		return showBackground ? 58 : font.getStringWidth(brackets.wrap(getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"));
-	}
-
-	@Override
-	public int getHeight() {
-		return showBackground ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -65,14 +59,8 @@ public class CPSDisplay extends ModDraggableDisplayText {
                 this.rightClicks.add(this.lastRightPressed);
             }
         }
-                
-        if (showBackground) {
-        	drawRect(pos);
-        }
-        
-        String text = getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS";
-                
-        drawCenteredText(showBackground ? text : brackets.wrap(text), pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+                        
+		drawTextToRender(pos, getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS");
 	}
 	
 	private int getCPS(List<Long> clicks) {

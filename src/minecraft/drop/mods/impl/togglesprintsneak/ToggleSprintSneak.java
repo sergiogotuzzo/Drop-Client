@@ -16,7 +16,7 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	private float flyBoostFactor = 4.0F;
 	
 	public ToggleSprintSneak() {
-		super(true, 0.5, 0.5);
+		super(true, 0.5, 0.5, "");
 		
 		setShowText(getBooleanFromFile("showText", showText));
 		setToggleSprint(getBooleanFromFile("toggleSprint", toggleSprint));
@@ -63,7 +63,8 @@ public class ToggleSprintSneak extends ModDraggableDisplayText {
 	    }
 	}
 	
-	private void drawTextToRender(ScreenPosition pos, String textToRender) {
+	@Override
+	public void drawTextToRender(ScreenPosition pos, String textToRender) {
 		if (showBackground) {
 	    	drawAlignedRect(pos, textToRender, 20);
 			drawCenteredAlignedText(pos, textToRender, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
