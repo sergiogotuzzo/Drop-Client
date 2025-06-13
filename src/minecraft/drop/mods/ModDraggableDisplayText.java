@@ -89,11 +89,6 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 		drawTextToRender(pos, dummyText);
 	}
 	
-	@Override
-	public void drawCenteredText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
-		drawText(text, x + (getWidth() - font.getStringWidth(text)) / 2 + (showBackground ? 0 : 1), y + getHeight() / 2 - 4 + (showBackground ? 0 : 1), color, dropShadow, chroma);
-	}
-	
 	public void drawTextToRender(ScreenPosition pos, String textToRender) {
 		if (showBackground) {
 	    	drawRect(pos);
