@@ -1,10 +1,8 @@
 package drop;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ServerData;
 import drop.events.EventManager;
 import drop.events.EventTarget;
-import drop.events.impl.RenderEvent;
 import drop.events.impl.TickEvent;
 import drop.gui.mod.GuiModPositioning;
 import drop.gui.mod.GuiMods;
