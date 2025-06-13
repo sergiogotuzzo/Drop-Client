@@ -13,18 +13,18 @@ import drop.events.impl.RenderEvent;
 import drop.gui.mod.GuiModPositioning;
 
 public class HUDManager {
-	private static HUDManager hudManager = null;
+	private static HUDManager instance = null;
 	
 	public static HUDManager getInstance() {
-		if (hudManager != null) {
-			return hudManager;
+		if (instance != null) {
+			return instance;
 		}
 		
-		hudManager = new HUDManager();
+		instance = new HUDManager();
 		
-		EventManager.register(hudManager);
+		EventManager.register(instance);
 		
-		return hudManager;
+		return instance;
 	}
 	
 	private Set<IRenderer> registeredRenderers = Sets.newHashSet();
