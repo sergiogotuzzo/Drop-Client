@@ -64,4 +64,16 @@ public class GuiMod extends GuiDropClientScreen {
 	protected void writeOptionValue(String text, int line) {
         this.drawText(text, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(text) - 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
 	}
+	
+	protected void writeSelectedOptionValue(String text, int line) {
+        this.drawText(text, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text), (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+	}
+	
+	protected GuiText createGuiTextLeftArrow(int id, String text, int line) {
+    	return new GuiText(id, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text) - 5 - mc.fontRendererObj.getStringWidth("<"), (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), "<");
+	}
+	
+	protected GuiText createGuiTextRightArrow(int id, int line) {
+    	return new GuiText(id, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(">"), (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), ">");
+	}
 }

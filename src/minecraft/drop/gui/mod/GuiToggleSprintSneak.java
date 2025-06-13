@@ -28,6 +28,7 @@ public class GuiToggleSprintSneak extends GuiMod {
     	this.writeOptionText("Text Shadow", 3);
     	this.writeOptionText("Show Background", 4);
     	this.writeOptionText("Brackets", 5);
+    	this.writeSelectedOptionValue(mod.getBrackets().getName(), 5);
         this.writeOptionText("Toggle Sprint", 6);
         this.writeOptionText("Toggle Sneak", 7);
         this.writeOptionText("Fly Boost", 8);
@@ -64,23 +65,27 @@ public class GuiToggleSprintSneak extends GuiMod {
 	        	mod.setShowBackground(!mod.isShowBackgroundToggled());
 	        	this.initGui();
 	        	break;
-	        case 5:
-	        	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
-	        	this.initGui();
-	        	break;
+            case 5:
+            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.NONE ? Brackets.ANGULAR.getId() : mod.getBrackets().getId() - 1));
+            	this.initGui();
+            	break;
             case 6:
-            	mod.setToggleSprint(!mod.isToggleSprintToggled());
+            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
             	this.initGui();
             	break;
             case 7:
-            	mod.setToggleSneak(!mod.isToggleSneakToggled());
+            	mod.setToggleSprint(!mod.isToggleSprintToggled());
             	this.initGui();
             	break;
             case 8:
-            	mod.setFlyBoost(!mod.isFlyBoostToggled());
+            	mod.setToggleSneak(!mod.isToggleSneakToggled());
             	this.initGui();
             	break;
             case 9:
+            	mod.setFlyBoost(!mod.isFlyBoostToggled());
+            	this.initGui();
+            	break;
+            case 10:
             	mod.setFlyBoostFactor(sliderFlyBoostFactor.getSliderPosition() * 8.0F);
             	
             	if (mod.getFlyBoostFactor() < 2.0F) {
@@ -98,10 +103,11 @@ public class GuiToggleSprintSneak extends GuiMod {
     	this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
 		this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
 		this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBackgroundToggled(), 4));
-		this.buttonList.add(this.createGuiText(5, mod.getBrackets().getName(), true, 5));
-    	this.buttonList.add(this.createGuiCheckBox(6, mod.isToggleSprintToggled(), 6));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSneakToggled(), 7));
-    	this.buttonList.add(this.createGuiCheckBox(8, mod.isFlyBoostToggled(), 8));
-    	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(9, 8.0F, mod.getFlyBoostFactor(), 10));
+		this.buttonList.add(this.createGuiTextLeftArrow(5, mod.getBrackets().getName(), 5));
+		this.buttonList.add(this.createGuiTextRightArrow(6, 5));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSprintToggled(), 6));
+    	this.buttonList.add(this.createGuiCheckBox(8, mod.isToggleSneakToggled(), 7));
+    	this.buttonList.add(this.createGuiCheckBox(9, mod.isFlyBoostToggled(), 8));
+    	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(10, 8.0F, mod.getFlyBoostFactor(), 10));
     }
 }

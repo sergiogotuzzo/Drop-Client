@@ -25,6 +25,7 @@ public class GuiModDraggableDisplayText extends GuiMod {
     	this.writeOptionText("Text Shadow", 2);
     	this.writeOptionText("Show Background", 3);
     	this.writeOptionText("Brackets", 4);
+    	this.writeSelectedOptionValue(mod.getBrackets().getName(), 4);
     }
 
     @Override
@@ -44,6 +45,10 @@ public class GuiModDraggableDisplayText extends GuiMod {
             	this.initGui();
             	break;
             case 4:
+            	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.NONE ? Brackets.ANGULAR.getId() : mod.getBrackets().getId() - 1));
+            	this.initGui();
+            	break;
+            case 5:
             	mod.setBrackets(Brackets.fromId(mod.getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : mod.getBrackets().getId() + 1));
             	this.initGui();
             	break;
@@ -57,6 +62,7 @@ public class GuiModDraggableDisplayText extends GuiMod {
 		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
 		this.buttonList.add(this.createGuiCheckBox(3, mod.isShowBackgroundToggled(), 3));
-		this.buttonList.add(this.createGuiText(4, mod.getBrackets().getName(), true, 4));
+		this.buttonList.add(this.createGuiTextLeftArrow(4, mod.getBrackets().getName(), 4));
+		this.buttonList.add(this.createGuiTextRightArrow(5, 4));
     }
 }
