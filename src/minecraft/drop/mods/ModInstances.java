@@ -62,7 +62,7 @@ public class ModInstances {
 	private static Freelook freelookMod = new Freelook();
 	private static Fullbright fullbrightMod = new Fullbright();
 	private static OldVisuals oldVisualsMod = new OldVisuals();
-	private static Scoreboard scoreboardMod = new Scoreboard();
+	private static Scoreboard scoreboardMod;
 	private static Chat chatMod = new Chat();
 	private static BlockOverlay blockOverlayMod = new BlockOverlay();
 	private static TimeChanger timeChangerMod = new TimeChanger();
@@ -97,6 +97,7 @@ public class ModInstances {
 		manager.register(comboCounterMod = new ComboCounter());
 		manager.register(reachDisplayMod = new ReachDisplay());
 		manager.register(bossbarMod = new Bossbar());
+		manager.register(scoreboardMod = new Scoreboard());
 	}
 	
 	public static FPSDisplay getFPSDisplayMod() {

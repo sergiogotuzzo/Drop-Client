@@ -346,13 +346,6 @@ public class GuiIngame extends Gui
 
         ScoreObjective scoreobjective1 = scoreobjective != null ? scoreobjective : scoreboard.getObjectiveInDisplaySlot(1);
 
-        if (scoreobjective1 != null)
-        {
-            if (ModInstances.getScoreboardMod().isEnabled()) {
-            	this.renderScoreboard(scoreobjective1, scaledresolution);
-            }
-        }
-
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.disableAlpha();
@@ -616,7 +609,7 @@ public class GuiIngame extends Gui
         for (Score score : collection)
         {
             ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(score.getPlayerName());
-            String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + (ModInstances.getScoreboardMod().isHideNumbersToggled() ? "" : ": " + EnumChatFormatting.RED + score.getScorePoints());
+            String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
             i = Math.max(i, this.getFontRenderer().getStringWidth(s));
         }
 
@@ -634,25 +627,16 @@ public class GuiIngame extends Gui
             String s2 = EnumChatFormatting.RED + "" + score1.getScorePoints();
             int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
             int l = scaledRes.getScaledWidth() - k1 + 2;
-                        
-            int backgroundRGB = new Color(0, 0, 0, ModInstances.getScoreboardMod().getBackgroundOpacity()).getRGB();
-        	
-        	drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, backgroundRGB);
-            
-        	this.getFontRenderer().drawString(s1, l1, k, 553648127, ModInstances.getScoreboardMod().isTextShadowToggled());
-        	
-        	if (!ModInstances.getScoreboardMod().isHideNumbersToggled()) {
-        		this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127, ModInstances.getScoreboardMod().isTextShadowToggled());
-        	}
+            drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1342177280);
+            this.getFontRenderer().drawString(s1, l1, k, 553648127);
+            this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
 
             if (j == collection.size())
             {
-            	String s3 = objective.getDisplayName();
-                
-            	drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, backgroundRGB);
-                drawRect(l1 - 2, k - 1, l, k, backgroundRGB);
-                
-            	this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127, ModInstances.getScoreboardMod().isTextShadowToggled());
+                String s3 = objective.getDisplayName();
+                drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
+                drawRect(l1 - 2, k - 1, l, k, 1342177280);
+                this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
             }
         }
     }
