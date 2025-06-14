@@ -2,7 +2,7 @@ package drop.mods;
 
 import org.apache.commons.lang3.StringUtils;
 
-import drop.Client;
+import drop.Drop;
 import drop.FileManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -14,12 +14,12 @@ public abstract class Mod {
 	
 	protected final Minecraft mc;
 	protected final FontRenderer font;
-	protected final Client client;
+	protected final Drop client;
 		
 	public Mod(boolean enabled) {
 		mc = Minecraft.getMinecraft();
 		font = mc.fontRendererObj;
-		client = Client.getInstance();
+		client = Drop.getInstance();
 		
 		setEnabled((boolean) getFromFile("enabled", enabled));
 	}

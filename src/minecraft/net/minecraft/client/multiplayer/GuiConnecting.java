@@ -20,7 +20,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import drop.Client;
+import drop.Drop;
 
 public class GuiConnecting extends GuiScreen
 {
@@ -39,8 +39,8 @@ public class GuiConnecting extends GuiScreen
         mcIn.setServerData(p_i1181_3_);
         this.connect(serveraddress.getIP(), serveraddress.getPort());
         
-        Client.lastServerIp = serveraddress.getIP();
-        Client.lastServerPort = serveraddress.getPort();
+        Drop.lastServerIp = serveraddress.getIP();
+        Drop.lastServerPort = serveraddress.getPort();
     }
 
     public GuiConnecting(GuiScreen p_i1182_1_, Minecraft mcIn, String hostName, int port)
@@ -50,8 +50,8 @@ public class GuiConnecting extends GuiScreen
         mcIn.loadWorld((WorldClient)null);
         this.connect(hostName, port);
         
-        Client.lastServerIp = hostName;
-        Client.lastServerPort = port;
+        Drop.lastServerIp = hostName;
+        Drop.lastServerPort = port;
     }
 
     private void connect(final String ip, final int port)
@@ -76,7 +76,7 @@ public class GuiConnecting extends GuiScreen
                     GuiConnecting.this.networkManager.sendPacket(new C00Handshake(47, ip, port, EnumConnectionState.LOGIN));
                     GuiConnecting.this.networkManager.sendPacket(new C00PacketLoginStart(GuiConnecting.this.mc.getSession().getProfile()));
                     
-                    Client.getInstance().getDiscordRichPresence().update("Playing " + mc.getCurrentServerData().serverIP, "In Game");
+                    Drop.getInstance().getDiscordRichPresence().update("Playing " + mc.getCurrentServerData().serverIP, "In Game");
                 }
                 catch (UnknownHostException unknownhostexception)
                 {

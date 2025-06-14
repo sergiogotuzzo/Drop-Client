@@ -3,7 +3,7 @@ package net.minecraft.client.gui;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 
-import drop.Client;
+import drop.Drop;
 import drop.gui.GuiDropClientScreen;
 
 import java.io.IOException;
@@ -58,7 +58,7 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
     public void initGui()
     {
     	if (updateDiscordRichPresence) {
-    		Client.getInstance().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
+    		Drop.getInstance().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
     	}
     	
         Keyboard.enableRepeatEvents(true);

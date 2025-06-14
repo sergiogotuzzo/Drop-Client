@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.lwjgl.input.Mouse;
 
-import drop.Client;
+import drop.Drop;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLanguage;
 import net.minecraft.client.gui.GuiMultiplayer;
@@ -26,7 +26,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     	
     	drawRect((this.width - 140) / 2, (this.height - 150) / 2, (this.width - 140) / 2 + 140, (this.height - 150) / 2 + 150, new Color(0, 0, 0, 127).getRGB());
     	
-        this.drawString(this.fontRendererObj, Client.nameVersion, 2, this.height - 10, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, Drop.nameVersion, 2, this.height - 10, 0xFFFFFF);
         this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0xFFFFFF);
         
         this.mc.getTextureManager().bindTexture(new ResourceLocation("drop/icon.png"));
@@ -61,7 +61,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 	
 	@Override
     public void initGui() {
-		Client.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
+		Drop.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
 				
 		this.buttonList.add(new GuiButton(1, this.width / 2 - 120 / 2, this.height / 2 + 24 - 4, 120, 20, I18n.format("menu.singleplayer", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 - 120 / 2, this.height / 2 + 24 * 2 - 4, 120, 20, I18n.format("menu.multiplayer", new Object[0])));

@@ -3,7 +3,7 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 import java.util.List;
 
-import drop.Client;
+import drop.Drop;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;
@@ -55,7 +55,7 @@ public class GuiDisconnected extends GuiScreen
         }
         else if (button.id == 1)
         {
-        	this.mc.displayGuiScreen(new GuiConnecting(this.parentScreen, mc, Client.lastServerIp, Client.lastServerPort));
+        	this.mc.displayGuiScreen(new GuiConnecting(this.parentScreen, mc, Drop.lastServerIp, Drop.lastServerPort));
         }
     }
 

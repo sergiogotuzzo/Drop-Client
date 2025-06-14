@@ -20,7 +20,7 @@ import org.lwjgl.util.glu.Project;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
-import drop.Client;
+import drop.Drop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -203,7 +203,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
-    	Client.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
+    	Drop.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
     	
         this.viewportTexture = new DynamicTexture(256, 256);
         this.backgroundTexture = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);

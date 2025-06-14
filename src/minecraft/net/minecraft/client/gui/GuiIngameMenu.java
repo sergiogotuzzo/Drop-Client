@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.lwjgl.opengl.GL11;
 
-import drop.Client;
+import drop.Drop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;

@@ -56,7 +56,7 @@ import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 
-import drop.Client;
+import drop.Drop;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -482,7 +482,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     private void startGame() throws LWJGLException, IOException
     {
-    	Client.getInstance().init();
+    	Drop.getInstance().init();
     	
         this.gameSettings = new GameSettings(this, this.mcDataDir);
         this.defaultResourcePacks.add(this.mcDefaultResourcePack);
@@ -610,7 +610,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         this.renderGlobal.makeEntityOutlineShader();
         
-        Client.getInstance().start();
+        Drop.getInstance().start();
     }
 
     private void registerMetadataSerializers()
@@ -638,7 +638,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle(Client.nameVersion);
+        Display.setTitle(Drop.nameVersion);
 
         try
         {
@@ -1064,7 +1064,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         try
         {
-        	Client.getInstance().shutdown();
+        	Drop.getInstance().shutdown();
         	
             this.stream.shutdownStream();
             logger.info("Stopping!");
@@ -2367,7 +2367,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         networkmanager.sendPacket(new C00PacketLoginStart(this.getSession().getProfile()));
         this.myNetworkManager = networkmanager;
         
-        Client.getInstance().getDiscordRichPresence().update("Playing Singleplayer", "In Game");
+        Drop.getInstance().getDiscordRichPresence().update("Playing Singleplayer", "In Game");
     }
 
     /**

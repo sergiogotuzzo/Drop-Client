@@ -3,7 +3,7 @@ package net.optifine.gui;
 import java.io.IOException;
 import java.util.List;
 
-import drop.Client;
+import drop.Drop;
 import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

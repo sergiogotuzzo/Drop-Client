@@ -2,7 +2,7 @@ package net.minecraft.client.gui.inventory;
 
 import com.google.common.collect.Sets;
 
-import drop.Client;
+import drop.Drop;
 
 import java.io.IOException;
 import java.util.Set;

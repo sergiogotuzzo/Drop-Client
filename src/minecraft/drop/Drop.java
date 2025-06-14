@@ -10,10 +10,10 @@ import drop.mods.hud.HUDManager;
 import drop.mods.ModInstances;
 import drop.mods.impl.Fullbright;
 
-public class Client {
+public class Drop {
 	public static final String nameVersion = "Drop Client (1.8.9-245e1c2/main)";
 	
-	private static final Client instance = new Client();
+	private static final Drop instance = new Drop();
 	
 	private DiscordRP discordRichPresence = new DiscordRP();
 	private HUDManager hudManager;
@@ -57,7 +57,7 @@ public class Client {
 		}
 	}
 	
-	public static final Client getInstance() {
+	public static final Drop getInstance() {
 		return instance;
 	}
 	
