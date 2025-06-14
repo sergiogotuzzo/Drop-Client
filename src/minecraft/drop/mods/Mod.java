@@ -3,7 +3,6 @@ package drop.mods;
 import org.apache.commons.lang3.StringUtils;
 
 import drop.Drop;
-import drop.FileManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import drop.events.EventManager;
@@ -45,7 +44,7 @@ public abstract class Mod {
 	}
 	
 	public void setToFile(String key, Object value) {
-		FileManager.set(this.getClass().getSimpleName() + "." + key, value);
+		Drop.getInstance().getModsFile().set(this.getClass().getSimpleName() + "." + key, value);
 	}
 	
 	private Object getFromFile(String key, Object defaultValue) {
@@ -53,7 +52,7 @@ public abstract class Mod {
 			setToFile(key, defaultValue);
 		}
 		
-		return FileManager.get(this.getClass().getSimpleName() + "." + key);
+		return Drop.getInstance().getModsFile().get(this.getClass().getSimpleName() + "." + key);
 	}
 	
 	public boolean getBooleanFromFile(String key, boolean defaultValue) {
@@ -77,7 +76,7 @@ public abstract class Mod {
 	}
 	
 	public boolean hasInFile(String key) {
-		return FileManager.has(this.getClass().getSimpleName() + "." + key);
+		return Drop.getInstance().getModsFile().has(this.getClass().getSimpleName() + "." + key);
 	}
 	
 	public String getName() {

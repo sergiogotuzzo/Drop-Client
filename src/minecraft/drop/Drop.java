@@ -1,6 +1,9 @@
 package drop;
 
 import net.minecraft.client.Minecraft;
+
+import java.io.IOException;
+
 import drop.events.EventManager;
 import drop.events.EventTarget;
 import drop.events.impl.TickEvent;
@@ -22,8 +25,10 @@ public class Drop {
 	public static String lastServerIp;
 	public static int lastServerPort;
 	
+	private FileManager modsFile;
+	
 	public void init() {
-		FileManager.init();
+		modsFile = FileManager.init("mods.json");
 		
 		discordRichPresence.start();
 		
@@ -67,5 +72,9 @@ public class Drop {
 	
 	public HUDManager getHUDManager() {
 		return hudManager;
+	}
+	
+	public FileManager getModsFile() {
+		return modsFile;
 	}
 }

@@ -13,29 +13,31 @@ import java.io.IOException;
 
 public class FileManager {
 	private static final File rootDir = new File("drop");
-    private static final File modsFile = new File(rootDir, "mods.json");
+    private static File file;
     
     // private static final Logger logger = LogManager.getLogger();
-        
-    public static void init() {
+    
+    private FileManager(String fileName) {
+    	file = new File(rootDir, fileName);
+    	
+    	if (!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+    }
+    
+    public static FileManager init(String fileName) {    	
 		if (!rootDir.exists()) {
 			rootDir.mkdirs();
 		}
 		
-		try {
-			if (!modsFile.exists()) {
-				modsFile.createNewFile();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return new FileManager(fileName);
 	}
     
-    public static File getModsFile() {
-    	return modsFile;
-    }
-
-    public static void set(String key, Object value) {
+    public void set(String key, Object value) {
         JSONObject jsonObject = readJsonFromFile();
         
         jsonObject.put(key, value);
@@ -45,22 +47,22 @@ public class FileManager {
         // logger.info("[DropClient] (FileManager) " + key + ": " + value);
     }
 
-    public static Object get(String key) {
+    public Object get(String key) {
         JSONObject jsonObject = readJsonFromFile();
         
         return jsonObject.get(key);
     }
     
-    public static boolean has(String key) {
+    public boolean has(String key) {
         JSONObject jsonObject = readJsonFromFile();
         
         return jsonObject.containsKey(key);
     }
 
-    private static JSONObject readJsonFromFile() {
+    private JSONObject readJsonFromFile() {
         JSONParser parser = new JSONParser();
         
-        try (FileReader reader = new FileReader(modsFile.getPath())) {
+        try (FileReader reader = new FileReader(file.getPath())) {
             return (JSONObject) parser.parse(reader);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
@@ -69,10 +71,10 @@ public class FileManager {
         }
     }
 
-    private static void writeJsonToFile(JSONObject jsonObject) {
-        try (FileWriter file = new FileWriter(modsFile.getPath())) {
-            file.write(jsonObject.toJSONString());
-            file.flush();
+    private void writeJsonToFile(JSONObject jsonObject) {
+        try (FileWriter fileWriter = new FileWriter(file.getPath())) {
+        	fileWriter.write(jsonObject.toJSONString());
+        	fileWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
