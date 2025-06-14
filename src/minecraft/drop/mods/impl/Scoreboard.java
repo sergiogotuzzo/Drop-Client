@@ -1,6 +1,7 @@
 package drop.mods.impl;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,17 +38,27 @@ public class Scoreboard extends ModDraggable {
 		return new GuiScoreboard(previousGuiScreen);
 	}
 	
-	private int listHeight;
-	private int listWidth;
+	private String dummyTitle = "DROP CLIENT";
+	private List<String> lines = Arrays.asList(" ", "A PvP client for", "Minecraft 1.8.9.", " ");
 
 	@Override
 	public int getWidth() {
-		return listWidth;
+		int width = font.getStringWidth(dummyTitle);
+		
+		int i = 0;
+		
+		for (String line : lines) {
+			i++;
+			
+			width = Math.max(width, font.getStringWidth(line + (hideNumbers ? "" : "   " + i)));
+		}
+		
+		return width + (hideNumbers ? 2 : 0);
 	}
 
 	@Override
 	public int getHeight() {
-		return listHeight;
+		return 1 + 2 + lines.size() * (font.FONT_HEIGHT + 2);
 	}
 	
 	@Override
@@ -72,12 +83,31 @@ public class Scoreboard extends ModDraggable {
 	        if (scoreObjective != null) {
 		        ScaledResolution scaledResolution = new ScaledResolution(this.mc);
 
-	            renderScoreboard(scoreObjective, scaledResolution);
+	            renderScoreboard(scoreObjective, scaledResolution, pos);
 	        }
 		}
 	}
+	
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		drawRect(pos, backgroundColor.getColor());
+				
+		drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), textShadow, false);
+		
+		int i = 0;
+		
+		for (String line : lines) {
+			i++;
+						
+			drawText(line, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, Color.WHITE.getRGB(), textShadow, false);
 
-	public void renderScoreboard(ScoreObjective scoreObjective, ScaledResolution scaledResolution) {
+			if (!hideNumbers) {
+				drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, new Color(255, 85, 85).getRGB(), textShadow, false);
+			}
+		}
+	}
+
+	public void renderScoreboard(ScoreObjective scoreObjective, ScaledResolution scaledResolution, ScreenPosition pos) {
         net.minecraft.scoreboard.Scoreboard scoreboard = scoreObjective.getScoreboard();
         Collection<Score> collection = scoreboard.getSortedScores(scoreObjective);
         List<Score> list = Lists.newArrayList(Iterables.filter(collection, new Predicate<Score>() {
@@ -104,14 +134,23 @@ public class Scoreboard extends ModDraggable {
         int i1 = collection.size() * font.FONT_HEIGHT;
         int j1 = pos.getAbsoluteY() + i1 + 10;
         int k1 = 3;
-        int l1 = pos.getAbsoluteX() - i + i - k1 + 5;
+        int l1;
+        
+        if (pos.getRelativeX() < 1.0/3.0) {
+            l1 = pos.getAbsoluteX() + 2;
+        } else if (pos.getRelativeX() > 2.0/3.0) {
+            l1 = pos.getAbsoluteX() + getWidth() - i;
+        } else {
+            l1 = pos.getAbsoluteX() + getWidth() / 2 - i / 2;
+        }
+        
         int j = 0;
 
         for (Score score : collection) {
         	++j;
         	
             int k = j1 - j * font.FONT_HEIGHT;
-            int l = pos.getAbsoluteX() - k1 + 2 + i;
+            int l = l1 + i;
             
             drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, backgroundColor.getRGB());
             
@@ -125,9 +164,6 @@ public class Scoreboard extends ModDraggable {
 
                 font.drawString(number, l - font.getStringWidth(number), k, 553648127, textShadow);
             }
-            
-            listHeight = i1 + 10;
-            listWidth = (l) - (l1 - 2);
 
             if (j == collection.size()) {
                 String content = scoreObjective.getDisplayName();
