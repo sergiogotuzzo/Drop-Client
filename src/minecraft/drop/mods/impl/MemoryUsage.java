@@ -5,7 +5,7 @@ import drop.mods.ModDraggableDisplayText;
 
 public class MemoryUsage extends ModDraggableDisplayText {
 	public MemoryUsage() {
-		super(false, 0.5, 0.5, "Mem: 1%");
+		super(false, 0.5, 0.5, "Mem: 0%");
 	}
 
 	@Override
