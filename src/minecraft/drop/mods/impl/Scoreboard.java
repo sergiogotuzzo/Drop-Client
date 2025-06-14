@@ -8,6 +8,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiScoreboard;
 import drop.mods.ModDraggable;
@@ -21,14 +22,14 @@ import net.minecraft.util.EnumChatFormatting;
 public class Scoreboard extends ModDraggable {
 	private boolean hideNumbers = false;
 	private boolean textShadow = false;
-	private int backgroundOpacity = 127;
+	private ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 127, false);
 	
 	public Scoreboard() {
 		super(true, 0.5, 0.5);
 		
 		setHideNumbers(getBooleanFromFile("hideNumbers", textShadow));
 		setTextShadow(getBooleanFromFile("textShadow", textShadow));
-		setBackgroundOpacity(getIntFromFile("backgroundOpacity", backgroundOpacity));
+		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
 	}
 	
 	@Override
@@ -111,9 +112,8 @@ public class Scoreboard extends ModDraggable {
         	
             int k = j1 - j * font.FONT_HEIGHT;
             int l = pos.getAbsoluteX() - k1 + 2 + i;
-            int backgroundRGB = new Color(0, 0, 0, backgroundOpacity).getRGB();
             
-            drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, backgroundRGB);
+            drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, backgroundColor.getRGB());
             
             ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
             String title = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName());
@@ -132,8 +132,8 @@ public class Scoreboard extends ModDraggable {
             if (j == collection.size()) {
                 String content = scoreObjective.getDisplayName();
                 
-                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, backgroundRGB);
-                drawRect(l1 - 2, k - 1, l, k, backgroundRGB);
+                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, backgroundColor.getRGB());
+                drawRect(l1 - 2, k - 1, l, k, backgroundColor.getRGB());
                 
                 font.drawString(content, l1 + i / 2 - font.getStringWidth(content) / 2, k - font.FONT_HEIGHT, 553648127, textShadow);
             }
@@ -160,13 +160,13 @@ public class Scoreboard extends ModDraggable {
 		return textShadow;
 	}
 	
-	public void setBackgroundOpacity(int opacity) {
-		backgroundOpacity = opacity;
+	public void setBackgroundColor(int rgb) {
+		backgroundColor = backgroundColor.fromRGB(rgb, false);
 		
-		setToFile("backgroundOpacity", opacity);
+		setToFile("backgroundColor", rgb);
 	}
 	
-	public int getBackgroundOpacity() {
-		return backgroundOpacity;
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
 	}
 }

@@ -25,6 +25,14 @@ public class GuiModColor extends GuiMod {
 		this(previousGuiScreen, mod, color, "textColor", "textChroma", "Text Color", false);
 	}
     
+    public GuiModColor(GuiScreen previousGuiScreen, Mod mod, ColorManager color, String colorKey, String subtitle) {
+		this(previousGuiScreen, mod, color, colorKey, "", subtitle, false);
+	}
+    
+    public GuiModColor(GuiScreen previousGuiScreen, Mod mod, ColorManager color, String colorKey, String subtitle, boolean showAlphaSlider) {
+		this(previousGuiScreen, mod, color, colorKey, "", subtitle, showAlphaSlider);
+	}
+    
     public GuiModColor(GuiScreen previousGuiScreen, Mod mod, ColorManager color, String colorKey, String colorChromaKey, String subtitle) {
 		this(previousGuiScreen, mod, color, colorKey, colorChromaKey, subtitle, false);
 	}
@@ -57,7 +65,9 @@ public class GuiModColor extends GuiMod {
             this.writeOptionValue(String.valueOf(color.getAlpha()), 8);
         }
         
-        this.writeOptionText("Chroma", showAlphaSlider ? 10 : 8, true);
+        if (colorChromaKey != "") {
+        	this.writeOptionText("Chroma", showAlphaSlider ? 10 : 8, true);
+        }
     }
     
     @Override
@@ -114,6 +124,8 @@ public class GuiModColor extends GuiMod {
         	this.buttonList.add(sliderAlpha = this.createGuiSlider(4, 255.0F, color.getAlpha(), 9));
     	}
     	
-    	this.buttonList.add(this.createGuiCheckBox(5, color.isChromaToggled(), showAlphaSlider ? 10 : 8));
+    	if (colorChromaKey != "") {
+        	this.buttonList.add(this.createGuiCheckBox(5, color.isChromaToggled(), showAlphaSlider ? 10 : 8));
+    	}
     }
 }

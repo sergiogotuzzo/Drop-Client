@@ -4,14 +4,11 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
 import drop.mods.impl.Scoreboard;
 
 public class GuiScoreboard extends GuiMod {
 	private static final Scoreboard mod = ModInstances.getScoreboardMod();
-
-	private GuiSlider sliderBackgroundOpacity;
 	
 	public GuiScoreboard(GuiScreen previousGuiScreen) {
 		super(previousGuiScreen, mod);
@@ -23,13 +20,7 @@ public class GuiScoreboard extends GuiMod {
         
         this.writeOptionText("Hide Numbers", 1);
         this.writeOptionText("Text Shadow", 2);
-        this.writeOptionText("Background Opacity", 3);
-        this.writeOptionValue(String.valueOf(mod.getBackgroundOpacity()), 3);
-    }
-    
-    @Override
-    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 255.0F));
+        this.writeOptionText("Background Color", 3);
     }
 
     @Override
@@ -46,7 +37,7 @@ public class GuiScoreboard extends GuiMod {
             	this.initGui();
             	break;
             case 3:
-            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 255.0F));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getBackgroundColor(), "backgroundColor", "Background Color", true));
             	break;
         }
     }
@@ -57,6 +48,6 @@ public class GuiScoreboard extends GuiMod {
         
     	this.buttonList.add(this.createGuiCheckBox(1, mod.isHideNumbersToggled(), 1));
     	this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
-    	this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(3, 255.0F, mod.getBackgroundOpacity(), 4));
+		this.buttonList.add(this.createGuiRect(3, mod.getBackgroundColor().getRGB(), 3));
     }
 }
