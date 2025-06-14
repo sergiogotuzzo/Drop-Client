@@ -654,7 +654,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
                 if (Config.zoomMode)
                 {
-                	f /= (ModInstances.getZoomMod().isScrollToZoomToggled() ? getScrollAmount() : 4.0F);
+                	f /= (ModInstances.getZoomMod().isScrollToZoomToggled() ? getScrollAmount() : (float) ModInstances.getZoomMod().getZoomLevel());
                 }
             }
             else if (Config.zoomMode)
@@ -662,7 +662,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 Config.zoomMode = false;
 
                 if (ModInstances.getZoomMod().isScrollToZoomToggled()) {
-                	this.scrollTotal = 4;
+                	this.scrollTotal = ModInstances.getZoomMod().getZoomLevel();
                 }
                 
                 this.mc.gameSettings.smoothCamera = Config.zoomSmoothCamera;
@@ -701,12 +701,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
     				scrollTotal--;
     			}
     			
-    			if (scrollTotal > 16) {
-    				scrollTotal = 16;
+    			if (scrollTotal > ModInstances.getZoomMod().getZoomLevelMax()) {
+    				scrollTotal = ModInstances.getZoomMod().getZoomLevelMax();
     			}
     			
-    			if (scrollTotal < 4) {
-    				scrollTotal = 4;
+    			if (scrollTotal < ModInstances.getZoomMod().getZoomLevelMin()) {
+    				scrollTotal = ModInstances.getZoomMod().getZoomLevelMin();
     			}
     		}
     	}
