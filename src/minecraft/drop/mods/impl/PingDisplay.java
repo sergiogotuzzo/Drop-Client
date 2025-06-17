@@ -50,10 +50,6 @@ public class PingDisplay extends ModDraggableDisplayText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (!mc.isSingleplayer()) {
-			if (showBackground) {
-				drawRect(pos);
-			}
-			
 			int ping = mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
 			ColorManager color = textColor; // Default
 			boolean dropShadow = textShadow;
