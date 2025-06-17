@@ -396,7 +396,20 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             worldrenderer.pos((double)(-j - 1), (double)(-1 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             worldrenderer.pos((double)(-j - 1), (double)(8 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             worldrenderer.pos((double)(j + 1), (double)(8 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            worldrenderer.pos((double)(j + 1), (double)(-1 + i), 0.0D).color(0.0F, 0.0F, 0.0F, ModInstances.getNametagsMod().isEnabled() ? ModInstances.getNametagsMod().getBackgroundOpacity() / 255.0F : 0.25F).endVertex();
+            
+            float red = 0.0F;
+            float green = 0.0F;
+            float blue = 0.0F;
+            float alpha = 0.25F;
+            
+            if (ModInstances.getNametagsMod().isEnabled()) {
+            	red = ModInstances.getNametagsMod().getBackgroundColor().getRed() / 255.0F;
+            	green = ModInstances.getNametagsMod().getBackgroundColor().getGreen() / 255.0F;
+            	blue = ModInstances.getNametagsMod().getBackgroundColor().getBlue() / 255.0F;
+            	alpha = ModInstances.getNametagsMod().getBackgroundColor().getAlpha() / 255.0F;
+            }
+            
+            worldrenderer.pos((double)(j + 1), (double)(-1 + i), 0.0D).color(red, green, blue, alpha).endVertex();
             tessellator.draw();
             GlStateManager.enableTexture2D();
             fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127, ModInstances.getNametagsMod().isEnabled() && ModInstances.getNametagsMod().isTextShadowToggled());

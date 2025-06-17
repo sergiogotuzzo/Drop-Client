@@ -12,7 +12,7 @@ public class Chat extends Mod {
 	private boolean chatHeightFix = true;
 	private boolean textShadow = false;
 	private boolean compactChat = true;
-	private int backgroundOpacity = 127;
+	private ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 127, false);
 	
 	public Chat() {
 		super(true);
@@ -20,7 +20,7 @@ public class Chat extends Mod {
 		setChatHeightFix(getBooleanFromFile("chatHeightFix", chatHeightFix));
 		setCompactChat(getBooleanFromFile("compactChat", compactChat));
 		setTextShadow(getBooleanFromFile("textShadow", textShadow));
-		setBackgroundOpacity(getIntFromFile("backgroundOpacity", backgroundOpacity));
+		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
 	}
 	
 	@Override
@@ -58,13 +58,13 @@ public class Chat extends Mod {
 		return textShadow;
 	}
 	
-	public void setBackgroundOpacity(int opacity) {
-		backgroundOpacity = opacity;
+	public void setBackgroundColor(int rgb) {
+		backgroundColor = backgroundColor.fromRGB(rgb, false);
 		
-		setToFile("backgroundOpacity", opacity);
+		setToFile("backgroundColor", rgb);
 	}
 	
-	public int getBackgroundOpacity() {
-		return backgroundOpacity;
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
 	}
 }

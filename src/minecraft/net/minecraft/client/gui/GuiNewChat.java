@@ -92,10 +92,8 @@ public class GuiNewChat extends Gui
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
                                 int h = chatMod.isChatHeightFixToggled() ? -12 : 0;
-                                
-                                int backgroundRGB = new Color(0, 0, 0, (int)((chatMod.getBackgroundOpacity() / 255.0F) * l1)).getRGB();
-                                
-                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, backgroundRGB);
+                                                                
+                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, ModInstances.getChatMod().getBackgroundColor().getRGB());
                                 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();

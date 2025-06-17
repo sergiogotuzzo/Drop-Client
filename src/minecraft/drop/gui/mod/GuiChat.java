@@ -5,14 +5,11 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.GuiSlider;
 import drop.mods.ModInstances;
 import drop.mods.impl.Chat;
 
 public class GuiChat extends GuiMod {
 	private static final Chat mod = ModInstances.getChatMod();
-
-	private GuiSlider sliderBackgroundOpacity;
 	
 	public GuiChat(GuiScreen previousGuiScreen) {
 		super(previousGuiScreen, mod);
@@ -25,13 +22,7 @@ public class GuiChat extends GuiMod {
 		this.writeOptionText("Chat Height Fix", 1);
 		this.writeOptionText("Compact Chat", 2);
 		this.writeOptionText("Text Shadow", 3);
-		this.writeOptionText("Background Opacity", 4);
-		this.writeOptionValue(String.valueOf(mod.getBackgroundOpacity()), 4);
-    }
-    
-    @Override
-    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-    	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 255.0F));
+        this.writeOptionText("Background Color", 4);
     }
 
     @Override
@@ -52,7 +43,7 @@ public class GuiChat extends GuiMod {
             	this.initGui();
             	break;
             case 4:
-            	mod.setBackgroundOpacity((int) (sliderBackgroundOpacity.getSliderPosition() * 255.0F));
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getBackgroundColor(), "backgroundColor", "Background Color", true));
             	break;
         }
     }
@@ -64,6 +55,6 @@ public class GuiChat extends GuiMod {
 		this.buttonList.add(this.createGuiCheckBox(1, mod.isChatHeightFixToggled(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.isCompactChatToggled(), 2));
 		this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
-		this.buttonList.add(sliderBackgroundOpacity = this.createGuiSlider(4, 255.0F, mod.getBackgroundOpacity(), 5));
+		this.buttonList.add(this.createGuiRect(4, mod.getBackgroundColor().getRGB(), 4));
     }
 }

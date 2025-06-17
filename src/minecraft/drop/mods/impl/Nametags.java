@@ -1,5 +1,6 @@
 package drop.mods.impl;
 
+import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiNametags;
 import drop.mods.Mod;
@@ -7,14 +8,14 @@ import drop.mods.Mod;
 public class Nametags extends Mod {
 	private boolean showInThirdPerson = true;
 	private boolean textShadow = false;
-	private int backgroundOpacity = 64;
+	private ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 64, false);
 	
 	public Nametags() {
 		super(false);
 		
 		setShowInThirdPerson(getBooleanFromFile("showInThirdPerson", showInThirdPerson));
 		setTextShadow(getBooleanFromFile("textShadow", textShadow));
-		setBackgroundOpacity(getIntFromFile("backgroundOpacity", backgroundOpacity));
+		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
 	}
 	
 	@Override
@@ -42,13 +43,13 @@ public class Nametags extends Mod {
 		return textShadow;
 	}
 	
-	public void setBackgroundOpacity(int opacity) {
-		backgroundOpacity = opacity;
+	public void setBackgroundColor(int rgb) {
+		backgroundColor = backgroundColor.fromRGB(rgb, false);
 		
-		setToFile("backgroundOpacity", opacity);
+		setToFile("backgroundColor", rgb);
 	}
 	
-	public int getBackgroundOpacity() {
-		return backgroundOpacity;
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
 	}
 }
