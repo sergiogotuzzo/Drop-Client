@@ -129,7 +129,7 @@ public class PackDisplay extends ModDraggable {
 	
 	private void drawSelectedPack(ResourcePackRepository.Entry selectedPack, int offsetY) {
 		if (showBackground) {
-			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28);
+			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, new Color(0, 0, 0, 102));
 		}
 		
 		if (showIcon) {
@@ -155,7 +155,7 @@ public class PackDisplay extends ModDraggable {
 	
 	private void drawDefaultPack() {
 		if (showBackground) {
-			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28);
+			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, new Color(0, 0, 0, 102));
 		}
 		
 		if (showIcon) {

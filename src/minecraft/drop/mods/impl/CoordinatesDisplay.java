@@ -85,7 +85,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			drawRect(pos);
+			getBounds().fill();
 		}
 		
 		int i = 11;

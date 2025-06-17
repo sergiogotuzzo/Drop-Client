@@ -28,10 +28,7 @@ public abstract class GuiDropClientScreen extends GuiScreen {
 	}
     
     public void drawHollowRect(int x, int y, int width, int height, int color) {
-		this.drawHorizontalLine(x, x + width, y, color);
-		this.drawHorizontalLine(x, x + width, y + height, color);
-		this.drawVerticalLine(x, y + height, y, color);
-		this.drawVerticalLine(x + width, y + height, y, color);
+		GuiDropClient.drawHollowRect(x, y, width, height, color);
 	}
     
     public void drawText(String text, int x, int y, int color, boolean textShadow, boolean chroma) {

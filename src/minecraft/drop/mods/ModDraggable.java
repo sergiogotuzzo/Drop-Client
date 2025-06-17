@@ -8,8 +8,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import drop.ColorManager;
+import drop.gui.GuiDropClient;
 import drop.gui.GuiDropClientScreen;
 import drop.mods.hud.IRenderer;
+import drop.mods.hud.Bounds;
 import drop.mods.hud.ScreenPosition;
 
 public abstract class ModDraggable extends Mod implements IRenderer {
@@ -33,24 +35,20 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		return pos;
 	}
 	
+	public Bounds getBounds() {
+		return Bounds.getBounds(this);
+	}
+	
 	public void drawRect(int left, int top, int right, int bottom, int color) {
-		Gui.drawRect(left, top, right, bottom, color);
+		GuiDropClient.drawRect(left, top, right, bottom, color);
 	}
 	
 	public void drawRect(int left, int top, int right, int bottom, Color color) {
 		drawRect(left, top, right, bottom, color.getRGB());
 	}
 	
-	public void drawRect(int left, int top, int right, int bottom) {
-		drawRect(left, top, right, bottom, new Color(0, 0, 0, 102).getRGB());
-	}
-	
-	public void drawRect(ScreenPosition pos, Color color) {
-		drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + getHeight(), color);
-	}
-	
-	public void drawRect(ScreenPosition pos) {
-		drawRect(pos, new Color(0, 0, 0, 102));
+	public void drawRect(int left, int top, int right, int bottom, ColorManager color) {
+		drawRect(left, top, right, bottom, color.getRGB());
 	}
 	
 	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, int color) {

@@ -278,6 +278,5 @@ public class ModInstances {
 			    getToggleSprintSneakMod(),
 			    getZoomMod()
 			);
-
 	}
 }

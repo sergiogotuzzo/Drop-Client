@@ -80,7 +80,7 @@ public class PingDisplay extends ModDraggableDisplayText {
 			String text = ping + " ms";
 			
 			if (showBackground) {
-		    	drawRect(pos);
+		    	getBounds().fill();
 				drawCenteredText(text, pos.getAbsoluteX(), pos.getAbsoluteY(), color, dropShadow);
 	    	} else {
 			    drawAlignedText(brackets.wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color, dropShadow);

@@ -90,7 +90,7 @@ public class Scoreboard extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		drawRect(pos, backgroundColor.getColor());
+		getBounds().fill(backgroundColor.getColor());
 				
 		drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), textShadow, false);
 		
