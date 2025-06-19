@@ -21,11 +21,15 @@ public class GuiPackDisplay extends GuiMod {
         this.writeOptionText("Name Text Color", 1);
         this.writeOptionText("Name Text Shadow", 2);
         this.writeOptionText("Show Description", 3);
-        this.writeOptionText("Description Text Color", 4);
-        this.writeOptionText("Description Text Shadow", 5);
-        this.writeOptionText("Show Background", 6);
-        this.writeOptionText("Show Icon", 7);
-        this.writeOptionText("Show All Selected Packs", 8);
+        
+        if (mod.isShowDescriptionToggled()) {
+        	this.writeOptionText("Description Text Color", 4);
+            this.writeOptionText("Description Text Shadow", 5);
+        }
+        
+        this.writeOptionText("Show Background", mod.isShowDescriptionToggled() ? 6 : 4);
+        this.writeOptionText("Show Icon", mod.isShowDescriptionToggled() ? 7 : 5);
+        this.writeOptionText("Show All Selected Packs", mod.isShowDescriptionToggled() ? 8 : 6);
     }
 
     @Override
@@ -73,10 +77,14 @@ public class GuiPackDisplay extends GuiMod {
         this.buttonList.add(this.createGuiRect(1, mod.getNameTextColor().getRGB(), 1));
     	this.buttonList.add(this.createGuiCheckBox(2, mod.isNameTextShadowToggled(), 2));
     	this.buttonList.add(this.createGuiCheckBox(3, mod.isShowDescriptionToggled(), 3));
-        this.buttonList.add(this.createGuiRect(4, mod.getDescriptionTextColor().getRGB(), 4));
-        this.buttonList.add(this.createGuiCheckBox(5, mod.isDescriptionTextShadowToggled(), 5));
-    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowBackgroundToggled(), 6));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowIconToggled(), 7));
-    	this.buttonList.add(this.createGuiCheckBox(8, mod.isShowAllSelectedPacksToggled(), 8));
+        
+    	if (mod.isShowDescriptionToggled()) {
+    		this.buttonList.add(this.createGuiRect(4, mod.getDescriptionTextColor().getRGB(), 4));
+            this.buttonList.add(this.createGuiCheckBox(5, mod.isDescriptionTextShadowToggled(), 5));
+    	}
+    	
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowBackgroundToggled(), mod.isShowDescriptionToggled() ? 6 : 4));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowIconToggled(), mod.isShowDescriptionToggled() ? 7 : 5));
+    	this.buttonList.add(this.createGuiCheckBox(8, mod.isShowAllSelectedPacksToggled(), mod.isShowDescriptionToggled() ? 8 : 6));
     }
 }

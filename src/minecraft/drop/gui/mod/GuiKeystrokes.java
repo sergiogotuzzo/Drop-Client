@@ -25,7 +25,10 @@ public class GuiKeystrokes extends GuiMod {
         this.writeOptionText("Show Mouse", 5);
         this.writeOptionText("Show Spacebar", 6);
         this.writeOptionText("Show Movement Keys", 7);
-        this.writeOptionText("Use Arrows", 8);
+        
+        if (mod.isShowMovementKeysToggled()) {
+        	this.writeOptionText("Use Arrows", 8);
+        }
     }
 
     @Override
@@ -77,6 +80,9 @@ public class GuiKeystrokes extends GuiMod {
     	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowMouseToggled(), 5));
     	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowSpacebarToggled(), 6));
     	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowMovementKeysToggled(), 7));
-    	this.buttonList.add(this.createGuiCheckBox(8, mod.isUseArrowsToggled(), 8));
-    }
+
+    	if (mod.isShowMovementKeysToggled()) {
+        	this.buttonList.add(this.createGuiCheckBox(8, mod.isUseArrowsToggled(), 8));
+    	}
+	}
 }

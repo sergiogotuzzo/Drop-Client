@@ -18,10 +18,14 @@ public class GuiBossbar extends GuiMod {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	
-    	this.writeOptionText("Text Color", 1);
-    	this.writeOptionText("Text Shadow", 2);
-    	this.writeOptionText("Show Name", 3);
-    	this.writeOptionText("Show Health", 4);
+    	this.writeOptionText("Show Name", 1);
+    	
+    	if (mod.isShowNameToggled()) {
+    		this.writeOptionText("Text Color", 2);
+        	this.writeOptionText("Text Shadow", 3);
+    	}
+    	
+    	this.writeOptionText("Show Health", mod.isShowNameToggled() ? 4 : 2);
     }
 
     @Override
@@ -29,17 +33,17 @@ public class GuiBossbar extends GuiMod {
     	super.actionPerformed(button);
     	
     	switch (button.id) {
-	    	case 1:
+			case 1:
+				mod.setShowName(!mod.isShowNameToggled());
+	        	this.initGui();
+	        	break;
+	    	case 2:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getTextColor()));
 	        	break;
-	        case 2:
+	        case 3:
 	        	mod.setTextShadow(!mod.isTextShadowToggled());
 	        	this.initGui();
 	        	break;
-    		case 3:
-    			mod.setShowName(!mod.isShowNameToggled());
-            	this.initGui();
-            	break;
     		case 4:
     			mod.setShowHealth(!mod.isShowHealthToggled());
             	this.initGui();
@@ -51,9 +55,13 @@ public class GuiBossbar extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-		this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
-    	this.buttonList.add(this.createGuiCheckBox(3, mod.isShowNameToggled(), 3));
-    	this.buttonList.add(this.createGuiCheckBox(4, mod.isShowHealthToggled(), 4));
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isShowNameToggled(), 1));
+
+		if (mod.isShowNameToggled()) {
+			this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
+			this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
+		}
+    	
+    	this.buttonList.add(this.createGuiCheckBox(4, mod.isShowHealthToggled(), mod.isShowNameToggled() ? 4 : 2));
     }
 }

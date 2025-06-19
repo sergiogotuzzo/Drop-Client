@@ -27,10 +27,13 @@ public class GuiZoom extends GuiMod {
         this.writeOptionText("Cinematic Camera", 2);
         this.writeOptionText("Zoom Level", 3);
 		this.writeOptionValue(String.valueOf(mod.getZoomLevel()), 3);
-		this.writeOptionText("Zoom Level Min", 5);
-		this.writeOptionValue(String.valueOf(mod.getZoomLevelMin()), 5);
-		this.writeOptionText("Zoom Level Max", 7);
-		this.writeOptionValue(String.valueOf(mod.getZoomLevelMax()), 7);
+		
+		if (mod.isScrollToZoomToggled()) {
+			this.writeOptionText("Zoom Level Min", 5);
+			this.writeOptionValue(String.valueOf(mod.getZoomLevelMin()), 5);
+			this.writeOptionText("Zoom Level Max", 7);
+			this.writeOptionValue(String.valueOf(mod.getZoomLevelMax()), 7);
+		}
     }
     
     @Override
@@ -98,7 +101,10 @@ public class GuiZoom extends GuiMod {
     	this.buttonList.add(this.createGuiCheckBox(1, mod.isScrollToZoomToggled(), 1));
     	this.buttonList.add(this.createGuiCheckBox(2, mod.isSmoothCameraToggled(), 2));
 		this.buttonList.add(sliderZoomLevel = this.createGuiSlider(3, 64.0F, mod.getZoomLevel(), 4));
-		this.buttonList.add(sliderZoomLevelMin = this.createGuiSlider(4, 64.0F, mod.getZoomLevelMin(), 6));
-		this.buttonList.add(sliderZoomLevelMax = this.createGuiSlider(5, 64.0F, mod.getZoomLevelMax(), 8));
+		
+		if (mod.isScrollToZoomToggled()) {
+			this.buttonList.add(sliderZoomLevelMin = this.createGuiSlider(4, 64.0F, mod.getZoomLevelMin(), 6));
+			this.buttonList.add(sliderZoomLevelMax = this.createGuiSlider(5, 64.0F, mod.getZoomLevelMax(), 8));
+		}
     }
 }

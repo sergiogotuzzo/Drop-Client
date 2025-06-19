@@ -27,8 +27,11 @@ public class GuiHurtCam extends GuiMod {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	
     	this.writeOptionText("Hurt Shake", 1);
-    	this.writeOptionText("Hurt Shake Intensity", 2);
-    	this.writeOptionValue(String.format("%.1f", mod.getHurtShakeIntensity()), 2);
+    	
+    	if (mod.isHurtShakeToggled()) {
+    		this.writeOptionText("Hurt Shake Intensity", 2);
+        	this.writeOptionValue(String.format("%.1f", mod.getHurtShakeIntensity()), 2);
+    	}
     }
     
     @Override
@@ -64,6 +67,9 @@ public class GuiHurtCam extends GuiMod {
 		super.initGui();
 		
 		this.buttonList.add(this.createGuiCheckBox(1, mod.isHurtShakeToggled(), 1));
-		this.buttonList.add(sliderHurtShakeIntensity = this.createGuiSlider(2, 35.0F, mod.getHurtShakeIntensity(), 3));
+		
+		if (mod.isHurtShakeToggled()) {
+			this.buttonList.add(sliderHurtShakeIntensity = this.createGuiSlider(2, 35.0F, mod.getHurtShakeIntensity(), 3));
+		}
     }
 }

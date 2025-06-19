@@ -21,10 +21,14 @@ public class GuiPotionEffects extends GuiMod {
         this.writeOptionText("Duration Text Color", 1);
         this.writeOptionText("Duration Text Shadow", 2);
         this.writeOptionText("Show Name", 3);
-        this.writeOptionText("Name Text Color", 4);
-        this.writeOptionText("Name Text Shadow", 5);
-        this.writeOptionText("Show Icon", 6);
-        this.writeOptionText("Blink", 7);
+        
+        if (mod.isShowNameToggled()) {
+        	this.writeOptionText("Name Text Color", 4);
+            this.writeOptionText("Name Text Shadow", 5);
+        }
+        
+        this.writeOptionText("Show Icon", mod.isShowNameToggled() ? 6 : 4);
+        this.writeOptionText("Blink", mod.isShowNameToggled() ? 7 : 5);
     }
 
     @Override
@@ -68,9 +72,13 @@ public class GuiPotionEffects extends GuiMod {
         this.buttonList.add(this.createGuiRect(1, mod.getDurationTextColor().getRGB(), 1));
     	this.buttonList.add(this.createGuiCheckBox(2, mod.isDurationTextShadowToggled(), 2));
     	this.buttonList.add(this.createGuiCheckBox(3, mod.isShowNameToggled(), 3));
-        this.buttonList.add(this.createGuiRect(4, mod.getNameTextColor().getRGB(), 4));
-    	this.buttonList.add(this.createGuiCheckBox(5, mod.isNameTextShadowToggled(), 5));
-    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowIconToggled(), 6));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isBlinkToggled(), 7));
+        
+    	if (mod.isShowNameToggled()) {
+    		this.buttonList.add(this.createGuiRect(4, mod.getNameTextColor().getRGB(), 4));
+        	this.buttonList.add(this.createGuiCheckBox(5, mod.isNameTextShadowToggled(), 5));
+    	}
+    	
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowIconToggled(), mod.isShowNameToggled() ? 6 : 4));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isBlinkToggled(), mod.isShowNameToggled() ? 7 : 5));
     }
 }

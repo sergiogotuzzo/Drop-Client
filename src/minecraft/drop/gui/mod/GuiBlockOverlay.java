@@ -22,12 +22,19 @@ public class GuiBlockOverlay extends GuiMod {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		
 		this.writeOptionText("Outline", 1);
-		this.writeOptionText("Outline Color", 2);
-		this.writeOptionText("Outline Width", 3);
-		this.writeOptionValue(String.format("%.1f", mod.getOutlineWidth()), 3);
-		this.writeOptionText("Overlay", 5);
-		this.writeOptionText("Overlay Color", 6);
-    }
+		
+		if (mod.isOutlineToggled()) {
+			this.writeOptionText("Outline Color", 2);
+			this.writeOptionText("Outline Width", 3);
+			this.writeOptionValue(String.format("%.1f", mod.getOutlineWidth()), 3);
+		}
+		
+		this.writeOptionText("Overlay", mod.isOutlineToggled() ? 5 : 2);
+		
+		if (mod.isOverlayToggled()) {
+			this.writeOptionText("Overlay Color", mod.isOutlineToggled() ? 6 : 3);
+		}
+	}
     
     @Override
     public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
@@ -72,9 +79,16 @@ public class GuiBlockOverlay extends GuiMod {
 		super.initGui();
 		
     	this.buttonList.add(this.createGuiCheckBox(1, mod.isOutlineToggled(), 1));
-        this.buttonList.add(this.createGuiRect(2, mod.getOutlineColor().getRGB(), 2));
-    	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 5.0F, mod.getOutlineWidth(), 4));
-    	this.buttonList.add(this.createGuiCheckBox(4, mod.isOverlayToggled(), 5));
-    	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), 6));
-    }
+        
+    	if (mod.isOutlineToggled()) {
+    		this.buttonList.add(this.createGuiRect(2, mod.getOutlineColor().getRGB(), 2));
+        	this.buttonList.add(sliderOutlineWidth = this.createGuiSlider(3, 5.0F, mod.getOutlineWidth(), 4));
+    	}
+    	
+    	this.buttonList.add(this.createGuiCheckBox(4, mod.isOverlayToggled(), mod.isOutlineToggled() ? 5 : 2));
+
+    	if (mod.isOverlayToggled()) {
+        	this.buttonList.add(this.createGuiRect(5, mod.getOverlayColor().getRGB(), mod.isOutlineToggled() ? 6 : 3));
+    	}
+	}
 }

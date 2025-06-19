@@ -21,9 +21,12 @@ public class GuiTimeChanger extends GuiMod {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		
-        this.writeOptionText("Time", 1);
-        this.writeOptionValue(String.format("%.2f", mod.getTime()), 1);
-        this.writeOptionText("Use Real Current Time", 3);
+        if (!mod.isUseRealCurrentTimeToggled()) {
+        	this.writeOptionText("Time", 1);
+            this.writeOptionValue(String.format("%.2f", mod.getTime()), 1);
+        }
+		
+        this.writeOptionText("Use Real Current Time", !mod.isUseRealCurrentTimeToggled() ? 3 : 1);
     }
     
     @Override
@@ -50,7 +53,10 @@ public class GuiTimeChanger extends GuiMod {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(sliderTime = this.createGuiSlider(1, 1.0F, mod.getTime(), 2));
-    	this.buttonList.add(this.createGuiCheckBox(2, mod.isUseRealCurrentTimeToggled(), 3));
+		if (!mod.isUseRealCurrentTimeToggled()) {
+	    	this.buttonList.add(sliderTime = this.createGuiSlider(1, 1.0F, mod.getTime(), 2));
+		}
+		
+		this.buttonList.add(this.createGuiCheckBox(2, mod.isUseRealCurrentTimeToggled(), !mod.isUseRealCurrentTimeToggled() ? 3 : 1));
     }
 }

@@ -24,16 +24,35 @@ public class GuiToggleSprintSneak extends GuiMod {
 		super.drawScreen(mouseX, mouseY, partialTicks);
         
         this.writeOptionText("Show Text", 1);
-		this.writeOptionText("Text Color", 2);
-    	this.writeOptionText("Text Shadow", 3);
-    	this.writeOptionText("Show Background", 4);
-    	this.writeOptionText("Brackets", 5);
-    	this.writeSelectedOptionValue(mod.getBrackets().getName(), 5);
-        this.writeOptionText("Toggle Sprint", 6);
-        this.writeOptionText("Toggle Sneak", 7);
-        this.writeOptionText("Fly Boost", 8);
-        this.writeOptionText("Fly Boost Factor", 9);
-        this.writeOptionValue(String.format("%.1f", mod.getFlyBoostFactor()), 9);
+		
+        if (mod.isShowTextToggled()) {
+        	this.writeOptionText("Text Color", 2);
+        	this.writeOptionText("Text Shadow", 3);
+        }
+        
+    	this.writeOptionText("Show Background", mod.isShowTextToggled() ? 4 : 2);
+    	
+    	if (!mod.isShowBackgroundToggled()) {
+    		this.writeOptionText("Brackets", mod.isShowTextToggled() ? 5 : 3);
+        	this.writeSelectedOptionValue(mod.getBrackets().getName(), mod.isShowTextToggled() ? 5 : 3);
+        	this.writeOptionText("Toggle Sprint", mod.isShowTextToggled() ? 6 : 4);
+            this.writeOptionText("Toggle Sneak", mod.isShowTextToggled() ? 7 : 5);
+            this.writeOptionText("Fly Boost", mod.isShowTextToggled() ? 8 : 6);
+            
+            if (mod.isFlyBoostToggled()) {
+            	this.writeOptionText("Fly Boost Factor", mod.isShowTextToggled() ? 9 : 7);
+                this.writeOptionValue(String.format("%.1f", mod.getFlyBoostFactor()), mod.isShowTextToggled() ? 9 : 7);
+            }
+    	} else {
+    		this.writeOptionText("Toggle Sprint", mod.isShowTextToggled() ? 5 : 3);
+            this.writeOptionText("Toggle Sneak", mod.isShowTextToggled() ? 6 : 4);
+            this.writeOptionText("Fly Boost", mod.isShowTextToggled() ? 7 : 5);
+            
+            if (mod.isFlyBoostToggled()) {
+            	this.writeOptionText("Fly Boost Factor", mod.isShowTextToggled() ? 8 : 6);
+                this.writeOptionValue(String.format("%.1f", mod.getFlyBoostFactor()), mod.isShowTextToggled() ? 8 : 6);
+            }
+    	}
     }
     
     @Override
@@ -100,14 +119,32 @@ public class GuiToggleSprintSneak extends GuiMod {
         super.initGui();
         
     	this.buttonList.add(this.createGuiCheckBox(1, mod.isShowTextToggled(), 1));
-    	this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
-		this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
-		this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBackgroundToggled(), 4));
-		this.buttonList.add(this.createGuiTextLeftArrow(5, mod.getBrackets().getName(), 5));
-		this.buttonList.add(this.createGuiTextRightArrow(6, 5));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSprintToggled(), 6));
-    	this.buttonList.add(this.createGuiCheckBox(8, mod.isToggleSneakToggled(), 7));
-    	this.buttonList.add(this.createGuiCheckBox(9, mod.isFlyBoostToggled(), 8));
-    	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(10, 8.0F, mod.getFlyBoostFactor(), 10));
-    }
+    	
+    	if (mod.isShowTextToggled()) {
+    		this.buttonList.add(this.createGuiRect(2, mod.getTextColor().getRGB(), 2));
+    		this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
+    	}
+    	
+		this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBackgroundToggled(), mod.isShowTextToggled() ? 4 : 2));
+		
+		if (!mod.isShowBackgroundToggled()) {
+			this.buttonList.add(this.createGuiTextLeftArrow(5, mod.getBrackets().getName(), mod.isShowTextToggled() ? 5 : 3));
+			this.buttonList.add(this.createGuiTextRightArrow(6, mod.isShowTextToggled() ? 5 : 3));
+			this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSprintToggled(), mod.isShowTextToggled() ? 6 : 4));
+	    	this.buttonList.add(this.createGuiCheckBox(8, mod.isToggleSneakToggled(), mod.isShowTextToggled() ? 7 : 5));
+	    	this.buttonList.add(this.createGuiCheckBox(9, mod.isFlyBoostToggled(), mod.isShowTextToggled() ? 8 : 6));
+
+	    	if (mod.isFlyBoostToggled()) {
+	        	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(10, 8.0F, mod.getFlyBoostFactor(), mod.isShowTextToggled() ? 10 : 8));
+	    	}
+		} else {
+			this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSprintToggled(), mod.isShowTextToggled() ? 5 : 3));
+	    	this.buttonList.add(this.createGuiCheckBox(8, mod.isToggleSneakToggled(), mod.isShowTextToggled() ? 6 : 4));
+	    	this.buttonList.add(this.createGuiCheckBox(9, mod.isFlyBoostToggled(), mod.isShowTextToggled() ? 7 : 5));
+
+	    	if (mod.isFlyBoostToggled()) {
+	        	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(10, 8.0F, mod.getFlyBoostFactor(), mod.isShowTextToggled() ? 9 : 7));
+	    	}
+		}
+	}
 }
