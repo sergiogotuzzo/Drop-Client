@@ -27,6 +27,7 @@ public class GuiCPSDisplay extends GuiModDraggableDisplayText {
     	super.actionPerformed(button);
     	
         if (button.id == 5) {
+        if (button.id == 6) {
         	mod.setShowRightCPS(!mod.isShowRightCPSToggled());
         	this.initGui();
         }
@@ -36,6 +37,6 @@ public class GuiCPSDisplay extends GuiModDraggableDisplayText {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowRightCPSToggled(), 5));
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowRightCPSToggled(), mod.isShowBackgroundToggled() ? 4 : 5));
     }
 }
