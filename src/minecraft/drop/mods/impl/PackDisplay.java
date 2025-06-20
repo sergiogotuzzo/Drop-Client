@@ -65,10 +65,10 @@ public class PackDisplay extends ModDraggable {
 			width += 28;
 		}
 		
-		if (showDescription) {
-			width += font.getStringWidth(mc.getResourcePackRepository().getRepositoryEntries().isEmpty() ? DefaultPack.getPackDescription() : getLongestSelectedPackDescription());
+		if (mc.getResourcePackRepository().getRepositoryEntries().isEmpty()) {
+			width += font.getStringWidth((showDescription ? DefaultPack.getPackDescription() : DefaultPack.getPackName()));
 		} else {
-			width += font.getStringWidth(mc.getResourcePackRepository().getRepositoryEntries().isEmpty() ? DefaultPack.getPackName() : getLongestSelectedPackName());
+			width += font.getStringWidth(getLongestPackText());
 		}
 		
 		return width;
@@ -174,6 +174,21 @@ public class PackDisplay extends ModDraggable {
 		if (showDescription) {
 			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, descriptionTextColor.isChromaToggled());
 		}
+	}
+	
+	private String getLongestPackText() {
+		String longestName = getLongestSelectedPackName();
+		String longestDescription = getLongestSelectedPackDescription();
+		
+		String longest = longestName;
+		
+		if (showDescription) {
+			if (font.getStringWidth(longestDescription) > font.getStringWidth(longest)) {
+				longest = longestDescription;
+			}
+		}
+		
+		return longest;
 	}
 	
 	private String getLongestSelectedPackName() {
