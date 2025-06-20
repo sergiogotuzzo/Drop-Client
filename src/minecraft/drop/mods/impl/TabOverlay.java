@@ -26,6 +26,8 @@ public class TabOverlay extends Mod {
 	private boolean showPlayerHeads = true;
 	private boolean hidePing = false;
 	private boolean pingNumbers = false;
+	private boolean showHeader = true;
+	private boolean showFooter = true;
 	
 	public TabOverlay() {
 		super(true);
@@ -323,5 +325,25 @@ public class TabOverlay extends Mod {
 	
 	public boolean isPingNumbersToggled() {
 		return pingNumbers;
+	}
+
+	public void setShowHeader(boolean toggled) {
+		this.showHeader = toggled;
+		
+		setToFile("showHeader", toggled);
+	}
+	
+	public boolean isShowHeaderToggled() {
+		return showHeader;
+	}
+
+	public void setShowFooter(boolean toggled) {
+		this.showFooter = toggled;
+		
+		setToFile("showFooter", toggled);
+	}
+	
+	public boolean isShowFooterToggled() {
+		return showFooter;
 	}
 }

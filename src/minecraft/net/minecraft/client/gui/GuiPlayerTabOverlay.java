@@ -130,21 +130,25 @@ public class GuiPlayerTabOverlay extends Gui
 
         if (this.header != null)
         {
-            list1 = this.mc.fontRendererObj.listFormattedStringToWidth(this.header.getFormattedText(), width - 50);
+            if (ModInstances.getTabOverlayMod().isEnabled() && ModInstances.getTabOverlayMod().isShowHeaderToggled() || !ModInstances.getTabOverlayMod().isEnabled()) {
+            	list1 = this.mc.fontRendererObj.listFormattedStringToWidth(this.header.getFormattedText(), width - 50);
 
-            for (String s : list1)
-            {
-                l1 = Math.max(l1, this.mc.fontRendererObj.getStringWidth(s));
+                for (String s : list1)
+                {
+                    l1 = Math.max(l1, this.mc.fontRendererObj.getStringWidth(s));
+                }
             }
         }
 
         if (this.footer != null)
         {
-            list2 = this.mc.fontRendererObj.listFormattedStringToWidth(this.footer.getFormattedText(), width - 50);
+            if (ModInstances.getTabOverlayMod().isEnabled() && ModInstances.getTabOverlayMod().isShowFooterToggled() || !ModInstances.getTabOverlayMod().isEnabled()) {
+            	list2 = this.mc.fontRendererObj.listFormattedStringToWidth(this.footer.getFormattedText(), width - 50);
 
-            for (String s2 : list2)
-            {
-                l1 = Math.max(l1, this.mc.fontRendererObj.getStringWidth(s2));
+                for (String s2 : list2)
+                {
+                    l1 = Math.max(l1, this.mc.fontRendererObj.getStringWidth(s2));
+                }
             }
         }
 

@@ -28,6 +28,8 @@ public class GuiTabOverlay extends GuiMod {
         }
         
         this.writeOptionText("Show Player Heads", !mod.isHidePingToggled() ? 5 : 2);
+        this.writeOptionText("Show Header", !mod.isHidePingToggled() ? 6 : 3);
+        this.writeOptionText("Show Footer", !mod.isHidePingToggled() ? 7 : 4);
     }
 
     @Override
@@ -54,6 +56,14 @@ public class GuiTabOverlay extends GuiMod {
             	mod.setShowPlayerHeads(!mod.isShowPlayerHeadsToggled());
             	this.initGui();
             	break;
+            case 6:
+            	mod.setShowHeader(!mod.isShowHeaderToggled());
+            	this.initGui();
+            	break;
+            case 7:
+            	mod.setShowFooter(!mod.isShowFooterToggled());
+            	this.initGui();
+            	break;
         }
     }
 	
@@ -70,5 +80,7 @@ public class GuiTabOverlay extends GuiMod {
     	}
     	
     	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowPlayerHeadsToggled(), !mod.isHidePingToggled() ? 5 : 2));
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowHeaderToggled(), !mod.isHidePingToggled() ? 6 : 3));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowFooterToggled(), !mod.isHidePingToggled() ? 7 : 4));
     }
 }
