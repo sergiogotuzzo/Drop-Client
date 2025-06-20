@@ -21,10 +21,15 @@ public class GuiParticles extends GuiMod {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		
-		this.writeOptionText("Show Criticals", 1);
-		this.writeOptionText("Always Sharpness", 2);
-		this.writeOptionText("Multiplier Factor", 3);
-		this.writeOptionValue(String.valueOf(mod.getMultiplierFactor()), 3);
+		this.writeOptionText("Affect Criticals", 1);
+		this.writeOptionText("Affect Sharpness", 2);
+		
+		if (mod.isAffectSharpnessToggled()) {
+			this.writeOptionText("Always Sharpness", 3);
+		}
+		
+		this.writeOptionText("Multiplier Factor", mod.isAffectSharpnessToggled() ? 4 : 3);
+		this.writeOptionValue(String.valueOf(mod.getMultiplierFactor()), mod.isAffectSharpnessToggled() ? 4 : 3);
     }
     
     @Override
@@ -41,15 +46,19 @@ public class GuiParticles extends GuiMod {
     	super.actionPerformed(button);
     	
         switch (button.id) {
-            case 1:
-            	mod.setShowCriticals(!mod.isShowCriticalsToggled());
-            	this.initGui();
-            	break;
-            case 2:
-            	mod.setAlwaysSharpness(!mod.isAlwaysSharpnessToggled());
+	        case 1:
+	        	mod.setAffectCriticals(!mod.isAffectCriticalsToggled());
+	        	this.initGui();
+	        	break;
+        	case 2:
+            	mod.setAffectSharpness(!mod.isAffectSharpnessToggled());
             	this.initGui();
             	break;
             case 3:
+            	mod.setAlwaysSharpness(!mod.isAlwaysSharpnessToggled());
+            	this.initGui();
+            	break;
+            case 4:
             	mod.setMultiplierFactor((int) (sliderMultiplierFactor.getSliderPosition() * 10.0F));
             	
             	if (mod.getMultiplierFactor() < 1) {
@@ -63,8 +72,13 @@ public class GuiParticles extends GuiMod {
     public void initGui() {
 		super.initGui();
 		
-    	this.buttonList.add(this.createGuiCheckBox(1, mod.isShowCriticalsToggled(), 1));
-        this.buttonList.add(this.createGuiCheckBox(2, mod.isAlwaysSharpnessToggled(), 2));
-    	this.buttonList.add(sliderMultiplierFactor = this.createGuiSlider(3, 10.0F, mod.getMultiplierFactor(), 4));
+    	this.buttonList.add(this.createGuiCheckBox(1, mod.isAffectCriticalsToggled(), 1));
+    	this.buttonList.add(this.createGuiCheckBox(2, mod.isAffectSharpnessToggled(), 2));
+
+    	if (mod.isAffectSharpnessToggled()) {
+            this.buttonList.add(this.createGuiCheckBox(3, mod.isAlwaysSharpnessToggled(), 3));
+    	}
+    	
+    	this.buttonList.add(sliderMultiplierFactor = this.createGuiSlider(4, 10.0F, mod.getMultiplierFactor(), mod.isAffectSharpnessToggled() ? 5 : 4));
     }
 }

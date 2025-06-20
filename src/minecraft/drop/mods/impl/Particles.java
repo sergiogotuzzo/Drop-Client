@@ -5,14 +5,16 @@ import drop.gui.mod.GuiParticles;
 import drop.mods.Mod;
 
 public class Particles extends Mod {
-	private boolean showCriticals = true;
+	private boolean affectCriticals = true;
+	private boolean affectSharpness = true;
 	private boolean alwaysSharpness = false;
 	private int multiplierFactor = 1;
 	
 	public Particles() {
 		super(false);
 		
-		setShowCriticals(getBooleanFromFile("showCriticals", showCriticals));
+		setAffectCriticals(getBooleanFromFile("affectCriticals", affectCriticals));
+		setAffectSharpness(getBooleanFromFile("affectSharpness", affectSharpness));
 		setAlwaysSharpness(getBooleanFromFile("alwaysSharpness", alwaysSharpness));
 		setMultiplierFactor(getIntFromFile("multiplierFactor", multiplierFactor));
 	}
@@ -22,14 +24,24 @@ public class Particles extends Mod {
 		return new GuiParticles(previousGuiScreen);
 	}
 	
-	public void setShowCriticals(boolean toggled) {
-		this.showCriticals = toggled;
+	public void setAffectCriticals(boolean toggled) {
+		this.affectCriticals = toggled;
 		
-		setToFile("showCriticals", toggled);
+		setToFile("affectCriticals", toggled);
 	}
 	
-	public boolean isShowCriticalsToggled() {
-		return showCriticals;
+	public boolean isAffectCriticalsToggled() {
+		return affectCriticals;
+	}
+	
+	public void setAffectSharpness(boolean toggled) {
+		this.affectSharpness = toggled;
+		
+		setToFile("affectSharpness", toggled);
+	}
+	
+	public boolean isAffectSharpnessToggled() {
+		return affectSharpness;
 	}
 	
 	public void setAlwaysSharpness(boolean toggled) {

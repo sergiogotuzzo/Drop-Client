@@ -1360,7 +1360,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                     if (flag2)
                     {
-                    	if (ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isAlwaysSharpnessToggled()) {
+                    	if (ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isAlwaysSharpnessToggled() && ModInstances.getParticlesMod().isAffectSharpnessToggled()) {
                     		this.onEnchantmentCritical(targetEntity);
                     	}
                     	
@@ -1383,14 +1383,16 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                         if (flag)
                         {
-                            if (!ModInstances.getParticlesMod().isEnabled() || ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isShowCriticalsToggled()) {
+                            if (!ModInstances.getParticlesMod().isEnabled() || ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isAffectCriticalsToggled()) {
                             	this.onCriticalHit(targetEntity);
                             }
                         }
 
                         if (f1 > 0.0F)
                         {
-                        	this.onEnchantmentCritical(targetEntity);
+                        	if (!ModInstances.getParticlesMod().isEnabled() || ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().isAffectSharpnessToggled()) {
+                            	this.onEnchantmentCritical(targetEntity);
+                            }
                         }
 
                         if (f >= 18.0F)
