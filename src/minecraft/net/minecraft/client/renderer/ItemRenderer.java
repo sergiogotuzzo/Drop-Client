@@ -315,19 +315,10 @@ public class ItemRenderer
     		if (oldVisualMod.isBowToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
     			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
     		}
-    		
-    		if (oldVisualMod.isBowToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
-    			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
-    		}
 
     		if (oldVisualMod.isFishingRodToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
     			GlStateManager.translate(0.08f, -0.027f, -0.33f);
     			GlStateManager.scale(0.93f, 1.0f, 1.0f);
-    		}
-
-    		if (oldVisualMod.isBlockHittingToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.isSwingInProgress && this.mc.thePlayer.getCurrentEquippedItem() != null && !this.mc.thePlayer.isEating() && !this.mc.thePlayer.isBlocking()) {
-    			GlStateManager.scale(0.85f, 0.85f, 0.85f);
-    			GlStateManager.translate(-0.078f, 0.003f, 0.05f);
     		}
     	}
 		
