@@ -44,16 +44,18 @@ public class GuiZoom extends GuiMod {
     		mod.setZoomLevel(4);
     	}
     	
-    	mod.setZoomLevelMin((int) (sliderZoomLevelMin.getSliderPosition() * 64.0F));
-    	
-    	if (mod.getZoomLevelMin() < 1) {
-    		mod.setZoomLevelMin(1);
-    	}
-    	
-    	mod.setZoomLevelMax((int) (sliderZoomLevelMax.getSliderPosition() * 64.0F));
-    	
-    	if (mod.getZoomLevelMax() < 4) {
-    		mod.setZoomLevelMax(4);
+    	if (mod.isScrollToZoomToggled()) {
+    		mod.setZoomLevelMin((int) (sliderZoomLevelMin.getSliderPosition() * 64.0F));
+        	
+        	if (mod.getZoomLevelMin() < 1) {
+        		mod.setZoomLevelMin(1);
+        	}
+        	
+        	mod.setZoomLevelMax((int) (sliderZoomLevelMax.getSliderPosition() * 64.0F));
+        	
+        	if (mod.getZoomLevelMax() < 4) {
+        		mod.setZoomLevelMax(4);
+        	}
     	}
     }
 
