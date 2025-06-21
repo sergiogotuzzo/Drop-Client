@@ -6,7 +6,7 @@ import drop.mods.ModDraggableDisplayText;
 
 public class ReachDisplay extends ModDraggableDisplayText {
 	public ReachDisplay() {
-		super(false, 0.5, 0.5, "0,0 blocks");
+		super(false, 0.5, 0.5, "0,00 blocks");
 	}
 	
 	float range = 0.0F;
@@ -18,7 +18,7 @@ public class ReachDisplay extends ModDraggableDisplayText {
 			this.range = 0.0F;
 		}
 				
-		drawTextToRender(pos, String.format("%.1f", range) + " blocks");
+		drawTextToRender(pos, String.format("%.2f", range) + " blocks");
 	}
 	
 	public void onEntityHit(Entity entity) {
