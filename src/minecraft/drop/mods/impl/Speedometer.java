@@ -3,8 +3,8 @@ package drop.mods.impl;
 import drop.mods.hud.ScreenPosition;
 import drop.mods.ModDraggableDisplayText;
 
-public class BPSDisplay extends ModDraggableDisplayText {
-	public BPSDisplay() {
+public class Speedometer extends ModDraggableDisplayText {
+	public Speedometer() {
 		super(false, 0.5, 0.5, "0,00 m/s");
 	}
 

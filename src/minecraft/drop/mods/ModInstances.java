@@ -6,7 +6,7 @@ import java.util.List;
 
 import drop.mods.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
-import drop.mods.impl.BPSDisplay;
+import drop.mods.impl.Speedometer;
 import drop.mods.impl.BlockOverlay;
 import drop.mods.impl.NoBobbing;
 import drop.mods.impl.NoHotbarScrolling;
@@ -56,7 +56,7 @@ public class ModInstances {
 	private static DayCounter dayCounterMod;
 	private static PackDisplay packDisplayMod;
 	private static ServerAddress serverAddressMod;
-	private static BPSDisplay bpsDisplayMod;
+	private static Speedometer speedometerMod;
 	private static ComboCounter comboCounterMod;
 	private static ReachDisplay reachDisplayMod;
 	private static Freelook freelookMod = new Freelook();
@@ -93,7 +93,7 @@ public class ModInstances {
 		manager.register(dayCounterMod = new DayCounter());
 		manager.register(packDisplayMod = new PackDisplay());
 		manager.register(serverAddressMod = new ServerAddress());
-		manager.register(bpsDisplayMod = new BPSDisplay());
+		manager.register(speedometerMod = new Speedometer());
 		manager.register(comboCounterMod = new ComboCounter());
 		manager.register(reachDisplayMod = new ReachDisplay());
 		manager.register(bossbarMod = new Bossbar());
@@ -156,8 +156,8 @@ public class ModInstances {
 		return serverAddressMod;
 	}
 	
-	public static BPSDisplay getBPSDisplayMod() {
-		return bpsDisplayMod;
+	public static Speedometer getSpeedometerMod() {
+		return speedometerMod;
 	}
 	
 	public static ComboCounter getComboCounterMod() {
@@ -245,7 +245,6 @@ public class ModInstances {
 			    getArmorStatusMod(),
 			    getBlockOverlayMod(),
 			    getBossbarMod(),
-			    getBPSDisplayMod(),
 			    getChatMod(),
 			    getClockMod(),
 			    getComboCounterMod(),
@@ -273,6 +272,7 @@ public class ModInstances {
 			    getReachDisplayMod(),
 			    getScoreboardMod(),
 			    getServerAddressMod(),
+			    getSpeedometerMod(),
 			    getTabOverlayMod(),
 			    getTimeChangerMod(),
 			    getToggleSprintSneakMod(),
