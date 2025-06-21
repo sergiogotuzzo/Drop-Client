@@ -27,7 +27,7 @@ public class GuiArmorStatus extends GuiMod {
     	if (!mod.isShowPercentageToggled() && !mod.isShowDamageToggled()) {
         	this.writeOptionText("Show Percentage", 1);
             this.writeOptionText("Show Damage", 2);
-    	} else if (mod.isShowPercentageToggled() && !mod.isShowDamageToggled()) {
+    	} else if (mod.isShowPercentageToggled()) {
         	this.writeOptionText("Show Percentage", 3);
     	} else if (!mod.isShowPercentageToggled() && mod.isShowDamageToggled()) {
     		this.writeOptionText("Show Damage", 3);
@@ -85,7 +85,7 @@ public class GuiArmorStatus extends GuiMod {
 		if (!mod.isShowPercentageToggled() && !mod.isShowDamageToggled()) {
 			this.buttonList.add(this.createGuiCheckBox(3, mod.isShowPercentageToggled(), 1));
 			this.buttonList.add(this.createGuiCheckBox(4, mod.isShowDamageToggled(), 2));
-    	} else if (mod.isShowPercentageToggled() && !mod.isShowDamageToggled()) {
+    	} else if (mod.isShowPercentageToggled()) {
     		this.buttonList.add(this.createGuiCheckBox(3, mod.isShowPercentageToggled(), 3));
     	} else if (!mod.isShowPercentageToggled() && mod.isShowDamageToggled()) {
     		this.buttonList.add(this.createGuiCheckBox(4, mod.isShowDamageToggled(), 3));
