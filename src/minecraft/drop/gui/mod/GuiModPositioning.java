@@ -56,26 +56,24 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	    
 	    for (IRenderer renderer : renderers.keySet()) {
 	        ScreenPosition pos = renderers.get(renderer);
-	        
+	        	        
 	        renderer.renderDummy(pos);
 	    }
 	    
-	    if (selectedRenderer.isPresent()) {
-	    	drawHollowRect(marginX, marginY, this.width - marginX * 2 - 1, this.height - marginY * 2 - 1, Color.CYAN.getRGB());
-	    	
+	    if (selectedRenderer.isPresent()) {	    	
 	    	ScreenPosition pos = renderers.get(selectedRenderer.get());
-	    	
+
 	    	int gap = 3;
 	        
 	    	if ((pos.getAbsoluteX() + selectedRenderer.get().getWidth()) >= this.width / 2 - gap && pos.getAbsoluteX() <= this.width / 2 + gap) {
-	    		drawVerticalLine(this.width / 2, 0 + marginY, this.height - marginY, Color.CYAN.getRGB());
+	    		drawVerticalLine(this.width / 2, 0, this.height, Color.WHITE.getRGB());
 	    	}
 	        
 	    	if ((pos.getAbsoluteY() + selectedRenderer.get().getHeight()) >= this.height / 2 - gap && pos.getAbsoluteY() <= this.height / 2 + gap) {
-	    		drawHorizontalLine(0 + marginX, this.width - marginX - 1, this.height / 2, Color.CYAN.getRGB());
+	    		drawHorizontalLine(0, this.width - 1, this.height / 2, Color.WHITE.getRGB());
 	    	}
-	        
-	    	drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth(), selectedRenderer.get().getHeight(), Color.MAGENTA.getRGB());
+	    	
+		    drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth(), selectedRenderer.get().getHeight(), Color.CYAN.getRGB());
 	    }
 
 	    this.zLevel = zBackup;
