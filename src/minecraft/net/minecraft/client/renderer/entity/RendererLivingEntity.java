@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 
 import drop.ColorManager;
 import drop.mods.ModInstances;
-import drop.mods.impl.OldVisuals;
+import drop.mods.impl.HitColor;
 
 import java.awt.Color;
 import java.nio.FloatBuffer;
@@ -422,23 +422,27 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
             if (flag1)
             {
-            	OldVisuals oldVisualsMod = ModInstances.getOldVisualsMod();
+            	HitColor hitColorMod = ModInstances.getHitColorMod();
             	
             	float red = 255.0F;
             	float green = 0.0F;
             	float blue = 0.0F;
-            	float alpha = oldVisualsMod.isEnabled() ? oldVisualsMod.getHitArmorColor().getAlpha() : 76.0F;
+            	float alpha = 76.0F;
             	
-            	if (oldVisualsMod.isHitArmorChromaToggled()) {
-                	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
+            	if (hitColorMod.isEnabled()) {
+            		if (hitColorMod.isHitColorChromaToggled()) {
+                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
-                	red = chromaColor.getRed();
-                	green = chromaColor.getGreen();
-                	blue = chromaColor.getBlue();
-            	} else {
-            		red = oldVisualsMod.getHitArmorColor().getRed();
-            		green = oldVisualsMod.getHitArmorColor().getGreen();
-            		blue = oldVisualsMod.getHitArmorColor().getBlue();
+                    	red = chromaColor.getRed();
+                    	green = chromaColor.getGreen();
+                    	blue = chromaColor.getBlue();
+                    	alpha = hitColorMod.getHitColor().getAlpha();
+                	} else {
+                		red = hitColorMod.getHitColor().getRed();
+                		green = hitColorMod.getHitColor().getGreen();
+                		blue = hitColorMod.getHitColor().getBlue();
+                    	alpha = hitColorMod.getHitColor().getAlpha();
+                	}
             	}
             	
                 this.brightnessBuffer.put(red / 255.0F);

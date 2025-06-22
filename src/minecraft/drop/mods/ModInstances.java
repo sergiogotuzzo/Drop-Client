@@ -21,6 +21,7 @@ import drop.mods.impl.DayCounter;
 import drop.mods.impl.FPSDisplay;
 import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
+import drop.mods.impl.HitColor;
 import drop.mods.impl.HurtCam;
 import drop.mods.impl.Keystrokes;
 import drop.mods.impl.LeftHand;
@@ -77,6 +78,7 @@ public class ModInstances {
 	private static NoHotbarScrolling noHotbarScrollingMod = new NoHotbarScrolling();
 	private static Particles particlesMod = new Particles();
 	private static NoAchievementNotifications noAchievementNotificationsMod = new NoAchievementNotifications();
+	private static HitColor hitColorMod = new HitColor();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -240,6 +242,10 @@ public class ModInstances {
 		return noAchievementNotificationsMod;
 	}
 	
+	public static HitColor getHitColorMod() {
+		return hitColorMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -254,6 +260,7 @@ public class ModInstances {
 			    getFPSDisplayMod(),
 			    getFullbrightMod(),
 			    getFreelookMod(),
+			    getHitColorMod(),
 			    getHurtCamMod(),
 			    getKeystrokesMod(),
 			    getLeftHandMod(),

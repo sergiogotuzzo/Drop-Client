@@ -22,7 +22,6 @@ public class GuiOldVisuals extends GuiMod {
         this.writeOptionText("Bow", 2);
         this.writeOptionText("Block Hitting", 3);
         this.writeOptionText("Armor Hit Animation", 4);
-        this.writeOptionText("Hit Armor Color", 5);
     }
 
     @Override
@@ -46,9 +45,6 @@ public class GuiOldVisuals extends GuiMod {
             	mod.setArmorHitAnimation(!mod.isArmorHitAnimationToggled());
             	this.initGui();
             	break;
-            case 5:
-            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getHitArmorColor(), "hitArmorColor", "hitArmorChroma", "Hit Armor Color", true));
-            	break;
         }
     }
 	
@@ -60,6 +56,5 @@ public class GuiOldVisuals extends GuiMod {
     	this.buttonList.add(this.createGuiCheckBox(2, mod.isBowToggled(), 2));
     	this.buttonList.add(this.createGuiCheckBox(3, mod.isBlockHittingToggled(), 3));
     	this.buttonList.add(this.createGuiCheckBox(4, mod.isArmorHitAnimationToggled(), 4));
-        this.buttonList.add(this.createGuiRect(5, mod.getHitArmorColor().getRGB(), 5));
     }
 }

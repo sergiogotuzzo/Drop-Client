@@ -14,7 +14,6 @@ public class OldVisuals extends Mod {
 	private boolean bow = true;
 	private boolean blockHitting = true;
 	private boolean armorHitAnimation = true;
-	private ColorManager hitArmorColor = ColorManager.fromColor(Color.RED, false).setAlpha(76);
 	
 	public OldVisuals() {
 		super(true);
@@ -23,8 +22,6 @@ public class OldVisuals extends Mod {
 		setBow(getBooleanFromFile("bow", bow));
 		setBlockHitting(getBooleanFromFile("blockHitting", blockHitting));
 		setArmorHitAnimation(getBooleanFromFile("armorHitAnimation", armorHitAnimation));
-		setHitArmorColor(getIntFromFile("hitArmorColor", hitArmorColor.getRGB()));
-		setHitArmorChroma(getBooleanFromFile("hitArmorChroma", hitArmorColor.isChromaToggled()));
 	}
 	
 	@Override
@@ -70,25 +67,5 @@ public class OldVisuals extends Mod {
 	
 	public boolean isArmorHitAnimationToggled() {
 		return armorHitAnimation;
-	}
-	
-	public void setHitArmorColor(int rgb) {
-		this.hitArmorColor = ColorManager.fromRGB(rgb, hitArmorColor.isChromaToggled());
-		
-		setToFile("hitArmorColor", rgb);
-	}
-	
-	public ColorManager getHitArmorColor() {
-		return hitArmorColor;
-	}
-	
-	public void setHitArmorChroma(boolean toggled) {
-		hitArmorColor.setChromaToggled(toggled);
-		
-		setToFile("hitArmorChroma", toggled);
-	}
-	
-	public boolean isHitArmorChromaToggled() {
-		return hitArmorColor.isChromaToggled();
 	}
 }
