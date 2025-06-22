@@ -64,18 +64,18 @@ public abstract class GuiDropClientScreen extends GuiScreen {
 	}
 	
 	protected GuiCheckBox createGuiCheckBox(int id, boolean toggled, int line) {
-    	return new GuiCheckBox(id, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), toggled);
+    	return new GuiCheckBox(id, (this.width + 350) / 2 - 15 - 13, (this.height - 250) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), toggled);
 	}
 	
 	protected GuiRect createGuiRect(int id, int color, int line) {
-    	return new GuiRect(id, (this.width + 300) / 2 - 15 - 13, (this.height - 200) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), color);
+    	return new GuiRect(id, (this.width + 350) / 2 - 15 - 13, (this.height - 250) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), color);
 	}
 	
 	protected GuiSlider createGuiSlider(int id, float max, float defaultValue, int line) {
-    	return new GuiSlider(id, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 1 + 15 * (line - 1), 300 - 15 * 2, 5, 0.0F, max, defaultValue);
+    	return new GuiSlider(id, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 1 + 15 * (line - 1), 350 - 15 * 2, 5, 0.0F, max, defaultValue);
 	}
 	
 	protected GuiText createGuiText(int id, String text, boolean right, int line) {
-    	return new GuiText(id, right ? (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(text) : (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), text);
+    	return new GuiText(id, right ? (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(text) : (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), text);
 	}
 }

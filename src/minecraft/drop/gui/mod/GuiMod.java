@@ -26,9 +26,9 @@ public class GuiMod extends GuiDropClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	this.drawDefaultBackground();
     	
-    	this.drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
+    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
         
-        this.drawScaledText(mod.getName(), (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
+        this.drawScaledText(mod.getName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -46,34 +46,34 @@ public class GuiMod extends GuiDropClientScreen {
 
         this.buttonList.clear();
 
-        this.buttonList.add(new GuiButton(0, (this.width + 300) / 2 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiButton(0, (this.width + 350) / 2 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
     }
 	
 	protected void writeOptionText(String text, int line) {
-        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+        this.drawText(text, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
 	}
 	
 	protected void writeOptionText(String text, int line, boolean chroma) {
-        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, chroma);
+        this.drawText(text, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, chroma);
 	}
 	
 	protected void writeOptionText(String text, int line, int color) {
-        this.drawText(text, (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), color, true, false);
+        this.drawText(text, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), color, true, false);
 	}
 	
 	protected void writeOptionValue(String text, int line) {
-        this.drawText(text, (this.width + 300) / 2 - mc.fontRendererObj.getStringWidth(text) - 15, (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+        this.drawText(text, (this.width + 350) / 2 - mc.fontRendererObj.getStringWidth(text) - 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
 	}
 	
 	protected void writeSelectedOptionValue(String text, int line) {
-        this.drawText(text, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text), (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+        this.drawText(text, (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text), (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
 	}
 	
 	protected GuiText createGuiTextLeftArrow(int id, String text, int line) {
-    	return new GuiText(id, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text) - 5 - mc.fontRendererObj.getStringWidth("<"), (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), "<");
+    	return new GuiText(id, (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text) - 5 - mc.fontRendererObj.getStringWidth("<"), (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), "<");
 	}
 	
 	protected GuiText createGuiTextRightArrow(int id, int line) {
-    	return new GuiText(id, (this.width + 300) / 2 - 15 - mc.fontRendererObj.getStringWidth(">"), (this.height - 200) / 2 + 30 + 15 + 15 * (line - 1), ">");
+    	return new GuiText(id, (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(">"), (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), ">");
 	}
 }

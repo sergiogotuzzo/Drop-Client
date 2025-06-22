@@ -48,9 +48,9 @@ public class GuiMods extends GuiDropClientScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	this.drawDefaultBackground();
     	
-    	this.drawRect((this.width - 300) / 2, (this.height - 200) / 2, (this.width - 300) / 2 + 300, (this.height - 200) / 2 + 200, new Color(0, 0, 0, 127).getRGB());
+    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
         
-    	this.drawScaledText("Mods", (this.width - 300) / 2 + 15, (this.height - 200) / 2 + 15, 2.0, 0xFFFFFFFF, true, false);
+    	this.drawScaledText("Mods", (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0, 0xFFFFFFFF, true, false);
 
     	this.textFieldSearchMod.drawTextBox();
 
@@ -109,9 +109,9 @@ public class GuiMods extends GuiDropClientScreen {
     	
         this.buttonList.clear();
 
-        this.buttonList.add(new GuiButton(0, (this.width - 300) / 2 + 300 - 50 - 15, (this.height - 200) / 2 + 15 - 3, 50, 20, I18n.format("gui.done")));
+        this.buttonList.add(new GuiButton(0, (this.width - 350) / 2 + 350 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done")));
 
-        this.textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 200) / 2 + 15 - 3, 120, 20);
+        this.textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 250) / 2 + 15 - 3, 120, 20);
         this.textFieldSearchMod.setText(textFieldText);
         this.textFieldSearchMod.setFocused(true);
 
@@ -130,17 +130,17 @@ public class GuiMods extends GuiDropClientScreen {
             	continue;
             }
 
-            int buttonY = (this.height - 200) / 2 + 30 + totalHeight - scrollOffset;
+            int buttonY = (this.height - 250) / 2 + 30 + totalHeight - scrollOffset;
 
-            if (buttonY >= (this.height - 200) / 2 + 30 && buttonY + 15 <= (this.height - 200) / 2 + 200 - 20) {
-                this.buttonList.add(new GuiText(i + 101, (this.width - 300) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
-                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 300) / 2 + 300 - 18 - 15, buttonY - 2 + 15));
+            if (buttonY >= (this.height - 250) / 2 + 30 && buttonY + 15 <= (this.height - 250) / 2 + 250 - 20) {
+                this.buttonList.add(new GuiText(i + 101, (this.width - 350) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
+                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 350) / 2 + 350 - 18 - 15, buttonY - 2 + 15));
             }
 
             totalHeight += 15;
         }
 
-        this.maxScroll = Math.max(0, totalHeight - (200 - 50));
+        this.maxScroll = Math.max(0, totalHeight - (250 - 50));
     }
 
     @Override
