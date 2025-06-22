@@ -11,7 +11,7 @@ import drop.ColorManager;
 import drop.gui.GuiDropClient;
 import drop.gui.GuiDropClientScreen;
 import drop.mods.hud.IRenderer;
-import drop.mods.hud.Bounds;
+import drop.mods.hud.Rectangle;
 import drop.mods.hud.ScreenPosition;
 
 public abstract class ModDraggable extends Mod implements IRenderer {
@@ -35,8 +35,8 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		return pos;
 	}
 	
-	public Bounds getBounds() {
-		return Bounds.getBounds(this);
+	public Rectangle getBounds() {
+		return Rectangle.getBounds(this);
 	}
 	
 	public void drawRect(int left, int top, int right, int bottom, int color) {
