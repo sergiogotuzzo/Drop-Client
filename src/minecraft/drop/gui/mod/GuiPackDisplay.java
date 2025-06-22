@@ -28,8 +28,15 @@ public class GuiPackDisplay extends GuiMod {
         }
         
         this.writeOptionText("Show Background", mod.isShowDescriptionToggled() ? 6 : 4);
-        this.writeOptionText("Show Icon", mod.isShowDescriptionToggled() ? 7 : 5);
-        this.writeOptionText("Show All Selected Packs", mod.isShowDescriptionToggled() ? 8 : 6);
+        
+        if (mod.isShowBackgroundToggled()) {
+        	this.writeOptionText("Background Color", mod.isShowDescriptionToggled() ? 7 : 5);
+        	this.writeOptionText("Show Icon", mod.isShowDescriptionToggled() ? 8 : 6);
+            this.writeOptionText("Show All Selected Packs", mod.isShowDescriptionToggled() ? 9 : 7);
+        } else {
+        	this.writeOptionText("Show Icon", mod.isShowDescriptionToggled() ? 7 : 5);
+            this.writeOptionText("Show All Selected Packs", mod.isShowDescriptionToggled() ? 8 : 6);
+        }
     }
 
     @Override
@@ -67,6 +74,9 @@ public class GuiPackDisplay extends GuiMod {
             	mod.setShowAllSelectedPacks(!mod.isShowAllSelectedPacksToggled());
             	this.initGui();
             	break;
+            case 9:
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getBackgroundColor(), "backgroundColor", "Background Color", true));
+            	break;
         }
     }
 	
@@ -84,7 +94,14 @@ public class GuiPackDisplay extends GuiMod {
     	}
     	
     	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowBackgroundToggled(), mod.isShowDescriptionToggled() ? 6 : 4));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowIconToggled(), mod.isShowDescriptionToggled() ? 7 : 5));
-    	this.buttonList.add(this.createGuiCheckBox(8, mod.isShowAllSelectedPacksToggled(), mod.isShowDescriptionToggled() ? 8 : 6));
+    	
+    	if (mod.isShowBackgroundToggled()) {
+	        this.buttonList.add(this.createGuiRect(9, mod.getBackgroundColor().getRGB(), mod.isShowDescriptionToggled() ? 7 : 5));
+	    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowIconToggled(), mod.isShowDescriptionToggled() ? 8 : 6));
+	    	this.buttonList.add(this.createGuiCheckBox(8, mod.isShowAllSelectedPacksToggled(), mod.isShowDescriptionToggled() ? 9 : 7));
+    	} else {
+	    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowIconToggled(), mod.isShowDescriptionToggled() ? 7 : 5));
+	    	this.buttonList.add(this.createGuiCheckBox(8, mod.isShowAllSelectedPacksToggled(), mod.isShowDescriptionToggled() ? 8 : 6));
+    	}
     }
 }

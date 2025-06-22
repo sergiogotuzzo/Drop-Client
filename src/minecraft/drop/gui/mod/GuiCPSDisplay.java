@@ -19,14 +19,14 @@ public class GuiCPSDisplay extends GuiModDraggableDisplayText {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
         
-        this.writeOptionText("Show Right CPS", mod.isShowBackgroundToggled() ? 4 : 5);
+        this.writeOptionText("Show Right CPS", 5);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
     	super.actionPerformed(button);
     	
-        if (button.id == 6) {
+        if (button.id == 7) {
         	mod.setShowRightCPS(!mod.isShowRightCPSToggled());
         	this.initGui();
         }
@@ -36,6 +36,6 @@ public class GuiCPSDisplay extends GuiModDraggableDisplayText {
     public void initGui() {
 		super.initGui();
         
-    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowRightCPSToggled(), mod.isShowBackgroundToggled() ? 4 : 5));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowRightCPSToggled(), 5));
     }
 }

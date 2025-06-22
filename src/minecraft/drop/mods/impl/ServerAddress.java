@@ -36,7 +36,7 @@ public class ServerAddress extends ModDraggableDisplayText {
 	@Override
 	public void drawTextToRender(ScreenPosition pos, String textToRender) {
 		if (showBackground) {
-			drawAlignedRect(pos, textToRender, 8);
+			drawAlignedRect(pos, textToRender, 8, backgroundColor.getRGB());
 			drawCenteredAlignedText(pos, textToRender, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
     	} else {
 		    drawAlignedText(brackets.wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);

@@ -16,6 +16,8 @@ import drop.mods.ModDraggableText;
 public class Keystrokes extends ModDraggableText {
 	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE, false);
 	private boolean pressedTextShadow = true;
+	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
+	protected ColorManager pressedBackgroundColor = ColorManager.fromRGB(255, 255, 255, 102, false);
 	private boolean showMovementKeys = true;
 	private boolean showMouse = true;
 	private boolean showSpacebar = true;
@@ -27,6 +29,8 @@ public class Keystrokes extends ModDraggableText {
 		setPressedTextColor(getIntFromFile("pressedTextColor", pressedTextColor.getRGB()));
 		setPressedTextChroma(getBooleanFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
 		setPressedTextShadow(getBooleanFromFile("pressedTextShadow", pressedTextShadow));
+		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
+		setPressedBackgroundColor(getIntFromFile("pressedBackgroundColor", pressedBackgroundColor.getRGB()));
 		setShowMovementKeys(getBooleanFromFile("showMovementKeys", showMovementKeys));
 		setShowMouse(getBooleanFromFile("showMouse", showMouse));
 		setShowSpacebar(getBooleanFromFile("showSpacebar", showSpacebar));
@@ -186,7 +190,7 @@ public class Keystrokes extends ModDraggableText {
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? new Color(255, 255, 255, 102) : new Color(0, 0, 0, 102)
+	                key.isDown() ? pressedBackgroundColor.getRGB() : backgroundColor.getRGB()
 	                );
 	        
 	        drawText(
@@ -237,6 +241,26 @@ public class Keystrokes extends ModDraggableText {
 	
 	public boolean isPressedTextShadowToggled() {
 		return pressedTextShadow;
+	}
+	
+	public void setBackgroundColor(int rgb) {
+		this.backgroundColor = ColorManager.fromRGB(rgb, false);
+		
+		setToFile("backgroundColor", rgb);
+	}
+	
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
+	}
+	
+	public void setPressedBackgroundColor(int rgb) {
+		this.pressedBackgroundColor = ColorManager.fromRGB(rgb, false);
+		
+		setToFile("pressedBackgroundColor", rgb);
+	}
+	
+	public ColorManager getPressedBackgroundColor() {
+		return pressedBackgroundColor;
 	}
 	
 	public void setShowMovementKeys(boolean toggled) {

@@ -22,12 +22,14 @@ public class GuiKeystrokes extends GuiMod {
         this.writeOptionText("Text Shadow", 2);
         this.writeOptionText("Text Color (Pressed)", 3);
         this.writeOptionText("Text Shadow (Pressed)", 4);
-        this.writeOptionText("Show Mouse", 5);
-        this.writeOptionText("Show Spacebar", 6);
-        this.writeOptionText("Show Movement Keys", 7);
+        this.writeOptionText("Background Color", 5);
+        this.writeOptionText("Background Color (Pressed)", 6);
+        this.writeOptionText("Show Mouse", 7);
+        this.writeOptionText("Show Spacebar", 8);
+        this.writeOptionText("Show Movement Keys", 9);
         
         if (mod.isShowMovementKeysToggled()) {
-        	this.writeOptionText("Use Arrows", 8);
+        	this.writeOptionText("Use Arrows", 10);
         }
     }
 
@@ -66,6 +68,12 @@ public class GuiKeystrokes extends GuiMod {
             	mod.setUseArrows(!mod.isUseArrowsToggled());
             	this.initGui();
             	break;
+            case 9:
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getBackgroundColor(), "backgroundColor", "Background Color", true));
+            	break;
+            case 10:
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getPressedBackgroundColor(), "pressedBackgroundColor", "Background Color (Pressed)", true));
+            	break;
         }
     }
 	
@@ -77,12 +85,14 @@ public class GuiKeystrokes extends GuiMod {
     	this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
         this.buttonList.add(this.createGuiRect(3, mod.getPressedTextColor().getRGB(), 3));
     	this.buttonList.add(this.createGuiCheckBox(4, mod.isPressedTextShadowToggled(), 4));
-    	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowMouseToggled(), 5));
-    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowSpacebarToggled(), 6));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowMovementKeysToggled(), 7));
+        this.buttonList.add(this.createGuiRect(9, mod.getBackgroundColor().getRGB(), 5));
+        this.buttonList.add(this.createGuiRect(10, mod.getPressedBackgroundColor().getRGB(), 6));
+    	this.buttonList.add(this.createGuiCheckBox(5, mod.isShowMouseToggled(), 7));
+    	this.buttonList.add(this.createGuiCheckBox(6, mod.isShowSpacebarToggled(), 8));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isShowMovementKeysToggled(), 9));
 
     	if (mod.isShowMovementKeysToggled()) {
-        	this.buttonList.add(this.createGuiCheckBox(8, mod.isUseArrowsToggled(), 8));
+        	this.buttonList.add(this.createGuiCheckBox(8, mod.isUseArrowsToggled(), 10));
     	}
 	}
 }

@@ -2,6 +2,7 @@ package drop.mods.impl;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
+import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiCoordinatesDisplay;
 import drop.mods.hud.ScreenPosition;
@@ -9,6 +10,7 @@ import drop.mods.ModDraggableText;
 
 public class CoordinatesDisplay extends ModDraggableText {
 	private boolean showBackground = false;
+	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
 	private boolean showBiome = true;
 	private boolean showFacing = true;
 	private boolean showFacingTowards = true;
@@ -17,6 +19,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 		super(false, 0.5, 0.5);
 		
 		setShowBackground(getBooleanFromFile("showBackground", showBackground));
+		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
 		setShowBiome(getBooleanFromFile("showBiome", showBiome));
 		setShowFacing(getBooleanFromFile("showFacing", showFacing));
 		setShowFacingTowards(getBooleanFromFile("showFacingTowards", showFacingTowards));
@@ -85,7 +88,7 @@ public class CoordinatesDisplay extends ModDraggableText {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (showBackground) {
-			getBounds().fill();
+			getBounds().fill(backgroundColor.getRGB());
 		}
 		
 		int i = 11;
@@ -224,6 +227,16 @@ public class CoordinatesDisplay extends ModDraggableText {
 	
 	public boolean isShowBackgroundToggled() {
 		return showBackground;
+	}
+	
+	public void setBackgroundColor(int rgb) {
+		this.backgroundColor = ColorManager.fromRGB(rgb, false);
+		
+		setToFile("backgroundColor", rgb);
+	}
+	
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
 	}
 	
 	public void setShowBiome(boolean toggled) {

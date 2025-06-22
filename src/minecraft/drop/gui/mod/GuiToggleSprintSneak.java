@@ -30,19 +30,21 @@ public class GuiToggleSprintSneak extends GuiMod {
         	this.writeOptionText("Text Shadow", 3);
         	this.writeOptionText("Show Background", 4);
         	
-        	if (!mod.isShowBackgroundToggled()) {
+        	if (mod.isShowBackgroundToggled()) {
+        		this.writeOptionText("Background Color", 5);
+        	} else {
         		this.writeOptionText("Brackets", 5);
             	this.writeSelectedOptionValue(mod.getBrackets().getName(), 5);
         	}
         }
     	
-    	this.writeOptionText("Toggle Sprint", mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 6 : 5 : 2);
-        this.writeOptionText("Toggle Sneak", mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 7 : 6 : 3);
-        this.writeOptionText("Fly Boost", mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 8 : 7 : 4);
+    	this.writeOptionText("Toggle Sprint", mod.isShowTextToggled() ? 6 : 2);
+        this.writeOptionText("Toggle Sneak", mod.isShowTextToggled() ? 7 : 3);
+        this.writeOptionText("Fly Boost", mod.isShowTextToggled() ? 8 : 4);
         
         if (mod.isFlyBoostToggled()) {
-        	this.writeOptionText("Fly Boost Factor", mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 9 : 8 : 5);
-            this.writeOptionValue(String.format("%.1f", mod.getFlyBoostFactor()), mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 9 : 8 : 5);
+        	this.writeOptionText("Fly Boost Factor", mod.isShowTextToggled() ? 9 : 5);
+            this.writeOptionValue(String.format("%.1f", mod.getFlyBoostFactor()), mod.isShowTextToggled() ? 9 : 5);
         }
     }
     
@@ -102,6 +104,9 @@ public class GuiToggleSprintSneak extends GuiMod {
             		mod.setFlyBoostFactor(2.0F);
             	}
             	break;
+            case 11:
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getBackgroundColor(), "backgroundColor", "Background Color", true));
+            	break;
         }
     }
 	
@@ -116,18 +121,20 @@ public class GuiToggleSprintSneak extends GuiMod {
     		this.buttonList.add(this.createGuiCheckBox(3, mod.isTextShadowToggled(), 3));
     		this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBackgroundToggled(), 4));
     		
-    		if (!mod.isShowBackgroundToggled()) {
+    		if (mod.isShowBackgroundToggled()) {
+    	        this.buttonList.add(this.createGuiRect(11, mod.getBackgroundColor().getRGB(), 5));
+    		} else {
     			this.buttonList.add(this.createGuiTextLeftArrow(5, mod.getBrackets().getName(), 5));
     			this.buttonList.add(this.createGuiTextRightArrow(6, 5));
     		}
     	}
     	
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSprintToggled(), mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 6 : 5 : 2));
-    	this.buttonList.add(this.createGuiCheckBox(8, mod.isToggleSneakToggled(), mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 7 : 6 : 3));
-    	this.buttonList.add(this.createGuiCheckBox(9, mod.isFlyBoostToggled(), mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 8 : 7 : 4));
+    	this.buttonList.add(this.createGuiCheckBox(7, mod.isToggleSprintToggled(), mod.isShowTextToggled() ? 6 : 2));
+    	this.buttonList.add(this.createGuiCheckBox(8, mod.isToggleSneakToggled(), mod.isShowTextToggled() ? 7 : 3));
+    	this.buttonList.add(this.createGuiCheckBox(9, mod.isFlyBoostToggled(), mod.isShowTextToggled() ? 8 : 4));
 
     	if (mod.isFlyBoostToggled()) {
-        	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(10, 8.0F, mod.getFlyBoostFactor(),mod.isShowTextToggled() ? !mod.isShowBackgroundToggled() ? 10 : 9 : 6));
+        	this.buttonList.add(sliderFlyBoostFactor = this.createGuiSlider(10, 8.0F, mod.getFlyBoostFactor(),mod.isShowTextToggled() ? 10 : 6));
     	}
 	}
 }

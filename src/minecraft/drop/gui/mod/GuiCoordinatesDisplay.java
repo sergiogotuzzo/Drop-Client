@@ -21,9 +21,14 @@ public class GuiCoordinatesDisplay extends GuiMod {
     	this.writeOptionText("Text Color", 1);
     	this.writeOptionText("Text Shadow", 2);
     	this.writeOptionText("Show Background", 3);
-    	this.writeOptionText("Show Biome", 4);
-    	this.writeOptionText("Show Facing", 5);
-    	this.writeOptionText("Show Facing Towards", 6);
+    	
+    	if (mod.isShowBackgroundToggled()) {
+        	this.writeOptionText("Background Color", 4);
+    	}
+    	
+    	this.writeOptionText("Show Biome", mod.isShowBackgroundToggled() ? 5 : 4);
+    	this.writeOptionText("Show Facing", mod.isShowBackgroundToggled() ? 6 : 5);
+    	this.writeOptionText("Show Facing Towards", mod.isShowBackgroundToggled() ? 7 : 6);
     }
 
     @Override
@@ -54,6 +59,9 @@ public class GuiCoordinatesDisplay extends GuiMod {
             	mod.setShowFacingTowards(!mod.isShowFacingTowardsToggled());
             	this.initGui();
             	break;
+            case 7:
+            	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getBackgroundColor(), "backgroundColor", "Background Color", true));
+            	break;
         }
     }
 	
@@ -64,8 +72,13 @@ public class GuiCoordinatesDisplay extends GuiMod {
         this.buttonList.add(this.createGuiRect(1, mod.getTextColor().getRGB(), 1));
         this.buttonList.add(this.createGuiCheckBox(2, mod.isTextShadowToggled(), 2));
         this.buttonList.add(this.createGuiCheckBox(3, mod.isShowBackgroundToggled(), 3));
-        this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBiomeToggled(), 4));
-        this.buttonList.add(this.createGuiCheckBox(5, mod.isShowFacingToggled(), 5));
-        this.buttonList.add(this.createGuiCheckBox(6, mod.isShowFacingTowardsToggled(), 6));
+        
+        if (mod.isShowBackgroundToggled()) {
+	        this.buttonList.add(this.createGuiRect(7, mod.getBackgroundColor().getRGB(), 4));
+        }
+        
+        this.buttonList.add(this.createGuiCheckBox(4, mod.isShowBiomeToggled(), mod.isShowBackgroundToggled() ? 5 : 4));
+        this.buttonList.add(this.createGuiCheckBox(5, mod.isShowFacingToggled(), mod.isShowBackgroundToggled() ? 6 : 5));
+        this.buttonList.add(this.createGuiCheckBox(6, mod.isShowFacingTowardsToggled(), mod.isShowBackgroundToggled() ? 7 : 5));
     }
 }

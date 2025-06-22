@@ -57,6 +57,7 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 	}
 
 	protected boolean showBackground = false;
+	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
 	protected Brackets brackets = Brackets.SQUARE;
 	protected String dummyText = "";
 	
@@ -66,6 +67,7 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 		this.dummyText = dummyText;
 		
 		setShowBackground(getBooleanFromFile("showBackground", showBackground));
+		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
 		setBrackets(Brackets.fromId(getIntFromFile("brackets", brackets.getId())));
 	}
 
@@ -91,7 +93,8 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 	
 	public void drawTextToRender(ScreenPosition pos, String textToRender) {
 		if (showBackground) {
-	    	getBounds().fill();
+	    	getBounds().fill(backgroundColor.getRGB());
+	    	
 			drawCenteredText(textToRender, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
     	} else {
 		    drawAlignedText(brackets.wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);
@@ -106,6 +109,16 @@ public abstract class ModDraggableDisplayText extends ModDraggableText {
 	
 	public boolean isShowBackgroundToggled() {
 		return showBackground;
+	}
+	
+	public void setBackgroundColor(int rgb) {
+		this.backgroundColor = ColorManager.fromRGB(rgb, false);
+		
+		setToFile("backgroundColor", rgb);
+	}
+	
+	public ColorManager getBackgroundColor() {
+		return backgroundColor;
 	}
 	
 	public void setBrackets(Brackets brackets) {
