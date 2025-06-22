@@ -438,7 +438,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             	} else {
             		red = oldVisualsMod.getHitArmorColor().getRed();
             		green = oldVisualsMod.getHitArmorColor().getGreen();
-            		green = oldVisualsMod.getHitArmorColor().getBlue();
+            		blue = oldVisualsMod.getHitArmorColor().getBlue();
             	}
             	
                 this.brightnessBuffer.put(red / 255.0F);
