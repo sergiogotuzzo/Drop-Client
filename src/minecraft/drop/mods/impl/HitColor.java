@@ -37,7 +37,7 @@ public class HitColor extends Mod {
 	public void setHitColorChroma(boolean toggled) {
 		hitColor.setChromaToggled(toggled);
 		
-		setToFile("hitColor", toggled);
+		setToFile("hitColorChroma", toggled);
 	}
 	
 	public boolean isHitColorChromaToggled() {
