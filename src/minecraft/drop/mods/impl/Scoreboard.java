@@ -38,7 +38,7 @@ public class Scoreboard extends ModDraggable {
 		return new GuiScoreboard(previousGuiScreen);
 	}
 	
-	private String dummyTitle = "DROP CLIENT";
+	private String dummyTitle = EnumChatFormatting.BOLD + "DROP CLIENT";
 	private List<String> lines = Arrays.asList(" ", "A PvP client for", "Minecraft 1.8.9.", " ");
 
 	@Override
