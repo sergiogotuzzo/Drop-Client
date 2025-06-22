@@ -2,6 +2,8 @@ package drop.mods.impl;
 
 import drop.mods.hud.ScreenPosition;
 import net.minecraft.entity.Entity;
+import drop.events.EventTarget;
+import drop.events.impl.EntityDamageEvent;
 import drop.mods.ModDraggableDisplayText;
 
 public class ReachDisplay extends ModDraggableDisplayText {
@@ -21,8 +23,9 @@ public class ReachDisplay extends ModDraggableDisplayText {
 		drawTextToRender(pos, String.format("%.2f", range) + " blocks");
 	}
 	
-	public void onEntityHit(Entity entity) {
-		this.range = mc.thePlayer.getDistanceToEntity(entity);
-		this.lastHit = System.currentTimeMillis();
+	@EventTarget
+	public void onEntityDamage(EntityDamageEvent event) {
+		range = mc.thePlayer.getDistanceToEntity(event.getEntity());
+		lastHit = System.currentTimeMillis();
 	}
 }

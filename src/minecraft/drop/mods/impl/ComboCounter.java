@@ -7,6 +7,9 @@ import net.minecraft.network.play.server.S19PacketEntityStatus;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import drop.events.EventTarget;
+import drop.events.impl.EntityAttackEvent;
+import drop.events.impl.EntityDamageEvent;
 import drop.mods.ModDraggableDisplayText;
 
 public class ComboCounter extends ModDraggableDisplayText {
@@ -14,7 +17,7 @@ public class ComboCounter extends ModDraggableDisplayText {
 		super(false, 0.5, 0.5, "0 combo");
 	}
 
-	private boolean attacked = false;
+	private int targetId;
 	private int combo = 0;
 	private long lastCombo;
 
@@ -26,16 +29,28 @@ public class ComboCounter extends ModDraggableDisplayText {
 		
 		drawTextToRender(pos, combo + " combo");
 	}
-	
-	public void onAttack() {
-		attacked = true;
+
+	@EventTarget
+	public void onEntityAttack(EntityAttackEvent event) {
+		this.targetId = event.getEntity().getEntityId();
 	}
 	
-	public void onEntityHit(S19PacketEntityStatus event) {
-		if (attacked && event.getOpCode() == 2) {
-			combo++;
-			lastCombo = System.currentTimeMillis();
-			attacked = false;
+	@EventTarget
+	public void onEntityDamage(EntityDamageEvent event) {
+		if (event.getEntity().getEntityId() == targetId) {
+			dealHit();
+		} else if (event.getEntity() == mc.thePlayer) {
+			takeHit();
 		}
+	}
+	
+	private void dealHit() {
+		targetId = -1;
+		combo++;
+		lastCombo = System.currentTimeMillis();
+	}
+	
+	private void takeHit() {
+		combo = 0;
 	}
 }

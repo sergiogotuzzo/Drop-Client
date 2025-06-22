@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 
+import drop.events.impl.EntityAttackEvent;
 import drop.mods.ModInstances;
 
 import java.util.Collection;
@@ -1309,9 +1310,8 @@ public abstract class EntityPlayer extends EntityLivingBase
     {
         if (targetEntity.canAttackWithItem())
         {
-        	ModInstances.getComboCounterMod().onAttack();
-        	ModInstances.getReachDisplayMod().onEntityHit(targetEntity);
-        	
+        	new EntityAttackEvent(targetEntity).call();
+        	        	
             if (!targetEntity.hitByEntity(this))
             {
                 float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();

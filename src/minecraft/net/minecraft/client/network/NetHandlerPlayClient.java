@@ -209,6 +209,7 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
+import drop.events.impl.EntityDamageEvent;
 import drop.gui.GuiDropClientMainMenu;
 import drop.mods.ModInstances;
 
@@ -1031,7 +1032,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
         if (entity != null)
         {
-        	ModInstances.getComboCounterMod().onEntityHit(packetIn);
+        	new EntityDamageEvent(entity).call();
         	
             if (packetIn.getOpCode() == 21)
             {
