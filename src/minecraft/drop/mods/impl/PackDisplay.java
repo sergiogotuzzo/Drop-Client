@@ -19,7 +19,6 @@ public class PackDisplay extends ModDraggable {
 	private boolean showDescription = false;
 	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
 	private boolean descriptionTextShadow = true;
-	private boolean showBackground = true;
 	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
 	private boolean showIcon = true;
 	private boolean showAllSelectedPacks = true;
@@ -34,7 +33,6 @@ public class PackDisplay extends ModDraggable {
 		setDescriptionTextColor(getIntFromFile("descriptionTextColor", descriptionTextColor.getRGB()));
 		setDescriptionTextChroma(getBooleanFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
 		setDescriptionTextShadow(getBooleanFromFile("descriptionTextShadow", descriptionTextShadow));
-		setShowBackground(getBooleanFromFile("showBackground", showBackground));
 		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
 		setShowIcon(getBooleanFromFile("showIcon", showIcon));
 		setShowAllSelectedPacks(getBooleanFromFile("showAllSelectedPacks", showAllSelectedPacks));
@@ -130,9 +128,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	private void drawSelectedPack(ResourcePackRepository.Entry selectedPack, int offsetY) {
-		if (showBackground) {
-			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, backgroundColor.getRGB());
-		}
+		drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, backgroundColor.getRGB());
 		
 		if (showIcon) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -156,9 +152,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	private void drawDefaultPack() {
-		if (showBackground) {
-			drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, backgroundColor.getRGB());
-		}
+		drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, backgroundColor.getRGB());
 		
 		if (showIcon) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -295,16 +289,6 @@ public class PackDisplay extends ModDraggable {
 	
 	public boolean isDescriptionTextShadowToggled() {
 		return descriptionTextShadow;
-	}
-	
-	public void setShowBackground(boolean toggled) {
-		showBackground = toggled;
-		
-		setToFile("showBackground", toggled);
-	}
-	
-	public boolean isShowBackgroundToggled() {
-		return showBackground;
 	}
 	
 	public void setBackgroundColor(int rgb) {
