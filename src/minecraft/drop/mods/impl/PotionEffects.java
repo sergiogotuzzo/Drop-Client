@@ -11,7 +11,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiSettings;
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.BracketsOption;

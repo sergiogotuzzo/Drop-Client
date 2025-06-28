@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.BracketsOption;

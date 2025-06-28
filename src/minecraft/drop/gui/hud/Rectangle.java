@@ -1,4 +1,4 @@
-package drop.mods.hud;
+package drop.gui.hud;
 
 import java.awt.Color;
 

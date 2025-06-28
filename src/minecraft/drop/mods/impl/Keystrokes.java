@@ -9,7 +9,7 @@ import drop.gui.GuiSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;

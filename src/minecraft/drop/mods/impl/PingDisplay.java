@@ -6,7 +6,7 @@ import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSettings;
 import drop.gui.mod.pingdisplay.GuiPingDisplay;
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.BracketsOption;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import drop.mods.hud.HUDManager;
+import drop.gui.hud.HUDManager;
 import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.Speedometer;
 import drop.mods.impl.BlockOverlay;

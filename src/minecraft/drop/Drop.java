@@ -9,7 +9,7 @@ import drop.events.EventTarget;
 import drop.events.impl.TickEvent;
 import drop.gui.mod.GuiModPositioning;
 import drop.gui.mod.GuiMods;
-import drop.mods.hud.HUDManager;
+import drop.gui.hud.HUDManager;
 import drop.mods.ModInstances;
 import drop.mods.impl.Fullbright;
 

@@ -7,7 +7,7 @@ import drop.gui.GuiSettings;
 import drop.mods.ModDraggable;
 import drop.mods.ModInstances;
 import drop.mods.ModOptions;
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
@@ -101,7 +101,7 @@ public class Bossbar extends ModDraggable {
 		}
 		
 		if (options.getBooleanOption("showName").isToggled()) {
-			drawText(bossName.replace("§r", ""), pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(bossName) / 2, pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawText(bossName.replace("ï¿½r", ""), pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(bossName) / 2, pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 	}
 }

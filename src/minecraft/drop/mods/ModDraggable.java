@@ -10,9 +10,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import drop.ColorManager;
 import drop.gui.GuiDropClient;
 import drop.gui.GuiDropClientScreen;
-import drop.mods.hud.IRenderer;
-import drop.mods.hud.Rectangle;
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.IRenderer;
+import drop.gui.hud.Rectangle;
+import drop.gui.hud.ScreenPosition;
 
 public abstract class ModDraggable extends Mod implements IRenderer {
 	protected ScreenPosition pos;
@@ -85,7 +85,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	            long t = System.currentTimeMillis() - (textCharX * 10 - y * 10);
 	            int c = Color.HSBtoRGB(t % (int) 2000.0F / 2000.0F, 0.8F, 0.8F);
 	            
-	            if (text.startsWith("§m")) {
+	            if (text.startsWith("ï¿½m")) {
 	            	drawText(text, x, y, c, dropShadow, false);
 	            } else {
 		            drawText(String.valueOf(textChar), textCharX, y, c, dropShadow, false);

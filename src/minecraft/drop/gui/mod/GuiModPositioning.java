@@ -13,9 +13,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientScreen;
-import drop.mods.hud.HUDManager;
-import drop.mods.hud.IRenderer;
-import drop.mods.hud.ScreenPosition;
+import drop.gui.hud.HUDManager;
+import drop.gui.hud.IRenderer;
+import drop.gui.hud.ScreenPosition;
 
 public class GuiModPositioning extends GuiDropClientScreen {
 	private final HashMap<IRenderer, ScreenPosition> renderers = new HashMap<IRenderer, ScreenPosition>();
