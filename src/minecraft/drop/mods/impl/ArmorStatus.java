@@ -41,7 +41,8 @@ public class ArmorStatus extends ModDraggable {
 				new BooleanOption(this, "showPercentage", false, new GuiSettings(14, "Show Percentage")),
 				new BooleanOption(this, "showDamage", true, new GuiSettings(15, "Show Damage")),
 				new BooleanOption(this, "showMaxDamage", false, new ParentOption("showDamage"), new GuiSettings(16, "Show Max Damage")),
-				new BooleanOption(this, "equippedItem", false, new GuiSettings(17, "Equipped Item")),
+				new BooleanOption(this, "armor", true, new GuiSettings(19, "Show Armor")),
+				new BooleanOption(this, "equippedItem", false, new GuiSettings(17, "Show Equipped Item")),
 				new BooleanOption(this, "damageOverlays", true, new GuiSettings(18, "Damage Overlays")),
 				new BooleanOption(this, "reverse", false, new GuiSettings(false))
 				);
@@ -105,10 +106,12 @@ public class ArmorStatus extends ModDraggable {
 			dummyPlayerInventory.add(new ItemStack(Items.diamond_sword));
 		}
 		
-		dummyPlayerInventory.add(new ItemStack(Items.diamond_boots));
-		dummyPlayerInventory.add(new ItemStack(Items.diamond_leggings));
-		dummyPlayerInventory.add(new ItemStack(Items.diamond_chestplate));
-		dummyPlayerInventory.add(new ItemStack(Items.diamond_helmet));
+		if (options.getBooleanOption("armor").isToggled()) {
+			dummyPlayerInventory.add(new ItemStack(Items.diamond_boots));
+			dummyPlayerInventory.add(new ItemStack(Items.diamond_leggings));
+			dummyPlayerInventory.add(new ItemStack(Items.diamond_chestplate));
+			dummyPlayerInventory.add(new ItemStack(Items.diamond_helmet));
+		}
 		
 		int i = 0;
 		
@@ -190,9 +193,11 @@ public class ArmorStatus extends ModDraggable {
 			}
 		}
 		
-		for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
-			if (itemStack != null) {
-				playerInventory.add(itemStack);
+		if (options.getBooleanOption("armor").isToggled()) {
+			for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
+				if (itemStack != null) {
+					playerInventory.add(itemStack);
+				}
 			}
 		}
 		
