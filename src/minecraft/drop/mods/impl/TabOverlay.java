@@ -22,8 +22,9 @@ public class TabOverlay extends Mod {
 		
 		this.options = new ModOptions(
 				new BooleanOption(this, "hidePing", false, new GuiSettings(1, "Hide Ping")),
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("hidePing", true), new GuiSettings(2, "Ping Text Color", true, false)),
-				new BooleanOption(this, "textShadow", true, new ParentOption("hidePing", true), new GuiSettings(3, "Ping Text Shadow")),
+				new BooleanOption(this, "pingNumbers", false, new ParentOption("hidePing", true), new GuiSettings(15, "Ping Numbers")),
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("pingNumbers"), new GuiSettings(2, "Ping Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new ParentOption("pingNumbers"), new GuiSettings(3, "Ping Text Shadow")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 4, "Dynamic Colors")),
 				new ColorOption(this, "excellentTextColor", ColorManager.fromRGB(85, 255, 85, false), new GuiSettings(false, 5, "Excellent Text Color", true, false)),
 				new BooleanOption(this, "excellentTextShadow", true, new GuiSettings(false, 6, "Excellent Text Shadow")),
@@ -35,7 +36,6 @@ public class TabOverlay extends Mod {
 				new BooleanOption(this, "weakTextShadow", true, new GuiSettings(false, 12, "Weak Text Shadow")),
 				new ColorOption(this, "unstableTextColor", ColorManager.fromRGB(170, 0, 0, false), new GuiSettings(false, 13, "Unstable Text Color", true, false)),
 				new BooleanOption(this, "unstableTextShadow", true, new GuiSettings(false, 14, "Unstable Text Shadow")),
-				new BooleanOption(this, "pingNumbers", false, new ParentOption("hidePing", true), new GuiSettings(15, "Ping Numbers")),
 				new BooleanOption(this, "showPlayerHeads", true, new GuiSettings(16, "Show Player Heads")),
 				new BooleanOption(this, "showHeader", true, new GuiSettings(17, "Show Header")),
 				new BooleanOption(this, "showFooter", true, new GuiSettings(18, "Show Footer"))
