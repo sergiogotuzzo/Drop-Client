@@ -1,78 +1,25 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiZoom;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.ModOption;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.IntOption;
 
-public class Zoom extends Mod {
-	private boolean scrollToZoom = true;
-	private boolean smoothCamera = true;
-	private int zoomLevel = 4;
-	private int zoomLevelMin = 4;
-	private int zoomLevelMax = 16;
-
+public class Zoom extends Mod {	
 	public Zoom() {
 		super(true);
 		
-		setScrollToZoom(getBooleanFromFile("scrollToZoom", scrollToZoom));
-		setSmoothCamera(getBooleanFromFile("smoothCamera", smoothCamera));
-		setZoomLevel(getIntFromFile("zoomLevel", zoomLevel));
-		setZoomLevelMin(getIntFromFile("zoomLevelMin", zoomLevelMin));
-		setZoomLevelMax(getIntFromFile("zoomLevelMax", zoomLevelMax));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiZoom(previousGuiScreen);
-	}
-	
-	public void setScrollToZoom(boolean toggled) {
-		this.scrollToZoom = toggled;
+		this.options = new ModOptions(
+				new BooleanOption(this, "scrollToZoom", true, new GuiSettings(1, "Scroll To Zoom")),
+				new BooleanOption(this, "smoothCamera", true, new GuiSettings(2, "Cinematic Camera")),
+				new IntOption(this, "zoomLevel", 2, 64, 4, new GuiSettings(3, "Zoom Level")),
+				new IntOption(this, "zoomLevelMin", 2, 64, 4, new ParentOption("scrollToZoom"), new GuiSettings(4, "Zoom Level Min")),
+				new IntOption(this, "zoomLevelMax", 2, 64, 16, new ParentOption("scrollToZoom"), new GuiSettings(5, "Zoom Level Max"))
+				);
 		
-		setToFile("scrollToZoom", toggled);
-	}
-	
-	public boolean isScrollToZoomToggled() {
-		return scrollToZoom;
-	}
-	
-	public void setSmoothCamera(boolean toggled) {
-		this.smoothCamera = toggled;
-		
-		setToFile("smoothCamera", toggled);
-	}
-	
-	public boolean isSmoothCameraToggled() {
-		return smoothCamera;
-	}
-	
-	public void setZoomLevel(int level) {
-		zoomLevel = level;
-		
-		setToFile("zoomLevel", level);
-	}
-	
-	public int getZoomLevel() {
-		return zoomLevel;
-	}
-	
-	public void setZoomLevelMin(int level) {
-		zoomLevelMin = level;
-		
-		setToFile("zoomLevelMin", level);
-	}
-	
-	public int getZoomLevelMin() {
-		return zoomLevelMin;
-	}
-	
-	public void setZoomLevelMax(int level) {
-		zoomLevelMax = level;
-		
-		setToFile("zoomLevelMax", level);
-	}
-	
-	public int getZoomLevelMax() {
-		return zoomLevelMax;
+		saveOptions();
 	}
 }

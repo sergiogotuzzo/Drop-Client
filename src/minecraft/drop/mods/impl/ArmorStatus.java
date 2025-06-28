@@ -11,54 +11,42 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiSettings;
 import drop.gui.mod.armorstatus.GuiArmorStatus;
-import drop.mods.ModDraggableText;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 
-public class ArmorStatus extends ModDraggableText {
-	private ColorManager veryHighTextColor = ColorManager.fromRGB(85, 255, 85, false);
-	private boolean veryHighTextShadow = true;
-	private ColorManager highTextColor = ColorManager.fromRGB(255, 255, 85, false);
-	private boolean highTextShadow = true;
-	private ColorManager mediumTextColor = ColorManager.fromRGB(255, 170, 0, false);
-	private boolean mediumTextShadow = true;
-	private ColorManager lowTextColor = ColorManager.fromRGB(255, 85, 85, false);
-	private boolean lowTextShadow = true;
-	private ColorManager veryLowTextColor = ColorManager.fromRGB(170, 0, 0, false);
-	private boolean veryLowTextShadow = true;
-	private boolean dynamicColors = true;
-	private boolean showPercentage = false;
-	private boolean showDamage = true;
-	private boolean showMaxDamage = false;
-	private boolean equippedItem = false;
-	private boolean damageOverlays = true;
-	private boolean reverse = false;
-
+public class ArmorStatus extends ModDraggable {
 	public ArmorStatus() {
 		super(true, 0.5, 0.5);
 		
-		setVeryHighTextColor(getIntFromFile("veryHighTextColor", veryHighTextColor.getRGB()));
-		setVeryHighTextChroma(getBooleanFromFile("veryHighTextChroma", veryHighTextColor.isChromaToggled()));
-		setVeryHighTextShadow(getBooleanFromFile("veryHighTextShadow", veryHighTextShadow));
-		setHighTextColor(getIntFromFile("highTextColor", highTextColor.getRGB()));
-		setHighTextChroma(getBooleanFromFile("highTextChroma", highTextColor.isChromaToggled()));
-		setHighTextShadow(getBooleanFromFile("highTextShadow", highTextShadow));
-		setMediumTextColor(getIntFromFile("mediumTextColor", mediumTextColor.getRGB()));
-		setMediumTextChroma(getBooleanFromFile("mediumTextChroma", mediumTextColor.isChromaToggled()));
-		setMediumTextShadow(getBooleanFromFile("mediumTextShadow", mediumTextShadow));
-		setLowTextColor(getIntFromFile("lowTextColor", lowTextColor.getRGB()));
-		setLowTextChroma(getBooleanFromFile("lowTextChroma", lowTextColor.isChromaToggled()));
-		setLowTextShadow(getBooleanFromFile("lowTextShadow", lowTextShadow));
-		setVeryLowTextColor(getIntFromFile("veryLowTextColor", veryLowTextColor.getRGB()));
-		setVeryLowTextChroma(getBooleanFromFile("veryLowTextChroma", veryLowTextColor.isChromaToggled()));
-		setVeryLowTextShadow(getBooleanFromFile("veryLowTextShadow", veryLowTextShadow));
-		setDynamicColors(getBooleanFromFile("dynamicColors", dynamicColors));
-		setShowPercentage(getBooleanFromFile("showPercentage", showPercentage));
-		setShowDamage(getBooleanFromFile("showDamage", showDamage));
-		setShowMaxDamage(getBooleanFromFile("showMaxDamage", showMaxDamage));
-		setEquippedItem(getBooleanFromFile("equippedItem", equippedItem));
-		setDamageOverlays(getBooleanFromFile("damageOverlays", damageOverlays));
-		setReverse(getBooleanFromFile("reverse", reverse));
+		this.options = new ModOptions(
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
+				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 3, "Dynamic Colors")),
+				new ColorOption(this, "veryHighTextColor", ColorManager.fromRGB(85, 255, 85, false), new GuiSettings(false, 4, "Very High Text Color", true, false)),
+				new BooleanOption(this, "veryHighTextShadow", true, new GuiSettings(false, 5, "Very High Text Shadow")),
+				new ColorOption(this, "highTextColor", ColorManager.fromRGB(255, 255, 85, false), new GuiSettings(false, 6, "High Text Color", true, false)),
+				new BooleanOption(this, "highTextShadow", true, new GuiSettings(false, 7, "High Text Shadow")),
+				new ColorOption(this, "mediumTextColor", ColorManager.fromRGB(255, 170, 0, false), new GuiSettings(false, 8, "Medium Text Color", true, false)),
+				new BooleanOption(this, "mediumTextShadow", true, new GuiSettings(false, 9, "Medium Text Shadow")),
+				new ColorOption(this, "lowTextColor", ColorManager.fromRGB(255, 85, 85, false), new GuiSettings(false, 10, "Low Text Color", true, false)),
+				new BooleanOption(this, "lowTextShadow", true, new GuiSettings(false, 11, "Low Text Shadow")),
+				new ColorOption(this, "veryLowTextColor", ColorManager.fromRGB(170, 0, 0, false), new GuiSettings(false, 12, "Very Low Text Color", true, false)),
+				new BooleanOption(this, "veryLowTextShadow", true, new GuiSettings(false, 13, "Very Low Text Shadow")),
+				new BooleanOption(this, "showPercentage", false, new GuiSettings(14, "Show Percentage")),
+				new BooleanOption(this, "showDamage", true, new GuiSettings(15, "Show Damage")),
+				new BooleanOption(this, "showMaxDamage", false, new ParentOption("showDamage"), new GuiSettings(16, "Show Max Damage")),
+				new BooleanOption(this, "equippedItem", false, new GuiSettings(17, "Equipped Item")),
+				new BooleanOption(this, "damageOverlays", true, new GuiSettings(18, "Damage Overlays")),
+				new BooleanOption(this, "reverse", false, new GuiSettings(false))
+				);
+				
+		saveOptions();
 	}
 
 	@Override
@@ -70,12 +58,12 @@ public class ArmorStatus extends ModDraggableText {
 	public int getWidth() {
 		int width = 0;
 		
-		if (showPercentage) {
+		if (options.getBooleanOption("showPercentage").isToggled()) {
 			width = font.getStringWidth("100%");
-		} else if (showDamage && !showMaxDamage) {
-			width = (equippedItem ? font.getStringWidth("1561") : font.getStringWidth("528"));
-		} else if (showDamage && showMaxDamage) {
-			width = (equippedItem ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
+		} else if (options.getBooleanOption("showDamage").isToggled() && !options.getBooleanOption("showMaxDamage").isToggled()) {
+			width = (options.getBooleanOption("equippedItem").isToggled() ? font.getStringWidth("1561") : font.getStringWidth("528"));
+		} else if (options.getBooleanOption("showDamage").isToggled() && options.getBooleanOption("showMaxDamage").isToggled()) {
+			width = (options.getBooleanOption("equippedItem").isToggled() ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
 		}
 		
 		return 16 + 2 + width;
@@ -83,15 +71,15 @@ public class ArmorStatus extends ModDraggableText {
 
 	@Override
 	public int getHeight() {
-		return 16 * (4 + (equippedItem ? 1 : 0));
+		return 16 * (4 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0));
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
-			setReverse(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
-			setReverse(true);
+		if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
+    		options.getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
+			options.getBooleanOption("reverse").toggle(true);
 		}
 		
 		int i = 0;
@@ -105,15 +93,15 @@ public class ArmorStatus extends ModDraggableText {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
-			setReverse(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
-			setReverse(true);
+		if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
+    		options.getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
+			options.getBooleanOption("reverse").toggle(true);
 		}
 		
 		Collection<ItemStack> dummyPlayerInventory = new ArrayList<ItemStack>();
 		
-		if (equippedItem) {
+		if (options.getBooleanOption("equippedItem").isToggled()) {
 			dummyPlayerInventory.add(new ItemStack(Items.diamond_sword));
 		}
 		
@@ -139,40 +127,40 @@ public class ArmorStatus extends ModDraggableText {
 			
 			String text = "";
 			
-			if (showPercentage) {
+			if (options.getBooleanOption("showPercentage").isToggled()) {
 				text = String.format("%.0f%%", damagePercentage);
-			} else if (showDamage && !showMaxDamage) {
+			} else if (options.getBooleanOption("showDamage").isToggled() && !options.getBooleanOption("showMaxDamage").isToggled()) {
 				text = String.valueOf(itemStack.getMaxDamage() - itemStack.getItemDamage());
-			} else if (showDamage && showMaxDamage) {
+			} else if (options.getBooleanOption("showDamage").isToggled() && options.getBooleanOption("showMaxDamage").isToggled()) {
 				text = (itemStack.getMaxDamage() - itemStack.getItemDamage()) + "/" + itemStack.getMaxDamage();
 			}
 			
-			ColorManager color = textColor; // Default
-			boolean dropShadow = textShadow;
+			ColorManager color = options.getColorOption("textColor").getColor(); // Default
+			boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
 			
-			if (dynamicColors) {				
+			if (options.getBooleanOption("dynamicColors").isToggled()) {				
 				if (damagePercentage <= 10) {
-			        color = veryLowTextColor; // Very low
-			        dropShadow = veryLowTextShadow;
+			        color = options.getColorOption("veryLowTextColor").getColor(); // Very low
+			        dropShadow = options.getBooleanOption("veryLowTextShadow").isToggled();
 			    } else if (damagePercentage <= 25) {
-			        color = lowTextColor; // Low
-			        dropShadow = lowTextShadow;
+			        color = options.getColorOption("lowTextColor").getColor(); // Low
+			        dropShadow = options.getBooleanOption("lowTextShadow").isToggled();
 			    } else if (damagePercentage <= 40) {
-			        color = mediumTextColor; // Medium
-			        dropShadow = mediumTextShadow;
+			        color = options.getColorOption("mediumTextColor").getColor(); // Medium
+			        dropShadow = options.getBooleanOption("mediumTextShadow").isToggled();
 			    } else if (damagePercentage <= 60) {
-			        color = highTextColor; // High
-			        dropShadow = highTextShadow;
+			        color = options.getColorOption("highTextColor").getColor(); // High
+			        dropShadow = options.getBooleanOption("highTextShadow").isToggled();
 			    } else if (damagePercentage <= 80) {
-			        color = veryHighTextColor; // Very high
-			        dropShadow = veryHighTextShadow;
+			        color = options.getColorOption("veryHighTextColor").getColor(); // Very high
+			        dropShadow = options.getBooleanOption("veryHighTextShadow").isToggled();
 			    }
 			}
 			
 			RenderHelper.enableGUIStandardItemLighting();
 			
-			int itemX = reverse ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
-			int damageX = reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
+			int itemX = options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
+			int damageX = options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
 			int offsetY = (-16 * i) + getHeight() - 16;
 			
 			mc.getRenderItem().renderItemAndEffectIntoGUI(itemStack, itemX, pos.getAbsoluteY() + offsetY);
@@ -181,8 +169,8 @@ public class ArmorStatus extends ModDraggableText {
 				mc.getRenderItem().renderItemOverlays(font, itemStack, itemX, pos.getAbsoluteY() + offsetY);
 			}
 			
-			if ((showDamage || showPercentage) && itemStack.getItem().isDamageable()) {
-				if (damageOverlays) {
+			if ((options.getBooleanOption("showDamage").isToggled() || options.getBooleanOption("showPercentage").isToggled()) && itemStack.getItem().isDamageable()) {
+				if (options.getBooleanOption("damageOverlays").isToggled()) {
 					mc.getRenderItem().renderItemOverlays(font, itemStack, itemX, pos.getAbsoluteY() + offsetY);
 				}
 				
@@ -196,7 +184,7 @@ public class ArmorStatus extends ModDraggableText {
 	private Collection<ItemStack> getPlayerInventory() {
 		Collection<ItemStack> playerInventory = new ArrayList<ItemStack>();
 		
-		if (equippedItem) {
+		if (options.getBooleanOption("equippedItem").isToggled()) {
 			if (mc.thePlayer.inventory.getCurrentItem() != null) {
 				playerInventory.add(mc.thePlayer.inventory.getCurrentItem());
 			}
@@ -209,225 +197,5 @@ public class ArmorStatus extends ModDraggableText {
 		}
 		
 		return playerInventory;
-	}
-	
-	public void setVeryHighTextColor(int rgb) {
-		veryHighTextColor.setRGB(rgb);
-		
-		setToFile("veryHighTextColor", rgb);
-	}
-	
-	public ColorManager getVeryHighTextColor() {
-		return veryHighTextColor;
-	}
-	
-	public void setVeryHighTextChroma(boolean toggled) {
-		veryHighTextColor.setChromaToggled(toggled);
-		
-		setToFile("veryHighTextChroma", toggled);
-	}
-	
-	public boolean isVeryHighTextChromaToggled() {
-		return veryHighTextColor.isChromaToggled();
-	}
-	
-	public void setVeryHighTextShadow(boolean toggled) {
-		veryHighTextShadow = toggled;
-		
-		setToFile("veryHighTextShadow", toggled);
-	}
-	
-	public boolean isVeryHighTextShadowToggled() {
-		return veryHighTextShadow;
-	}
-	
-	public void setHighTextColor(int rgb) {
-		highTextColor.setRGB(rgb);
-		
-		setToFile("highTextColor", rgb);
-	}
-	
-	public ColorManager getHighTextColor() {
-		return highTextColor;
-	}
-	
-	public void setHighTextChroma(boolean toggled) {
-		highTextColor.setChromaToggled(toggled);
-		
-		setToFile("highTextChroma", toggled);
-	}
-	
-	public boolean isHighTextChromaToggled() {
-		return highTextColor.isChromaToggled();
-	}
-	
-	public void setHighTextShadow(boolean toggled) {
-		highTextShadow = toggled;
-		
-		setToFile("highTextShadow", toggled);
-	}
-	
-	public boolean isHighTextShadowToggled() {
-		return highTextShadow;
-	}
-	
-	public void setMediumTextColor(int rgb) {
-		mediumTextColor.setRGB(rgb);
-		
-		setToFile("mediumTextColor", rgb);
-	}
-	
-	public ColorManager getMediumTextColor() {
-		return mediumTextColor;
-	}
-	
-	public void setMediumTextChroma(boolean toggled) {
-		mediumTextColor.setChromaToggled(toggled);
-		
-		setToFile("mediumTextChroma", toggled);
-	}
-	
-	public boolean isMediumTextChromaToggled() {
-		return mediumTextColor.isChromaToggled();
-	}
-	
-	public void setMediumTextShadow(boolean toggled) {
-		mediumTextShadow = toggled;
-		
-		setToFile("mediumTextShadow", toggled);
-	}
-	
-	public boolean isMediumTextShadowToggled() {
-		return mediumTextShadow;
-	}
-	
-	public void setLowTextColor(int rgb) {
-		lowTextColor.setRGB(rgb);
-		
-		setToFile("lowTextColor", rgb);
-	}
-	
-	public ColorManager getLowTextColor() {
-		return lowTextColor;
-	}
-	
-	public void setLowTextChroma(boolean toggled) {
-		lowTextColor.setChromaToggled(toggled);
-		
-		setToFile("lowTextChroma", toggled);
-	}
-	
-	public boolean isLowTextChromaToggled() {
-		return lowTextColor.isChromaToggled();
-	}
-	
-	public void setLowTextShadow(boolean toggled) {
-		lowTextShadow = toggled;
-		
-		setToFile("lowTextShadow", toggled);
-	}
-	
-	public boolean isLowTextShadowToggled() {
-		return lowTextShadow;
-	}
-	
-	public void setVeryLowTextColor(int rgb) {
-		veryLowTextColor.setRGB(rgb);
-		
-		setToFile("veryLowTextColor", rgb);
-	}
-	
-	public ColorManager getVeryLowTextColor() {
-		return veryLowTextColor;
-	}
-	
-	public void setVeryLowTextChroma(boolean toggled) {
-		veryLowTextColor.setChromaToggled(toggled);
-		
-		setToFile("veryLowTextChroma", toggled);
-	}
-	
-	public boolean isVeryLowTextChromaToggled() {
-		return veryLowTextColor.isChromaToggled();
-	}
-	
-	public void setVeryLowTextShadow(boolean toggled) {
-		veryLowTextShadow = toggled;
-		
-		setToFile("veryLowTextShadow", toggled);
-	}
-	
-	public boolean isVeryLowTextShadowToggled() {
-		return veryLowTextShadow;
-	}
-	
-	public void setDynamicColors(boolean toggled) {
-		dynamicColors = toggled;
-		
-		setToFile("dynamicColors", toggled);
-	}
-	
-	public boolean isDynamicColorsToggled() {
-		return dynamicColors;
-	}
-	
-	public void setShowPercentage(boolean toggled) {
-		showPercentage = toggled;
-		
-		setToFile("showPercentage", toggled);
-	}
-	
-	public boolean isShowPercentageToggled() {
-		return showPercentage;
-	}
-	
-	public void setShowDamage(boolean toggled) {
-		showDamage = toggled;
-		
-		setToFile("showDamage", toggled);
-	}
-	
-	public boolean isShowDamageToggled() {
-		return showDamage;
-	}
-	
-	public void setShowMaxDamage(boolean toggled) {
-		showMaxDamage = toggled;
-		
-		setToFile("showMaxDamage", toggled);
-	}
-	
-	public boolean isShowMaxDamageToggled() {
-		return showMaxDamage;
-	}
-	
-	public void setEquippedItem(boolean toggled) {
-		equippedItem = toggled;
-		
-		setToFile("equippedItem", toggled);
-	}
-	
-	public boolean isEquippedItemToggled() {
-		return equippedItem;
-	}
-	
-	public void setDamageOverlays(boolean toggled) {
-		damageOverlays = toggled;
-		
-		setToFile("damageOverlays", toggled);
-	}
-	
-	public boolean isDamageOverlaysToggled() {
-		return damageOverlays;
-	}
-	
-	public void setReverse(boolean toggled) {
-		reverse = toggled;
-		
-		setToFile("reverse", toggled);
-	}
-	
-	public boolean isReverseToggled() {
-		return reverse;
 	}
 }

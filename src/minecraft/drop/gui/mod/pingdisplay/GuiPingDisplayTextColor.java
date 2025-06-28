@@ -7,12 +7,14 @@ import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.PingDisplay;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 
 public class GuiPingDisplayTextColor extends GuiModColor {
 	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
 	
 	public GuiPingDisplayTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod, mod.getTextColor());
+		super(previousGuiScreen, mod, (ColorOption) mod.getOptions().getColorOption("textColor"));
 	}
 
     @Override
@@ -21,12 +23,12 @@ public class GuiPingDisplayTextColor extends GuiModColor {
     	
     	switch (button.id) {
 	    	case 6:
-	    		mc.displayGuiScreen(new GuiPingDisplayDynamicColors(this));
-	    		break;
-	    	case 7:
-	    		mod.setDynamicColors(!mod.isDynamicColorsToggled());
+	    		mod.getOptions().getBooleanOption("dynamicColors").toggle();
 	        	this.initGui();
 	        	break;
+	    	case 7:
+	    		mc.displayGuiScreen(new GuiPingDisplayDynamicColors(this));
+	    		break;
 		}
     }
 	
@@ -34,7 +36,9 @@ public class GuiPingDisplayTextColor extends GuiModColor {
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiText(6, "Dynamic Colors", false, 9));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isDynamicColorsToggled(), 9));
+		BooleanOption dynamicColors = mod.getOptions().getBooleanOption("dynamicColors");
+		
+		this.buttonList.add(this.createGuiText(7, dynamicColors.getGuiSettings().getOptionName(), false, 9));
+    	this.buttonList.add(this.createGuiCheckBox(6, dynamicColors.isToggled(), 9));
     }
 }

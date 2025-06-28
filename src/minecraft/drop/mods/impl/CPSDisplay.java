@@ -1,27 +1,37 @@
 package drop.mods.impl;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
 import net.minecraft.util.EnumChatFormatting;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiCPSDisplay;
+import drop.ColorManager;
+import drop.gui.GuiSettings;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableDisplayText;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
 
-public class CPSDisplay extends ModDraggableDisplayText {
-	public boolean showRightCPS = false;
-        
+public class CPSDisplay extends ModDraggable {        
 	public CPSDisplay() {
-		super(true, 0.5, 0.5, "0 CPS");
+		super(true, 0.5, 0.5);
 		
-		setShowRightCPS(getBooleanFromFile("showRightCPS", showRightCPS));
-		
-		if (showRightCPS) {
-			dummyText = "0 ⎟ 0 CPS";
-		}
+		this.options = new ModOptions(
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
+				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Show Background")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
+				new BooleanOption(this, "showRightCPS", false, new GuiSettings(6, "Show Right CPS"))
+				);
+				
+		saveOptions();
 	}
 	
 	private List<Long> leftClicks = new ArrayList<>();
@@ -33,8 +43,13 @@ public class CPSDisplay extends ModDraggableDisplayText {
     private long lastRightPressed;
 	
 	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiCPSDisplay(previousGuiScreen);
+	public int getWidth() {
+		return options.getBooleanOption("showBackground").isToggled() ? 58 : font.getStringWidth(options.getBracketsOption("brackets").wrap("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS"));
+	}
+
+	@Override
+	public int getHeight() {
+		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -59,8 +74,25 @@ public class CPSDisplay extends ModDraggableDisplayText {
                 this.rightClicks.add(this.lastRightPressed);
             }
         }
-                        
-		drawTextToRender(pos, getCPS(leftClicks) + (showRightCPS ? " ⎟ " + getCPS(rightClicks) : "") + " CPS");
+        
+        if (options.getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+	    	
+			drawCenteredText(getCPS(leftClicks) + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	} else {
+		    drawAlignedText(options.getBracketsOption("brackets").wrap(getCPS(leftClicks) + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	}                        
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		if (options.getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+	    	
+			drawCenteredText("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	} else {
+		    drawAlignedText(options.getBracketsOption("brackets").wrap("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	}
 	}
 	
 	private int getCPS(List<Long> clicks) {
@@ -70,14 +102,4 @@ public class CPSDisplay extends ModDraggableDisplayText {
 
         return clicks.size();
     }
-	
-	public void setShowRightCPS(boolean toggled) {
-		showRightCPS = toggled;
-		
-		setToFile("showRightCPS", toggled);
-	}
-	
-	public boolean isShowRightCPSToggled() {
-		return showRightCPS;
-	}
 }

@@ -2625,16 +2625,16 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
             final BlockOverlay blockOverlayMod = ModInstances.getBlockOverlayMod();
             
             if (blockOverlayMod.isEnabled()) {
-            	if (blockOverlayMod.isOutlineToggled()) {
-            		if (blockOverlayMod.isOutlineChromaToggled()) {
+            	if (blockOverlayMod.getOptions().getBooleanOption("outline").isToggled()) {
+            		if (blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().isChromaToggled()) {
                     	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                         GlStateManager.color(chromaColor.getRed() / 255.0F, chromaColor.getGreen() / 255.0F, chromaColor.getBlue() / 255.0F, 0.4F);
             		} else {
-            			GlStateManager.color((float) blockOverlayMod.getOutlineColor().getRed() / 255.0F, (float) blockOverlayMod.getOutlineColor().getGreen() / 255.0F, blockOverlayMod.getOutlineColor().getBlue() / 255.0F, 1.0F);
+            			GlStateManager.color((float) blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().getRed() / 255.0F, (float) blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().getGreen() / 255.0F, blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().getBlue() / 255.0F, 1.0F);
             		}
             		
-                	GL11.glLineWidth(blockOverlayMod.getOutlineWidth());
+                	GL11.glLineWidth((float) blockOverlayMod.getOptions().getFloatOption("outlineWidth").getValue());
             	} else {
             		GlStateManager.color(0.0F, 0.0F, 0.0F, 0.0F);
             	}
@@ -2666,21 +2666,21 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
 
                 drawSelectionBoundingBox(axisalignedbb.expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2));
                 
-                if (blockOverlayMod.isEnabled() && blockOverlayMod.isOverlayToggled()) {
+                if (blockOverlayMod.isEnabled() && blockOverlayMod.getOptions().getBooleanOption("overlay").isToggled()) {
                 	int red;
                 	int green;
                 	int blue;
-                	int alpha = blockOverlayMod.getOverlayColor().getAlpha();
+                	int alpha = blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().getAlpha();
 
-                	if (blockOverlayMod.isOverlayChromaToggled()) {
+                	if (blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().isChromaToggled()) {
                     	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
                     	red = chromaColor.getRed();
                     	green = chromaColor.getGreen();
                     	blue = chromaColor.getBlue();
                 	} else {
-                		red = blockOverlayMod.getOverlayColor().getRed();
-                    	green = blockOverlayMod.getOverlayColor().getGreen();
-                    	blue = blockOverlayMod.getOverlayColor().getBlue();
+                		red = blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().getRed();
+                    	green = blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().getGreen();
+                    	blue = blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().getBlue();
                 	}
                 	
                 	BlockOverlay.drawSelectionOverlay(block.getSelectedBoundingBox(this.theWorld, blockpos).expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2), red, green, blue, alpha);

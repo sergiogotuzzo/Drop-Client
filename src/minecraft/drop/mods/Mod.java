@@ -2,11 +2,18 @@ package drop.mods;
 
 import org.apache.commons.lang3.StringUtils;
 
+import drop.ColorManager;
 import drop.Drop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import drop.events.EventManager;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiMod;
+import drop.mods.option.ModOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.IntOption;
 
 public abstract class Mod {
 	protected boolean enabled;
@@ -14,17 +21,19 @@ public abstract class Mod {
 	protected final Minecraft mc;
 	protected final FontRenderer font;
 	protected final Drop client;
-		
+	
+	protected ModOptions options = new ModOptions();
+	
 	public Mod(boolean enabled) {
 		mc = Minecraft.getMinecraft();
 		font = mc.fontRendererObj;
 		client = Drop.getInstance();
 		
-		setEnabled((boolean) getFromFile("enabled", enabled));
+		setEnabled((boolean) getFromFile("enabled", enabled));				
 	}
 	
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return null;
+		return new GuiMod(previousGuiScreen, this);
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -41,6 +50,25 @@ public abstract class Mod {
 	
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public void saveOptions() {
+		for (ModOption option : this.options.getOptions()) {
+			if (option instanceof BooleanOption) {
+				option.saveValue(getBooleanFromFile(option.getKey(), (boolean) option.getValue()));
+			} else if (option instanceof ColorOption) {
+				ColorOption colorOption = (ColorOption) option;
+
+				int rgb = getIntFromFile(colorOption.getKeyRGB(), colorOption.getColor().getRGB());
+				boolean chroma = colorOption.shouldBeShownChromaInGui() ? getBooleanFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
+				
+				colorOption.saveValue(ColorManager.fromRGB(rgb, chroma));
+			} else if (option instanceof FloatOption) {
+				option.saveValue(getFloatFromFile(option.getKey(), (float) option.getValue()));
+			} else if (option instanceof IntOption) {
+				option.saveValue(getIntFromFile(option.getKey(), (int) option.getValue()));
+			}
+		}
 	}
 	
 	public void setToFile(String key, Object value) {
@@ -81,5 +109,9 @@ public abstract class Mod {
 	
 	public String getName() {
 		return StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(this.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
+	}
+	
+	public ModOptions getOptions() {
+		return options;
 	}
 }

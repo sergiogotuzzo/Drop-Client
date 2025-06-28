@@ -5,9 +5,12 @@ import net.minecraft.entity.Entity;
 import java.awt.Color;
 
 import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiOldVisuals;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.IntOption;
 
 public class OldVisuals extends Mod {
 	private boolean fishingRod = true;
@@ -18,54 +21,13 @@ public class OldVisuals extends Mod {
 	public OldVisuals() {
 		super(true);
 		
-		setFishingRod(getBooleanFromFile("fishingRod", fishingRod));
-		setBow(getBooleanFromFile("bow", bow));
-		setBlockHitting(getBooleanFromFile("blockHitting", blockHitting));
-		setArmorHitAnimation(getBooleanFromFile("armorHitAnimation", armorHitAnimation));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiOldVisuals(previousGuiScreen);
-	}
-	
-	public void setFishingRod(boolean toggled) {
-		this.fishingRod = toggled;
+		this.options = new ModOptions(
+				new BooleanOption(this, "fishingRod", true, new GuiSettings(1, "Fishing Rod")),
+				new BooleanOption(this, "bow", true, new GuiSettings(2, "Bow")),
+				new BooleanOption(this, "blockHitting", true, new GuiSettings(3, "Block Hitting")),
+				new BooleanOption(this, "armorHitAnimation", true, new GuiSettings(4, "Armor Hit Animation"))
+				);
 		
-		setToFile("fishingRod", toggled);
-	}
-	
-	public boolean isFishingRodToggled() {
-		return fishingRod;
-	}
-	
-	public void setBow(boolean toggled) {
-		this.bow = toggled;
-		
-		setToFile("bow", toggled);
-	}
-	
-	public boolean isBowToggled() {
-		return bow;
-	}
-	
-	public void setBlockHitting(boolean toggled) {
-		this.blockHitting = toggled;
-		
-		setToFile("blockHitting", toggled);
-	}
-	
-	public boolean isBlockHittingToggled() {
-		return blockHitting;
-	}
-	
-	public void setArmorHitAnimation(boolean toggled) {
-		this.armorHitAnimation = toggled;
-		
-		setToFile("armorHitAnimation", toggled);
-	}
-	
-	public boolean isArmorHitAnimationToggled() {
-		return armorHitAnimation;
+		saveOptions();
 	}
 }

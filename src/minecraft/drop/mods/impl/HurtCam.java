@@ -1,42 +1,21 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiHurtCam;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.FloatOption;
 
 public class HurtCam extends Mod {
-	private boolean hurtShake = true;
-	private float hurtShakeIntensity = 14.0F;
-	
 	public HurtCam() {
 		super(true);
 		
-		setHurtShake(getBooleanFromFile("hurtShake", hurtShake));
-		setHurtShakeIntensity(getFloatFromFile("hurtShakeIntensity", hurtShakeIntensity));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiHurtCam(previousGuiScreen);
-	}
-	
-	public void setHurtShake(boolean toggled) {
-		this.hurtShake = toggled;
+		this.options = new ModOptions(
+				new BooleanOption(this, "hurtShake", true, new GuiSettings(1, "Hurt Shake")),
+				new FloatOption(this, "hurtShakeIntensity", 5.0F, 35.0F, 14.0F, new ParentOption("hurtShake"), new GuiSettings(2, "Hurt Shake Intensity"))
+				);
 		
-		setToFile("hurtShake", hurtShake);
-	}
-	
-	public boolean isHurtShakeToggled() {
-		return hurtShake;
-	}
-	
-	public void setHurtShakeIntensity(float intensity) {
-		this.hurtShakeIntensity = intensity;
-		
-		setToFile("hurtShakeIntensity", hurtShakeIntensity);
-	}
-	
-	public float getHurtShakeIntensity() {
-		return hurtShakeIntensity;
+		saveOptions();
 	}
 }

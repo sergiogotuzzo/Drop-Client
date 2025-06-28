@@ -312,11 +312,11 @@ public class ItemRenderer
     	OldVisuals oldVisualMod = ModInstances.getOldVisualsMod();
     	
     	if (oldVisualMod.isEnabled()) {
-    		if (oldVisualMod.isBowToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+    		if (oldVisualMod.getOptions().getBooleanOption("bow").isToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
     			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
     		}
 
-    		if (oldVisualMod.isFishingRodToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
+    		if (oldVisualMod.getOptions().getBooleanOption("fishingRod").isToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
     			GlStateManager.translate(0.08f, -0.027f, -0.33f);
     			GlStateManager.scale(0.93f, 1.0f, 1.0f);
     		}
@@ -409,7 +409,7 @@ public class ItemRenderer
                 {
                     EnumAction enumaction = this.itemToRender.getItemUseAction();
                     
-                    float swingProgress = ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isBlockHittingToggled() ? f1 : 0.0F;
+                    float swingProgress = ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().getOptions().getBooleanOption("blockHitting").isToggled() ? f1 : 0.0F;
 
                     switch (enumaction)
                     {

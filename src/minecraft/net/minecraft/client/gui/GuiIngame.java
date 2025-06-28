@@ -136,7 +136,7 @@ public class GuiIngame extends Gui
 
     public void renderGameOverlay(float partialTicks)
     {
-    	if (ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().isBlockHittingToggled() && this.mc.thePlayer.getHeldItem() != null) {
+    	if (ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().getOptions().getBooleanOption("blockHitting").isToggled() && this.mc.thePlayer.getHeldItem() != null) {
 			this.attemptSwing();
 		}
     	

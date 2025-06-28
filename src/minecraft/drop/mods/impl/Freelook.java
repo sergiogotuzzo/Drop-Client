@@ -1,36 +1,40 @@
 package drop.mods.impl;
 
+import java.awt.Color;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import drop.ColorManager;
 import drop.events.EventTarget;
 import drop.events.impl.KeyEvent;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiFreelook;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.option.type.FloatOption;
 
 public class Freelook extends Mod {
-	private boolean hold = true;
-	private boolean invertYaw = false;
-	private boolean invertPitch = false;
-	
 	public Freelook() {
 		super(true);
 		
-		setHold(getBooleanFromFile("hold", hold));
-		setInvertYaw(getBooleanFromFile("invertYaw", invertYaw));
-		setInvertPitch(getBooleanFromFile("invertPitch", invertPitch));
+		this.options = new ModOptions(
+				new BooleanOption(this, "hold", true, new GuiSettings(1, "Hold")),
+				new BooleanOption(this, "invertYaw", false, new GuiSettings(2, "Invert Yaw")),
+				new BooleanOption(this, "invertPitch", false, new GuiSettings(3, "Invert Pitch"))
+				);
+				
+		saveOptions();
 	}
 	
 	private boolean perspectiveToggled = false;
 	private float cameraYaw = 0F;
 	private float cameraPitch = 0F;
 	private int previousPerspective = 0;
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiFreelook(previousGuiScreen);
-	}
 	
 	@EventTarget
 	public void onKey(KeyEvent e) {
@@ -47,7 +51,7 @@ public class Freelook extends Mod {
 				} else {
 					mc.gameSettings.thirdPersonView = previousPerspective;
 				}
-			} else if (hold) {
+			} else if (options.getBooleanOption("hold").isToggled()) {
 				perspectiveToggled = false;
 				mc.gameSettings.thirdPersonView = previousPerspective;
 			}
@@ -80,8 +84,8 @@ public class Freelook extends Mod {
 			float f3 = mc.mouseHelper.deltaX * f2;
 			float f4 = mc.mouseHelper.deltaY * f2;
 			
-			cameraYaw = invertYaw ? cameraYaw - (f3 * 0.15F) : cameraYaw + (f3 * 0.15F);
-			cameraPitch = invertPitch ? cameraPitch + (f4 * 0.15F) : cameraPitch - (f4 * 0.15F);
+			cameraYaw = options.getBooleanOption("invertYaw").isToggled() ? cameraYaw - (f3 * 0.15F) : cameraYaw + (f3 * 0.15F);
+			cameraPitch = options.getBooleanOption("invertPitch").isToggled() ? cameraPitch + (f4 * 0.15F) : cameraPitch - (f4 * 0.15F);
 			
 			if (cameraPitch > 90) {
 				cameraPitch = 90;
@@ -93,35 +97,5 @@ public class Freelook extends Mod {
 		}
 		
 		return false;
-	}
-	
-	public void setHold(boolean toggled) {
-		hold = toggled;
-		
-		setToFile("hold", toggled);
-	}
-	
-	public boolean isHoldToggled() {
-		return hold;
-	}
-	
-	public void setInvertYaw(boolean toggled) {
-		invertYaw = toggled;
-		
-		setToFile("invertYaw", toggled);
-	}
-	
-	public boolean isInvertYawToggled() {
-		return invertYaw;
-	}
-	
-	public void setInvertPitch(boolean toggled) {
-		invertPitch = toggled;
-		
-		setToFile("invertPitch", toggled);
-	}
-	
-	public boolean isInvertPitchToggled() {
-		return invertPitch;
 	}
 }

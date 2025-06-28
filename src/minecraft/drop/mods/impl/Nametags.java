@@ -1,9 +1,11 @@
 package drop.mods.impl;
 
 import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiNametags;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 
 public class Nametags extends Mod {
 	private boolean showInThirdPerson = true;
@@ -13,43 +15,12 @@ public class Nametags extends Mod {
 	public Nametags() {
 		super(false);
 		
-		setShowInThirdPerson(getBooleanFromFile("showInThirdPerson", showInThirdPerson));
-		setTextShadow(getBooleanFromFile("textShadow", textShadow));
-		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiNametags(previousGuiScreen);
-	}
-	
-	public void setShowInThirdPerson(boolean toggled) {
-		this.showInThirdPerson = toggled;
+		this.options = new ModOptions(
+				new BooleanOption(this, "showInThirdPerson", true, new GuiSettings(1, "Show In Third Person")),
+				new BooleanOption(this, "textShadow", false, new GuiSettings(2, "Text Shadow")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 64, false), new GuiSettings(3, "Background Color", false, true))
+				);
 		
-		setToFile("showInThirdPerson", toggled);
-	}
-	
-	public boolean isShowInThirdPersonToggled() {
-		return showInThirdPerson;
-	}
-	
-	public void setTextShadow(boolean toggled) {
-		textShadow = toggled;
-		
-		setToFile("textShadow", toggled);
-	}
-	
-	public boolean isTextShadowToggled() {
-		return textShadow;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		backgroundColor = backgroundColor.fromRGB(rgb, false);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
+		saveOptions();
 	}
 }

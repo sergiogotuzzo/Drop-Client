@@ -1,25 +1,54 @@
 package drop.mods.impl;
 
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.play.server.S19PacketEntityStatus;
 
+import java.awt.Color;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import drop.ColorManager;
 import drop.events.EventTarget;
 import drop.events.impl.EntityAttackEvent;
 import drop.events.impl.EntityDamageEvent;
-import drop.mods.ModDraggableDisplayText;
+import drop.gui.GuiSettings;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
 
-public class ComboCounter extends ModDraggableDisplayText {
+public class ComboCounter extends ModDraggable {
 	public ComboCounter() {
-		super(false, 0.5, 0.5, "0 combo");
+		super(false, 0.5, 0.5);
+		
+		this.options = new ModOptions(
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
+				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Show Background")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets"))
+				);
+				
+		saveOptions();
 	}
 
 	private int targetId;
 	private int combo = 0;
 	private long lastCombo;
+	
+	@Override
+	public int getWidth() {
+		return options.getBooleanOption("showBackground").isToggled() ? 58 : font.getStringWidth(options.getBracketsOption("brackets").wrap("0 combo"));
+	}
+
+	@Override
+	public int getHeight() {
+		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
+	}
 
 	@Override
 	public void render(ScreenPosition pos) {
@@ -27,7 +56,24 @@ public class ComboCounter extends ModDraggableDisplayText {
 			combo = 0;
 		}
 		
-		drawTextToRender(pos, combo + " combo");
+		if (options.getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+	    	
+			drawCenteredText(combo + " combo", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	} else {
+		    drawAlignedText(options.getBracketsOption("brackets").wrap(combo + " combo"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		if (options.getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+	    	
+			drawCenteredText("0 combo", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	} else {
+		    drawAlignedText(options.getBracketsOption("brackets").wrap("0 combo"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+    	}
 	}
 
 	@EventTarget

@@ -54,7 +54,7 @@ public class DropClientMovementInput extends MovementInput {
 		
 		jump = gameSettings.keyBindJump.isKeyDown();
 		
-		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.isToggleSneakToggled()) {
+		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.getOptions().getBooleanOption("toggleSneak").isToggled()) {
 			if (gameSettings.keyBindSneak.isKeyDown()) {
 				if (sneakWasPressed == 0) {
 					if (sneak) {
@@ -87,7 +87,7 @@ public class DropClientMovementInput extends MovementInput {
 		
 		toggleSprintSneakMod.sneaking = sneak;
 		
-		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.isToggleSprintToggled()) {
+		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.getOptions().getBooleanOption("toggleSprint").isToggled()) {
 			if (gameSettings.keyBindSprint.isKeyDown() && !player.capabilities.isFlying) {
 				if (sprintWasPressed == 0) {
 					if (sprint) {
@@ -119,21 +119,23 @@ public class DropClientMovementInput extends MovementInput {
 		
 		toggleSprintSneakMod.sprinting = sprint;
 		
-		if (toggleSprintSneakMod.isFlyBoostToggled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && mc.gameSettings.keyBindSprint.isKeyDown()) {
+		if (toggleSprintSneakMod.getOptions().getBooleanOption("flyBoost").isToggled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && mc.gameSettings.keyBindSprint.isKeyDown()) {
 			if (originalFlySpeed < 0.0F || this.player.capabilities.getFlySpeed() != boostedFlySpeed) {
 				originalFlySpeed = this.player.capabilities.getFlySpeed();
 			}
 			
-			boostedFlySpeed = originalFlySpeed * toggleSprintSneakMod.getFlyBoostFactor();
+			float boostFactor = (float) toggleSprintSneakMod.getOptions().getFloatOption("flyBoostFactor").getValue();
+			
+			boostedFlySpeed = originalFlySpeed * boostFactor;
 			
 			player.capabilities.setFlySpeed(boostedFlySpeed);
 			
 			if (sneak) {
-				player.motionY -= 0.15D * (double) (toggleSprintSneakMod.getFlyBoostFactor() - 1.0F);
+				player.motionY -= 0.15D * (double) (boostFactor - 1.0F);
 			}
 			
 			if (jump) {
-				player.motionY += 0.15D * (double) (toggleSprintSneakMod.getFlyBoostFactor() - 1.0F);
+				player.motionY += 0.15D * (double) (boostFactor - 1.0F);
 			}
 		} else {
 			if (player.capabilities.getFlySpeed() == boostedFlySpeed) {

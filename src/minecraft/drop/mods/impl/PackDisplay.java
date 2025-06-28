@@ -4,38 +4,34 @@ import java.awt.Color;
 import java.util.List;
 
 import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiPackDisplay;
+import drop.gui.GuiSettings;
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.util.ResourceLocation;
 import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
 
 public class PackDisplay extends ModDraggable {
-	private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
-	private boolean nameTextShadow = true;
-	private boolean showDescription = false;
-	private ColorManager descriptionTextColor = ColorManager.fromColor(Color.GRAY, false);
-	private boolean descriptionTextShadow = true;
-	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
-	private boolean showIcon = true;
-	private boolean showAllSelectedPacks = true;
-	
 	public PackDisplay() {
 		super(false, 0.5, 0.5);
 		
-		setNameTextColor(getIntFromFile("nameTextColor", nameTextColor.getRGB()));
-		setNameTextChroma(getBooleanFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
-		setNameTextShadow(getBooleanFromFile("nameTextShadow", nameTextShadow));
-		setShowDescription(getBooleanFromFile("showDescription", showDescription));
-		setDescriptionTextColor(getIntFromFile("descriptionTextColor", descriptionTextColor.getRGB()));
-		setDescriptionTextChroma(getBooleanFromFile("descriptionTextChroma", descriptionTextColor.isChromaToggled()));
-		setDescriptionTextShadow(getBooleanFromFile("descriptionTextShadow", descriptionTextShadow));
-		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
-		setShowIcon(getBooleanFromFile("showIcon", showIcon));
-		setShowAllSelectedPacks(getBooleanFromFile("showAllSelectedPacks", showAllSelectedPacks));
+		this.options = new ModOptions(
+				new ColorOption(this, "nameTextColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Name Text Color", true, false)),
+				new BooleanOption(this, "nameTextShadow", true, new GuiSettings(2, "Name Text Shadow")),
+				new BooleanOption(this, "showDescription", false, new GuiSettings(3, "Show Description")),
+				new ColorOption(this, "descriptionTextColor", ColorManager.fromColor(Color.GRAY, false), new ParentOption("showDescription"), new GuiSettings(4, "Description Text Color", true, false)),
+				new BooleanOption(this, "descriptionTextShadow", true, new ParentOption("showDescription"), new GuiSettings(5, "Description Text Shadow")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new GuiSettings(6, "Background Color", false, true)),
+				new BooleanOption(this, "showIcon", true, new GuiSettings(7, "Show Icon")),
+				new BooleanOption(this, "showAllSelectedPacks", true, new GuiSettings(8, "Show All Selected Packs"))
+				);
+				
+		saveOptions();
 	}
 	
 	private static class DefaultPack {
@@ -53,20 +49,15 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiPackDisplay(previousGuiScreen);
-	}
-	
-	@Override
 	public int getWidth() {
 		int width = 8;
 		
-		if (showIcon) {
+		if (options.getBooleanOption("showIcon").isToggled()) {
 			width += 28;
 		}
 		
 		if (mc.getResourcePackRepository().getRepositoryEntries().isEmpty()) {
-			width += font.getStringWidth((showDescription ? DefaultPack.getPackDescription() : DefaultPack.getPackName()));
+			width += font.getStringWidth((options.getBooleanOption("showDescription").isToggled() ? DefaultPack.getPackDescription() : DefaultPack.getPackName()));
 		} else {
 			width += font.getStringWidth(getLongestPackText());
 		}
@@ -86,7 +77,7 @@ public class PackDisplay extends ModDraggable {
 		if (!selectedPacks.isEmpty()) {
 			int offsetY = 0;
 
-			if (showAllSelectedPacks) {
+			if (options.getBooleanOption("showAllSelectedPacks").isToggled()) {
 				for (int i = 0; i < selectedPacks.size(); i++) {
 					ResourcePackRepository.Entry selectedPack = selectedPacks.get(i);
 					
@@ -109,7 +100,7 @@ public class PackDisplay extends ModDraggable {
 		if (!selectedPacks.isEmpty()) {
 			int offsetY = 0;
 
-			if (showAllSelectedPacks) {
+			if (options.getBooleanOption("showAllSelectedPacks").isToggled()) {
 				for (int i = 0; i < selectedPacks.size(); i++) {
 					ResourcePackRepository.Entry selectedPack = selectedPacks.get(i);
 					
@@ -128,9 +119,9 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	private void drawSelectedPack(ResourcePackRepository.Entry selectedPack, int offsetY) {
-		drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, backgroundColor.getRGB());
+		drawRect(pos.getAbsoluteX() + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, options.getColorOption("backgroundColor").getColor().getRGB());
 		
-		if (showIcon) {
+		if (options.getBooleanOption("showIcon").isToggled()) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			
 			selectedPack.bindTexturePackIcon(mc.getTextureManager());
@@ -138,23 +129,23 @@ public class PackDisplay extends ModDraggable {
 			Gui.drawModalRectWithCustomSizedTexture(pos.getAbsoluteX(), pos.getAbsoluteY() + offsetY, 0.0F, 0.0F, 28, 28, 28, 28);
 		}
 
-		int packX = pos.getAbsoluteX() + 4 + (showIcon ? 28 : 0);
-		int packNameY = pos.getAbsoluteY() + offsetY + (showDescription ? 4 : 28 / 2 - 4);
+		int packX = pos.getAbsoluteX() + 4 + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0);
+		int packNameY = pos.getAbsoluteY() + offsetY + (options.getBooleanOption("showDescription").isToggled() ? 4 : 28 / 2 - 4);
 		
 		String packName = selectedPack.getResourcePackName();
 		String packDescription = selectedPack.getTexturePackDescription().replace("�r", "");
 
-		drawText(packName, packX, packNameY, nameTextColor.getRGB(), nameTextShadow, !packName.contains("�") && nameTextColor.isChromaToggled());
+		drawText(packName, packX, packNameY, options.getColorOption("nameTextColor").getColor().getRGB(), options.getBooleanOption("nameTextShadow").isToggled(), !packName.contains("�") && options.getColorOption("nameTextColor").getColor().isChromaToggled());
 				
-		if (showDescription) {
-			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, !packDescription.contains("�") && descriptionTextColor.isChromaToggled());
+		if (options.getBooleanOption("showDescription").isToggled()) {
+			drawText(packDescription, packX, pos.getAbsoluteY() + offsetY + 28 - font.FONT_HEIGHT - 4, options.getColorOption("descriptionTextColor").getColor().getRGB(), options.getBooleanOption("descriptionTextShadow").isToggled(), !packDescription.contains("�") && options.getColorOption("descriptionTextColor").getColor().isChromaToggled());
 		}
 	}
 	
 	private void drawDefaultPack() {
-		drawRect(pos.getAbsoluteX() + (showIcon ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, backgroundColor.getRGB());
+		drawRect(pos.getAbsoluteX() + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, options.getColorOption("backgroundColor").getColor().getRGB());
 		
-		if (showIcon) {
+		if (options.getBooleanOption("showIcon").isToggled()) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			
 			mc.getTextureManager().bindTexture(DefaultPack.getResourceLocation());
@@ -162,13 +153,13 @@ public class PackDisplay extends ModDraggable {
 			Gui.drawModalRectWithCustomSizedTexture(pos.getAbsoluteX(), pos.getAbsoluteY(), 0.0F, 0.0F, 28, 28, 28, 28);
 		}
 
-		int packX = pos.getAbsoluteX() + 4 + (showIcon ? 28 : 0);
-		int packNameY = pos.getAbsoluteY() + (showDescription ? 4 : 28 / 2 - 4);
+		int packX = pos.getAbsoluteX() + 4 + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0);
+		int packNameY = pos.getAbsoluteY() + (options.getBooleanOption("showDescription").isToggled() ? 4 : 28 / 2 - 4);
 		
-		drawText(DefaultPack.getPackName(), packX, packNameY, nameTextColor.getRGB(), nameTextShadow, nameTextColor.isChromaToggled());
+		drawText(DefaultPack.getPackName(), packX, packNameY, options.getColorOption("nameTextColor").getColor().getRGB(), options.getBooleanOption("nameTextShadow").isToggled(), options.getColorOption("nameTextColor").getColor().isChromaToggled());
 		
-		if (showDescription) {
-			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, descriptionTextColor.getRGB(), descriptionTextShadow, descriptionTextColor.isChromaToggled());
+		if (options.getBooleanOption("showDescription").isToggled()) {
+			drawText(DefaultPack.getPackDescription(), packX, pos.getAbsoluteY() + 28 - font.FONT_HEIGHT - 4, options.getColorOption("descriptionTextColor").getColor(), options.getBooleanOption("descriptionTextShadow").isToggled());
 		}
 	}
 	
@@ -178,7 +169,7 @@ public class PackDisplay extends ModDraggable {
 		
 		String longest = longestName;
 		
-		if (showDescription) {
+		if (options.getBooleanOption("showDescription").isToggled()) {
 			if (font.getStringWidth(longestDescription) > font.getStringWidth(longest)) {
 				longest = longestDescription;
 			}
@@ -219,105 +210,5 @@ public class PackDisplay extends ModDraggable {
 		}
 		
 		return longest;
-	}
-	
-	public void setNameTextColor(int rgb) {
-		nameTextColor.setRGB(rgb);
-		
-		setToFile("nameTextColor", rgb);
-	}
-	
-	public ColorManager getNameTextColor() {
-		return nameTextColor;
-	}
-	
-	public void setNameTextChroma(boolean toggled) {
-		nameTextColor.setChromaToggled(toggled);
-		
-		setToFile("nameTextChroma", toggled);
-	}
-	
-	public boolean isNameTextChromaToggled() {
-		return nameTextColor.isChromaToggled();
-	}
-	
-	public void setNameTextShadow(boolean toggled) {
-		nameTextShadow = toggled;
-		
-		setToFile("nameTextShadow", toggled);
-	}
-	
-	public boolean isNameTextShadowToggled() {
-		return nameTextShadow;
-	}
-	
-	public void setShowDescription(boolean toggled) {
-		showDescription = toggled;
-		
-		setToFile("showDescription", toggled);
-	}
-	
-	public boolean isShowDescriptionToggled() {
-		return showDescription;
-	}
-	
-	public void setDescriptionTextColor(int rgb) {
-		descriptionTextColor.setRGB(rgb);
-		
-		setToFile("descriptionTextColor", rgb);
-	}
-	
-	public ColorManager getDescriptionTextColor() {
-		return descriptionTextColor;
-	}
-	
-	public void setDescriptionTextChroma(boolean toggled) {
-		descriptionTextColor.setChromaToggled(toggled);
-		
-		setToFile("descriptionTextChroma", toggled);
-	}
-	
-	public boolean isDescriptionTextChromaToggled() {
-		return descriptionTextColor.isChromaToggled();
-	}
-	
-	public void setDescriptionTextShadow(boolean toggled) {
-		descriptionTextShadow = toggled;
-		
-		setToFile("descriptionTextShadow", toggled);
-	}
-	
-	public boolean isDescriptionTextShadowToggled() {
-		return descriptionTextShadow;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		this.backgroundColor = ColorManager.fromRGB(rgb, false);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
-	}
-	
-	public void setShowIcon(boolean toggled) {
-		showIcon = toggled;
-		
-		setToFile("showIcon", toggled);
-	}
-	
-	public boolean isShowIconToggled() {
-		return showIcon;
-	}
-	
-	public void setShowAllSelectedPacks(boolean toggled) {
-		showAllSelectedPacks = toggled;
-		
-		setToFile("showAllSelectedPacks", toggled);
-	}
-	
-	public boolean isShowAllSelectedPacksToggled() {
-		return showAllSelectedPacks;
 	}
 }

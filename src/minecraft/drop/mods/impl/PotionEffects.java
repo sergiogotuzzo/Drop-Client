@@ -10,52 +10,45 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiPotionEffects;
+import drop.gui.GuiSettings;
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
 import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
 
-public class PotionEffects extends ModDraggable {	
-    private ColorManager durationTextColor = ColorManager.fromColor(Color.WHITE, false);
-    private boolean durationTextShadow = true;
-    private boolean showName = true;
-    private ColorManager nameTextColor = ColorManager.fromColor(Color.WHITE, false);
-    private boolean nameTextShadow = true;
-	private boolean showIcon = true;
-    private boolean blink = true;
-	private boolean reverse = false;
-	
+public class PotionEffects extends ModDraggable {
 	public PotionEffects() {
 		super(true, 0.5, 0.5);
 		
-		setDurationTextColor(getIntFromFile("durationTextColor", durationTextColor.getRGB()));
-		setDurationTextShadow(getBooleanFromFile("durationTextShadow", durationTextShadow));
-		setDurationTextChroma(getBooleanFromFile("durationTextChroma", durationTextColor.isChromaToggled()));
-    	setShowName(getBooleanFromFile("showName", showName));
-		setNameTextColor(getIntFromFile("nameTextColor", nameTextColor.getRGB()));
-		setNameTextChroma(getBooleanFromFile("nameTextChroma", nameTextColor.isChromaToggled()));
-    	setNameTextShadow(getBooleanFromFile("nameTextShadow", nameTextShadow));
-		setShowIcon(getBooleanFromFile("showIcon", showIcon));
-		setBlink(getBooleanFromFile("blink", blink));
-		setReverse(getBooleanFromFile("reverse", reverse));
+		this.options = new ModOptions(
+				new ColorOption(this, "durationTextColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Duration Text Color", true, false)),
+				new BooleanOption(this, "durationTextShadow", true, new GuiSettings(2, "Duration Text Shadow")),
+				new BooleanOption(this, "showName", true, new GuiSettings(3, "Show Name")),
+				new ColorOption(this, "nameTextColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(4, "Name Text Color", true, false)),
+				new BooleanOption(this, "nameTextShadow", true, new ParentOption("showName"), new GuiSettings(5, "Name Text Shadow")),
+				new BooleanOption(this, "showIcon", true, new GuiSettings(6, "Show Icon")),
+				new BooleanOption(this, "blink", true, new GuiSettings(7, "Blink")),
+				new BooleanOption(this, "reverse", false, new GuiSettings(false))
+				);
+				
+		saveOptions();
 	}
 	
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiPotionEffects(previousGuiScreen);
-	}
 
 	@Override
     public int getWidth() {
 		int width = 2;
 		
-		if (showIcon) {
+		if (options.getBooleanOption("showIcon").isToggled()) {
 			width += 20;
 		}
 		
-		if (showName) {
+		if (options.getBooleanOption("showName").isToggled()) {
 			width += font.getStringWidth("Strenght IV");
 		} else {
 			width += font.getStringWidth("00:00");
@@ -71,10 +64,10 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
-    	if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
-			setReverse(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
-			setReverse(true);
+    	if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
+    		options.getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
+			options.getBooleanOption("reverse").toggle(true);
 		}
     	
         int offsetY = 0;
@@ -90,10 +83,10 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-    	if (pos.getRelativeX() < 1.0 / 3.0 && reverse) {
-			setReverse(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !reverse) {
-			setReverse(true);
+    	if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
+    		options.getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
+			options.getBooleanOption("reverse").toggle(true);
 		}
     	
         int offsetY = 0;
@@ -109,10 +102,10 @@ public class PotionEffects extends ModDraggable {
 
     private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect potionEffect) {
         if (potionEffect != null) {
-        	if (showIcon) {
+        	if (options.getBooleanOption("showIcon").isToggled()) {
             	Potion potion = Potion.potionTypes[potionEffect.getPotionID()];
                 
-                int iconX = (reverse ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
+                int iconX = (options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
 
                 if (potion.hasStatusIcon()) {
                     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -125,26 +118,26 @@ public class PotionEffects extends ModDraggable {
                 }
             }
             
-            int i = showIcon ? 20 : 0;
+            int i = options.getBooleanOption("showIcon").isToggled() ? 20 : 0;
             
-            if (showName) {
+            if (options.getBooleanOption("showName").isToggled()) {
                 String potionName = getPotionName(potionEffect);
 
-                int nameX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
+                int nameX = (options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
 
-            	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, nameTextColor, nameTextShadow);
+            	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, options.getColorOption("nameTextColor").getColor(), options.getBooleanOption("nameTextShadow").isToggled());
             }
             
         	String durationString = Potion.getDurationString(potionEffect);
-            int durationX = (reverse ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
-            int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (showName ? 2 : -2);
+            int durationX = (options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
+            int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (options.getBooleanOption("showName").isToggled() ? 2 : -2);
             
-            if (blink) {
+            if (options.getBooleanOption("blink").isToggled()) {
         		if (potionEffect.getDuration() >= 20 * 10 || potionEffect.getDuration() % 20 < 10) {
-            		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
+            		drawText(durationString, durationX, durationY, options.getColorOption("durationTextColor").getColor(), options.getBooleanOption("durationTextShadow").isToggled());
                 }
         	} else {
-        		drawText(durationString, durationX, durationY, durationTextColor, durationTextShadow);
+        		drawText(durationString, durationX, durationY, options.getColorOption("durationTextColor").getColor(), options.getBooleanOption("durationTextShadow").isToggled());
         	}
         }
     }
@@ -162,104 +155,4 @@ public class PotionEffects extends ModDraggable {
     	
     	return potionName;
     }
-    
-    public void setDurationTextColor(int rgb) {
-    	durationTextColor.setRGB(rgb);
-		
-		setToFile("durationTextColor", rgb);
-	}
-    
-    public ColorManager getDurationTextColor() {
-		return durationTextColor;
-	}
-	
-	public void setDurationTextChroma(boolean toggled) {
-		durationTextColor.setChromaToggled(toggled);
-		
-		setToFile("durationTextChroma", toggled);
-	}
-	
-	public void setDurationTextShadow(boolean toggled) {
-		durationTextShadow = toggled;
-		
-		setToFile("durationTextShadow", toggled);
-	}
-	
-	public boolean isDurationTextShadowToggled() {
-		return durationTextShadow;
-	}
-	
-	public boolean isDurationTextChromaToggled() {
-		return durationTextColor.isChromaToggled();
-	}
-    
-    public void setShowName(boolean toggled) {
-    	showName = toggled;
-		
-    	setToFile("showName", toggled);
-    }
-
-    public boolean isShowNameToggled() {
-        return showName;
-    }
-	
-	public void setNameTextColor(int rgb) {
-		nameTextColor.setRGB(rgb);
-		
-		setToFile("nameTextColor", rgb);
-	}
-    
-    public ColorManager getNameTextColor() {
-		return nameTextColor;
-	}
-	
-	public void setNameTextChroma(boolean toggled) {
-		nameTextColor.setChromaToggled(toggled);
-		
-		setToFile("nameTextChroma", toggled);
-	}
-	
-	public boolean isNameTextChromaToggled() {
-		return nameTextColor.isChromaToggled();
-	}
-
-	public void setNameTextShadow(boolean toggled) {
-		nameTextShadow = toggled;
-		
-		setToFile("nameTextShadow", toggled);
-	}
-	
-	public boolean isNameTextShadowToggled() {
-		return nameTextShadow;
-	}
-    
-    public void setShowIcon(boolean toggled) {
-    	showIcon = toggled;
-		
-    	setToFile("showIcon", toggled);
-    }
-
-    public boolean isShowIconToggled() {
-        return showIcon;
-    }
-	
-	public void setBlink(boolean toggled) {
-		this.blink = toggled;
-		
-		setToFile("blink", toggled);
-	}
-	
-	public boolean isBlinkToggled() {
-		return blink;
-	}
-	
-	public void setReverse(boolean toggled) {
-		reverse = toggled;
-		
-		setToFile("reverse", toggled);
-	}
-	
-	public boolean isReverseToggled() {
-		return reverse;
-	}
 }

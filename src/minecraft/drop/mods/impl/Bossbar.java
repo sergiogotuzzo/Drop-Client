@@ -1,41 +1,45 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiBossbar;
-import drop.mods.ModDraggableText;
+import java.awt.Color;
+
+import drop.ColorManager;
+import drop.gui.GuiSettings;
+import drop.mods.ModDraggable;
 import drop.mods.ModInstances;
+import drop.mods.ModOptions;
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.boss.BossStatus;
 
-public class Bossbar extends ModDraggableText {
-	private boolean showName = true;
-	private boolean showHealth = true;
-	
+public class Bossbar extends ModDraggable {
 	public Bossbar() {
 		super(true, 0.5, 0.5);
 		
-		setShowName(getBooleanFromFile("showName", showName));
-		setShowHealth(getBooleanFromFile("showHealth", showHealth));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiBossbar(previousGuiScreen);
+		this.options = new ModOptions(
+				new BooleanOption(this, "showName", true, new GuiSettings(1, "Show Name")),
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(2, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new ParentOption("showName"), new GuiSettings(3, "Text Shadow")),
+				new BooleanOption(this, "showHealth", true, new GuiSettings(4, "Show Health"))
+				);
+		
+		saveOptions();
 	}
 
 	@Override
 	public int getWidth() {
 		int width = 0;
 		
-		if (showName) {
+		if (options.getBooleanOption("showName").isToggled()) {
 			width = font.getStringWidth(BossStatus.bossName != null && BossStatus.statusBarTime > 0 ? BossStatus.bossName : "Ender Dragon");
 		}
 		
-		if (showHealth) {
+		if (options.getBooleanOption("showHealth").isToggled()) {
 			width = 182;
 		}
 		
@@ -46,11 +50,11 @@ public class Bossbar extends ModDraggableText {
 	public int getHeight() {
 		int height = 0;
 		
-		if (showHealth) {
+		if (options.getBooleanOption("showName").isToggled()) {
 			height += 5;
 		}
 		
-		if (showName) {
+		if (options.getBooleanOption("showHealth").isToggled()) {
 			height += 1 + font.FONT_HEIGHT;
 		}
 		
@@ -80,12 +84,12 @@ public class Bossbar extends ModDraggableText {
 	}
 	
 	private void renderBossbar(ScreenPosition pos, float bossHealthScale, String bossName) {
-		if (showHealth) {
+		if (options.getBooleanOption("showHealth").isToggled()) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			
 			mc.getTextureManager().bindTexture(Gui.icons);
 			
-			int healthY = pos.getAbsoluteY() + (showName ? font.FONT_HEIGHT + 1 : 0);
+			int healthY = pos.getAbsoluteY() + (options.getBooleanOption("showName").isToggled() ? font.FONT_HEIGHT + 1 : 0);
 
             drawTexturedModalRect(pos.getAbsoluteX(), healthY, 0, 74, 182, 5);
             
@@ -96,28 +100,8 @@ public class Bossbar extends ModDraggableText {
             }
 		}
 		
-		if (showName) {
-			drawText(bossName.replace("§r", ""), pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(bossName) / 2, pos.getAbsoluteY(), textColor, textShadow);
+		if (options.getBooleanOption("showName").isToggled()) {
+			drawText(bossName.replace("§r", ""), pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(bossName) / 2, pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
-	}
-	
-	public void setShowName(boolean toggled) {
-		showName = toggled;
-		
-		setToFile("showName", toggled);
-	}
-	
-	public boolean isShowNameToggled() {
-		return showName;
-	}
-	
-	public void setShowHealth(boolean toggled) {
-		showHealth = toggled;
-		
-		setToFile("showHealth", toggled);
-	}
-	
-	public boolean isShowHealthToggled() {
-		return showHealth;
 	}
 }

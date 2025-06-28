@@ -10,10 +10,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiScoreboard;
+import drop.gui.GuiSettings;
 import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -21,21 +24,16 @@ import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.EnumChatFormatting;
 
 public class Scoreboard extends ModDraggable {
-	private boolean hideNumbers = false;
-	private boolean textShadow = false;
-	private ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 127, false);
-	
 	public Scoreboard() {
 		super(true, 0.5, 0.5);
 		
-		setHideNumbers(getBooleanFromFile("hideNumbers", textShadow));
-		setTextShadow(getBooleanFromFile("textShadow", textShadow));
-		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiScoreboard(previousGuiScreen);
+		this.options = new ModOptions(
+				new BooleanOption(this, "hideNumbers", true, new GuiSettings(1, "Hide Numbers")),
+				new BooleanOption(this, "textShadow", false, new GuiSettings(2, "Text Shadow")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new GuiSettings(3, "Background Color", false, true))
+				);
+		
+		saveOptions();
 	}
 	
 	private String dummyTitle = EnumChatFormatting.BOLD + "DROP CLIENT";
@@ -50,10 +48,10 @@ public class Scoreboard extends ModDraggable {
 		for (String line : lines) {
 			i++;
 			
-			width = Math.max(width, font.getStringWidth(line + (hideNumbers ? "" : "   " + i)));
+			width = Math.max(width, font.getStringWidth(line + (options.getBooleanOption("hideNumbers").isToggled() ? "" : "   " + i)));
 		}
 		
-		return width + (hideNumbers ? 2 : 0);
+		return width + (options.getBooleanOption("hideNumbers").isToggled() ? 2 : 0);
 	}
 
 	@Override
@@ -90,19 +88,19 @@ public class Scoreboard extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		getBounds().fill(backgroundColor.getColor());
+		getBounds().fill(options.getColorOption("backgroundColor").getColor());
 				
-		drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), textShadow, false);
+		drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
 		
 		int i = 0;
 		
 		for (String line : lines) {
 			i++;
 						
-			drawText(line, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, Color.WHITE.getRGB(), textShadow, false);
+			drawText(line, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
 
-			if (!hideNumbers) {
-				drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, new Color(255, 85, 85).getRGB(), textShadow, false);
+			if (!options.getBooleanOption("hideNumbers").isToggled()) {
+				drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, new Color(255, 85, 85).getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
 			}
 		}
 	}
@@ -126,7 +124,7 @@ public class Scoreboard extends ModDraggable {
 
         for (Score score : collection) {
             ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
-            String lineText = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName()) + (hideNumbers ? "" : ": " + EnumChatFormatting.RED + score.getScorePoints());
+            String lineText = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName()) + (options.getBooleanOption("hideNumbers").isToggled() ? "" : ": " + EnumChatFormatting.RED + score.getScorePoints());
             
             i = Math.max(i, font.getStringWidth(lineText));
         }
@@ -152,57 +150,27 @@ public class Scoreboard extends ModDraggable {
             int k = j1 - j * font.FONT_HEIGHT;
             int l = l1 + i;
             
-            drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, backgroundColor.getRGB());
+            drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, options.getColorOption("backgroundColor").getColor().getRGB());
             
             ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
             String title = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName());
 
-            font.drawString(title, l1, k, 553648127, textShadow);
+            font.drawString(title, l1, k, 553648127, options.getBooleanOption("textShadow").isToggled());
 
-            if (!hideNumbers) {
+            if (!options.getBooleanOption("hideNumbers").isToggled()) {
                 String number = EnumChatFormatting.RED + "" + score.getScorePoints();
 
-                font.drawString(number, l - font.getStringWidth(number), k, 553648127, textShadow);
+                font.drawString(number, l - font.getStringWidth(number), k, 553648127, options.getBooleanOption("textShadow").isToggled());
             }
 
             if (j == collection.size()) {
                 String content = scoreObjective.getDisplayName();
                 
-                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, backgroundColor.getRGB());
-                drawRect(l1 - 2, k - 1, l, k, backgroundColor.getRGB());
+                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, options.getColorOption("backgroundColor").getColor().getRGB());
+                drawRect(l1 - 2, k - 1, l, k, options.getColorOption("backgroundColor").getColor().getRGB());
                 
-                font.drawString(content, l1 + i / 2 - font.getStringWidth(content) / 2, k - font.FONT_HEIGHT, 553648127, textShadow);
+                font.drawString(content, l1 + i / 2 - font.getStringWidth(content) / 2, k - font.FONT_HEIGHT, 553648127, options.getBooleanOption("textShadow").isToggled());
             }
         }
     }
-	
-	public void setHideNumbers(boolean toggled) {
-		hideNumbers = toggled;
-		
-		setToFile("hideNumbers", toggled);
-	}
-	
-	public boolean isHideNumbersToggled() {
-		return hideNumbers;
-	}
-	
-	public void setTextShadow(boolean toggled) {
-		textShadow = toggled;
-		
-		setToFile("textShadow", toggled);
-	}
-	
-	public boolean isTextShadowToggled() {
-		return textShadow;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		backgroundColor = backgroundColor.fromRGB(rgb, false);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
-	}
 }

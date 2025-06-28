@@ -1,45 +1,64 @@
 package drop.mods.impl;
 
 import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
 import net.minecraft.client.multiplayer.ServerData;
-import drop.mods.ModDraggableDisplayText;
 
-public class ServerAddress extends ModDraggableDisplayText {
+import java.awt.Color;
+
+import drop.ColorManager;
+import drop.gui.GuiSettings;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
+
+public class ServerAddress extends ModDraggable {
 	public ServerAddress() {
-		super(false, 0.5, 0.5, "mc.example.org");
+		super(true, 0.5, 0.5);
+
+		this.options = new ModOptions(
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
+				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Show Background")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets"))
+				);
+				
+		saveOptions();
 	}
 	
-	private ServerData dummyServerData = new ServerData("Example", "mc.example.org", false);
-
 	@Override
 	public int getWidth() {
-		return showBackground ? font.getStringWidth(dummyServerData.serverIP) + 8 : font.getStringWidth(brackets.wrap(dummyServerData.serverIP));
+		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("mc.example.org") + 8 : font.getStringWidth(options.getBracketsOption("brackets").wrap("mc.example.org"));
 	}
 
 	@Override
 	public int getHeight() {
-		return showBackground ? 18 : font.FONT_HEIGHT;
+		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
-    	if (mc.getCurrentServerData() != null) {
-    		drawTextToRender(pos, mc.getCurrentServerData().serverIP);
-    	}
+		if (mc.getCurrentServerData() != null) {
+			if (options.getBooleanOption("showBackground").isToggled()) {
+				drawAlignedRect(pos, mc.getCurrentServerData().serverIP, 8, options.getColorOption("backgroundColor").getColor().getRGB());
+				drawCenteredAlignedText(pos, mc.getCurrentServerData().serverIP, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+	    	} else {
+			    drawAlignedText(options.getBracketsOption("brackets").wrap(mc.getCurrentServerData().serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+	    	}
+		}
 	}
-	
+
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		drawTextToRender(pos, dummyServerData.serverIP);
-	}
-	
-	@Override
-	public void drawTextToRender(ScreenPosition pos, String textToRender) {
-		if (showBackground) {
-			drawAlignedRect(pos, textToRender, 8, backgroundColor.getRGB());
-			drawCenteredAlignedText(pos, textToRender, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+		if (options.getBooleanOption("showBackground").isToggled()) {
+			drawAlignedRect(pos, "mc.example.org", 8, options.getColorOption("backgroundColor").getColor().getRGB());
+			drawCenteredAlignedText(pos, "mc.example.org", 8, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(brackets.wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);
+		    drawAlignedText(options.getBracketsOption("brackets").wrap("mc.example.org"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	}
 	}
 }

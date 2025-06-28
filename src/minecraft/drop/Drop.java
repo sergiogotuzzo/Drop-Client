@@ -57,7 +57,7 @@ public class Drop {
 		
 		if (mc.gameSettings.keyBindFullbright.isPressed()) {
 			Fullbright mod = ModInstances.getFullbrightMod();
-			
+
 			mod.setEnabled(!mod.isEnabled());
 		}
 	}

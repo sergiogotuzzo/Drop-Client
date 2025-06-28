@@ -644,7 +644,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 {
                     Config.zoomMode = true;
                     
-                    if (ModInstances.getZoomMod().isSmoothCameraToggled()) {
+                    if (ModInstances.getZoomMod().getOptions().getBooleanOption("smoothCamera").isToggled()) {
                     	Config.zoomSmoothCamera = this.mc.gameSettings.smoothCamera;
                         this.mc.gameSettings.smoothCamera = true;
                     }
@@ -654,15 +654,15 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
                 if (Config.zoomMode)
                 {
-                	f /= (ModInstances.getZoomMod().isScrollToZoomToggled() ? getScrollAmount() : (float) ModInstances.getZoomMod().getZoomLevel());
+                	f /= (ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled() ? getScrollAmount() : (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevel").getValue());
                 }
             }
             else if (Config.zoomMode)
             {
                 Config.zoomMode = false;
 
-                if (ModInstances.getZoomMod().isScrollToZoomToggled()) {
-                	this.scrollTotal = ModInstances.getZoomMod().getZoomLevel();
+                if (ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled()) {
+                	this.scrollTotal = (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevel").getValue();
                 }
                 
                 this.mc.gameSettings.smoothCamera = Config.zoomSmoothCamera;
@@ -689,7 +689,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
     }
     
     private int getScrollAmount() {
-    	if (ModInstances.getZoomMod().isEnabled() && ModInstances.getZoomMod().isScrollToZoomToggled()) {
+    	if (ModInstances.getZoomMod().isEnabled() && ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled()) {
     		int dWheel = Mouse.getDWheel();
     		
     		if (dWheel != 0) {
@@ -701,12 +701,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
     				scrollTotal--;
     			}
     			
-    			if (scrollTotal > ModInstances.getZoomMod().getZoomLevelMax()) {
-    				scrollTotal = ModInstances.getZoomMod().getZoomLevelMax();
+    			if (scrollTotal > (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMax").getValue()) {
+    				scrollTotal = (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMax").getValue();
     			}
     			
-    			if (scrollTotal < ModInstances.getZoomMod().getZoomLevelMin()) {
-    				scrollTotal = ModInstances.getZoomMod().getZoomLevelMin();
+    			if (scrollTotal < (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMin").getValue()) {
+    				scrollTotal = (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMin").getValue();
     			}
     		}
     	}
@@ -737,7 +737,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             float f2 = entitylivingbase.attackedAtYaw;
             HurtCam hurtCamMod = ModInstances.getHurtCamMod();
             GlStateManager.rotate(-f2, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(-f * (hurtCamMod.isEnabled() ? hurtCamMod.isHurtShakeToggled() ? hurtCamMod.getHurtShakeIntensity() : 0.0F : 14.0F), 0.0F, 0.0F, 1.0F);
+            GlStateManager.rotate(-f * (hurtCamMod.isEnabled() ? hurtCamMod.getOptions().getBooleanOption("hurtShake").isToggled() ? (float) hurtCamMod.getOptions().getFloatOption("hurtShakeIntensity").getValue() : 0.0F : 14.0F), 0.0F, 0.0F, 1.0F);
             GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
         }
     }

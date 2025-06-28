@@ -2,39 +2,40 @@ package drop.mods.impl;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.chunk.Chunk;
-import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiCoordinatesDisplay;
-import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableText;
 
-public class CoordinatesDisplay extends ModDraggableText {
-	private boolean showBackground = false;
-	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
-	private boolean showBiome = true;
-	private boolean showFacing = true;
-	private boolean showFacingTowards = true;
-	
+import java.awt.Color;
+
+import drop.ColorManager;
+import drop.gui.GuiSettings;
+import drop.mods.hud.ScreenPosition;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
+
+public class CoordinatesDisplay extends ModDraggable {
 	public CoordinatesDisplay() {
 		super(false, 0.5, 0.5);
 		
-		setShowBackground(getBooleanFromFile("showBackground", showBackground));
-		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
-		setShowBiome(getBooleanFromFile("showBiome", showBiome));
-		setShowFacing(getBooleanFromFile("showFacing", showFacing));
-		setShowFacingTowards(getBooleanFromFile("showFacingTowards", showFacingTowards));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiCoordinatesDisplay(previousGuiScreen);
+		this.options = new ModOptions(
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
+				new BooleanOption(this, "showBackground", true, new GuiSettings(3, "Show Background")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BooleanOption(this, "showBiome", true, new GuiSettings(5, "Show Biome")),
+				new BooleanOption(this, "showFacing", true, new GuiSettings(6, "Show Facing")),
+				new BooleanOption(this, "showFacingTowards", false, new GuiSettings(7, "Show Facing Towards"))
+				);
+				
+		saveOptions();
 	}
 	
 	@Override
 	public int getWidth() {
 		int width = 0;
 
-		if (showBiome) {
+		if (options.getBooleanOption("showBiome").isToggled()) {
 			int biomeWidth = font.getStringWidth(getBiomeText());
 			int coordsWidth = font.getStringWidth(getLongestCoordinateText());
 
@@ -44,21 +45,21 @@ public class CoordinatesDisplay extends ModDraggableText {
 				width = coordsWidth;
 			}
 
-			if (showFacing || showFacingTowards) {
+			if (options.getBooleanOption("showFacing").isToggled() || options.getBooleanOption("showFacingTowards").isToggled()) {
 				width += 10 + 6;
 			}
 
-			if (showBackground) {
+			if (options.getBooleanOption("showBackground").isToggled()) {
 				width += 12;
 			}
 		} else {
 			width = font.getStringWidth(getLongestCoordinateText());
 			
-			if (showFacing || showFacingTowards) {
+			if (options.getBooleanOption("showFacing").isToggled() || options.getBooleanOption("showFacingTowards").isToggled()) {
 				width += 10 + 6;
 			}
 
-			if (showBackground) {
+			if (options.getBooleanOption("showBackground").isToggled()) {
 				width += 12;
 			}
 		}
@@ -71,9 +72,9 @@ public class CoordinatesDisplay extends ModDraggableText {
 	public int getHeight() {
 		int height = 0;
 		
-		int lines = showBiome ? 4 : 3;
+		int lines = options.getBooleanOption("showBiome").isToggled() ? 4 : 3;
 		
-		if (showBackground) {
+		if (options.getBooleanOption("showBackground").isToggled()) {
 			height += 12;
 						
 			height += 10 * lines;
@@ -87,8 +88,8 @@ public class CoordinatesDisplay extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (showBackground) {
-			getBounds().fill(backgroundColor.getRGB());
+		if (options.getBooleanOption("showBackground").isToggled()) {
+			getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
 		}
 		
 		int i = 11;
@@ -97,25 +98,25 @@ public class CoordinatesDisplay extends ModDraggableText {
 		String textY = "Y: " + (int) mc.getRenderViewEntity().getEntityBoundingBox().minY;
 		String textZ = "Z: " + (int) mc.getRenderViewEntity().posZ;
 		
-		int k = showBackground ? 6 : 0;
-		int j = showBackground ? 6 : font.FONT_HEIGHT + 1;
-		int h = showBackground ? 0 : 1;
+		int k = options.getBooleanOption("showBackground").isToggled() ? 6 : 0;
+		int j = options.getBooleanOption("showBackground").isToggled() ? 6 : font.FONT_HEIGHT + 1;
+		int h = options.getBooleanOption("showBackground").isToggled() ? 0 : 1;
 		
-		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow);
-		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow);
-		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow);
+		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		
-		if (showFacing) {
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h, pos.getAbsoluteY() + i * 2 - j, textColor, textShadow);
+		if (options.getBooleanOption("showFacing").isToggled()) {
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h, pos.getAbsoluteY() + i * 2 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 		
-		if (showFacingTowards) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h, pos.getAbsoluteY() + i * 1 - j, textColor, textShadow);
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h, pos.getAbsoluteY() + i * 3 - j, textColor, textShadow);
+		if (options.getBooleanOption("showFacingTowards").isToggled()) {
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h, pos.getAbsoluteY() + i * 1 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h, pos.getAbsoluteY() + i * 3 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 		
-		if (showBiome) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h, textColor, textShadow);
+		if (options.getBooleanOption("showBiome").isToggled()) {
+			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 	}
 	
@@ -217,55 +218,5 @@ public class CoordinatesDisplay extends ModDraggableText {
 	        default:
 	        	return "";
 	    }
-	}
-	
-	public void setShowBackground(boolean toggled) {
-		showBackground = toggled;
-		
-		setToFile("showBackground", toggled);
-	}
-	
-	public boolean isShowBackgroundToggled() {
-		return showBackground;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		this.backgroundColor = ColorManager.fromRGB(rgb, false);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
-	}
-	
-	public void setShowBiome(boolean toggled) {
-		showBiome = toggled;
-		
-		setToFile("showBiome", toggled);
-	}
-	
-	public boolean isShowBiomeToggled() {
-		return showBiome;
-	}
-	
-	public void setShowFacing(boolean toggled) {
-		showFacing = toggled;
-		
-		setToFile("showFacing", toggled);
-	}
-	
-	public boolean isShowFacingToggled() {
-		return showFacing;
-	}
-	
-	public void setShowFacingTowards(boolean toggled) {
-		showFacingTowards = toggled;
-		
-		setToFile("showFacingTowards", toggled);
-	}
-	
-	public boolean isShowFacingTowardsToggled() {
-		return showFacingTowards;
 	}
 }

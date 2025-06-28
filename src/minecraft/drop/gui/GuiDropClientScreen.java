@@ -3,6 +3,9 @@ package drop.gui;
 import java.awt.Color;
 
 import drop.Drop;
+import drop.mods.Mod;
+import drop.mods.option.ModOption;
+import drop.mods.option.type.FloatOption;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -75,7 +78,39 @@ public abstract class GuiDropClientScreen extends GuiScreen {
     	return new GuiSlider(id, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 1 + 15 * (line - 1), 350 - 15 * 2, 5, 0.0F, max, defaultValue);
 	}
 	
+	protected GuiSliderOption createGuiSliderOption(int id, float max, float defaultValue, int line, ModOption option) {
+    	return new GuiSliderOption(id, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 1 + 15 * (line - 1), 350 - 15 * 2, 5, 0.0F, max, defaultValue, option);
+	}
+	
 	protected GuiText createGuiText(int id, String text, boolean right, int line) {
     	return new GuiText(id, right ? (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(text) : (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), text);
+	}
+	
+	protected void writeOptionText(String text, int line) {
+        this.drawText(text, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+	}
+	
+	protected void writeOptionText(String text, int line, boolean chroma) {
+        this.drawText(text, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, chroma);
+	}
+	
+	protected void writeOptionText(String text, int line, int color) {
+        this.drawText(text, (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), color, true, false);
+	}
+	
+	protected void writeOptionValue(String text, int line) {
+        this.drawText(text, (this.width + 350) / 2 - mc.fontRendererObj.getStringWidth(text) - 15, (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+	}
+	
+	protected void writeSelectedOptionValue(String text, int line) {
+        this.drawText(text, (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text), (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), -1, true, false);
+	}
+	
+	protected GuiText createGuiTextLeftArrow(int id, String text, int line) {
+    	return new GuiText(id, (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(">") - 5 - mc.fontRendererObj.getStringWidth(text) - 5 - mc.fontRendererObj.getStringWidth("<"), (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), "<");
+	}
+	
+	protected GuiText createGuiTextRightArrow(int id, int line) {
+    	return new GuiText(id, (this.width + 350) / 2 - 15 - mc.fontRendererObj.getStringWidth(">"), (this.height - 250) / 2 + 30 + 15 + 15 * (line - 1), ">");
 	}
 }

@@ -34,7 +34,7 @@ public class EntityParticleEmitter extends EntityFX
      */
     public void onUpdate()
     {
-        for (int i = 0; i < 16 * (ModInstances.getParticlesMod().isEnabled() ? ModInstances.getParticlesMod().getMultiplierFactor() : 1); ++i)
+        for (int i = 0; i < 16 * (ModInstances.getParticlesMod().isEnabled() ? (int) ModInstances.getParticlesMod().getOptions().getIntOption("multiplierFactor").getValue() : 1); ++i)
         {
             double d0 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);
             double d1 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);

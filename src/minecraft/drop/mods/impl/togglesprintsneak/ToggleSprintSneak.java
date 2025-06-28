@@ -3,123 +3,76 @@ package drop.mods.impl.togglesprintsneak;
 import java.awt.Color;
 
 import drop.ColorManager;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiToggleSprintSneak;
+import drop.gui.GuiSettings;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableDisplayText;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.option.type.FloatOption;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
 
-public class ToggleSprintSneak extends ModDraggableDisplayText {
-	private boolean showText = true;
-	private boolean toggleSprint = true;
-	private boolean toggleSneak = false;
-	private boolean flyBoost = true;
-	private float flyBoostFactor = 4.0F;
-	
+public class ToggleSprintSneak extends ModDraggable {
 	public ToggleSprintSneak() {
-		super(true, 0.5, 0.5, "");
+		super(true, 0.5, 0.5);
 		
-		setShowText(getBooleanFromFile("showText", showText));
-		setToggleSprint(getBooleanFromFile("toggleSprint", toggleSprint));
-		setToggleSneak(getBooleanFromFile("toggleSneak", toggleSneak));
-		setFlyBoost(getBooleanFromFile("flyBoost", flyBoost));
-		setFlyBoostFactor(getFloatFromFile("flyBoostFactor", flyBoostFactor));
+		this.options = new ModOptions(
+				new BooleanOption(this, "showText", true, new GuiSettings(1, "Show Text")),
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("showText"), new GuiSettings(2, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new ParentOption("showText"), new GuiSettings(3, "Text Shadow")),
+				new BooleanOption(this, "showBackground", false, new ParentOption("showText"), new GuiSettings(4, "Show Background")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(5, "Background Color", false, true)),
+				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(6, "Brackets")),
+				new BooleanOption(this, "toggleSprint", true, new GuiSettings(7, "Toggle Sprint")),
+				new BooleanOption(this, "toggleSneak", false, new GuiSettings(8, "Toggle Sneak")),
+				new BooleanOption(this, "flyBoost", true, new GuiSettings(9, "Fly Boost")),
+				new FloatOption(this, "flyBoostFactor", 2.0F, 8.0F, 4.0F, new ParentOption("flyBoost"), new GuiSettings(10, "Fly Boost Factor"))
+				);
+				
+		saveOptions();
 	}
 	
 	public int keyHoldTicks = 7;
 	public boolean sprinting = false;
 	public boolean sneaking = false;
 	private String textToRender = "";
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiToggleSprintSneak(previousGuiScreen);
-	}
 
 	@Override
 	public int getWidth() {
-		return showBackground ? font.getStringWidth("Sprinting (Toggled)") + 20 : font.getStringWidth(brackets.wrap("Sprinting (Toggled)"));
+		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + 20 : font.getStringWidth(options.getBracketsOption("brackets").wrap("Sprinting (Toggled)"));
 	}
 
 	@Override
 	public int getHeight() {
-		return showBackground ? 18 : font.FONT_HEIGHT;
+		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
-	    if (showText && mc.thePlayer.movementInput.getDisplayText() != "") {
+	    if (options.getBooleanOption("showText").isToggled() && mc.thePlayer.movementInput.getDisplayText() != "") {
 	    	String text = mc.thePlayer.movementInput.getDisplayText();
 	    	
-	    	drawTextToRender(pos, textToRender = (showBackground ? text : brackets.wrap(text)));
+	    	drawTextToRender(pos, textToRender = (options.getBooleanOption("showBackground").isToggled() ? text : options.getBracketsOption("brackets").wrap(text)));
 	    }
 	}
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (showText) {
+		if (options.getBooleanOption("showText").isToggled()) {
 			String text = "Sprinting (Toggled)";
 	    	
-	    	drawTextToRender(pos, textToRender = (showBackground ? text : brackets.wrap(text)));
+	    	drawTextToRender(pos, textToRender = (options.getBooleanOption("showBackground").isToggled() ? text : options.getBracketsOption("brackets").wrap(text)));
 	    }
 	}
 	
-	@Override
 	public void drawTextToRender(ScreenPosition pos, String textToRender) {
-		if (showBackground) {
-	    	drawAlignedRect(pos, textToRender, 20, backgroundColor.getRGB());
-			drawCenteredAlignedText(pos, textToRender, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), textColor, textShadow);
+		if (options.getBooleanOption("showBackground").isToggled()) {
+	    	drawAlignedRect(pos, textToRender, 20, options.getColorOption("backgroundColor").getColor().getRGB());
+			drawCenteredAlignedText(pos, textToRender, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, textColor, textShadow);
+		    drawAlignedText(textToRender, pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	}
-	}
-	
-	public void setShowText(boolean toggled) {
-		showText = toggled;
-		
-		setToFile("showText", toggled);
-	}
-	
-	public boolean isShowTextToggled() {
-		return showText;
-	}
-	
-	public void setToggleSprint(boolean toggled) {
-		toggleSprint = toggled;
-		
-		setToFile("toggleSprint", toggled);
-	}
-	
-	public boolean isToggleSprintToggled() {
-		return toggleSprint;
-	}
-	
-	public void setToggleSneak(boolean toggled) {
-		toggleSneak = toggled;
-		
-		setToFile("toggleSneak", toggled);
-	}
-	
-	public boolean isToggleSneakToggled() {
-		return toggleSneak;
-	}
-	
-	public void setFlyBoost(boolean toggled) {
-		flyBoost = toggled;
-		
-		setToFile("flyBoost", toggled);
-	}
-	
-	public boolean isFlyBoostToggled() {
-		return flyBoost;
-	}
-	
-	public void setFlyBoostFactor(float factor) {
-		flyBoostFactor = factor;
-		
-		setToFile("flyBoostFactor", factor);
-	}
-	
-	public float getFlyBoostFactor() {
-		return flyBoostFactor;
 	}
 }

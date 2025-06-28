@@ -6,35 +6,33 @@ import org.lwjgl.opengl.GL11;
 
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiBlockOverlay;
+import drop.gui.GuiSettings;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.AxisAlignedBB;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.Brackets;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.option.type.FloatOption;
 
 public class BlockOverlay extends Mod {
-	private boolean outline = true;
-	private float outlineWidth = 2.0F;
-	private ColorManager outlineColor = ColorManager.fromColor(Color.BLACK, false);
-	private boolean overlay = false;
-	private ColorManager overlayColor = ColorManager.fromColor(Color.WHITE, false).setAlpha(80);
-	
 	public BlockOverlay() {
 		super(false);
 		
-		setOutline(getBooleanFromFile("outline", outline));
-		setOutlineWidth(getFloatFromFile("outlineWidth", outlineWidth));
-		setOutlineColor(getIntFromFile("outlineColor", outlineColor.getRGB()));
-		setOutlineChroma(getBooleanFromFile("outlineChroma", outlineColor.isChromaToggled()));
-		setOverlay(getBooleanFromFile("overlay", overlay));
-		setOverlayColor(getIntFromFile("overlayColor", overlayColor.getRGB()));
-		setOverlayChroma(getBooleanFromFile("overlayChroma", overlayColor.isChromaToggled()));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiBlockOverlay(previousGuiScreen);
+		this.options = new ModOptions(
+				new BooleanOption(this, "outline", true, new GuiSettings(1, "Outline")),
+				new FloatOption(this, "outlineWidth", 0.4F, 5.0F, 2.0F, new ParentOption("outline"), new GuiSettings(2, "Outline Width")),
+				new ColorOption(this, "outlineColor", ColorManager.fromColor(Color.BLACK, false), new ParentOption("outline"), new GuiSettings(3, "Outline Color", true, false)),
+				new BooleanOption(this, "overlay", false, new GuiSettings(4, "Overlay")),
+				new ColorOption(this, "overlayColor", ColorManager.fromColor(Color.WHITE, false).setAlpha(80), new ParentOption("overlay"), new GuiSettings(5, "Overlay Color", true, true))
+				);
+				
+		saveOptions();
 	}
     
     public static void drawSelectionOverlay(AxisAlignedBB axisAlignedBBIn, int red, int green, int blue, int alpha) {
@@ -68,74 +66,4 @@ public class BlockOverlay extends Mod {
     	worldRenderer.pos(axisAlignedBBIn.minX, axisAlignedBBIn.maxY, axisAlignedBBIn.minZ).color(red, green, blue, alpha).endVertex();
     	tessellator.draw();
     }
-	
-	public void setOutline(boolean toggled) {
-		outline = toggled;
-		
-		setToFile("outline", toggled);
-	}
-	
-	public boolean isOutlineToggled() {
-		return outline;
-	}
-	
-	public void setOutlineWidth(float width) {
-		outlineWidth = width;
-		
-		setToFile("outlineWidth", width);
-	}
-	
-	public float getOutlineWidth() {
-		return outlineWidth;
-	}
-	
-	public void setOutlineColor(int rgb) {
-		outlineColor.setRGB(rgb);
-		
-		setToFile("outlineColor", rgb);
-	}
-	
-	public ColorManager getOutlineColor() {
-		return outlineColor;
-	}
-	
-	public void setOutlineChroma(boolean toggled) {
-		outlineColor.setChromaToggled(toggled);
-		
-		setToFile("outlineChroma", toggled);
-	}
-	
-	public boolean isOutlineChromaToggled() {
-		return outlineColor.isChromaToggled();
-	}
-	
-	public void setOverlay(boolean toggled) {
-		overlay = toggled;
-		
-		setToFile("overlay", toggled);
-	}
-	
-	public boolean isOverlayToggled() {
-		return overlay;
-	}
-	
-	public void setOverlayColor(int rgb) {
-		overlayColor.setRGB(rgb);
-		
-		setToFile("overlayColor", rgb);
-	}
-	
-	public ColorManager getOverlayColor() {
-		return overlayColor;
-	}
-	
-	public void setOverlayChroma(boolean toggled) {
-		overlayColor.setChromaToggled(toggled);
-		
-		setToFile("overlayChroma", toggled);
-	}
-	
-	public boolean isOverlayChromaToggled() {
-		return overlayColor.isChromaToggled();
-	}
 }

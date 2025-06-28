@@ -7,12 +7,14 @@ import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.ArmorStatus;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
 
 public class GuiArmorStatusTextColor extends GuiModColor {
 	private static final ArmorStatus mod = ModInstances.getArmorStatusMod();
 	
 	public GuiArmorStatusTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod, mod.getTextColor());
+		super(previousGuiScreen, mod, (ColorOption) mod.getOptions().getColorOption("textColor"));
 	}
 
     @Override
@@ -21,20 +23,22 @@ public class GuiArmorStatusTextColor extends GuiModColor {
     	
     	switch (button.id) {
 	    	case 6:
-	    		mc.displayGuiScreen(new GuiArmorStatusDynamicColors(this));
-	    		break;
-	    	case 7:
-	    		mod.setDynamicColors(!mod.isDynamicColorsToggled());
+	    		mod.getOptions().getBooleanOption("dynamicColors").toggle();
 	        	this.initGui();
 	        	break;
-    	}
+	    	case 7:
+	    		mc.displayGuiScreen(new GuiArmorStatusDynamicColors(this));
+	    		break;
+		}
     }
 	
 	@Override
     public void initGui() {
 		super.initGui();
 		
-		this.buttonList.add(this.createGuiText(6, "Dynamic Colors", false, 9));
-    	this.buttonList.add(this.createGuiCheckBox(7, mod.isDynamicColorsToggled(), 9));
+		BooleanOption dynamicColors = mod.getOptions().getBooleanOption("dynamicColors");
+		
+		this.buttonList.add(this.createGuiText(7, dynamicColors.getGuiSettings().getOptionName(), false, 9));
+    	this.buttonList.add(this.createGuiCheckBox(6, dynamicColors.isToggled(), 9));
     }
 }

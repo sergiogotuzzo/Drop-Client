@@ -1,66 +1,23 @@
 package drop.mods.impl;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiParticles;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.IntOption;
 
 public class Particles extends Mod {
-	private boolean affectCriticals = true;
-	private boolean affectSharpness = true;
-	private boolean alwaysSharpness = false;
-	private int multiplierFactor = 1;
-	
 	public Particles() {
 		super(false);
 		
-		setAffectCriticals(getBooleanFromFile("affectCriticals", affectCriticals));
-		setAffectSharpness(getBooleanFromFile("affectSharpness", affectSharpness));
-		setAlwaysSharpness(getBooleanFromFile("alwaysSharpness", alwaysSharpness));
-		setMultiplierFactor(getIntFromFile("multiplierFactor", multiplierFactor));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiParticles(previousGuiScreen);
-	}
-	
-	public void setAffectCriticals(boolean toggled) {
-		this.affectCriticals = toggled;
+		this.options = new ModOptions(
+				new BooleanOption(this, "affectCriticals", true, new GuiSettings(1, "Affect Criticals")),
+				new BooleanOption(this, "affectSharpness", true, new GuiSettings(2, "Affect Sharpness")),
+				new BooleanOption(this, "alwaysSharpness", false, new ParentOption("affectSharpness"), new GuiSettings(3, "Always Sharpness")),
+				new IntOption(this, "multiplierFactor", 1, 10, 1, new GuiSettings(4, "Multiplier Factor"))
+				);
 		
-		setToFile("affectCriticals", toggled);
-	}
-	
-	public boolean isAffectCriticalsToggled() {
-		return affectCriticals;
-	}
-	
-	public void setAffectSharpness(boolean toggled) {
-		this.affectSharpness = toggled;
-		
-		setToFile("affectSharpness", toggled);
-	}
-	
-	public boolean isAffectSharpnessToggled() {
-		return affectSharpness;
-	}
-	
-	public void setAlwaysSharpness(boolean toggled) {
-		this.alwaysSharpness = toggled;
-		
-		setToFile("alwaysSharpness", toggled);
-	}
-	
-	public boolean isAlwaysSharpnessToggled() {
-		return alwaysSharpness;
-	}
-	
-	public void setMultiplierFactor(int factor) {
-		this.multiplierFactor = factor;
-		
-		setToFile("multiplierFactor", factor);
-	}
-	
-	public int getMultiplierFactor() {
-		return multiplierFactor;
+		saveOptions();
 	}
 }

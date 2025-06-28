@@ -2,23 +2,24 @@ package drop.mods.impl;
 
 import java.time.LocalTime;
 
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiTimeChanger;
+import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModOptions;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.IntOption;
 
 public class TimeChanger extends Mod {
-	private float time = 0.0F;
-	private boolean useRealCurrentTime = false;
-	
 	public TimeChanger() {
 		super(false);
 		
-		setTime(getFloatFromFile("time", time));
-	}
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiTimeChanger(previousGuiScreen);
+		this.options = new ModOptions(
+				new FloatOption(this, "time", 0.0F, 1.0F, 0.0F, new ParentOption("useRealCurrentTime", true), new GuiSettings(1, "Time", 2)),
+				new BooleanOption(this, "useRealCurrentTime", false, new GuiSettings(2, "Use Real Current Time"))
+				);
+		
+		saveOptions();
 	}
 	
 	public static float getRealCurrentTimeInMinecraftTime() {
@@ -26,25 +27,5 @@ public class TimeChanger extends Mod {
 	    float totalHours = now.getHour() + (now.getMinute() / 60f);
 	    
 	    return ((totalHours - 12f + 24f) % 24f) / 24f;
-	}
-	
-	public void setTime(float time) {
-		this.time = time;
-		
-		setToFile("time", time);
-	}
-	
-	public float getTime() {
-		return time;
-	}
-	
-	public void setUseRealCurrentTime(boolean toggled) {
-		this.useRealCurrentTime = toggled;
-		
-		setToFile("useRealCurrentTime", toggled);
-	}
-	
-	public boolean isUseRealCurrentTimeToggled() {
-		return useRealCurrentTime;
 	}
 }

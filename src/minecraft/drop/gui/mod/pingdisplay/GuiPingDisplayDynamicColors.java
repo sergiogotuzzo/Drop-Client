@@ -1,24 +1,31 @@
 package drop.gui.mod.pingdisplay;
 
+import java.awt.Color;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import drop.gui.mod.GuiMod;
+import net.minecraft.client.resources.I18n;
+import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.PingDisplay;
 
-public class GuiPingDisplayDynamicColors extends GuiMod {
+public class GuiPingDisplayDynamicColors extends GuiDropClientScreen {
 	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
+	private GuiDropClientScreen previousGuiScreen;
 	
-	public GuiPingDisplayDynamicColors(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod);
+	public GuiPingDisplayDynamicColors(GuiDropClientScreen previousGuiScreen) {
+		this.previousGuiScreen = previousGuiScreen;
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	super.drawScreen(mouseX, mouseY, partialTicks);
+    	this.drawDefaultBackground();
+    	
+    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
+        
+        this.drawScaledText(mod.getName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
 
         this.writeOptionText("Excellent Text Color", 1);
         this.writeOptionText("Excellent Text Shadow", 2);
@@ -30,6 +37,8 @@ public class GuiPingDisplayDynamicColors extends GuiMod {
         this.writeOptionText("Weak Text Shadow", 8);
         this.writeOptionText("Unstable Text Color", 9);
         this.writeOptionText("Unstable Text Shadow", 10);
+        
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -37,39 +46,42 @@ public class GuiPingDisplayDynamicColors extends GuiMod {
     	super.actionPerformed(button);
     	
         switch (button.id) {
+        	case 0:
+        		mc.displayGuiScreen(this.previousGuiScreen);
+        		break;
 	        case 1:
-	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getExcellentTextColor(), "excellentTextColor", "excellentTextChroma", "Excellent Text Color"));
+	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("excellentTextColor")));
 	        	break;
 	        case 2:
-	        	mod.setExcellentTextShadow(!mod.isExcellentTextShadowToggled());
+	        	mod.getOptions().getBooleanOption("excellentTextShadow").toggle();
 	        	this.initGui();
 	        	break;
 	        case 3:
-	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getGoodTextColor(), "goodTextColor", "goodTextChroma", "Good Text Color"));
+	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("goodTextColor")));
 	        	break;
 	        case 4:
-	        	mod.setGoodTextShadow(!mod.isGoodTextShadowToggled());
+	        	mod.getOptions().getBooleanOption("goodTextShadow").toggle();
 	        	this.initGui();
 	        	break;
 	        case 5:
-	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getModerateTextColor(), "moderateTextColor", "moderateTextChroma", "Moderate Text Color"));
+	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("moderateTextColor")));
 	        	break;
 	        case 6:
-	        	mod.setModerateTextShadow(!mod.isModerateTextShadowToggled());
+	        	mod.getOptions().getBooleanOption("moderateTextShadow").toggle();
 	        	this.initGui();
 	        	break;
 	        case 7:
-	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getWeakTextColor(), "weakTextColor", "weakTextChroma", "Weak Text Color"));
+	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("weakTextColor")));
 	        	break;
 	        case 8:
-	        	mod.setWeakTextShadow(!mod.isWeakTextShadowToggled());
+	        	mod.getOptions().getBooleanOption("weakTextShadow").toggle();
 	        	this.initGui();
 	        	break;
 	        case 9:
-	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getUnstableTextColor(), "unstableTextColor", "unstableTextChroma", "Unstable Text Color"));
+	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("unstableTextColor")));
 	        	break;
 	        case 10:
-	        	mod.setUnstableTextShadow(!mod.isUnstableTextShadowToggled());
+	        	mod.getOptions().getBooleanOption("unstableTextShadow").toggle();
 	        	this.initGui();
 	        	break;
         }
@@ -79,15 +91,19 @@ public class GuiPingDisplayDynamicColors extends GuiMod {
     public void initGui() {
 		super.initGui();
 
-		this.buttonList.add(this.createGuiRect(1, mod.getExcellentTextColor().getRGB(), 1));
-		this.buttonList.add(this.createGuiCheckBox(2, mod.isExcellentTextShadowToggled(), 2));
-		this.buttonList.add(this.createGuiRect(3, mod.getGoodTextColor().getRGB(), 3));
-		this.buttonList.add(this.createGuiCheckBox(4, mod.isGoodTextShadowToggled(), 4));
-		this.buttonList.add(this.createGuiRect(5, mod.getModerateTextColor().getRGB(), 5));
-		this.buttonList.add(this.createGuiCheckBox(6, mod.isModerateTextShadowToggled(), 6));
-		this.buttonList.add(this.createGuiRect(7, mod.getWeakTextColor().getRGB(), 7));
-		this.buttonList.add(this.createGuiCheckBox(8, mod.isWeakTextShadowToggled(), 8));
-		this.buttonList.add(this.createGuiRect(9, mod.getUnstableTextColor().getRGB(), 9));
-		this.buttonList.add(this.createGuiCheckBox(10, mod.isUnstableTextShadowToggled(), 10));
+        this.buttonList.clear();
+        
+        this.buttonList.add(new GuiButton(0, (this.width + 350) / 2 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
+
+		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("excellentTextColor").getColor().getRGB(), 1));
+		this.buttonList.add(this.createGuiCheckBox(2, mod.getOptions().getBooleanOption("excellentTextShadow").isToggled(), 2));
+		this.buttonList.add(this.createGuiRect(3, mod.getOptions().getColorOption("goodTextColor").getColor().getRGB(), 3));
+		this.buttonList.add(this.createGuiCheckBox(4, mod.getOptions().getBooleanOption("goodTextShadow").isToggled(), 4));
+		this.buttonList.add(this.createGuiRect(5, mod.getOptions().getColorOption("moderateTextColor").getColor().getRGB(), 5));
+		this.buttonList.add(this.createGuiCheckBox(6, mod.getOptions().getBooleanOption("moderateTextShadow").isToggled(), 6));
+		this.buttonList.add(this.createGuiRect(7, mod.getOptions().getColorOption("weakTextColor").getColor().getRGB(), 7));
+		this.buttonList.add(this.createGuiCheckBox(8, mod.getOptions().getBooleanOption("weakTextShadow").isToggled(), 8));
+		this.buttonList.add(this.createGuiRect(9, mod.getOptions().getColorOption("unstableTextColor").getColor().getRGB(), 9));
+		this.buttonList.add(this.createGuiCheckBox(10, mod.getOptions().getBooleanOption("unstableTextShadow").isToggled(), 10));
     }
 }

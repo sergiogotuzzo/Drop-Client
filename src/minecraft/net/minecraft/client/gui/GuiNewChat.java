@@ -91,14 +91,14 @@ public class GuiNewChat extends Gui
                                 
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                int h = chatMod.isChatHeightFixToggled() ? -12 : 0;
+                                int h = chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
                                                                 
-                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, ModInstances.getChatMod().getBackgroundColor().getRGB());
+                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, ModInstances.getChatMod().getOptions().getColorOption("backgroundColor").getColor().getRGB());
                                 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.isTextShadowToggled());
+                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.getOptions().getBooleanOption("textShadow").isToggled());
                                 
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -150,7 +150,7 @@ public class GuiNewChat extends Gui
     		sameMessageAmount++;
     		lastMessage = chatComponent.getUnformattedText();
     		
-    		if (ModInstances.getChatMod().isEnabled() && ModInstances.getChatMod().isCompactChatToggled()) {
+    		if (ModInstances.getChatMod().isEnabled() && ModInstances.getChatMod().getOptions().getBooleanOption("compactChat").isToggled()) {
     			mc.ingameGUI.getChatGUI().deleteChatLine(line);
         		chatComponent.appendText(ChatFormatting.RED + " (" + sameMessageAmount + "x)");
     		}
@@ -300,7 +300,7 @@ public class GuiNewChat extends Gui
             
             final Chat chatMod = ModInstances.getChatMod();
             
-            int h = chatMod.isChatHeightFixToggled() ? -12 : 0;
+            int h = chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
             k += h;
 
             if (j >= 0 && k >= 0)

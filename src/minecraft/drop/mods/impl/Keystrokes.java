@@ -5,36 +5,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import drop.ColorManager;
+import drop.gui.GuiSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
-import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiKeystrokes;
 import drop.mods.hud.ScreenPosition;
-import drop.mods.ModDraggableText;
+import drop.mods.option.ParentOption;
+import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.ColorOption;
+import drop.mods.ModDraggable;
+import drop.mods.ModOptions;
 
-public class Keystrokes extends ModDraggableText {
-	private ColorManager pressedTextColor = ColorManager.fromColor(Color.WHITE, false);
-	private boolean pressedTextShadow = true;
-	protected ColorManager backgroundColor = ColorManager.fromRGB(0, 0, 0, 102, false);
-	protected ColorManager pressedBackgroundColor = ColorManager.fromRGB(255, 255, 255, 102, false);
-	private boolean showMovementKeys = true;
-	private boolean showMouse = true;
-	private boolean showSpacebar = true;
-	private boolean useArrows = false;
-	
+public class Keystrokes extends ModDraggable {
 	public Keystrokes() {
 		super(true, 0.5, 0.5);
 		
-		setPressedTextColor(getIntFromFile("pressedTextColor", pressedTextColor.getRGB()));
-		setPressedTextChroma(getBooleanFromFile("pressedTextChroma", pressedTextColor.isChromaToggled()));
-		setPressedTextShadow(getBooleanFromFile("pressedTextShadow", pressedTextShadow));
-		setBackgroundColor(getIntFromFile("backgroundColor", backgroundColor.getRGB()));
-		setPressedBackgroundColor(getIntFromFile("pressedBackgroundColor", pressedBackgroundColor.getRGB()));
-		setShowMovementKeys(getBooleanFromFile("showMovementKeys", showMovementKeys));
-		setShowMouse(getBooleanFromFile("showMouse", showMouse));
-		setShowSpacebar(getBooleanFromFile("showSpacebar", showSpacebar));
-		setUseArrows(getBooleanFromFile("useArrows", useArrows));
+		this.options = new ModOptions(
+				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
+				new ColorOption(this, "pressedTextColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(3, "Text Color (Pressed)", true, false)),
+				new BooleanOption(this, "pressedTextShadow", true, new GuiSettings(4, "Text Shadow (Pressed)")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new GuiSettings(5, "Background Color", false, true)),
+				new ColorOption(this, "pressedBackgroundColor", ColorManager.fromRGB(255, 255, 255, 102, false), new GuiSettings(6, "Background Color (Pressed)", false, true)),
+				new BooleanOption(this, "showMovementKeys", true, new GuiSettings(7, "Show Movement Keys")),
+				new BooleanOption(this, "showMouse", true, new GuiSettings(8, "Show Mouse")),
+				new BooleanOption(this, "showSpacebar", true, new GuiSettings(9, "Show Spacebar")),
+				new BooleanOption(this, "useArrows", false, new ParentOption("showMovementKeys"), new GuiSettings(10, "Use Arrows"))
+				);
+				
+		saveOptions();
+		
+		updateMode();
 	}
 	
 	public static enum KeystrokesMode {
@@ -132,11 +133,6 @@ public class Keystrokes extends ModDraggableText {
 	}
 	
 	private KeystrokesMode mode = KeystrokesMode.WASD_MOUSE_JUMP;
-	
-	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiKeystrokes(previousGuiScreen);
-	}
 
 	@Override
 	public int getWidth() {
@@ -150,10 +146,12 @@ public class Keystrokes extends ModDraggableText {
 
 	@Override
 	public void render(ScreenPosition pos) {
+		updateMode();
+
 	    for (Key key : mode.getKeys()) {
 	        int textWidth = font.getStringWidth(key.getName());
 	        
-	        if (useArrows) {
+	        if (options.getBooleanOption("useArrows").isToggled()) {
 	        	switch (key.getName()) {
 		        	case "W":
 		        		key.setName("▲");
@@ -190,20 +188,24 @@ public class Keystrokes extends ModDraggableText {
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? pressedBackgroundColor.getRGB() : backgroundColor.getRGB()
+	                key.isDown() ? options.getColorOption("pressedBackgroundColor").getColor().getRGB() : options.getColorOption("backgroundColor").getColor().getRGB()
 	                );
 	        
 	        drawText(
 	        		key.getName(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
 	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
-	                key.isDown() ? pressedTextColor : textColor,
-	                key.isDown() ? pressedTextShadow : textShadow
+	                key.isDown() ? options.getColorOption("pressedTextColor").getColor() : options.getColorOption("textColor").getColor(),
+	                key.isDown() ? options.getBooleanOption("pressedTextShadow").isToggled() : options.getBooleanOption("textShadow").isToggled()
 	        		);
 	    }
 	}
 	
 	private void updateMode() {
+		boolean showMovementKeys = options.getBooleanOption("showMovementKeys").isToggled();
+		boolean showMouse = options.getBooleanOption("showMouse").isToggled();
+		boolean showSpacebar = options.getBooleanOption("showSpacebar").isToggled();
+		
 		if (showMovementKeys && showMouse && showSpacebar) {
 			mode = KeystrokesMode.WASD_MOUSE_JUMP;
 		} else if (showMovementKeys && showMouse && !showSpacebar) {
@@ -221,101 +223,5 @@ public class Keystrokes extends ModDraggableText {
 		} else if (!showMovementKeys && !showMouse && !showSpacebar) {
 			mode = KeystrokesMode.NONE;
 		}
-	}
-	
-	public void setPressedTextColor(int rgb) {
-		pressedTextColor.setRGB(rgb);
-		
-		setToFile("pressedTextColor", rgb);
-	}
-	
-	public ColorManager getPressedTextColor() {
-		return pressedTextColor;
-	}
-	
-	public void setPressedTextShadow(boolean toggled) {
-		pressedTextShadow = toggled;
-		
-		setToFile("pressedTextShadow", toggled);
-	}
-	
-	public boolean isPressedTextShadowToggled() {
-		return pressedTextShadow;
-	}
-	
-	public void setBackgroundColor(int rgb) {
-		this.backgroundColor = ColorManager.fromRGB(rgb, false);
-		
-		setToFile("backgroundColor", rgb);
-	}
-	
-	public ColorManager getBackgroundColor() {
-		return backgroundColor;
-	}
-	
-	public void setPressedBackgroundColor(int rgb) {
-		this.pressedBackgroundColor = ColorManager.fromRGB(rgb, false);
-		
-		setToFile("pressedBackgroundColor", rgb);
-	}
-	
-	public ColorManager getPressedBackgroundColor() {
-		return pressedBackgroundColor;
-	}
-	
-	public void setShowMovementKeys(boolean toggled) {
-		showMovementKeys = toggled;
-		
-		setToFile("showMovementKeys", toggled);
-		
-		updateMode();
-	}
-	
-	public boolean isShowMovementKeysToggled() {
-		return showMovementKeys;
-	}
-	
-	public void setShowMouse(boolean toggled) {
-		showMouse = toggled;
-		
-		setToFile("showMouse", toggled);
-		
-		updateMode();
-	}
-	
-	public boolean isShowMouseToggled() {
-		return showMouse;
-	}
-	
-	public void setShowSpacebar(boolean toggled) {
-		showSpacebar = toggled;
-		
-		setToFile("showSpacebar", toggled);
-		
-		updateMode();
-	}
-	
-	public boolean isShowSpacebarToggled() {
-		return showSpacebar;
-	}
-	
-	public void setUseArrows(boolean toggled) {
-		useArrows = toggled;
-		
-		setToFile("useArrows", toggled);
-	}
-	
-	public boolean isUseArrowsToggled() {
-		return useArrows;
-	}
-	
-	public void setPressedTextChroma(boolean toggled) {
-		pressedTextColor.setChromaToggled(toggled);
-		
-		setToFile("pressedTextChroma", toggled);
-	}
-	
-	public boolean isPressedTextChromaToggled() {
-		return pressedTextColor.isChromaToggled();
 	}
 }
