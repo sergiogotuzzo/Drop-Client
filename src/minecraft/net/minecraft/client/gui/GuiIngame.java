@@ -196,6 +196,12 @@ public class GuiIngame extends Gui
 
         GlStateManager.enableAlpha();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        
+        if (!ModInstances.getBossbarMod().isEnabled()) {
+        	this.mc.mcProfiler.startSection("bossHealth");
+            this.renderBossHealth();
+            this.mc.mcProfiler.endSection();
+        }
 
         if (this.mc.playerController.shouldDrawHUD())
         {

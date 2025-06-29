@@ -22,10 +22,11 @@ public class Bossbar extends ModDraggable {
 		super(true, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new BooleanOption(this, "showName", true, new GuiSettings(1, "Show Name")),
+				new BooleanOption(this, "hide", false, new GuiSettings(5, "Hide")),
+				new BooleanOption(this, "showName", true, new ParentOption("hide", true), new GuiSettings(1, "Show Name")),
 				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(2, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new ParentOption("showName"), new GuiSettings(3, "Text Shadow")),
-				new BooleanOption(this, "showHealth", true, new GuiSettings(4, "Show Health"))
+				new BooleanOption(this, "showHealth", true, new ParentOption("hide", true), new GuiSettings(4, "Show Health"))
 				);
 		
 		saveOptions();
@@ -63,7 +64,7 @@ public class Bossbar extends ModDraggable {
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (BossStatus.bossName != null && BossStatus.statusBarTime > 0) {
+		if (!options.getBooleanOption("hide").isToggled() && BossStatus.bossName != null && BossStatus.statusBarTime > 0) {
 			--BossStatus.statusBarTime;
 			
 			this.renderBossbar(pos, BossStatus.healthScale, BossStatus.bossName);
@@ -72,15 +73,17 @@ public class Bossbar extends ModDraggable {
 
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		float bossHealthScale = 1.0F;
-		String bossName = "Ender Dragon";
-		
-		if (BossStatus.bossName != null && BossStatus.statusBarTime > 0) {
-			bossHealthScale = BossStatus.healthScale;
-			bossName = BossStatus.bossName;
+		if (!options.getBooleanOption("hide").isToggled()) {
+			float bossHealthScale = 1.0F;
+			String bossName = "Ender Dragon";
+			
+			if (BossStatus.bossName != null && BossStatus.statusBarTime > 0) {
+				bossHealthScale = BossStatus.healthScale;
+				bossName = BossStatus.bossName;
+			}
+			
+			this.renderBossbar(pos, bossHealthScale, bossName);
 		}
-		
-		this.renderBossbar(pos, bossHealthScale, bossName);
 	}
 	
 	private void renderBossbar(ScreenPosition pos, float bossHealthScale, String bossName) {
