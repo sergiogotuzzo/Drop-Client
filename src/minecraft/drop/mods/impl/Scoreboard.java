@@ -25,7 +25,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class Scoreboard extends ModDraggable {
 	public Scoreboard() {
-		super(true, 0.5, 0.5);
+		super(false, 0.5, 0.5);
 		
 		this.options = new ModOptions(
 				new BooleanOption(this, "hide", false, new GuiSettings(5, "Hide")),

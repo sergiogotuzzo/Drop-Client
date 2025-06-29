@@ -13,7 +13,7 @@ import drop.mods.option.type.ColorOption;
 
 public class Chat extends Mod {
 	public Chat() {
-		super(true);
+		super(false);
 		
 		this.options = new ModOptions(
 				new BooleanOption(this, "chatHeightFix", true, new GuiSettings(1, "Chat Height Fix")),
