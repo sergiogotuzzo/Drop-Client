@@ -91,14 +91,17 @@ public class GuiNewChat extends Gui
                                 
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                int h = chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
+                                int h = chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
                                                                 
-                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, ModInstances.getChatMod().getOptions().getColorOption("backgroundColor").getColor().getRGB());
+                                ColorManager backgroundColor = chatMod.getOptions().getColorOption("backgroundColor").getColor();
+                                int rgba = ((int) ((backgroundColor.getAlpha() / 255.0F) * l1) << 24) | (backgroundColor.getRed() << 16) | (backgroundColor.getGreen() << 8) | backgroundColor.getBlue();
+
+                                drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, chatMod.isEnabled() ? rgba : l1 / 2 << 24);
                                 
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.getOptions().getBooleanOption("textShadow").isToggled());
+                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("textShadow").isToggled());
                                 
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -300,7 +303,7 @@ public class GuiNewChat extends Gui
             
             final Chat chatMod = ModInstances.getChatMod();
             
-            int h = chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
+            int h = chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
             k += h;
 
             if (j >= 0 && k >= 0)
