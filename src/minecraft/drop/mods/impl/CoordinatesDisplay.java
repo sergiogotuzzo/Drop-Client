@@ -101,22 +101,23 @@ public class CoordinatesDisplay extends ModDraggable {
 		int k = options.getBooleanOption("showBackground").isToggled() ? 6 : 0;
 		int j = options.getBooleanOption("showBackground").isToggled() ? 6 : font.FONT_HEIGHT + 1;
 		int h = options.getBooleanOption("showBackground").isToggled() ? 0 : 1;
+		int l = options.getBooleanOption("showBackground").isToggled() ? 1 : 0;
 		
-		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
-		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
-		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		drawText(textX, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 1 - j + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		drawText(textY, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 2 - j + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		drawText(textZ, pos.getAbsoluteX() + k + h, pos.getAbsoluteY() + i * 3 - j + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		
 		if (options.getBooleanOption("showFacing").isToggled()) {
-			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h, pos.getAbsoluteY() + i * 2 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawText(getFacing(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacing()) - k + h + l, pos.getAbsoluteY() + i * 2 - j + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 		
 		if (options.getBooleanOption("showFacingTowards").isToggled()) {
-			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h, pos.getAbsoluteY() + i * 1 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
-			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h, pos.getAbsoluteY() + i * 3 - j, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawText(getFacingTowardsX(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsX()) - k + h + l, pos.getAbsoluteY() + i * 1 - j + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawText(getFacingTowardsZ(), pos.getAbsoluteX() + getWidth() - font.getStringWidth(getFacingTowardsZ()) - k + h + l, pos.getAbsoluteY() + i * 3 - j + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 		
 		if (options.getBooleanOption("showBiome").isToggled()) {
-			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawText(getBiomeText(), pos.getAbsoluteX() + k, pos.getAbsoluteY() + i * 4 - j + h + l, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 		}
 	}
 	
