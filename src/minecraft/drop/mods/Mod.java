@@ -4,9 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import drop.ColorManager;
 import drop.Drop;
+import drop.event.EventManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import drop.events.EventManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModSettings;
 import drop.mods.option.ModOption;

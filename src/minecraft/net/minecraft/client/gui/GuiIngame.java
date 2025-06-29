@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import drop.ColorManager;
+import drop.event.impl.RenderEvent;
 
 import java.awt.Color;
 import java.util.Collection;
@@ -48,7 +49,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
-import drop.events.impl.RenderEvent;
 import drop.mods.ModInstances;
 
 public class GuiIngame extends Gui

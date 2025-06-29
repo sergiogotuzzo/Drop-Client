@@ -1,7 +1,7 @@
 package drop.mods.impl;
 
-import drop.events.EventTarget;
-import drop.events.impl.TickEvent;
+import drop.event.EventTarget;
+import drop.event.impl.TickEvent;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
 

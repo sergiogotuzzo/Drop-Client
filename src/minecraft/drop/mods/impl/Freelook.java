@@ -6,8 +6,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import drop.ColorManager;
-import drop.events.EventTarget;
-import drop.events.impl.KeyEvent;
+import drop.event.EventTarget;
+import drop.event.impl.KeyEvent;
 import drop.gui.GuiSettings;
 import drop.mods.Mod;
 import drop.mods.ModOptions;

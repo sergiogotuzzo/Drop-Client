@@ -4,7 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 
-import drop.events.impl.EntityAttackEvent;
+import drop.event.impl.EntityAttackEvent;
 import drop.mods.ModInstances;
 
 import java.util.Collection;

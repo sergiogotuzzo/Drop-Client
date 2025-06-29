@@ -1,4 +1,4 @@
-package drop.events;
+package drop.event;
 
 public class EventCancelable extends Event {
 	private boolean cancelled = false;

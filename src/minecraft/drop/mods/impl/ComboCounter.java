@@ -13,9 +13,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import drop.ColorManager;
-import drop.events.EventTarget;
-import drop.events.impl.EntityAttackEvent;
-import drop.events.impl.EntityDamageEvent;
+import drop.event.EventTarget;
+import drop.event.impl.EntityAttackEvent;
+import drop.event.impl.EntityDamageEvent;
 import drop.gui.GuiSettings;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;

@@ -1,6 +1,6 @@
-package drop.events.impl;
+package drop.event.impl;
 
-import drop.events.Event;
+import drop.event.Event;
 import net.minecraft.entity.Entity;
 
 public class EntityAttackEvent extends Event {

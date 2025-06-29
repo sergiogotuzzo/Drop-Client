@@ -1,4 +1,4 @@
-package drop.events;
+package drop.event;
 
 public class EventPriority {
 	public static final byte FIRST = 0;

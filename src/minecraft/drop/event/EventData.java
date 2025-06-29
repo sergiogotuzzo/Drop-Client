@@ -1,4 +1,4 @@
-package drop.events;
+package drop.event;
 
 import java.lang.reflect.Method;
 

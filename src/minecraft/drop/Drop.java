@@ -4,11 +4,11 @@ import net.minecraft.client.Minecraft;
 
 import java.io.IOException;
 
-import drop.events.EventManager;
-import drop.events.EventTarget;
-import drop.events.impl.TickEvent;
 import drop.gui.mod.GuiModPositioning;
 import drop.gui.mod.GuiMods;
+import drop.event.EventManager;
+import drop.event.EventTarget;
+import drop.event.impl.TickEvent;
 import drop.gui.hud.HUDManager;
 import drop.mods.ModInstances;
 import drop.mods.impl.Fullbright;

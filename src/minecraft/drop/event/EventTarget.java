@@ -1,4 +1,4 @@
-package drop.events;
+package drop.event;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

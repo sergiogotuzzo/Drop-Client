@@ -1,6 +1,6 @@
-package drop.events.impl;
+package drop.event.impl;
 
-import drop.events.EventCancelable;
+import drop.event.EventCancelable;
 
 public class KeyEvent extends EventCancelable {
 	private final int key;

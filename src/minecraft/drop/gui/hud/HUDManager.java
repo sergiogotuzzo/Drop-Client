@@ -7,9 +7,9 @@ import com.google.common.collect.Sets;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import drop.events.EventManager;
-import drop.events.EventTarget;
-import drop.events.impl.RenderEvent;
+import drop.event.EventManager;
+import drop.event.EventTarget;
+import drop.event.impl.RenderEvent;
 import drop.gui.mod.GuiModPositioning;
 
 public class HUDManager {

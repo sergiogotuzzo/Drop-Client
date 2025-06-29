@@ -209,7 +209,7 @@ import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
-import drop.events.impl.EntityDamageEvent;
+import drop.event.impl.EntityDamageEvent;
 import drop.gui.GuiDropClientMainMenu;
 import drop.mods.ModInstances;
 

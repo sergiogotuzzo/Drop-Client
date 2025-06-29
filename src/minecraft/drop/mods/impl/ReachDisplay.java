@@ -10,8 +10,8 @@ import net.minecraft.entity.Entity;
 import java.awt.Color;
 
 import drop.ColorManager;
-import drop.events.EventTarget;
-import drop.events.impl.EntityDamageEvent;
+import drop.event.EventTarget;
+import drop.event.impl.EntityDamageEvent;
 import drop.gui.GuiSettings;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
