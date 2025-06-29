@@ -63,7 +63,7 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	    if (selectedRenderer.isPresent()) {	    	
 	    	ScreenPosition pos = renderers.get(selectedRenderer.get());
 
-	    	int gap = 3;
+	    	int gap = 10;
 	        
 	    	if ((pos.getAbsoluteX() + selectedRenderer.get().getWidth()) >= this.width / 2 - gap && pos.getAbsoluteX() <= this.width / 2 + gap) {
 	    		drawVerticalLine(this.width / 2, 0, this.height, Color.WHITE.getRGB());
