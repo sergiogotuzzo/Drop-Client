@@ -17,7 +17,7 @@ import drop.mods.option.Brackets;
 
 public class ServerAddress extends ModDraggable {
 	public ServerAddress() {
-		super(true, 0.5, 0.5);
+		super(false, 0.5, 0.5);
 
 		this.options = new ModOptions(
 				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
