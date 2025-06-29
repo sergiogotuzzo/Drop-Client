@@ -11,7 +11,7 @@ public enum Brackets {
     private final String open;
     private final String close;
 
-    Brackets(int id, String open, String close) {
+    private Brackets(int id, String open, String close) {
         this.id = id;
         this.open = open;
         this.close = close;

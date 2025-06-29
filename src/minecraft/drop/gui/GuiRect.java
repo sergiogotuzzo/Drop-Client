@@ -54,14 +54,7 @@ public class GuiRect extends GuiButton {
             }
             
             drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, rectColor.getRGB());
-            drawHollowRect(this.xPosition, this.yPosition, this.width, this.height, Color.BLACK.getRGB());
+            GuiDropClient.drawHollowRect(this.xPosition, this.yPosition, this.width, this.height, Color.BLACK.getRGB());
         }
     }
-    
-    public void drawHollowRect(int x, int y, int width, int height, int color) {
-		this.drawHorizontalLine(x, x + width, y, color);
-		this.drawHorizontalLine(x, x + width, y + height, color);
-		this.drawVerticalLine(x, y + height, y, color);
-		this.drawVerticalLine(x + width, y + height, y, color);
-	}
 }

@@ -17,11 +17,11 @@ import drop.mods.option.type.ColorOption;
 import drop.mods.option.type.FloatOption;
 import drop.mods.option.type.IntOption;
 
-public class GuiMod extends GuiDropClientScreen {
+public class GuiModSettings extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	protected final Mod mod;
 	
-	public GuiMod(GuiScreen previousGuiScreen, Mod mod) {
+	public GuiModSettings(GuiScreen previousGuiScreen, Mod mod) {
 		this.previousGuiScreen = previousGuiScreen;
 		this.mod = mod;
 	}

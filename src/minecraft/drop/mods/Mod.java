@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import drop.events.EventManager;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiMod;
+import drop.gui.mod.GuiModSettings;
 import drop.mods.option.ModOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
@@ -29,11 +29,11 @@ public abstract class Mod {
 		font = mc.fontRendererObj;
 		client = Drop.getInstance();
 		
-		setEnabled((boolean) getFromFile("enabled", enabled));				
+		setEnabled(getBooleanFromFile("enabled", enabled));				
 	}
 	
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
-		return new GuiMod(previousGuiScreen, this);
+		return new GuiModSettings(previousGuiScreen, this);
 	}
 
 	public void setEnabled(boolean enabled) {

@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import drop.gui.mod.GuiMod;
+import drop.gui.mod.GuiModSettings;
 import drop.mods.ModInstances;
 import drop.mods.impl.ArmorStatus;
 
-public class GuiArmorStatus extends GuiMod {	
+public class GuiArmorStatus extends GuiModSettings {	
 	public GuiArmorStatus(GuiScreen previousGuiScreen) {
 		super(previousGuiScreen, ModInstances.getArmorStatusMod());
 	}
