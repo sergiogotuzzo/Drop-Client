@@ -28,10 +28,11 @@ public class Scoreboard extends ModDraggable {
 		super(true, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new BooleanOption(this, "hideNumbers", true, new GuiSettings(1, "Hide Numbers")),
-				new BooleanOption(this, "textShadow", false, new GuiSettings(2, "Text Shadow")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new GuiSettings(3, "Background Color", false, true)),
-				new ColorOption(this, "topBackgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new GuiSettings(4, "Top Background Color", false, true))
+				new BooleanOption(this, "hide", false, new GuiSettings(5, "Hide")),
+				new BooleanOption(this, "hideNumbers", true, new ParentOption("hide", true), new GuiSettings(1, "Hide Numbers")),
+				new BooleanOption(this, "textShadow", false, new ParentOption("hide", true), new GuiSettings(2, "Text Shadow")),
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(3, "Background Color", false, true)),
+				new ColorOption(this, "topBackgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(4, "Top Background Color", false, true))
 				);
 		
 		saveOptions();
@@ -62,7 +63,7 @@ public class Scoreboard extends ModDraggable {
 	
 	@Override
 	public void render(ScreenPosition pos) {
-		if (mc.theWorld.getScoreboard() != null) {
+		if (!options.getBooleanOption("hide").isToggled() && mc.theWorld.getScoreboard() != null) {
 			net.minecraft.scoreboard.Scoreboard scoreboard = this.mc.theWorld.getScoreboard();
 			ScoreObjective scoreObjective = null;
 			ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(this.mc.thePlayer.getName());

@@ -346,6 +346,11 @@ public class GuiIngame extends Gui
 
         ScoreObjective scoreobjective1 = scoreobjective != null ? scoreobjective : scoreboard.getObjectiveInDisplaySlot(1);
 
+        if (!ModInstances.getScoreboardMod().isEnabled() && scoreobjective1 != null)
+        {
+            this.renderScoreboard(scoreobjective1, scaledresolution);
+        }
+
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.disableAlpha();
