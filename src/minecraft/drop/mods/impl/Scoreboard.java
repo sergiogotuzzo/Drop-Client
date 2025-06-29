@@ -30,6 +30,7 @@ public class Scoreboard extends ModDraggable {
 		this.options = new ModOptions(
 				new BooleanOption(this, "hide", false, new GuiSettings(5, "Hide")),
 				new BooleanOption(this, "hideNumbers", true, new ParentOption("hide", true), new GuiSettings(1, "Hide Numbers")),
+				new ColorOption(this, "numbersColor", ColorManager.fromRGB(255, 85, 85, false), new ParentOption("hideNumbers", true), new GuiSettings(6, "Numbers Color", true, false)),
 				new BooleanOption(this, "textShadow", false, new ParentOption("hide", true), new GuiSettings(2, "Text Shadow")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(3, "Background Color", false, true)),
 				new ColorOption(this, "topBackgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(4, "Top Background Color", false, true))
@@ -103,7 +104,7 @@ public class Scoreboard extends ModDraggable {
 				drawText(line, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
 
 				if (!options.getBooleanOption("hideNumbers").isToggled()) {
-					drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, new Color(255, 85, 85).getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
+					drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, options.getColorOption("numbersColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 				}
 			}
 		}
@@ -162,9 +163,9 @@ public class Scoreboard extends ModDraggable {
             font.drawString(title, l1, k, 553648127, options.getBooleanOption("textShadow").isToggled());
 
             if (!options.getBooleanOption("hideNumbers").isToggled()) {
-                String number = EnumChatFormatting.RED + "" + score.getScorePoints();
+                String number = String.valueOf(score.getScorePoints());
 
-                font.drawString(number, l - font.getStringWidth(number), k, 553648127, options.getBooleanOption("textShadow").isToggled());
+                drawText(number, l - font.getStringWidth(number), k, options.getColorOption("numbersColor").getColor(), options.getBooleanOption("textShadow").isToggled());
             }
 
             if (j == collection.size()) {
