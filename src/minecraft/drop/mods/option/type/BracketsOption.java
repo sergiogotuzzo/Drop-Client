@@ -15,6 +15,12 @@ public class BracketsOption extends ModOption {
 		this(mod, key, value, null, guiSettings);
 	}
 	
+	public void saveValue(Brackets brackets) {
+		super.setValue(brackets);
+		
+		mod.setToFile(getKey(), brackets.getId());
+	}
+	
 	public Brackets getBrackets() {
 		return (Brackets) getValue();
 	}

@@ -9,8 +9,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModSettings;
+import drop.mods.option.Brackets;
 import drop.mods.option.ModOption;
 import drop.mods.option.type.BooleanOption;
+import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
 import drop.mods.option.type.FloatOption;
 import drop.mods.option.type.IntOption;
@@ -67,6 +69,8 @@ public abstract class Mod {
 				option.saveValue(getFloatFromFile(option.getKey(), (float) option.getValue()));
 			} else if (option instanceof IntOption) {
 				option.saveValue(getIntFromFile(option.getKey(), (int) option.getValue()));
+			} else if (option instanceof BracketsOption) {
+				((BracketsOption) option).saveValue(Brackets.fromId(getIntFromFile(option.getKey(), ((BracketsOption) option).getId())));
 			}
 		}
 	}

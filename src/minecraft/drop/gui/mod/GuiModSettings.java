@@ -57,10 +57,10 @@ public class GuiModSettings extends GuiMenu {
 			
 			if (option instanceof BracketsOption) {
 				if (button.id == -1) {
-					((BracketsOption) option).setValue(Brackets.fromId(((BracketsOption) option).getBrackets() == Brackets.NONE ? Brackets.ANGULAR.getId() : ((BracketsOption) option).getId() - 1));
+					((BracketsOption) option).saveValue(Brackets.fromId(((BracketsOption) option).getBrackets() == Brackets.NONE ? Brackets.ANGULAR.getId() : ((BracketsOption) option).getId() - 1));
 	            	this.initGui();
 				} else if (button.id == -2) {
-					((BracketsOption) option).setValue(Brackets.fromId(((BracketsOption) option).getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : ((BracketsOption) option).getId() + 1));
+					((BracketsOption) option).saveValue(Brackets.fromId(((BracketsOption) option).getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : ((BracketsOption) option).getId() + 1));
 	            	this.initGui();
 				}
 			}
