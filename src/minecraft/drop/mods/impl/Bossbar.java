@@ -36,12 +36,14 @@ public class Bossbar extends ModDraggable {
 	public int getWidth() {
 		int width = 0;
 		
-		if (options.getBooleanOption("showName").isToggled()) {
-			width = font.getStringWidth(BossStatus.bossName != null && BossStatus.statusBarTime > 0 ? BossStatus.bossName : "Ender Dragon");
-		}
-		
-		if (options.getBooleanOption("showHealth").isToggled()) {
-			width = 182;
+		if (!options.getBooleanOption("hide").isToggled()) {
+			if (options.getBooleanOption("showName").isToggled()) {
+				width = font.getStringWidth(BossStatus.bossName != null && BossStatus.statusBarTime > 0 ? BossStatus.bossName : "Ender Dragon");
+			}
+			
+			if (options.getBooleanOption("showHealth").isToggled()) {
+				width = 182;
+			}
 		}
 		
 		return width;
@@ -51,12 +53,14 @@ public class Bossbar extends ModDraggable {
 	public int getHeight() {
 		int height = 0;
 		
-		if (options.getBooleanOption("showName").isToggled()) {
-			height += 5;
-		}
-		
-		if (options.getBooleanOption("showHealth").isToggled()) {
-			height += 1 + font.FONT_HEIGHT;
+		if (!options.getBooleanOption("hide").isToggled()) {
+			if (options.getBooleanOption("showName").isToggled()) {
+				height += 5;
+			}
+			
+			if (options.getBooleanOption("showHealth").isToggled()) {
+				height += 1 + font.FONT_HEIGHT;
+			}
 		}
 		
 		return height;

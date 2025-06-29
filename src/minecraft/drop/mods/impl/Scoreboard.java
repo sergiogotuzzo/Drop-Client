@@ -53,12 +53,12 @@ public class Scoreboard extends ModDraggable {
 			width = Math.max(width, font.getStringWidth(line + (options.getBooleanOption("hideNumbers").isToggled() ? "" : "   " + i)));
 		}
 		
-		return width + (options.getBooleanOption("hideNumbers").isToggled() ? 2 : 0);
+		return !options.getBooleanOption("hide").isToggled() ? width + (options.getBooleanOption("hideNumbers").isToggled() ? 2 : 0) : 0;
 	}
 
 	@Override
 	public int getHeight() {
-		return 1 + 2 + lines.size() * (font.FONT_HEIGHT + 2);
+		return !options.getBooleanOption("hide").isToggled() ? 1 + 2 + lines.size() * (font.FONT_HEIGHT + 2) : 0;
 	}
 	
 	@Override
