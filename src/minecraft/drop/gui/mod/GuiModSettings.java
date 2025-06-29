@@ -17,22 +17,18 @@ import drop.mods.option.type.ColorOption;
 import drop.mods.option.type.FloatOption;
 import drop.mods.option.type.IntOption;
 
-public class GuiModSettings extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	protected final Mod mod;
-	
+public class GuiModSettings extends GuiMenu {
+	private final Mod mod;
+
 	public GuiModSettings(GuiScreen previousGuiScreen, Mod mod) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod.getName());
+		
 		this.mod = mod;
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
-    	
-    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText(mod.getName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
+    	super.drawScreen(mouseX, mouseY, partialTicks);
         
         int i = 1;
 		
@@ -43,15 +39,11 @@ public class GuiModSettings extends GuiDropClientScreen {
 				i++;
 			}
 		}
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        if (button.id == 0) {
-        	this.mc.displayGuiScreen(this.previousGuiScreen);
-        }
+        super.actionPerformed(button);
         
         for (ModOption option : mod.getOptions().getOptions()) {
 			if (button.id == option.getGuiSettings().getButtonId()) {
@@ -78,10 +70,6 @@ public class GuiModSettings extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-
-        this.buttonList.add(new GuiButton(0, (this.width + 350) / 2 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
         
         int i = 1;
         

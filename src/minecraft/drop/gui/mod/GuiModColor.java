@@ -13,10 +13,7 @@ import drop.gui.GuiSlider;
 import drop.mods.Mod;
 import drop.mods.option.type.ColorOption;
 
-public class GuiModColor extends GuiDropClientScreen {
-	private final GuiScreen previousGuiScreen;
-	private final Mod mod;
-	
+public class GuiModColor extends GuiMenu {	
 	protected final ColorOption option;
 
 	private GuiSlider sliderRed;
@@ -27,21 +24,18 @@ public class GuiModColor extends GuiDropClientScreen {
     private ColorManager color;
 	
 	public GuiModColor(GuiScreen previousGuiScreen, Mod mod, ColorOption option) {
-		this.previousGuiScreen = previousGuiScreen;
-		this.mod = mod;
+		super(previousGuiScreen, mod.getName());
+
 		this.option = option;
 		
-		this.color = (ColorManager) option.getValue();
+		this.color = option.getColor();
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
-    	
-    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText(mod.getName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
-        this.drawScaledText(option.getGuiSettings().getOptionName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB(), color.isChromaToggled()).setAlpha(255).getRGB(), true, color.isChromaToggled());
+        super.drawScreen(mouseX, mouseY, partialTicks);
+
+        this.drawScaledText(option.getGuiSettings().getOptionName(), (this.width - rectWidth) / 2 + 15, (this.height - rectHeight) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB(), color.isChromaToggled()).setAlpha(255).getRGB(), true, color.isChromaToggled());
         
         this.writeOptionText("Red", 2, Color.RED.getRGB());
         this.writeOptionValue(String.valueOf(color.getRed()), 2);
@@ -58,8 +52,6 @@ public class GuiModColor extends GuiDropClientScreen {
         if (option.getGuiSettings().shouldBeChromaCheckBoxShown()) {
         	this.writeOptionText("Chroma", option.getGuiSettings().shouldBeAlphaSliderShown() ? 10 : 8, true);
         }
-        
-        super.drawScreen(mouseX, mouseY, partialTicks);
     }
     
     @Override
@@ -76,11 +68,10 @@ public class GuiModColor extends GuiDropClientScreen {
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException {    	
+    protected void actionPerformed(GuiButton button) throws IOException {
+    	super.actionPerformed(button);
+    	
         switch (button.id) {
-	        case 0:
-	        	this.mc.displayGuiScreen(this.previousGuiScreen);
-	        	break;
             case 1:
             	color.setRed((int) (sliderRed.getSliderPosition() * 255.0F));
             	option.saveValue(color);
@@ -108,10 +99,6 @@ public class GuiModColor extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-        this.buttonList.add(new GuiButton(0, (this.width + 350) / 2 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
                 
     	this.buttonList.add(sliderRed = this.createGuiSlider(1, 255.0F, color.getRed(), 3));
     	this.buttonList.add(sliderGreen = this.createGuiSlider(2,255.0F, color.getGreen(), 5));

@@ -7,25 +7,21 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiMenu;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.ArmorStatus;
 
-public class GuiArmorStatusDynamicColors extends GuiDropClientScreen {
+public class GuiArmorStatusDynamicColors extends GuiMenu {
 	private static final ArmorStatus mod = ModInstances.getArmorStatusMod();
-	private GuiDropClientScreen previousGuiScreen;
 	
 	public GuiArmorStatusDynamicColors(GuiDropClientScreen previousGuiScreen) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod.getName());
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
-    	
-    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText(mod.getName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
+    	super.drawScreen(mouseX, mouseY, partialTicks);
 
         this.writeOptionText("Very High Text Color", 1);
         this.writeOptionText("Very High Text Shadow", 2);
@@ -37,8 +33,6 @@ public class GuiArmorStatusDynamicColors extends GuiDropClientScreen {
         this.writeOptionText("Low Text Shadow", 8);
         this.writeOptionText("Very Low Text Color", 9);
         this.writeOptionText("Very Low Text Shadow", 10);
-        
-        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -46,9 +40,6 @@ public class GuiArmorStatusDynamicColors extends GuiDropClientScreen {
     	super.actionPerformed(button);
     	
         switch (button.id) {
-        	case 0:
-        		mc.displayGuiScreen(this.previousGuiScreen);
-        		break;
 	        case 1:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("veryHighTextColor")));
 	        	break;
@@ -90,10 +81,6 @@ public class GuiArmorStatusDynamicColors extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-        this.buttonList.add(new GuiButton(0, (this.width + 350) / 2 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
 
 		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("veryHighTextColor").getColor().getRGB(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.getOptions().getBooleanOption("veryHighTextShadow").isToggled(), 2));

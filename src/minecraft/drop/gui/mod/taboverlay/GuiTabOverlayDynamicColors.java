@@ -7,25 +7,21 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.mod.GuiMenu;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.TabOverlay;
 
-public class GuiTabOverlayDynamicColors extends GuiDropClientScreen {
+public class GuiTabOverlayDynamicColors extends GuiMenu {
 	private static final TabOverlay mod = ModInstances.getTabOverlayMod();
-	private GuiDropClientScreen previousGuiScreen;
 	
 	public GuiTabOverlayDynamicColors(GuiDropClientScreen previousGuiScreen) {
-		this.previousGuiScreen = previousGuiScreen;
+		super(previousGuiScreen, mod.getName());
 	}
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
-    	
-    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
-        
-        this.drawScaledText(mod.getName(), (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0D, 0xFFFFFFFF, true, false);
+    	super.drawScreen(mouseX, mouseY, partialTicks);
 
         this.writeOptionText("Excellent Text Color", 1);
         this.writeOptionText("Excellent Text Shadow", 2);
@@ -37,8 +33,6 @@ public class GuiTabOverlayDynamicColors extends GuiDropClientScreen {
         this.writeOptionText("Weak Text Shadow", 8);
         this.writeOptionText("Unstable Text Color", 9);
         this.writeOptionText("Unstable Text Shadow", 10);
-        
-        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -46,9 +40,6 @@ public class GuiTabOverlayDynamicColors extends GuiDropClientScreen {
     	super.actionPerformed(button);
     	
         switch (button.id) {
-        	case 0:
-        		mc.displayGuiScreen(this.previousGuiScreen);
-        		break;
 	        case 1:
 	        	mc.displayGuiScreen(new GuiModColor(this, mod, mod.getOptions().getColorOption("excellentTextColor")));
 	        	break;
@@ -90,10 +81,6 @@ public class GuiTabOverlayDynamicColors extends GuiDropClientScreen {
 	@Override
     public void initGui() {
 		super.initGui();
-
-        this.buttonList.clear();
-        
-        this.buttonList.add(new GuiButton(0, (this.width + 350) / 2 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done", new Object[0])));
 
 		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("excellentTextColor").getColor().getRGB(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.getOptions().getBooleanOption("excellentTextShadow").isToggled(), 2));

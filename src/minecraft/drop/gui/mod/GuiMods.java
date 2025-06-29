@@ -17,9 +17,7 @@ import drop.gui.GuiText;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
 
-public class GuiMods extends GuiDropClientScreen {
-    private final GuiScreen previousGuiScreen;
-    
+public class GuiMods extends GuiMenu {    
     private GuiTextField textFieldSearchMod;
     private String textFieldText = "";
     
@@ -27,7 +25,7 @@ public class GuiMods extends GuiDropClientScreen {
     private int maxScroll = 0;
 
     public GuiMods(GuiScreen previousGuiScreen) {
-        this.previousGuiScreen = previousGuiScreen;
+        super(previousGuiScreen, "Mods");
     }
 
     @Override
@@ -46,15 +44,9 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    	this.drawDefaultBackground();
-    	
-    	this.drawRect((this.width - 350) / 2, (this.height - 250) / 2, (this.width - 350) / 2 + 350, (this.height - 250) / 2 + 250, new Color(0, 0, 0, 127).getRGB());
-        
-    	this.drawScaledText("Mods", (this.width - 350) / 2 + 15, (this.height - 250) / 2 + 15, 2.0, 0xFFFFFFFF, true, false);
+    	super.drawScreen(mouseX, mouseY, partialTicks);
 
     	this.textFieldSearchMod.drawTextBox();
-
-        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -77,9 +69,7 @@ public class GuiMods extends GuiDropClientScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        if (button.id == 0) {
-            mc.displayGuiScreen(previousGuiScreen);
-        }
+        super.actionPerformed(button);
 
         int id = button.id;
         List<Mod> mods = new ArrayList<>(ModInstances.getAllMods());
@@ -106,12 +96,8 @@ public class GuiMods extends GuiDropClientScreen {
     @Override
     public void initGui() {
     	super.initGui();
-    	
-        this.buttonList.clear();
 
-        this.buttonList.add(new GuiButton(0, (this.width - 350) / 2 + 350 - 50 - 15, (this.height - 250) / 2 + 15 - 3, 50, 20, I18n.format("gui.done")));
-
-        this.textFieldSearchMod = new GuiTextField(999, this.fontRendererObj, (this.width - 120) / 2, (this.height - 250) / 2 + 15 - 3, 120, 20);
+        this.textFieldSearchMod = new GuiTextField(-1, this.fontRendererObj, (this.width - 120) / 2, (this.height - rectHeight) / 2 + 15 - 3, 120, 20);
         this.textFieldSearchMod.setText(textFieldText);
         this.textFieldSearchMod.setFocused(true);
 
@@ -130,17 +116,17 @@ public class GuiMods extends GuiDropClientScreen {
             	continue;
             }
 
-            int buttonY = (this.height - 250) / 2 + 30 + totalHeight - scrollOffset;
+            int buttonY = (this.height - rectHeight) / 2 + 30 + totalHeight - scrollOffset;
 
-            if (buttonY >= (this.height - 250) / 2 + 30 && buttonY + 15 <= (this.height - 250) / 2 + 250 - 20) {
-                this.buttonList.add(new GuiText(i + 101, (this.width - 350) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
-                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - 350) / 2 + 350 - 18 - 15, buttonY - 2 + 15));
+            if (buttonY >= (this.height - rectHeight) / 2 + 30 && buttonY + 15 <= (this.height - rectHeight) / 2 + rectHeight - 20) {
+                this.buttonList.add(new GuiText(i + 101, (this.width - rectWidth) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
+                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - rectWidth) / 2 + rectWidth - 18 - 15, buttonY - 2 + 15));
             }
 
             totalHeight += 15;
         }
 
-        this.maxScroll = Math.max(0, totalHeight - (250 - 50));
+        this.maxScroll = Math.max(0, totalHeight - (rectHeight - 50));
     }
 
     @Override
