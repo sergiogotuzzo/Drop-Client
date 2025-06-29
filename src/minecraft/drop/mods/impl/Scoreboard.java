@@ -30,7 +30,8 @@ public class Scoreboard extends ModDraggable {
 		this.options = new ModOptions(
 				new BooleanOption(this, "hideNumbers", true, new GuiSettings(1, "Hide Numbers")),
 				new BooleanOption(this, "textShadow", false, new GuiSettings(2, "Text Shadow")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new GuiSettings(3, "Background Color", false, true))
+				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new GuiSettings(3, "Background Color", false, true)),
+				new ColorOption(this, "topBackgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new GuiSettings(4, "Top Background Color", false, true))
 				);
 		
 		saveOptions();
@@ -166,8 +167,8 @@ public class Scoreboard extends ModDraggable {
             if (j == collection.size()) {
                 String content = scoreObjective.getDisplayName();
                 
-                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, options.getColorOption("backgroundColor").getColor().getRGB());
-                drawRect(l1 - 2, k - 1, l, k, options.getColorOption("backgroundColor").getColor().getRGB());
+                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, options.getColorOption("topBackgroundColor").getColor().getRGB());
+                drawRect(l1 - 2, k - 1, l, k, options.getColorOption("topBackgroundColor").getColor().getRGB());
                 
                 font.drawString(content, l1 + i / 2 - font.getStringWidth(content) / 2, k - font.FONT_HEIGHT, 553648127, options.getBooleanOption("textShadow").isToggled());
             }
