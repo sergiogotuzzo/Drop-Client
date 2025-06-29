@@ -90,19 +90,21 @@ public class Scoreboard extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		getBounds().fill(options.getColorOption("backgroundColor").getColor());
-				
-		drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
-		
-		int i = 0;
-		
-		for (String line : lines) {
-			i++;
-						
-			drawText(line, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
+		if (!options.getBooleanOption("hide").isToggled()) {
+			getBounds().fill(options.getColorOption("backgroundColor").getColor());
+			
+			drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
+			
+			int i = 0;
+			
+			for (String line : lines) {
+				i++;
+							
+				drawText(line, pos.getAbsoluteX() + 2, pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
 
-			if (!options.getBooleanOption("hideNumbers").isToggled()) {
-				drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, new Color(255, 85, 85).getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
+				if (!options.getBooleanOption("hideNumbers").isToggled()) {
+					drawText(String.valueOf(i), pos.getAbsoluteX() + getWidth() - font.getStringWidth(String.valueOf(i)), pos.getAbsoluteY() + i * font.FONT_HEIGHT + 2, new Color(255, 85, 85).getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
+				}
 			}
 		}
 	}
