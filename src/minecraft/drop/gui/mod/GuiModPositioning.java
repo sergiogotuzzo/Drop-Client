@@ -130,8 +130,8 @@ public class GuiModPositioning extends GuiDropClientScreen {
 		int screenWidth = res.getScaledWidth();
 		int screenHeight = res.getScaledHeight();
 		
-		int absoluteX = Math.max(marginX, Math.min(pos.getAbsoluteX(), Math.max(screenWidth - renderer.getWidth() - marginX, 0)));
-		int absoluteY = Math.max(marginY, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight() - marginY, 0)));
+		int absoluteX = Math.max(marginX, Math.min(pos.getAbsoluteX(), Math.max(screenWidth - renderer.getWidth() - marginX - 1, 0)));
+		int absoluteY = Math.max(marginY, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight() - marginY - 1, 0)));
 		
 		pos.setAbsolute(absoluteX, absoluteY);
 	}
