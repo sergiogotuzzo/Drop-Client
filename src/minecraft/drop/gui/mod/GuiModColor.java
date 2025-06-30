@@ -1,16 +1,16 @@
 package drop.gui.mod;
 
-import java.awt.Color;
 import java.io.IOException;
 
-import drop.ColorManager;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import drop.Color;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.option.type.ColorOption;
 
 public class GuiModColor extends GuiMenu {	
@@ -21,7 +21,7 @@ public class GuiModColor extends GuiMenu {
     private GuiSlider sliderBlue;
     private GuiSlider sliderAlpha;
     
-    private ColorManager color;
+    private ModColor color;
 	
 	public GuiModColor(GuiScreen previousGuiScreen, Mod mod, ColorOption option) {
 		super(previousGuiScreen, mod.getName());
@@ -35,13 +35,13 @@ public class GuiModColor extends GuiMenu {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        this.drawScaledText(option.getGuiSettings().getOptionName(), (this.width - rectWidth) / 2 + 15, (this.height - rectHeight) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, ColorManager.fromRGB(color.getRGB(), color.isChromaToggled()).setAlpha(255).getRGB(), true, color.isChromaToggled());
+        this.drawScaledText(option.getGuiSettings().getOptionName(), (this.width - rectWidth) / 2 + 15, (this.height - rectHeight) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, new Color(color.getRGB()).setAlpha(255).getRGB(), true, color.isChromaToggled());
         
-        this.writeOptionText("Red", 2, Color.RED.getRGB());
+        this.writeOptionText("Red", 2, new Color(255, 0, 0).getRGB());
         this.writeOptionValue(String.valueOf(color.getRed()), 2);
-        this.writeOptionText("Green", 4, Color.GREEN.getRGB());
+        this.writeOptionText("Green", 4, new Color(0, 255, 0).getRGB());
         this.writeOptionValue(String.valueOf(color.getGreen()), 4);
-        this.writeOptionText("Blue", 6, Color.BLUE.getRGB());
+        this.writeOptionText("Blue", 6, new Color(0, 0, 255).getRGB());
         this.writeOptionValue(String.valueOf(color.getBlue()), 6);
 
         if (option.getGuiSettings().shouldBeAlphaSliderShown()) {

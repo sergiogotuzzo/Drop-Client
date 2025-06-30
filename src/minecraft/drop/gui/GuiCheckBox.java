@@ -8,7 +8,7 @@ public class GuiCheckBox extends GuiRect {
 	private boolean toggled;
 	
 	public GuiCheckBox(int buttonId, int x, int y, boolean toggled) {
-		super(buttonId, x, y, new Color(0, 0, 0, 100).getRGB());
+		super(buttonId, x, y, 13, 13, new Color(0, 0, 0, 100).getRGB(), Color.BLACK.getRGB());
 		
 		this.toggled = toggled;
 	}
@@ -20,7 +20,6 @@ public class GuiCheckBox extends GuiRect {
         	if (toggled) {
             	mc.fontRendererObj.drawStringWithShadow("✔", this.xPosition - this.width / 2 + mc.fontRendererObj.getStringWidth("✔"), this.yPosition - this.height / 2 + mc.fontRendererObj.FONT_HEIGHT, Color.WHITE.getRGB());
         	}
-        	
         }
     }
 }

@@ -58,7 +58,7 @@ public class GuiMenu extends GuiDropClientScreen {
 	}
 	
 	protected GuiRect createGuiRect(int id, int color, int line) {
-    	return new GuiRect(id, (this.width + rectWidth) / 2 - 15 - 13, (this.height - rectHeight) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), color);
+    	return new GuiRect(id, (this.width + rectWidth) / 2 - 15 - 13, (this.height - rectHeight) / 2 + 30 + 15 - 2 * 2 + 15 * (line - 1), 13, 13, color, Color.BLACK.getRGB());
 	}
 	
 	protected GuiSlider createGuiSlider(int id, float max, float defaultValue, int line) {
