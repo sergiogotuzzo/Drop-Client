@@ -430,18 +430,17 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             	float alpha = 76.0F;
             	
             	if (hitColorMod.isEnabled()) {
+            		red = hitColorMod.getOptions().getColorOption("hitColor").getColor().getRed();
+            		green = hitColorMod.getOptions().getColorOption("hitColor").getColor().getGreen();
+            		blue = hitColorMod.getOptions().getColorOption("hitColor").getColor().getBlue();
+                	alpha = hitColorMod.getOptions().getColorOption("hitColor").getColor().getAlpha();
+                	
             		if (hitColorMod.getOptions().getColorOption("hitColor").getColor().isChromaToggled()) {
                     	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                     	red = chromaColor.getRed();
                     	green = chromaColor.getGreen();
                     	blue = chromaColor.getBlue();
-                    	alpha = hitColorMod.getOptions().getColorOption("hitColor").getColor().getAlpha();
-                	} else {
-                		red = hitColorMod.getOptions().getColorOption("hitColor").getColor().getRed();
-                		green = hitColorMod.getOptions().getColorOption("hitColor").getColor().getGreen();
-                		blue = hitColorMod.getOptions().getColorOption("hitColor").getColor().getBlue();
-                    	alpha = hitColorMod.getOptions().getColorOption("hitColor").getColor().getAlpha();
                 	}
             	}
             	
