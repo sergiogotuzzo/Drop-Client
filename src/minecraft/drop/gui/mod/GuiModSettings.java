@@ -6,16 +6,11 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.mods.Mod;
-import drop.mods.option.Brackets;
+import drop.mods.ModColor;
 import drop.mods.option.*;
-import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.BracketsOption;
-import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
-import drop.mods.option.type.IntOption;
+import drop.mods.option.type.*;
 
 public class GuiModSettings extends GuiMenu {
 	private final Mod mod;
@@ -102,7 +97,7 @@ public class GuiModSettings extends GuiMenu {
 		if (option instanceof BooleanOption) {
 			this.buttonList.add(this.createGuiCheckBox(option.getGuiSettings().getButtonId(), ((BooleanOption) option).isToggled(), i));
 		} else if (option instanceof ColorOption) {
-    		this.buttonList.add(this.createGuiRect(option.getGuiSettings().getButtonId(), ((ColorManager) option.getValue()).getRGB(), i));
+    		this.buttonList.add(this.createGuiRect(option.getGuiSettings().getButtonId(), ((ColorOption) option).getColor().getRGB(), i));
 		} else if (option instanceof FloatOption) {
 			i++;
 			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((FloatOption) option).getMax(), (float) option.getValue(), i, (FloatOption) option));
