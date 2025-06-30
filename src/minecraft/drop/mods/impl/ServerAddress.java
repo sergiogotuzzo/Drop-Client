@@ -24,6 +24,8 @@ public class ServerAddress extends ModDraggable {
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Show Background")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(6, "Show Border")),
+				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(7, "Border Color", false, true)),
 				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets"))
 				);
 				
@@ -45,6 +47,11 @@ public class ServerAddress extends ModDraggable {
 		if (mc.getCurrentServerData() != null) {
 			if (options.getBooleanOption("showBackground").isToggled()) {
 				drawAlignedRect(pos, mc.getCurrentServerData().serverIP, 8, options.getColorOption("backgroundColor").getColor().getRGB());
+				
+				if (options.getBooleanOption("showBorder").isToggled()) {
+			    	drawAlignedHollowRect(pos, mc.getCurrentServerData().serverIP, 8, options.getColorOption("borderColor").getColor().getRGB());
+		    	}
+				
 				drawCenteredAlignedText(pos, mc.getCurrentServerData().serverIP, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
 			    drawAlignedText(options.getBracketsOption("brackets").wrap(mc.getCurrentServerData().serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
@@ -56,6 +63,11 @@ public class ServerAddress extends ModDraggable {
 	public void renderDummy(ScreenPosition pos) {
 		if (options.getBooleanOption("showBackground").isToggled()) {
 			drawAlignedRect(pos, "mc.example.org", 8, options.getColorOption("backgroundColor").getColor().getRGB());
+			
+			if (options.getBooleanOption("showBorder").isToggled()) {
+		    	drawAlignedHollowRect(pos, "mc.example.org", 8, options.getColorOption("borderColor").getColor().getRGB());
+	    	}
+			
 			drawCenteredAlignedText(pos, "mc.example.org", 8, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
 		    drawAlignedText(options.getBracketsOption("brackets").wrap("mc.example.org"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());

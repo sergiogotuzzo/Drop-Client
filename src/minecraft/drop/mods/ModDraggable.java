@@ -77,6 +77,32 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawAlignedRect(pos, text, widthBackground, new Color(0, 0, 0, 102));
 	}
 	
+	public void drawAlignedHollowRect(ScreenPosition pos, String text, int widthBackground, int color) {
+	    int rectLeft;
+	    int rectRight;
+	    
+	    int textWidth = font.getStringWidth(text);
+	    int rectTop = pos.getAbsoluteY();
+	    int rectBottom = rectTop + getHeight();
+
+	    if (pos.getRelativeX() < 1.0 / 3.0) {
+	        rectLeft = pos.getAbsoluteX();
+	        rectRight = rectLeft + textWidth + widthBackground;
+	    } else if (pos.getRelativeX() > 2.0 / 3.0) {
+	        rectRight = pos.getAbsoluteX() + getWidth();
+	        rectLeft = rectRight - textWidth - widthBackground;
+	    } else {
+	        rectLeft = pos.getAbsoluteX() - (textWidth + widthBackground) / 2 + getWidth() / 2;
+	        rectRight = pos.getAbsoluteX() + (textWidth + widthBackground) / 2 + getWidth() / 2;
+	    }
+
+	    drawRect(rectLeft + 1, rectTop + 1, rectRight - 1, rectTop, color);
+	    drawRect(rectLeft + 1, rectBottom, rectRight - 1, rectBottom - 1, color);
+	    drawRect(rectLeft + 1, rectTop, rectLeft, rectBottom, color);
+	    drawRect(rectRight, rectTop, rectRight - 1, rectBottom, color);
+	}
+
+	
 	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
 		if (chroma) {
 			int textCharX = x;

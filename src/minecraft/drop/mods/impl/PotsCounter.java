@@ -24,6 +24,8 @@ public class PotsCounter extends ModDraggable {
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Show Background")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(6, "Show Border")),
+				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(7, "Border Color", false, true)),
 				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets"))
 				);
 				
@@ -55,6 +57,10 @@ public class PotsCounter extends ModDraggable {
 		if (options.getBooleanOption("showBackground").isToggled()) {
 	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
 	    	
+	    	if (options.getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	}
+	    	
 			drawCenteredText(potsCount + " pots", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
 		    drawAlignedText(options.getBracketsOption("brackets").wrap(potsCount + " pots"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
@@ -65,6 +71,10 @@ public class PotsCounter extends ModDraggable {
 	public void renderDummy(ScreenPosition pos) {
 		if (options.getBooleanOption("showBackground").isToggled()) {
 	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+	    	
+	    	if (options.getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	}
 	    	
 			drawCenteredText("0 pots", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {

@@ -39,7 +39,7 @@ public class Rectangle {
 	}
 	
 	public void stroke(int color) {
-		GuiDropClient.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), width, height, color);
+		GuiDropClient.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), width - 1, height - 1, color);
 	}
 	
 	public void stroke(Color color) {

@@ -23,6 +23,8 @@ public class CoordinatesDisplay extends ModDraggable {
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", true, new GuiSettings(3, "Show Background")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(8, "Show Border")),
+				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(9, "Border Color", false, true)),
 				new BooleanOption(this, "showBiome", true, new GuiSettings(5, "Show Biome")),
 				new BooleanOption(this, "showFacing", true, new GuiSettings(6, "Show Facing")),
 				new BooleanOption(this, "showFacingTowards", false, new GuiSettings(7, "Show Facing Towards"))
@@ -90,6 +92,10 @@ public class CoordinatesDisplay extends ModDraggable {
 	public void render(ScreenPosition pos) {
 		if (options.getBooleanOption("showBackground").isToggled()) {
 			getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+			
+			if (options.getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	}
 		}
 		
 		int i = 11;

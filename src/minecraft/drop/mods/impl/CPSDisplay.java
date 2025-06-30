@@ -27,6 +27,8 @@ public class CPSDisplay extends ModDraggable {
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Show Background")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(7, "Show Border")),
+				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(8, "Border Color", false, true)),
 				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
 				new BooleanOption(this, "showRightCPS", false, new GuiSettings(6, "Show Right CPS"))
 				);
@@ -78,6 +80,10 @@ public class CPSDisplay extends ModDraggable {
         if (options.getBooleanOption("showBackground").isToggled()) {
 	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
 	    	
+	    	if (options.getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	}
+	    	
 			drawCenteredText(getCPS(leftClicks) + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
 		    drawAlignedText(options.getBracketsOption("brackets").wrap(getCPS(leftClicks) + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
@@ -88,6 +94,10 @@ public class CPSDisplay extends ModDraggable {
 	public void renderDummy(ScreenPosition pos) {
 		if (options.getBooleanOption("showBackground").isToggled()) {
 	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+	    	
+	    	if (options.getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	}
 	    	
 			drawCenteredText("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
