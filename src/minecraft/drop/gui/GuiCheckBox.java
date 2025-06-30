@@ -2,9 +2,7 @@ package drop.gui;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 
 public class GuiCheckBox extends GuiRect {
 	private boolean toggled;

@@ -2,7 +2,6 @@ package drop.gui.hud;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiDropClient;
 import drop.mods.ModDraggable;
 import net.minecraft.client.gui.Gui;

@@ -1,9 +1,7 @@
 package drop.mods.option.type;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.mods.Mod;
-import drop.mods.impl.togglesprintsneak.ToggleSprintSneak;
 import drop.mods.option.ModOption;
 import drop.mods.option.ParentOption;
 

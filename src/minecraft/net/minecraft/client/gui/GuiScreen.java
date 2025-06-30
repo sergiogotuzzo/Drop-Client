@@ -4,8 +4,6 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import drop.ColorManager;
-
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.ClipboardOwner;

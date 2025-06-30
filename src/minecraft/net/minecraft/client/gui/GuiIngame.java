@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import drop.ColorManager;
 import drop.event.impl.RenderEvent;
 
 import java.awt.Color;
