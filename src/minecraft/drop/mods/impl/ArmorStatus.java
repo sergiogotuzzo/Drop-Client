@@ -1,8 +1,6 @@
 package drop.mods.impl;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -41,8 +39,8 @@ public class ArmorStatus extends ModDraggable {
 				new BooleanOption(this, "showPercentage", false, new GuiSettings(14, "Show Percentage")),
 				new BooleanOption(this, "showDamage", true, new GuiSettings(15, "Show Damage")),
 				new BooleanOption(this, "showMaxDamage", false, new ParentOption("showDamage"), new GuiSettings(16, "Show Max Damage")),
-				new BooleanOption(this, "armor", true, new GuiSettings(19, "Show Armor")),
-				new BooleanOption(this, "equippedItem", false, new GuiSettings(17, "Show Equipped Item")),
+				new BooleanOption(this, "armor", true, new GuiSettings(19, "Armor")),
+				new BooleanOption(this, "equippedItem", false, new GuiSettings(17, "Equipped Item")),
 				new BooleanOption(this, "damageOverlays", true, new GuiSettings(18, "Damage Overlays")),
 				new BooleanOption(this, "reverse", false, new GuiSettings(false))
 				);
@@ -72,7 +70,7 @@ public class ArmorStatus extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return 16 * (4 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0));
+		return 16 * ((options.getBooleanOption("armor").isToggled() ? 4 : 0) + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0));
 	}
 
 	@Override
@@ -85,10 +83,20 @@ public class ArmorStatus extends ModDraggable {
 		
 		int i = 0;
 		
-		for (ItemStack itemStack : getPlayerInventory()) {
-			drawItemStack(pos, i, itemStack);
+		if (options.getBooleanOption("equippedItem").isToggled() && mc.thePlayer.inventory.getCurrentItem() != null) {
+			drawItemStack(pos, i, mc.thePlayer.inventory.getCurrentItem());
 			
 			i++;
+		}
+		
+		if (options.getBooleanOption("armor").isToggled()) {
+			for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
+				if (itemStack != null) {
+					drawItemStack(pos, i, itemStack);
+					
+					i++;
+				}
+			}
 		}
 	}
 	
@@ -99,26 +107,16 @@ public class ArmorStatus extends ModDraggable {
 		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
 			options.getBooleanOption("reverse").toggle(true);
 		}
-		
-		Collection<ItemStack> dummyPlayerInventory = new ArrayList<ItemStack>();
-		
+				
 		if (options.getBooleanOption("equippedItem").isToggled()) {
-			dummyPlayerInventory.add(new ItemStack(Items.diamond_sword));
+			drawItemStack(pos, 0, new ItemStack(Items.diamond_sword));
 		}
 		
 		if (options.getBooleanOption("armor").isToggled()) {
-			dummyPlayerInventory.add(new ItemStack(Items.diamond_boots));
-			dummyPlayerInventory.add(new ItemStack(Items.diamond_leggings));
-			dummyPlayerInventory.add(new ItemStack(Items.diamond_chestplate));
-			dummyPlayerInventory.add(new ItemStack(Items.diamond_helmet));
-		}
-		
-		int i = 0;
-		
-		for (ItemStack itemStack : dummyPlayerInventory) {
-			drawItemStack(pos, i, itemStack);
-			
-			i++;
+			drawItemStack(pos, 0 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_boots));
+			drawItemStack(pos, 1 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_leggings));
+			drawItemStack(pos, 2 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_chestplate));
+			drawItemStack(pos, 3 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_helmet));
 		}
 	}
 
@@ -182,25 +180,5 @@ public class ArmorStatus extends ModDraggable {
 			
 			GL11.glPopMatrix();
 		}
-	}
-	
-	private Collection<ItemStack> getPlayerInventory() {
-		Collection<ItemStack> playerInventory = new ArrayList<ItemStack>();
-		
-		if (options.getBooleanOption("equippedItem").isToggled()) {
-			if (mc.thePlayer.inventory.getCurrentItem() != null) {
-				playerInventory.add(mc.thePlayer.inventory.getCurrentItem());
-			}
-		}
-		
-		if (options.getBooleanOption("armor").isToggled()) {
-			for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
-				if (itemStack != null) {
-					playerInventory.add(itemStack);
-				}
-			}
-		}
-		
-		return playerInventory;
 	}
 }
