@@ -21,9 +21,9 @@ public class CoordinatesDisplay extends ModDraggable {
 		this.options = new ModOptions(
 				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
-				new BooleanOption(this, "showBackground", true, new GuiSettings(3, "Show Background")),
+				new BooleanOption(this, "showBackground", true, new GuiSettings(3, "Background")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
-				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(8, "Show Border")),
+				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(8, "Border")),
 				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(9, "Border Color", false, true)),
 				new BooleanOption(this, "showBiome", true, new GuiSettings(5, "Show Biome")),
 				new BooleanOption(this, "showFacing", true, new GuiSettings(6, "Show Facing")),

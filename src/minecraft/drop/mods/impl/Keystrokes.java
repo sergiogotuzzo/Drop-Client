@@ -27,7 +27,7 @@ public class Keystrokes extends ModDraggable {
 				new BooleanOption(this, "pressedTextShadow", true, new GuiSettings(4, "Text Shadow (Pressed)")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new GuiSettings(5, "Background Color", false, true)),
 				new ColorOption(this, "pressedBackgroundColor", ColorManager.fromRGB(255, 255, 255, 102, false), new GuiSettings(6, "Background Color (Pressed)", false, true)),
-				new BooleanOption(this, "showBorder", false, new GuiSettings(11, "Show Border")),
+				new BooleanOption(this, "showBorder", false, new GuiSettings(11, "Border")),
 				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(12, "Border Color", false, true)),
 				new ColorOption(this, "pressedBorderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(13, "Border Color (Pressed)", false, true)),
 				new BooleanOption(this, "showMovementKeys", true, new GuiSettings(7, "Show Movement Keys")),
