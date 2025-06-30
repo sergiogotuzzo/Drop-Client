@@ -42,11 +42,7 @@ public abstract class GuiDropClientScreen extends GuiScreen {
 	            long t = System.currentTimeMillis() - (textCharX * 10 - y * 10);
 	            int c = Color.HSBtoRGB(t % (int) 2000.0F / 2000.0F, 0.8F, 0.8F);
 	            
-	            if (text.startsWith("�m")) {
-	            	drawText(text, x, y, c, textShadow, false);
-	            } else {
-		            drawText(String.valueOf(textChar), textCharX, y, c, textShadow, false);
-	            }
+	            drawText(String.valueOf(textChar), textCharX, y, c, textShadow, false);
 	            
 	            textCharX += mc.fontRendererObj.getCharWidth(textChar);
 	        }
