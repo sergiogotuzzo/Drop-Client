@@ -27,6 +27,9 @@ public class Keystrokes extends ModDraggable {
 				new BooleanOption(this, "pressedTextShadow", true, new GuiSettings(4, "Text Shadow (Pressed)")),
 				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new GuiSettings(5, "Background Color", false, true)),
 				new ColorOption(this, "pressedBackgroundColor", ColorManager.fromRGB(255, 255, 255, 102, false), new GuiSettings(6, "Background Color (Pressed)", false, true)),
+				new BooleanOption(this, "showBorder", false, new GuiSettings(11, "Show Border")),
+				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(12, "Border Color", false, true)),
+				new ColorOption(this, "pressedBorderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(13, "Border Color (Pressed)", false, true)),
 				new BooleanOption(this, "showMovementKeys", true, new GuiSettings(7, "Show Movement Keys")),
 				new BooleanOption(this, "showMouse", true, new GuiSettings(8, "Show Mouse")),
 				new BooleanOption(this, "showSpacebar", true, new GuiSettings(9, "Show Spacebar")),
@@ -190,6 +193,16 @@ public class Keystrokes extends ModDraggable {
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
 	                key.isDown() ? options.getColorOption("pressedBackgroundColor").getColor().getRGB() : options.getColorOption("backgroundColor").getColor().getRGB()
 	                );
+	        
+	        if (options.getBooleanOption("showBorder").isToggled()) {
+	        	drawHollowRect(
+		                pos.getAbsoluteX() + key.getX(),
+		                pos.getAbsoluteY() + key.getY(),
+		                key.getWidth() - 1,
+		                key.getHeight() - 1,
+		                key.isDown() ? options.getColorOption("pressedBorderColor").getColor().getRGB() : options.getColorOption("borderColor").getColor().getRGB()
+		                );
+	        }
 	        
 	        drawText(
 	        		key.getName(),

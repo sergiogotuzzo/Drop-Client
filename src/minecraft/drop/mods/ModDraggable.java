@@ -51,6 +51,10 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawRect(left, top, right, bottom, color.getRGB());
 	}
 	
+	public void drawHollowRect(int x, int y, int width, int height, int color) {
+		GuiDropClient.drawHollowRect(x, y, width, height, color);
+	}
+	
 	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, int color) {
 		int rectLeft;
 		int rectRight;
