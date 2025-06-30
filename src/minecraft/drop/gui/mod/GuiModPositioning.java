@@ -73,7 +73,7 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	    		drawHorizontalLine(0, this.width - 1, this.height / 2, Color.WHITE.getRGB());
 	    	}
 	    	
-		    drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth(), selectedRenderer.get().getHeight(), Color.CYAN.getRGB());
+		    drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth() - 1, selectedRenderer.get().getHeight() - 1, Color.CYAN.getRGB());
 	    }
 
 	    this.zLevel = zBackup;
@@ -130,8 +130,8 @@ public class GuiModPositioning extends GuiDropClientScreen {
 		int screenWidth = res.getScaledWidth();
 		int screenHeight = res.getScaledHeight();
 		
-		int absoluteX = Math.max(marginX, Math.min(pos.getAbsoluteX(), Math.max(screenWidth - renderer.getWidth() - marginX - 1, 0)));
-		int absoluteY = Math.max(marginY, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight() - marginY - 1, 0)));
+		int absoluteX = Math.max(marginX, Math.min(pos.getAbsoluteX(), Math.max(screenWidth - renderer.getWidth() - marginX, 0)));
+		int absoluteY = Math.max(marginY, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight() - marginY, 0)));
 		
 		pos.setAbsolute(absoluteX, absoluteY);
 	}
