@@ -6,10 +6,7 @@ import drop.mods.ModColor;
 import drop.mods.option.ModOption;
 import drop.mods.option.ParentOption;
 
-public class ColorOption extends ModOption {	
-	private boolean alphaInGui;
-	private boolean chromaInGui;
-	
+public class ColorOption extends ModOption {
 	public ColorOption(Mod mod, String key, ModColor value, ParentOption parentOption, GuiSettings guiSettings) {
 		super(mod, key, value, parentOption, guiSettings);
 	}
@@ -23,7 +20,7 @@ public class ColorOption extends ModOption {
 		
 		mod.setToFile(getKeyRGB(), color.getRGB());
 
-		if (chromaInGui) {
+		if (getGuiSettings().shouldBeChromaCheckBoxShown()) {
 			mod.setToFile(getKeyChroma(), color.isChromaToggled());
 		}
 	}
@@ -33,15 +30,7 @@ public class ColorOption extends ModOption {
 	}
 	
 	public String getKeyChroma() {
-		return chromaInGui ? this.getKey() + "Chroma" : null;
-	}
-	
-	public boolean shouldBeShownAlphaInGui() {
-		return alphaInGui;
-	}
-	
-	public boolean shouldBeShownChromaInGui() {
-		return chromaInGui;
+		return this.getKey() + "Chroma";
 	}
 	
 	public ModColor getColor() {

@@ -61,7 +61,7 @@ public abstract class Mod {
 				ColorOption colorOption = (ColorOption) option;
 
 				int rgb = getIntFromFile(colorOption.getKeyRGB(), colorOption.getColor().getRGB());
-				boolean chroma = colorOption.shouldBeShownChromaInGui() ? getBooleanFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
+				boolean chroma = colorOption.getGuiSettings().shouldBeChromaCheckBoxShown() ? getBooleanFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
 				
 				colorOption.saveValue(ModColor.fromRGB(rgb, chroma));
 			} else if (option instanceof FloatOption) {
