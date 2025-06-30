@@ -35,9 +35,23 @@ public class BlockOverlay extends Mod {
 		saveOptions();
 	}
     
-    public static void drawSelectionOverlay(AxisAlignedBB axisAlignedBBIn, int red, int green, int blue, int alpha) {
+    public void drawSelectionOverlay(AxisAlignedBB axisAlignedBBIn) {
     	Tessellator tessellator = Tessellator.getInstance();
     	WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+    	
+    	ModColor overlayColor = options.getColorOption("overlayColor").getColor();
+    	int red = overlayColor.getRed();
+    	int green = overlayColor.getGreen();
+    	int blue = overlayColor.getBlue();
+    	int alpha = overlayColor.getAlpha();
+
+    	if (overlayColor.isChromaToggled()) {
+        	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
+        	
+        	red = chromaColor.getRed();
+        	green = chromaColor.getGreen();
+        	blue = chromaColor.getBlue();
+    	}
 
     	worldRenderer.begin(GL11.GL_TRIANGLE_STRIP, DefaultVertexFormats.POSITION_COLOR);
     	worldRenderer.pos(axisAlignedBBIn.minX, axisAlignedBBIn.minY, axisAlignedBBIn.minZ).color(red, green, blue, alpha).endVertex();
