@@ -85,7 +85,8 @@ public class PingDisplay extends ModDraggable {
 			String text = ping + " ms";
 			
 			if (options.getBooleanOption("showBackground").isToggled()) {
-		    	getBounds().fill();
+				getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+
 				drawCenteredText(text, pos.getAbsoluteX(), pos.getAbsoluteY(), color, dropShadow);
 	    	} else {
 			    drawAlignedText(options.getBracketsOption("brackets").wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color, dropShadow);
