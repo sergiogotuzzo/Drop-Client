@@ -1,8 +1,8 @@
 package drop.mods.option.type;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.option.ModOption;
 import drop.mods.option.ParentOption;
 
@@ -10,15 +10,15 @@ public class ColorOption extends ModOption {
 	private boolean alphaInGui;
 	private boolean chromaInGui;
 	
-	public ColorOption(Mod mod, String key, ColorManager value, ParentOption parentOption, GuiSettings guiSettings) {
+	public ColorOption(Mod mod, String key, ModColor value, ParentOption parentOption, GuiSettings guiSettings) {
 		super(mod, key, value, parentOption, guiSettings);
 	}
 	
-	public ColorOption(Mod mod, String key, ColorManager value, GuiSettings guiSettings) {
+	public ColorOption(Mod mod, String key, ModColor value, GuiSettings guiSettings) {
 		this(mod, key, value, null, guiSettings);
 	}
 	
-	public void saveValue(ColorManager color) {
+	public void saveValue(ModColor color) {
 		super.setValue(color);
 		
 		mod.setToFile(getKeyRGB(), color.getRGB());
@@ -44,7 +44,7 @@ public class ColorOption extends ModOption {
 		return chromaInGui;
 	}
 	
-	public ColorManager getColor() {
-		return (ColorManager) getValue();
+	public ModColor getColor() {
+		return (ModColor) getValue();
 	}
 }

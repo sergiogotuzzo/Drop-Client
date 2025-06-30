@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collection;
 
-import drop.ColorManager;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
@@ -16,6 +15,7 @@ import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
@@ -25,10 +25,10 @@ public class PotionEffects extends ModDraggable {
 		super(true, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "durationTextColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Duration Text Color", true, false)),
+				new ColorOption(this, "durationTextColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Duration Text Color", true, false)),
 				new BooleanOption(this, "durationTextShadow", true, new GuiSettings(2, "Duration Text Shadow")),
 				new BooleanOption(this, "showName", true, new GuiSettings(3, "Show Name")),
-				new ColorOption(this, "nameTextColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(4, "Name Text Color", true, false)),
+				new ColorOption(this, "nameTextColor", ModColor.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(4, "Name Text Color", true, false)),
 				new BooleanOption(this, "nameTextShadow", true, new ParentOption("showName"), new GuiSettings(5, "Name Text Shadow")),
 				new BooleanOption(this, "showIcon", true, new GuiSettings(6, "Show Icon")),
 				new BooleanOption(this, "blink", true, new GuiSettings(7, "Blink")),

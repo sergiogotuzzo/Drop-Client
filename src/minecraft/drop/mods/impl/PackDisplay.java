@@ -3,7 +3,6 @@ package drop.mods.impl;
 import java.awt.Color;
 import java.util.List;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
@@ -13,6 +12,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.util.ResourceLocation;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 
@@ -21,12 +21,12 @@ public class PackDisplay extends ModDraggable {
 		super(false, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "nameTextColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Name Text Color", true, false)),
+				new ColorOption(this, "nameTextColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Name Text Color", true, false)),
 				new BooleanOption(this, "nameTextShadow", true, new GuiSettings(2, "Name Text Shadow")),
 				new BooleanOption(this, "showDescription", false, new GuiSettings(3, "Show Description")),
-				new ColorOption(this, "descriptionTextColor", ColorManager.fromColor(Color.GRAY, false), new ParentOption("showDescription"), new GuiSettings(4, "Description Text Color", true, false)),
+				new ColorOption(this, "descriptionTextColor", ModColor.fromColor(Color.GRAY, false), new ParentOption("showDescription"), new GuiSettings(4, "Description Text Color", true, false)),
 				new BooleanOption(this, "descriptionTextShadow", true, new ParentOption("showDescription"), new GuiSettings(5, "Description Text Shadow")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new GuiSettings(6, "Background Color", false, true)),
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new GuiSettings(6, "Background Color", false, true)),
 				new BooleanOption(this, "showIcon", true, new GuiSettings(7, "Show Icon")),
 				new BooleanOption(this, "showAllSelectedPacks", true, new GuiSettings(8, "Show All Selected Packs"))
 				);

@@ -2,11 +2,11 @@ package drop.mods.impl;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSettings;
 import drop.gui.mod.taboverlay.GuiTabOverlay;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
 import drop.mods.option.ParentOption;
@@ -23,18 +23,18 @@ public class TabOverlay extends Mod {
 		this.options = new ModOptions(
 				new BooleanOption(this, "hidePing", false, new GuiSettings(1, "Hide Ping")),
 				new BooleanOption(this, "pingNumbers", false, new ParentOption("hidePing", true), new GuiSettings(15, "Ping Numbers")),
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("pingNumbers"), new GuiSettings(2, "Ping Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new ParentOption("pingNumbers"), new GuiSettings(2, "Ping Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new ParentOption("pingNumbers"), new GuiSettings(3, "Ping Text Shadow")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 4, "Dynamic Colors")),
-				new ColorOption(this, "excellentTextColor", ColorManager.fromRGB(85, 255, 85, false), new GuiSettings(false, 5, "Excellent Text Color", true, false)),
+				new ColorOption(this, "excellentTextColor", ModColor.fromRGB(85, 255, 85, false), new GuiSettings(false, 5, "Excellent Text Color", true, false)),
 				new BooleanOption(this, "excellentTextShadow", true, new GuiSettings(false, 6, "Excellent Text Shadow")),
-				new ColorOption(this, "goodTextColor", ColorManager.fromRGB(255, 255, 85, false), new GuiSettings(false, 7, "Good Text Color", true, false)),
+				new ColorOption(this, "goodTextColor", ModColor.fromRGB(255, 255, 85, false), new GuiSettings(false, 7, "Good Text Color", true, false)),
 				new BooleanOption(this, "goodTextShadow", true, new GuiSettings(false, 8, "Good Text Shadow")),
-				new ColorOption(this, "moderateTextColor", ColorManager.fromRGB(255, 170, 0, false), new GuiSettings(false, 9, "Moderate Text Color", true, false)),
+				new ColorOption(this, "moderateTextColor", ModColor.fromRGB(255, 170, 0, false), new GuiSettings(false, 9, "Moderate Text Color", true, false)),
 				new BooleanOption(this, "moderateTextShadow", true, new GuiSettings(false, 10, "Moderate Text Shadow")),
-				new ColorOption(this, "weakTextColor", ColorManager.fromRGB(255, 85, 85, false), new GuiSettings(false, 11, "Weak Text Color", true, false)),
+				new ColorOption(this, "weakTextColor", ModColor.fromRGB(255, 85, 85, false), new GuiSettings(false, 11, "Weak Text Color", true, false)),
 				new BooleanOption(this, "weakTextShadow", true, new GuiSettings(false, 12, "Weak Text Shadow")),
-				new ColorOption(this, "unstableTextColor", ColorManager.fromRGB(170, 0, 0, false), new GuiSettings(false, 13, "Unstable Text Color", true, false)),
+				new ColorOption(this, "unstableTextColor", ModColor.fromRGB(170, 0, 0, false), new GuiSettings(false, 13, "Unstable Text Color", true, false)),
 				new BooleanOption(this, "unstableTextShadow", true, new GuiSettings(false, 14, "Unstable Text Shadow")),
 				new BooleanOption(this, "showPlayerHeads", true, new GuiSettings(16, "Show Player Heads")),
 				new BooleanOption(this, "showHeader", true, new GuiSettings(17, "Show Header")),
@@ -51,7 +51,7 @@ public class TabOverlay extends Mod {
 
 	public void writePing(FontRenderer font, int p_175245_1_, int p_175245_2_, int p_175245_3_, NetworkPlayerInfo networkPlayerInfoIn) {
 		int ping = networkPlayerInfoIn.getResponseTime();
-		ColorManager color = options.getColorOption("textColor").getColor(); // Default
+		ModColor color = options.getColorOption("textColor").getColor(); // Default
 		boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
 		
 		if (options.getBooleanOption("dynamicColors").isToggled()) {

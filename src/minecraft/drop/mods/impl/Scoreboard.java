@@ -9,8 +9,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 import drop.gui.hud.ScreenPosition;
@@ -30,10 +30,10 @@ public class Scoreboard extends ModDraggable {
 		this.options = new ModOptions(
 				new BooleanOption(this, "hide", false, new GuiSettings(5, "Hide")),
 				new BooleanOption(this, "hideNumbers", true, new ParentOption("hide", true), new GuiSettings(1, "Hide Numbers")),
-				new ColorOption(this, "numbersColor", ColorManager.fromRGB(255, 85, 85, false), new ParentOption("hideNumbers", true), new GuiSettings(6, "Numbers Color", true, false)),
+				new ColorOption(this, "numbersColor", ModColor.fromRGB(255, 85, 85, false), new ParentOption("hideNumbers", true), new GuiSettings(6, "Numbers Color", true, false)),
 				new BooleanOption(this, "textShadow", false, new ParentOption("hide", true), new GuiSettings(2, "Text Shadow")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(3, "Background Color", false, true)),
-				new ColorOption(this, "topBackgroundColor", ColorManager.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(4, "Top Background Color", false, true))
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(3, "Background Color", false, true)),
+				new ColorOption(this, "topBackgroundColor", ModColor.fromRGB(0, 0, 0, 127, false), new ParentOption("hide", true), new GuiSettings(4, "Top Background Color", false, true))
 				);
 		
 		saveOptions();

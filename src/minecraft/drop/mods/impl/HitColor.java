@@ -4,9 +4,9 @@ import net.minecraft.entity.Entity;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.ModOptions;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
@@ -18,7 +18,7 @@ public class HitColor extends Mod {
 		super(true);
 
 		this.options = new ModOptions(
-				new ColorOption(this, "hitColor", ColorManager.fromColor(Color.RED, false).setAlpha(76), new GuiSettings(1, "Hit Color", true, true))
+				new ColorOption(this, "hitColor", ModColor.fromColor(Color.RED, false).setAlpha(76), new GuiSettings(1, "Hit Color", true, true))
 				);
 				
 		saveOptions();

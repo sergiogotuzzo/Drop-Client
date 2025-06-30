@@ -7,13 +7,13 @@ import java.util.List;
 import org.lwjgl.input.Mouse;
 
 import net.minecraft.util.EnumChatFormatting;
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
@@ -23,12 +23,12 @@ public class CPSDisplay extends ModDraggable {
 		super(true, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Background")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
 				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(7, "Border")),
-				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(8, "Border Color", false, true)),
+				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(8, "Border Color", false, true)),
 				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
 				new BooleanOption(this, "showRightCPS", false, new GuiSettings(6, "Show Right CPS"))
 				);

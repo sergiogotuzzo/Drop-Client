@@ -29,7 +29,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonSyntaxException;
 
-import drop.ColorManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockEnderChest;
@@ -120,6 +119,7 @@ import net.optifine.shaders.ShadowUtils;
 import net.optifine.shaders.gui.GuiShaderOptions;
 import net.optifine.util.ChunkUtils;
 import net.optifine.util.RenderChunkUtils;
+import drop.mods.ModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.BlockOverlay;
 
@@ -2627,7 +2627,7 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
             if (blockOverlayMod.isEnabled()) {
             	if (blockOverlayMod.getOptions().getBooleanOption("outline").isToggled()) {
             		if (blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().isChromaToggled()) {
-                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
+                    	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                         GlStateManager.color(chromaColor.getRed() / 255.0F, chromaColor.getGreen() / 255.0F, chromaColor.getBlue() / 255.0F, 0.4F);
             		} else {
@@ -2673,7 +2673,7 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
                 	int alpha = blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().getAlpha();
 
                 	if (blockOverlayMod.getOptions().getColorOption("overlayColor").getColor().isChromaToggled()) {
-                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
+                    	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
                     	red = chromaColor.getRed();
                     	green = chromaColor.getGreen();
                     	blue = chromaColor.getBlue();

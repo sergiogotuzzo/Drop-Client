@@ -3,8 +3,6 @@
 import com.google.common.collect.Lists;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-import drop.ColorManager;
-
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +13,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.Chat;
 
@@ -93,7 +92,7 @@ public class GuiNewChat extends Gui
                                 int j2 = -i1 * 9;
                                 int h = chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
                                                                 
-                                ColorManager backgroundColor = chatMod.getOptions().getColorOption("backgroundColor").getColor();
+                                ModColor backgroundColor = chatMod.getOptions().getColorOption("backgroundColor").getColor();
                                 int rgba = ((int) ((backgroundColor.getAlpha() / 255.0F) * l1) << 24) | (backgroundColor.getRed() << 16) | (backgroundColor.getGreen() << 8) | backgroundColor.getBlue();
 
                                 drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, chatMod.isEnabled() ? rgba : l1 / 2 << 24);

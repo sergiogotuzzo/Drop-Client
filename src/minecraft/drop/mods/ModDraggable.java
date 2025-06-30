@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import drop.ColorManager;
 import drop.gui.GuiDropClient;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.hud.IRenderer;
@@ -107,7 +106,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		}
 	}
 	
-	public void drawText(String text, int x, int y, ColorManager color, boolean dropShadow) {
+	public void drawText(String text, int x, int y, ModColor color, boolean dropShadow) {
 		drawText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
@@ -115,7 +114,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, color, dropShadow, chroma);
 	}
 	
-	public void drawCenteredText(String text, int x, int y, ColorManager color, boolean dropShadow) {
+	public void drawCenteredText(String text, int x, int y, ModColor color, boolean dropShadow) {
 		drawCenteredText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
@@ -133,7 +132,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, textX, y + getHeight() / 2 - 4, color, dropShadow, chroma);
 	}
 	
-	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, ColorManager color, boolean dropShadow) {
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, ModColor color, boolean dropShadow) {
 		drawCenteredAlignedText(pos, text, widthBackground, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
@@ -151,7 +150,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawText(text, alignedX, y, color, dropShadow, chroma);
 	}
 	
-	public void drawAlignedText(String text, int x, int y, ColorManager color, boolean dropShadow) {
+	public void drawAlignedText(String text, int x, int y, ModColor color, boolean dropShadow) {
 		drawAlignedText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
@@ -166,7 +165,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		GlStateManager.popMatrix();
 	}
 	
-	public void drawScaledText(String text, int x, int y, double scale, ColorManager color, boolean dropShadow) {
+	public void drawScaledText(String text, int x, int y, double scale, ModColor color, boolean dropShadow) {
 		drawScaledText(text, x, y, scale, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	

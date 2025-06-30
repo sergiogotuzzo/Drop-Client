@@ -2,7 +2,7 @@ package net.minecraft.client.renderer.entity;
 
 import com.google.common.collect.Lists;
 
-import drop.ColorManager;
+import drop.mods.ModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.HitColor;
 
@@ -431,7 +431,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             	
             	if (hitColorMod.isEnabled()) {
             		if (hitColorMod.getOptions().getColorOption("hitColor").getColor().isChromaToggled()) {
-                    	ColorManager chromaColor = ColorManager.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
+                    	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                     	red = chromaColor.getRed();
                     	green = chromaColor.getGreen();

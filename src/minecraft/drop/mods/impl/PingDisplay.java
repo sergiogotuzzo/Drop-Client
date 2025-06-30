@@ -2,7 +2,6 @@ package drop.mods.impl;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSettings;
 import drop.gui.mod.pingdisplay.GuiPingDisplay;
@@ -11,6 +10,7 @@ import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
@@ -20,23 +20,23 @@ public class PingDisplay extends ModDraggable {
 		super(false, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Background")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
 				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(17, "Border")),
-				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(18, "Border Color", false, true)),
+				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(18, "Border Color", false, true)),
 				new BracketsOption(this, "brackets", Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 6, "Dynamic Colors")),
-				new ColorOption(this, "excellentTextColor", ColorManager.fromRGB(85, 255, 85, false), new GuiSettings(false, 7, "Excellent Text Color", true, false)),
+				new ColorOption(this, "excellentTextColor", ModColor.fromRGB(85, 255, 85, false), new GuiSettings(false, 7, "Excellent Text Color", true, false)),
 				new BooleanOption(this, "excellentTextShadow", true, new GuiSettings(false, 8, "Excellent Text Shadow")),
-				new ColorOption(this, "goodTextColor", ColorManager.fromRGB(255, 255, 85, false), new GuiSettings(false, 9, "Good Text Color", true, false)),
+				new ColorOption(this, "goodTextColor", ModColor.fromRGB(255, 255, 85, false), new GuiSettings(false, 9, "Good Text Color", true, false)),
 				new BooleanOption(this, "goodTextShadow", true, new GuiSettings(false, 10, "Good Text Shadow")),
-				new ColorOption(this, "moderateTextColor", ColorManager.fromRGB(255, 170, 0, false), new GuiSettings(false, 11, "Moderate Text Color", true, false)),
+				new ColorOption(this, "moderateTextColor", ModColor.fromRGB(255, 170, 0, false), new GuiSettings(false, 11, "Moderate Text Color", true, false)),
 				new BooleanOption(this, "moderateTextShadow", true, new GuiSettings(false, 12, "Moderate Text Shadow")),
-				new ColorOption(this, "weakTextColor", ColorManager.fromRGB(255, 85, 85, false), new GuiSettings(false, 13, "Weak Text Color", true, false)),
+				new ColorOption(this, "weakTextColor", ModColor.fromRGB(255, 85, 85, false), new GuiSettings(false, 13, "Weak Text Color", true, false)),
 				new BooleanOption(this, "weakTextShadow", true, new GuiSettings(false, 14, "Weak Text Shadow")),
-				new ColorOption(this, "unstableTextColor", ColorManager.fromRGB(170, 0, 0, false), new GuiSettings(false, 15, "Unstable Text Color", true, false)),
+				new ColorOption(this, "unstableTextColor", ModColor.fromRGB(170, 0, 0, false), new GuiSettings(false, 15, "Unstable Text Color", true, false)),
 				new BooleanOption(this, "unstableTextShadow", true, new GuiSettings(false, 16, "Unstable Text Shadow"))
 				);
 				
@@ -62,7 +62,7 @@ public class PingDisplay extends ModDraggable {
 	public void render(ScreenPosition pos) {
 		if (!mc.isSingleplayer()) {
 			int ping = mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
-			ColorManager color = options.getColorOption("textColor").getColor(); // Default
+			ModColor color = options.getColorOption("textColor").getColor(); // Default
 			boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
 			
 			if (options.getBooleanOption("dynamicColors").isToggled()) {

@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
-import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSettings;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,6 +11,7 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.AxisAlignedBB;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
 import drop.mods.option.ParentOption;
@@ -27,9 +27,9 @@ public class BlockOverlay extends Mod {
 		this.options = new ModOptions(
 				new BooleanOption(this, "outline", true, new GuiSettings(1, "Outline")),
 				new FloatOption(this, "outlineWidth", 0.4F, 5.0F, 2.0F, new ParentOption("outline"), new GuiSettings(2, "Outline Width")),
-				new ColorOption(this, "outlineColor", ColorManager.fromColor(Color.BLACK, false), new ParentOption("outline"), new GuiSettings(3, "Outline Color", true, false)),
+				new ColorOption(this, "outlineColor", ModColor.fromColor(Color.BLACK, false), new ParentOption("outline"), new GuiSettings(3, "Outline Color", true, false)),
 				new BooleanOption(this, "overlay", false, new GuiSettings(4, "Overlay")),
-				new ColorOption(this, "overlayColor", ColorManager.fromColor(Color.WHITE, false).setAlpha(80), new ParentOption("overlay"), new GuiSettings(5, "Overlay Color", true, true))
+				new ColorOption(this, "overlayColor", ModColor.fromColor(Color.WHITE, false).setAlpha(80), new ParentOption("overlay"), new GuiSettings(5, "Overlay Color", true, true))
 				);
 				
 		saveOptions();

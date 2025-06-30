@@ -6,13 +6,13 @@ import java.util.Collection;
 
 import org.lwjgl.opengl.GL11;
 
-import drop.ColorManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSettings;
 import drop.gui.mod.armorstatus.GuiArmorStatus;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 import drop.gui.hud.ScreenPosition;
@@ -25,18 +25,18 @@ public class ArmorStatus extends ModDraggable {
 		super(true, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 3, "Dynamic Colors")),
-				new ColorOption(this, "veryHighTextColor", ColorManager.fromRGB(85, 255, 85, false), new GuiSettings(false, 4, "Very High Text Color", true, false)),
+				new ColorOption(this, "veryHighTextColor", ModColor.fromRGB(85, 255, 85, false), new GuiSettings(false, 4, "Very High Text Color", true, false)),
 				new BooleanOption(this, "veryHighTextShadow", true, new GuiSettings(false, 5, "Very High Text Shadow")),
-				new ColorOption(this, "highTextColor", ColorManager.fromRGB(255, 255, 85, false), new GuiSettings(false, 6, "High Text Color", true, false)),
+				new ColorOption(this, "highTextColor", ModColor.fromRGB(255, 255, 85, false), new GuiSettings(false, 6, "High Text Color", true, false)),
 				new BooleanOption(this, "highTextShadow", true, new GuiSettings(false, 7, "High Text Shadow")),
-				new ColorOption(this, "mediumTextColor", ColorManager.fromRGB(255, 170, 0, false), new GuiSettings(false, 8, "Medium Text Color", true, false)),
+				new ColorOption(this, "mediumTextColor", ModColor.fromRGB(255, 170, 0, false), new GuiSettings(false, 8, "Medium Text Color", true, false)),
 				new BooleanOption(this, "mediumTextShadow", true, new GuiSettings(false, 9, "Medium Text Shadow")),
-				new ColorOption(this, "lowTextColor", ColorManager.fromRGB(255, 85, 85, false), new GuiSettings(false, 10, "Low Text Color", true, false)),
+				new ColorOption(this, "lowTextColor", ModColor.fromRGB(255, 85, 85, false), new GuiSettings(false, 10, "Low Text Color", true, false)),
 				new BooleanOption(this, "lowTextShadow", true, new GuiSettings(false, 11, "Low Text Shadow")),
-				new ColorOption(this, "veryLowTextColor", ColorManager.fromRGB(170, 0, 0, false), new GuiSettings(false, 12, "Very Low Text Color", true, false)),
+				new ColorOption(this, "veryLowTextColor", ModColor.fromRGB(170, 0, 0, false), new GuiSettings(false, 12, "Very Low Text Color", true, false)),
 				new BooleanOption(this, "veryLowTextShadow", true, new GuiSettings(false, 13, "Very Low Text Shadow")),
 				new BooleanOption(this, "showPercentage", false, new GuiSettings(14, "Show Percentage")),
 				new BooleanOption(this, "showDamage", true, new GuiSettings(15, "Show Damage")),
@@ -138,7 +138,7 @@ public class ArmorStatus extends ModDraggable {
 				text = (itemStack.getMaxDamage() - itemStack.getItemDamage()) + "/" + itemStack.getMaxDamage();
 			}
 			
-			ColorManager color = options.getColorOption("textColor").getColor(); // Default
+			ModColor color = options.getColorOption("textColor").getColor(); // Default
 			boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
 			
 			if (options.getBooleanOption("dynamicColors").isToggled()) {				

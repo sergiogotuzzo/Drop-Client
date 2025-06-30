@@ -2,8 +2,8 @@ package drop.mods.impl;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModInstances;
 import drop.mods.ModOptions;
@@ -24,7 +24,7 @@ public class Bossbar extends ModDraggable {
 		this.options = new ModOptions(
 				new BooleanOption(this, "hide", false, new GuiSettings(5, "Hide")),
 				new BooleanOption(this, "showName", true, new ParentOption("hide", true), new GuiSettings(1, "Show Name")),
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(2, "Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new ParentOption("showName"), new GuiSettings(2, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new ParentOption("showName"), new GuiSettings(3, "Text Shadow")),
 				new BooleanOption(this, "showHealth", true, new ParentOption("hide", true), new GuiSettings(4, "Show Health"))
 				);

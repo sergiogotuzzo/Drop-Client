@@ -4,9 +4,9 @@ import net.minecraft.entity.Entity;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.mods.Mod;
+import drop.mods.ModColor;
 import drop.mods.ModOptions;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;

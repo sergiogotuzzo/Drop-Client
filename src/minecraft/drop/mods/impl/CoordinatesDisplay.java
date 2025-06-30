@@ -5,12 +5,12 @@ import net.minecraft.world.chunk.Chunk;
 
 import java.awt.Color;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 
@@ -19,12 +19,12 @@ public class CoordinatesDisplay extends ModDraggable {
 		super(false, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", true, new GuiSettings(3, "Background")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
 				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(8, "Border")),
-				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(9, "Border Color", false, true)),
+				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(9, "Border Color", false, true)),
 				new BooleanOption(this, "showBiome", true, new GuiSettings(5, "Show Biome")),
 				new BooleanOption(this, "showFacing", true, new GuiSettings(6, "Show Facing")),
 				new BooleanOption(this, "showFacingTowards", false, new GuiSettings(7, "Show Facing Towards"))

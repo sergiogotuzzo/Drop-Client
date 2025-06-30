@@ -2,7 +2,6 @@ package drop.mods;
 
 import org.apache.commons.lang3.StringUtils;
 
-import drop.ColorManager;
 import drop.Drop;
 import drop.event.EventManager;
 import net.minecraft.client.Minecraft;
@@ -64,7 +63,7 @@ public abstract class Mod {
 				int rgb = getIntFromFile(colorOption.getKeyRGB(), colorOption.getColor().getRGB());
 				boolean chroma = colorOption.shouldBeShownChromaInGui() ? getBooleanFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
 				
-				colorOption.saveValue(ColorManager.fromRGB(rgb, chroma));
+				colorOption.saveValue(ModColor.fromRGB(rgb, chroma));
 			} else if (option instanceof FloatOption) {
 				option.saveValue(getFloatFromFile(option.getKey(), (float) option.getValue()));
 			} else if (option instanceof IntOption) {

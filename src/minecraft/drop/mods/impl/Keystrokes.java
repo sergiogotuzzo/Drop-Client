@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import drop.ColorManager;
 import drop.gui.GuiSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -13,6 +12,7 @@ import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
+import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
 
@@ -21,15 +21,15 @@ public class Keystrokes extends ModDraggable {
 		super(true, 0.5, 0.5);
 		
 		this.options = new ModOptions(
-				new ColorOption(this, "textColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
+				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
-				new ColorOption(this, "pressedTextColor", ColorManager.fromColor(Color.WHITE, false), new GuiSettings(3, "Text Color (Pressed)", true, false)),
+				new ColorOption(this, "pressedTextColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(3, "Text Color (Pressed)", true, false)),
 				new BooleanOption(this, "pressedTextShadow", true, new GuiSettings(4, "Text Shadow (Pressed)")),
-				new ColorOption(this, "backgroundColor", ColorManager.fromRGB(0, 0, 0, 102, false), new GuiSettings(5, "Background Color", false, true)),
-				new ColorOption(this, "pressedBackgroundColor", ColorManager.fromRGB(255, 255, 255, 102, false), new GuiSettings(6, "Background Color (Pressed)", false, true)),
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new GuiSettings(5, "Background Color", false, true)),
+				new ColorOption(this, "pressedBackgroundColor", ModColor.fromRGB(255, 255, 255, 102, false), new GuiSettings(6, "Background Color (Pressed)", false, true)),
 				new BooleanOption(this, "showBorder", false, new GuiSettings(11, "Border")),
-				new ColorOption(this, "borderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(12, "Border Color", false, true)),
-				new ColorOption(this, "pressedBorderColor", ColorManager.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(13, "Border Color (Pressed)", false, true)),
+				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(12, "Border Color", false, true)),
+				new ColorOption(this, "pressedBorderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(13, "Border Color (Pressed)", false, true)),
 				new BooleanOption(this, "showMovementKeys", true, new GuiSettings(7, "Show Movement Keys")),
 				new BooleanOption(this, "showMouse", true, new GuiSettings(8, "Show Mouse")),
 				new BooleanOption(this, "showSpacebar", true, new GuiSettings(9, "Show Spacebar")),
