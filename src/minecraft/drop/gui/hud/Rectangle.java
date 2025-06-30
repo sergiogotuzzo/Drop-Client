@@ -26,31 +26,7 @@ public class Rectangle {
 		GuiDropClient.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + width, pos.getAbsoluteY() + height, color);
 	}
 	
-	public void fill(Color color) {
-		fill(color.getRGB());
-	}
-	
-	public void fill(ColorManager color) {
-		fill(color.getRGB());
-	}
-	
-	public void fill() {
-		fill(new Color(0, 0, 0, 102));
-	}
-	
 	public void stroke(int color) {
 		GuiDropClient.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), width - 1, height - 1, color);
-	}
-	
-	public void stroke(Color color) {
-		stroke(color.getRGB());
-	}
-	
-	public void stroke(ColorManager color) {
-		stroke(color.getRGB());
-	}
-	
-	public void stroke() {
-		stroke(new Color(0, 0, 0));
 	}
 }

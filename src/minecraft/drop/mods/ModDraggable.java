@@ -43,14 +43,6 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		GuiDropClient.drawRect(left, top, right, bottom, color);
 	}
 	
-	public void drawRect(int left, int top, int right, int bottom, Color color) {
-		drawRect(left, top, right, bottom, color.getRGB());
-	}
-	
-	public void drawRect(int left, int top, int right, int bottom, ColorManager color) {
-		drawRect(left, top, right, bottom, color.getRGB());
-	}
-	
 	public void drawHollowRect(int x, int y, int width, int height, int color) {
 		GuiDropClient.drawHollowRect(x, y, width, height, color);
 	}
@@ -73,39 +65,26 @@ public abstract class ModDraggable extends Mod implements IRenderer {
     	drawRect(rectLeft, pos.getAbsoluteY(), rectRight, pos.getAbsoluteY() + getHeight(), color);
 	}
 	
-	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground, Color color) {
-		drawAlignedRect(pos, text, widthBackground, color.getRGB());
-	}
-	
-	public void drawAlignedRect(ScreenPosition pos, String text, int widthBackground) {
-		drawAlignedRect(pos, text, widthBackground, new Color(0, 0, 0, 102));
-	}
-	
 	public void drawAlignedHollowRect(ScreenPosition pos, String text, int widthBackground, int color) {
 	    int rectLeft;
 	    int rectRight;
-	    
-	    int textWidth = font.getStringWidth(text);
-	    int rectTop = pos.getAbsoluteY();
-	    int rectBottom = rectTop + getHeight();
 
 	    if (pos.getRelativeX() < 1.0 / 3.0) {
 	        rectLeft = pos.getAbsoluteX();
-	        rectRight = rectLeft + textWidth + widthBackground;
+	        rectRight = rectLeft + font.getStringWidth(text) + widthBackground;
 	    } else if (pos.getRelativeX() > 2.0 / 3.0) {
 	        rectRight = pos.getAbsoluteX() + getWidth();
-	        rectLeft = rectRight - textWidth - widthBackground;
+	        rectLeft = rectRight - font.getStringWidth(text) - widthBackground;
 	    } else {
-	        rectLeft = pos.getAbsoluteX() - (textWidth + widthBackground) / 2 + getWidth() / 2;
-	        rectRight = pos.getAbsoluteX() + (textWidth + widthBackground) / 2 + getWidth() / 2;
+	        rectLeft = pos.getAbsoluteX() - (font.getStringWidth(text) + widthBackground) / 2 + getWidth() / 2;
+	        rectRight = pos.getAbsoluteX() + (font.getStringWidth(text) + widthBackground) / 2 + getWidth() / 2;
 	    }
 
-	    drawRect(rectLeft + 1, rectTop + 1, rectRight - 1, rectTop, color);
-	    drawRect(rectLeft + 1, rectBottom, rectRight - 1, rectBottom - 1, color);
-	    drawRect(rectLeft + 1, rectTop, rectLeft, rectBottom, color);
-	    drawRect(rectRight, rectTop, rectRight - 1, rectBottom, color);
+	    drawRect(rectLeft + 1, pos.getAbsoluteY() + 1, rectRight - 1, pos.getAbsoluteY(), color);
+	    drawRect(rectLeft + 1, pos.getAbsoluteY() + getHeight(), rectRight - 1, pos.getAbsoluteY() + getHeight() - 1, color);
+	    drawRect(rectLeft + 1, pos.getAbsoluteY(), rectLeft, pos.getAbsoluteY() + getHeight(), color);
+	    drawRect(rectRight, pos.getAbsoluteY(), rectRight - 1, pos.getAbsoluteY() + getHeight(), color);
 	}
-
 	
 	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
 		if (chroma) {

@@ -92,7 +92,7 @@ public class Scoreboard extends ModDraggable {
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (!options.getBooleanOption("hide").isToggled()) {
-			getBounds().fill(options.getColorOption("backgroundColor").getColor());
+			getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
 			
 			drawText(dummyTitle, pos.getAbsoluteX() + getWidth() / 2 - font.getStringWidth(dummyTitle) / 2, pos.getAbsoluteY() + 1, Color.WHITE.getRGB(), options.getBooleanOption("textShadow").isToggled(), false);
 			
