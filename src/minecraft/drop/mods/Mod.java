@@ -69,7 +69,7 @@ public abstract class Mod {
 			} else if (option instanceof IntOption) {
 				option.saveValue(getIntFromFile(option.getKey(), (int) option.getValue()));
 			} else if (option instanceof BracketsOption) {
-				((BracketsOption) option).saveValue(Brackets.fromId(getIntFromFile(option.getKey(), ((BracketsOption) option).getId())));
+				((BracketsOption) option).saveValue(Brackets.fromId(getIntFromFile(option.getKey(), ((BracketsOption) option).getBrackets().getId())));
 			}
 		}
 	}

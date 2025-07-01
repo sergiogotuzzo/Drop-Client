@@ -24,20 +24,8 @@ public class BracketsOption extends ModOption {
 	public Brackets getBrackets() {
 		return (Brackets) getValue();
 	}
-	
-	public int getId() {
-        return getBrackets().getId();
-    }
-
-    public String getOpen() {
-        return getBrackets().getOpen();
-    }
-
-    public String getClose() {
-        return getBrackets().getClose();
-    }
 
     public String wrap(String text) {
-        return getOpen() + text + getClose();
+        return getBrackets().getOpen() + text + getBrackets().getClose();
     }
 }
