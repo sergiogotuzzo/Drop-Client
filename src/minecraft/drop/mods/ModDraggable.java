@@ -20,7 +20,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	public ModDraggable(boolean enabled, double relativeX, double relativeY) {
 		super(enabled);
 		
-		setPosition(ScreenPosition.fromRelativePosition(getDoubleFromFile("x", relativeX), getDoubleFromFile("y", relativeY)));
+		setPosition(ScreenPosition.fromRelativePosition((double) getFromFile("x", relativeX), (double) getFromFile("y", relativeY)));
 	}
 	
 	public void setPosition(ScreenPosition pos) {

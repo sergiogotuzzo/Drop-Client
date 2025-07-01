@@ -75,16 +75,13 @@ public class GuiModList extends GuiMenu {
         List<Mod> mods = new ArrayList<>(ModInstances.getAllMods());
         
         if (id >= 1 && id <= 100) {
-            Mod mod = mods.get(id - 1);
-            
-            mod.setEnabled(!mod.isEnabled());
+        	mods.get(id - 1).toggle();
             
             this.initGui();
         }
         
         if (id >= 101) {
-            Mod mod = mods.get(id - 101);
-            GuiDropClientScreen modGui = mod.getGui(this);
+            GuiDropClientScreen modGui = mods.get(id - 101).getGui(this);
             
             if (modGui == null) {
             	return;

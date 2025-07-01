@@ -30,14 +30,14 @@ public abstract class Mod {
 		font = mc.fontRendererObj;
 		client = Drop.getInstance();
 		
-		setEnabled(getBooleanFromFile("enabled", enabled));				
+		toggle((boolean) getFromFile("enabled", enabled));				
 	}
 	
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return new GuiModSettings(previousGuiScreen, this);
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void toggle(boolean enabled) {
 		this.enabled = enabled;
 		
 		if (enabled) {
@@ -49,6 +49,10 @@ public abstract class Mod {
 		setToFile("enabled", enabled);
 	}
 	
+	public void toggle() {
+		toggle(!enabled);
+	}
+	
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -56,20 +60,20 @@ public abstract class Mod {
 	public void saveOptions() {
 		for (ModOption option : this.options.getOptions()) {
 			if (option instanceof BooleanOption) {
-				option.saveValue(getBooleanFromFile(option.getKey(), (boolean) option.getValue()));
+				option.saveValue((boolean) getFromFile(option.getKey(), ((BooleanOption) option).isToggled()));
 			} else if (option instanceof ColorOption) {
 				ColorOption colorOption = (ColorOption) option;
 
-				int rgb = getIntFromFile(colorOption.getKeyRGB(), colorOption.getColor().getRGB());
-				boolean chroma = colorOption.getGuiSettings().shouldBeChromaCheckBoxShown() ? getBooleanFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
+				int rgb = (int) ((long) getFromFile(colorOption.getKeyRGB(), colorOption.getColor().getRGB()));
+				boolean chroma = colorOption.getGuiSettings().shouldBeChromaCheckBoxShown() ? (boolean) getFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
 				
 				colorOption.saveValue(ModColor.fromRGB(rgb, chroma));
 			} else if (option instanceof FloatOption) {
-				option.saveValue(getFloatFromFile(option.getKey(), (float) option.getValue()));
+				option.saveValue((float) ((double) getFromFile(option.getKey(), (float) option.getValue())));
 			} else if (option instanceof IntOption) {
-				option.saveValue(getIntFromFile(option.getKey(), (int) option.getValue()));
+				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));
 			} else if (option instanceof BracketsOption) {
-				((BracketsOption) option).saveValue(Brackets.fromId(getIntFromFile(option.getKey(), ((BracketsOption) option).getBrackets().getId())));
+				((BracketsOption) option).saveValue(Brackets.fromId((int) ((long) getFromFile(option.getKey(), ((BracketsOption) option).getBrackets().getId()))));
 			}
 		}
 	}
@@ -78,32 +82,12 @@ public abstract class Mod {
 		Drop.getInstance().getModsFile().set(this.getClass().getSimpleName() + "." + key, value);
 	}
 	
-	private Object getFromFile(String key, Object defaultValue) {
+	public Object getFromFile(String key, Object defaultValue) {
 		if (!hasInFile(key)) {
 			setToFile(key, defaultValue);
 		}
 		
 		return Drop.getInstance().getModsFile().get(this.getClass().getSimpleName() + "." + key);
-	}
-	
-	public boolean getBooleanFromFile(String key, boolean defaultValue) {
-		return (boolean) getFromFile(key, defaultValue);
-	}
-	
-	public double getDoubleFromFile(String key, double defaultValue) {
-		return (double) getFromFile(key, defaultValue);
-	}
-	
-	public float getFloatFromFile(String key, float defaultValue) {
-		return (float) getDoubleFromFile(key, defaultValue);
-	}
-	
-	public long getLongFromFile(String key, long defaultValue) {
-		return (long) getFromFile(key, defaultValue);
-	}
-	
-	public int getIntFromFile(String key, int defaultValue) {
-		return (int) getLongFromFile(key, defaultValue);
 	}
 	
 	public boolean hasInFile(String key) {
