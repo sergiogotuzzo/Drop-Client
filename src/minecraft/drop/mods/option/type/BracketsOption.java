@@ -12,7 +12,7 @@ public class BracketsOption extends ModOption {
 	}
 	
 	public BracketsOption(Mod mod, String key, Brackets value, GuiSettings guiSettings) {
-		this(mod, key, value, null, guiSettings);
+		super(mod, key, value, guiSettings);
 	}
 	
 	public void saveValue(Brackets brackets) {

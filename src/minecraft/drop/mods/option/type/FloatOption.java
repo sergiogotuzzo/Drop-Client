@@ -17,7 +17,10 @@ public class FloatOption extends ModOption {
 	}
 	
 	public FloatOption(Mod mod, String key, float min, float max, float value, GuiSettings guiSettings) {
-		this(mod, key, min, max, value, null, guiSettings);
+		super(mod, key, value, guiSettings);
+		
+		this.min = min;
+		this.max = max;
 	}
 
 	public float getMin() {

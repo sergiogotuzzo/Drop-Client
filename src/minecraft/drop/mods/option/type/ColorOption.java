@@ -12,7 +12,7 @@ public class ColorOption extends ModOption {
 	}
 	
 	public ColorOption(Mod mod, String key, ModColor value, GuiSettings guiSettings) {
-		this(mod, key, value, null, guiSettings);
+		super(mod, key, value, guiSettings);
 	}
 	
 	public void saveValue(ModColor color) {

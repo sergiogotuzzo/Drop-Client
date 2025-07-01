@@ -17,7 +17,10 @@ public class IntOption extends ModOption {
 	}
 	
 	public IntOption(Mod mod, String key, int min, int max, int value, GuiSettings guiSettings) {
-		this(mod, key, min, max, value, null, guiSettings);
+		super(mod, key, value, guiSettings);
+		
+		this.min = min;
+		this.max = max;
 	}
 	
 	public int getMin() {

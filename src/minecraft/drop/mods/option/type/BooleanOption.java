@@ -11,7 +11,7 @@ public class BooleanOption extends ModOption {
 	}
 	
 	public BooleanOption(Mod mod, String key, boolean value, GuiSettings guiSettings) {
-		this(mod, key, value, null, guiSettings);
+		super(mod, key, value, guiSettings);
 	}
 	
 	public void toggle(boolean toggled) {
