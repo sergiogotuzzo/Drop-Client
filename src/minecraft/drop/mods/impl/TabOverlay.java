@@ -18,7 +18,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 
 public class TabOverlay extends Mod {
 	public TabOverlay() {
-		super(true);
+		super(false);
 		
 		this.options = new ModOptions(
 				new BooleanOption(this, "hidePing", false, new GuiSettings(1, "Hide Ping")),

@@ -15,7 +15,7 @@ import drop.mods.option.type.FloatOption;
 
 public class HitColor extends Mod {
 	public HitColor() {
-		super(true);
+		super(false);
 
 		this.options = new ModOptions(
 				new ColorOption(this, "hitColor", ModColor.fromColor(Color.RED, false).setAlpha(76), new GuiSettings(1, "Hit Color", true, true))

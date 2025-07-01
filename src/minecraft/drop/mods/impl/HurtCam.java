@@ -9,7 +9,7 @@ import drop.mods.option.type.FloatOption;
 
 public class HurtCam extends Mod {
 	public HurtCam() {
-		super(true);
+		super(false);
 		
 		this.options = new ModOptions(
 				new BooleanOption(this, "hurtShake", true, new GuiSettings(1, "Hurt Shake")),
