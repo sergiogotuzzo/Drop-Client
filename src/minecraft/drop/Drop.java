@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import java.io.IOException;
 
 import drop.gui.mod.GuiModPositioning;
-import drop.gui.mod.GuiMods;
+import drop.gui.mod.GuiModList;
 import drop.event.EventManager;
 import drop.event.EventTarget;
 import drop.event.impl.TickEvent;
@@ -51,8 +51,8 @@ public class Drop {
 			mc.displayGuiScreen(new GuiModPositioning(hudManager));
 		}
 		
-		if (mc.gameSettings.keyBindModsMenu.isPressed()) {
-			mc.displayGuiScreen(new GuiMods(null));
+		if (mc.gameSettings.keyBindModList.isPressed()) {
+			mc.displayGuiScreen(new GuiModList(null));
 		}
 		
 		if (mc.gameSettings.keyBindFullbright.isPressed()) {

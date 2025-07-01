@@ -17,14 +17,14 @@ import drop.gui.GuiText;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
 
-public class GuiMods extends GuiMenu {    
+public class GuiModList extends GuiMenu {    
     private GuiTextField textFieldSearchMod;
     private String textFieldText = "";
     
     private int scrollOffset = 0;
     private int maxScroll = 0;
 
-    public GuiMods(GuiScreen previousGuiScreen) {
+    public GuiModList(GuiScreen previousGuiScreen) {
         super(previousGuiScreen, "Mods");
     }
 
@@ -84,12 +84,13 @@ public class GuiMods extends GuiMenu {
         
         if (id >= 101) {
             Mod mod = mods.get(id - 101);
+            GuiDropClientScreen modGui = mod.getGui(this);
             
-            if (mod.getGui(this) == null) {
+            if (modGui == null) {
             	return;
             }
             
-            this.mc.displayGuiScreen(mod.getGui(this));
+            this.mc.displayGuiScreen(modGui);
         }
     }
 
@@ -105,12 +106,12 @@ public class GuiMods extends GuiMenu {
 
         List<Mod> mods = ModInstances.getAllMods();
         
-        for (int i = 0; i < mods.size(); i++) {
-            Mod mod = mods.get(i);
+        for (int i = 1; i < mods.size(); i++) {
+            Mod mod = mods.get(i - 1);
             
             if (!textFieldSearchMod.getText().isEmpty() && !mod.getName().toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
             	if (scrollOffset > 0) {
-                	scrollOffset = 0;
+                	scrollOffset = 0 ;
             	}
             	
             	continue;
@@ -119,8 +120,8 @@ public class GuiMods extends GuiMenu {
             int buttonY = (this.height - rectHeight) / 2 + 30 + totalHeight - scrollOffset;
 
             if (buttonY >= (this.height - rectHeight) / 2 + 30 && buttonY + 15 <= (this.height - rectHeight) / 2 + rectHeight - 20) {
-                this.buttonList.add(new GuiText(i + 101, (this.width - rectWidth) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
-                this.buttonList.add(new GuiButtonToggled(i + 1, mod.isEnabled(), (this.width - rectWidth) / 2 + rectWidth - 18 - 15, buttonY - 2 + 15));
+                this.buttonList.add(new GuiText(i + 100, (this.width - rectWidth) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
+                this.buttonList.add(new GuiButtonToggled(i, mod.isEnabled(), (this.width - rectWidth) / 2 + rectWidth - 18 - 15, buttonY - 2 + 15));
             }
 
             totalHeight += 15;

@@ -289,7 +289,7 @@ public class GameSettings
     
     /** Drop Client keybindings */
     public KeyBinding keyBindModPositioning = new KeyBinding("Mod Positioning", Keyboard.KEY_RSHIFT, "Drop Client");
-    public KeyBinding keyBindModsMenu = new KeyBinding("Mods Menu", -98, "Drop Client");
+    public KeyBinding keyBindModList = new KeyBinding("Mod List", -98, "Drop Client");
     public KeyBinding keyBindFreelook = new KeyBinding("Freelook", Keyboard.KEY_F, "Drop Client");
     public KeyBinding keyBindFullbright = new KeyBinding("Fullbright", Keyboard.KEY_L, "Drop Client");
     
@@ -351,7 +351,7 @@ public class GameSettings
     
     public void addClientKeybindings() {
     	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindModPositioning);
-    	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindModsMenu);
+    	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindModList);
     	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindFreelook);
     	this.keyBindings = (KeyBinding[]) ArrayUtils.add(this.keyBindings, this.keyBindFullbright);
     }

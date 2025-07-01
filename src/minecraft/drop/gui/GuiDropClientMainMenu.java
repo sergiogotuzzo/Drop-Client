@@ -15,7 +15,7 @@ import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import drop.gui.mod.GuiMods;
+import drop.gui.mod.GuiModList;
 
 public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 {
@@ -45,7 +45,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     			this.mc.displayGuiScreen(new GuiMultiplayer(this, true));
     			break;
     		case 3:
-    			this.mc.displayGuiScreen(new GuiMods(this));
+    			this.mc.displayGuiScreen(new GuiModList(this));
     			break;
     		case 4:
     			this.mc.displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.getLanguageManager()));

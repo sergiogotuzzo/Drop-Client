@@ -14,7 +14,7 @@ import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientMainMenu;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiMods;
+import drop.gui.mod.GuiModList;
 
 public class GuiIngameMenu extends GuiDropClientScreen
 {
@@ -109,7 +109,7 @@ public class GuiIngameMenu extends GuiDropClientScreen
             	this.mc.displayGuiScreen(new GuiMultiplayer(this, false));
             	break;
             case 9:
-            	this.mc.displayGuiScreen(new GuiMods(this));
+            	this.mc.displayGuiScreen(new GuiModList(this));
             	break;
         }
     }
