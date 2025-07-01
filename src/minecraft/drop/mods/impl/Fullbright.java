@@ -15,4 +15,8 @@ public class Fullbright extends Mod {
 	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
 		return null;
 	}
+	
+	public float getGamma() {
+		return enabled ? 10.0F : mc.gameSettings.gammaSetting;
+	}
 }
