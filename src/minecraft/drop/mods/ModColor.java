@@ -2,7 +2,9 @@ package drop.mods;
 
 import java.awt.Color;
 
-public class ModColor extends drop.Color {
+import drop.ColorManager;
+
+public class ModColor extends ColorManager {
 	private boolean chroma;
 	
 	private ModColor(int red, int green, int blue, int alpha, boolean chroma) {

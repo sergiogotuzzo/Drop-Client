@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import drop.Color;
+import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
 import drop.mods.Mod;
@@ -35,13 +35,13 @@ public class GuiModColor extends GuiModMenu {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        this.drawScaledText(option.getGuiSettings().getOptionName(), (this.width - rectWidth) / 2 + 15, (this.height - rectHeight) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, new Color(color.getRGB()).setAlpha(255).getRGB(), true, color.isChromaToggled());
+        this.drawScaledText(option.getGuiSettings().getOptionName(), (this.width - rectWidth) / 2 + 15, (this.height - rectHeight) / 2 + 30 + 15 * 0 + 15 - 5, 1.3D, new ColorManager(color.getRGB()).setAlpha(255).getRGB(), true, color.isChromaToggled());
         
-        this.writeOptionText("Red", 2, new Color(255, 0, 0).getRGB());
+        this.writeOptionText("Red", 2, new ColorManager(255, 0, 0).getRGB());
         this.writeOptionValue(String.valueOf(color.getRed()), 2);
-        this.writeOptionText("Green", 4, new Color(0, 255, 0).getRGB());
+        this.writeOptionText("Green", 4, new ColorManager(0, 255, 0).getRGB());
         this.writeOptionValue(String.valueOf(color.getGreen()), 4);
-        this.writeOptionText("Blue", 6, new Color(0, 0, 255).getRGB());
+        this.writeOptionText("Blue", 6, new ColorManager(0, 0, 255).getRGB());
         this.writeOptionValue(String.valueOf(color.getBlue()), 6);
 
         if (option.getGuiSettings().shouldBeAlphaSliderShown()) {

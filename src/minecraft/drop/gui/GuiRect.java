@@ -1,6 +1,6 @@
 package drop.gui;
 
-import drop.Color;
+import drop.ColorManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -21,7 +21,7 @@ public class GuiRect extends GuiButton {
         if (this.visible) {
             this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
             
-            Color rectColor = new Color(backgroundColor);
+            ColorManager rectColor = new ColorManager(backgroundColor);
             
             if (this.hovered) {
             	int alpha = rectColor.getAlpha();

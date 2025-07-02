@@ -1,27 +1,27 @@
 package drop;
 
-public class Color {
+public class ColorManager {
 	private int red;
 	private int green;
 	private int blue;
 	private int alpha;
 	
-	public Color(int red, int green, int blue, int alpha) {
+	public ColorManager(int red, int green, int blue, int alpha) {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
 		this.alpha = alpha;
 	}
 	
-	public Color(int red, int green, int blue) {
+	public ColorManager(int red, int green, int blue) {
 		this(red, green, blue, 255);
 	}
 	
-	public Color(int rgb) {
+	public ColorManager(int rgb) {
 		this((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, (rgb >> 0) & 0xFF, (rgb >> 24) & 0xFF);
 	}
 	
-	public Color setRed(int red) {
+	public ColorManager setRed(int red) {
 		this.red = red;
 		
 		return this;
@@ -31,7 +31,7 @@ public class Color {
 		return red;
 	}
 	
-	public Color setGreen(int green) {
+	public ColorManager setGreen(int green) {
 		this.green = green;
 		
 		return this;
@@ -41,7 +41,7 @@ public class Color {
 		return green;
 	}
 	
-	public Color setBlue(int blue) {
+	public ColorManager setBlue(int blue) {
 		this.blue = blue;
 		
 		return this;
@@ -51,7 +51,7 @@ public class Color {
 		return blue;
 	}
 	
-	public Color setAlpha(int alpha) {
+	public ColorManager setAlpha(int alpha) {
 		this.alpha = alpha;
 		
 		return this;
@@ -61,7 +61,7 @@ public class Color {
 		return alpha;
 	}
 	
-	public Color setRGB(int rgb) {
+	public ColorManager setRGB(int rgb) {
 		this.red = (rgb >> 16) & 0xFF;
 		this.green = (rgb >> 8) & 0xFF;
 		this.blue = (rgb >> 0) & 0xFF;
