@@ -7,12 +7,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiMenu;
+import drop.gui.mod.GuiModMenu;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.PingDisplay;
 
-public class GuiPingDisplayDynamicColors extends GuiMenu {
+public class GuiPingDisplayDynamicColors extends GuiModMenu {
 	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
 	
 	public GuiPingDisplayDynamicColors(GuiDropClientScreen previousGuiScreen) {

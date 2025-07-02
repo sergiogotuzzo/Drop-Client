@@ -14,14 +14,14 @@ import drop.gui.GuiSliderOption;
 import drop.gui.GuiText;
 import drop.mods.option.ModOption;
 
-public class GuiMenu extends GuiDropClientScreen {
+public class GuiModMenu extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;
 	private String title;
 	
 	public int rectWidth = 350;
 	public int rectHeight = 250;
 	
-	public GuiMenu(GuiScreen previousGuiScreen, String title) {
+	public GuiModMenu(GuiScreen previousGuiScreen, String title) {
 		this.previousGuiScreen = previousGuiScreen;
 		this.title = title;
 	}

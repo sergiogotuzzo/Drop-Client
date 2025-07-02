@@ -10,11 +10,7 @@ import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModSettings;
 import drop.mods.option.Brackets;
 import drop.mods.option.ModOption;
-import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.BracketsOption;
-import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
-import drop.mods.option.type.IntOption;
+import drop.mods.option.type.*;
 
 public abstract class Mod {
 	protected boolean enabled;

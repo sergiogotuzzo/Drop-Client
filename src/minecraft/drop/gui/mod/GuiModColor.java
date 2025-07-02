@@ -13,7 +13,7 @@ import drop.mods.Mod;
 import drop.mods.ModColor;
 import drop.mods.option.type.ColorOption;
 
-public class GuiModColor extends GuiMenu {	
+public class GuiModColor extends GuiModMenu {	
 	protected final ColorOption option;
 
 	private GuiSlider sliderRed;

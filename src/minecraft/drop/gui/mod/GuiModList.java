@@ -17,7 +17,7 @@ import drop.gui.GuiText;
 import drop.mods.Mod;
 import drop.mods.ModInstances;
 
-public class GuiModList extends GuiMenu {    
+public class GuiModList extends GuiModMenu {    
     private GuiTextField textFieldSearchMod;
     private String textFieldText = "";
     

@@ -7,12 +7,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
-import drop.gui.mod.GuiMenu;
+import drop.gui.mod.GuiModMenu;
 import drop.gui.mod.GuiModColor;
 import drop.mods.ModInstances;
 import drop.mods.impl.TabOverlay;
 
-public class GuiTabOverlayDynamicColors extends GuiMenu {
+public class GuiTabOverlayDynamicColors extends GuiModMenu {
 	private static final TabOverlay mod = ModInstances.getTabOverlayMod();
 	
 	public GuiTabOverlayDynamicColors(GuiDropClientScreen previousGuiScreen) {

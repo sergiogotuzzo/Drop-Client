@@ -12,7 +12,7 @@ import drop.mods.ModColor;
 import drop.mods.option.*;
 import drop.mods.option.type.*;
 
-public class GuiModSettings extends GuiMenu {
+public class GuiModSettings extends GuiModMenu {
 	private final Mod mod;
 
 	public GuiModSettings(GuiScreen previousGuiScreen, Mod mod) {
