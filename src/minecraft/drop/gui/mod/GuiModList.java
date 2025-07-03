@@ -103,12 +103,12 @@ public class GuiModList extends GuiModMenu {
 
         List<Mod> mods = ModInstances.getAllMods();
         
-        for (int i = 1; i < mods.size(); i++) {
+        for (int i = 1; i - 1 < mods.size(); i++) {
             Mod mod = mods.get(i - 1);
             
             if (!textFieldSearchMod.getText().isEmpty() && !mod.getName().toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
             	if (scrollOffset > 0) {
-                	scrollOffset = 0 ;
+                	scrollOffset = 0;
             	}
             	
             	continue;
