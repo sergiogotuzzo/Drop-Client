@@ -9,6 +9,7 @@ import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.Speedometer;
 import drop.mods.impl.BlockOverlay;
 import drop.mods.impl.NoBobbing;
+import drop.mods.impl.NoFireLayer;
 import drop.mods.impl.NoHotbarScrolling;
 import drop.mods.impl.NoPumpkinOverlay;
 import drop.mods.impl.Bossbar;
@@ -79,6 +80,7 @@ public class ModInstances {
 	private static Particles particlesMod = new Particles();
 	private static NoAchievementNotifications noAchievementNotificationsMod = new NoAchievementNotifications();
 	private static HitColor hitColorMod = new HitColor();
+	private static NoFireLayer noFireLayerMod = new NoFireLayer();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -246,6 +248,10 @@ public class ModInstances {
 		return hitColorMod;
 	}
 	
+	public static NoFireLayer getNoFireLayerMod() {
+		return noFireLayerMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -268,6 +274,7 @@ public class ModInstances {
 			    getNametagsMod(),
 			    getNoAchievementNotificationsMod(),
 			    getNoBobbingMod(),
+			    getNoFireLayerMod(),
 			    getNoHotbarScrollingMod(),
 			    getNoPumpkinOverlayMod(),
 			    getOldVisualsMod(),
