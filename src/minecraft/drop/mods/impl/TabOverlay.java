@@ -38,7 +38,9 @@ public class TabOverlay extends Mod {
 				new BooleanOption(this, "unstableTextShadow", true, new GuiSettings(false, 14, "Unstable Text Shadow")),
 				new BooleanOption(this, "showPlayerHeads", true, new GuiSettings(16, "Show Player Heads")),
 				new BooleanOption(this, "showHeader", true, new GuiSettings(17, "Show Header")),
-				new BooleanOption(this, "showFooter", true, new GuiSettings(18, "Show Footer"))
+				new BooleanOption(this, "showFooter", true, new GuiSettings(18, "Show Footer")),
+				new ColorOption(this, "backgroundColor", ModColor.fromRGB(Integer.MIN_VALUE, false), new GuiSettings(true, 19, "Background Color", false, true)),
+				new ColorOption(this, "backgroundColorPlayer", ModColor.fromRGB(553648127, false), new GuiSettings(true, 20, "Player Background Color", false, true))
 				);
 				
 		saveOptions();

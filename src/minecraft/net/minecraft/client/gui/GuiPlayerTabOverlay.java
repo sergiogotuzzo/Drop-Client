@@ -3,6 +3,8 @@ package net.minecraft.client.gui;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import com.mojang.authlib.GameProfile;
+
+import java.awt.Color;
 import java.util.Comparator;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -151,10 +153,18 @@ public class GuiPlayerTabOverlay extends Gui
                 }
             }
         }
+        
+        int backgroundColor = Integer.MIN_VALUE;
+        int backgroundColorPlayer = 553648127;
+        
+        if (ModInstances.getTabOverlayMod().isEnabled()) {
+        	backgroundColor = ModInstances.getTabOverlayMod().getOptions().getColorOption("backgroundColor").getColor().getRGB();
+        	backgroundColorPlayer = ModInstances.getTabOverlayMod().getOptions().getColorOption("backgroundColorPlayer").getColor().getRGB();
+        }
 
         if (list1 != null)
         {
-            drawRect(width / 2 - l1 / 2 - 1, k1 - 1, width / 2 + l1 / 2 + 1, k1 + list1.size() * this.mc.fontRendererObj.FONT_HEIGHT, Integer.MIN_VALUE);
+            drawRect(width / 2 - l1 / 2 - 1, k1 - 1, width / 2 + l1 / 2 + 1, k1 + list1.size() * this.mc.fontRendererObj.FONT_HEIGHT, backgroundColor);
 
             for (String s3 : list1)
             {
@@ -166,7 +176,7 @@ public class GuiPlayerTabOverlay extends Gui
             ++k1;
         }
 
-        drawRect(width / 2 - l1 / 2 - 1, k1 - 1, width / 2 + l1 / 2 + 1, k1 + i4 * 9, Integer.MIN_VALUE);
+        drawRect(width / 2 - l1 / 2 - 1, k1 - 1, width / 2 + l1 / 2 + 1, k1 + i4 * 9, backgroundColor);
 
         for (int k4 = 0; k4 < l3; ++k4)
         {
@@ -174,7 +184,7 @@ public class GuiPlayerTabOverlay extends Gui
             int i5 = k4 % i4;
             int j2 = j1 + l4 * i1 + l4 * 5;
             int k2 = k1 + i5 * 9;
-            drawRect(j2, k2, j2 + i1, k2 + 8, 553648127);
+            drawRect(j2, k2, j2 + i1, k2 + 8, backgroundColorPlayer);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             GlStateManager.enableAlpha();
             GlStateManager.enableBlend();
@@ -244,7 +254,7 @@ public class GuiPlayerTabOverlay extends Gui
         if (list2 != null)
         {
             k1 = k1 + i4 * 9 + 1;
-            drawRect(width / 2 - l1 / 2 - 1, k1 - 1, width / 2 + l1 / 2 + 1, k1 + list2.size() * this.mc.fontRendererObj.FONT_HEIGHT, Integer.MIN_VALUE);
+            drawRect(width / 2 - l1 / 2 - 1, k1 - 1, width / 2 + l1 / 2 + 1, k1 + list2.size() * this.mc.fontRendererObj.FONT_HEIGHT, backgroundColor);
 
             for (String s4 : list2)
             {
