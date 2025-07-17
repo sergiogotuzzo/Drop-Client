@@ -85,12 +85,12 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	    drawRect(rectRight, pos.getAbsoluteY(), rectRight - 1, pos.getAbsoluteY() + getHeight(), color);
 	}
 	
-	public void drawText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
+	public void drawText(String text, float x, float y, int color, boolean dropShadow, boolean chroma) {
 		if (chroma) {
-			int textCharX = x;
+			float textCharX = x;
 			
 	        for (char textChar : text.toCharArray()) {
-	            long t = System.currentTimeMillis() - (textCharX * 10 - y * 10);
+	            long t = System.currentTimeMillis() - (long) (textCharX * 10 - y * 10);
 	            int c = Color.HSBtoRGB(t % (int) 2000.0F / 2000.0F, 0.8F, 0.8F);
 	            
 	            if (text.startsWith("§")) {
@@ -106,55 +106,55 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		}
 	}
 	
-	public void drawText(String text, int x, int y, ModColor color, boolean dropShadow) {
+	public void drawText(String text, float x, float y, ModColor color, boolean dropShadow) {
 		drawText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
-	public void drawCenteredText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
-		drawText(text, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2, pos.getAbsoluteY() + getHeight() / 2 - 4, color, dropShadow, chroma);
+	public void drawCenteredText(String text, float x, float y, int color, boolean dropShadow, boolean chroma) {
+		drawText(text, pos.getAbsoluteX() + (getWidth() - font.getStringWidth(text)) / 2.0F + 0.5F, pos.getAbsoluteY() + (getHeight() / 2.0F) - 4.0F, color, dropShadow, chroma);
 	}
 	
-	public void drawCenteredText(String text, int x, int y, ModColor color, boolean dropShadow) {
+	public void drawCenteredText(String text, float x, float y, ModColor color, boolean dropShadow) {
 		drawCenteredText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
-	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, int color, boolean dropShadow, boolean chroma) {
-		int textX;
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, float x, float y, int color, boolean dropShadow, boolean chroma) {
+		float textX;
 		
 		if (pos.getRelativeX() < 1.0 / 3.0) {
-			textX = x + widthBackground / 2;
+			textX = x + widthBackground / 2.0F;
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
-			textX = x + getWidth() - font.getStringWidth(text) - widthBackground / 2;
+			textX = x + getWidth() - font.getStringWidth(text) - widthBackground / 2.0F;
 		} else {
-			textX = x + (getWidth() - font.getStringWidth(text)) / 2;
+			textX = x + (getWidth() - font.getStringWidth(text)) / 2.0F;
 		}
 		
-		drawText(text, textX, y + getHeight() / 2 - 4, color, dropShadow, chroma);
+		drawText(text, textX, y + getHeight() / 2.0F - 4.0F, color, dropShadow, chroma);
 	}
 	
-	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, int x, int y, ModColor color, boolean dropShadow) {
+	public void drawCenteredAlignedText(ScreenPosition pos, String text, int widthBackground, float x, float y, ModColor color, boolean dropShadow) {
 		drawCenteredAlignedText(pos, text, widthBackground, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
-	public void drawAlignedText(String text, int x, int y, int color, boolean dropShadow, boolean chroma) {
-		int alignedX;
+	public void drawAlignedText(String text, float x, float y, int color, boolean dropShadow, boolean chroma) {
+		float alignedX;
 		
 		if (pos.getRelativeX() < 1.0 / 3.0) {
 			alignedX = x;
 		} else if (pos.getRelativeX() > 2.0 / 3.0) {
 			alignedX = x + getWidth() - font.getStringWidth(text);
 		} else {
-			alignedX = x + (getWidth() - font.getStringWidth(text)) / 2;
+			alignedX = x + (getWidth() - font.getStringWidth(text)) / 2.0F;
 		}
 		
 		drawText(text, alignedX, y, color, dropShadow, chroma);
 	}
 	
-	public void drawAlignedText(String text, int x, int y, ModColor color, boolean dropShadow) {
+	public void drawAlignedText(String text, float x, float y, ModColor color, boolean dropShadow) {
 		drawAlignedText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
-	public void drawScaledText(String text, int x, int y, double scale, int color, boolean dropShadow, boolean chroma) {
+	public void drawScaledText(String text, float x, float y, double scale, int color, boolean dropShadow, boolean chroma) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, 0);
 		GlStateManager.scale(scale, scale, 1);
@@ -165,7 +165,7 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		GlStateManager.popMatrix();
 	}
 	
-	public void drawScaledText(String text, int x, int y, double scale, ModColor color, boolean dropShadow) {
+	public void drawScaledText(String text, float x, float y, double scale, ModColor color, boolean dropShadow) {
 		drawScaledText(text, x, y, scale, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
