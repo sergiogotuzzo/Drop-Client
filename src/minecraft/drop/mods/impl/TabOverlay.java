@@ -24,7 +24,6 @@ public class TabOverlay extends Mod {
 				new BooleanOption(this, "hidePing", false, new GuiSettings(1, "Hide Ping")),
 				new BooleanOption(this, "pingNumbers", false, new ParentOption("hidePing", true), new GuiSettings(15, "Ping Numbers")),
 				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new ParentOption("pingNumbers"), new GuiSettings(2, "Ping Text Color", true, false)),
-				new BooleanOption(this, "textShadow", true, new ParentOption("pingNumbers"), new GuiSettings(3, "Ping Text Shadow")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 4, "Dynamic Colors")),
 				new ColorOption(this, "excellentTextColor", ModColor.fromRGB(85, 255, 85, false), new GuiSettings(false, 5, "Excellent Text Color", true, false)),
 				new BooleanOption(this, "excellentTextShadow", true, new GuiSettings(false, 6, "Excellent Text Shadow")),
@@ -40,7 +39,8 @@ public class TabOverlay extends Mod {
 				new BooleanOption(this, "showHeader", true, new GuiSettings(17, "Show Header")),
 				new BooleanOption(this, "showFooter", true, new GuiSettings(18, "Show Footer")),
 				new ColorOption(this, "backgroundColor", ModColor.fromRGB(Integer.MIN_VALUE, false), new GuiSettings(true, 19, "Background Color", false, true)),
-				new ColorOption(this, "backgroundColorPlayer", ModColor.fromRGB(553648127, false), new GuiSettings(true, 20, "Player Background Color", false, true))
+				new ColorOption(this, "playerBackgroundColor", ModColor.fromRGB(553648127, false), new GuiSettings(true, 20, "Player Background Color", false, true)),
+				new BooleanOption(this, "textShadow", true, new GuiSettings(3, "Text Shadow"))
 				);
 				
 		saveOptions();

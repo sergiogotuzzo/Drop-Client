@@ -155,11 +155,17 @@ public class GuiPlayerTabOverlay extends Gui
         }
         
         int backgroundColor = Integer.MIN_VALUE;
-        int backgroundColorPlayer = 553648127;
+        int playerBackgroundColor = 553648127;
         
         if (ModInstances.getTabOverlayMod().isEnabled()) {
         	backgroundColor = ModInstances.getTabOverlayMod().getOptions().getColorOption("backgroundColor").getColor().getRGB();
-        	backgroundColorPlayer = ModInstances.getTabOverlayMod().getOptions().getColorOption("backgroundColorPlayer").getColor().getRGB();
+        	playerBackgroundColor = ModInstances.getTabOverlayMod().getOptions().getColorOption("playerBackgroundColor").getColor().getRGB();
+        }
+        
+        boolean dropShadow = true;
+        
+        if (ModInstances.getTabOverlayMod().isEnabled()) {
+        	dropShadow = ModInstances.getTabOverlayMod().getOptions().getBooleanOption("textShadow").isToggled();
         }
 
         if (list1 != null)
@@ -169,7 +175,7 @@ public class GuiPlayerTabOverlay extends Gui
             for (String s3 : list1)
             {
                 int i2 = this.mc.fontRendererObj.getStringWidth(s3);
-                this.mc.fontRendererObj.drawStringWithShadow(s3, (float)(width / 2 - i2 / 2), (float)k1, -1);
+                this.mc.fontRendererObj.drawString(s3, (float)(width / 2 - i2 / 2), (float)k1, -1, dropShadow);
                 k1 += this.mc.fontRendererObj.FONT_HEIGHT;
             }
 
@@ -184,7 +190,7 @@ public class GuiPlayerTabOverlay extends Gui
             int i5 = k4 % i4;
             int j2 = j1 + l4 * i1 + l4 * 5;
             int k2 = k1 + i5 * 9;
-            drawRect(j2, k2, j2 + i1, k2 + 8, backgroundColorPlayer);
+            drawRect(j2, k2, j2 + i1, k2 + 8, playerBackgroundColor);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             GlStateManager.enableAlpha();
             GlStateManager.enableBlend();
@@ -217,11 +223,11 @@ public class GuiPlayerTabOverlay extends Gui
                 if (networkplayerinfo1.getGameType() == WorldSettings.GameType.SPECTATOR)
                 {
                     s1 = EnumChatFormatting.ITALIC + s1;
-                    this.mc.fontRendererObj.drawStringWithShadow(s1, (float)j2, (float)k2, -1862270977);
+                    this.mc.fontRendererObj.drawString(s1, (float)j2, (float)k2, -1862270977, dropShadow);
                 }
                 else
                 {
-                    this.mc.fontRendererObj.drawStringWithShadow(s1, (float)j2, (float)k2, -1);
+                    this.mc.fontRendererObj.drawString(s1, (float)j2, (float)k2, -1, dropShadow);
                 }
 
                 if (scoreObjectiveIn != null && networkplayerinfo1.getGameType() != WorldSettings.GameType.SPECTATOR)
@@ -259,7 +265,7 @@ public class GuiPlayerTabOverlay extends Gui
             for (String s4 : list2)
             {
                 int j5 = this.mc.fontRendererObj.getStringWidth(s4);
-                this.mc.fontRendererObj.drawStringWithShadow(s4, (float)(width / 2 - j5 / 2), (float)k1, -1);
+                this.mc.fontRendererObj.drawString(s4, (float)(width / 2 - j5 / 2), (float)k1, -1, dropShadow);
                 k1 += this.mc.fontRendererObj.FONT_HEIGHT;
             }
         }
