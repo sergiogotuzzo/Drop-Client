@@ -9,6 +9,7 @@ import drop.mods.impl.ArmorStatus;
 import drop.mods.impl.Speedometer;
 import drop.mods.impl.BlockOverlay;
 import drop.mods.impl.NoBobbing;
+import drop.mods.impl.NoFireLayer;
 import drop.mods.impl.NoHotbarScrolling;
 import drop.mods.impl.NoPumpkinOverlay;
 import drop.mods.impl.Bossbar;
@@ -23,6 +24,7 @@ import drop.mods.impl.Freelook;
 import drop.mods.impl.Fullbright;
 import drop.mods.impl.HitColor;
 import drop.mods.impl.HurtCam;
+import drop.mods.impl.ItemPhysics;
 import drop.mods.impl.Keystrokes;
 import drop.mods.impl.LeftHand;
 import drop.mods.impl.MemoryUsage;
@@ -79,6 +81,8 @@ public class ModInstances {
 	private static Particles particlesMod = new Particles();
 	private static NoAchievementNotifications noAchievementNotificationsMod = new NoAchievementNotifications();
 	private static HitColor hitColorMod = new HitColor();
+	private static NoFireLayer noFireLayerMod = new NoFireLayer();
+	private static ItemPhysics itemPhysicsMod = new ItemPhysics();
 	
 	public static void register(HUDManager manager) {
 		manager.register(fpsDisplayMod = new FPSDisplay());
@@ -246,6 +250,14 @@ public class ModInstances {
 		return hitColorMod;
 	}
 	
+	public static NoFireLayer getNoFireLayerMod() {
+		return noFireLayerMod;
+	}
+	
+	public static ItemPhysics getItemPhysicsMod() {
+		return itemPhysicsMod;
+	}
+	
 	public static List<Mod> getAllMods() {
 		return Arrays.asList(
 			    getArmorStatusMod(),
@@ -262,12 +274,14 @@ public class ModInstances {
 			    getFreelookMod(),
 			    getHitColorMod(),
 			    getHurtCamMod(),
+			    getItemPhysicsMod(),
 			    getKeystrokesMod(),
 			    getLeftHandMod(),
 			    getMemoryUsageMod(),
 			    getNametagsMod(),
 			    getNoAchievementNotificationsMod(),
 			    getNoBobbingMod(),
+			    getNoFireLayerMod(),
 			    getNoHotbarScrollingMod(),
 			    getNoPumpkinOverlayMod(),
 			    getOldVisualsMod(),

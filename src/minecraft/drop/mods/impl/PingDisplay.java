@@ -50,12 +50,12 @@ public class PingDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? 58 : font.getStringWidth(options.getBracketsOption("brackets").wrap("-1 ms"));
+		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(options.getBracketsOption("brackets").wrap("-1 ms"));
 	}
 
 	@Override
 	public int getHeight() {
-		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
+		return options.getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
 	}
 
 	@Override

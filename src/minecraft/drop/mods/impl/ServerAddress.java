@@ -39,7 +39,7 @@ public class ServerAddress extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
+		return options.getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
 	}
 
 	@Override

@@ -43,12 +43,12 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + 20 : font.getStringWidth(options.getBracketsOption("brackets").wrap("Sprinting (Toggled)"));
+		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + 10 : font.getStringWidth(options.getBracketsOption("brackets").wrap("Sprinting (Toggled)"));
 	}
 
 	@Override
 	public int getHeight() {
-		return options.getBooleanOption("showBackground").isToggled() ? 18 : font.FONT_HEIGHT;
+		return options.getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -57,13 +57,13 @@ public class ToggleSprintSneak extends ModDraggable {
 	    	String text = mc.thePlayer.movementInput.getDisplayText();
 	    	
 	    	if (options.getBooleanOption("showBackground").isToggled()) {
-		    	drawAlignedRect(pos, textToRender = text, 20, options.getColorOption("backgroundColor").getColor().getRGB());
+		    	drawAlignedRect(pos, textToRender = text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
 		    	
 		    	if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(pos, text, 20, options.getColorOption("borderColor").getColor().getRGB());
+			    	drawAlignedHollowRect(pos, text, 10, options.getColorOption("borderColor").getColor().getRGB());
 		    	}
 		    	
-				drawCenteredAlignedText(pos, text, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredAlignedText(pos, text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
 			    drawAlignedText(textToRender = options.getBracketsOption("brackets").wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
@@ -76,13 +76,13 @@ public class ToggleSprintSneak extends ModDraggable {
 			String text = "Sprinting (Toggled)";
 			
 			if (options.getBooleanOption("showBackground").isToggled()) {
-		    	drawAlignedRect(pos, text, 20, options.getColorOption("backgroundColor").getColor().getRGB());
+		    	drawAlignedRect(pos, text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
 		    	
 		    	if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(pos, text, 20, options.getColorOption("borderColor").getColor().getRGB());
+			    	drawAlignedHollowRect(pos, text, 10, options.getColorOption("borderColor").getColor().getRGB());
 		    	}
 		    	
-				drawCenteredAlignedText(pos, text, 20, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredAlignedText(pos, text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
 			    drawAlignedText(options.getBracketsOption("brackets").wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}

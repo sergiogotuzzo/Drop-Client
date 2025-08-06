@@ -44,11 +44,11 @@ public class Keystrokes extends ModDraggable {
 	public static enum KeystrokesMode {
 		WASD(Key.W, Key.A, Key.S, Key.D),
 		WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
-		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 40, 58, 10)),
-		WASD_MOUSE_JUMP(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 60, 58, 10)),
-		MOUSE(new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 0, 28, 18), new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 30, 0, 28, 18)),
-		JUMP(new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 0, 58, 10)),
-		MOUSE_JUMP(new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 0, 28, 18), new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 30, 0, 28, 18), new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 20, 58, 10)),
+		WASD_JUMP(Key.W, Key.A, Key.S, Key.D, new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 36, 53, 8)),
+		WASD_MOUSE_JUMP(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB, new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 54, 53, 8)),
+		MOUSE(new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 0, 26, 17), new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 27, 0, 26, 17)),
+		JUMP(new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 0, 53, 8)),
+		MOUSE_JUMP(new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 0, 26, 17), new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 27, 0, 26, 17), new Key(EnumChatFormatting.STRIKETHROUGH + "---", Minecraft.getMinecraft().gameSettings.keyBindJump, 0, 18, 53, 8)),
 		NONE();
 	
 		private final Key[] keys;
@@ -78,12 +78,12 @@ public class Keystrokes extends ModDraggable {
 	}
 	
 	private static class Key {
-		private static final Key W = new Key("W", Minecraft.getMinecraft().gameSettings.keyBindForward, 20, 0, 18, 18);
-		private static final Key A = new Key("A", Minecraft.getMinecraft().gameSettings.keyBindLeft, 0, 20, 18, 18);
-		private static final Key S = new Key("S", Minecraft.getMinecraft().gameSettings.keyBindBack, 20, 20, 18, 18);
-		private static final Key D = new Key("D", Minecraft.getMinecraft().gameSettings.keyBindRight, 40, 20, 18, 18);
-		private static final Key LMB = new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 40, 28, 18);
-		private static final Key RMB = new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 30, 40, 28, 18);
+		private static final Key W = new Key("W", Minecraft.getMinecraft().gameSettings.keyBindForward, 18, 0, 17, 17);
+		private static final Key A = new Key("A", Minecraft.getMinecraft().gameSettings.keyBindLeft, 0, 18, 17, 17);
+		private static final Key S = new Key("S", Minecraft.getMinecraft().gameSettings.keyBindBack, 18, 18, 17, 17);
+		private static final Key D = new Key("D", Minecraft.getMinecraft().gameSettings.keyBindRight, 36, 18, 17, 17);
+		private static final Key LMB = new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 0, 36, 26, 17);
+		private static final Key RMB = new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 27, 36, 26, 17);
 		
 		private String name;
 		
@@ -206,8 +206,8 @@ public class Keystrokes extends ModDraggable {
 	        
 	        drawText(
 	        		key.getName(),
-	                pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
-	                pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+	                pos.getAbsoluteX() + key.getX() + (key.getWidth() / 2.0F) - (textWidth / 2.0F),
+	                pos.getAbsoluteY() + key.getY() + (key.getHeight() / 2.0F) - 4.0F,
 	                key.isDown() ? options.getColorOption("pressedTextColor").getColor() : options.getColorOption("textColor").getColor(),
 	                key.isDown() ? options.getBooleanOption("pressedTextShadow").isToggled() : options.getBooleanOption("textShadow").isToggled()
 	        		);
