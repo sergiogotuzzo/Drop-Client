@@ -13,7 +13,7 @@ import drop.gui.hud.HUDManager;
 import drop.mods.ModInstances;
 
 public class Drop {
-	public static final String nameVersion = "Drop Client (1.8.9-012f9b2/main)";
+	public static final String nameVersion = "Drop Client (1.8.9-68b6198/main)";
 	
 	private static final Drop instance = new Drop();
 	
