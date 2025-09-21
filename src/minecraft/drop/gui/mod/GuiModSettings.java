@@ -97,7 +97,7 @@ public class GuiModSettings extends GuiModMenu {
 		if (option instanceof BooleanOption) {
 			this.buttonList.add(this.createGuiCheckBox(option.getGuiSettings().getButtonId(), ((BooleanOption) option).isToggled(), i));
 		} else if (option instanceof ColorOption) {
-    		this.buttonList.add(this.createGuiRect(option.getGuiSettings().getButtonId(), ((ColorOption) option).getColor().getRGB(), i));
+    		this.buttonList.add(this.createGuiRect(option.getGuiSettings().getButtonId(), ((ColorOption) option).getColor().getRGB(), ((ColorOption) option).getColor().isChromaToggled(), i));
 		} else if (option instanceof FloatOption) {
 			i++;
 			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((FloatOption) option).getMax(), (float) option.getValue(), i, (FloatOption) option));

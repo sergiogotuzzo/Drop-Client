@@ -82,15 +82,15 @@ public class GuiArmorStatusDynamicColors extends GuiModMenu {
     public void initGui() {
 		super.initGui();
 
-		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("veryHighTextColor").getColor().getRGB(), 1));
+		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("veryHighTextColor").getColor().getRGB(), mod.getOptions().getColorOption("veryHighTextColor").getColor().isChromaToggled(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.getOptions().getBooleanOption("veryHighTextShadow").isToggled(), 2));
-		this.buttonList.add(this.createGuiRect(3, mod.getOptions().getColorOption("highTextColor").getColor().getRGB(), 3));
+		this.buttonList.add(this.createGuiRect(3, mod.getOptions().getColorOption("highTextColor").getColor().getRGB(), mod.getOptions().getColorOption("highTextColor").getColor().isChromaToggled(), 3));
 		this.buttonList.add(this.createGuiCheckBox(4, mod.getOptions().getBooleanOption("highTextShadow").isToggled(), 4));
-		this.buttonList.add(this.createGuiRect(5, mod.getOptions().getColorOption("mediumTextColor").getColor().getRGB(), 5));
+		this.buttonList.add(this.createGuiRect(5, mod.getOptions().getColorOption("mediumTextColor").getColor().getRGB(), mod.getOptions().getColorOption("mediumTextColor").getColor().isChromaToggled(), 5));
 		this.buttonList.add(this.createGuiCheckBox(6, mod.getOptions().getBooleanOption("mediumTextShadow").isToggled(), 6));
-		this.buttonList.add(this.createGuiRect(7, mod.getOptions().getColorOption("lowTextColor").getColor().getRGB(), 7));
+		this.buttonList.add(this.createGuiRect(7, mod.getOptions().getColorOption("lowTextColor").getColor().getRGB(), mod.getOptions().getColorOption("lowTextColor").getColor().isChromaToggled(), 7));
 		this.buttonList.add(this.createGuiCheckBox(8, mod.getOptions().getBooleanOption("lowTextShadow").isToggled(), 8));
-		this.buttonList.add(this.createGuiRect(9, mod.getOptions().getColorOption("veryLowTextColor").getColor().getRGB(), 9));
+		this.buttonList.add(this.createGuiRect(9, mod.getOptions().getColorOption("veryLowTextColor").getColor().getRGB(), mod.getOptions().getColorOption("veryLowTextColor").getColor().isChromaToggled(), 9));
 		this.buttonList.add(this.createGuiCheckBox(10, mod.getOptions().getBooleanOption("veryLowTextShadow").isToggled(), 10));
     }
 }

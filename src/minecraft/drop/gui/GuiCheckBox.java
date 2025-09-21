@@ -8,7 +8,7 @@ public class GuiCheckBox extends GuiRect {
 	private boolean toggled;
 	
 	public GuiCheckBox(int buttonId, int x, int y, boolean toggled) {
-		super(buttonId, x, y, 13, 13, new Color(0, 0, 0, 100).getRGB(), Color.BLACK.getRGB());
+		super(buttonId, x, y, 13, 13, new Color(0, 0, 0, 100).getRGB(), Color.BLACK.getRGB(), false);
 		
 		this.toggled = toggled;
 	}

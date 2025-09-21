@@ -82,15 +82,15 @@ public class GuiPingDisplayDynamicColors extends GuiModMenu {
     public void initGui() {
 		super.initGui();
 
-		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("excellentTextColor").getColor().getRGB(), 1));
+		this.buttonList.add(this.createGuiRect(1, mod.getOptions().getColorOption("excellentTextColor").getColor().getRGB(), mod.getOptions().getColorOption("excellentTextColor").getColor().isChromaToggled(), 1));
 		this.buttonList.add(this.createGuiCheckBox(2, mod.getOptions().getBooleanOption("excellentTextShadow").isToggled(), 2));
-		this.buttonList.add(this.createGuiRect(3, mod.getOptions().getColorOption("goodTextColor").getColor().getRGB(), 3));
+		this.buttonList.add(this.createGuiRect(3, mod.getOptions().getColorOption("goodTextColor").getColor().getRGB(), mod.getOptions().getColorOption("goodTextColor").getColor().isChromaToggled(), 3));
 		this.buttonList.add(this.createGuiCheckBox(4, mod.getOptions().getBooleanOption("goodTextShadow").isToggled(), 4));
-		this.buttonList.add(this.createGuiRect(5, mod.getOptions().getColorOption("moderateTextColor").getColor().getRGB(), 5));
+		this.buttonList.add(this.createGuiRect(5, mod.getOptions().getColorOption("moderateTextColor").getColor().getRGB(), mod.getOptions().getColorOption("moderateTextColor").getColor().isChromaToggled(), 5));
 		this.buttonList.add(this.createGuiCheckBox(6, mod.getOptions().getBooleanOption("moderateTextShadow").isToggled(), 6));
-		this.buttonList.add(this.createGuiRect(7, mod.getOptions().getColorOption("weakTextColor").getColor().getRGB(), 7));
+		this.buttonList.add(this.createGuiRect(7, mod.getOptions().getColorOption("weakTextColor").getColor().getRGB(), mod.getOptions().getColorOption("weakTextColor").getColor().isChromaToggled(), 7));
 		this.buttonList.add(this.createGuiCheckBox(8, mod.getOptions().getBooleanOption("weakTextShadow").isToggled(), 8));
-		this.buttonList.add(this.createGuiRect(9, mod.getOptions().getColorOption("unstableTextColor").getColor().getRGB(), 9));
+		this.buttonList.add(this.createGuiRect(9, mod.getOptions().getColorOption("unstableTextColor").getColor().getRGB(), mod.getOptions().getColorOption("unstableTextColor").getColor().isChromaToggled(), 9));
 		this.buttonList.add(this.createGuiCheckBox(10, mod.getOptions().getBooleanOption("unstableTextShadow").isToggled(), 10));
     }
 }
