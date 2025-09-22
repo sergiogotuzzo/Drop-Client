@@ -32,6 +32,7 @@ public class PotionEffects extends ModDraggable {
 				new BooleanOption(this, "nameTextShadow", true, new ParentOption("showName"), new GuiSettings(5, "Name Text Shadow")),
 				new BooleanOption(this, "showIcon", true, new GuiSettings(6, "Show Icon")),
 				new BooleanOption(this, "blink", true, new GuiSettings(7, "Blink")),
+				new BooleanOption(this, "showInInv", true, new GuiSettings(8, "Show In Inventory")),
 				new BooleanOption(this, "reverse", false, new GuiSettings(false))
 				);
 				
