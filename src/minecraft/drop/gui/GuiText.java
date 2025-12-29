@@ -3,9 +3,12 @@ package drop.gui;
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiText extends GuiButton {
 	public final boolean hovering;
@@ -42,6 +45,12 @@ public class GuiText extends GuiButton {
         	}
         	
         	mc.fontRendererObj.drawStringWithShadow(displayString, this.xPosition, this.yPosition, textColor);
+        }
+    }
+	
+	public void playPressSound(SoundHandler soundHandlerIn) {
+        if (this.hovering) {
+        	soundHandlerIn.playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
         }
     }
 }
