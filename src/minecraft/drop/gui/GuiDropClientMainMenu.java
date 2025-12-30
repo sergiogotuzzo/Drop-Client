@@ -29,9 +29,6 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
         this.drawString(this.fontRendererObj, Drop.nameVersion, 2, this.height - 10, 0xFFFFFF);
         this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0xFFFFFF);
         
-        this.mc.getTextureManager().bindTexture(new ResourceLocation("drop/icon.png"));
-        this.drawModalRectWithCustomSizedTexture(this.width / 2 - 84 / 2, this.height / 2 - 84 + 12, 0.0f, 0.0f, 84, 84, (float)(84), (float)(84));
-
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -62,7 +59,9 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 	@Override
     public void initGui() {
 		Drop.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
-				
+		
+        this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("drop/icon.png"), this.width / 2 - 84 / 2 + 19, this.height / 2 - 84 + 24, 84, 84, 84 - 38, 84 - 24, false));
+
 		this.buttonList.add(new GuiButton(1, this.width / 2 - 120 / 2, this.height / 2 + 24 - 4, 120, 20, I18n.format("menu.singleplayer", new Object[0])));
         this.buttonList.add(new GuiButton(2, this.width / 2 - 120 / 2, this.height / 2 + 24 * 2 - 4, 120, 20, I18n.format("menu.multiplayer", new Object[0])));
         

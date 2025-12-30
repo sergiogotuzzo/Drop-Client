@@ -10,8 +10,14 @@ import java.util.function.Predicate;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiLanguage;
+import net.minecraft.client.gui.GuiMultiplayer;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
+import drop.gui.GuiButtonIcon;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.hud.HUDManager;
 import drop.gui.hud.IRenderer;
@@ -82,6 +88,22 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	}
 	
 	@Override
+	public void initGui() {
+		super.initGui();
+		
+		this.buttonList.add(new GuiButtonIcon(1, new ResourceLocation("drop/icon.png"), this.width / 2 - 84 / 2 + 38 / 2, this.height / 2 - 84 / 2 + 24 / 2, 84, 84, 84 - 38, 84 - 24, false));
+	}
+	
+	@Override
+    protected void actionPerformed(GuiButton button) throws IOException {		
+    	switch (button.id) {
+    		case 1:
+    			this.mc.displayGuiScreen(new GuiModList(this));
+    			break;
+    	}
+    }
+	
+	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
 		if (keyCode == Keyboard.KEY_ESCAPE) {
 			renderers.entrySet().forEach((entry) -> {
@@ -94,6 +116,8 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	
 	@Override
 	protected void mouseClicked(int x, int y, int mouseButton) throws IOException {
+		super.mouseClicked(x, y, mouseButton);
+		
 		this.prevX = x;
 		this.prevY = y;
 		
