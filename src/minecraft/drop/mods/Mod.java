@@ -68,8 +68,8 @@ public abstract class Mod {
 				option.saveValue((float) ((double) getFromFile(option.getKey(), (float) option.getValue())));
 			} else if (option instanceof IntOption) {
 				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));
-			} else if (option instanceof BracketsOption) {
-				((BracketsOption) option).saveValue(Brackets.fromId((int) ((long) getFromFile(option.getKey(), ((BracketsOption) option).getBrackets().getId()))));
+			} else if (option instanceof StepOption) {
+				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));
 			}
 		}
 	}

@@ -13,10 +13,8 @@ import net.minecraft.util.AxisAlignedBB;
 import drop.mods.Mod;
 import drop.mods.ModColor;
 import drop.mods.ModOptions;
-import drop.mods.option.Brackets;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
 import drop.mods.option.type.FloatOption;
 

@@ -9,14 +9,8 @@ import drop.event.EventTarget;
 import drop.event.impl.KeyEvent;
 import drop.gui.GuiSettings;
 import drop.mods.Mod;
-import drop.mods.ModColor;
 import drop.mods.ModOptions;
-import drop.mods.option.Brackets;
-import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.BracketsOption;
-import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
 
 public class Freelook extends Mod {
 	public Freelook() {

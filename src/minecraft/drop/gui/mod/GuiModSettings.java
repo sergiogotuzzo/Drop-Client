@@ -50,14 +50,16 @@ public class GuiModSettings extends GuiModMenu {
 				}
 			}
 			
-			if (option instanceof BracketsOption) {
+			if (option instanceof StepOption) {
+				StepOption stepOption = (StepOption) option;
+				
 				if (button.id == -1) {
-					((BracketsOption) option).saveValue(Brackets.fromId(((BracketsOption) option).getBrackets() == Brackets.NONE ? Brackets.ANGULAR.getId() : ((BracketsOption) option).getBrackets().getId() - 1));
-	            	this.initGui();
+					stepOption.saveValue((int) stepOption.getValue() == stepOption.getMin() ? stepOption.getMax() : (int) stepOption.getValue() - 1);
 				} else if (button.id == -2) {
-					((BracketsOption) option).saveValue(Brackets.fromId(((BracketsOption) option).getBrackets() == Brackets.ANGULAR ? Brackets.NONE.getId() : ((BracketsOption) option).getBrackets().getId() + 1));
-	            	this.initGui();
+					stepOption.saveValue((int) stepOption.getValue() == stepOption.getMax() ? stepOption.getMin() : (int) stepOption.getValue() + 1);
 				}
+								
+            	this.initGui();
 			}
 		}
     }
@@ -86,8 +88,12 @@ public class GuiModSettings extends GuiModMenu {
 		} else if (option instanceof IntOption) {
 			this.writeOptionValue(String.valueOf(option.getValue()), i);
 			i++;
-		} else if (option instanceof BracketsOption) {
-        	this.writeSelectedOptionValue(((BracketsOption) option).getBrackets().getName(), i);
+		} else if (option instanceof StepOption) {
+        	if (((StepOption) option).getEnum() instanceof Brackets) {
+        		this.writeSelectedOptionValue(Brackets.fromId((int) option.getValue()).getName(), i);
+        	} else {
+        		this.writeSelectedOptionValue(String.valueOf(option.getValue()), i);
+        	}
 		}
 		
 		return i;
@@ -104,8 +110,16 @@ public class GuiModSettings extends GuiModMenu {
 		} else if (option instanceof IntOption) {
 			i++;
 			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((IntOption) option).getMax(), (int) option.getValue(), i, (IntOption) option));
-		} else if (option instanceof BracketsOption) {
-			this.buttonList.add(this.createGuiTextLeftArrow(-1, ((BracketsOption) option).getBrackets().getName(), i));
+		} else if (option instanceof StepOption) {
+			String text;
+			
+			if (((StepOption) option).getEnum() instanceof Brackets) {
+        		text = Brackets.fromId((int) option.getValue()).getName();
+        	} else {
+        		text = String.valueOf(option.getValue());
+        	}
+			
+			this.buttonList.add(this.createGuiTextLeftArrow(-1, text, i));
 			this.buttonList.add(this.createGuiTextRightArrow(-2, i));
 		}
 		

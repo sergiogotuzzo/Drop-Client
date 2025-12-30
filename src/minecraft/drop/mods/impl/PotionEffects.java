@@ -13,7 +13,6 @@ import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
 import drop.mods.ModColor;
 import drop.mods.ModDraggable;

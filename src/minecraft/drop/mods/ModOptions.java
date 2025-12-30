@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 import drop.mods.option.ModOption;
 import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.BracketsOption;
 import drop.mods.option.type.ColorOption;
 import drop.mods.option.type.FloatOption;
 import drop.mods.option.type.IntOption;
+import drop.mods.option.type.StepOption;
 
 public class ModOptions {
 	private ModOption[] options;
@@ -46,7 +46,7 @@ public class ModOptions {
 		return (FloatOption) getOption(key);
 	}
 	
-	public BracketsOption getBracketsOption(String key) {
-		return (BracketsOption) getOption(key);
+	public StepOption getStepOption(String key) {
+		return (StepOption) getOption(key);
 	}
 }
