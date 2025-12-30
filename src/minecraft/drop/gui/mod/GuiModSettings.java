@@ -82,10 +82,10 @@ public class GuiModSettings extends GuiModMenu {
     private int writeOption(ModOption option, int i) {
     	this.writeOptionText(option.getGuiSettings().getOptionName(), i);
 		
-		if (option instanceof FloatOption) {
+		if (option instanceof ScrollOption_FLOAT) {
 			this.writeOptionValue(String.format("%." + option.getGuiSettings().getDecimals() + "f", option.getValue()), i);
 			i++;
-		} else if (option instanceof IntOption) {
+		} else if (option instanceof ScrollOption_INT) {
 			this.writeOptionValue(String.valueOf(option.getValue()), i);
 			i++;
 		} else if (option instanceof StepOption) {
@@ -104,12 +104,12 @@ public class GuiModSettings extends GuiModMenu {
 			this.buttonList.add(this.createGuiCheckBox(option.getGuiSettings().getButtonId(), ((BooleanOption) option).isToggled(), i));
 		} else if (option instanceof ColorOption) {
     		this.buttonList.add(this.createGuiRect(option.getGuiSettings().getButtonId(), ((ColorOption) option).getColor().getRGB(), ((ColorOption) option).getColor().isChromaToggled(), i));
-		} else if (option instanceof FloatOption) {
+		} else if (option instanceof ScrollOption_FLOAT) {
 			i++;
-			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((FloatOption) option).getMax(), (float) option.getValue(), i, (FloatOption) option));
-		} else if (option instanceof IntOption) {
+			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((ScrollOption_FLOAT) option).getMax(), (float) option.getValue(), i, (ScrollOption_FLOAT) option));
+		} else if (option instanceof ScrollOption_INT) {
 			i++;
-			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((IntOption) option).getMax(), (int) option.getValue(), i, (IntOption) option));
+			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((ScrollOption_INT) option).getMax(), (int) option.getValue(), i, (ScrollOption_INT) option));
 		} else if (option instanceof StepOption) {
 			String text;
 			

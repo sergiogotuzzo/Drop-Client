@@ -5,8 +5,8 @@ import java.util.Arrays;
 import drop.mods.option.ModOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
-import drop.mods.option.type.IntOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
+import drop.mods.option.type.ScrollOption_INT;
 import drop.mods.option.type.StepOption;
 
 public class ModOptions {
@@ -38,12 +38,12 @@ public class ModOptions {
 		return (ColorOption) getOption(key);
 	}
 	
-	public IntOption getIntOption(String key) {
-		return (IntOption) getOption(key);
+	public ScrollOption_INT getIntOption(String key) {
+		return (ScrollOption_INT) getOption(key);
 	}
 	
-	public FloatOption getFloatOption(String key) {
-		return (FloatOption) getOption(key);
+	public ScrollOption_FLOAT getFloatOption(String key) {
+		return (ScrollOption_FLOAT) getOption(key);
 	}
 	
 	public StepOption getStepOption(String key) {

@@ -16,7 +16,7 @@ import drop.mods.ModOptions;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
 
 public class BlockOverlay extends Mod {
 	public BlockOverlay() {
@@ -24,7 +24,7 @@ public class BlockOverlay extends Mod {
 		
 		this.options = new ModOptions(
 				new BooleanOption(this, "outline", true, new GuiSettings(1, "Outline")),
-				new FloatOption(this, "outlineWidth", 0.4F, 5.0F, 2.0F, new ParentOption("outline"), new GuiSettings(2, "Outline Width")),
+				new ScrollOption_FLOAT(this, "outlineWidth", 0.4F, 5.0F, 2.0F, new ParentOption("outline"), new GuiSettings(2, "Outline Width")),
 				new ColorOption(this, "outlineColor", ModColor.fromColor(Color.BLACK, false), new ParentOption("outline"), new GuiSettings(3, "Outline Color", true, false)),
 				new BooleanOption(this, "overlay", false, new GuiSettings(4, "Overlay")),
 				new ColorOption(this, "overlayColor", ModColor.fromColor(Color.WHITE, false).setAlpha(80), new ParentOption("overlay"), new GuiSettings(5, "Overlay Color", true, true))

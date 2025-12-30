@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import drop.mods.Mod;
 import drop.mods.option.ModOption;
-import drop.mods.option.type.FloatOption;
-import drop.mods.option.type.IntOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
+import drop.mods.option.type.ScrollOption_INT;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -112,14 +112,14 @@ public class GuiSliderOption extends GuiButton {
 		if (option.getValue() instanceof Float) {
         	this.option.setValue(this.getSliderPosition() * max);
     		
-    		if ((float) option.getValue() < ((FloatOption) option).getMin()) {
-            	option.setValue(((FloatOption) option).getMin());
+    		if ((float) option.getValue() < ((ScrollOption_FLOAT) option).getMin()) {
+            	option.setValue(((ScrollOption_FLOAT) option).getMin());
             }
         } else if (option.getValue() instanceof Integer) {
         	this.option.setValue((int) (this.getSliderPosition() * max));
     		
-    		if ((int) ((IntOption) option).getValue() < ((IntOption) option).getMin()) {
-            	option.setValue(((IntOption) option).getMin());
+    		if ((int) ((ScrollOption_INT) option).getValue() < ((ScrollOption_INT) option).getMin()) {
+            	option.setValue(((ScrollOption_INT) option).getMin());
             }
         }
 	}

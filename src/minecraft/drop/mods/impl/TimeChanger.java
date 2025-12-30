@@ -7,15 +7,15 @@ import drop.mods.Mod;
 import drop.mods.ModOptions;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.FloatOption;
-import drop.mods.option.type.IntOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
+import drop.mods.option.type.ScrollOption_INT;
 
 public class TimeChanger extends Mod {
 	public TimeChanger() {
 		super(false);
 		
 		this.options = new ModOptions(
-				new FloatOption(this, "time", 0.0F, 1.0F, 0.0F, new ParentOption("useRealCurrentTime", true), new GuiSettings(1, "Time", 2)),
+				new ScrollOption_FLOAT(this, "time", 0.0F, 1.0F, 0.0F, new ParentOption("useRealCurrentTime", true), new GuiSettings(1, "Time", 2)),
 				new BooleanOption(this, "useRealCurrentTime", false, new GuiSettings(2, "Use Real Current Time"))
 				);
 		

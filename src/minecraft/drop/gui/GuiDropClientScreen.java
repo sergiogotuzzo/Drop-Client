@@ -5,7 +5,7 @@ import java.awt.Color;
 import drop.Drop;
 import drop.mods.Mod;
 import drop.mods.option.ModOption;
-import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

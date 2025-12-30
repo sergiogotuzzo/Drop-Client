@@ -7,7 +7,7 @@ import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
 import drop.mods.option.type.StepOption;
 import drop.mods.ModColor;
 import drop.mods.ModDraggable;
@@ -30,7 +30,7 @@ public class ToggleSprintSneak extends ModDraggable {
 				new BooleanOption(this, "toggleSprint", true, new GuiSettings(7, "Toggle Sprint")),
 				new BooleanOption(this, "toggleSneak", false, new GuiSettings(8, "Toggle Sneak")),
 				new BooleanOption(this, "flyBoost", true, new GuiSettings(9, "Fly Boost")),
-				new FloatOption(this, "flyBoostFactor", 2.0F, 8.0F, 4.0F, new ParentOption("flyBoost"), new GuiSettings(10, "Fly Boost Factor"))
+				new ScrollOption_FLOAT(this, "flyBoostFactor", 2.0F, 8.0F, 4.0F, new ParentOption("flyBoost"), new GuiSettings(10, "Fly Boost Factor"))
 				);
 				
 		saveOptions();

@@ -5,18 +5,18 @@ import drop.mods.Mod;
 import drop.mods.option.ModOption;
 import drop.mods.option.ParentOption;
 
-public class IntOption extends ModOption {
+public class ScrollOption_INT extends ModOption {
 	private int min;
 	private int max;
 	
-	public IntOption(Mod mod, String key, int min, int max, int value, ParentOption parentOption, GuiSettings guiSettings) {
+	public ScrollOption_INT(Mod mod, String key, int min, int max, int value, ParentOption parentOption, GuiSettings guiSettings) {
 		super(mod, key, value, parentOption, guiSettings);
 		
 		this.min = min;
 		this.max = max;
 	}
 	
-	public IntOption(Mod mod, String key, int min, int max, int value, GuiSettings guiSettings) {
+	public ScrollOption_INT(Mod mod, String key, int min, int max, int value, GuiSettings guiSettings) {
 		super(mod, key, value, guiSettings);
 		
 		this.min = min;

@@ -64,9 +64,9 @@ public abstract class Mod {
 				boolean chroma = colorOption.getGuiSettings().shouldBeChromaCheckBoxShown() ? (boolean) getFromFile(colorOption.getKeyChroma(), colorOption.getColor().isChromaToggled()) : false;
 				
 				colorOption.saveValue(ModColor.fromRGB(rgb, chroma));
-			} else if (option instanceof FloatOption) {
+			} else if (option instanceof ScrollOption_FLOAT) {
 				option.saveValue((float) ((double) getFromFile(option.getKey(), (float) option.getValue())));
-			} else if (option instanceof IntOption) {
+			} else if (option instanceof ScrollOption_INT) {
 				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));
 			} else if (option instanceof StepOption) {
 				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));

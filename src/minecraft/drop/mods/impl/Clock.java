@@ -8,7 +8,7 @@ import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.ScrollOption_FLOAT;
 import drop.mods.option.type.StepOption;
 import drop.gui.GuiSettings;
 import drop.mods.ModColor;
