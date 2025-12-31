@@ -57,13 +57,13 @@ public class ToggleSprintSneak extends ModDraggable {
 	    	String text = mc.thePlayer.movementInput.getDisplayText();
 	    	
 	    	if (options.getBooleanOption("showBackground").isToggled()) {
-		    	drawAlignedRect(pos, textToRender = text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
+		    	drawAlignedRect(textToRender = text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
 		    	
 		    	if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(pos, text, 10, options.getColorOption("borderColor").getColor().getRGB());
+			    	drawAlignedHollowRect(text, 10, options.getColorOption("borderColor").getColor().getRGB());
 		    	}
 		    	
-				drawCenteredAlignedText(pos, text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredText(text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
 			    drawAlignedText(textToRender = Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
@@ -76,13 +76,13 @@ public class ToggleSprintSneak extends ModDraggable {
 			String text = "Sprinting (Toggled)";
 			
 			if (options.getBooleanOption("showBackground").isToggled()) {
-		    	drawAlignedRect(pos, text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
+		    	drawAlignedRect(text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
 		    	
 		    	if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(pos, text, 10, options.getColorOption("borderColor").getColor().getRGB());
+			    	drawAlignedHollowRect(text, 10, options.getColorOption("borderColor").getColor().getRGB());
 		    	}
 		    	
-				drawCenteredAlignedText(pos, text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredText(text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
 			    drawAlignedText(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
