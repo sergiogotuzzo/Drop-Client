@@ -154,21 +154,6 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 		drawAlignedText(text, x, y, color.getRGB(), dropShadow, color.isChromaToggled());
 	}
 	
-	public void drawScaledText(String text, float x, float y, double scale, int color, boolean dropShadow, boolean chroma) {
-		GlStateManager.pushMatrix();
-		GlStateManager.translate(x, y, 0);
-		GlStateManager.scale(scale, scale, 1);
-		GlStateManager.translate(-x, -y, 0);
-		
-		drawText(text, x, y, color, dropShadow, chroma);
-		
-		GlStateManager.popMatrix();
-	}
-	
-	public void drawScaledText(String text, float x, float y, double scale, ModColor color, boolean dropShadow) {
-		drawScaledText(text, x, y, scale, color.getRGB(), dropShadow, color.isChromaToggled());
-	}
-	
 	public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height) {
 		float f = 0.00390625F;
 		float f1 = 0.00390625F;
