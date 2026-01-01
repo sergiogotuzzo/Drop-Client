@@ -9,7 +9,7 @@ import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.StepOption;
+import drop.mods.option.type.EnumOption;
 import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
@@ -26,7 +26,7 @@ public class PingDisplay extends ModDraggable {
 				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
 				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(17, "Border")),
 				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(18, "Border Color", false, true)),
-				new StepOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
+				new EnumOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 6, "Dynamic Colors")),
 				new ColorOption(this, "excellentTextColor", ModColor.fromRGB(85, 255, 85, false), new GuiSettings(false, 7, "Excellent Text Color", true, false)),
 				new BooleanOption(this, "excellentTextShadow", true, new GuiSettings(false, 8, "Excellent Text Shadow")),
@@ -50,7 +50,7 @@ public class PingDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap("-1 ms"));
+		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("-1 ms"));
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class PingDisplay extends ModDraggable {
 
 				drawCenteredText(text, pos.getAbsoluteX(), pos.getAbsoluteY(), color, dropShadow);
 	    	} else {
-			    drawAlignedText(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color, dropShadow);
+			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color, dropShadow);
 	    	}
 		}
 	}
@@ -111,7 +111,7 @@ public class PingDisplay extends ModDraggable {
 	    	
 			drawCenteredText("-1 ms", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap("-1 ms"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("-1 ms"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	}
 	}
 }

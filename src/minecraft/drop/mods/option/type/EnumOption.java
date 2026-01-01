@@ -5,12 +5,12 @@ import drop.mods.Mod;
 import drop.mods.option.ModOption;
 import drop.mods.option.ParentOption;
 
-public class StepOption extends ModOption {
+public class EnumOption extends ModOption {
 	private int min;
 	private int max;
 	private Enum enumIn;
 	
-	public StepOption(Mod mod, String key, int min, int max, int value, Enum enumIn, ParentOption parentOption, GuiSettings guiSettings) {
+	public EnumOption(Mod mod, String key, int min, int max, int value, Enum enumIn, ParentOption parentOption, GuiSettings guiSettings) {
 		super(mod, key, value, parentOption, guiSettings);
 		
 		this.min = min;
@@ -18,7 +18,7 @@ public class StepOption extends ModOption {
 		this.enumIn = enumIn;
 	}
 	
-	public StepOption(Mod mod, String key, int min, int max, int value, Enum enumIn, GuiSettings guiSettings) {
+	public EnumOption(Mod mod, String key, int min, int max, int value, Enum enumIn, GuiSettings guiSettings) {
 		super(mod, key, value, guiSettings);
 		
 		this.min = min;
@@ -36,5 +36,9 @@ public class StepOption extends ModOption {
 	
 	public Enum getEnum() {
 		return enumIn;
+	}
+	
+	public int getId() {
+		return (int) getValue();
 	}
 }

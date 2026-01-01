@@ -50,13 +50,13 @@ public class GuiModSettings extends GuiModMenu {
 				}
 			}
 			
-			if (option instanceof StepOption) {
-				StepOption stepOption = (StepOption) option;
+			if (option instanceof EnumOption) {
+				EnumOption enumOption = (EnumOption) option;
 				
 				if (button.id == -1) {
-					stepOption.saveValue((int) stepOption.getValue() == stepOption.getMin() ? stepOption.getMax() : (int) stepOption.getValue() - 1);
+					enumOption.saveValue((int) enumOption.getValue() == enumOption.getMin() ? enumOption.getMax() : (int) enumOption.getValue() - 1);
 				} else if (button.id == -2) {
-					stepOption.saveValue((int) stepOption.getValue() == stepOption.getMax() ? stepOption.getMin() : (int) stepOption.getValue() + 1);
+					enumOption.saveValue((int) enumOption.getValue() == enumOption.getMax() ? enumOption.getMin() : (int) enumOption.getValue() + 1);
 				}
 								
             	this.initGui();
@@ -82,14 +82,14 @@ public class GuiModSettings extends GuiModMenu {
     private int writeOption(ModOption option, int i) {
     	this.writeOptionText(option.getGuiSettings().getOptionName(), i);
 		
-		if (option instanceof ScrollOption_FLOAT) {
+		if (option instanceof FloatOption) {
 			this.writeOptionValue(String.format("%." + option.getGuiSettings().getDecimals() + "f", option.getValue()), i);
 			i++;
-		} else if (option instanceof ScrollOption_INT) {
+		} else if (option instanceof IntOption) {
 			this.writeOptionValue(String.valueOf(option.getValue()), i);
 			i++;
-		} else if (option instanceof StepOption) {
-        	if (((StepOption) option).getEnum() instanceof Brackets) {
+		} else if (option instanceof EnumOption) {
+        	if (((EnumOption) option).getEnum() instanceof Brackets) {
         		this.writeSelectedOptionValue(Brackets.fromId((int) option.getValue()).getName(), i);
         	} else {
         		this.writeSelectedOptionValue(String.valueOf(option.getValue()), i);
@@ -104,16 +104,16 @@ public class GuiModSettings extends GuiModMenu {
 			this.buttonList.add(this.createGuiCheckBox(option.getGuiSettings().getButtonId(), ((BooleanOption) option).isToggled(), i));
 		} else if (option instanceof ColorOption) {
     		this.buttonList.add(this.createGuiRect(option.getGuiSettings().getButtonId(), ((ColorOption) option).getColor().getRGB(), ((ColorOption) option).getColor().isChromaToggled(), i));
-		} else if (option instanceof ScrollOption_FLOAT) {
+		} else if (option instanceof FloatOption) {
 			i++;
-			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((ScrollOption_FLOAT) option).getMax(), (float) option.getValue(), i, (ScrollOption_FLOAT) option));
-		} else if (option instanceof ScrollOption_INT) {
+			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((FloatOption) option).getMax(), (float) option.getValue(), i, (FloatOption) option));
+		} else if (option instanceof IntOption) {
 			i++;
-			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((ScrollOption_INT) option).getMax(), (int) option.getValue(), i, (ScrollOption_INT) option));
-		} else if (option instanceof StepOption) {
+			this.buttonList.add(this.createGuiSliderOption(option.getGuiSettings().getButtonId(), ((IntOption) option).getMax(), (int) option.getValue(), i, (IntOption) option));
+		} else if (option instanceof EnumOption) {
 			String text;
 			
-			if (((StepOption) option).getEnum() instanceof Brackets) {
+			if (((EnumOption) option).getEnum() instanceof Brackets) {
         		text = Brackets.fromId((int) option.getValue()).getName();
         	} else {
         		text = String.valueOf(option.getValue());

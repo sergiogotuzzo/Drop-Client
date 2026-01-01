@@ -7,8 +7,8 @@ import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.ScrollOption_FLOAT;
-import drop.mods.option.type.StepOption;
+import drop.mods.option.type.FloatOption;
+import drop.mods.option.type.EnumOption;
 import drop.mods.ModColor;
 import drop.mods.ModDraggable;
 import drop.mods.ModOptions;
@@ -26,11 +26,11 @@ public class ToggleSprintSneak extends ModDraggable {
 				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(5, "Background Color", false, true)),
 				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(11, "Border")),
 				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(12, "Border Color", false, true)),
-				new StepOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(6, "Brackets")),
+				new EnumOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(6, "Brackets")),
 				new BooleanOption(this, "toggleSprint", true, new GuiSettings(7, "Toggle Sprint")),
 				new BooleanOption(this, "toggleSneak", false, new GuiSettings(8, "Toggle Sneak")),
 				new BooleanOption(this, "flyBoost", true, new GuiSettings(9, "Fly Boost")),
-				new ScrollOption_FLOAT(this, "flyBoostFactor", 2.0F, 8.0F, 4.0F, new ParentOption("flyBoost"), new GuiSettings(10, "Fly Boost Factor"))
+				new FloatOption(this, "flyBoostFactor", 2.0F, 8.0F, 4.0F, new ParentOption("flyBoost"), new GuiSettings(10, "Fly Boost Factor"))
 				);
 				
 		saveOptions();
@@ -43,7 +43,7 @@ public class ToggleSprintSneak extends ModDraggable {
 
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + 10 : font.getStringWidth(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap("Sprinting (Toggled)"));
+		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + 10 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("Sprinting (Toggled)"));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ToggleSprintSneak extends ModDraggable {
 		    	
 				drawCenteredText(text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
-			    drawAlignedText(textToRender = Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			    drawAlignedText(textToRender = Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
 	    }
 	}
@@ -84,7 +84,7 @@ public class ToggleSprintSneak extends ModDraggable {
 		    	
 				drawCenteredText(text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
-			    drawAlignedText(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
 	    }
 	}

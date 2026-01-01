@@ -5,7 +5,7 @@ import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
-import drop.mods.option.type.StepOption;
+import drop.mods.option.type.EnumOption;
 
 import java.awt.Color;
 
@@ -26,7 +26,7 @@ public class PotsCounter extends ModDraggable {
 				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 102, false), new ParentOption("showBackground"), new GuiSettings(4, "Background Color", false, true)),
 				new BooleanOption(this, "showBorder", false, new ParentOption("showBackground"), new GuiSettings(6, "Border")),
 				new ColorOption(this, "borderColor", ModColor.fromRGB(0, 0, 0, 255, false), new ParentOption("showBorder"), new GuiSettings(7, "Border Color", false, true)),
-				new StepOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets"))
+				new EnumOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets"))
 				);
 				
 		saveOptions();
@@ -34,7 +34,7 @@ public class PotsCounter extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap("0 pots"));
+		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("0 pots"));
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class PotsCounter extends ModDraggable {
 	    	
 			drawCenteredText(potsCount + " pots", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap(potsCount + " pots"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(potsCount + " pots"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	}
 	}
 
@@ -78,7 +78,7 @@ public class PotsCounter extends ModDraggable {
 	    	
 			drawCenteredText("0 pots", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getStepOption("brackets").getValue()).wrap("0 pots"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("0 pots"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	}
 	}
 }
