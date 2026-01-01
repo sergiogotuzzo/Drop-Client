@@ -16,6 +16,9 @@ import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
 
 public class ServerAddress extends ModDraggable {
+	private String textToRender = "";
+	private int RECT_GAP = 8;
+	
 	public ServerAddress() {
 		super(false, 0.5, 0.5);
 
@@ -34,7 +37,7 @@ public class ServerAddress extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("mc.example.org") + 8 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("mc.example.org"));
+		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("mc.example.org") + RECT_GAP : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("mc.example.org"));
 	}
 
 	@Override
@@ -45,32 +48,36 @@ public class ServerAddress extends ModDraggable {
 	@Override
 	public void render(ScreenPosition pos) {
 		if (mc.getCurrentServerData() != null) {
+			textToRender = mc.getCurrentServerData().serverIP;
+			
 			if (options.getBooleanOption("showBackground").isToggled()) {
-				drawAlignedRect(mc.getCurrentServerData().serverIP, 8, options.getColorOption("backgroundColor").getColor().getRGB());
+				getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB(),textToRender, RECT_GAP);
 				
 				if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(mc.getCurrentServerData().serverIP, 8, options.getColorOption("borderColor").getColor().getRGB());
+			    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB(), textToRender, RECT_GAP);
 		    	}
 				
-				drawCenteredText(mc.getCurrentServerData().serverIP, 8, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredText(textToRender, RECT_GAP, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
-			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(mc.getCurrentServerData().serverIP), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
 		}
 	}
 
 	@Override
 	public void renderDummy(ScreenPosition pos) {
+		textToRender = "mc.example.org";
+		
 		if (options.getBooleanOption("showBackground").isToggled()) {
-			drawAlignedRect("mc.example.org", 8, options.getColorOption("backgroundColor").getColor().getRGB());
+			getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB(),textToRender, RECT_GAP);
 			
 			if (options.getBooleanOption("showBorder").isToggled()) {
-		    	drawAlignedHollowRect("mc.example.org", 8, options.getColorOption("borderColor").getColor().getRGB());
+		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB(), textToRender, RECT_GAP);
 	    	}
 			
-			drawCenteredText("mc.example.org", 8, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawCenteredText(textToRender, RECT_GAP, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("mc.example.org"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
     	}
 	}
 }

@@ -15,6 +15,13 @@ import drop.mods.ModOptions;
 import drop.mods.option.Brackets;
 
 public class ToggleSprintSneak extends ModDraggable {
+	public int keyHoldTicks = 7;
+	public boolean sprinting = false;
+	public boolean sneaking = false;
+	
+	private String textToRender = "";
+	private int RECT_GAP = 10;
+	
 	public ToggleSprintSneak() {
 		super(true, 0.5, 0.5);
 		
@@ -35,15 +42,10 @@ public class ToggleSprintSneak extends ModDraggable {
 				
 		saveOptions();
 	}
-	
-	public int keyHoldTicks = 7;
-	public boolean sprinting = false;
-	public boolean sneaking = false;
-	private String textToRender = "";
 
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + 10 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("Sprinting (Toggled)"));
+		return options.getBooleanOption("showBackground").isToggled() ? font.getStringWidth("Sprinting (Toggled)") + RECT_GAP : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("Sprinting (Toggled)"));
 	}
 
 	@Override
@@ -54,18 +56,18 @@ public class ToggleSprintSneak extends ModDraggable {
 	@Override
 	public void render(ScreenPosition pos) {
 	    if (options.getBooleanOption("showText").isToggled() && mc.thePlayer.movementInput.getDisplayText() != "") {
-	    	String text = mc.thePlayer.movementInput.getDisplayText();
+	    	textToRender = mc.thePlayer.movementInput.getDisplayText();
 	    	
-	    	if (options.getBooleanOption("showBackground").isToggled()) {
-		    	drawAlignedRect(textToRender = text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
+	    	if (options.getBooleanOption("showBackground").isToggled()) {	    		
+	    		getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB(), textToRender, RECT_GAP);
 		    	
 		    	if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(text, 10, options.getColorOption("borderColor").getColor().getRGB());
+		    		getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB(), textToRender, RECT_GAP);
 		    	}
 		    	
-				drawCenteredText(text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredText(textToRender, RECT_GAP, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
-			    drawAlignedText(textToRender = Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
 	    }
 	}
@@ -73,18 +75,18 @@ public class ToggleSprintSneak extends ModDraggable {
 	@Override
 	public void renderDummy(ScreenPosition pos) {
 		if (options.getBooleanOption("showText").isToggled()) {
-			String text = "Sprinting (Toggled)";
+			textToRender = "Sprinting (Toggled)";
 			
-			if (options.getBooleanOption("showBackground").isToggled()) {
-		    	drawAlignedRect(text, 10, options.getColorOption("backgroundColor").getColor().getRGB());
+			if (options.getBooleanOption("showBackground").isToggled()) {	    		
+	    		getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB(), textToRender, RECT_GAP);
 		    	
 		    	if (options.getBooleanOption("showBorder").isToggled()) {
-			    	drawAlignedHollowRect(text, 10, options.getColorOption("borderColor").getColor().getRGB());
+		    		getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB(), textToRender, RECT_GAP);
 		    	}
 		    	
-				drawCenteredText(text, 10, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+				drawCenteredText(textToRender, RECT_GAP, pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	} else {
-			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(textToRender), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
 	    	}
 	    }
 	}

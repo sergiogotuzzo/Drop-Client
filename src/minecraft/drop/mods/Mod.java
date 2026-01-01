@@ -97,4 +97,8 @@ public abstract class Mod {
 	public ModOptions getOptions() {
 		return options;
 	}
+	
+	public Minecraft getMinecraft() {
+		return mc;
+	}
 }
