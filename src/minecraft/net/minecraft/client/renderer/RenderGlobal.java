@@ -120,7 +120,7 @@ import net.optifine.shaders.gui.GuiShaderOptions;
 import net.optifine.util.ChunkUtils;
 import net.optifine.util.RenderChunkUtils;
 import drop.mods.ModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.BlockOverlay;
 
 public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListener
@@ -2622,9 +2622,9 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
             GL11.glLineWidth(2.0F);
             GlStateManager.disableTexture2D();
             
-            final BlockOverlay blockOverlayMod = ModInstances.getBlockOverlayMod();
+            final BlockOverlay blockOverlayMod = ModHandler.get(BlockOverlay.class);
             
-            if (blockOverlayMod.isEnabled() && blockOverlayMod.getOptions().getBooleanOption("outline").isToggled()) {
+            if (blockOverlayMod.getOptions().getBooleanOption("outline").isEnabled()) {
             	if (blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().isChromaToggled()) {
                 	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 

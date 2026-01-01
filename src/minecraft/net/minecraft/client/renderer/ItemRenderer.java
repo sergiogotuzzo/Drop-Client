@@ -30,7 +30,9 @@ import net.minecraft.world.storage.MapData;
 import net.optifine.DynamicLights;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.LeftHand;
+import drop.mods.impl.NoFireLayer;
 import drop.mods.impl.OldVisuals;
 
 import org.lwjgl.opengl.GL11;
@@ -309,18 +311,14 @@ public class ItemRenderer
      */
     private void transformFirstPersonItem(float equipProgress, float swingProgress)
     {
-    	OldVisuals oldVisualMod = ModInstances.getOldVisualsMod();
-    	
-    	if (oldVisualMod.isEnabled()) {
-    		if (oldVisualMod.getOptions().getBooleanOption("bow").isToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
-    			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
-    		}
+    	if (ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("bow").isEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
+		}
 
-    		if (oldVisualMod.getOptions().getBooleanOption("fishingRod").isToggled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
-    			GlStateManager.translate(0.08f, -0.027f, -0.33f);
-    			GlStateManager.scale(0.93f, 1.0f, 1.0f);
-    		}
-    	}
+		if (ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("fishingRod").isEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
+			GlStateManager.translate(0.08f, -0.027f, -0.33f);
+			GlStateManager.scale(0.93f, 1.0f, 1.0f);
+		}
 		
         GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
         GlStateManager.translate(0.0F, equipProgress * -0.6F, 0.0F);
@@ -394,7 +392,7 @@ public class ItemRenderer
             GlStateManager.enableRescaleNormal();
             GlStateManager.pushMatrix();
             
-            if (ModInstances.getLeftHandMod().isEnabled()) {
+            if (ModHandler.get(LeftHand.class).isEnabled()) {
             	GL11.glScaled(-1.0D, 1.0D, 1.0D);
             	GlStateManager.disableCull();
             }
@@ -409,7 +407,7 @@ public class ItemRenderer
                 {
                     EnumAction enumaction = this.itemToRender.getItemUseAction();
                     
-                    float swingProgress = ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().getOptions().getBooleanOption("blockHitting").isToggled() ? f1 : 0.0F;
+                    float swingProgress = ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("blockHitting").isEnabled() ? f1 : 0.0F;
 
                     switch (enumaction)
                     {
@@ -500,7 +498,7 @@ public class ItemRenderer
 
             if (this.mc.thePlayer.isBurning() && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderFireOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(partialTicks)}))
             {
-                if (!ModInstances.getNoFireLayerMod().isEnabled()) {
+                if (!ModHandler.get(NoFireLayer.class).isEnabled()) {
                 	this.renderFireInFirstPerson(partialTicks);
                 }
             }

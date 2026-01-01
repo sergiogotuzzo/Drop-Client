@@ -192,7 +192,9 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import drop.gui.GuiDropClientMainMenu;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.NoHotbarScrolling;
+import drop.mods.impl.Zoom;
 import drop.mods.impl.togglesprintsneak.DropClientMovementInput;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
@@ -1892,7 +1894,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         }
                         else
                         {
-                        	if (!ModInstances.getNoHotbarScrollingMod().isEnabled() && (!Config.zoomMode || Config.zoomMode && !ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled())) {
+                        	if (!ModHandler.get(NoHotbarScrolling.class).isEnabled() && (!Config.zoomMode || Config.zoomMode && !ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled())) {
                         		this.thePlayer.inventory.changeCurrentItem(j);
                         	}
                         }

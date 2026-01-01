@@ -5,13 +5,13 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.TabOverlay;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
 
 public class GuiTabOverlayTextColor extends GuiModColor {
-	private static final TabOverlay mod = ModInstances.getTabOverlayMod();
+	private static final TabOverlay mod = ModHandler.get(TabOverlay.class);
 	
 	public GuiTabOverlayTextColor(GuiScreen previousGuiScreen) {
 		super(previousGuiScreen, mod, (ColorOption) mod.getOptions().getColorOption("textColor"));

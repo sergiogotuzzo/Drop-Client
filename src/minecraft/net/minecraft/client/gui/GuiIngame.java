@@ -48,7 +48,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Bossbar;
+import drop.mods.impl.NoPumpkinOverlay;
+import drop.mods.impl.OldVisuals;
 
 public class GuiIngame extends Gui
 {
@@ -135,7 +138,7 @@ public class GuiIngame extends Gui
 
     public void renderGameOverlay(float partialTicks)
     {
-    	if (ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().getOptions().getBooleanOption("blockHitting").isToggled() && this.mc.thePlayer.getHeldItem() != null) {
+    	if (ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("blockHitting").isEnabled() && this.mc.thePlayer.getHeldItem() != null) {
 			this.attemptSwing();
 		}
     	
@@ -158,7 +161,7 @@ public class GuiIngame extends Gui
 
         if (this.mc.gameSettings.thirdPersonView == 0 && itemstack != null && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin))
         {
-            if (!ModInstances.getNoPumpkinOverlayMod().isEnabled()) {
+            if (!ModHandler.get(NoPumpkinOverlay.class).isEnabled()) {
             	this.renderPumpkinOverlay(scaledresolution);
             }
         }
@@ -196,7 +199,7 @@ public class GuiIngame extends Gui
         GlStateManager.enableAlpha();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         
-        if (!ModInstances.getBossbarMod().isEnabled()) {
+        if (!ModHandler.get(Bossbar.class).isEnabled()) {
         	this.mc.mcProfiler.startSection("bossHealth");
             this.renderBossHealth();
             this.mc.mcProfiler.endSection();
@@ -351,7 +354,7 @@ public class GuiIngame extends Gui
 
         ScoreObjective scoreobjective1 = scoreobjective != null ? scoreobjective : scoreboard.getObjectiveInDisplaySlot(1);
 
-        if (!ModInstances.getScoreboardMod().isEnabled() && scoreobjective1 != null)
+        if (!ModHandler.get(drop.mods.impl.Scoreboard.class).isEnabled() && scoreobjective1 != null)
         {
             this.renderScoreboard(scoreobjective1, scaledresolution);
         }

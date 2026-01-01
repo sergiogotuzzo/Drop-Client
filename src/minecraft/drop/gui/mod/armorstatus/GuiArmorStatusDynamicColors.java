@@ -9,11 +9,11 @@ import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModMenu;
 import drop.gui.mod.GuiModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.ArmorStatus;
 
 public class GuiArmorStatusDynamicColors extends GuiModMenu {
-	private static final ArmorStatus mod = ModInstances.getArmorStatusMod();
+	private static final ArmorStatus mod = ModHandler.get(ArmorStatus.class);
 	
 	public GuiArmorStatusDynamicColors(GuiDropClientScreen previousGuiScreen) {
 		super(previousGuiScreen, mod.getName());

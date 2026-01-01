@@ -2,7 +2,8 @@ package net.minecraft.client.renderer.entity;
 
 import java.util.Random;
 
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.ItemPhysics;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -37,7 +38,7 @@ public class RenderEntityItem extends Render<EntityItem>
         }
         else
         {
-        	if (ModInstances.getItemPhysicsMod().isEnabled()) {
+        	if (ModHandler.get(ItemPhysics.class).isEnabled()) {
         		boolean flag = p_177077_9_.isGui3d();
                 int i = this.func_177078_a(itemstack);
                 float f = 0.25F;
@@ -62,7 +63,7 @@ public class RenderEntityItem extends Render<EntityItem>
                 }
                 
                 if (!itemIn.onGround) {
-                    float rotAmount = ((itemIn.getAge() + p_177077_8_) * ((int) ModInstances.getItemPhysicsMod().getOptions().getIntOption("rotationSpeed").getValue() * 10)) % 360;
+                    float rotAmount = ((itemIn.getAge() + p_177077_8_) * ((int) ModHandler.get(ItemPhysics.class).getOptions().getIntOption("rotationSpeed").getValue() * 10)) % 360;
                     
                     GlStateManager.rotate(rotAmount, 1f, 0f, 1f);
                 }

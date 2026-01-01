@@ -88,8 +88,13 @@ import net.optifine.util.MemoryMonitor;
 import net.optifine.util.TextureUtils;
 import net.optifine.util.TimedEvent;
 import drop.gui.GuiDropClientMainMenu;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Freelook;
+import drop.mods.impl.Fullbright;
 import drop.mods.impl.HurtCam;
+import drop.mods.impl.NoBobbing;
+import drop.mods.impl.OldVisuals;
+import drop.mods.impl.Zoom;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -416,7 +421,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         Entity entity = this.mc.getRenderViewEntity();
         double d2 = entity.posX;
-        double d0 = entity.posY + (double)ModInstances.getOldVisualsMod().getCustomEyeHeight(entity);
+        double d0 = entity.posY + (double)ModHandler.get(OldVisuals.class).getCustomEyeHeight(entity);
         double d1 = entity.posZ;
         float f2 = this.mc.theWorld.getLightBrightness(new BlockPos(d2, d0, d1));
         float f3 = (float)this.mc.gameSettings.renderDistanceChunks / 16.0F;
@@ -632,7 +637,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
             boolean flag = false;
 
-            if (ModInstances.getZoomMod().isEnabled() && this.mc.currentScreen == null)
+            if (ModHandler.get(Zoom.class).isEnabled() && this.mc.currentScreen == null)
             {
                 GameSettings gamesettings = this.mc.gameSettings;
                 flag = GameSettings.isKeyDown(this.mc.gameSettings.ofKeyBindZoom);
@@ -644,7 +649,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 {
                     Config.zoomMode = true;
                     
-                    if (ModInstances.getZoomMod().getOptions().getBooleanOption("smoothCamera").isToggled()) {
+                    if (ModHandler.get(Zoom.class).getOptions().getBooleanOption("smoothCamera").isToggled()) {
                     	Config.zoomSmoothCamera = this.mc.gameSettings.smoothCamera;
                         this.mc.gameSettings.smoothCamera = true;
                     }
@@ -654,15 +659,15 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
                 if (Config.zoomMode)
                 {
-                	f /= (ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled() ? getScrollAmount() : (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevel").getValue());
+                	f /= (ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled() ? getScrollAmount() : (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevel").getValue());
                 }
             }
             else if (Config.zoomMode)
             {
                 Config.zoomMode = false;
 
-                if (ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled()) {
-                	this.scrollTotal = (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevel").getValue();
+                if (ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled()) {
+                	this.scrollTotal = (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevel").getValue();
                 }
                 
                 this.mc.gameSettings.smoothCamera = Config.zoomSmoothCamera;
@@ -689,7 +694,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
     }
     
     private int getScrollAmount() {
-    	if (ModInstances.getZoomMod().isEnabled() && ModInstances.getZoomMod().getOptions().getBooleanOption("scrollToZoom").isToggled()) {
+    	if (ModHandler.get(Zoom.class).isEnabled() && ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled()) {
     		int dWheel = Mouse.getDWheel();
     		
     		if (dWheel != 0) {
@@ -701,12 +706,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
     				scrollTotal--;
     			}
     			
-    			if (scrollTotal > (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMax").getValue()) {
-    				scrollTotal = (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMax").getValue();
+    			if (scrollTotal > (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMax").getValue()) {
+    				scrollTotal = (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMax").getValue();
     			}
     			
-    			if (scrollTotal < (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMin").getValue()) {
-    				scrollTotal = (int) ModInstances.getZoomMod().getOptions().getIntOption("zoomLevelMin").getValue();
+    			if (scrollTotal < (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMin").getValue()) {
+    				scrollTotal = (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMin").getValue();
     			}
     		}
     	}
@@ -735,7 +740,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             f = f / (float)entitylivingbase.maxHurtTime;
             f = MathHelper.sin(f * f * f * f * (float)Math.PI);
             float f2 = entitylivingbase.attackedAtYaw;
-            HurtCam hurtCamMod = ModInstances.getHurtCamMod();
+            HurtCam hurtCamMod = ModHandler.get(HurtCam.class);
             GlStateManager.rotate(-f2, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(-f * (hurtCamMod.isEnabled() ? hurtCamMod.getOptions().getBooleanOption("hurtShake").isToggled() ? (float) hurtCamMod.getOptions().getFloatOption("hurtShakeIntensity").getValue() : 0.0F : 14.0F), 0.0F, 0.0F, 1.0F);
             GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
@@ -767,7 +772,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
     private void orientCamera(float partialTicks)
     {
         Entity entity = this.mc.getRenderViewEntity();
-        float f = ModInstances.getOldVisualsMod().getCustomEyeHeight(entity);
+        float f = ModHandler.get(OldVisuals.class).getCustomEyeHeight(entity);
         double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * (double)partialTicks;
         double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * (double)partialTicks + (double)f;
         double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * (double)partialTicks;
@@ -793,8 +798,8 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     GlStateManager.rotate((float)(j * 90), 0.0F, 1.0F, 0.0F);
                 }
 
-                GlStateManager.rotate(ModInstances.getFreelookMod().getCameraYaw() + (ModInstances.getFreelookMod().getCameraYaw() - ModInstances.getFreelookMod().getCameraYaw()) * partialTicks + 180.0F, 0.0F, -1.0F, 0.0F);
-                GlStateManager.rotate(ModInstances.getFreelookMod().getCameraPitch() + (ModInstances.getFreelookMod().getCameraPitch() - ModInstances.getFreelookMod().getCameraPitch()) * partialTicks, -1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate(ModHandler.get(Freelook.class).getCameraYaw() + (ModHandler.get(Freelook.class).getCameraYaw() - ModHandler.get(Freelook.class).getCameraYaw()) * partialTicks + 180.0F, 0.0F, -1.0F, 0.0F);
+                GlStateManager.rotate(ModHandler.get(Freelook.class).getCameraPitch() + (ModHandler.get(Freelook.class).getCameraPitch() - ModHandler.get(Freelook.class).getCameraPitch()) * partialTicks, -1.0F, 0.0F, 0.0F);
             }
         }
         else if (this.mc.gameSettings.thirdPersonView > 0)
@@ -807,8 +812,8 @@ public class EntityRenderer implements IResourceManagerReloadListener
             }
             else
             {
-                float f1 = ModInstances.getFreelookMod().getCameraYaw();
-                float f2 = ModInstances.getFreelookMod().getCameraPitch();
+                float f1 = ModHandler.get(Freelook.class).getCameraYaw();
+                float f2 = ModHandler.get(Freelook.class).getCameraPitch();
 
                 if (this.mc.gameSettings.thirdPersonView == 2)
                 {
@@ -845,11 +850,11 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 }
 
-                GlStateManager.rotate(ModInstances.getFreelookMod().getCameraPitch() - f2, 1.0F, 0.0F, 0.0F);
-                GlStateManager.rotate(ModInstances.getFreelookMod().getCameraYaw() - f1, 0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(ModHandler.get(Freelook.class).getCameraPitch() - f2, 1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate(ModHandler.get(Freelook.class).getCameraYaw() - f1, 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate(0.0F, 0.0F, (float)(-d3));
-                GlStateManager.rotate(f1 - ModInstances.getFreelookMod().getCameraYaw(), 0.0F, 1.0F, 0.0F);
-                GlStateManager.rotate(f2 - ModInstances.getFreelookMod().getCameraPitch(), 1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate(f1 - ModHandler.get(Freelook.class).getCameraYaw(), 0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(f2 - ModHandler.get(Freelook.class).getCameraPitch(), 1.0F, 0.0F, 0.0F);
             }
         }
         else
@@ -861,8 +866,8 @@ public class EntityRenderer implements IResourceManagerReloadListener
         {
             if (!this.mc.gameSettings.debugCamEnable)
             {
-                float f6 = ModInstances.getFreelookMod().getCameraYaw() + (ModInstances.getFreelookMod().getCameraYaw() - ModInstances.getFreelookMod().getCameraYaw()) * partialTicks + 180.0F;
-                float f7 = ModInstances.getFreelookMod().getCameraPitch() + (ModInstances.getFreelookMod().getCameraPitch() - ModInstances.getFreelookMod().getCameraPitch()) * partialTicks;
+                float f6 = ModHandler.get(Freelook.class).getCameraYaw() + (ModHandler.get(Freelook.class).getCameraYaw() - ModHandler.get(Freelook.class).getCameraYaw()) * partialTicks + 180.0F;
+                float f7 = ModHandler.get(Freelook.class).getCameraPitch() + (ModHandler.get(Freelook.class).getCameraPitch() - ModHandler.get(Freelook.class).getCameraPitch()) * partialTicks;
                 float f8 = 0.0F;
 
                 if (entity instanceof EntityAnimal)
@@ -884,7 +889,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
         else if (!this.mc.gameSettings.debugCamEnable)
         {
-            GlStateManager.rotate(ModInstances.getFreelookMod().getCameraPitch() + (ModInstances.getFreelookMod().getCameraPitch() - ModInstances.getFreelookMod().getCameraPitch()) * partialTicks, 1.0F, 0.0F, 0.0F);
+            GlStateManager.rotate(ModHandler.get(Freelook.class).getCameraPitch() + (ModHandler.get(Freelook.class).getCameraPitch() - ModHandler.get(Freelook.class).getCameraPitch()) * partialTicks, 1.0F, 0.0F, 0.0F);
 
             if (entity instanceof EntityAnimal)
             {
@@ -893,7 +898,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             }
             else
             {
-                GlStateManager.rotate(ModInstances.getFreelookMod().getCameraYaw() + (ModInstances.getFreelookMod().getCameraYaw() - ModInstances.getFreelookMod().getCameraYaw()) * partialTicks + 180.0F, 0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(ModHandler.get(Freelook.class).getCameraYaw() + (ModHandler.get(Freelook.class).getCameraYaw() - ModHandler.get(Freelook.class).getCameraYaw()) * partialTicks + 180.0F, 0.0F, 1.0F, 0.0F);
             }
         }
 
@@ -954,7 +959,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         this.hurtCameraEffect(partialTicks);
 
-        if (this.mc.gameSettings.viewBobbing && !ModInstances.getNoBobbingMod().isEnabled())
+        if (this.mc.gameSettings.viewBobbing && !ModHandler.get(NoBobbing.class).isEnabled())
         {
             this.setupViewBobbing(partialTicks);
         }
@@ -1232,7 +1237,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                         f10 = 1.0F;
                     }
                     
-                    float f16 = ModInstances.getFullbrightMod().getGamma();
+                    float f16 = ModHandler.get(Fullbright.class).getGamma();
                     float f17 = 1.0F - f8;
                     float f13 = 1.0F - f9;
                     float f14 = 1.0F - f10;
@@ -1323,7 +1328,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             Mouse.setGrabbed(true);
         }
 
-        if (this.mc.inGameHasFocus && flag && ModInstances.getFreelookMod().overrideMouse())
+        if (this.mc.inGameHasFocus && flag && ModHandler.get(Freelook.class).overrideMouse())
         {
             this.mc.mouseHelper.mouseXYChange();
             float f = this.mc.gameSettings.mouseSensitivity * 0.6F + 0.2F;
@@ -1538,7 +1543,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             GlStateManager.matrixMode(5888);
             GlStateManager.loadIdentity();
             this.orientCamera(partialTicks);
-            GlStateManager.translate(0.0F, ModInstances.getOldVisualsMod().getCustomEyeHeight(entity), 0.0F);
+            GlStateManager.translate(0.0F, ModHandler.get(OldVisuals.class).getCustomEyeHeight(entity), 0.0F);
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.005D, 1.0E-4D, 1.0E-4D), 255, 0, 0, 255);
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0E-4D, 1.0E-4D, 0.005D), 0, 0, 255, 255);
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0E-4D, 0.0033D, 1.0E-4D), 0, 255, 0, 255);
@@ -1682,7 +1687,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         this.setupFog(0, partialTicks);
         GlStateManager.shadeModel(7425);
 
-        if (entity.posY + (double)ModInstances.getOldVisualsMod().getCustomEyeHeight(entity) < 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
+        if (entity.posY + (double)ModHandler.get(OldVisuals.class).getCustomEyeHeight(entity) < 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
         {
             this.renderCloudsCheck(renderglobal, partialTicks, pass);
         }
@@ -1927,7 +1932,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         GlStateManager.disableBlend();
         GlStateManager.disableFog();
 
-        if (entity.posY + (double)ModInstances.getOldVisualsMod().getCustomEyeHeight(entity) >= 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
+        if (entity.posY + (double)ModHandler.get(OldVisuals.class).getCustomEyeHeight(entity) >= 128.0D + (double)(this.mc.gameSettings.ofCloudsHeight * 128.0F))
         {
             this.mc.mcProfiler.endStartSection("aboveClouds");
             this.renderCloudsCheck(renderglobal, partialTicks, pass);

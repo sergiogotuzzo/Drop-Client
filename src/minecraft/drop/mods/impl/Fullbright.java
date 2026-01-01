@@ -4,7 +4,6 @@ import drop.event.EventTarget;
 import drop.event.impl.TickEvent;
 import drop.gui.GuiDropClientScreen;
 import drop.mods.Mod;
-import drop.mods.ModInstances;
 
 public class Fullbright extends Mod {	
 	public Fullbright() {

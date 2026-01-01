@@ -25,4 +25,8 @@ public class BooleanOption extends ModOption {
 	public boolean isToggled() {
 		return (boolean) getValue();
 	}
+	
+	public boolean isEnabled() {
+		return mod.isEnabled() && isToggled();
+	}
 }

@@ -107,7 +107,8 @@ import net.optifine.entity.model.CustomEntityModels;
 import net.optifine.player.PlayerItemsLayer;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Freelook;
 
 public class RenderManager
 {
@@ -279,8 +280,8 @@ public class RenderManager
         }
         else
         {
-        	this.playerViewY = ModInstances.getFreelookMod().getCameraYaw() + (ModInstances.getFreelookMod().getCameraYaw() - ModInstances.getFreelookMod().getCameraYaw()) * partialTicks;
-        	this.playerViewX = ModInstances.getFreelookMod().getCameraPitch() + (ModInstances.getFreelookMod().getCameraPitch() - ModInstances.getFreelookMod().getCameraPitch()) * partialTicks;
+        	this.playerViewY = ModHandler.get(Freelook.class).getCameraYaw() + (ModHandler.get(Freelook.class).getCameraYaw() - ModHandler.get(Freelook.class).getCameraYaw()) * partialTicks;
+        	this.playerViewX = ModHandler.get(Freelook.class).getCameraPitch() + (ModHandler.get(Freelook.class).getCameraPitch() - ModHandler.get(Freelook.class).getCameraPitch()) * partialTicks;
         }
 
         if (optionsIn.thirdPersonView == 2)

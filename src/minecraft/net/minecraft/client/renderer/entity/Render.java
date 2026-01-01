@@ -25,7 +25,8 @@ import net.optifine.entity.model.IEntityRenderer;
 import net.optifine.shaders.Shaders;
 import org.lwjgl.opengl.GL11;
 
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Nametags;
 
 public abstract class Render<T extends Entity> implements IEntityRenderer
 {
@@ -402,20 +403,20 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             float blue = 0.0F;
             float alpha = 0.25F;
             
-            if (ModInstances.getNametagsMod().isEnabled()) {
-            	red = ModInstances.getNametagsMod().getOptions().getColorOption("backgroundColor").getColor().getRed() / 255.0F;
-            	green = ModInstances.getNametagsMod().getOptions().getColorOption("backgroundColor").getColor().getGreen() / 255.0F;
-            	blue = ModInstances.getNametagsMod().getOptions().getColorOption("backgroundColor").getColor().getBlue() / 255.0F;
-            	alpha = ModInstances.getNametagsMod().getOptions().getColorOption("backgroundColor").getColor().getAlpha() / 255.0F;
+            if (ModHandler.get(Nametags.class).isEnabled()) {
+            	red = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getRed() / 255.0F;
+            	green = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getGreen() / 255.0F;
+            	blue = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getBlue() / 255.0F;
+            	alpha = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getAlpha() / 255.0F;
             }
             
             worldrenderer.pos((double)(j + 1), (double)(-1 + i), 0.0D).color(red, green, blue, alpha).endVertex();
             tessellator.draw();
             GlStateManager.enableTexture2D();
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127, ModInstances.getNametagsMod().isEnabled() && ModInstances.getNametagsMod().getOptions().getBooleanOption("textShadow").isToggled());
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127, ModHandler.get(Nametags.class).getOptions().getBooleanOption("textShadow").isEnabled());
             GlStateManager.enableDepth();
             GlStateManager.depthMask(true);
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, -1, ModInstances.getNametagsMod().isEnabled() && ModInstances.getNametagsMod().getOptions().getBooleanOption("textShadow").isToggled());
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, -1, ModHandler.get(Nametags.class).getOptions().getBooleanOption("textShadow").isEnabled());
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

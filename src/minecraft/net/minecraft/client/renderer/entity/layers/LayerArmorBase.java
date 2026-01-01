@@ -16,7 +16,8 @@ import net.optifine.reflect.Reflector;
 import net.optifine.reflect.ReflectorForge;
 import net.optifine.shaders.Shaders;
 import net.optifine.shaders.ShadersRender;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.OldVisuals;
 
 public abstract class LayerArmorBase<T extends ModelBase> implements LayerRenderer<EntityLivingBase>
 {
@@ -47,7 +48,7 @@ public abstract class LayerArmorBase<T extends ModelBase> implements LayerRender
 
     public boolean shouldCombineTextures()
     {
-        return ModInstances.getOldVisualsMod().isEnabled() && ModInstances.getOldVisualsMod().getOptions().getBooleanOption("armorHitAnimation").isToggled();
+        return ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("armorHitAnimation").isEnabled();
     }
 
     private void renderLayer(EntityLivingBase entitylivingbaseIn, float p_177182_2_, float p_177182_3_, float partialTicks, float p_177182_5_, float p_177182_6_, float p_177182_7_, float scale, int armorSlot)

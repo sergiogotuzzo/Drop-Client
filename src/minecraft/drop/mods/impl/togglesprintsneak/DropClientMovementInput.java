@@ -7,7 +7,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MovementInput;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 
 public class DropClientMovementInput extends MovementInput {
 	private boolean sprint = false;
@@ -21,7 +21,7 @@ public class DropClientMovementInput extends MovementInput {
 	
 	private static final DecimalFormat df = new DecimalFormat("#.0");
 	
-	private ToggleSprintSneak toggleSprintSneakMod = ModInstances.getToggleSprintSneakMod();
+	private ToggleSprintSneak toggleSprintSneakMod = ModHandler.get(ToggleSprintSneak.class);
 	
 	public DropClientMovementInput(GameSettings gameSettings) {
 		this.gameSettings = gameSettings;

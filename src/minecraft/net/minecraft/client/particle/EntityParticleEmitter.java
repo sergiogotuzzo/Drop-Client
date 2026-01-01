@@ -1,6 +1,7 @@
 package net.minecraft.client.particle;
 
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Particles;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumParticleTypes;
@@ -34,7 +35,7 @@ public class EntityParticleEmitter extends EntityFX
      */
     public void onUpdate()
     {
-        for (int i = 0; i < 16 * (ModInstances.getParticlesMod().isEnabled() ? (int) ModInstances.getParticlesMod().getOptions().getIntOption("multiplierFactor").getValue() : 1); ++i)
+        for (int i = 0; i < 16 * (ModHandler.get(Particles.class).isEnabled() ? (int) ModHandler.get(Particles.class).getOptions().getIntOption("multiplierFactor").getValue() : 1); ++i)
         {
             double d0 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);
             double d1 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);

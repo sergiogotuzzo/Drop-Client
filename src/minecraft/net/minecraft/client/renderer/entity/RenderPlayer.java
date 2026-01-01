@@ -1,6 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Nametags;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelPlayer;
@@ -63,7 +64,7 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
             this.setModelVisibilities(entity);
             super.doRender(entity, x, d0, z, entityYaw, partialTicks);
             
-            if (ModInstances.getNametagsMod().isEnabled() && ModInstances.getNametagsMod().getOptions().getBooleanOption("showInThirdPerson").isToggled() && entity instanceof EntityPlayerSP) {     
+            if (ModHandler.get(Nametags.class).getOptions().getBooleanOption("showInThirdPerson").isEnabled() && entity instanceof EntityPlayerSP) {     
             	if (entity.isSneaking()) {
             		d0 = y - 0.125D;
             	}

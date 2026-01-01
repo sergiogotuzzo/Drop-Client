@@ -5,7 +5,8 @@ import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 
 import drop.event.impl.EntityAttackEvent;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Particles;
 
 import java.util.Collection;
 import java.util.List;
@@ -1360,7 +1361,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                     if (flag2)
                     {
-                    	if (ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().getOptions().getBooleanOption("affectSharpness").isToggled() && ModInstances.getParticlesMod().getOptions().getBooleanOption("alwaysSharpness").isToggled()) {
+                    	if (ModHandler.get(Particles.class).getOptions().getBooleanOption("alwaysSharpness").isEnabled() && ModHandler.get(Particles.class).getOptions().getBooleanOption("affectSharpness").isToggled()) {
                     		this.onEnchantmentCritical(targetEntity);
                     	}
                     	
@@ -1383,14 +1384,14 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                         if (flag)
                         {
-                            if (!ModInstances.getParticlesMod().isEnabled() || ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().getOptions().getBooleanOption("affectCriticals").isToggled()) {
+                            if (!ModHandler.get(Particles.class).isEnabled() || ModHandler.get(Particles.class).getOptions().getBooleanOption("affectCriticals").isEnabled()) {
                             	this.onCriticalHit(targetEntity);
                             }
                         }
 
                         if (f1 > 0.0F)
                         {
-                        	if (!ModInstances.getParticlesMod().isEnabled() || ModInstances.getParticlesMod().isEnabled() && ModInstances.getParticlesMod().getOptions().getBooleanOption("affectSharpness").isToggled()) {
+                        	if (!ModHandler.get(Particles.class).isEnabled() || ModHandler.get(Particles.class).getOptions().getBooleanOption("affectSharpness").isEnabled()) {
                             	this.onEnchantmentCritical(targetEntity);
                             }
                         }

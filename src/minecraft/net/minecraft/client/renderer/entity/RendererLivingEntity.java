@@ -3,7 +3,7 @@ package net.minecraft.client.renderer.entity;
 import com.google.common.collect.Lists;
 
 import drop.mods.ModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.HitColor;
 
 import java.awt.Color;
@@ -422,7 +422,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
             if (flag1)
             {
-            	HitColor hitColorMod = ModInstances.getHitColorMod();
+            	HitColor hitColorMod = ModHandler.get(HitColor.class);
             	
             	float red = 255.0F;
             	float green = 0.0F;

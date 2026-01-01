@@ -9,11 +9,11 @@ import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModMenu;
 import drop.gui.mod.GuiModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.TabOverlay;
 
 public class GuiTabOverlayDynamicColors extends GuiModMenu {
-	private static final TabOverlay mod = ModInstances.getTabOverlayMod();
+	private static final TabOverlay mod = ModHandler.get(TabOverlay.class);
 	
 	public GuiTabOverlayDynamicColors(GuiDropClientScreen previousGuiScreen) {
 		super(previousGuiScreen, mod.getName());

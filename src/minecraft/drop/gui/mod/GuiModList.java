@@ -15,7 +15,7 @@ import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiText;
 import drop.mods.Mod;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 
 public class GuiModList extends GuiModMenu {    
     private GuiTextField textFieldSearchMod;
@@ -72,7 +72,7 @@ public class GuiModList extends GuiModMenu {
         super.actionPerformed(button);
 
         int id = button.id;
-        List<Mod> mods = new ArrayList<>(ModInstances.getAllMods());
+        List<Mod> mods = new ArrayList<>(ModHandler.getAll());
         
         if (id >= 1 && id <= 100) {
         	mods.get(id - 1).toggle();
@@ -101,7 +101,7 @@ public class GuiModList extends GuiModMenu {
 
         int totalHeight = 0;
 
-        List<Mod> mods = ModInstances.getAllMods();
+        List<Mod> mods = ModHandler.getAll();
         
         for (int i = 1; i - 1 < mods.size(); i++) {
             Mod mod = mods.get(i - 1);

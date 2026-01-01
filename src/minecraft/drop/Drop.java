@@ -10,7 +10,8 @@ import drop.event.EventManager;
 import drop.event.EventTarget;
 import drop.event.impl.TickEvent;
 import drop.gui.hud.HUDManager;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.Fullbright;
 
 public class Drop {
 	public static final String nameVersion = "Drop Client (1.8.9-68b6198/main)";
@@ -37,7 +38,7 @@ public class Drop {
 	public void start() {
 		hudManager = HUDManager.getInstance();
 		
-		ModInstances.register(hudManager);
+		ModHandler.init(hudManager);
 	}
 	
 	public void shutdown() {
@@ -55,7 +56,7 @@ public class Drop {
 		}
 		
 		if (mc.gameSettings.keyBindFullbright.isPressed()) {
-			ModInstances.getFullbrightMod().toggle();
+			ModHandler.get(Fullbright.class).toggle();
 		}
 	}
 	

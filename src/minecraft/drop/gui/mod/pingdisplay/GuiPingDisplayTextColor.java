@@ -5,13 +5,13 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.PingDisplay;
 import drop.mods.option.type.BooleanOption;
 import drop.mods.option.type.ColorOption;
 
 public class GuiPingDisplayTextColor extends GuiModColor {
-	private static final PingDisplay mod = ModInstances.getPingDisplayMod();
+	private static final PingDisplay mod = ModHandler.get(PingDisplay.class);
 	
 	public GuiPingDisplayTextColor(GuiScreen previousGuiScreen) {
 		super(previousGuiScreen, mod, (ColorOption) mod.getOptions().getColorOption("textColor"));

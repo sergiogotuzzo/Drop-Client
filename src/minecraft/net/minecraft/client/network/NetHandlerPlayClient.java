@@ -211,7 +211,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
 import drop.event.impl.EntityDamageEvent;
 import drop.gui.GuiDropClientMainMenu;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
+import drop.mods.impl.NoAchievementNotifications;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1477,7 +1478,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
                 {
                     Achievement achievement = (Achievement)statbase;
                     
-                    if (!ModInstances.getNoAchievementNotificationsMod().isEnabled()) {
+                    if (!ModHandler.get(NoAchievementNotifications.class).isEnabled()) {
                     	this.gameController.guiAchievement.displayAchievement(achievement);
                     }
                     

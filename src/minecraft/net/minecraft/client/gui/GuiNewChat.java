@@ -14,7 +14,7 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import drop.mods.Mod;
 import drop.mods.ModColor;
-import drop.mods.ModInstances;
+import drop.mods.ModHandler;
 import drop.mods.impl.Chat;
 
 import org.apache.logging.log4j.LogManager;
@@ -86,7 +86,7 @@ public class GuiNewChat extends Gui
 
                             if (l1 > 3)
                             {
-                                final Chat chatMod = ModInstances.getChatMod();
+                                final Chat chatMod = ModHandler.get(Chat.class);
                                 
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
@@ -152,7 +152,7 @@ public class GuiNewChat extends Gui
     		sameMessageAmount++;
     		lastMessage = chatComponent.getUnformattedText();
     		
-    		if (ModInstances.getChatMod().isEnabled() && ModInstances.getChatMod().getOptions().getBooleanOption("compactChat").isToggled()) {
+    		if (ModHandler.get(Chat.class).getOptions().getBooleanOption("compactChat").isEnabled()) {
     			mc.ingameGUI.getChatGUI().deleteChatLine(line);
         		chatComponent.appendText(ChatFormatting.RED + " (" + sameMessageAmount + "x)");
     		}
@@ -299,10 +299,8 @@ public class GuiNewChat extends Gui
             int k = mouseY / i - 27;
             j = MathHelper.floor_float((float)j / f);
             k = MathHelper.floor_float((float)k / f);
-            
-            final Chat chatMod = ModInstances.getChatMod();
-            
-            int h = chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
+                        
+            int h = ModHandler.get(Chat.class).getOptions().getBooleanOption("chatHeightFix").isEnabled() ? -12 : 0;
             k += h;
 
             if (j >= 0 && k >= 0)

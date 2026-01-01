@@ -5,7 +5,6 @@ import java.awt.Color;
 import drop.gui.GuiSettings;
 import drop.mods.ModColor;
 import drop.mods.ModDraggable;
-import drop.mods.ModInstances;
 import drop.mods.ModOptions;
 import drop.gui.hud.ScreenPosition;
 import drop.mods.option.ParentOption;

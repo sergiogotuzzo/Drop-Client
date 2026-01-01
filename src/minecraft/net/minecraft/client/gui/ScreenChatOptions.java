@@ -5,7 +5,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
-import drop.mods.ModInstances;
 import drop.mods.impl.Chat;
 
 public class ScreenChatOptions extends GuiDropClientScreen
@@ -14,7 +13,6 @@ public class ScreenChatOptions extends GuiDropClientScreen
     private final GuiScreen parentScreen;
     private final GameSettings game_settings;
     private String field_146401_i;
-    private final Chat chatMod = ModInstances.getChatMod();
     private GuiSlider sliderBackgroundOpacity;
 
     public ScreenChatOptions(GuiScreen parentScreenIn, GameSettings gameSettingsIn)
