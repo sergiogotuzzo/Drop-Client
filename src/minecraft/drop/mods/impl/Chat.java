@@ -18,7 +18,6 @@ public class Chat extends Mod {
 		this.options = new ModOptions(
 				new BooleanOption(this, "chatHeightFix", true, new GuiSettings(1, "Chat Height Fix")),
 				new BooleanOption(this, "textShadow", false, new GuiSettings(2, "Text Shadow")),
-				new BooleanOption(this, "compactChat", true, new GuiSettings(3, "Compact Chat")),
 				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 127, false), new GuiSettings(4, "Background Color", false, true))
 				);
 		

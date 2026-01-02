@@ -90,7 +90,7 @@ public class GuiNewChat extends Gui
                                 
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                int h = chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("chatHeightFix").isToggled() ? -12 : 0;
+                                int h = chatMod.getOptions().getBooleanOption("chatHeightFix").isEnabled() ? -12 : 0;
                                                                 
                                 ModColor backgroundColor = chatMod.getOptions().getColorOption("backgroundColor").getColor();
                                 int rgba = ((int) ((backgroundColor.getAlpha() / 255.0F) * l1) << 24) | (backgroundColor.getRed() << 16) | (backgroundColor.getGreen() << 8) | backgroundColor.getBlue();
@@ -100,7 +100,7 @@ public class GuiNewChat extends Gui
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.isEnabled() && chatMod.getOptions().getBooleanOption("textShadow").isToggled());
+                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.getOptions().getBooleanOption("textShadow").isEnabled());
                                 
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -142,32 +142,9 @@ public class GuiNewChat extends Gui
         this.sentMessages.clear();
     }
     
-	private String lastMessage = "";
-	private int sameMessageAmount = 0;
-	private int line = 0;
-    
     public void printChatMessage(IChatComponent chatComponent)
     {
-    	if (chatComponent.getUnformattedText().equals(lastMessage)) {    		
-    		sameMessageAmount++;
-    		lastMessage = chatComponent.getUnformattedText();
-    		
-    		if (ModHandler.get(Chat.class).getOptions().getBooleanOption("compactChat").isEnabled()) {
-    			mc.ingameGUI.getChatGUI().deleteChatLine(line);
-        		chatComponent.appendText(ChatFormatting.RED + " (" + sameMessageAmount + "x)");
-    		}
-    	} else {
-    		sameMessageAmount = 1;
-    		lastMessage = chatComponent.getUnformattedText();
-    	}
-    	
-    	line++;
- 
-    	if (line > 256) {
-    		line = 0;
-    	}
-    	
-        this.printChatMessageWithOptionalDeletion(chatComponent, line);
+        this.printChatMessageWithOptionalDeletion(chatComponent, 0);
     }
 
     /**
