@@ -22,7 +22,7 @@ public class GuiModList extends GuiModMenu {
     private String textFieldText = "";
     
     private int scrollOffset = 0;
-    private int maxScroll = 0;
+    private int modsFoundBeforeRendering = 0;
 
     public GuiModList(GuiScreen previousGuiScreen) {
         super(previousGuiScreen, "Mods");
@@ -33,11 +33,20 @@ public class GuiModList extends GuiModMenu {
         super.handleMouseInput();
         
         int dWheel = Mouse.getDWheel();
-        
+                
         if (dWheel != 0) {
-            scrollOffset -= Integer.signum(dWheel) * 15;
-            scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
-            
+        	scrollOffset -= dWheel / 120 * 15;
+        	
+        	int maxModsToRender = (rectHeight - 41 - 14) / 15;
+        	
+        	if (scrollOffset >= (ModHandler.getAll().size() - maxModsToRender) * 15) {
+        		scrollOffset = (ModHandler.getAll().size() - maxModsToRender) * 15;
+        	}
+        	
+        	if (scrollOffset <= 0) {
+        		scrollOffset = 0;
+        	}
+                        
             this.initGui();
         }
     }
@@ -72,7 +81,7 @@ public class GuiModList extends GuiModMenu {
         super.actionPerformed(button);
 
         int id = button.id;
-        List<Mod> mods = new ArrayList<>(ModHandler.getAll());
+        List<Mod> mods = ModHandler.getAll();
         
         if (id >= 1 && id <= 100) {
         	mods.get(id - 1).toggle();
@@ -98,33 +107,31 @@ public class GuiModList extends GuiModMenu {
         this.textFieldSearchMod = new GuiTextField(-1, this.fontRendererObj, (this.width - 120) / 2, (this.height - rectHeight) / 2 + 15 - 3, 120, 20);
         this.textFieldSearchMod.setText(textFieldText);
         this.textFieldSearchMod.setFocused(true);
-
-        int totalHeight = 0;
-
+        
         List<Mod> mods = ModHandler.getAll();
         
+        modsFoundBeforeRendering = 0;
+                
         for (int i = 1; i - 1 < mods.size(); i++) {
             Mod mod = mods.get(i - 1);
-            
-            if (!textFieldSearchMod.getText().isEmpty() && !mod.getName().toLowerCase().startsWith(textFieldSearchMod.getText().toLowerCase())) {
+                                                            
+            if (!this.textFieldSearchMod.getText().isEmpty() && !mod.getName().toLowerCase().startsWith(this.textFieldSearchMod.getText().toLowerCase())) {
             	if (scrollOffset > 0) {
                 	scrollOffset = 0;
-            	}
+                }
             	
-            	continue;
+            	modsFoundBeforeRendering++;
+            		                	
+                continue;
             }
-
-            int buttonY = (this.height - rectHeight) / 2 + 30 + totalHeight - scrollOffset;
-
-            if (buttonY >= (this.height - rectHeight) / 2 + 30 && buttonY + 15 <= (this.height - rectHeight) / 2 + rectHeight - 20) {
-                this.buttonList.add(new GuiText(i + 100, (this.width - rectWidth) / 2 + 15, buttonY + 15, mod.getName(), mod.getGui(this) != null));
-                this.buttonList.add(new GuiButtonToggled(i, mod.isEnabled(), (this.width - rectWidth) / 2 + rectWidth - 18 - 15, buttonY - 2 + 15));
+            
+            int buttonY = (this.height - rectHeight) / 2 + 45 + ((i - 1) * 9) + ((i - 1) * 6) - scrollOffset - modsFoundBeforeRendering * 15;
+            
+            if (buttonY >= (this.height - rectHeight) / 2 + 45 && buttonY <= (this.height + rectHeight) / 2 - 15) {
+                this.buttonList.add(new GuiText(i + 100, (this.width - rectWidth) / 2 + 15, buttonY, mod.getName(), mod.getGui(this) != null));
+                this.buttonList.add(new GuiButtonToggled(i, mod.isEnabled(), (this.width - rectWidth) / 2 + rectWidth - 18 - 15, buttonY - 2));
             }
-
-            totalHeight += 15;
-        }
-
-        this.maxScroll = Math.max(0, totalHeight - (rectHeight - 50));
+        }        
     }
 
     @Override
