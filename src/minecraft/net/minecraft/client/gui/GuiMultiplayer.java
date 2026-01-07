@@ -393,6 +393,8 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
 
     public void connectToSelected()
     {
+    	this.disconnect();
+
         GuiListExtended.IGuiListEntry guilistextended$iguilistentry = this.serverListSelector.func_148193_k() < 0 ? null : this.serverListSelector.getListEntry(this.serverListSelector.func_148193_k());
 
         if (guilistextended$iguilistentry instanceof ServerListEntryNormal)
@@ -499,4 +501,11 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
 
         this.serverListSelector.func_148195_a(this.savedServerList);
     }
+    
+    public void disconnect() {
+		if(this.mc.theWorld != null) {
+			this.mc.theWorld.sendQuittingDisconnectingPacket();
+			this.mc.loadWorld(null);
+		}
+	}
 }
