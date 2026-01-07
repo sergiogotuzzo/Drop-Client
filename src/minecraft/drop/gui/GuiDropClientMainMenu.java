@@ -58,7 +58,7 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
 	
 	@Override
     public void initGui() {
-		Drop.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
+		Drop.getDropClient().getDiscordRichPresence().update("In Main Menu", "Idle");
 		
         this.buttonList.add(new GuiButtonIcon(3, new ResourceLocation("drop/icon.png"), this.width / 2 - 84 / 2 + 19, this.height / 2 - 84 + 24, 84, 84, 84 - 38, 84 - 24, false));
 

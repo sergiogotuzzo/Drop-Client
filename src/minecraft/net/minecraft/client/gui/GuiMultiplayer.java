@@ -58,7 +58,7 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
     public void initGui()
     {
     	if (updateDiscordRichPresence) {
-    		Drop.getInstance().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
+    		Drop.getDropClient().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
     	}
     	
         Keyboard.enableRepeatEvents(true);

@@ -24,7 +24,7 @@ public abstract class Mod {
 	public Mod(boolean enabled) {
 		mc = Minecraft.getMinecraft();
 		font = mc.fontRendererObj;
-		client = Drop.getInstance();
+		client = Drop.getDropClient();
 		
 		toggle((boolean) getFromFile("enabled", enabled));				
 	}
@@ -75,7 +75,7 @@ public abstract class Mod {
 	}
 	
 	public void setToFile(String key, Object value) {
-		Drop.getInstance().getModsFile().set(this.getClass().getSimpleName() + "." + key, value);
+		Drop.getDropClient().getModsFile().set(this.getClass().getSimpleName() + "." + key, value);
 	}
 	
 	public Object getFromFile(String key, Object defaultValue) {
@@ -83,11 +83,11 @@ public abstract class Mod {
 			setToFile(key, defaultValue);
 		}
 		
-		return Drop.getInstance().getModsFile().get(this.getClass().getSimpleName() + "." + key);
+		return Drop.getDropClient().getModsFile().get(this.getClass().getSimpleName() + "." + key);
 	}
 	
 	public boolean hasInFile(String key) {
-		return Drop.getInstance().getModsFile().has(this.getClass().getSimpleName() + "." + key);
+		return Drop.getDropClient().getModsFile().has(this.getClass().getSimpleName() + "." + key);
 	}
 	
 	public String getName() {

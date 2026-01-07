@@ -484,7 +484,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     private void startGame() throws LWJGLException, IOException
     {
-    	Drop.getInstance().init();
+    	Drop.getDropClient().init();
     	
         this.gameSettings = new GameSettings(this, this.mcDataDir);
         this.defaultResourcePacks.add(this.mcDefaultResourcePack);
@@ -612,7 +612,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         this.renderGlobal.makeEntityOutlineShader();
         
-        Drop.getInstance().start();
+        Drop.getDropClient().start();
     }
 
     private void registerMetadataSerializers()
@@ -1066,7 +1066,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         try
         {
-        	Drop.getInstance().shutdown();
+        	Drop.getDropClient().shutdown();
         	
             this.stream.shutdownStream();
             logger.info("Stopping!");
@@ -2369,7 +2369,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         networkmanager.sendPacket(new C00PacketLoginStart(this.getSession().getProfile()));
         this.myNetworkManager = networkmanager;
         
-        Drop.getInstance().getDiscordRichPresence().update("Playing Singleplayer", "In Game");
+        Drop.getDropClient().getDiscordRichPresence().update("Playing Singleplayer", "In Game");
     }
 
     /**

@@ -203,7 +203,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
      */
     public void initGui()
     {
-    	Drop.getInstance().getDiscordRichPresence().update("In Main Menu", "Idle");
+    	Drop.getDropClient().getDiscordRichPresence().update("In Main Menu", "Idle");
     	
         this.viewportTexture = new DynamicTexture(256, 256);
         this.backgroundTexture = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);

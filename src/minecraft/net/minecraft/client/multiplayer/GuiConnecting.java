@@ -76,7 +76,7 @@ public class GuiConnecting extends GuiScreen
                     GuiConnecting.this.networkManager.sendPacket(new C00Handshake(47, ip, port, EnumConnectionState.LOGIN));
                     GuiConnecting.this.networkManager.sendPacket(new C00PacketLoginStart(GuiConnecting.this.mc.getSession().getProfile()));
                     
-                    Drop.getInstance().getDiscordRichPresence().update("Playing " + mc.getCurrentServerData().serverIP, "In Game");
+                    Drop.getDropClient().getDiscordRichPresence().update("Playing " + mc.getCurrentServerData().serverIP, "In Game");
                 }
                 catch (UnknownHostException unknownhostexception)
                 {
