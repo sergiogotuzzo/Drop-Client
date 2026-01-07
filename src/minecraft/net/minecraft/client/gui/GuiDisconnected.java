@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import drop.Drop;
+import drop.gui.GuiDropClientMainMenu;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;
@@ -51,7 +52,7 @@ public class GuiDisconnected extends GuiScreen
     {
         if (button.id == 0)
         {
-            this.mc.displayGuiScreen(this.parentScreen);
+            this.mc.displayGuiScreen(new GuiMultiplayer(new GuiDropClientMainMenu(), true));
         }
         else if (button.id == 1)
         {
