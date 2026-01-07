@@ -11,7 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-public class GuiCommandBlock extends GuiScreen
+import drop.gui.GuiDropClientScreen;
+
+public class GuiCommandBlock extends GuiDropClientScreen
 {
     private static final Logger field_146488_a = LogManager.getLogger();
 
@@ -47,6 +49,8 @@ public class GuiCommandBlock extends GuiScreen
      */
     public void initGui()
     {
+    	super.initGui();
+    	
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
         this.buttonList.add(this.doneBtn = new GuiButton(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done", new Object[0])));
@@ -70,6 +74,8 @@ public class GuiCommandBlock extends GuiScreen
      */
     public void onGuiClosed()
     {
+    	super.onGuiClosed();
+    	
         Keyboard.enableRepeatEvents(false);
     }
 
