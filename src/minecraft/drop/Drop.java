@@ -14,9 +14,12 @@ import drop.mods.ModHandler;
 import drop.mods.impl.Fullbright;
 
 public class Drop {
-	public static final String nameVersion = "Drop Client (1.8.9-68b6198/main)";
+	private static final String NAME = "Drop Client";
+	private static final String VERSION = "68b6198";
+	private static final String BRANCH = "main";
+	public static final String MENU_SUBTITLE = "Not affiliated with Mojang AB nor Microsoft";
 	
-	private static final Drop instance = new Drop();
+	private static final Drop dropClient = new Drop();
 	
 	private DiscordRP discordRichPresence = new DiscordRP();
 	private HUDManager hudManager;
@@ -60,8 +63,12 @@ public class Drop {
 		}
 	}
 	
-	public static final Drop getInstance() {
-		return instance;
+	public static String getNameVersion() {
+		return NAME + " (" + VERSION + "/" + BRANCH + ")";
+	}
+	
+	public static final Drop getDropClient() {
+		return dropClient;
 	}
 	
 	public DiscordRP getDiscordRichPresence() {

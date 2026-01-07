@@ -26,8 +26,8 @@ public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
     	
     	drawRect((this.width - 140) / 2, (this.height - 150) / 2, (this.width - 140) / 2 + 140, (this.height - 150) / 2 + 150, new Color(0, 0, 0, 127).getRGB());
     	
-        this.drawString(this.fontRendererObj, Drop.nameVersion, 2, this.height - 10, 0xFFFFFF);
-        this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, Drop.getNameVersion(), 2, this.height - 10, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, Drop.MENU_SUBTITLE, this.width - this.fontRendererObj.getStringWidth(Drop.MENU_SUBTITLE) - 2, this.height - 10, 0xFFFFFF);
         
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

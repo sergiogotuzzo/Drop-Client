@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 public abstract class GuiDropClientScreen extends GuiScreen {
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawString(this.fontRendererObj, Drop.nameVersion, 2, this.height - 10, 0x808080);
-        this.drawString(this.fontRendererObj, "Not affiliated with Mojang AB nor Microsoft", this.width - this.fontRendererObj.getStringWidth("Not affiliated with Mojang AB nor Microsoft") - 2, this.height - 10, 0x808080);
+        this.drawString(this.fontRendererObj, Drop.getNameVersion(), 2, this.height - 10, 0x808080);
+        this.drawString(this.fontRendererObj, Drop.MENU_SUBTITLE, this.width - this.fontRendererObj.getStringWidth(Drop.MENU_SUBTITLE) - 2, this.height - 10, 0x808080);
         
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
