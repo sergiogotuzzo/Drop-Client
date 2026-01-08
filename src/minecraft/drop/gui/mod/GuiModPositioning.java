@@ -28,8 +28,8 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	
 	private Optional<IRenderer> selectedRenderer = Optional.empty();
 	
-	private int prevX;
-	private int prevY;
+	private int offsetX;
+	private int offsetY;
 	
 	public static final int marginX = 2;
 	public static final int marginY = 2;
@@ -118,20 +118,26 @@ public class GuiModPositioning extends GuiDropClientScreen {
 	protected void mouseClicked(int x, int y, int mouseButton) throws IOException {
 		super.mouseClicked(x, y, mouseButton);
 		
-		this.prevX = x;
-		this.prevY = y;
-		
 		loadMouseOver(x, y);
+		
+		if (selectedRenderer.isPresent()) {
+			ScreenPosition pos = renderers.get(selectedRenderer.get());
+			
+			offsetX = x - pos.getAbsoluteX();
+			offsetY = y - pos.getAbsoluteY();
+		}
 	}
 	
 	@Override
 	protected void mouseClickMove(int x, int y, int button, long time) {
 		if (selectedRenderer.isPresent()) {
-			moveSelectedRenderBy(x - prevX, y - prevY);
+			IRenderer ren = selectedRenderer.get();
+			ScreenPosition pos = renderers.get(ren);
+			
+			pos.setAbsolute(x - offsetX, y - offsetY);
+			
+			adjustBounds(ren, pos);
 		}
-		
-		this.prevX = x;
-		this.prevY = y;
 	}
 
 	@Override
@@ -158,15 +164,6 @@ public class GuiModPositioning extends GuiDropClientScreen {
 		int absoluteY = Math.max(marginY, Math.min(pos.getAbsoluteY(), Math.max(screenHeight - renderer.getHeight() - marginY, 0)));
 		
 		pos.setAbsolute(absoluteX, absoluteY);
-	}
-
-	private void moveSelectedRenderBy(int offsetX, int offsetY) {
-		IRenderer renderer = selectedRenderer.get();
-		ScreenPosition pos = renderers.get(renderer);
-		
-		pos.setAbsolute(pos.getAbsoluteX() + offsetX, pos.getAbsoluteY() + offsetY);
-		
-		adjustBounds(renderer, pos);
 	}
 	
 	private boolean isMouseOver(IRenderer renderer, int mouseX, int mouseY) {
