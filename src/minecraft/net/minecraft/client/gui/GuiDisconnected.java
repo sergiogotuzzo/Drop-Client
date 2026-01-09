@@ -2,10 +2,6 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 import java.util.List;
-
-import drop.Drop;
-import drop.gui.GuiDropClientMainMenu;
-import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;
 
@@ -14,8 +10,8 @@ public class GuiDisconnected extends GuiScreen
     private String reason;
     private IChatComponent message;
     private List<String> multilineMessage;
-    private final GuiScreen parentScreen;
-    private int field_175353_i;
+    protected final GuiScreen parentScreen;
+    protected int field_175353_i;
 
     public GuiDisconnected(GuiScreen screen, String reasonLocalizationKey, IChatComponent chatComp)
     {
@@ -42,7 +38,6 @@ public class GuiDisconnected extends GuiScreen
         this.multilineMessage = this.fontRendererObj.listFormattedStringToWidth(this.message.getFormattedText(), this.width - 50);
         this.field_175353_i = this.multilineMessage.size() * this.fontRendererObj.FONT_HEIGHT;
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 2 + this.field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT, I18n.format("gui.toMenu", new Object[0])));
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 2 + this.field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 25, I18n.format("Reconnect", new Object[0])));
     }
 
     /**
@@ -52,11 +47,7 @@ public class GuiDisconnected extends GuiScreen
     {
         if (button.id == 0)
         {
-            this.mc.displayGuiScreen(new GuiMultiplayer(new GuiDropClientMainMenu(), true));
-        }
-        else if (button.id == 1)
-        {
-        	this.mc.displayGuiScreen(new GuiConnecting(this.parentScreen, mc, Drop.lastServerIp, Drop.lastServerPort));
+            this.mc.displayGuiScreen(this.parentScreen);
         }
     }
 

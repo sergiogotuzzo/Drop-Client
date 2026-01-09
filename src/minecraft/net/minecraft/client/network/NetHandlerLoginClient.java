@@ -5,6 +5,8 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.exceptions.AuthenticationUnavailableException;
 import com.mojang.authlib.exceptions.InvalidCredentialsException;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
+
+import drop.gui.GuiReconnect;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import java.math.BigInteger;
@@ -109,7 +111,7 @@ public class NetHandlerLoginClient implements INetHandlerLoginClient
      */
     public void onDisconnect(IChatComponent reason)
     {
-        this.mc.displayGuiScreen(new GuiDisconnected(this.previousGuiScreen, "connect.failed", reason));
+        this.mc.displayGuiScreen(new GuiReconnect("connect.failed", reason));
     }
 
     public void handleDisconnect(S00PacketDisconnect packetIn)

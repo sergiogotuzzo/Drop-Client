@@ -16,11 +16,11 @@ import net.minecraft.network.handshake.client.C00Handshake;
 import net.minecraft.network.login.client.C00PacketLoginStart;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import drop.Drop;
+import drop.gui.GuiReconnect;
 
 public class GuiConnecting extends GuiScreen
 {
@@ -34,13 +34,10 @@ public class GuiConnecting extends GuiScreen
     {
         this.mc = mcIn;
         this.previousGuiScreen = p_i1181_1_;
-        ServerAddress serveraddress = ServerAddress.fromString(p_i1181_3_.serverIP);
+        ServerAddress serveraddress = ServerAddress.fromString(p_i1181_3_.serverIP);        
         mcIn.loadWorld((WorldClient)null);
         mcIn.setServerData(p_i1181_3_);
         this.connect(serveraddress.getIP(), serveraddress.getPort());
-        
-        Drop.lastServerIp = serveraddress.getIP();
-        Drop.lastServerPort = serveraddress.getPort();
     }
 
     public GuiConnecting(GuiScreen p_i1182_1_, Minecraft mcIn, String hostName, int port)
@@ -49,13 +46,13 @@ public class GuiConnecting extends GuiScreen
         this.previousGuiScreen = p_i1182_1_;
         mcIn.loadWorld((WorldClient)null);
         this.connect(hostName, port);
-        
-        Drop.lastServerIp = hostName;
-        Drop.lastServerPort = port;
     }
 
     private void connect(final String ip, final int port)
     {
+    	GuiReconnect.ip = ip;
+    	GuiReconnect.port = port;
+    	
         logger.info("Connecting to " + ip + ", " + port);
         (new Thread("Server Connector #" + CONNECTION_ID.incrementAndGet())
         {
@@ -104,7 +101,7 @@ public class GuiConnecting extends GuiScreen
                         s = s.replaceAll(s1, "");
                     }
 
-                    GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {s})));
+                    GuiConnecting.this.mc.displayGuiScreen(new GuiReconnect("connect.failed", new ChatComponentTranslation("disconnect.genericReason", new Object[] {s})));
                 }
             }
         }).start();

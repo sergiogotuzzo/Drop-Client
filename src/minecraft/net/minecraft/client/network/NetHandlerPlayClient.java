@@ -211,6 +211,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
 import drop.event.impl.EntityDamageEvent;
 import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiReconnect;
 import drop.mod.ModHandler;
 import drop.mod.impl.NoAchievementNotifications;
 
@@ -807,12 +808,12 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             }
             else
             {
-                this.gameController.displayGuiScreen(new GuiDisconnected(this.guiScreenServer, "disconnect.lost", reason));
+                this.gameController.displayGuiScreen(new GuiReconnect("disconnect.lost", reason));
             }
         }
         else
         {
-            this.gameController.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new GuiDropClientMainMenu(), true), "disconnect.lost", reason));
+            this.gameController.displayGuiScreen(new GuiReconnect("disconnect.lost", reason));
         }
     }
 

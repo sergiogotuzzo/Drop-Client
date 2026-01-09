@@ -25,9 +25,6 @@ public class Drop {
 	private HUDManager hudManager;
 	private Minecraft mc = Minecraft.getMinecraft();
 	
-	public static String lastServerIp;
-	public static int lastServerPort;
-	
 	private FileManager modsFile;
 	
 	public void init() {
