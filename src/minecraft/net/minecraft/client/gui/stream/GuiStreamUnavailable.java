@@ -2,7 +2,7 @@ package net.minecraft.client.gui.stream;
 
 import com.google.common.collect.Lists;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 
 import java.io.IOException;
 import java.net.URI;
@@ -25,7 +25,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import tv.twitch.ErrorCode;
 
-public class GuiStreamUnavailable extends GuiDropClientScreen
+public class GuiStreamUnavailable extends GuiBlurredScreen
 {
     private static final Logger field_152322_a = LogManager.getLogger();
     private final IChatComponent field_152324_f;

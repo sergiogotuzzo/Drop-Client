@@ -3,11 +3,11 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.GuiSlider;
 import drop.mod.impl.Chat;
 
-public class ScreenChatOptions extends GuiDropClientScreen
+public class ScreenChatOptions extends GuiBlurredScreen
 {
     private static final GameSettings.Options[] field_146399_a = new GameSettings.Options[] {GameSettings.Options.CHAT_VISIBILITY, GameSettings.Options.CHAT_COLOR, GameSettings.Options.CHAT_LINKS, GameSettings.Options.CHAT_OPACITY, GameSettings.Options.CHAT_LINKS_PROMPT, GameSettings.Options.CHAT_SCALE, GameSettings.Options.CHAT_HEIGHT_FOCUSED, GameSettings.Options.CHAT_HEIGHT_UNFOCUSED, GameSettings.Options.CHAT_WIDTH, GameSettings.Options.REDUCED_DEBUG_INFO};
     private final GuiScreen parentScreen;

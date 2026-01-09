@@ -6,7 +6,7 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.mod.GuiModMenu;
 import drop.mod.ModHandler;
 import drop.mod.impl.TabOverlay;
@@ -15,7 +15,7 @@ import drop.gui.mod.GuiModColor;
 public class GuiTabOverlayDynamicColors extends GuiModMenu {
 	private static final TabOverlay mod = ModHandler.get(TabOverlay.class);
 	
-	public GuiTabOverlayDynamicColors(GuiDropClientScreen previousGuiScreen) {
+	public GuiTabOverlayDynamicColors(GuiBlurredScreen previousGuiScreen) {
 		super(previousGuiScreen, mod.getName());
 	}
 

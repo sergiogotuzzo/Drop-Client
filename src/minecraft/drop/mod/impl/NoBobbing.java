@@ -1,6 +1,6 @@
 package drop.mod.impl;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.mod.Mod;
 
 public class NoBobbing extends Mod {	
@@ -9,7 +9,7 @@ public class NoBobbing extends Mod {
 	}
 	
 	@Override
-	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+	public GuiBlurredScreen getGui(GuiBlurredScreen previousGuiScreen) {
 		return null;
 	}
 }

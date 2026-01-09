@@ -1,6 +1,6 @@
 package net.optifine.gui;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -8,7 +8,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiQualitySettingsOF extends GuiDropClientScreen
+public class GuiQualitySettingsOF extends GuiBlurredScreen
 {
     private GuiScreen prevScreen;
     protected String title;

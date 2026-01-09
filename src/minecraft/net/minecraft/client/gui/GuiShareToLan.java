@@ -2,14 +2,14 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.WorldSettings;
 
-public class GuiShareToLan extends GuiDropClientScreen
+public class GuiShareToLan extends GuiBlurredScreen
 {
     private final GuiScreen field_146598_a;
     private GuiButton field_146596_f;

@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.GuiSettings;
 import drop.mod.Mod;
 import drop.mod.ModColor;

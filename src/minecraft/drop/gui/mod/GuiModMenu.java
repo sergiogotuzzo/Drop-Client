@@ -7,14 +7,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiCheckBox;
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.GuiRect;
 import drop.gui.GuiSlider;
 import drop.gui.GuiSliderOption;
 import drop.gui.GuiText;
 import drop.mod.option.ModOption;
 
-public class GuiModMenu extends GuiDropClientScreen {
+public class GuiModMenu extends GuiBlurredScreen {
 	private final GuiScreen previousGuiScreen;
 	private String title;
 	

@@ -2,13 +2,13 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.optifine.gui.GuiButtonOF;
 import net.optifine.gui.GuiScreenCapeOF;
 
-public class GuiCustomizeSkin extends GuiDropClientScreen
+public class GuiCustomizeSkin extends GuiBlurredScreen
 {
     /** The parent GUI for this GUI */
     private final GuiScreen parentScreen;

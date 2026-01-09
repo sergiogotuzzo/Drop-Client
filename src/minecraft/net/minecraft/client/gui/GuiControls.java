@@ -2,13 +2,12 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import drop.gui.GuiDropClientScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 
-public class GuiControls extends GuiDropClientScreen
+public class GuiControls extends GuiScreen
 {
     private static final GameSettings.Options[] optionsArr = new GameSettings.Options[] {GameSettings.Options.INVERT_MOUSE, GameSettings.Options.SENSITIVITY, GameSettings.Options.TOUCHSCREEN};
 

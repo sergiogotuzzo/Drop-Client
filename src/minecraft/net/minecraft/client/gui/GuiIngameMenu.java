@@ -13,11 +13,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientMainMenu;
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.GuiIngameMultiplayer;
 import drop.gui.mod.GuiModList;
 
-public class GuiIngameMenu extends GuiDropClientScreen
+public class GuiIngameMenu extends GuiBlurredScreen
 {
     private int field_146445_a;
     private int field_146444_f;

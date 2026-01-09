@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class GuiDropClientScreen extends GuiScreen {
+public abstract class GuiBlurredScreen extends GuiScreen {
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawString(this.fontRendererObj, Drop.getNameVersion(), 2, this.height - 10, 0x808080);

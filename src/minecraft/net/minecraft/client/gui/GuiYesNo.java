@@ -2,13 +2,13 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 
 import java.io.IOException;
 import java.util.List;
 import net.minecraft.client.resources.I18n;
 
-public class GuiYesNo extends GuiDropClientScreen
+public class GuiYesNo extends GuiBlurredScreen
 {
     /**
      * A reference to the screen object that created this. Used for navigating between screens.

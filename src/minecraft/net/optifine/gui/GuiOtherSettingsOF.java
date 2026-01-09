@@ -1,6 +1,6 @@
 package net.optifine.gui;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiOtherSettingsOF extends GuiDropClientScreen implements GuiYesNoCallback
+public class GuiOtherSettingsOF extends GuiBlurredScreen implements GuiYesNoCallback
 {
     private GuiScreen prevScreen;
     protected String title;

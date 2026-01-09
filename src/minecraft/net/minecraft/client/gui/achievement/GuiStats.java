@@ -2,7 +2,7 @@ package net.minecraft.client.gui.achievement;
 
 import com.google.common.collect.Lists;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -31,7 +31,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 
-public class GuiStats extends GuiDropClientScreen implements IProgressMeter
+public class GuiStats extends GuiBlurredScreen implements IProgressMeter
 {
     protected GuiScreen parentScreen;
     protected String screenTitle = "Select world";

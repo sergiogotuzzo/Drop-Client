@@ -5,10 +5,10 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.GuiIngameMultiplayer;
 
-public class GuiScreenServerList extends GuiDropClientScreen
+public class GuiScreenServerList extends GuiBlurredScreen
 {
     private final GuiScreen field_146303_a;
     private final ServerData field_146301_f;

@@ -2,15 +2,13 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 
-import drop.gui.GuiDropClientScreen;
-
 import java.io.IOException;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 
-public class GuiSnooper extends GuiDropClientScreen
+public class GuiSnooper extends GuiScreen
 {
     private final GuiScreen field_146608_a;
 

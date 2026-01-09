@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import drop.Drop;
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiVideoSettings;
 
-public class GuiScreenOF extends GuiDropClientScreen
+public class GuiScreenOF extends GuiBlurredScreen
 {
     protected void actionPerformedRightClick(GuiButton button) throws IOException
     {

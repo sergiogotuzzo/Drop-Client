@@ -18,12 +18,12 @@ import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiButtonIcon;
-import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiBlurredScreen;
 import drop.gui.hud.HUDManager;
 import drop.gui.hud.IRenderer;
 import drop.gui.hud.ScreenPosition;
 
-public class GuiModPositioning extends GuiDropClientScreen {
+public class GuiModPositioning extends GuiBlurredScreen {
 	private final HashMap<IRenderer, ScreenPosition> renderers = new HashMap<IRenderer, ScreenPosition>();
 	
 	private Optional<IRenderer> selectedRenderer = Optional.empty();
