@@ -11,9 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 
-public class GuiCommandBlock extends GuiBlurredScreen
+public class GuiCommandBlock extends GuiScreenDC
 {
     private static final Logger field_146488_a = LogManager.getLogger();
 

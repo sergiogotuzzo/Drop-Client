@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class GuiBlurredScreen extends GuiScreen {
+public abstract class GuiScreenDC extends GuiScreen {
 	@Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawString(this.fontRendererObj, Drop.getNameVersion(), 2, this.height - 10, 0x808080);
@@ -28,10 +28,6 @@ public abstract class GuiBlurredScreen extends GuiScreen {
 	@Override
 	public void onGuiClosed() {
     	mc.entityRenderer.stopUseShader();
-	}
-    
-    public void drawHollowRect(int x, int y, int width, int height, int color) {
-		GuiDropClient.drawHollowRect(x, y, width, height, color);
 	}
     
     public void drawText(String text, int x, int y, int color, boolean textShadow, boolean chroma) {

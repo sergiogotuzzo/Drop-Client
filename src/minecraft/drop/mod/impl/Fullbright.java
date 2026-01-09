@@ -2,7 +2,7 @@ package drop.mod.impl;
 
 import drop.event.EventTarget;
 import drop.event.impl.TickEvent;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.mod.Mod;
 
 public class Fullbright extends Mod {	
@@ -11,7 +11,7 @@ public class Fullbright extends Mod {
 	}
 	
 	@Override
-	public GuiBlurredScreen getGui(GuiBlurredScreen previousGuiScreen) {
+	public GuiScreenDC getGui(GuiScreenDC previousGuiScreen) {
 		return null;
 	}
 	

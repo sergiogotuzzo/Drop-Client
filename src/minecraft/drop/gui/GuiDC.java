@@ -2,15 +2,15 @@ package drop.gui;
 
 import net.minecraft.client.gui.Gui;
 
-public class GuiDropClient {
+public class GuiDC {
 	public static void drawRect(int left, int top, int right, int bottom, int color) {
 		Gui.drawRect(left, top, right, bottom, color);
 	}
 	
 	public static void drawHorizontalLine(int startX, int endX, int y, int color) {
-        if (endX < startX)
-        {
+        if (endX < startX) {
             int i = startX;
+            
             startX = endX;
             endX = i;
         }
@@ -19,9 +19,9 @@ public class GuiDropClient {
     }
 
 	public static void drawVerticalLine(int x, int startY, int endY, int color) {
-        if (endY < startY)
-        {
+        if (endY < startY) {
             int i = startY;
+            
             startY = endY;
             endY = i;
         }

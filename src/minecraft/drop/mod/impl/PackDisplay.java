@@ -3,6 +3,7 @@ package drop.mod.impl;
 import java.awt.Color;
 import java.util.List;
 
+import drop.gui.GuiDC;
 import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mod.ModColor;
@@ -119,7 +120,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	private void drawSelectedPack(ResourcePackRepository.Entry selectedPack, int offsetY) {
-		drawRect(pos.getAbsoluteX() + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, options.getColorOption("backgroundColor").getColor().getRGB());
+		GuiDC.drawRect(pos.getAbsoluteX() + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0), pos.getAbsoluteY() + offsetY, pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + offsetY + 28, options.getColorOption("backgroundColor").getColor().getRGB());
 		
 		if (options.getBooleanOption("showIcon").isToggled()) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -143,7 +144,7 @@ public class PackDisplay extends ModDraggable {
 	}
 	
 	private void drawDefaultPack() {
-		drawRect(pos.getAbsoluteX() + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, options.getColorOption("backgroundColor").getColor().getRGB());
+		GuiDC.drawRect(pos.getAbsoluteX() + (options.getBooleanOption("showIcon").isToggled() ? 28 : 0), pos.getAbsoluteY(), pos.getAbsoluteX() + getWidth(), pos.getAbsoluteY() + 28, options.getColorOption("backgroundColor").getColor().getRGB());
 		
 		if (options.getBooleanOption("showIcon").isToggled()) {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import drop.gui.GuiDC;
 import drop.gui.GuiSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -186,7 +187,7 @@ public class Keystrokes extends ModDraggable {
 	        	}
 	        }
 	        
-	        drawRect(
+	        GuiDC.drawRect(
 	                pos.getAbsoluteX() + key.getX(),
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
@@ -195,7 +196,7 @@ public class Keystrokes extends ModDraggable {
 	                );
 	        
 	        if (options.getBooleanOption("showBorder").isToggled()) {
-	        	drawHollowRect(
+	        	GuiDC.drawHollowRect(
 		                pos.getAbsoluteX() + key.getX(),
 		                pos.getAbsoluteY() + key.getY(),
 		                key.getWidth() - 1,

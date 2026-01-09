@@ -5,7 +5,7 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumChatFormatting;
-import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiMainMenuDC;
 
 public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
 {
@@ -74,7 +74,7 @@ public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
             case 1:
                 if (this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled())
                 {
-                    this.mc.displayGuiScreen(new GuiDropClientMainMenu());
+                    this.mc.displayGuiScreen(new GuiMainMenuDC());
                 }
                 else
                 {
@@ -91,7 +91,7 @@ public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
         {
             this.mc.theWorld.sendQuittingDisconnectingPacket();
             this.mc.loadWorld((WorldClient)null);
-            this.mc.displayGuiScreen(new GuiDropClientMainMenu());
+            this.mc.displayGuiScreen(new GuiMainMenuDC());
         }
         else
         {

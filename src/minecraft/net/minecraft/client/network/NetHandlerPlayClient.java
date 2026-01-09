@@ -210,7 +210,7 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
 import drop.event.impl.EntityDamageEvent;
-import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiMainMenuDC;
 import drop.gui.GuiReconnect;
 import drop.mod.ModHandler;
 import drop.mod.impl.NoAchievementNotifications;

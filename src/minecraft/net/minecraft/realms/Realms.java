@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.Session;
 import net.minecraft.world.WorldSettings;
-import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiMainMenuDC;
 
 public class Realms
 {
@@ -113,6 +113,6 @@ public class Realms
 
     public static boolean inTitleScreen()
     {
-        return Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().currentScreen instanceof GuiDropClientMainMenu;
+        return Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().currentScreen instanceof GuiMainMenuDC;
     }
 }

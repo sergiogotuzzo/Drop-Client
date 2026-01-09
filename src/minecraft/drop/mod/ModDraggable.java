@@ -7,8 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import drop.gui.GuiDropClient;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.hud.IRenderer;
 import drop.gui.hud.Rectangle;
 import drop.gui.hud.ScreenPosition;
@@ -36,14 +35,6 @@ public abstract class ModDraggable extends Mod implements IRenderer {
 	
 	public Rectangle getBounds() {
 		return Rectangle.getBounds(this);
-	}
-	
-	public void drawRect(int left, int top, int right, int bottom, int color) {
-		GuiDropClient.drawRect(left, top, right, bottom, color);
-	}
-	
-	public void drawHollowRect(int x, int y, int width, int height, int color) {
-		GuiDropClient.drawHollowRect(x, y, width, height, color);
 	}
 	
 	public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height) {

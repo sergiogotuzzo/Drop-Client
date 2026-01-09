@@ -9,6 +9,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import drop.gui.GuiDC;
 import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mod.ModColor;
@@ -155,7 +156,7 @@ public class Scoreboard extends ModDraggable {
             int k = j1 - j * font.FONT_HEIGHT;
             int l = l1 + i;
             
-            drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, options.getColorOption("backgroundColor").getColor().getRGB());
+            GuiDC.drawRect(l1 - 2, k, l, k + font.FONT_HEIGHT, options.getColorOption("backgroundColor").getColor().getRGB());
             
             ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
             String title = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName());
@@ -171,8 +172,8 @@ public class Scoreboard extends ModDraggable {
             if (j == collection.size()) {
                 String content = scoreObjective.getDisplayName();
                 
-                drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, options.getColorOption("topBackgroundColor").getColor().getRGB());
-                drawRect(l1 - 2, k - 1, l, k, options.getColorOption("topBackgroundColor").getColor().getRGB());
+                GuiDC.drawRect(l1 - 2 , k - font.FONT_HEIGHT - 1, l, k - 1, options.getColorOption("topBackgroundColor").getColor().getRGB());
+                GuiDC.drawRect(l1 - 2, k - 1, l, k, options.getColorOption("topBackgroundColor").getColor().getRGB());
                 
                 font.drawString(content, l1 + i / 2 - font.getStringWidth(content) / 2, k - font.FONT_HEIGHT, 553648127, options.getBooleanOption("textShadow").isToggled());
             }

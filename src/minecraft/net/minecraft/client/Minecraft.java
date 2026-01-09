@@ -191,7 +191,7 @@ import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
-import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiMainMenuDC;
 import drop.mod.ModHandler;
 import drop.mod.impl.NoHotbarScrolling;
 import drop.mod.impl.Zoom;
@@ -584,11 +584,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (this.serverName != null)
         {
-            this.displayGuiScreen(new GuiConnecting(new GuiDropClientMainMenu(), this, this.serverName, this.serverPort));
+            this.displayGuiScreen(new GuiConnecting(new GuiMainMenuDC(), this, this.serverName, this.serverPort));
         }
         else
         {
-            this.displayGuiScreen(new GuiDropClientMainMenu());
+            this.displayGuiScreen(new GuiMainMenuDC());
         }
 
         this.renderEngine.deleteTexture(this.mojangLogo);
@@ -1008,14 +1008,14 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (guiScreenIn == null && this.theWorld == null)
         {
-            guiScreenIn = new GuiDropClientMainMenu();
+            guiScreenIn = new GuiMainMenuDC();
         }
         else if (guiScreenIn == null && this.thePlayer.getHealth() <= 0.0F)
         {
             guiScreenIn = new GuiGameOver();
         }
 
-        if (guiScreenIn instanceof GuiDropClientMainMenu)
+        if (guiScreenIn instanceof GuiMainMenuDC)
         {
             this.gameSettings.showDebugInfo = false;
             this.ingameGUI.getChatGUI().clearChatMessages();

@@ -12,7 +12,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.GuiText;
 import drop.mod.Mod;
 import drop.mod.ModHandler;
@@ -90,7 +90,7 @@ public class GuiModList extends GuiModMenu {
         }
         
         if (id >= 101) {
-            GuiBlurredScreen modGui = mods.get(id - 101).getGui(this);
+            GuiScreenDC modGui = mods.get(id - 101).getGui(this);
             
             if (modGui == null) {
             	return;

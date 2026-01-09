@@ -23,9 +23,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 
-public class GuiAchievements extends GuiBlurredScreen implements IProgressMeter
+public class GuiAchievements extends GuiScreenDC implements IProgressMeter
 {
     private static final int field_146572_y = AchievementList.minDisplayColumn * 24 - 112;
     private static final int field_146571_z = AchievementList.minDisplayRow * 24 - 112;

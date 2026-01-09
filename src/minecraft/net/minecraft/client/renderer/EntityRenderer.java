@@ -87,7 +87,7 @@ import net.optifine.shaders.ShadersRender;
 import net.optifine.util.MemoryMonitor;
 import net.optifine.util.TextureUtils;
 import net.optifine.util.TimedEvent;
-import drop.gui.GuiDropClientMainMenu;
+import drop.gui.GuiMainMenuDC;
 import drop.mod.ModHandler;
 import drop.mod.impl.Freelook;
 import drop.mod.impl.Fullbright;
@@ -2746,9 +2746,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
             }
         }
 
-        if (this.mc.currentScreen instanceof GuiDropClientMainMenu)
+        if (this.mc.currentScreen instanceof GuiMainMenuDC)
         {
-            this.updateMainMenu((GuiDropClientMainMenu)this.mc.currentScreen);
+            this.updateMainMenu((GuiMainMenuDC)this.mc.currentScreen);
         }
 
         if (this.updatedWorld != world)
@@ -2786,7 +2786,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
     }
 
-    private void updateMainMenu(GuiDropClientMainMenu p_updateMainMenu_1_)
+    private void updateMainMenu(GuiMainMenuDC p_updateMainMenu_1_)
     {
         try
         {

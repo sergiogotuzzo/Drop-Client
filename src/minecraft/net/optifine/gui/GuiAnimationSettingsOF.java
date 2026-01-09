@@ -1,6 +1,6 @@
 package net.optifine.gui;
 
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -9,7 +9,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.optifine.Lang;
 
-public class GuiAnimationSettingsOF extends GuiBlurredScreen
+public class GuiAnimationSettingsOF extends GuiScreenDC
 {
     private GuiScreen prevScreen;
     protected String title;

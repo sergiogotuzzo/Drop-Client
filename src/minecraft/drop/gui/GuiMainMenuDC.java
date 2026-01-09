@@ -17,7 +17,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.mod.GuiModList;
 
-public class GuiDropClientMainMenu extends GuiScreen implements GuiYesNoCallback
+public class GuiMainMenuDC extends GuiScreen implements GuiYesNoCallback
 {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {

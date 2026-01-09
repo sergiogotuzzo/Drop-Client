@@ -12,12 +12,12 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
-import drop.gui.GuiDropClientMainMenu;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiMainMenuDC;
+import drop.gui.GuiScreenDC;
 import drop.gui.GuiIngameMultiplayer;
 import drop.gui.mod.GuiModList;
 
-public class GuiIngameMenu extends GuiBlurredScreen
+public class GuiIngameMenu extends GuiScreenDC
 {
     private int field_146445_a;
     private int field_146444_f;
@@ -74,16 +74,16 @@ public class GuiIngameMenu extends GuiBlurredScreen
 
                 if (flag)
                 {
-                    this.mc.displayGuiScreen(new GuiDropClientMainMenu());
+                    this.mc.displayGuiScreen(new GuiMainMenuDC());
                 }
                 else if (flag1)
                 {
                     RealmsBridge realmsbridge = new RealmsBridge();
-                    realmsbridge.switchToRealms(new GuiDropClientMainMenu());
+                    realmsbridge.switchToRealms(new GuiMainMenuDC());
                 }
                 else
                 {
-                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiDropClientMainMenu()));
+                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiMainMenuDC()));
                 }
 
             case 2:

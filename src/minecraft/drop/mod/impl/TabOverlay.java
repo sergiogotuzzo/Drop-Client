@@ -2,7 +2,7 @@ package drop.mod.impl;
 
 import java.awt.Color;
 
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.GuiSettings;
 import drop.gui.mod.taboverlay.GuiTabOverlay;
 import drop.mod.Mod;
@@ -45,7 +45,7 @@ public class TabOverlay extends Mod {
 	}
 	
 	@Override
-	public GuiBlurredScreen getGui(GuiBlurredScreen previousGuiScreen) {
+	public GuiScreenDC getGui(GuiScreenDC previousGuiScreen) {
 		return new GuiTabOverlay(previousGuiScreen);
 	}
 

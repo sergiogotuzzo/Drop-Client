@@ -49,7 +49,7 @@ public class GuiRect extends GuiButton {
             }
             
             drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, rectColor.getRGB());
-            GuiDropClient.drawHollowRect(this.xPosition, this.yPosition, this.width, this.height, borderColor);
+            GuiDC.drawHollowRect(this.xPosition, this.yPosition, this.width, this.height, borderColor);
         }
     }
 }

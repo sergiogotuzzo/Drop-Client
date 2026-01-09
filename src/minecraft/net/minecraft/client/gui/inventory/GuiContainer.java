@@ -20,11 +20,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 
 import org.lwjgl.input.Keyboard;
 
-public abstract class GuiContainer extends GuiBlurredScreen
+public abstract class GuiContainer extends GuiScreenDC
 {
     /** The location of the inventory background texture */
     protected static final ResourceLocation inventoryBackground = new ResourceLocation("textures/gui/container/inventory.png");

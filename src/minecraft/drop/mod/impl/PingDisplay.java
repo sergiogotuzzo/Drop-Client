@@ -2,7 +2,7 @@ package drop.mod.impl;
 
 import java.awt.Color;
 
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.GuiSettings;
 import drop.gui.mod.pingdisplay.GuiPingDisplay;
 import drop.mod.ModColor;
@@ -44,7 +44,7 @@ public class PingDisplay extends ModDraggable {
 	}
 	
 	@Override
-	public GuiBlurredScreen getGui(GuiBlurredScreen previousGuiScreen) {
+	public GuiScreenDC getGui(GuiScreenDC previousGuiScreen) {
 		return new GuiPingDisplay(previousGuiScreen);
 	}
 	

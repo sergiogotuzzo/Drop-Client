@@ -6,7 +6,7 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.mod.GuiModMenu;
 import drop.mod.ModHandler;
 import drop.mod.impl.PingDisplay;
@@ -15,7 +15,7 @@ import drop.gui.mod.GuiModColor;
 public class GuiPingDisplayDynamicColors extends GuiModMenu {
 	private static final PingDisplay mod = ModHandler.get(PingDisplay.class);
 	
-	public GuiPingDisplayDynamicColors(GuiBlurredScreen previousGuiScreen) {
+	public GuiPingDisplayDynamicColors(GuiScreenDC previousGuiScreen) {
 		super(previousGuiScreen, mod.getName());
 	}
 

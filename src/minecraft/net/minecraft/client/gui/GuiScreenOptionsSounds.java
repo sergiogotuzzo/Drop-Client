@@ -2,7 +2,7 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
@@ -13,7 +13,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiScreenOptionsSounds extends GuiBlurredScreen
+public class GuiScreenOptionsSounds extends GuiScreenDC
 {
     private final GuiScreen field_146505_f;
 

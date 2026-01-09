@@ -14,7 +14,7 @@ public class GuiReconnect extends GuiDisconnected {
 	public static int port;
 	
 	public GuiReconnect(String reasonLocalizationKey, IChatComponent chatComp) {
-		super(new GuiMultiplayer(new GuiDropClientMainMenu()), reasonLocalizationKey, chatComp);
+		super(new GuiMultiplayer(new GuiMainMenuDC()), reasonLocalizationKey, chatComp);
 	}
 	
 	@Override

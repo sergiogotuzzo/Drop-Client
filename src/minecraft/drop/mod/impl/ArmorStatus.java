@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.GuiSettings;
 import drop.gui.mod.armorstatus.GuiArmorStatus;
 import drop.mod.ModColor;
@@ -49,7 +49,7 @@ public class ArmorStatus extends ModDraggable {
 	}
 
 	@Override
-	public GuiBlurredScreen getGui(GuiBlurredScreen previousGuiScreen) {
+	public GuiScreenDC getGui(GuiScreenDC previousGuiScreen) {
 		return new GuiArmorStatus(previousGuiScreen);
 	}
 	

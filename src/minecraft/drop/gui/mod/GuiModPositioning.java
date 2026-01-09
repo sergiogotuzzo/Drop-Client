@@ -18,12 +18,13 @@ import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiButtonIcon;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiDC;
+import drop.gui.GuiScreenDC;
 import drop.gui.hud.HUDManager;
 import drop.gui.hud.IRenderer;
 import drop.gui.hud.ScreenPosition;
 
-public class GuiModPositioning extends GuiBlurredScreen {
+public class GuiModPositioning extends GuiScreenDC {
 	private final HashMap<IRenderer, ScreenPosition> renderers = new HashMap<IRenderer, ScreenPosition>();
 	
 	private Optional<IRenderer> selectedRenderer = Optional.empty();
@@ -79,7 +80,7 @@ public class GuiModPositioning extends GuiBlurredScreen {
 	    		drawHorizontalLine(0, this.width - 1, this.height / 2, Color.WHITE.getRGB());
 	    	}
 	    	
-		    drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth() - 1, selectedRenderer.get().getHeight() - 1, Color.CYAN.getRGB());
+		    GuiDC.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), selectedRenderer.get().getWidth() - 1, selectedRenderer.get().getHeight() - 1, Color.CYAN.getRGB());
 	    }
 
 	    this.zLevel = zBackup;

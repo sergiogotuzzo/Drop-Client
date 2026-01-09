@@ -6,7 +6,7 @@ import drop.Drop;
 import drop.event.EventManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import drop.gui.GuiBlurredScreen;
+import drop.gui.GuiScreenDC;
 import drop.gui.mod.GuiModSettings;
 import drop.mod.option.Brackets;
 import drop.mod.option.ModOption;
@@ -29,7 +29,7 @@ public abstract class Mod {
 		toggle((boolean) getFromFile("enabled", enabled));				
 	}
 	
-	public GuiBlurredScreen getGui(GuiBlurredScreen previousGuiScreen) {
+	public GuiScreenDC getGui(GuiScreenDC previousGuiScreen) {
 		return new GuiModSettings(previousGuiScreen, this);
 	}
 
