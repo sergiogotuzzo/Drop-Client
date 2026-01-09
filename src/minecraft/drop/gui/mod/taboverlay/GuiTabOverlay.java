@@ -5,8 +5,8 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModSettings;
-import drop.mods.ModHandler;
-import drop.mods.impl.TabOverlay;
+import drop.mod.ModHandler;
+import drop.mod.impl.TabOverlay;
 
 public class GuiTabOverlay extends GuiModSettings {	
 	public GuiTabOverlay(GuiScreen previousGuiScreen) {

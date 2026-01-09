@@ -5,7 +5,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
-import drop.mods.impl.Chat;
+import drop.mod.impl.Chat;
 
 public class ScreenChatOptions extends GuiDropClientScreen
 {

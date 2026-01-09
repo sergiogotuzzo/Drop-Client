@@ -1,7 +1,7 @@
 package net.minecraft.client.particle;
 
-import drop.mods.ModHandler;
-import drop.mods.impl.Particles;
+import drop.mod.ModHandler;
+import drop.mod.impl.Particles;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumParticleTypes;

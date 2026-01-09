@@ -2,8 +2,8 @@ package net.minecraft.client.renderer.entity;
 
 import java.util.Random;
 
-import drop.mods.ModHandler;
-import drop.mods.impl.ItemPhysics;
+import drop.mod.ModHandler;
+import drop.mod.impl.ItemPhysics;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;

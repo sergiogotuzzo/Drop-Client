@@ -30,12 +30,13 @@ import net.minecraft.world.storage.MapData;
 import net.optifine.DynamicLights;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
-import drop.mods.ModHandler;
-import drop.mods.impl.LeftHand;
-import drop.mods.impl.NoFireLayer;
-import drop.mods.impl.OldVisuals;
 
 import org.lwjgl.opengl.GL11;
+
+import drop.mod.ModHandler;
+import drop.mod.impl.LeftHand;
+import drop.mod.impl.NoFireLayer;
+import drop.mod.impl.OldVisuals;
 
 public class ItemRenderer
 {

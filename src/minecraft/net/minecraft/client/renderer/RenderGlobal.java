@@ -29,6 +29,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonSyntaxException;
 
+import drop.mod.ModColor;
+import drop.mod.ModHandler;
+import drop.mod.impl.BlockOverlay;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockEnderChest;
@@ -119,9 +122,6 @@ import net.optifine.shaders.ShadowUtils;
 import net.optifine.shaders.gui.GuiShaderOptions;
 import net.optifine.util.ChunkUtils;
 import net.optifine.util.RenderChunkUtils;
-import drop.mods.ModColor;
-import drop.mods.ModHandler;
-import drop.mods.impl.BlockOverlay;
 
 public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListener
 {

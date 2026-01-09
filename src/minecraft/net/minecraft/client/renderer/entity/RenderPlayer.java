@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
-import drop.mods.ModHandler;
-import drop.mods.impl.Nametags;
+import drop.mod.ModHandler;
+import drop.mod.impl.Nametags;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelPlayer;

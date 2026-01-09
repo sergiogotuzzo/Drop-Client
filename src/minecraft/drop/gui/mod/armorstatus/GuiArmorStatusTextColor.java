@@ -5,10 +5,10 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModColor;
-import drop.mods.ModHandler;
-import drop.mods.impl.ArmorStatus;
-import drop.mods.option.type.BooleanOption;
-import drop.mods.option.type.ColorOption;
+import drop.mod.ModHandler;
+import drop.mod.impl.ArmorStatus;
+import drop.mod.option.type.BooleanOption;
+import drop.mod.option.type.ColorOption;
 
 public class GuiArmorStatusTextColor extends GuiModColor {
 	private static final ArmorStatus mod = ModHandler.get(ArmorStatus.class);

@@ -192,10 +192,10 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import drop.gui.GuiDropClientMainMenu;
-import drop.mods.ModHandler;
-import drop.mods.impl.NoHotbarScrolling;
-import drop.mods.impl.Zoom;
-import drop.mods.impl.togglesprintsneak.DropClientMovementInput;
+import drop.mod.ModHandler;
+import drop.mod.impl.NoHotbarScrolling;
+import drop.mod.impl.Zoom;
+import drop.mod.impl.togglesprintsneak.DropClientMovementInput;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {

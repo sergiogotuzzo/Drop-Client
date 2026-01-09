@@ -3,6 +3,11 @@
 import com.google.common.collect.Lists;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import drop.mod.Mod;
+import drop.mod.ModColor;
+import drop.mod.ModHandler;
+import drop.mod.impl.Chat;
+
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
@@ -12,10 +17,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
-import drop.mods.Mod;
-import drop.mods.ModColor;
-import drop.mods.ModHandler;
-import drop.mods.impl.Chat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

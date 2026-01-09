@@ -5,8 +5,8 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import drop.gui.mod.GuiModSettings;
-import drop.mods.ModHandler;
-import drop.mods.impl.PingDisplay;
+import drop.mod.ModHandler;
+import drop.mod.impl.PingDisplay;
 
 public class GuiPingDisplay extends GuiModSettings {	
 	public GuiPingDisplay(GuiScreen previousGuiScreen) {

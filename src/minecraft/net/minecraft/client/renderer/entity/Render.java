@@ -25,8 +25,8 @@ import net.optifine.entity.model.IEntityRenderer;
 import net.optifine.shaders.Shaders;
 import org.lwjgl.opengl.GL11;
 
-import drop.mods.ModHandler;
-import drop.mods.impl.Nametags;
+import drop.mod.ModHandler;
+import drop.mod.impl.Nametags;
 
 public abstract class Render<T extends Entity> implements IEntityRenderer
 {

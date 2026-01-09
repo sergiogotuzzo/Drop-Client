@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import drop.ColorManager;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiSlider;
-import drop.mods.Mod;
-import drop.mods.ModColor;
-import drop.mods.option.type.ColorOption;
+import drop.mod.Mod;
+import drop.mod.ModColor;
+import drop.mod.option.type.ColorOption;
 
 public class GuiModColor extends GuiModMenu {	
 	protected final ColorOption option;

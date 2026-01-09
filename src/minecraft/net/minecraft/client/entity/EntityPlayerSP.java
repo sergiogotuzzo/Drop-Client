@@ -1,5 +1,6 @@
 package net.minecraft.client.entity;
 
+import drop.mod.impl.togglesprintsneak.DropClientMovementInput;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -51,7 +52,6 @@ import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
-import drop.mods.impl.togglesprintsneak.DropClientMovementInput;
 
 public class EntityPlayerSP extends AbstractClientPlayer
 {

@@ -7,10 +7,10 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
-import drop.mods.Mod;
-import drop.mods.ModColor;
-import drop.mods.option.*;
-import drop.mods.option.type.*;
+import drop.mod.Mod;
+import drop.mod.ModColor;
+import drop.mod.option.*;
+import drop.mod.option.type.*;
 
 public class GuiModSettings extends GuiModMenu {
 	private final Mod mod;

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
+import drop.mod.ModHandler;
+import drop.mod.impl.Freelook;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
@@ -107,8 +109,6 @@ import net.optifine.entity.model.CustomEntityModels;
 import net.optifine.player.PlayerItemsLayer;
 import net.optifine.reflect.Reflector;
 import net.optifine.shaders.Shaders;
-import drop.mods.ModHandler;
-import drop.mods.impl.Freelook;
 
 public class RenderManager
 {

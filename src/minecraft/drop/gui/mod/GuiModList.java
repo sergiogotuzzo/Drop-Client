@@ -14,8 +14,8 @@ import net.minecraft.client.resources.I18n;
 import drop.gui.GuiButtonToggled;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.GuiText;
-import drop.mods.Mod;
-import drop.mods.ModHandler;
+import drop.mod.Mod;
+import drop.mod.ModHandler;
 
 public class GuiModList extends GuiModMenu {    
     private GuiTextField textFieldSearchMod;

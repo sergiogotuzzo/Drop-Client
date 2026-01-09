@@ -2,8 +2,8 @@ package net.minecraft.client.renderer;
 
 import java.util.Collection;
 
-import drop.mods.ModHandler;
-import drop.mods.impl.PotionEffects;
+import drop.mod.ModHandler;
+import drop.mod.impl.PotionEffects;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;

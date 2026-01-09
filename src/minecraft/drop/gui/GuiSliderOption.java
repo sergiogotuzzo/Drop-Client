@@ -2,10 +2,10 @@ package drop.gui;
 
 import java.awt.Color;
 
-import drop.mods.Mod;
-import drop.mods.option.ModOption;
-import drop.mods.option.type.FloatOption;
-import drop.mods.option.type.IntOption;
+import drop.mod.Mod;
+import drop.mod.option.ModOption;
+import drop.mod.option.type.FloatOption;
+import drop.mod.option.type.IntOption;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

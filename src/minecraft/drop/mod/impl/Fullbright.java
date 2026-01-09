@@ -1,0 +1,21 @@
+package drop.mod.impl;
+
+import drop.event.EventTarget;
+import drop.event.impl.TickEvent;
+import drop.gui.GuiDropClientScreen;
+import drop.mod.Mod;
+
+public class Fullbright extends Mod {	
+	public Fullbright() {
+		super(true);
+	}
+	
+	@Override
+	public GuiDropClientScreen getGui(GuiDropClientScreen previousGuiScreen) {
+		return null;
+	}
+	
+	public float getGamma() {
+		return enabled ? 10.0F : mc.gameSettings.gammaSetting;
+	}
+}

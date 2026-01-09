@@ -4,6 +4,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import drop.mod.ModHandler;
+import drop.mod.impl.TimeChanger;
+
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Collection;
@@ -54,8 +57,6 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldInfo;
-import drop.mods.ModHandler;
-import drop.mods.impl.TimeChanger;
 
 public abstract class World implements IBlockAccess
 {

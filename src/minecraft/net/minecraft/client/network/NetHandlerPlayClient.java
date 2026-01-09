@@ -211,8 +211,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.MapData;
 import drop.event.impl.EntityDamageEvent;
 import drop.gui.GuiDropClientMainMenu;
-import drop.mods.ModHandler;
-import drop.mods.impl.NoAchievementNotifications;
+import drop.mod.ModHandler;
+import drop.mod.impl.NoAchievementNotifications;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -8,9 +8,9 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiDropClientScreen;
 import drop.gui.mod.GuiModMenu;
+import drop.mod.ModHandler;
+import drop.mod.impl.PingDisplay;
 import drop.gui.mod.GuiModColor;
-import drop.mods.ModHandler;
-import drop.mods.impl.PingDisplay;
 
 public class GuiPingDisplayDynamicColors extends GuiModMenu {
 	private static final PingDisplay mod = ModHandler.get(PingDisplay.class);

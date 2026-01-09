@@ -12,7 +12,7 @@ import drop.gui.GuiRect;
 import drop.gui.GuiSlider;
 import drop.gui.GuiSliderOption;
 import drop.gui.GuiText;
-import drop.mods.option.ModOption;
+import drop.mod.option.ModOption;
 
 public class GuiModMenu extends GuiDropClientScreen {
 	private final GuiScreen previousGuiScreen;

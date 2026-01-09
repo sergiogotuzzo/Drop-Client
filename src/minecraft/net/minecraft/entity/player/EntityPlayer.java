@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 
 import drop.event.impl.EntityAttackEvent;
-import drop.mods.ModHandler;
-import drop.mods.impl.Particles;
+import drop.mod.ModHandler;
+import drop.mod.impl.Particles;
 
 import java.util.Collection;
 import java.util.List;

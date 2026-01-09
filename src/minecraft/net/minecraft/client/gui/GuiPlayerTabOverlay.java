@@ -4,6 +4,9 @@ import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import com.mojang.authlib.GameProfile;
 
+import drop.mod.ModHandler;
+import drop.mod.impl.TabOverlay;
+
 import java.awt.Color;
 import java.util.Comparator;
 import java.util.List;
@@ -21,8 +24,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldSettings;
-import drop.mods.ModHandler;
-import drop.mods.impl.TabOverlay;
 
 public class GuiPlayerTabOverlay extends Gui
 {

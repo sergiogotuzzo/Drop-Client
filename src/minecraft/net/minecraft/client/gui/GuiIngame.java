@@ -5,6 +5,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import drop.event.impl.RenderEvent;
+import drop.mod.ModHandler;
+import drop.mod.impl.Bossbar;
+import drop.mod.impl.NoPumpkinOverlay;
+import drop.mod.impl.OldVisuals;
 
 import java.awt.Color;
 import java.util.Collection;
@@ -48,10 +52,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.border.WorldBorder;
 import net.optifine.CustomColors;
-import drop.mods.ModHandler;
-import drop.mods.impl.Bossbar;
-import drop.mods.impl.NoPumpkinOverlay;
-import drop.mods.impl.OldVisuals;
 
 public class GuiIngame extends Gui
 {
@@ -354,7 +354,7 @@ public class GuiIngame extends Gui
 
         ScoreObjective scoreobjective1 = scoreobjective != null ? scoreobjective : scoreboard.getObjectiveInDisplaySlot(1);
 
-        if (!ModHandler.get(drop.mods.impl.Scoreboard.class).isEnabled() && scoreobjective1 != null)
+        if (!ModHandler.get(drop.mod.impl.Scoreboard.class).isEnabled() && scoreobjective1 != null)
         {
             this.renderScoreboard(scoreobjective1, scaledresolution);
         }
