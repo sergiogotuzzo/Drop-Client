@@ -18,7 +18,7 @@ public class DiscordRP {
 			public void apply(DiscordUser user) {
 				System.out.println("Welcome " + user.username + "#" + user.discriminator);
 				
-				update("Launching Client...", "");
+				update("In Loading Screen", "Waiting...");
 			}
 		};
 		DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler(readyEventHandler).build();
