@@ -6,14 +6,15 @@ import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
 import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiIngameMultiplayer;
 
 public class GuiScreenServerList extends GuiDropClientScreen
 {
-    private final GuiMultiplayer field_146303_a;
+    private final GuiScreen field_146303_a;
     private final ServerData field_146301_f;
     private GuiTextField field_146302_g;
 
-    public GuiScreenServerList(GuiMultiplayer p_i1031_1_, ServerData p_i1031_2_)
+    public GuiScreenServerList(GuiScreen p_i1031_1_, ServerData p_i1031_2_)
     {
         this.field_146303_a = p_i1031_1_;
         this.field_146301_f = p_i1031_2_;
@@ -71,7 +72,10 @@ public class GuiScreenServerList extends GuiDropClientScreen
             }
             else if (button.id == 0)
             {
-            	this.field_146303_a.disconnect();
+            	if (this.field_146303_a instanceof GuiIngameMultiplayer) {
+            		((GuiIngameMultiplayer) this.field_146303_a).disconnect();
+            	}
+            	
                 this.field_146301_f.serverIP = this.field_146302_g.getText();
                 this.field_146303_a.confirmClicked(true, 0);
             }

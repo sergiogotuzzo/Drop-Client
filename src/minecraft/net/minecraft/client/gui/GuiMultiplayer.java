@@ -4,7 +4,6 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 
 import drop.Drop;
-import drop.gui.GuiDropClientScreen;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,18 +13,17 @@ import net.minecraft.client.multiplayer.ServerList;
 import net.minecraft.client.network.LanServerDetector;
 import net.minecraft.client.network.OldServerPinger;
 import net.minecraft.client.resources.I18n;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallback
+public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback
 {
-    private static final Logger logger = LogManager.getLogger();
+    protected static final Logger logger = LogManager.getLogger();
     private final OldServerPinger oldServerPinger = new OldServerPinger();
     private GuiScreen parentScreen;
-    private ServerSelectionList serverListSelector;
-    private ServerList savedServerList;
+    protected ServerSelectionList serverListSelector;
+    protected ServerList savedServerList;
     private GuiButton btnEditServer;
     private GuiButton btnSelectServer;
     private GuiButton btnDeleteServer;
@@ -39,16 +37,13 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
      */
     private String hoveringText;
     private ServerData selectedServer;
-    private LanServerDetector.LanServerList lanServerList;
-    private LanServerDetector.ThreadLanServerFind lanServerDetector;
-    private boolean initialized;
-    
-    private boolean updateDiscordRichPresence;
+    protected LanServerDetector.LanServerList lanServerList;
+    protected LanServerDetector.ThreadLanServerFind lanServerDetector;
+    protected boolean initialized;
 
-    public GuiMultiplayer(GuiScreen parentScreen, boolean updateDiscordRichPresence)
+    public GuiMultiplayer(GuiScreen parentScreen)
     {
         this.parentScreen = parentScreen;
-        this.updateDiscordRichPresence = updateDiscordRichPresence;
     }
 
     /**
@@ -57,10 +52,6 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
      */
     public void initGui()
     {
-    	if (updateDiscordRichPresence) {
-    		Drop.getDropClient().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
-    	}
-    	
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
 
@@ -90,6 +81,8 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
         }
 
         this.createButtons();
+        
+        Drop.getDropClient().getDiscordRichPresence().update("In Multiplayer Menu", "Idle");
     }
 
     /**
@@ -205,7 +198,7 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
 
     private void refreshServerList()
     {
-        this.mc.displayGuiScreen(new GuiMultiplayer(this.parentScreen, this.updateDiscordRichPresence));
+        this.mc.displayGuiScreen(new GuiMultiplayer(this.parentScreen));
     }
 
     public void confirmClicked(boolean result, int id)
@@ -393,8 +386,6 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
 
     public void connectToSelected()
     {
-    	this.disconnect();
-
         GuiListExtended.IGuiListEntry guilistextended$iguilistentry = this.serverListSelector.func_148193_k() < 0 ? null : this.serverListSelector.getListEntry(this.serverListSelector.func_148193_k());
 
         if (guilistextended$iguilistentry instanceof ServerListEntryNormal)
@@ -501,11 +492,4 @@ public class GuiMultiplayer extends GuiDropClientScreen implements GuiYesNoCallb
 
         this.serverListSelector.func_148195_a(this.savedServerList);
     }
-    
-    public void disconnect() {
-		if(this.mc.theWorld != null) {
-			this.mc.theWorld.sendQuittingDisconnectingPacket();
-			this.mc.loadWorld(null);
-		}
-	}
 }

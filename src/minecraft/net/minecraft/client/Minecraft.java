@@ -2369,7 +2369,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         networkmanager.sendPacket(new C00PacketLoginStart(this.getSession().getProfile()));
         this.myNetworkManager = networkmanager;
         
-        Drop.getDropClient().getDiscordRichPresence().update("Playing Singleplayer", "In Game");
+        Drop.getDropClient().getDiscordRichPresence().update("In Game", "Playing a World");
     }
 
     /**

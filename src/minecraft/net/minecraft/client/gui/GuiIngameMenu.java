@@ -14,6 +14,7 @@ import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import drop.gui.GuiDropClientMainMenu;
 import drop.gui.GuiDropClientScreen;
+import drop.gui.GuiIngameMultiplayer;
 import drop.gui.mod.GuiModList;
 
 public class GuiIngameMenu extends GuiDropClientScreen
@@ -48,8 +49,9 @@ public class GuiIngameMenu extends GuiDropClientScreen
         this.buttonList.add(new GuiButton(6, this.width / 2 + 2, this.height / 4 + 48 + i, 98, 20, I18n.format("gui.stats", new Object[0])));
         guibutton.enabled = this.mc.isSingleplayer() && !this.mc.getIntegratedServer().getPublic();
         
+        /* Drop Client */
         this.buttonList.add(new GuiButton(8, this.width / 2 - 100, this.height / 4 + 72 + i, 98, 20, I18n.format("menu.multiplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(9, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, I18n.format("Mods...", new Object[0])));
+        this.buttonList.add(new GuiButton(9, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, "Mods..."));
     }
 
     /**
@@ -81,7 +83,7 @@ public class GuiIngameMenu extends GuiDropClientScreen
                 }
                 else
                 {
-                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiDropClientMainMenu(), true));
+                    this.mc.displayGuiScreen(new GuiMultiplayer(new GuiDropClientMainMenu()));
                 }
 
             case 2:
@@ -106,7 +108,7 @@ public class GuiIngameMenu extends GuiDropClientScreen
                 this.mc.displayGuiScreen(new GuiShareToLan(this));
                 break;
             case 8:
-            	this.mc.displayGuiScreen(new GuiMultiplayer(this, false));
+            	this.mc.displayGuiScreen(new GuiIngameMultiplayer(this));
             	break;
             case 9:
             	this.mc.displayGuiScreen(new GuiModList(this));
