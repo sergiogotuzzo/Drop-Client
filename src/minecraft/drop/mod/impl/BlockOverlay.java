@@ -8,7 +8,6 @@ import drop.gui.GuiScreenDC;
 import drop.gui.GuiSettings;
 import drop.mod.Mod;
 import drop.mod.ModColor;
-import drop.mod.ModOptions;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
@@ -21,23 +20,21 @@ import net.minecraft.util.AxisAlignedBB;
 public class BlockOverlay extends Mod {
 	public BlockOverlay() {
 		super(false);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new BooleanOption(this, "outline", true, new GuiSettings(1, "Outline")),
 				new FloatOption(this, "outlineWidth", 0.4F, 5.0F, 2.0F, new ParentOption("outline"), new GuiSettings(2, "Outline Width")),
 				new ColorOption(this, "outlineColor", ModColor.fromColor(Color.BLACK, false), new ParentOption("outline"), new GuiSettings(3, "Outline Color", true, false)),
 				new BooleanOption(this, "overlay", false, new GuiSettings(4, "Overlay")),
 				new ColorOption(this, "overlayColor", ModColor.fromColor(Color.WHITE, false).setAlpha(80), new ParentOption("overlay"), new GuiSettings(5, "Overlay Color", true, true))
 				);
-				
-		saveOptions();
 	}
     
     public void drawSelectionOverlay(AxisAlignedBB axisAlignedBBIn) {
     	Tessellator tessellator = Tessellator.getInstance();
     	WorldRenderer worldRenderer = tessellator.getWorldRenderer();
     	
-    	ModColor overlayColor = options.getColorOption("overlayColor").getColor();
+    	ModColor overlayColor = getColorOption("overlayColor").getColor();
     	int red = overlayColor.getRed();
     	int green = overlayColor.getGreen();
     	int blue = overlayColor.getBlue();

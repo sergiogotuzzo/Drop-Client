@@ -7,7 +7,6 @@ import drop.gui.GuiSettings;
 import drop.gui.mod.pingdisplay.GuiPingDisplay;
 import drop.mod.ModColor;
 import drop.mod.ModDraggable;
-import drop.mod.ModOptions;
 import drop.mod.option.Brackets;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
@@ -18,8 +17,8 @@ import drop.gui.hud.ScreenPosition;
 public class PingDisplay extends ModDraggable {
 	public PingDisplay() {
 		super(false, 0.5, 0.5);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Background")),
@@ -39,8 +38,6 @@ public class PingDisplay extends ModDraggable {
 				new ColorOption(this, "unstableTextColor", ModColor.fromRGB(170, 0, 0, false), new GuiSettings(false, 15, "Unstable Text Color", true, false)),
 				new BooleanOption(this, "unstableTextShadow", true, new GuiSettings(false, 16, "Unstable Text Shadow"))
 				);
-				
-		saveOptions();
 	}
 	
 	@Override
@@ -50,68 +47,68 @@ public class PingDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("-1 ms"));
+		return getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) getEnumOption("brackets").getValue()).wrap("-1 ms"));
 	}
 
 	@Override
 	public int getHeight() {
-		return options.getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
+		return getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
 		if (!mc.isSingleplayer()) {
 			int ping = mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
-			ModColor color = options.getColorOption("textColor").getColor(); // Default
-			boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
+			ModColor color = getColorOption("textColor").getColor(); // Default
+			boolean dropShadow = getBooleanOption("textShadow").isToggled();
 			
-			if (options.getBooleanOption("dynamicColors").isToggled()) {
+			if (getBooleanOption("dynamicColors").isToggled()) {
 				if (ping > 300) {
-					color = options.getColorOption("unstableTextColor").getColor(); // Unstable
-					dropShadow = options.getBooleanOption("unstableTextShadow").isToggled();
+					color = getColorOption("unstableTextColor").getColor(); // Unstable
+					dropShadow = getBooleanOption("unstableTextShadow").isToggled();
 				} else if (ping > 200) {
-					color = options.getColorOption("weakTextColor").getColor(); // Weak
-					dropShadow = options.getBooleanOption("weakTextShadow").isToggled();
+					color = getColorOption("weakTextColor").getColor(); // Weak
+					dropShadow = getBooleanOption("weakTextShadow").isToggled();
 				} else if (ping > 150) {
-					color = options.getColorOption("moderateTextColor").getColor(); // Moderate
-					dropShadow = options.getBooleanOption("moderateTextShadow").isToggled();
+					color = getColorOption("moderateTextColor").getColor(); // Moderate
+					dropShadow = getBooleanOption("moderateTextShadow").isToggled();
 				} else if (ping > 100) {
-					color = options.getColorOption("goodTextColor").getColor(); // Good
-					dropShadow = options.getBooleanOption("goodTextShadow").isToggled();
+					color = getColorOption("goodTextColor").getColor(); // Good
+					dropShadow = getBooleanOption("goodTextShadow").isToggled();
 				} else if (ping > 50) {
-					color = options.getColorOption("excellentTextColor").getColor(); // Excellent
-					dropShadow = options.getBooleanOption("excellentTextShadow").isToggled();
+					color = getColorOption("excellentTextColor").getColor(); // Excellent
+					dropShadow = getBooleanOption("excellentTextShadow").isToggled();
 				}
 			}
 			
 			String text = ping + " ms";
 			
-			if (options.getBooleanOption("showBackground").isToggled()) {
-				getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+			if (getBooleanOption("showBackground").isToggled()) {
+				getBounds().fill(getColorOption("backgroundColor").getColor().getRGB());
 				
-				if (options.getBooleanOption("showBorder").isToggled()) {
-			    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+				if (getBooleanOption("showBorder").isToggled()) {
+			    	getBounds().stroke(getColorOption("borderColor").getColor().getRGB());
 		    	}
 
 				drawCenteredText(text, pos.getAbsoluteX(), pos.getAbsoluteY(), color, dropShadow);
 	    	} else {
-			    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color, dropShadow);
+			    drawAlignedText(Brackets.fromId((int) getEnumOption("brackets").getValue()).wrap(text), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, color, dropShadow);
 	    	}
 		}
 	}
 
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (options.getBooleanOption("showBackground").isToggled()) {
-	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+		if (getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(getColorOption("backgroundColor").getColor().getRGB());
 	    	
-	    	if (options.getBooleanOption("showBorder").isToggled()) {
-		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	if (getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(getColorOption("borderColor").getColor().getRGB());
 	    	}
 	    	
-			drawCenteredText("-1 ms", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawCenteredText("-1 ms", pos.getAbsoluteX(), pos.getAbsoluteY(), getColorOption("textColor").getColor(), getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("-1 ms"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) getEnumOption("brackets").getValue()).wrap("-1 ms"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, getColorOption("textColor").getColor(), getBooleanOption("textShadow").isToggled());
     	}
 	}
 }

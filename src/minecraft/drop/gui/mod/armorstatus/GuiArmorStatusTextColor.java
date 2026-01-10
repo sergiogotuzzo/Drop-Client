@@ -14,7 +14,7 @@ public class GuiArmorStatusTextColor extends GuiModColor {
 	private static final ArmorStatus mod = ModHandler.get(ArmorStatus.class);
 	
 	public GuiArmorStatusTextColor(GuiScreen previousGuiScreen) {
-		super(previousGuiScreen, mod, (ColorOption) mod.getOptions().getColorOption("textColor"));
+		super(previousGuiScreen, mod, (ColorOption) mod.getColorOption("textColor"));
 	}
 
     @Override
@@ -23,7 +23,7 @@ public class GuiArmorStatusTextColor extends GuiModColor {
     	
     	switch (button.id) {
 	    	case 6:
-	    		mod.getOptions().getBooleanOption("dynamicColors").toggle();
+	    		mod.getBooleanOption("dynamicColors").toggle();
 	        	this.initGui();
 	        	break;
 	    	case 7:
@@ -36,7 +36,7 @@ public class GuiArmorStatusTextColor extends GuiModColor {
     public void initGui() {
 		super.initGui();
 		
-		BooleanOption dynamicColors = mod.getOptions().getBooleanOption("dynamicColors");
+		BooleanOption dynamicColors = mod.getBooleanOption("dynamicColors");
 		
 		this.buttonList.add(this.createGuiText(7, dynamicColors.getGuiSettings().getOptionName(), false, 9));
     	this.buttonList.add(this.createGuiCheckBox(6, dynamicColors.isToggled(), 9));

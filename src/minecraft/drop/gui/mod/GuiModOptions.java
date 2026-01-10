@@ -12,10 +12,10 @@ import drop.mod.ModColor;
 import drop.mod.option.*;
 import drop.mod.option.type.*;
 
-public class GuiModSettings extends GuiModMenu {
+public class GuiModOptions extends GuiModMenu {
 	private final Mod mod;
 
-	public GuiModSettings(GuiScreen previousGuiScreen, Mod mod) {
+	public GuiModOptions(GuiScreen previousGuiScreen, Mod mod) {
 		super(previousGuiScreen, mod.getName());
 		
 		this.mod = mod;
@@ -27,7 +27,7 @@ public class GuiModSettings extends GuiModMenu {
         
         int i = 1;
 		
-		for (ModOption option : mod.getOptions().getOptions()) {			
+		for (ModOption option : mod.getOptions()) {			
 			if (isOptionVisible(option)) {
 				i = this.writeOption(option, i);
 				
@@ -40,7 +40,7 @@ public class GuiModSettings extends GuiModMenu {
     protected void actionPerformed(GuiButton button) throws IOException {
         super.actionPerformed(button);
         
-        for (ModOption option : mod.getOptions().getOptions()) {
+        for (ModOption option : mod.getOptions()) {
 			if (button.id == option.getGuiSettings().getButtonId()) {
 				if (option instanceof BooleanOption) {
 					((BooleanOption) option).toggle();
@@ -70,7 +70,7 @@ public class GuiModSettings extends GuiModMenu {
         
         int i = 1;
         
-		for (ModOption option : mod.getOptions().getOptions()) {				
+		for (ModOption option : mod.getOptions()) {				
 			if (isOptionVisible(option)) {
 				i = this.drawButton(option, i);
 				
@@ -137,7 +137,7 @@ public class GuiModSettings extends GuiModMenu {
 	        return true;
 	    }
 
-	    ModOption optionParented = mod.getOptions().getOption(parentOption.getKey());
+	    ModOption optionParented = mod.getOption(parentOption.getKey());
 
 	    if (!(optionParented instanceof BooleanOption)) {
 	        return false;

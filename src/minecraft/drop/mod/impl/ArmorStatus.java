@@ -12,7 +12,6 @@ import drop.gui.GuiSettings;
 import drop.gui.mod.armorstatus.GuiArmorStatus;
 import drop.mod.ModColor;
 import drop.mod.ModDraggable;
-import drop.mod.ModOptions;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
@@ -21,8 +20,8 @@ import drop.gui.hud.ScreenPosition;
 public class ArmorStatus extends ModDraggable {
 	public ArmorStatus() {
 		super(true, 0.5, 0.5);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "dynamicColors", true, new GuiSettings(false, 3, "Dynamic Colors")),
@@ -44,8 +43,6 @@ public class ArmorStatus extends ModDraggable {
 				new BooleanOption(this, "damageOverlays", true, new GuiSettings(18, "Damage Overlays")),
 				new BooleanOption(this, "reverse", false, new GuiSettings(false))
 				);
-				
-		saveOptions();
 	}
 
 	@Override
@@ -57,12 +54,12 @@ public class ArmorStatus extends ModDraggable {
 	public int getWidth() {
 		int width = 0;
 		
-		if (options.getBooleanOption("showPercentage").isToggled()) {
+		if (getBooleanOption("showPercentage").isToggled()) {
 			width = font.getStringWidth("100%");
-		} else if (options.getBooleanOption("showDamage").isToggled() && !options.getBooleanOption("showMaxDamage").isToggled()) {
-			width = (options.getBooleanOption("equippedItem").isToggled() ? font.getStringWidth("1561") : font.getStringWidth("528"));
-		} else if (options.getBooleanOption("showDamage").isToggled() && options.getBooleanOption("showMaxDamage").isToggled()) {
-			width = (options.getBooleanOption("equippedItem").isToggled() ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
+		} else if (getBooleanOption("showDamage").isToggled() && !getBooleanOption("showMaxDamage").isToggled()) {
+			width = (getBooleanOption("equippedItem").isToggled() ? font.getStringWidth("1561") : font.getStringWidth("528"));
+		} else if (getBooleanOption("showDamage").isToggled() && getBooleanOption("showMaxDamage").isToggled()) {
+			width = (getBooleanOption("equippedItem").isToggled() ? font.getStringWidth("1561/1561") : font.getStringWidth("528/528"));
 		}
 		
 		return 16 + 2 + width;
@@ -70,26 +67,26 @@ public class ArmorStatus extends ModDraggable {
 
 	@Override
 	public int getHeight() {
-		return 16 * ((options.getBooleanOption("armor").isToggled() ? 4 : 0) + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0));
+		return 16 * ((getBooleanOption("armor").isToggled() ? 4 : 0) + (getBooleanOption("equippedItem").isToggled() ? 1 : 0));
 	}
 
 	@Override
 	public void render(ScreenPosition pos) {
-		if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
-    		options.getBooleanOption("reverse").toggle(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
-			options.getBooleanOption("reverse").toggle(true);
+		if (pos.getRelativeX() < 1.0 / 3.0 && getBooleanOption("reverse").isToggled()) {
+    		getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !getBooleanOption("reverse").isToggled()) {
+			getBooleanOption("reverse").toggle(true);
 		}
 		
 		int i = 0;
 		
-		if (options.getBooleanOption("equippedItem").isToggled() && mc.thePlayer.inventory.getCurrentItem() != null) {
+		if (getBooleanOption("equippedItem").isToggled() && mc.thePlayer.inventory.getCurrentItem() != null) {
 			drawItemStack(pos, i, mc.thePlayer.inventory.getCurrentItem());
 			
 			i++;
 		}
 		
-		if (options.getBooleanOption("armor").isToggled()) {
+		if (getBooleanOption("armor").isToggled()) {
 			for (ItemStack itemStack : mc.thePlayer.inventory.armorInventory) {
 				if (itemStack != null) {
 					drawItemStack(pos, i, itemStack);
@@ -102,21 +99,21 @@ public class ArmorStatus extends ModDraggable {
 	
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
-    		options.getBooleanOption("reverse").toggle(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
-			options.getBooleanOption("reverse").toggle(true);
+		if (pos.getRelativeX() < 1.0 / 3.0 && getBooleanOption("reverse").isToggled()) {
+    		getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !getBooleanOption("reverse").isToggled()) {
+			getBooleanOption("reverse").toggle(true);
 		}
 				
-		if (options.getBooleanOption("equippedItem").isToggled()) {
+		if (getBooleanOption("equippedItem").isToggled()) {
 			drawItemStack(pos, 0, new ItemStack(Items.diamond_sword));
 		}
 		
-		if (options.getBooleanOption("armor").isToggled()) {
-			drawItemStack(pos, 0 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_boots));
-			drawItemStack(pos, 1 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_leggings));
-			drawItemStack(pos, 2 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_chestplate));
-			drawItemStack(pos, 3 + (options.getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_helmet));
+		if (getBooleanOption("armor").isToggled()) {
+			drawItemStack(pos, 0 + (getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_boots));
+			drawItemStack(pos, 1 + (getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_leggings));
+			drawItemStack(pos, 2 + (getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_chestplate));
+			drawItemStack(pos, 3 + (getBooleanOption("equippedItem").isToggled() ? 1 : 0), new ItemStack(Items.diamond_helmet));
 		}
 	}
 
@@ -128,40 +125,40 @@ public class ArmorStatus extends ModDraggable {
 			
 			String text = "";
 			
-			if (options.getBooleanOption("showPercentage").isToggled()) {
+			if (getBooleanOption("showPercentage").isToggled()) {
 				text = String.format("%.0f%%", damagePercentage);
-			} else if (options.getBooleanOption("showDamage").isToggled() && !options.getBooleanOption("showMaxDamage").isToggled()) {
+			} else if (getBooleanOption("showDamage").isToggled() && !getBooleanOption("showMaxDamage").isToggled()) {
 				text = String.valueOf(itemStack.getMaxDamage() - itemStack.getItemDamage());
-			} else if (options.getBooleanOption("showDamage").isToggled() && options.getBooleanOption("showMaxDamage").isToggled()) {
+			} else if (getBooleanOption("showDamage").isToggled() && getBooleanOption("showMaxDamage").isToggled()) {
 				text = (itemStack.getMaxDamage() - itemStack.getItemDamage()) + "/" + itemStack.getMaxDamage();
 			}
 			
-			ModColor color = options.getColorOption("textColor").getColor(); // Default
-			boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
+			ModColor color = getColorOption("textColor").getColor();
+			boolean dropShadow = getBooleanOption("textShadow").isToggled();
 			
-			if (options.getBooleanOption("dynamicColors").isToggled()) {				
+			if (getBooleanOption("dynamicColors").isToggled()) {				
 				if (damagePercentage <= 10) {
-			        color = options.getColorOption("veryLowTextColor").getColor(); // Very low
-			        dropShadow = options.getBooleanOption("veryLowTextShadow").isToggled();
+			        color = getColorOption("veryLowTextColor").getColor();
+			        dropShadow = getBooleanOption("veryLowTextShadow").isToggled();
 			    } else if (damagePercentage <= 25) {
-			        color = options.getColorOption("lowTextColor").getColor(); // Low
-			        dropShadow = options.getBooleanOption("lowTextShadow").isToggled();
+			        color = getColorOption("lowTextColor").getColor();
+			        dropShadow = getBooleanOption("lowTextShadow").isToggled();
 			    } else if (damagePercentage <= 40) {
-			        color = options.getColorOption("mediumTextColor").getColor(); // Medium
-			        dropShadow = options.getBooleanOption("mediumTextShadow").isToggled();
+			        color = getColorOption("mediumTextColor").getColor();
+			        dropShadow = getBooleanOption("mediumTextShadow").isToggled();
 			    } else if (damagePercentage <= 60) {
-			        color = options.getColorOption("highTextColor").getColor(); // High
-			        dropShadow = options.getBooleanOption("highTextShadow").isToggled();
+			        color = getColorOption("highTextColor").getColor();
+			        dropShadow = getBooleanOption("highTextShadow").isToggled();
 			    } else if (damagePercentage <= 80) {
-			        color = options.getColorOption("veryHighTextColor").getColor(); // Very high
-			        dropShadow = options.getBooleanOption("veryHighTextShadow").isToggled();
+			        color = getColorOption("veryHighTextColor").getColor();
+			        dropShadow = getBooleanOption("veryHighTextShadow").isToggled();
 			    }
 			}
 			
 			RenderHelper.enableGUIStandardItemLighting();
 			
-			int itemX = options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
-			int damageX = options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
+			int itemX = getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - 16 : pos.getAbsoluteX();
+			int damageX = getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(text) - 16 - 2 : pos.getAbsoluteX() + 16 + 2;
 			int offsetY = (-16 * i) + getHeight() - 16;
 			
 			mc.getRenderItem().renderItemAndEffectIntoGUI(itemStack, itemX, pos.getAbsoluteY() + offsetY);
@@ -170,8 +167,8 @@ public class ArmorStatus extends ModDraggable {
 				mc.getRenderItem().renderItemOverlays(font, itemStack, itemX, pos.getAbsoluteY() + offsetY);
 			}
 			
-			if ((options.getBooleanOption("showDamage").isToggled() || options.getBooleanOption("showPercentage").isToggled()) && itemStack.getItem().isDamageable()) {
-				if (options.getBooleanOption("damageOverlays").isToggled()) {
+			if ((getBooleanOption("showDamage").isToggled() || getBooleanOption("showPercentage").isToggled()) && itemStack.getItem().isDamageable()) {
+				if (getBooleanOption("damageOverlays").isToggled()) {
 					mc.getRenderItem().renderItemOverlays(font, itemStack, itemX, pos.getAbsoluteY() + offsetY);
 				}
 				

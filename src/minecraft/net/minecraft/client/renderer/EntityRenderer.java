@@ -649,7 +649,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
                 {
                     Config.zoomMode = true;
                     
-                    if (ModHandler.get(Zoom.class).getOptions().getBooleanOption("smoothCamera").isToggled()) {
+                    if (ModHandler.get(Zoom.class).getBooleanOption("smoothCamera").isToggled()) {
                     	Config.zoomSmoothCamera = this.mc.gameSettings.smoothCamera;
                         this.mc.gameSettings.smoothCamera = true;
                     }
@@ -659,15 +659,15 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
                 if (Config.zoomMode)
                 {
-                	f /= (ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled() ? getScrollAmount() : (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevel").getValue());
+                	f /= (ModHandler.get(Zoom.class).getBooleanOption("scrollToZoom").isToggled() ? getScrollAmount() : (int) ModHandler.get(Zoom.class).getIntOption("zoomLevel").getValue());
                 }
             }
             else if (Config.zoomMode)
             {
                 Config.zoomMode = false;
 
-                if (ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled()) {
-                	this.scrollTotal = (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevel").getValue();
+                if (ModHandler.get(Zoom.class).getBooleanOption("scrollToZoom").isToggled()) {
+                	this.scrollTotal = (int) ModHandler.get(Zoom.class).getIntOption("zoomLevel").getValue();
                 }
                 
                 this.mc.gameSettings.smoothCamera = Config.zoomSmoothCamera;
@@ -694,7 +694,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
     }
     
     private int getScrollAmount() {
-    	if (ModHandler.get(Zoom.class).isEnabled() && ModHandler.get(Zoom.class).getOptions().getBooleanOption("scrollToZoom").isToggled()) {
+    	if (ModHandler.get(Zoom.class).isEnabled() && ModHandler.get(Zoom.class).getBooleanOption("scrollToZoom").isToggled()) {
     		int dWheel = Mouse.getDWheel();
     		
     		if (dWheel != 0) {
@@ -706,12 +706,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
     				scrollTotal--;
     			}
     			
-    			if (scrollTotal > (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMax").getValue()) {
-    				scrollTotal = (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMax").getValue();
+    			if (scrollTotal > (int) ModHandler.get(Zoom.class).getIntOption("zoomLevelMax").getValue()) {
+    				scrollTotal = (int) ModHandler.get(Zoom.class).getIntOption("zoomLevelMax").getValue();
     			}
     			
-    			if (scrollTotal < (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMin").getValue()) {
-    				scrollTotal = (int) ModHandler.get(Zoom.class).getOptions().getIntOption("zoomLevelMin").getValue();
+    			if (scrollTotal < (int) ModHandler.get(Zoom.class).getIntOption("zoomLevelMin").getValue()) {
+    				scrollTotal = (int) ModHandler.get(Zoom.class).getIntOption("zoomLevelMin").getValue();
     			}
     		}
     	}
@@ -742,7 +742,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
             float f2 = entitylivingbase.attackedAtYaw;
             HurtCam hurtCamMod = ModHandler.get(HurtCam.class);
             GlStateManager.rotate(-f2, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(-f * (hurtCamMod.isEnabled() ? hurtCamMod.getOptions().getBooleanOption("hurtShake").isToggled() ? (float) hurtCamMod.getOptions().getFloatOption("hurtShakeIntensity").getValue() : 0.0F : 14.0F), 0.0F, 0.0F, 1.0F);
+            GlStateManager.rotate(-f * (hurtCamMod.isEnabled() ? hurtCamMod.getBooleanOption("hurtShake").isToggled() ? (float) hurtCamMod.getFloatOption("hurtShakeIntensity").getValue() : 0.0F : 14.0F), 0.0F, 0.0F, 1.0F);
             GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
         }
     }

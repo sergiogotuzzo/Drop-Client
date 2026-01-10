@@ -13,7 +13,6 @@ import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mod.ModColor;
 import drop.mod.ModDraggable;
-import drop.mod.ModOptions;
 import drop.mod.option.Brackets;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
@@ -22,8 +21,8 @@ import drop.mod.option.type.ColorOption;
 public class PotionEffects extends ModDraggable {
 	public PotionEffects() {
 		super(true, 0.5, 0.5);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new ColorOption(this, "durationTextColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Duration Text Color", true, false)),
 				new BooleanOption(this, "durationTextShadow", true, new GuiSettings(2, "Duration Text Shadow")),
 				new BooleanOption(this, "showName", true, new GuiSettings(3, "Show Name")),
@@ -34,8 +33,6 @@ public class PotionEffects extends ModDraggable {
 				new BooleanOption(this, "showInInv", true, new GuiSettings(8, "Show In Inventory")),
 				new BooleanOption(this, "reverse", false, new GuiSettings(false))
 				);
-				
-		saveOptions();
 	}
 	
 	private Collection<PotionEffect> dummyPotionEffects = Arrays.asList(new PotionEffect(Potion.moveSpeed.getId(), 20 * 60, 3), new PotionEffect(Potion.damageBoost.getId(), 20, 3));
@@ -44,11 +41,11 @@ public class PotionEffects extends ModDraggable {
     public int getWidth() {
 		int width = 2;
 		
-		if (options.getBooleanOption("showIcon").isToggled()) {
+		if (getBooleanOption("showIcon").isToggled()) {
 			width += 20;
 		}
 		
-		if (options.getBooleanOption("showName").isToggled()) {
+		if (getBooleanOption("showName").isToggled()) {
 			width += font.getStringWidth("Strenght IV");
 		} else {
 			width += font.getStringWidth("00:00");
@@ -64,10 +61,10 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
-    	if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
-    		options.getBooleanOption("reverse").toggle(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
-			options.getBooleanOption("reverse").toggle(true);
+    	if (pos.getRelativeX() < 1.0 / 3.0 && getBooleanOption("reverse").isToggled()) {
+    		getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !getBooleanOption("reverse").isToggled()) {
+			getBooleanOption("reverse").toggle(true);
 		}
     	
         int offsetY = 0;
@@ -83,10 +80,10 @@ public class PotionEffects extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-    	if (pos.getRelativeX() < 1.0 / 3.0 && options.getBooleanOption("reverse").isToggled()) {
-    		options.getBooleanOption("reverse").toggle(false);
-		} else if (pos.getRelativeX() > 2.0 / 3.0 && !options.getBooleanOption("reverse").isToggled()) {
-			options.getBooleanOption("reverse").toggle(true);
+    	if (pos.getRelativeX() < 1.0 / 3.0 && getBooleanOption("reverse").isToggled()) {
+    		getBooleanOption("reverse").toggle(false);
+		} else if (pos.getRelativeX() > 2.0 / 3.0 && !getBooleanOption("reverse").isToggled()) {
+			getBooleanOption("reverse").toggle(true);
 		}
     	
         int offsetY = 0;
@@ -102,10 +99,10 @@ public class PotionEffects extends ModDraggable {
 
     private void drawPotionEffect(ScreenPosition pos, int offsetY, PotionEffect potionEffect) {
         if (potionEffect != null) {
-        	if (options.getBooleanOption("showIcon").isToggled()) {
+        	if (getBooleanOption("showIcon").isToggled()) {
             	Potion potion = Potion.potionTypes[potionEffect.getPotionID()];
                 
-                int iconX = (options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
+                int iconX = (getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - 20 : pos.getAbsoluteX());
 
                 if (potion.hasStatusIcon()) {
                     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -118,26 +115,26 @@ public class PotionEffects extends ModDraggable {
                 }
             }
             
-            int i = options.getBooleanOption("showIcon").isToggled() ? 20 : 0;
+            int i = getBooleanOption("showIcon").isToggled() ? 20 : 0;
             
-            if (options.getBooleanOption("showName").isToggled()) {
+            if (getBooleanOption("showName").isToggled()) {
                 String potionName = getPotionName(potionEffect);
 
-                int nameX = (options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
+                int nameX = (getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(potionName) - i - 2: pos.getAbsoluteX() + i + 2);
 
-            	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, options.getColorOption("nameTextColor").getColor(), options.getBooleanOption("nameTextShadow").isToggled());
+            	drawText(potionName, nameX, pos.getAbsoluteY() + offsetY + 2, getColorOption("nameTextColor").getColor(), getBooleanOption("nameTextShadow").isToggled());
             }
             
         	String durationString = Potion.getDurationString(potionEffect);
-            int durationX = (options.getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
-            int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (options.getBooleanOption("showName").isToggled() ? 2 : -2);
+            int durationX = (getBooleanOption("reverse").isToggled() ? pos.getAbsoluteX() + getWidth() - font.getStringWidth(durationString) - i - 2: pos.getAbsoluteX() + i + 2);
+            int durationY = pos.getAbsoluteY() + offsetY + font.FONT_HEIGHT + (getBooleanOption("showName").isToggled() ? 2 : -2);
             
-            if (options.getBooleanOption("blink").isToggled()) {
+            if (getBooleanOption("blink").isToggled()) {
         		if (potionEffect.getDuration() >= 20 * 10 || potionEffect.getDuration() % 20 < 10) {
-            		drawText(durationString, durationX, durationY, options.getColorOption("durationTextColor").getColor(), options.getBooleanOption("durationTextShadow").isToggled());
+            		drawText(durationString, durationX, durationY, getColorOption("durationTextColor").getColor(), getBooleanOption("durationTextShadow").isToggled());
                 }
         	} else {
-        		drawText(durationString, durationX, durationY, options.getColorOption("durationTextColor").getColor(), options.getBooleanOption("durationTextShadow").isToggled());
+        		drawText(durationString, durationX, durationY, getColorOption("durationTextColor").getColor(), getBooleanOption("durationTextShadow").isToggled());
         	}
         }
     }

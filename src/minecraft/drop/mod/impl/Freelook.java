@@ -9,20 +9,17 @@ import drop.event.EventTarget;
 import drop.event.impl.KeyEvent;
 import drop.gui.GuiSettings;
 import drop.mod.Mod;
-import drop.mod.ModOptions;
 import drop.mod.option.type.BooleanOption;
 
 public class Freelook extends Mod {
 	public Freelook() {
 		super(true);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new BooleanOption(this, "hold", true, new GuiSettings(1, "Hold")),
 				new BooleanOption(this, "invertYaw", false, new GuiSettings(2, "Invert Yaw")),
 				new BooleanOption(this, "invertPitch", false, new GuiSettings(3, "Invert Pitch"))
 				);
-				
-		saveOptions();
 	}
 	
 	private boolean perspectiveToggled = false;
@@ -45,7 +42,7 @@ public class Freelook extends Mod {
 				} else {
 					mc.gameSettings.thirdPersonView = previousPerspective;
 				}
-			} else if (options.getBooleanOption("hold").isToggled()) {
+			} else if (getBooleanOption("hold").isToggled()) {
 				perspectiveToggled = false;
 				mc.gameSettings.thirdPersonView = previousPerspective;
 			}
@@ -78,8 +75,8 @@ public class Freelook extends Mod {
 			float f3 = mc.mouseHelper.deltaX * f2;
 			float f4 = mc.mouseHelper.deltaY * f2;
 			
-			cameraYaw = options.getBooleanOption("invertYaw").isToggled() ? cameraYaw - (f3 * 0.15F) : cameraYaw + (f3 * 0.15F);
-			cameraPitch = options.getBooleanOption("invertPitch").isToggled() ? cameraPitch + (f4 * 0.15F) : cameraPitch - (f4 * 0.15F);
+			cameraYaw = getBooleanOption("invertYaw").isToggled() ? cameraYaw - (f3 * 0.15F) : cameraYaw + (f3 * 0.15F);
+			cameraPitch = getBooleanOption("invertPitch").isToggled() ? cameraPitch + (f4 * 0.15F) : cameraPitch - (f4 * 0.15F);
 			
 			if (cameraPitch > 90) {
 				cameraPitch = 90;

@@ -1361,7 +1361,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                     if (flag2)
                     {
-                    	if (ModHandler.get(Particles.class).getOptions().getBooleanOption("alwaysSharpness").isEnabled() && ModHandler.get(Particles.class).getOptions().getBooleanOption("affectSharpness").isToggled()) {
+                    	if (ModHandler.get(Particles.class).getBooleanOption("alwaysSharpness").isEnabled() && ModHandler.get(Particles.class).getBooleanOption("affectSharpness").isToggled()) {
                     		this.onEnchantmentCritical(targetEntity);
                     	}
                     	
@@ -1384,14 +1384,14 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                         if (flag)
                         {
-                            if (!ModHandler.get(Particles.class).isEnabled() || ModHandler.get(Particles.class).getOptions().getBooleanOption("affectCriticals").isEnabled()) {
+                            if (!ModHandler.get(Particles.class).isEnabled() || ModHandler.get(Particles.class).getBooleanOption("affectCriticals").isEnabled()) {
                             	this.onCriticalHit(targetEntity);
                             }
                         }
 
                         if (f1 > 0.0F)
                         {
-                        	if (!ModHandler.get(Particles.class).isEnabled() || ModHandler.get(Particles.class).getOptions().getBooleanOption("affectSharpness").isEnabled()) {
+                        	if (!ModHandler.get(Particles.class).isEnabled() || ModHandler.get(Particles.class).getBooleanOption("affectSharpness").isEnabled()) {
                             	this.onEnchantmentCritical(targetEntity);
                             }
                         }

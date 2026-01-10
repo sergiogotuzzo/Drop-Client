@@ -404,19 +404,19 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
             float alpha = 0.25F;
             
             if (ModHandler.get(Nametags.class).isEnabled()) {
-            	red = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getRed() / 255.0F;
-            	green = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getGreen() / 255.0F;
-            	blue = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getBlue() / 255.0F;
-            	alpha = ModHandler.get(Nametags.class).getOptions().getColorOption("backgroundColor").getColor().getAlpha() / 255.0F;
+            	red = ModHandler.get(Nametags.class).getColorOption("backgroundColor").getColor().getRed() / 255.0F;
+            	green = ModHandler.get(Nametags.class).getColorOption("backgroundColor").getColor().getGreen() / 255.0F;
+            	blue = ModHandler.get(Nametags.class).getColorOption("backgroundColor").getColor().getBlue() / 255.0F;
+            	alpha = ModHandler.get(Nametags.class).getColorOption("backgroundColor").getColor().getAlpha() / 255.0F;
             }
             
             worldrenderer.pos((double)(j + 1), (double)(-1 + i), 0.0D).color(red, green, blue, alpha).endVertex();
             tessellator.draw();
             GlStateManager.enableTexture2D();
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127, ModHandler.get(Nametags.class).getOptions().getBooleanOption("textShadow").isEnabled());
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, 553648127, ModHandler.get(Nametags.class).getBooleanOption("textShadow").isEnabled());
             GlStateManager.enableDepth();
             GlStateManager.depthMask(true);
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, -1, ModHandler.get(Nametags.class).getOptions().getBooleanOption("textShadow").isEnabled());
+            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, i, -1, ModHandler.get(Nametags.class).getBooleanOption("textShadow").isEnabled());
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

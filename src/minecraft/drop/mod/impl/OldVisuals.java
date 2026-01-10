@@ -4,22 +4,19 @@ import net.minecraft.entity.Entity;
 
 import drop.gui.GuiSettings;
 import drop.mod.Mod;
-import drop.mod.ModOptions;
 import drop.mod.option.type.BooleanOption;
 
 public class OldVisuals extends Mod {
 	public OldVisuals() {
 		super(true);
 		
-		this.options = new ModOptions(
+		saveOptions(
 				new BooleanOption(this, "fishingRod", true, new GuiSettings(1, "Fishing Rod")),
 				new BooleanOption(this, "bow", true, new GuiSettings(2, "Bow")),
 				new BooleanOption(this, "blockHitting", true, new GuiSettings(3, "Block Hitting")),
 				new BooleanOption(this, "sneaking", true, new GuiSettings(5, "Sneaking")),
 				new BooleanOption(this, "armorHitAnimation", true, new GuiSettings(4, "Armor Hit Animation"))
 				);
-		
-		saveOptions();
 	}
 	
 	private long sneak = 0L;
@@ -27,7 +24,7 @@ public class OldVisuals extends Mod {
     private int value = 0;
     
     public float getCustomEyeHeight(Entity entity) {
-    	if (!options.getBooleanOption("sneaking").isToggled()) {
+    	if (!getBooleanOption("sneaking").isToggled()) {
     		return entity.getEyeHeight();
     	}
     	

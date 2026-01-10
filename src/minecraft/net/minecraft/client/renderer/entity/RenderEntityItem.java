@@ -63,7 +63,7 @@ public class RenderEntityItem extends Render<EntityItem>
                 }
                 
                 if (!itemIn.onGround) {
-                    float rotAmount = ((itemIn.getAge() + p_177077_8_) * ((int) ModHandler.get(ItemPhysics.class).getOptions().getIntOption("rotationSpeed").getValue() * 10)) % 360;
+                    float rotAmount = ((itemIn.getAge() + p_177077_8_) * ((int) ModHandler.get(ItemPhysics.class).getIntOption("rotationSpeed").getValue() * 10)) % 360;
                     
                     GlStateManager.rotate(rotAmount, 1f, 0f, 1f);
                 }

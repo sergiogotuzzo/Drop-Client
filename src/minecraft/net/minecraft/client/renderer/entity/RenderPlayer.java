@@ -64,7 +64,7 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
             this.setModelVisibilities(entity);
             super.doRender(entity, x, d0, z, entityYaw, partialTicks);
             
-            if (ModHandler.get(Nametags.class).getOptions().getBooleanOption("showInThirdPerson").isEnabled() && entity instanceof EntityPlayerSP) {     
+            if (ModHandler.get(Nametags.class).getBooleanOption("showInThirdPerson").isEnabled() && entity instanceof EntityPlayerSP) {     
             	if (entity.isSneaking()) {
             		d0 = y - 0.125D;
             	}

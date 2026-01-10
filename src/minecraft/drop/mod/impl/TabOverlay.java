@@ -7,7 +7,6 @@ import drop.gui.GuiSettings;
 import drop.gui.mod.taboverlay.GuiTabOverlay;
 import drop.mod.Mod;
 import drop.mod.ModColor;
-import drop.mod.ModOptions;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
@@ -17,8 +16,8 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 public class TabOverlay extends Mod {
 	public TabOverlay() {
 		super(false);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new BooleanOption(this, "hidePing", false, new GuiSettings(1, "Hide Ping")),
 				new BooleanOption(this, "pingNumbers", false, new ParentOption("hidePing", true), new GuiSettings(15, "Ping Numbers")),
 				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new ParentOption("pingNumbers"), new GuiSettings(2, "Ping Text Color", true, false)),
@@ -40,8 +39,6 @@ public class TabOverlay extends Mod {
 				new ColorOption(this, "playerBackgroundColor", ModColor.fromRGB(553648127, false), new GuiSettings(true, 20, "Player Background Color", false, true)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(3, "Text Shadow"))
 				);
-				
-		saveOptions();
 	}
 	
 	@Override
@@ -51,25 +48,25 @@ public class TabOverlay extends Mod {
 
 	public void writePing(FontRenderer font, int p_175245_1_, int p_175245_2_, int p_175245_3_, NetworkPlayerInfo networkPlayerInfoIn) {
 		int ping = networkPlayerInfoIn.getResponseTime();
-		ModColor color = options.getColorOption("textColor").getColor(); // Default
-		boolean dropShadow = options.getBooleanOption("textShadow").isToggled();
+		ModColor color = getColorOption("textColor").getColor(); // Default
+		boolean dropShadow = getBooleanOption("textShadow").isToggled();
 		
-		if (options.getBooleanOption("dynamicColors").isToggled()) {
+		if (getBooleanOption("dynamicColors").isToggled()) {
 			if (ping > 300) {
-				color = options.getColorOption("unstableTextColor").getColor(); // Unstable
-				dropShadow = options.getBooleanOption("unstableTextShadow").isToggled();
+				color = getColorOption("unstableTextColor").getColor(); // Unstable
+				dropShadow = getBooleanOption("unstableTextShadow").isToggled();
 			} else if (ping > 200) {
-				color = options.getColorOption("weakTextColor").getColor(); // Weak
-				dropShadow = options.getBooleanOption("weakTextShadow").isToggled();
+				color = getColorOption("weakTextColor").getColor(); // Weak
+				dropShadow = getBooleanOption("weakTextShadow").isToggled();
 			} else if (ping > 150) {
-				color = options.getColorOption("moderateTextColor").getColor(); // Moderate
-				dropShadow = options.getBooleanOption("moderateTextShadow").isToggled();
+				color = getColorOption("moderateTextColor").getColor(); // Moderate
+				dropShadow = getBooleanOption("moderateTextShadow").isToggled();
 			} else if (ping > 100) {
-				color = options.getColorOption("goodTextColor").getColor(); // Good
-				dropShadow = options.getBooleanOption("goodTextShadow").isToggled();
+				color = getColorOption("goodTextColor").getColor(); // Good
+				dropShadow = getBooleanOption("goodTextShadow").isToggled();
 			} else if (ping > 50) {
-				color = options.getColorOption("excellentTextColor").getColor(); // Excellent
-				dropShadow = options.getBooleanOption("excellentTextShadow").isToggled();
+				color = getColorOption("excellentTextColor").getColor(); // Excellent
+				dropShadow = getBooleanOption("excellentTextShadow").isToggled();
 			}
 		}
 		

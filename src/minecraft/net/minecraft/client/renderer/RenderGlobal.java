@@ -2624,16 +2624,16 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
             
             final BlockOverlay blockOverlayMod = ModHandler.get(BlockOverlay.class);
             
-            if (blockOverlayMod.getOptions().getBooleanOption("outline").isEnabled()) {
-            	if (blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().isChromaToggled()) {
+            if (blockOverlayMod.getBooleanOption("outline").isEnabled()) {
+            	if (blockOverlayMod.getColorOption("outlineColor").getColor().isChromaToggled()) {
                 	ModColor chromaColor = ModColor.fromRGB(Color.HSBtoRGB(System.currentTimeMillis() % (int) 2000.0F / 2000.0F, 1.0F, 1.0F), true);
 
                     GlStateManager.color(chromaColor.getRed() / 255.0F, chromaColor.getGreen() / 255.0F, chromaColor.getBlue() / 255.0F, 0.4F);
         		} else {
-        			GlStateManager.color((float) blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().getRed() / 255.0F, (float) blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().getGreen() / 255.0F, blockOverlayMod.getOptions().getColorOption("outlineColor").getColor().getBlue() / 255.0F, 1.0F);
+        			GlStateManager.color((float) blockOverlayMod.getColorOption("outlineColor").getColor().getRed() / 255.0F, (float) blockOverlayMod.getColorOption("outlineColor").getColor().getGreen() / 255.0F, blockOverlayMod.getColorOption("outlineColor").getColor().getBlue() / 255.0F, 1.0F);
         		}
         		
-            	GL11.glLineWidth((float) blockOverlayMod.getOptions().getFloatOption("outlineWidth").getValue());
+            	GL11.glLineWidth((float) blockOverlayMod.getFloatOption("outlineWidth").getValue());
             }
             
             if (Config.isShaders())
@@ -2660,11 +2660,11 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
                     axisalignedbb = BlockModelUtils.getOffsetBoundingBox(axisalignedbb, block$enumoffsettype, blockpos);
                 }
 
-                if (!blockOverlayMod.isEnabled() || blockOverlayMod.isEnabled() && blockOverlayMod.getOptions().getBooleanOption("outline").isToggled()) {
+                if (!blockOverlayMod.isEnabled() || blockOverlayMod.isEnabled() && blockOverlayMod.getBooleanOption("outline").isToggled()) {
                     drawSelectionBoundingBox(axisalignedbb.expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2));
                 }
                 
-                if (blockOverlayMod.isEnabled() && blockOverlayMod.getOptions().getBooleanOption("overlay").isToggled()) {
+                if (blockOverlayMod.isEnabled() && blockOverlayMod.getBooleanOption("overlay").isToggled()) {
                 	blockOverlayMod.drawSelectionOverlay(block.getSelectedBoundingBox(this.theWorld, blockpos).expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-d0, -d1, -d2));
                 }
             }

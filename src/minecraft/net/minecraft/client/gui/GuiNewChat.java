@@ -91,9 +91,9 @@ public class GuiNewChat extends Gui
                                 
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
-                                int h = chatMod.getOptions().getBooleanOption("chatHeightFix").isEnabled() ? -12 : 0;
+                                int h = chatMod.getBooleanOption("chatHeightFix").isEnabled() ? -12 : 0;
                                                                 
-                                ModColor backgroundColor = chatMod.getOptions().getColorOption("backgroundColor").getColor();
+                                ModColor backgroundColor = chatMod.getColorOption("backgroundColor").getColor();
                                 int rgba = ((int) ((backgroundColor.getAlpha() / 255.0F) * l1) << 24) | (backgroundColor.getRed() << 16) | (backgroundColor.getGreen() << 8) | backgroundColor.getBlue();
 
                                 drawRect(i2, j2 - 9 + h, i2 + l + 4, j2 + h, chatMod.isEnabled() ? rgba : l1 / 2 << 24);
@@ -101,7 +101,7 @@ public class GuiNewChat extends Gui
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 
-                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.getOptions().getBooleanOption("textShadow").isEnabled());
+                                this.mc.fontRendererObj.drawString(s, (float)i2, (float)(j2 - 8) + h, 16777215 + (l1 << 24), chatMod.getBooleanOption("textShadow").isEnabled());
                                 
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -278,7 +278,7 @@ public class GuiNewChat extends Gui
             j = MathHelper.floor_float((float)j / f);
             k = MathHelper.floor_float((float)k / f);
                         
-            int h = ModHandler.get(Chat.class).getOptions().getBooleanOption("chatHeightFix").isEnabled() ? -12 : 0;
+            int h = ModHandler.get(Chat.class).getBooleanOption("chatHeightFix").isEnabled() ? -12 : 0;
             k += h;
 
             if (j >= 0 && k >= 0)

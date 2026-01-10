@@ -54,7 +54,7 @@ public class DropClientMovementInput extends MovementInput {
 		
 		jump = gameSettings.keyBindJump.isKeyDown();
 		
-		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.getOptions().getBooleanOption("toggleSneak").isToggled()) {
+		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.getBooleanOption("toggleSneak").isToggled()) {
 			if (gameSettings.keyBindSneak.isKeyDown()) {
 				if (sneakWasPressed == 0) {
 					if (sneak) {
@@ -87,7 +87,7 @@ public class DropClientMovementInput extends MovementInput {
 		
 		toggleSprintSneakMod.sneaking = sneak;
 		
-		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.getOptions().getBooleanOption("toggleSprint").isToggled()) {
+		if (toggleSprintSneakMod.isEnabled() && toggleSprintSneakMod.getBooleanOption("toggleSprint").isToggled()) {
 			if (gameSettings.keyBindSprint.isKeyDown() && !player.capabilities.isFlying) {
 				if (sprintWasPressed == 0) {
 					if (sprint) {
@@ -119,12 +119,12 @@ public class DropClientMovementInput extends MovementInput {
 		
 		toggleSprintSneakMod.sprinting = sprint;
 		
-		if (toggleSprintSneakMod.getOptions().getBooleanOption("flyBoost").isToggled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && mc.gameSettings.keyBindSprint.isKeyDown()) {
+		if (toggleSprintSneakMod.getBooleanOption("flyBoost").isToggled() && player.capabilities.isCreativeMode && player.capabilities.isFlying && (mc.getRenderViewEntity() == player) && mc.gameSettings.keyBindSprint.isKeyDown()) {
 			if (originalFlySpeed < 0.0F || this.player.capabilities.getFlySpeed() != boostedFlySpeed) {
 				originalFlySpeed = this.player.capabilities.getFlySpeed();
 			}
 			
-			float boostFactor = (float) toggleSprintSneakMod.getOptions().getFloatOption("flyBoostFactor").getValue();
+			float boostFactor = (float) toggleSprintSneakMod.getFloatOption("flyBoostFactor").getValue();
 			
 			boostedFlySpeed = originalFlySpeed * boostFactor;
 			

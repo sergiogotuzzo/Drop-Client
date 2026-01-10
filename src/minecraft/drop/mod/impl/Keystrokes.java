@@ -12,7 +12,6 @@ import net.minecraft.util.EnumChatFormatting;
 import drop.gui.hud.ScreenPosition;
 import drop.mod.ModColor;
 import drop.mod.ModDraggable;
-import drop.mod.ModOptions;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
@@ -20,8 +19,8 @@ import drop.mod.option.type.ColorOption;
 public class Keystrokes extends ModDraggable {
 	public Keystrokes() {
 		super(true, 0.5, 0.5);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new ColorOption(this, "pressedTextColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(3, "Text Color (Pressed)", true, false)),
@@ -36,8 +35,6 @@ public class Keystrokes extends ModDraggable {
 				new BooleanOption(this, "showSpacebar", true, new GuiSettings(9, "Show Spacebar")),
 				new BooleanOption(this, "useArrows", false, new ParentOption("showMovementKeys"), new GuiSettings(10, "Use Arrows"))
 				);
-				
-		saveOptions();
 		
 		updateMode();
 	}
@@ -155,7 +152,7 @@ public class Keystrokes extends ModDraggable {
 	    for (Key key : mode.getKeys()) {
 	        int textWidth = font.getStringWidth(key.getName());
 	        
-	        if (options.getBooleanOption("useArrows").isToggled()) {
+	        if (getBooleanOption("useArrows").isToggled()) {
 	        	switch (key.getName()) {
 		        	case "W":
 		        		key.setName("▲");
@@ -192,16 +189,16 @@ public class Keystrokes extends ModDraggable {
 	                pos.getAbsoluteY() + key.getY(),
 	                pos.getAbsoluteX() + key.getX() + key.getWidth(),
 	                pos.getAbsoluteY() + key.getY() + key.getHeight(),
-	                key.isDown() ? options.getColorOption("pressedBackgroundColor").getColor().getRGB() : options.getColorOption("backgroundColor").getColor().getRGB()
+	                key.isDown() ? getColorOption("pressedBackgroundColor").getColor().getRGB() : getColorOption("backgroundColor").getColor().getRGB()
 	                );
 	        
-	        if (options.getBooleanOption("showBorder").isToggled()) {
+	        if (getBooleanOption("showBorder").isToggled()) {
 	        	GuiDC.drawHollowRect(
 		                pos.getAbsoluteX() + key.getX(),
 		                pos.getAbsoluteY() + key.getY(),
 		                key.getWidth() - 1,
 		                key.getHeight() - 1,
-		                key.isDown() ? options.getColorOption("pressedBorderColor").getColor().getRGB() : options.getColorOption("borderColor").getColor().getRGB()
+		                key.isDown() ? getColorOption("pressedBorderColor").getColor().getRGB() : getColorOption("borderColor").getColor().getRGB()
 		                );
 	        }
 	        
@@ -209,16 +206,16 @@ public class Keystrokes extends ModDraggable {
 	        		key.getName(),
 	                pos.getAbsoluteX() + key.getX() + (key.getWidth() / 2.0F) - (textWidth / 2.0F),
 	                pos.getAbsoluteY() + key.getY() + (key.getHeight() / 2.0F) - 4.0F,
-	                key.isDown() ? options.getColorOption("pressedTextColor").getColor() : options.getColorOption("textColor").getColor(),
-	                key.isDown() ? options.getBooleanOption("pressedTextShadow").isToggled() : options.getBooleanOption("textShadow").isToggled()
+	                key.isDown() ? getColorOption("pressedTextColor").getColor() : getColorOption("textColor").getColor(),
+	                key.isDown() ? getBooleanOption("pressedTextShadow").isToggled() : getBooleanOption("textShadow").isToggled()
 	        		);
 	    }
 	}
 	
 	private void updateMode() {
-		boolean showMovementKeys = options.getBooleanOption("showMovementKeys").isToggled();
-		boolean showMouse = options.getBooleanOption("showMouse").isToggled();
-		boolean showSpacebar = options.getBooleanOption("showSpacebar").isToggled();
+		boolean showMovementKeys = getBooleanOption("showMovementKeys").isToggled();
+		boolean showMouse = getBooleanOption("showMouse").isToggled();
+		boolean showSpacebar = getBooleanOption("showSpacebar").isToggled();
 		
 		if (showMovementKeys && showMouse && showSpacebar) {
 			mode = KeystrokesMode.WASD_MOUSE_JUMP;

@@ -7,33 +7,36 @@ import drop.event.EventManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import drop.gui.GuiScreenDC;
-import drop.gui.mod.GuiModSettings;
+import drop.gui.mod.GuiModOptions;
 import drop.mod.option.Brackets;
 import drop.mod.option.ModOption;
 import drop.mod.option.type.*;
 
 public abstract class Mod {
 	protected boolean enabled;
+	protected ModOption[] options;
 	
 	protected final Minecraft mc;
 	protected final FontRenderer font;
 	protected final Drop client;
-	
-	protected ModOptions options = new ModOptions();
 	
 	public Mod(boolean enabled) {
 		mc = Minecraft.getMinecraft();
 		font = mc.fontRendererObj;
 		client = Drop.getDropClient();
 		
-		toggle((boolean) getFromFile("enabled", enabled));				
+		setEnabled((boolean) getFromFile("enabled", enabled));				
 	}
 	
 	public GuiScreenDC getGui(GuiScreenDC previousGuiScreen) {
-		return new GuiModSettings(previousGuiScreen, this);
+		return new GuiModOptions(previousGuiScreen, this);
+	}
+	
+	public String getName() {
+		return StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(getClass().getSimpleName().replaceAll("\\d+", "")), " ");
 	}
 
-	public void toggle(boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 		
 		if (enabled) {
@@ -45,16 +48,18 @@ public abstract class Mod {
 		setToFile("enabled", enabled);
 	}
 	
-	public void toggle() {
-		toggle(!enabled);
-	}
-	
 	public boolean isEnabled() {
 		return enabled;
 	}
 	
-	public void saveOptions() {
-		for (ModOption option : this.options.getOptions()) {
+	public void toggle() {
+		setEnabled(!enabled);
+	}
+	
+	public void saveOptions(ModOption... options) {
+		this.options = options;
+		
+		for (ModOption option : this.options) {
 			if (option instanceof BooleanOption) {
 				option.saveValue((boolean) getFromFile(option.getKey(), ((BooleanOption) option).isToggled()));
 			} else if (option instanceof ColorOption) {
@@ -66,16 +71,48 @@ public abstract class Mod {
 				colorOption.saveValue(ModColor.fromRGB(rgb, chroma));
 			} else if (option instanceof FloatOption) {
 				option.saveValue((float) ((double) getFromFile(option.getKey(), (float) option.getValue())));
-			} else if (option instanceof IntOption) {
-				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));
-			} else if (option instanceof EnumOption) {
+			} else if (option instanceof IntOption || option instanceof EnumOption) {
 				option.saveValue((int) ((long) getFromFile(option.getKey(), (int) option.getValue())));
 			}
 		}
 	}
 	
+	public ModOption[] getOptions() {
+		return options;
+	}
+	
+	public ModOption getOption(String key) {		
+		for (ModOption option : options) {
+			if (option.getKey() == key) {
+				return option;
+			}
+		}
+		
+		return null;
+	}
+	
+	public BooleanOption getBooleanOption(String key) {		
+		return (BooleanOption) getOption(key);
+	}
+	
+	public ColorOption getColorOption(String key) {		
+		return (ColorOption) getOption(key);
+	}
+	
+	public IntOption getIntOption(String key) {
+		return (IntOption) getOption(key);
+	}
+	
+	public FloatOption getFloatOption(String key) {
+		return (FloatOption) getOption(key);
+	}
+	
+	public EnumOption getEnumOption(String key) {
+		return (EnumOption) getOption(key);
+	}
+	
 	public void setToFile(String key, Object value) {
-		Drop.getDropClient().getModsFile().set(this.getClass().getSimpleName() + "." + key, value);
+		client.getModsFile().set(getClass().getSimpleName() + "." + key, value);
 	}
 	
 	public Object getFromFile(String key, Object defaultValue) {
@@ -83,21 +120,13 @@ public abstract class Mod {
 			setToFile(key, defaultValue);
 		}
 		
-		return Drop.getDropClient().getModsFile().get(this.getClass().getSimpleName() + "." + key);
+		return client.getModsFile().get(getClass().getSimpleName() + "." + key);
 	}
 	
 	public boolean hasInFile(String key) {
-		return Drop.getDropClient().getModsFile().has(this.getClass().getSimpleName() + "." + key);
+		return client.getModsFile().has(getClass().getSimpleName() + "." + key);
 	}
-	
-	public String getName() {
-		return StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(this.getClass().getSimpleName().replace("Mod", "").replaceAll("\\d+", "")), " ");
-	}
-	
-	public ModOptions getOptions() {
-		return options;
-	}
-	
+
 	public Minecraft getMinecraft() {
 		return mc;
 	}

@@ -1,12 +1,8 @@
 package drop.mod.impl;
 
-import java.awt.Color;
-
-import drop.FileManager;
 import drop.gui.GuiSettings;
 import drop.mod.Mod;
 import drop.mod.ModColor;
-import drop.mod.ModOptions;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
@@ -15,12 +11,10 @@ public class Chat extends Mod {
 	public Chat() {
 		super(false);
 		
-		this.options = new ModOptions(
+		saveOptions(
 				new BooleanOption(this, "chatHeightFix", true, new GuiSettings(1, "Chat Height Fix")),
 				new BooleanOption(this, "textShadow", false, new GuiSettings(2, "Text Shadow")),
 				new ColorOption(this, "backgroundColor", ModColor.fromRGB(0, 0, 0, 127, false), new GuiSettings(4, "Background Color", false, true))
 				);
-		
-		saveOptions();
 	}
 }

@@ -32,7 +32,7 @@ public abstract class InventoryEffectRenderer extends GuiContainer
 
     protected void updateActivePotionEffects()
     {
-        if (!this.mc.thePlayer.getActivePotionEffects().isEmpty() && (ModHandler.get(PotionEffects.class).getOptions().getBooleanOption("showInInv").isEnabled() || !ModHandler.get(PotionEffects.class).isEnabled()))
+        if (!this.mc.thePlayer.getActivePotionEffects().isEmpty() && (ModHandler.get(PotionEffects.class).getBooleanOption("showInInv").isEnabled() || !ModHandler.get(PotionEffects.class).isEnabled()))
         {
             this.guiLeft = 160 + (this.width - this.xSize - 200) / 2;
             this.hasActivePotionEffects = true;
@@ -51,7 +51,7 @@ public abstract class InventoryEffectRenderer extends GuiContainer
     {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        if (this.hasActivePotionEffects && (ModHandler.get(PotionEffects.class).getOptions().getBooleanOption("showInInv").isEnabled() || !ModHandler.get(PotionEffects.class).isEnabled()))
+        if (this.hasActivePotionEffects && (ModHandler.get(PotionEffects.class).getBooleanOption("showInInv").isEnabled() || !ModHandler.get(PotionEffects.class).isEnabled()))
         {
         	this.drawActivePotionEffects();
         }

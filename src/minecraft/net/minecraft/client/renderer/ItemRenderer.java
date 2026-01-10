@@ -312,11 +312,11 @@ public class ItemRenderer
      */
     private void transformFirstPersonItem(float equipProgress, float swingProgress)
     {
-    	if (ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("bow").isEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
+    	if (ModHandler.get(OldVisuals.class).getBooleanOption("bow").isEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getItemInUse() != null && this.mc.thePlayer.getItemInUse().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getItemInUse().getItem()) == 261) {
 			GlStateManager.translate(-0.01f, 0.05f, -0.06f);
 		}
 
-		if (ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("fishingRod").isEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
+		if (ModHandler.get(OldVisuals.class).getBooleanOption("fishingRod").isEnabled() && this.mc != null && this.mc.thePlayer != null && this.mc.thePlayer.getCurrentEquippedItem() != null && this.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Item.getIdFromItem(this.mc.thePlayer.getCurrentEquippedItem().getItem()) == 346) {
 			GlStateManager.translate(0.08f, -0.027f, -0.33f);
 			GlStateManager.scale(0.93f, 1.0f, 1.0f);
 		}
@@ -408,7 +408,7 @@ public class ItemRenderer
                 {
                     EnumAction enumaction = this.itemToRender.getItemUseAction();
                     
-                    float swingProgress = ModHandler.get(OldVisuals.class).getOptions().getBooleanOption("blockHitting").isEnabled() ? f1 : 0.0F;
+                    float swingProgress = ModHandler.get(OldVisuals.class).getBooleanOption("blockHitting").isEnabled() ? f1 : 0.0F;
 
                     switch (enumaction)
                     {

@@ -119,8 +119,8 @@ public class GuiPlayerTabOverlay extends Gui
             l = 0;
         }
         
-        int playerHeadWidth = ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("showPlayerHeads").isEnabled() ? 9 : 0;
-        int pingIconWidth = ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("hidePing").isEnabled() ? 0 : ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("pingNumbers").isEnabled() ? mc.fontRendererObj.getStringWidth("000") + 3 : 13;
+        int playerHeadWidth = ModHandler.get(TabOverlay.class).getBooleanOption("showPlayerHeads").isEnabled() ? 9 : 0;
+        int pingIconWidth = ModHandler.get(TabOverlay.class).getBooleanOption("hidePing").isEnabled() ? 0 : ModHandler.get(TabOverlay.class).getBooleanOption("pingNumbers").isEnabled() ? mc.fontRendererObj.getStringWidth("000") + 3 : 13;
         
         int i1 = Math.min(j4 * (playerHeadWidth + i + l + (pingIconWidth)), width - 50) / j4;
         int j1 = width / 2 - (i1 * j4 + (j4 - 1) * 5) / 2;
@@ -131,7 +131,7 @@ public class GuiPlayerTabOverlay extends Gui
 
         if (this.header != null)
         {
-            if (ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("showHeader").isEnabled() || !ModHandler.get(TabOverlay.class).isEnabled()) {
+            if (ModHandler.get(TabOverlay.class).getBooleanOption("showHeader").isEnabled() || !ModHandler.get(TabOverlay.class).isEnabled()) {
             	list1 = this.mc.fontRendererObj.listFormattedStringToWidth(this.header.getFormattedText(), width - 50);
 
                 for (String s : list1)
@@ -143,7 +143,7 @@ public class GuiPlayerTabOverlay extends Gui
 
         if (this.footer != null)
         {
-            if (ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("showFooter").isEnabled() || !ModHandler.get(TabOverlay.class).isEnabled()) {
+            if (ModHandler.get(TabOverlay.class).getBooleanOption("showFooter").isEnabled() || !ModHandler.get(TabOverlay.class).isEnabled()) {
             	list2 = this.mc.fontRendererObj.listFormattedStringToWidth(this.footer.getFormattedText(), width - 50);
 
                 for (String s2 : list2)
@@ -157,14 +157,14 @@ public class GuiPlayerTabOverlay extends Gui
         int playerBackgroundColor = 553648127;
         
         if (ModHandler.get(TabOverlay.class).isEnabled()) {
-        	backgroundColor = ModHandler.get(TabOverlay.class).getOptions().getColorOption("backgroundColor").getColor().getRGB();
-        	playerBackgroundColor = ModHandler.get(TabOverlay.class).getOptions().getColorOption("playerBackgroundColor").getColor().getRGB();
+        	backgroundColor = ModHandler.get(TabOverlay.class).getColorOption("backgroundColor").getColor().getRGB();
+        	playerBackgroundColor = ModHandler.get(TabOverlay.class).getColorOption("playerBackgroundColor").getColor().getRGB();
         }
         
         boolean dropShadow = true;
         
         if (ModHandler.get(TabOverlay.class).isEnabled()) {
-        	dropShadow = ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("textShadow").isToggled();
+        	dropShadow = ModHandler.get(TabOverlay.class).getBooleanOption("textShadow").isToggled();
         }
 
         if (list1 != null)
@@ -201,7 +201,7 @@ public class GuiPlayerTabOverlay extends Gui
                 String s1 = this.getPlayerName(networkplayerinfo1);
                 GameProfile gameprofile = networkplayerinfo1.getGameProfile();
                 
-                if (ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("showPlayerHeads").isEnabled()) {
+                if (ModHandler.get(TabOverlay.class).getBooleanOption("showPlayerHeads").isEnabled()) {
                 	EntityPlayer entityplayer = this.mc.theWorld.getPlayerEntityByUUID(gameprofile.getId());
                     boolean flag1 = entityplayer != null && entityplayer.isWearing(EnumPlayerModelParts.CAPE) && (gameprofile.getName().equals("Dinnerbone") || gameprofile.getName().equals("Grumm"));
                     this.mc.getTextureManager().bindTexture(networkplayerinfo1.getLocationSkin());
@@ -241,10 +241,10 @@ public class GuiPlayerTabOverlay extends Gui
                 }
                 
                 if (ModHandler.get(TabOverlay.class).isEnabled()) {
-                	if (!ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("hidePing").isToggled()) {
-                		int playerHeadsWidth = ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("showPlayerHeads").isToggled() ? 9 : 0;
+                	if (!ModHandler.get(TabOverlay.class).getBooleanOption("hidePing").isToggled()) {
+                		int playerHeadsWidth = ModHandler.get(TabOverlay.class).getBooleanOption("showPlayerHeads").isToggled() ? 9 : 0;
                 		
-                		if (ModHandler.get(TabOverlay.class).getOptions().getBooleanOption("pingNumbers").isToggled()) {
+                		if (ModHandler.get(TabOverlay.class).getBooleanOption("pingNumbers").isToggled()) {
                 			ModHandler.get(TabOverlay.class).writePing(mc.fontRendererObj, i1, j2 - playerHeadsWidth, k2, networkplayerinfo1); 
                         } else {
                         	this.drawPing(i1, j2 - playerHeadsWidth, k2, networkplayerinfo1);

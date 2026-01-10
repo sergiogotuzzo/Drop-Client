@@ -11,7 +11,6 @@ import drop.gui.GuiSettings;
 import drop.gui.hud.ScreenPosition;
 import drop.mod.ModColor;
 import drop.mod.ModDraggable;
-import drop.mod.ModOptions;
 import drop.mod.option.Brackets;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
@@ -21,8 +20,8 @@ import drop.mod.option.type.EnumOption;
 public class CPSDisplay extends ModDraggable {        
 	public CPSDisplay() {
 		super(true, 0.5, 0.5);
-		
-		this.options = new ModOptions(
+				
+		saveOptions(
 				new ColorOption(this, "textColor", ModColor.fromColor(Color.WHITE, false), new GuiSettings(1, "Text Color", true, false)),
 				new BooleanOption(this, "textShadow", true, new GuiSettings(2, "Text Shadow")),
 				new BooleanOption(this, "showBackground", false, new GuiSettings(3, "Background")),
@@ -32,8 +31,6 @@ public class CPSDisplay extends ModDraggable {
 				new EnumOption(this, "brackets", Brackets.NONE.getId(), Brackets.ANGULAR.getId(), Brackets.SQUARE.getId(), Brackets.SQUARE, new ParentOption("showBackground", true), new GuiSettings(5, "Brackets")),
 				new BooleanOption(this, "showRightCPS", false, new GuiSettings(6, "Show Right CPS"))
 				);
-				
-		saveOptions();
 	}
 	
 	private List<Long> leftClicks = new ArrayList<>();
@@ -46,12 +43,12 @@ public class CPSDisplay extends ModDraggable {
 	
 	@Override
 	public int getWidth() {
-		return options.getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS"));
+		return getBooleanOption("showBackground").isToggled() ? 53 : font.getStringWidth(Brackets.fromId((int) getEnumOption("brackets").getValue()).wrap("0" + (getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS"));
 	}
 
 	@Override
 	public int getHeight() {
-		return options.getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
+		return getBooleanOption("showBackground").isToggled() ? 17 : font.FONT_HEIGHT;
 	}
 
 	@Override
@@ -77,31 +74,31 @@ public class CPSDisplay extends ModDraggable {
             }
         }
         
-        if (options.getBooleanOption("showBackground").isToggled()) {
-	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+        if (getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(getColorOption("backgroundColor").getColor().getRGB());
 	    	
-	    	if (options.getBooleanOption("showBorder").isToggled()) {
-		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	if (getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(getColorOption("borderColor").getColor().getRGB());
 	    	}
 	    	
-			drawCenteredText(getCPS(leftClicks) + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawCenteredText(getCPS(leftClicks) + (getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), getColorOption("textColor").getColor(), getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap(getCPS(leftClicks) + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) getEnumOption("brackets").getValue()).wrap(getCPS(leftClicks) + (getBooleanOption("showRightCPS").isToggled() ? " ⎟ " + getCPS(rightClicks) : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, getColorOption("textColor").getColor(), getBooleanOption("textShadow").isToggled());
     	}                        
 	}
 
 	@Override
 	public void renderDummy(ScreenPosition pos) {
-		if (options.getBooleanOption("showBackground").isToggled()) {
-	    	getBounds().fill(options.getColorOption("backgroundColor").getColor().getRGB());
+		if (getBooleanOption("showBackground").isToggled()) {
+	    	getBounds().fill(getColorOption("backgroundColor").getColor().getRGB());
 	    	
-	    	if (options.getBooleanOption("showBorder").isToggled()) {
-		    	getBounds().stroke(options.getColorOption("borderColor").getColor().getRGB());
+	    	if (getBooleanOption("showBorder").isToggled()) {
+		    	getBounds().stroke(getColorOption("borderColor").getColor().getRGB());
 	    	}
 	    	
-			drawCenteredText("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+			drawCenteredText("0" + (getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS", pos.getAbsoluteX(), pos.getAbsoluteY(), getColorOption("textColor").getColor(), getBooleanOption("textShadow").isToggled());
     	} else {
-		    drawAlignedText(Brackets.fromId((int) options.getEnumOption("brackets").getValue()).wrap("0" + (options.getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, options.getColorOption("textColor").getColor(), options.getBooleanOption("textShadow").isToggled());
+		    drawAlignedText(Brackets.fromId((int) getEnumOption("brackets").getValue()).wrap("0" + (getBooleanOption("showRightCPS").isToggled() ? " ⎟ 0" : "") + " CPS"), pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, getColorOption("textColor").getColor(), getBooleanOption("textShadow").isToggled());
     	}
 	}
 	

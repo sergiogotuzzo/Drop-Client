@@ -1497,7 +1497,7 @@ public abstract class World implements IBlockAccess
      */
     public float getCelestialAngle(float partialTicks)
     {
-        return ModHandler.get(TimeChanger.class).isEnabled() ?ModHandler.get(TimeChanger.class).getOptions().getBooleanOption("useRealCurrentTime").isToggled() ? TimeChanger.getRealCurrentTimeInMinecraftTime() : (float) ModHandler.get(TimeChanger.class).getOptions().getFloatOption("time").getValue() : this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), partialTicks);
+        return ModHandler.get(TimeChanger.class).isEnabled() ? ModHandler.get(TimeChanger.class).getBooleanOption("useRealCurrentTime").isToggled() ? TimeChanger.getRealCurrentTimeInMinecraftTime() : (float) ModHandler.get(TimeChanger.class).getFloatOption("time").getValue() : this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), partialTicks);
     }
 
     public int getMoonPhase()
