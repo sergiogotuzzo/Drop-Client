@@ -6,12 +6,12 @@ import java.io.IOException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import drop.gui.GuiCheckBox;
 import drop.gui.GuiScreenDC;
-import drop.gui.GuiRect;
-import drop.gui.GuiSlider;
-import drop.gui.GuiSliderOption;
-import drop.gui.GuiText;
+import drop.gui.component.GuiCheckBox;
+import drop.gui.component.GuiRect;
+import drop.gui.component.GuiSlider;
+import drop.gui.component.GuiSliderOption;
+import drop.gui.component.GuiText;
 import drop.mod.option.ModOption;
 
 public class GuiModMenu extends GuiScreenDC {

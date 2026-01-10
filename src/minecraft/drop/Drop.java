@@ -5,13 +5,13 @@ import net.minecraft.client.Minecraft;
 import java.io.IOException;
 
 import drop.gui.mod.GuiModPositioning;
+import drop.gui.mod.hud.HUDManager;
 import drop.mod.ModHandler;
 import drop.mod.impl.Fullbright;
 import drop.gui.mod.GuiModList;
 import drop.event.EventManager;
 import drop.event.EventTarget;
 import drop.event.impl.TickEvent;
-import drop.gui.hud.HUDManager;
 
 public class Drop {
 	private static final String NAME = "Drop Client";

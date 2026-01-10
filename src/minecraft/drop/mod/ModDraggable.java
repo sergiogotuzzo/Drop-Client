@@ -9,9 +9,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import drop.gui.GuiScreenDC;
-import drop.gui.hud.IRenderer;
-import drop.gui.hud.Rectangle;
-import drop.gui.hud.ScreenPosition;
+import drop.gui.mod.hud.IRenderer;
+import drop.gui.mod.hud.Rectangle;
+import drop.gui.mod.hud.ScreenPosition;
+import drop.mod.option.ModColor;
 
 public abstract class ModDraggable extends Mod implements IRenderer {
 	protected ScreenPosition pos;

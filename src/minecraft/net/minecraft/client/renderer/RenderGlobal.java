@@ -29,9 +29,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonSyntaxException;
 
-import drop.mod.ModColor;
 import drop.mod.ModHandler;
 import drop.mod.impl.BlockOverlay;
+import drop.mod.option.ModColor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockEnderChest;

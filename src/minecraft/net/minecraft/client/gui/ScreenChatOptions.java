@@ -4,7 +4,7 @@ import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import drop.gui.GuiScreenDC;
-import drop.gui.GuiSlider;
+import drop.gui.component.GuiSlider;
 import drop.mod.impl.Chat;
 
 public class ScreenChatOptions extends GuiScreenDC

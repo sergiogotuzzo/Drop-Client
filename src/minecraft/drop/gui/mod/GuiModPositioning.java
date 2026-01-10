@@ -17,12 +17,12 @@ import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
-import drop.gui.GuiButtonIcon;
 import drop.gui.GuiDC;
 import drop.gui.GuiScreenDC;
-import drop.gui.hud.HUDManager;
-import drop.gui.hud.IRenderer;
-import drop.gui.hud.ScreenPosition;
+import drop.gui.component.GuiButtonIcon;
+import drop.gui.mod.hud.HUDManager;
+import drop.gui.mod.hud.IRenderer;
+import drop.gui.mod.hud.ScreenPosition;
 
 public class GuiModPositioning extends GuiScreenDC {
 	private final HashMap<IRenderer, ScreenPosition> renderers = new HashMap<IRenderer, ScreenPosition>();

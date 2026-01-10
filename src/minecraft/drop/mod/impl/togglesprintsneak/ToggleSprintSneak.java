@@ -2,11 +2,11 @@ package drop.mod.impl.togglesprintsneak;
 
 import java.awt.Color;
 
-import drop.gui.GuiSettings;
-import drop.gui.hud.ScreenPosition;
-import drop.mod.ModColor;
+import drop.gui.mod.GuiSettings;
+import drop.gui.mod.hud.ScreenPosition;
 import drop.mod.ModDraggable;
 import drop.mod.option.Brackets;
+import drop.mod.option.ModColor;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;

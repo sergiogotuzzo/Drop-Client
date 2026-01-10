@@ -10,10 +10,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import drop.gui.GuiDC;
-import drop.gui.GuiSettings;
-import drop.gui.hud.ScreenPosition;
-import drop.mod.ModColor;
+import drop.gui.mod.GuiSettings;
+import drop.gui.mod.hud.ScreenPosition;
 import drop.mod.ModDraggable;
+import drop.mod.option.ModColor;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;

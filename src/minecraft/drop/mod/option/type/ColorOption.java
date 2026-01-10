@@ -1,8 +1,8 @@
 package drop.mod.option.type;
 
-import drop.gui.GuiSettings;
+import drop.gui.mod.GuiSettings;
 import drop.mod.Mod;
-import drop.mod.ModColor;
+import drop.mod.option.ModColor;
 import drop.mod.option.ModOption;
 import drop.mod.option.ParentOption;
 

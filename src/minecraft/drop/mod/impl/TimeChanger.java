@@ -2,7 +2,7 @@ package drop.mod.impl;
 
 import java.time.LocalTime;
 
-import drop.gui.GuiSettings;
+import drop.gui.mod.GuiSettings;
 import drop.mod.Mod;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;

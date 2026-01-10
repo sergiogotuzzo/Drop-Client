@@ -3,10 +3,10 @@ package drop.mod.impl;
 import java.awt.Color;
 
 import drop.gui.GuiScreenDC;
-import drop.gui.GuiSettings;
-import drop.gui.mod.taboverlay.GuiTabOverlay;
+import drop.gui.mod.GuiSettings;
+import drop.gui.mod.impl.taboverlay.GuiTabOverlay;
 import drop.mod.Mod;
-import drop.mod.ModColor;
+import drop.mod.option.ModColor;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
@@ -48,24 +48,24 @@ public class TabOverlay extends Mod {
 
 	public void writePing(FontRenderer font, int p_175245_1_, int p_175245_2_, int p_175245_3_, NetworkPlayerInfo networkPlayerInfoIn) {
 		int ping = networkPlayerInfoIn.getResponseTime();
-		ModColor color = getColorOption("textColor").getColor(); // Default
+		ModColor color = getColorOption("textColor").getColor();
 		boolean dropShadow = getBooleanOption("textShadow").isToggled();
 		
 		if (getBooleanOption("dynamicColors").isToggled()) {
 			if (ping > 300) {
-				color = getColorOption("unstableTextColor").getColor(); // Unstable
+				color = getColorOption("unstableTextColor").getColor();
 				dropShadow = getBooleanOption("unstableTextShadow").isToggled();
 			} else if (ping > 200) {
-				color = getColorOption("weakTextColor").getColor(); // Weak
+				color = getColorOption("weakTextColor").getColor();
 				dropShadow = getBooleanOption("weakTextShadow").isToggled();
 			} else if (ping > 150) {
-				color = getColorOption("moderateTextColor").getColor(); // Moderate
+				color = getColorOption("moderateTextColor").getColor();
 				dropShadow = getBooleanOption("moderateTextShadow").isToggled();
 			} else if (ping > 100) {
-				color = getColorOption("goodTextColor").getColor(); // Good
+				color = getColorOption("goodTextColor").getColor();
 				dropShadow = getBooleanOption("goodTextShadow").isToggled();
 			} else if (ping > 50) {
-				color = getColorOption("excellentTextColor").getColor(); // Excellent
+				color = getColorOption("excellentTextColor").getColor();
 				dropShadow = getBooleanOption("excellentTextShadow").isToggled();
 			}
 		}

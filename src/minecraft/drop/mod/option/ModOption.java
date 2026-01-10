@@ -1,6 +1,6 @@
 package drop.mod.option;
 
-import drop.gui.GuiSettings;
+import drop.gui.mod.GuiSettings;
 import drop.mod.Mod;
 
 public class ModOption {

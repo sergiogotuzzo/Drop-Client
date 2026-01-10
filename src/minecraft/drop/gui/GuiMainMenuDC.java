@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import drop.gui.component.GuiButtonIcon;
 import drop.gui.mod.GuiModList;
 
 public class GuiMainMenuDC extends GuiScreen implements GuiYesNoCallback

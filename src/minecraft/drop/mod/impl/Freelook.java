@@ -7,7 +7,7 @@ import org.lwjgl.opengl.Display;
 
 import drop.event.EventTarget;
 import drop.event.impl.KeyEvent;
-import drop.gui.GuiSettings;
+import drop.gui.mod.GuiSettings;
 import drop.mod.Mod;
 import drop.mod.option.type.BooleanOption;
 

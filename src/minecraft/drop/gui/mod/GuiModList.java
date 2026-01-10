@@ -11,9 +11,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
-import drop.gui.GuiButtonToggled;
 import drop.gui.GuiScreenDC;
-import drop.gui.GuiText;
+import drop.gui.component.GuiButtonToggled;
+import drop.gui.component.GuiText;
 import drop.mod.Mod;
 import drop.mod.ModHandler;
 

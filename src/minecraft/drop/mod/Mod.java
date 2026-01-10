@@ -9,6 +9,7 @@ import net.minecraft.client.gui.FontRenderer;
 import drop.gui.GuiScreenDC;
 import drop.gui.mod.GuiModOptions;
 import drop.mod.option.Brackets;
+import drop.mod.option.ModColor;
 import drop.mod.option.ModOption;
 import drop.mod.option.type.*;
 

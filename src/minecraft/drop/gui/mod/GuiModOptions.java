@@ -8,7 +8,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import drop.gui.GuiScreenDC;
 import drop.mod.Mod;
-import drop.mod.ModColor;
 import drop.mod.option.*;
 import drop.mod.option.type.*;
 

@@ -2,9 +2,9 @@ package drop.mod.impl;
 
 import java.awt.Color;
 
-import drop.gui.GuiSettings;
+import drop.gui.mod.GuiSettings;
 import drop.mod.Mod;
-import drop.mod.ModColor;
+import drop.mod.option.ModColor;
 import drop.mod.option.type.ColorOption;
 
 public class HitColor extends Mod {

@@ -4,9 +4,9 @@ import com.google.common.collect.Lists;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import drop.mod.Mod;
-import drop.mod.ModColor;
 import drop.mod.ModHandler;
 import drop.mod.impl.Chat;
+import drop.mod.option.ModColor;
 
 import java.awt.Color;
 import java.util.Iterator;

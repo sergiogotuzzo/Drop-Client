@@ -2,9 +2,9 @@ package net.minecraft.client.renderer.entity;
 
 import com.google.common.collect.Lists;
 
-import drop.mod.ModColor;
 import drop.mod.ModHandler;
 import drop.mod.impl.HitColor;
+import drop.mod.option.ModColor;
 
 import java.awt.Color;
 import java.nio.FloatBuffer;

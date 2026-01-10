@@ -5,9 +5,9 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import drop.gui.GuiScreenDC;
-import drop.gui.GuiSettings;
+import drop.gui.mod.GuiSettings;
 import drop.mod.Mod;
-import drop.mod.ModColor;
+import drop.mod.option.ModColor;
 import drop.mod.option.ParentOption;
 import drop.mod.option.type.BooleanOption;
 import drop.mod.option.type.ColorOption;
